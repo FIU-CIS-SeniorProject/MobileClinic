@@ -1,0 +1,1097 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0FCC49CE16F3C63400FD3338 /* MedicationFile.json in Resources */ = {isa = PBXBuildFile; fileRef = 0FCC49CD16F3C63400FD3338 /* MedicationFile.json */; };
+		463294A216C9B97B00C57DCE /* PatientObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 463294A116C9B97B00C57DCE /* PatientObject.m */; };
+		EA09328916F818D200536DF3 /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = EA09328816F818D200536DF3 /* Database.m */; };
+		EA0FE4DC171CB3CA00E68DFD /* SystemBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0FE4DB171CB3CA00E68DFD /* SystemBackup.m */; };
+		EA0FE4DD171CB3CA00E68DFD /* SystemBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0FE4DB171CB3CA00E68DFD /* SystemBackup.m */; };
+		EA0FE4F1171E2B1300E68DFD /* NSData+GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0FE4F0171E2B1300E68DFD /* NSData+GZIP.m */; };
+		EA0FE4F2171E2B1300E68DFD /* NSData+GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0FE4F0171E2B1300E68DFD /* NSData+GZIP.m */; };
+		EA0FE4F4171E2BAF00E68DFD /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0FE4F3171E2BAF00E68DFD /* libz.dylib */; };
+		EA172D3616B50A9C00F00C61 /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = EA172D3516B50A9C00F00C61 /* Server.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		EA172D3C16B56AEE00F00C61 /* ServerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EA172D3B16B56AEE00F00C61 /* ServerWrapper.m */; };
+		EA172D5C16B60A6B00F00C61 /* UserObject.m in Sources */ = {isa = PBXBuildFile; fileRef = EA172D5B16B60A6B00F00C61 /* UserObject.m */; };
+		EA172D6016B6108D00F00C61 /* ObjectFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = EA172D5F16B6108D00F00C61 /* ObjectFactory.m */; };
+		EA172D6416B6116800F00C61 /* BaseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = EA172D6316B6116800F00C61 /* BaseObject.m */; };
+		EA172D7A16B6371D00F00C61 /* StatusObject.m in Sources */ = {isa = PBXBuildFile; fileRef = EA172D7916B6371D00F00C61 /* StatusObject.m */; };
+		EA172D7E16B6412600F00C61 /* ConnectListContent.m in Sources */ = {isa = PBXBuildFile; fileRef = EA172D7D16B6412600F00C61 /* ConnectListContent.m */; };
+		EA186A4716BB5BF500977A00 /* HTTPServerCore.m in Sources */ = {isa = PBXBuildFile; fileRef = EA186A4616BB5BF500977A00 /* HTTPServerCore.m */; };
+		EA1EE1BF16D0A02100E263D2 /* VisitationObject.m in Sources */ = {isa = PBXBuildFile; fileRef = EA1EE1BE16D0A02000E263D2 /* VisitationObject.m */; };
+		EA4CEC1416E3F8F400D6AB58 /* Visitation.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4CEC1316E3F8F400D6AB58 /* Visitation.m */; };
+		EA51359E17015D93001761FC /* BaseObject+Protected.m in Sources */ = {isa = PBXBuildFile; fileRef = EA51359D17015D93001761FC /* BaseObject+Protected.m */; };
+		EA5272CE1708653E0033604C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA8D85EE16B0C9BF00256495 /* Cocoa.framework */; };
+		EA5272D41708653E0033604C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EA5272D21708653E0033604C /* InfoPlist.strings */; };
+		EA5272DA1708653E0033604C /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = EA5272D81708653E0033604C /* Credits.rtf */; };
+		EA5272E5170866930033604C /* GHUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA5272E4170866930033604C /* GHUnit.framework */; };
+		EA5272E71708673E0033604C /* GHUnit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = EA5272E4170866930033604C /* GHUnit.framework */; };
+		EA5272EA170867800033604C /* RunTests.sh in Resources */ = {isa = PBXBuildFile; fileRef = EA5272E8170867800033604C /* RunTests.sh */; };
+		EA5272EB170867800033604C /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = EA5272E9170867800033604C /* Makefile */; };
+		EA5272F2170867CE0033604C /* GHUnitTestMain.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5272F1170867CE0033604C /* GHUnitTestMain.m */; };
+		EA5272F5170868C20033604C /* SmokeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5272F4170868C20033604C /* SmokeTest.m */; };
+		EA5272F917086CDB0033604C /* UserObjectTest.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5272F817086CDB0033604C /* UserObjectTest.m */; };
+		EA5272FA17086D1F0033604C /* UserObject.m in Sources */ = {isa = PBXBuildFile; fileRef = EA172D5B16B60A6B00F00C61 /* UserObject.m */; };
+		EA5272FB17086D360033604C /* BaseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = EA172D6316B6116800F00C61 /* BaseObject.m */; };
+		EA5272FC17086D360033604C /* BaseObject+Protected.m in Sources */ = {isa = PBXBuildFile; fileRef = EA51359D17015D93001761FC /* BaseObject+Protected.m */; };
+		EA5272FD17086D4D0033604C /* CloudService.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC37F1416F36DBA00836C1C /* CloudService.m */; };
+		EA5272FE17086D4D0033604C /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = EA09328816F818D200536DF3 /* Database.m */; };
+		EA5272FF17086D4D0033604C /* DatabaseDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9372AA16BC6D6300D3D617 /* DatabaseDriver.m */; };
+		EA52730017086D5F0033604C /* StatusObject.m in Sources */ = {isa = PBXBuildFile; fileRef = EA172D7916B6371D00F00C61 /* StatusObject.m */; };
+		EA527301170877550033604C /* Mobile_Clinic.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EAC19C5216DD24BC00B0B8DA /* Mobile_Clinic.xcdatamodeld */; };
+		EA5D38F816B9E38000377D2C /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5D38F716B9E38000377D2C /* GCDAsyncSocket.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		EA5D38FB16B9E3E400377D2C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA5D38FA16B9E3E400377D2C /* Security.framework */; };
+		EA5D38FE16B9E55D00377D2C /* ServerCore.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5D38FD16B9E55D00377D2C /* ServerCore.m */; };
+		EA749BD316EDAF8D000F849F /* PrescriptionObject.m in Sources */ = {isa = PBXBuildFile; fileRef = EA749BD216EDAF8D000F849F /* PrescriptionObject.m */; };
+		EA7D505A17179D9E002ED819 /* PatientData.png in Resources */ = {isa = PBXBuildFile; fileRef = EA7D505817179D9E002ED819 /* PatientData.png */; };
+		EA7D505B17179D9E002ED819 /* PatientFile.png in Resources */ = {isa = PBXBuildFile; fileRef = EA7D505917179D9E002ED819 /* PatientFile.png */; };
+		EA7D505E1717A045002ED819 /* Pills.png in Resources */ = {isa = PBXBuildFile; fileRef = EA7D505D1717A044002ED819 /* Pills.png */; };
+		EA7D50601717A152002ED819 /* DoctorUser.png in Resources */ = {isa = PBXBuildFile; fileRef = EA7D505F1717A152002ED819 /* DoctorUser.png */; };
+		EA8D85EF16B0C9BF00256495 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA8D85EE16B0C9BF00256495 /* Cocoa.framework */; };
+		EA8D85F916B0C9BF00256495 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EA8D85F716B0C9BF00256495 /* InfoPlist.strings */; };
+		EA8D85FB16B0C9BF00256495 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EA8D85FA16B0C9BF00256495 /* main.m */; };
+		EA8D85FF16B0C9BF00256495 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = EA8D85FD16B0C9BF00256495 /* Credits.rtf */; };
+		EA8D860216B0C9C000256495 /* FIUAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EA8D860116B0C9C000256495 /* FIUAppDelegate.m */; };
+		EA8D860516B0C9C000256495 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA8D860316B0C9C000256495 /* MainMenu.xib */; };
+		EA9372AB16BC6D6300D3D617 /* DatabaseDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9372AA16BC6D6300D3D617 /* DatabaseDriver.m */; };
+		EA9BAA52172AA9A400773B42 /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9BAA51172AA9A400773B42 /* NSDataAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		EA9BAA53172AA9A400773B42 /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9BAA51172AA9A400773B42 /* NSDataAdditions.m */; };
+		EAADC01E16E0596C009E7AF9 /* PatientFile.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = EAADC01D16E0596C009E7AF9 /* PatientFile.json */; };
+		EAC0D7D516FBBACD00621DDC /* DataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC0D7D416FBBACD00621DDC /* DataProcessor.m */; };
+		EAC0D7DB16FE7D6200621DDC /* UserView.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC0D7D916FE7D6200621DDC /* UserView.m */; };
+		EAC0D7DD16FE7D6200621DDC /* UserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAC0D7DA16FE7D6200621DDC /* UserView.xib */; };
+		EAC0D7E116FEC65D00621DDC /* MainMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC0D7E016FEC65D00621DDC /* MainMenu.m */; };
+		EAC19C5416DD24BC00B0B8DA /* Mobile_Clinic.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EAC19C5216DD24BC00B0B8DA /* Mobile_Clinic.xcdatamodeld */; };
+		EAC19C6316DD27BF00B0B8DA /* Medication.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC19C6216DD27BF00B0B8DA /* Medication.m */; };
+		EAC19C6816DD27BF00B0B8DA /* Users.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC19C6716DD27BF00B0B8DA /* Users.m */; };
+		EAC19C7E16DE839C00B0B8DA /* PatientTable.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC19C7C16DE839C00B0B8DA /* PatientTable.m */; };
+		EAC19C7F16DE839C00B0B8DA /* PatientTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAC19C7D16DE839C00B0B8DA /* PatientTable.xib */; };
+		EAC19C8516DEE40700B0B8DA /* Patients.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC19C8416DEE40700B0B8DA /* Patients.m */; };
+		EAC37F1116F213E400836C1C /* Prescription.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC37F1016F213E400836C1C /* Prescription.m */; };
+		EAC37F1516F36DBA00836C1C /* CloudService.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC37F1416F36DBA00836C1C /* CloudService.m */; };
+		EAC37F1C16F394DB00836C1C /* MedicationObject.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC37F1B16F394DA00836C1C /* MedicationObject.m */; };
+		EAD015EA16D5E524002A8B3B /* NSObject+CustomTools.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD015E916D5E524002A8B3B /* NSObject+CustomTools.m */; };
+		EAE655E616F5443800139C62 /* MedicationList.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE655E416F5443800139C62 /* MedicationList.m */; };
+		EAE655E716F5443800139C62 /* MedicationList.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAE655E516F5443800139C62 /* MedicationList.xib */; };
+		EAE6CD9F16BE29B9008949DC /* NSString+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE6CD9E16BE29B9008949DC /* NSString+Validation.m */; };
+		EAEA9E94170F4F07005F1202 /* BaseObject+Protected.m in Sources */ = {isa = PBXBuildFile; fileRef = EAEA9E93170F4F07005F1202 /* BaseObject+Protected.m */; };
+		EAEA9E971711BCA5005F1202 /* PatientObjectTest.m in Sources */ = {isa = PBXBuildFile; fileRef = EAEA9E961711BCA5005F1202 /* PatientObjectTest.m */; };
+		EAEA9E9B1711C39A005F1202 /* PatientObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 463294A116C9B97B00C57DCE /* PatientObject.m */; };
+		EAEA9E9C1711C911005F1202 /* NSObject+CustomTools.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD015E916D5E524002A8B3B /* NSObject+CustomTools.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EA5272E61708672F0033604C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				EA5272E71708673E0033604C /* GHUnit.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EAADC01C16E0595F009E7AF9 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				EAADC01E16E0596C009E7AF9 /* PatientFile.json in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0FCC49CD16F3C63400FD3338 /* MedicationFile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MedicationFile.json; sourceTree = "<group>"; };
+		463294A016C9B97B00C57DCE /* PatientObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatientObject.h; sourceTree = "<group>"; };
+		463294A116C9B97B00C57DCE /* PatientObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatientObject.m; sourceTree = "<group>"; };
+		EA09328716F818D200536DF3 /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
+		EA09328816F818D200536DF3 /* Database.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Database.m; sourceTree = "<group>"; };
+		EA09328A16F81C2800536DF3 /* DatabaseProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseProtocol.h; sourceTree = "<group>"; };
+		EA0FE4DA171CB3CA00E68DFD /* SystemBackup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemBackup.h; sourceTree = "<group>"; };
+		EA0FE4DB171CB3CA00E68DFD /* SystemBackup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemBackup.m; sourceTree = "<group>"; };
+		EA0FE4EF171E2B1300E68DFD /* NSData+GZIP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+GZIP.h"; sourceTree = "<group>"; };
+		EA0FE4F0171E2B1300E68DFD /* NSData+GZIP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+GZIP.m"; sourceTree = "<group>"; };
+		EA0FE4F3171E2BAF00E68DFD /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		EA172D3416B50A9C00F00C61 /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
+		EA172D3516B50A9C00F00C61 /* Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Server.m; sourceTree = "<group>"; };
+		EA172D3A16B56AEE00F00C61 /* ServerWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerWrapper.h; sourceTree = "<group>"; };
+		EA172D3B16B56AEE00F00C61 /* ServerWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerWrapper.m; sourceTree = "<group>"; };
+		EA172D5A16B60A6A00F00C61 /* UserObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserObject.h; sourceTree = "<group>"; };
+		EA172D5B16B60A6B00F00C61 /* UserObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserObject.m; sourceTree = "<group>"; };
+		EA172D5E16B6108D00F00C61 /* ObjectFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectFactory.h; sourceTree = "<group>"; };
+		EA172D5F16B6108D00F00C61 /* ObjectFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectFactory.m; sourceTree = "<group>"; };
+		EA172D6216B6116800F00C61 /* BaseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseObject.h; sourceTree = "<group>"; };
+		EA172D6316B6116800F00C61 /* BaseObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseObject.m; sourceTree = "<group>"; };
+		EA172D7816B6371D00F00C61 /* StatusObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusObject.h; sourceTree = "<group>"; };
+		EA172D7916B6371D00F00C61 /* StatusObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusObject.m; sourceTree = "<group>"; };
+		EA172D7C16B6412600F00C61 /* ConnectListContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectListContent.h; sourceTree = "<group>"; };
+		EA172D7D16B6412600F00C61 /* ConnectListContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectListContent.m; sourceTree = "<group>"; };
+		EA186A4516BB5BF500977A00 /* HTTPServerCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPServerCore.h; sourceTree = "<group>"; };
+		EA186A4616BB5BF500977A00 /* HTTPServerCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPServerCore.m; sourceTree = "<group>"; };
+		EA1EE1BD16D0A02000E263D2 /* VisitationObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisitationObject.h; sourceTree = "<group>"; };
+		EA1EE1BE16D0A02000E263D2 /* VisitationObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisitationObject.m; sourceTree = "<group>"; };
+		EA27F9C516DCA9FA008D7DA9 /* DatabaseDriverProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseDriverProtocol.h; sourceTree = "<group>"; };
+		EA4CEC1216E3F8F400D6AB58 /* Visitation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Visitation.h; sourceTree = "<group>"; };
+		EA4CEC1316E3F8F400D6AB58 /* Visitation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Visitation.m; sourceTree = "<group>"; };
+		EA51359C17015D93001761FC /* BaseObject+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BaseObject+Protected.h"; sourceTree = "<group>"; };
+		EA51359D17015D93001761FC /* BaseObject+Protected.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BaseObject+Protected.m"; sourceTree = "<group>"; };
+		EA5272CD1708653E0033604C /* MC-Tests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MC-Tests.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA5272D11708653E0033604C /* MC-Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MC-Tests-Info.plist"; sourceTree = "<group>"; };
+		EA5272D31708653E0033604C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EA5272D71708653E0033604C /* MC-Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MC-Tests-Prefix.pch"; sourceTree = "<group>"; };
+		EA5272D91708653E0033604C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		EA5272E4170866930033604C /* GHUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GHUnit.framework; sourceTree = "<group>"; };
+		EA5272E8170867800033604C /* RunTests.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = RunTests.sh; sourceTree = "<group>"; };
+		EA5272E9170867800033604C /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		EA5272F1170867CE0033604C /* GHUnitTestMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUnitTestMain.m; sourceTree = "<group>"; };
+		EA5272F4170868C20033604C /* SmokeTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmokeTest.m; sourceTree = "<group>"; };
+		EA5272F817086CDB0033604C /* UserObjectTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserObjectTest.m; sourceTree = "<group>"; };
+		EA5D38F616B9E38000377D2C /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		EA5D38F716B9E38000377D2C /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		EA5D38FA16B9E3E400377D2C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		EA5D38FC16B9E55D00377D2C /* ServerCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerCore.h; sourceTree = "<group>"; };
+		EA5D38FD16B9E55D00377D2C /* ServerCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerCore.m; sourceTree = "<group>"; };
+		EA749BD116EDAF8D000F849F /* PrescriptionObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrescriptionObject.h; sourceTree = "<group>"; };
+		EA749BD216EDAF8D000F849F /* PrescriptionObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrescriptionObject.m; sourceTree = "<group>"; };
+		EA749BD616EDAFA6000F849F /* PrescriptionObjectProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrescriptionObjectProtocol.h; sourceTree = "<group>"; };
+		EA7CDC7416ED1D13005A9070 /* PatientObjectProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatientObjectProtocol.h; sourceTree = "<group>"; };
+		EA7D505817179D9E002ED819 /* PatientData.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PatientData.png; sourceTree = "<group>"; };
+		EA7D505917179D9E002ED819 /* PatientFile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PatientFile.png; sourceTree = "<group>"; };
+		EA7D505D1717A044002ED819 /* Pills.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pills.png; sourceTree = "<group>"; };
+		EA7D505F1717A152002ED819 /* DoctorUser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DoctorUser.png; sourceTree = "<group>"; };
+		EA8D85EA16B0C9BF00256495 /* Mobile Clinic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mobile Clinic.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA8D85EE16B0C9BF00256495 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		EA8D85F116B0C9BF00256495 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		EA8D85F216B0C9BF00256495 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		EA8D85F316B0C9BF00256495 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		EA8D85F616B0C9BF00256495 /* Mobile Clinic-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Mobile Clinic-Info.plist"; sourceTree = "<group>"; };
+		EA8D85F816B0C9BF00256495 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EA8D85FA16B0C9BF00256495 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EA8D85FC16B0C9BF00256495 /* Mobile Clinic-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Mobile Clinic-Prefix.pch"; sourceTree = "<group>"; };
+		EA8D85FE16B0C9BF00256495 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		EA8D860016B0C9BF00256495 /* FIUAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FIUAppDelegate.h; sourceTree = "<group>"; };
+		EA8D860116B0C9C000256495 /* FIUAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FIUAppDelegate.m; sourceTree = "<group>"; };
+		EA8D860416B0C9C000256495 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		EA8D860F16B0C9C000256495 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		EA8D861616B0C9C000256495 /* Mobile ClinicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Mobile ClinicTests-Info.plist"; sourceTree = "<group>"; };
+		EA8D861816B0C9C000256495 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EA8D861A16B0C9C000256495 /* Mobile_ClinicTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Mobile_ClinicTests.h; sourceTree = "<group>"; };
+		EA8D861B16B0C9C000256495 /* Mobile_ClinicTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Mobile_ClinicTests.m; sourceTree = "<group>"; };
+		EA8D862516B0C9C000256495 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+		EA8D862716B0C9C000256495 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		EA8D862916B0C9C000256495 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		EA8D862B16B0C9C000256495 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		EA8D862F16B0C9C000256495 /* Mobile ClinicImporter-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Mobile ClinicImporter-Info.plist"; sourceTree = "<group>"; };
+		EA8D863116B0C9C000256495 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EA8D863316B0C9C000256495 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		EA8D863516B0C9C000256495 /* GetMetadataForFile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetMetadataForFile.m; sourceTree = "<group>"; };
+		EA8D863716B0C9C000256495 /* MySpotlightImporter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MySpotlightImporter.h; sourceTree = "<group>"; };
+		EA8D863816B0C9C000256495 /* MySpotlightImporter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MySpotlightImporter.m; sourceTree = "<group>"; };
+		EA8D863A16B0C9C000256495 /* Importer Read Me.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Importer Read Me.txt"; sourceTree = "<group>"; };
+		EA8D863B16B0C9C000256495 /* Mobile ClinicImporter-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Mobile ClinicImporter-Prefix.pch"; sourceTree = "<group>"; };
+		EA9372A716BC622C00D3D617 /* BaseObjectProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseObjectProtocol.h; sourceTree = "<group>"; };
+		EA9372A916BC6D6300D3D617 /* DatabaseDriver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseDriver.h; sourceTree = "<group>"; };
+		EA9372AA16BC6D6300D3D617 /* DatabaseDriver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseDriver.m; sourceTree = "<group>"; };
+		EA9BAA50172AA9A400773B42 /* NSDataAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataAdditions.h; sourceTree = "<group>"; };
+		EA9BAA51172AA9A400773B42 /* NSDataAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataAdditions.m; sourceTree = "<group>"; };
+		EAADC01D16E0596C009E7AF9 /* PatientFile.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PatientFile.json; sourceTree = "<group>"; };
+		EAADC01F16E05DA3009E7AF9 /* ServerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerProtocol.h; sourceTree = "<group>"; };
+		EAC0D7D316FBBACD00621DDC /* DataProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataProcessor.h; sourceTree = "<group>"; };
+		EAC0D7D416FBBACD00621DDC /* DataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataProcessor.m; sourceTree = "<group>"; };
+		EAC0D7D816FE7D6200621DDC /* UserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserView.h; sourceTree = "<group>"; };
+		EAC0D7D916FE7D6200621DDC /* UserView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserView.m; sourceTree = "<group>"; };
+		EAC0D7DA16FE7D6200621DDC /* UserView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserView.xib; sourceTree = "<group>"; };
+		EAC0D7DF16FEC65D00621DDC /* MainMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenu.h; sourceTree = "<group>"; };
+		EAC0D7E016FEC65D00621DDC /* MainMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenu.m; sourceTree = "<group>"; };
+		EAC19C5316DD24BC00B0B8DA /* Mobile_Clinic.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Mobile_Clinic.xcdatamodel; sourceTree = "<group>"; };
+		EAC19C6116DD27BF00B0B8DA /* Medication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Medication.h; path = ../Medication.h; sourceTree = "<group>"; };
+		EAC19C6216DD27BF00B0B8DA /* Medication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Medication.m; path = ../Medication.m; sourceTree = "<group>"; };
+		EAC19C6616DD27BF00B0B8DA /* Users.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Users.h; path = ../Users.h; sourceTree = "<group>"; };
+		EAC19C6716DD27BF00B0B8DA /* Users.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Users.m; path = ../Users.m; sourceTree = "<group>"; };
+		EAC19C7B16DE839C00B0B8DA /* PatientTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatientTable.h; sourceTree = "<group>"; };
+		EAC19C7C16DE839C00B0B8DA /* PatientTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatientTable.m; sourceTree = "<group>"; };
+		EAC19C7D16DE839C00B0B8DA /* PatientTable.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PatientTable.xib; sourceTree = "<group>"; };
+		EAC19C8316DEE40700B0B8DA /* Patients.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Patients.h; sourceTree = "<group>"; };
+		EAC19C8416DEE40700B0B8DA /* Patients.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Patients.m; sourceTree = "<group>"; };
+		EAC37F0F16F213E400836C1C /* Prescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prescription.h; sourceTree = "<group>"; };
+		EAC37F1016F213E400836C1C /* Prescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Prescription.m; sourceTree = "<group>"; };
+		EAC37F1316F36DBA00836C1C /* CloudService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloudService.h; sourceTree = "<group>"; };
+		EAC37F1416F36DBA00836C1C /* CloudService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloudService.m; sourceTree = "<group>"; };
+		EAC37F1616F36DD500836C1C /* CloudServiceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloudServiceProtocol.h; sourceTree = "<group>"; };
+		EAC37F1716F37A8F00836C1C /* CommonObjectProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonObjectProtocol.h; sourceTree = "<group>"; };
+		EAC37F1A16F394D800836C1C /* MedicationObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MedicationObject.h; sourceTree = "<group>"; };
+		EAC37F1B16F394DA00836C1C /* MedicationObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MedicationObject.m; sourceTree = "<group>"; };
+		EAC37F1E16F3950D00836C1C /* MedicationObjectProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MedicationObjectProtocol.h; sourceTree = "<group>"; };
+		EAC37F1F16F3A01C00836C1C /* StatusObjectProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusObjectProtocol.h; sourceTree = "<group>"; };
+		EAD015E816D5E524002A8B3B /* NSObject+CustomTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+CustomTools.h"; sourceTree = "<group>"; };
+		EAD015E916D5E524002A8B3B /* NSObject+CustomTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+CustomTools.m"; sourceTree = "<group>"; };
+		EAE655E316F5443800139C62 /* MedicationList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MedicationList.h; sourceTree = "<group>"; };
+		EAE655E416F5443800139C62 /* MedicationList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MedicationList.m; sourceTree = "<group>"; };
+		EAE655E516F5443800139C62 /* MedicationList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MedicationList.xib; sourceTree = "<group>"; };
+		EAE6CD9D16BE29B9008949DC /* NSString+Validation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Validation.h"; sourceTree = "<group>"; };
+		EAE6CD9E16BE29B9008949DC /* NSString+Validation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Validation.m"; sourceTree = "<group>"; };
+		EAEA9E93170F4F07005F1202 /* BaseObject+Protected.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BaseObject+Protected.m"; sourceTree = "<group>"; };
+		EAEA9E961711BCA5005F1202 /* PatientObjectTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatientObjectTest.m; sourceTree = "<group>"; };
+		EAEF2F9816ED63BD00A9B49A /* VisitationObjectProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisitationObjectProtocol.h; sourceTree = "<group>"; };
+		EAF4B6C416E68FED007B14B7 /* UserObjectProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserObjectProtocol.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EA5272CA1708653E0033604C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA5272CE1708653E0033604C /* Cocoa.framework in Frameworks */,
+				EA5272E5170866930033604C /* GHUnit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EA8D85E716B0C9BF00256495 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA0FE4F4171E2BAF00E68DFD /* libz.dylib in Frameworks */,
+				EA5D38FB16B9E3E400377D2C /* Security.framework in Frameworks */,
+				EA8D85EF16B0C9BF00256495 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EA09328616F8149F00536DF3 /* Cloud API */ = {
+			isa = PBXGroup;
+			children = (
+				EAC37F1316F36DBA00836C1C /* CloudService.h */,
+				EAC37F1416F36DBA00836C1C /* CloudService.m */,
+				EAC37F1616F36DD500836C1C /* CloudServiceProtocol.h */,
+			);
+			name = "Cloud API";
+			sourceTree = "<group>";
+		};
+		EA09328B16F8219100536DF3 /* Database Core */ = {
+			isa = PBXGroup;
+			children = (
+				EA09328716F818D200536DF3 /* Database.h */,
+				EA09328816F818D200536DF3 /* Database.m */,
+				EA09328A16F81C2800536DF3 /* DatabaseProtocol.h */,
+			);
+			name = "Database Core";
+			sourceTree = "<group>";
+		};
+		EA09328C16F821AE00536DF3 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				EA09328B16F8219100536DF3 /* Database Core */,
+				EA9372AD16BC7C5800D3D617 /* Database Driver */,
+			);
+			name = Database;
+			sourceTree = "<group>";
+		};
+		EA172D3916B56ABC00F00C61 /* Server Core */ = {
+			isa = PBXGroup;
+			children = (
+				EA172D5916B5F7DC00F00C61 /* Server (Do Not Edit) */,
+				EA9372AF16BC7D1000D3D617 /* HTTP Drivers Experimental */,
+				EA9372B016BC7D4D00D3D617 /* Server Wrapper OLD */,
+				EA5D38FC16B9E55D00377D2C /* ServerCore.h */,
+				EA5D38FD16B9E55D00377D2C /* ServerCore.m */,
+				EAADC01F16E05DA3009E7AF9 /* ServerProtocol.h */,
+			);
+			name = "Server Core";
+			sourceTree = "<group>";
+		};
+		EA172D5916B5F7DC00F00C61 /* Server (Do Not Edit) */ = {
+			isa = PBXGroup;
+			children = (
+				EA5D38F616B9E38000377D2C /* GCDAsyncSocket.h */,
+				EA5D38F716B9E38000377D2C /* GCDAsyncSocket.m */,
+				EA172D3416B50A9C00F00C61 /* Server.h */,
+				EA172D3516B50A9C00F00C61 /* Server.m */,
+			);
+			name = "Server (Do Not Edit)";
+			sourceTree = "<group>";
+		};
+		EA172D6616B6134200F00C61 /* MC-> Data Subsystem */ = {
+			isa = PBXGroup;
+			children = (
+				EAC19C5216DD24BC00B0B8DA /* Mobile_Clinic.xcdatamodeld */,
+				EA172D6816B615DD00F00C61 /* Factory Pattern */,
+				EA172D6716B6135100F00C61 /* System Objects (Decorator Base) */,
+				EA9372AE16BC7CBD00D3D617 /* Object Types (USE THESE ONLY) */,
+			);
+			name = "MC-> Data Subsystem";
+			sourceTree = "<group>";
+		};
+		EA172D6716B6135100F00C61 /* System Objects (Decorator Base) */ = {
+			isa = PBXGroup;
+			children = (
+				EA09328C16F821AE00536DF3 /* Database */,
+				EAC37F0916F17A8A00836C1C /* Base Object */,
+			);
+			name = "System Objects (Decorator Base)";
+			sourceTree = "<group>";
+		};
+		EA172D6816B615DD00F00C61 /* Factory Pattern */ = {
+			isa = PBXGroup;
+			children = (
+				EA172D5E16B6108D00F00C61 /* ObjectFactory.h */,
+				EA172D5F16B6108D00F00C61 /* ObjectFactory.m */,
+			);
+			name = "Factory Pattern";
+			sourceTree = "<group>";
+		};
+		EA5272CF1708653E0033604C /* MC-Tests */ = {
+			isa = PBXGroup;
+			children = (
+				EA5272E8170867800033604C /* RunTests.sh */,
+				EA5272E9170867800033604C /* Makefile */,
+				EA5272E4170866930033604C /* GHUnit.framework */,
+				EA5272D01708653E0033604C /* Supporting Files */,
+				EA5272F6170868CA0033604C /* System Object Tests */,
+			);
+			path = "MC-Tests";
+			sourceTree = "<group>";
+		};
+		EA5272D01708653E0033604C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EA5272F1170867CE0033604C /* GHUnitTestMain.m */,
+				EA5272D11708653E0033604C /* MC-Tests-Info.plist */,
+				EA5272D21708653E0033604C /* InfoPlist.strings */,
+				EA5272D71708653E0033604C /* MC-Tests-Prefix.pch */,
+				EA5272D81708653E0033604C /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EA5272F6170868CA0033604C /* System Object Tests */ = {
+			isa = PBXGroup;
+			children = (
+				EA5272F4170868C20033604C /* SmokeTest.m */,
+				EA5272F817086CDB0033604C /* UserObjectTest.m */,
+				EAEA9E93170F4F07005F1202 /* BaseObject+Protected.m */,
+				EAEA9E961711BCA5005F1202 /* PatientObjectTest.m */,
+			);
+			name = "System Object Tests";
+			sourceTree = "<group>";
+		};
+		EA749BCF16EDAF2E000F849F /* Visitation Objects */ = {
+			isa = PBXGroup;
+			children = (
+				EA1EE1BD16D0A02000E263D2 /* VisitationObject.h */,
+				EA1EE1BE16D0A02000E263D2 /* VisitationObject.m */,
+				EAEF2F9816ED63BD00A9B49A /* VisitationObjectProtocol.h */,
+			);
+			name = "Visitation Objects";
+			sourceTree = "<group>";
+		};
+		EA749BD016EDAF3F000F849F /* Patient Objects */ = {
+			isa = PBXGroup;
+			children = (
+				463294A016C9B97B00C57DCE /* PatientObject.h */,
+				463294A116C9B97B00C57DCE /* PatientObject.m */,
+				EA7CDC7416ED1D13005A9070 /* PatientObjectProtocol.h */,
+			);
+			name = "Patient Objects";
+			sourceTree = "<group>";
+		};
+		EA7D505C17179DA3002ED819 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				EA7D505F1717A152002ED819 /* DoctorUser.png */,
+				EA7D505D1717A044002ED819 /* Pills.png */,
+				EA7D505817179D9E002ED819 /* PatientData.png */,
+				EA7D505917179D9E002ED819 /* PatientFile.png */,
+			);
+			name = Icons;
+			sourceTree = "<group>";
+		};
+		EA8D85DF16B0C9BF00256495 = {
+			isa = PBXGroup;
+			children = (
+				EA9BAA50172AA9A400773B42 /* NSDataAdditions.h */,
+				EA9BAA51172AA9A400773B42 /* NSDataAdditions.m */,
+				EA0FE4F3171E2BAF00E68DFD /* libz.dylib */,
+				EA0FE4EF171E2B1300E68DFD /* NSData+GZIP.h */,
+				EA0FE4F0171E2B1300E68DFD /* NSData+GZIP.m */,
+				EA0FE4DA171CB3CA00E68DFD /* SystemBackup.h */,
+				EA0FE4DB171CB3CA00E68DFD /* SystemBackup.m */,
+				EA7D505C17179DA3002ED819 /* Icons */,
+				EAC0D7E316FECDF800621DDC /* User View & Controller */,
+				EAC0D7D716FD1A0000621DDC /* Med View & Controller */,
+				EA09328616F8149F00536DF3 /* Cloud API */,
+				EAADC01D16E0596C009E7AF9 /* PatientFile.json */,
+				0FCC49CD16F3C63400FD3338 /* MedicationFile.json */,
+				EAEF2F9716ED5B7300A9B49A /* Patient Control */,
+				EA172D7C16B6412600F00C61 /* ConnectListContent.h */,
+				EA172D7D16B6412600F00C61 /* ConnectListContent.m */,
+				EACEB53616BEBDCD00685AE8 /* Categories */,
+				EA172D6616B6134200F00C61 /* MC-> Data Subsystem */,
+				EA172D3916B56ABC00F00C61 /* Server Core */,
+				EA8D85F416B0C9BF00256495 /* Mobile Clinic */,
+				EA8D861416B0C9C000256495 /* Mobile ClinicTests */,
+				EA8D862D16B0C9C000256495 /* Mobile ClinicImporter */,
+				EA5272CF1708653E0033604C /* MC-Tests */,
+				EA8D85ED16B0C9BF00256495 /* Frameworks */,
+				EA8D85EB16B0C9BF00256495 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EA8D85EB16B0C9BF00256495 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA8D85EA16B0C9BF00256495 /* Mobile Clinic.app */,
+				EA5272CD1708653E0033604C /* MC-Tests.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA8D85ED16B0C9BF00256495 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EA5D38FA16B9E3E400377D2C /* Security.framework */,
+				EA8D85EE16B0C9BF00256495 /* Cocoa.framework */,
+				EA8D860F16B0C9C000256495 /* SenTestingKit.framework */,
+				EA8D862516B0C9C000256495 /* CoreServices.framework */,
+				EA8D862716B0C9C000256495 /* CoreFoundation.framework */,
+				EA8D862916B0C9C000256495 /* CoreData.framework */,
+				EA8D862B16B0C9C000256495 /* Foundation.framework */,
+				EA8D85F016B0C9BF00256495 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EA8D85F016B0C9BF00256495 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EA8D85F116B0C9BF00256495 /* AppKit.framework */,
+				EA8D85F216B0C9BF00256495 /* CoreData.framework */,
+				EA8D85F316B0C9BF00256495 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		EA8D85F416B0C9BF00256495 /* Mobile Clinic */ = {
+			isa = PBXGroup;
+			children = (
+				EAC19C6616DD27BF00B0B8DA /* Users.h */,
+				EAC19C6716DD27BF00B0B8DA /* Users.m */,
+				EAC19C6116DD27BF00B0B8DA /* Medication.h */,
+				EAC19C6216DD27BF00B0B8DA /* Medication.m */,
+				EA8D860016B0C9BF00256495 /* FIUAppDelegate.h */,
+				EA8D860116B0C9C000256495 /* FIUAppDelegate.m */,
+				EA8D860316B0C9C000256495 /* MainMenu.xib */,
+				EAC0D7DF16FEC65D00621DDC /* MainMenu.h */,
+				EAC0D7E016FEC65D00621DDC /* MainMenu.m */,
+				EA8D85F516B0C9BF00256495 /* Supporting Files */,
+				EAC37F0F16F213E400836C1C /* Prescription.h */,
+				EAC37F1016F213E400836C1C /* Prescription.m */,
+				EA4CEC1216E3F8F400D6AB58 /* Visitation.h */,
+				EA4CEC1316E3F8F400D6AB58 /* Visitation.m */,
+				EAC19C8316DEE40700B0B8DA /* Patients.h */,
+				EAC19C8416DEE40700B0B8DA /* Patients.m */,
+			);
+			path = "Mobile Clinic";
+			sourceTree = "<group>";
+		};
+		EA8D85F516B0C9BF00256495 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EA8D85F616B0C9BF00256495 /* Mobile Clinic-Info.plist */,
+				EA8D85F716B0C9BF00256495 /* InfoPlist.strings */,
+				EA8D85FA16B0C9BF00256495 /* main.m */,
+				EA8D85FC16B0C9BF00256495 /* Mobile Clinic-Prefix.pch */,
+				EA8D85FD16B0C9BF00256495 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EA8D861416B0C9C000256495 /* Mobile ClinicTests */ = {
+			isa = PBXGroup;
+			children = (
+				EA8D861A16B0C9C000256495 /* Mobile_ClinicTests.h */,
+				EA8D861B16B0C9C000256495 /* Mobile_ClinicTests.m */,
+				EA8D861516B0C9C000256495 /* Supporting Files */,
+			);
+			path = "Mobile ClinicTests";
+			sourceTree = "<group>";
+		};
+		EA8D861516B0C9C000256495 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EA8D861616B0C9C000256495 /* Mobile ClinicTests-Info.plist */,
+				EA8D861716B0C9C000256495 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EA8D862D16B0C9C000256495 /* Mobile ClinicImporter */ = {
+			isa = PBXGroup;
+			children = (
+				EA8D863516B0C9C000256495 /* GetMetadataForFile.m */,
+				EA8D863716B0C9C000256495 /* MySpotlightImporter.h */,
+				EA8D863816B0C9C000256495 /* MySpotlightImporter.m */,
+				EA8D863A16B0C9C000256495 /* Importer Read Me.txt */,
+				EA8D862E16B0C9C000256495 /* Supporting Files */,
+			);
+			path = "Mobile ClinicImporter";
+			sourceTree = "<group>";
+		};
+		EA8D862E16B0C9C000256495 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EA8D862F16B0C9C000256495 /* Mobile ClinicImporter-Info.plist */,
+				EA8D863016B0C9C000256495 /* InfoPlist.strings */,
+				EA8D863316B0C9C000256495 /* main.c */,
+				EA8D863B16B0C9C000256495 /* Mobile ClinicImporter-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EA9372AD16BC7C5800D3D617 /* Database Driver */ = {
+			isa = PBXGroup;
+			children = (
+				EA27F9C516DCA9FA008D7DA9 /* DatabaseDriverProtocol.h */,
+				EA9372A916BC6D6300D3D617 /* DatabaseDriver.h */,
+				EA9372AA16BC6D6300D3D617 /* DatabaseDriver.m */,
+			);
+			name = "Database Driver";
+			sourceTree = "<group>";
+		};
+		EA9372AE16BC7CBD00D3D617 /* Object Types (USE THESE ONLY) */ = {
+			isa = PBXGroup;
+			children = (
+				EAC37F1716F37A8F00836C1C /* CommonObjectProtocol.h */,
+				EAC37F1916F394B300836C1C /* Status Object */,
+				EAC37F1816F3821F00836C1C /* User Objects */,
+				EA749BD016EDAF3F000F849F /* Patient Objects */,
+				EA749BCF16EDAF2E000F849F /* Visitation Objects */,
+				EAC37F0A16F17A9A00836C1C /* Prescription Object */,
+				EAC37F1D16F394E100836C1C /* Medication Objects */,
+			);
+			name = "Object Types (USE THESE ONLY)";
+			sourceTree = "<group>";
+		};
+		EA9372AF16BC7D1000D3D617 /* HTTP Drivers Experimental */ = {
+			isa = PBXGroup;
+			children = (
+				EA186A4516BB5BF500977A00 /* HTTPServerCore.h */,
+				EA186A4616BB5BF500977A00 /* HTTPServerCore.m */,
+			);
+			name = "HTTP Drivers Experimental";
+			sourceTree = "<group>";
+		};
+		EA9372B016BC7D4D00D3D617 /* Server Wrapper OLD */ = {
+			isa = PBXGroup;
+			children = (
+				EA172D3A16B56AEE00F00C61 /* ServerWrapper.h */,
+				EA172D3B16B56AEE00F00C61 /* ServerWrapper.m */,
+			);
+			name = "Server Wrapper OLD";
+			sourceTree = "<group>";
+		};
+		EAC0D7D716FD1A0000621DDC /* Med View & Controller */ = {
+			isa = PBXGroup;
+			children = (
+				EAE655E316F5443800139C62 /* MedicationList.h */,
+				EAE655E416F5443800139C62 /* MedicationList.m */,
+				EAE655E516F5443800139C62 /* MedicationList.xib */,
+			);
+			name = "Med View & Controller";
+			sourceTree = "<group>";
+		};
+		EAC0D7E316FECDF800621DDC /* User View & Controller */ = {
+			isa = PBXGroup;
+			children = (
+				EAC0D7D816FE7D6200621DDC /* UserView.h */,
+				EAC0D7D916FE7D6200621DDC /* UserView.m */,
+				EAC0D7DA16FE7D6200621DDC /* UserView.xib */,
+			);
+			name = "User View & Controller";
+			sourceTree = "<group>";
+		};
+		EAC37F0916F17A8A00836C1C /* Base Object */ = {
+			isa = PBXGroup;
+			children = (
+				EA172D6216B6116800F00C61 /* BaseObject.h */,
+				EA172D6316B6116800F00C61 /* BaseObject.m */,
+				EA9372A716BC622C00D3D617 /* BaseObjectProtocol.h */,
+				EA51359C17015D93001761FC /* BaseObject+Protected.h */,
+				EA51359D17015D93001761FC /* BaseObject+Protected.m */,
+			);
+			name = "Base Object";
+			sourceTree = "<group>";
+		};
+		EAC37F0A16F17A9A00836C1C /* Prescription Object */ = {
+			isa = PBXGroup;
+			children = (
+				EA749BD116EDAF8D000F849F /* PrescriptionObject.h */,
+				EA749BD216EDAF8D000F849F /* PrescriptionObject.m */,
+				EA749BD616EDAFA6000F849F /* PrescriptionObjectProtocol.h */,
+			);
+			name = "Prescription Object";
+			sourceTree = "<group>";
+		};
+		EAC37F1816F3821F00836C1C /* User Objects */ = {
+			isa = PBXGroup;
+			children = (
+				EA172D5A16B60A6A00F00C61 /* UserObject.h */,
+				EA172D5B16B60A6B00F00C61 /* UserObject.m */,
+				EAF4B6C416E68FED007B14B7 /* UserObjectProtocol.h */,
+			);
+			name = "User Objects";
+			sourceTree = "<group>";
+		};
+		EAC37F1916F394B300836C1C /* Status Object */ = {
+			isa = PBXGroup;
+			children = (
+				EA172D7816B6371D00F00C61 /* StatusObject.h */,
+				EA172D7916B6371D00F00C61 /* StatusObject.m */,
+				EAC37F1F16F3A01C00836C1C /* StatusObjectProtocol.h */,
+			);
+			name = "Status Object";
+			sourceTree = "<group>";
+		};
+		EAC37F1D16F394E100836C1C /* Medication Objects */ = {
+			isa = PBXGroup;
+			children = (
+				EAC37F1A16F394D800836C1C /* MedicationObject.h */,
+				EAC37F1B16F394DA00836C1C /* MedicationObject.m */,
+				EAC37F1E16F3950D00836C1C /* MedicationObjectProtocol.h */,
+			);
+			name = "Medication Objects";
+			sourceTree = "<group>";
+		};
+		EACEB53616BEBDCD00685AE8 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				EAC0D7D316FBBACD00621DDC /* DataProcessor.h */,
+				EAC0D7D416FBBACD00621DDC /* DataProcessor.m */,
+				EAE6CD9D16BE29B9008949DC /* NSString+Validation.h */,
+				EAE6CD9E16BE29B9008949DC /* NSString+Validation.m */,
+				EAD015E816D5E524002A8B3B /* NSObject+CustomTools.h */,
+				EAD015E916D5E524002A8B3B /* NSObject+CustomTools.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		EAEF2F9716ED5B7300A9B49A /* Patient Control */ = {
+			isa = PBXGroup;
+			children = (
+				EAC19C7B16DE839C00B0B8DA /* PatientTable.h */,
+				EAC19C7C16DE839C00B0B8DA /* PatientTable.m */,
+				EAC19C7D16DE839C00B0B8DA /* PatientTable.xib */,
+			);
+			name = "Patient Control";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EA5272CC1708653E0033604C /* MC-Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EA5272E31708653E0033604C /* Build configuration list for PBXNativeTarget "MC-Tests" */;
+			buildPhases = (
+				EA5272C91708653E0033604C /* Sources */,
+				EA5272E61708672F0033604C /* CopyFiles */,
+				EA5272CA1708653E0033604C /* Frameworks */,
+				EA5272CB1708653E0033604C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "MC-Tests";
+			productName = "MC-Tests";
+			productReference = EA5272CD1708653E0033604C /* MC-Tests.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EA8D85E916B0C9BF00256495 /* Mobile Clinic */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EA8D864116B0C9C000256495 /* Build configuration list for PBXNativeTarget "Mobile Clinic" */;
+			buildPhases = (
+				EA8D85E616B0C9BF00256495 /* Sources */,
+				EA8D85E716B0C9BF00256495 /* Frameworks */,
+				EA8D85E816B0C9BF00256495 /* Resources */,
+				EAADC01C16E0595F009E7AF9 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Mobile Clinic";
+			productName = "Mobile Clinic";
+			productReference = EA8D85EA16B0C9BF00256495 /* Mobile Clinic.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EA8D85E116B0C9BF00256495 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = FIU;
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = "Florida International University";
+			};
+			buildConfigurationList = EA8D85E416B0C9BF00256495 /* Build configuration list for PBXProject "Mobile Clinic" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = EA8D85DF16B0C9BF00256495;
+			productRefGroup = EA8D85EB16B0C9BF00256495 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EA8D85E916B0C9BF00256495 /* Mobile Clinic */,
+				EA5272CC1708653E0033604C /* MC-Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EA5272CB1708653E0033604C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA5272D41708653E0033604C /* InfoPlist.strings in Resources */,
+				EA5272DA1708653E0033604C /* Credits.rtf in Resources */,
+				EA5272EA170867800033604C /* RunTests.sh in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EA8D85E816B0C9BF00256495 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA8D85F916B0C9BF00256495 /* InfoPlist.strings in Resources */,
+				EA8D85FF16B0C9BF00256495 /* Credits.rtf in Resources */,
+				EA8D860516B0C9C000256495 /* MainMenu.xib in Resources */,
+				EAC19C7F16DE839C00B0B8DA /* PatientTable.xib in Resources */,
+				0FCC49CE16F3C63400FD3338 /* MedicationFile.json in Resources */,
+				EAE655E716F5443800139C62 /* MedicationList.xib in Resources */,
+				EAC0D7DD16FE7D6200621DDC /* UserView.xib in Resources */,
+				EA7D505A17179D9E002ED819 /* PatientData.png in Resources */,
+				EA7D505B17179D9E002ED819 /* PatientFile.png in Resources */,
+				EA7D505E1717A045002ED819 /* Pills.png in Resources */,
+				EA7D50601717A152002ED819 /* DoctorUser.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EA5272C91708653E0033604C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAEA9E9C1711C911005F1202 /* NSObject+CustomTools.m in Sources */,
+				EAEA9E9B1711C39A005F1202 /* PatientObject.m in Sources */,
+				EA527301170877550033604C /* Mobile_Clinic.xcdatamodeld in Sources */,
+				EA52730017086D5F0033604C /* StatusObject.m in Sources */,
+				EA5272FD17086D4D0033604C /* CloudService.m in Sources */,
+				EA5272FE17086D4D0033604C /* Database.m in Sources */,
+				EA5272FF17086D4D0033604C /* DatabaseDriver.m in Sources */,
+				EA5272FB17086D360033604C /* BaseObject.m in Sources */,
+				EA5272FC17086D360033604C /* BaseObject+Protected.m in Sources */,
+				EA5272FA17086D1F0033604C /* UserObject.m in Sources */,
+				EA5272EB170867800033604C /* Makefile in Sources */,
+				EA5272F2170867CE0033604C /* GHUnitTestMain.m in Sources */,
+				EA5272F5170868C20033604C /* SmokeTest.m in Sources */,
+				EA5272F917086CDB0033604C /* UserObjectTest.m in Sources */,
+				EAEA9E94170F4F07005F1202 /* BaseObject+Protected.m in Sources */,
+				EAEA9E971711BCA5005F1202 /* PatientObjectTest.m in Sources */,
+				EA0FE4DD171CB3CA00E68DFD /* SystemBackup.m in Sources */,
+				EA0FE4F2171E2B1300E68DFD /* NSData+GZIP.m in Sources */,
+				EA9BAA53172AA9A400773B42 /* NSDataAdditions.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EA8D85E616B0C9BF00256495 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA8D85FB16B0C9BF00256495 /* main.m in Sources */,
+				EA8D860216B0C9C000256495 /* FIUAppDelegate.m in Sources */,
+				EA172D3616B50A9C00F00C61 /* Server.m in Sources */,
+				EA172D3C16B56AEE00F00C61 /* ServerWrapper.m in Sources */,
+				EA172D5C16B60A6B00F00C61 /* UserObject.m in Sources */,
+				EA172D6016B6108D00F00C61 /* ObjectFactory.m in Sources */,
+				EA172D6416B6116800F00C61 /* BaseObject.m in Sources */,
+				EA172D7A16B6371D00F00C61 /* StatusObject.m in Sources */,
+				EA172D7E16B6412600F00C61 /* ConnectListContent.m in Sources */,
+				EA5D38F816B9E38000377D2C /* GCDAsyncSocket.m in Sources */,
+				EA5D38FE16B9E55D00377D2C /* ServerCore.m in Sources */,
+				EA186A4716BB5BF500977A00 /* HTTPServerCore.m in Sources */,
+				EA9372AB16BC6D6300D3D617 /* DatabaseDriver.m in Sources */,
+				EAE6CD9F16BE29B9008949DC /* NSString+Validation.m in Sources */,
+				463294A216C9B97B00C57DCE /* PatientObject.m in Sources */,
+				EA1EE1BF16D0A02100E263D2 /* VisitationObject.m in Sources */,
+				EAD015EA16D5E524002A8B3B /* NSObject+CustomTools.m in Sources */,
+				EAC19C5416DD24BC00B0B8DA /* Mobile_Clinic.xcdatamodeld in Sources */,
+				EAC19C6316DD27BF00B0B8DA /* Medication.m in Sources */,
+				EAC19C6816DD27BF00B0B8DA /* Users.m in Sources */,
+				EAC19C7E16DE839C00B0B8DA /* PatientTable.m in Sources */,
+				EAC19C8516DEE40700B0B8DA /* Patients.m in Sources */,
+				EA4CEC1416E3F8F400D6AB58 /* Visitation.m in Sources */,
+				EA749BD316EDAF8D000F849F /* PrescriptionObject.m in Sources */,
+				EAC37F1116F213E400836C1C /* Prescription.m in Sources */,
+				EAC37F1516F36DBA00836C1C /* CloudService.m in Sources */,
+				EAC37F1C16F394DB00836C1C /* MedicationObject.m in Sources */,
+				EAE655E616F5443800139C62 /* MedicationList.m in Sources */,
+				EA09328916F818D200536DF3 /* Database.m in Sources */,
+				EAC0D7D516FBBACD00621DDC /* DataProcessor.m in Sources */,
+				EAC0D7DB16FE7D6200621DDC /* UserView.m in Sources */,
+				EAC0D7E116FEC65D00621DDC /* MainMenu.m in Sources */,
+				EA51359E17015D93001761FC /* BaseObject+Protected.m in Sources */,
+				EA0FE4DC171CB3CA00E68DFD /* SystemBackup.m in Sources */,
+				EA0FE4F1171E2B1300E68DFD /* NSData+GZIP.m in Sources */,
+				EA9BAA52172AA9A400773B42 /* NSDataAdditions.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		EA5272D21708653E0033604C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EA5272D31708653E0033604C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		EA5272D81708653E0033604C /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EA5272D91708653E0033604C /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		EA8D85F716B0C9BF00256495 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EA8D85F816B0C9BF00256495 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		EA8D85FD16B0C9BF00256495 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EA8D85FE16B0C9BF00256495 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		EA8D860316B0C9C000256495 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EA8D860416B0C9C000256495 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		EA8D861716B0C9C000256495 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EA8D861816B0C9C000256495 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		EA8D863016B0C9C000256495 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EA8D863116B0C9C000256495 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EA5272E11708653E0033604C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/MC-Tests\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MC-Tests/MC-Tests-Prefix.pch";
+				INFOPLIST_FILE = "MC-Tests/MC-Tests-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		EA5272E21708653E0033604C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/MC-Tests\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MC-Tests/MC-Tests-Prefix.pch";
+				INFOPLIST_FILE = "MC-Tests/MC-Tests-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		EA8D863C16B0C9C000256495 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		EA8D863D16B0C9C000256495 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		EA8D864216B0C9C000256495 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Mobile Clinic/Mobile Clinic-Prefix.pch";
+				INFOPLIST_FILE = "Mobile Clinic/Mobile Clinic-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		EA8D864316B0C9C000256495 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Mobile Clinic/Mobile Clinic-Prefix.pch";
+				INFOPLIST_FILE = "Mobile Clinic/Mobile Clinic-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EA5272E31708653E0033604C /* Build configuration list for PBXNativeTarget "MC-Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EA5272E11708653E0033604C /* Debug */,
+				EA5272E21708653E0033604C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EA8D85E416B0C9BF00256495 /* Build configuration list for PBXProject "Mobile Clinic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EA8D863C16B0C9C000256495 /* Debug */,
+				EA8D863D16B0C9C000256495 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EA8D864116B0C9C000256495 /* Build configuration list for PBXNativeTarget "Mobile Clinic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EA8D864216B0C9C000256495 /* Debug */,
+				EA8D864316B0C9C000256495 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		EAC19C5216DD24BC00B0B8DA /* Mobile_Clinic.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				EAC19C5316DD24BC00B0B8DA /* Mobile_Clinic.xcdatamodel */,
+			);
+			currentVersion = EAC19C5316DD24BC00B0B8DA /* Mobile_Clinic.xcdatamodel */;
+			name = Mobile_Clinic.xcdatamodeld;
+			path = "Mobile Clinic/Mobile_Clinic.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = EA8D85E116B0C9BF00256495 /* Project object */;
+}
