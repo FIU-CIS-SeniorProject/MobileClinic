@@ -1,0 +1,52 @@
+
+<div id="menu" role="navigation">
+  <ul class="additional-menu">
+             <li class="active">
+
+                <li><%= link_to home_path do%> 
+                    <i class="icon-dashboard" id="sideIcon"></i> Dashboard </a>
+                    <%end%>
+                 </li>
+
+                  <li><%= link_to users_path do%> 
+                    <i class="icon-cloud" id="sideIcon"></i> Cloud App Users </a>
+                    <%end%>
+                 </li>
+                 <% if  admin_user? %>
+                 <li><%= link_to createuser_path do%> 
+                    <i class="icon-user" id="sideIcon"></i> Create a Cloud User </a>
+                    <%end%>
+                 </li>
+                <% end %>
+
+                <li><%= link_to appusers_path do%> 
+                    <i class="icon-group" id="sideIcon"></i> Application Users </a>
+                    <%end%>
+                 </li>
+                 <% if  admin_user? %>
+                 <li><%= link_to createappuser_path do%> 
+                    <i class="icon-user-md" id="sideIcon"></i> Create Application User </a>
+                    <%end%>
+                 </li>
+                <% end %>
+
+                <li><%= link_to patients_path do%> 
+                    <i class="icon-group" id="sideIcon"></i> Patient Data </a>
+                    <%end%>
+                 </li>
+
+                 <li><%= link_to medications_path do%> 
+                    <i class="icon-group" id="sideIcon"></i> List of Medication </a>
+                    <%end%>
+                 </li>
+
+                 <li><%= link_to createmedication_path do%> 
+                    <i class="icon-group" id="sideIcon"></i> Create Medication </a>
+                    <%end%>
+                 </li>
+                      
+             
+    </ul>
+
+    <div class="clearfix"></div>
+</div>

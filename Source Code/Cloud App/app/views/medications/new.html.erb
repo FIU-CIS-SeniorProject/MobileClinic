@@ -1,0 +1,40 @@
+ <div class="block">
+
+<% provide(:title, 'Add Medication') %>
+<div class="grid">
+  <div class="grid-title">
+    <div class="pull-left">
+      <div class="icon-title"><i class="icon-plus"></i></div> 
+      <span>New Medication</span> 
+      <div class="clearfix"></div>
+    </div>
+    <div class="clearfix"></div>   
+  </div>
+  <div class="grid-content">
+    <%= form_for(@medication) do |f| %>
+    <%= render 'shared/error_messages_med' %>
+    <div class="grid-content overflow">
+      <%= f.text_field :name , class: "span input", :placeholder => 'Name of Medication' %>
+    </div>
+    <div class="grid-content overflow">
+      <%= f.text_field :numContainers , class: "span input", :placeholder => 'Number of Containers' %>
+    </div>
+    <div class="grid-content overflow">
+      <%= f.text_field :tabletsPerContainer , class: "span input", :placeholder => 'Tablets Per Container' %>
+    </div>
+    <div class="grid-content overflow">
+      <%= f.text_field :doseOfTablets , class: "span input", :placeholder => 'Amount of Dose' %>
+    </div>
+    <div class="grid-content overflow">
+      <%= f.text_field :expiration , class: "span input", :placeholder => 'Expiration' %>
+    </div>
+     <div class="grid-content overflow">
+      <%= f.text_area :notes , class: "span input same-height-1", :placeholder => 'Notes' %>
+     </div>
+
+    <%= f.submit "Create New Medication", :class => "btn btn-large btn-block btn-info"%>   
+    <% end %>
+  </div> 
+</div>
+
+</div>

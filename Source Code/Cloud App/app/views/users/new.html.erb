@@ -1,0 +1,48 @@
+<% provide(:title, 'Create Cloud User') %>
+ <div class="block">
+<div class="block">
+  <div class="grid">
+    <div class="grid-title">
+      <div class="pull-left">
+        <div class="icon-title"><i class="icon-plus"></i></div> 
+        <span>New User</span> 
+        <div class="clearfix"></div>
+      </div>
+      <div class="clearfix"></div>   
+    </div>
+    <div class="grid-content">
+      <%= form_for(@user) do |f| %>
+      <div class="grid-content overflow">
+        <%= render 'shared/error_messages' %>
+        <%= f.text_field :firstName , class: "span input", :placeholder => 'First Name' %>
+      </div>
+      <div class="grid-content overflow">
+        <%= f.text_field :lastName , class: "span input", :placeholder => 'Last Name' %>
+      </div>
+      <div class="grid-content overflow">
+        <%= f.text_field :email , class: "span input", :placeholder => 'Email' %>
+      </div>
+      <div class="grid-content overflow">
+        <%= f.text_field :userName , class: "span input", :placeholder => 'User Name' %>
+      </div>
+      <div class="grid-content overflow">
+        <%= f.password_field :password , class: "span input", :placeholder => 'Password' %>
+      </div>
+      <div class="grid-content overflow">
+        <%= f.password_field :password_confirmation , class: "span input", :placeholder => 'Repeat Password' %>
+      </div>
+      <div class="grid-content overflow">
+        <%= f.select :userType, [['Admin',0], ['Record Keeper',1]] %>
+      </div>
+      <div class="grid-content overflow">
+        <%= f.select :status, [['Active',1], ['Inactive',0]]%>
+      </div>
+      <div class="grid-content overflow">
+        <%= f.file_field :avatar %>
+      </div>
+      <%= f.submit "Create Account", :class => "btn btn-large btn-block btn-info"%>   
+      <% end %>
+    </div> 
+  </div>
+</div>
+</div>

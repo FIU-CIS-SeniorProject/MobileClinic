@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/mcemr/!svn/ver/82/trunk/Web/admin-webapp/config/initializers
+END
+inflections.rb
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/mcemr/!svn/ver/82/trunk/Web/admin-webapp/config/initializers/inflections.rb
+END
+session_store.rb
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/mcemr/!svn/ver/82/trunk/Web/admin-webapp/config/initializers/session_store.rb
+END
+secret_token.rb
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/mcemr/!svn/ver/82/trunk/Web/admin-webapp/config/initializers/secret_token.rb
+END
+backtrace_silencers.rb
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/mcemr/!svn/ver/82/trunk/Web/admin-webapp/config/initializers/backtrace_silencers.rb
+END
+mime_types.rb
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/mcemr/!svn/ver/82/trunk/Web/admin-webapp/config/initializers/mime_types.rb
+END
+wrap_parameters.rb
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/mcemr/!svn/ver/82/trunk/Web/admin-webapp/config/initializers/wrap_parameters.rb
+END
