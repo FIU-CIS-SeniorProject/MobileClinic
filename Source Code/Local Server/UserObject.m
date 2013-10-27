@@ -73,7 +73,7 @@
 
 -(void)setupObject
 {
-    self->COMMONID =  USERNAME;
+    self->COMMONID = USERNAME;
     self->CLASSTYPE = kUserType;
     self->COMMONDATABASE = DATABASE;
 }

@@ -24,9 +24,7 @@
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 3/15/13.
-//  Copyright (c) 2013 Florida International University. All rights reserved.
 //
-
 #import "CloudService.h"
 
 @interface CloudService()
@@ -60,12 +58,13 @@
     self = [super init];
     if(self)
     {
-        kURL = @"http://staging-webapp.herokuapp.com/";
         kApiKey = @"12345";
         kAccessToken = @"";
         isAuthenticated = NO;
         //production
         //kURL = @"http://znja-webapp.herokuapp.com/api/";
+        //kURL = @"http://staging-webapp.herokuapp.com/";
+        kURL = @"http://pure-refuge-1813.herokuapp.com/";
         
         [self getAccessToken:^(BOOL success)
         {
@@ -109,9 +108,9 @@
             {
                 NSError *jsonError;
                 
-                //read and print the server response for debug
+                // Read and print the server response for debug
                 NSString *myString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                // NSLog(@"%@", myString);
+                NSLog(@"%@", myString);
                 
                 NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
                 if ((completion && json) || (completion && jsonError))

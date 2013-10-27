@@ -24,7 +24,6 @@
 //  Mobile Clinic
 //
 //  Created by Rigo Hernandez on 3/10/13.
-//  Copyright (c) 2013 Steven Berlanga. All rights reserved.
 //
 #import "PatientQueueViewController.h"
 #import "DoctorPatientViewController.h"
@@ -94,7 +93,7 @@
             // Settings with respect to station chosen
             switch ([[self stationChosen] intValue])
             {
-                case 2:
+                case DOCTORSTATION:
                     {
                         [navbar setTintColor:[UIColor blueColor]];
                 
@@ -107,7 +106,7 @@
                         [self sortBy:PRIORITY inAscendingOrder:NO];
                     }
                     break;
-                case 3:
+                case PHARMACISTSTATION:
                     {
                         [navbar setTintColor:[UIColor greenColor]];
                 

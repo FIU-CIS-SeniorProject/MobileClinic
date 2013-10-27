@@ -24,7 +24,6 @@
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 3/1/13.
-//  Copyright (c) 2013 Steven Berlanga. All rights reserved.
 //
 #define OPEN_VISITS_PATIENT @"Open Visit"
 
@@ -54,7 +53,6 @@ typedef void (^MobileClinicSearchResponse)(NSArray* allObjectsFromSearch, NSErro
 // @param patietnInfo The patient's information in a dictionary form
 -(void) createAndCheckInPatient:(NSDictionary*)patientInfo onCompletion:(MobileClinicCommandResponse)Response;
 
-
 // Locates the patient by First and/or Family name. This method fetches the query from the server and caches it to the device. Then it queries the cache to return a complete list objects that matches the criteria
 // @param firstname the firstname of the patient
 // @param lastname the family name of the patient
@@ -66,7 +64,6 @@ typedef void (^MobileClinicSearchResponse)(NSArray* allObjectsFromSearch, NSErro
 // @param visitInfo The visitation information
 // @param patientInfo The patient to associate the visitation to
 -(void)addNewVisit:(NSDictionary *)visitInfo ForCurrentPatient:(NSDictionary *)patientInfo shouldCheckOut:(BOOL)checkout onCompletion:(MobileClinicCommandResponse)Response;
-
 
 // This will update the give visit in local and remote database.
 // If the visit is locked by another user the server will not update the visit but will throw an error message.

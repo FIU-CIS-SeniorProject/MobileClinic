@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		0FCC49CE16F3C63400FD3338 /* MedicationFile.json in Resources */ = {isa = PBXBuildFile; fileRef = 0FCC49CD16F3C63400FD3338 /* MedicationFile.json */; };
 		463294A216C9B97B00C57DCE /* PatientObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 463294A116C9B97B00C57DCE /* PatientObject.m */; };
+		8C34AEB2180E08E3006A81B3 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C34AEB1180E08E3006A81B3 /* XCTest.framework */; };
+		8C34AEB8180E08E3006A81B3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8C34AEB6180E08E3006A81B3 /* InfoPlist.strings */; };
+		8C34AEBA180E08E3006A81B3 /* Mobile_Clinic_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C34AEB9180E08E3006A81B3 /* Mobile_Clinic_Tests.m */; };
 		EA09328916F818D200536DF3 /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = EA09328816F818D200536DF3 /* Database.m */; };
 		EA0FE4DC171CB3CA00E68DFD /* SystemBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0FE4DB171CB3CA00E68DFD /* SystemBackup.m */; };
 		EA0FE4DD171CB3CA00E68DFD /* SystemBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0FE4DB171CB3CA00E68DFD /* SystemBackup.m */; };
@@ -85,6 +88,16 @@
 		EAEA9E9C1711C911005F1202 /* NSObject+CustomTools.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD015E916D5E524002A8B3B /* NSObject+CustomTools.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		8C34AEBC180E08E3006A81B3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA8D85E116B0C9BF00256495 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EA8D85E916B0C9BF00256495;
+			remoteInfo = "Mobile Clinic";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		EA5272E61708672F0033604C /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -112,6 +125,12 @@
 		0FCC49CD16F3C63400FD3338 /* MedicationFile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MedicationFile.json; sourceTree = "<group>"; };
 		463294A016C9B97B00C57DCE /* PatientObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatientObject.h; sourceTree = "<group>"; };
 		463294A116C9B97B00C57DCE /* PatientObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatientObject.m; sourceTree = "<group>"; };
+		8C34AEB0180E08E3006A81B3 /* Mobile Clinic Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Mobile Clinic Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C34AEB1180E08E3006A81B3 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		8C34AEB5180E08E3006A81B3 /* Mobile Clinic Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Mobile Clinic Tests-Info.plist"; sourceTree = "<group>"; };
+		8C34AEB7180E08E3006A81B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8C34AEB9180E08E3006A81B3 /* Mobile_Clinic_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Mobile_Clinic_Tests.m; sourceTree = "<group>"; };
+		8C34AEBB180E08E3006A81B3 /* Mobile Clinic Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Mobile Clinic Tests-Prefix.pch"; sourceTree = "<group>"; };
 		EA09328716F818D200536DF3 /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
 		EA09328816F818D200536DF3 /* Database.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Database.m; sourceTree = "<group>"; };
 		EA09328A16F81C2800536DF3 /* DatabaseProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseProtocol.h; sourceTree = "<group>"; };
@@ -245,6 +264,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		8C34AEAD180E08E3006A81B3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C34AEB2180E08E3006A81B3 /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EA5272CA1708653E0033604C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -267,6 +294,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C34AEB3180E08E3006A81B3 /* Mobile Clinic Tests */ = {
+			isa = PBXGroup;
+			children = (
+				8C34AEB9180E08E3006A81B3 /* Mobile_Clinic_Tests.m */,
+				8C34AEB4180E08E3006A81B3 /* Supporting Files */,
+			);
+			path = "Mobile Clinic Tests";
+			sourceTree = "<group>";
+		};
+		8C34AEB4180E08E3006A81B3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8C34AEB5180E08E3006A81B3 /* Mobile Clinic Tests-Info.plist */,
+				8C34AEB6180E08E3006A81B3 /* InfoPlist.strings */,
+				8C34AEBB180E08E3006A81B3 /* Mobile Clinic Tests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		EA09328616F8149F00536DF3 /* Cloud API */ = {
 			isa = PBXGroup;
 			children = (
@@ -441,6 +487,7 @@
 				EA8D861416B0C9C000256495 /* Mobile ClinicTests */,
 				EA8D862D16B0C9C000256495 /* Mobile ClinicImporter */,
 				EA5272CF1708653E0033604C /* MC-Tests */,
+				8C34AEB3180E08E3006A81B3 /* Mobile Clinic Tests */,
 				EA8D85ED16B0C9BF00256495 /* Frameworks */,
 				EA8D85EB16B0C9BF00256495 /* Products */,
 			);
@@ -451,6 +498,7 @@
 			children = (
 				EA8D85EA16B0C9BF00256495 /* Mobile Clinic.app */,
 				EA5272CD1708653E0033604C /* MC-Tests.app */,
+				8C34AEB0180E08E3006A81B3 /* Mobile Clinic Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -465,6 +513,7 @@
 				EA8D862716B0C9C000256495 /* CoreFoundation.framework */,
 				EA8D862916B0C9C000256495 /* CoreData.framework */,
 				EA8D862B16B0C9C000256495 /* Foundation.framework */,
+				8C34AEB1180E08E3006A81B3 /* XCTest.framework */,
 				EA8D85F016B0C9BF00256495 /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -697,6 +746,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		8C34AEAF180E08E3006A81B3 /* Mobile Clinic Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8C34AEC0180E08E4006A81B3 /* Build configuration list for PBXNativeTarget "Mobile Clinic Tests" */;
+			buildPhases = (
+				8C34AEAC180E08E3006A81B3 /* Sources */,
+				8C34AEAD180E08E3006A81B3 /* Frameworks */,
+				8C34AEAE180E08E3006A81B3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8C34AEBD180E08E3006A81B3 /* PBXTargetDependency */,
+			);
+			name = "Mobile Clinic Tests";
+			productName = "Mobile Clinic Tests";
+			productReference = 8C34AEB0180E08E3006A81B3 /* Mobile Clinic Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		EA5272CC1708653E0033604C /* MC-Tests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EA5272E31708653E0033604C /* Build configuration list for PBXNativeTarget "MC-Tests" */;
@@ -742,6 +809,11 @@
 				CLASSPREFIX = FIU;
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = "Florida International University";
+				TargetAttributes = {
+					8C34AEAF180E08E3006A81B3 = {
+						TestTargetID = EA8D85E916B0C9BF00256495;
+					};
+				};
 			};
 			buildConfigurationList = EA8D85E416B0C9BF00256495 /* Build configuration list for PBXProject "Mobile Clinic" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -757,11 +829,20 @@
 			targets = (
 				EA8D85E916B0C9BF00256495 /* Mobile Clinic */,
 				EA5272CC1708653E0033604C /* MC-Tests */,
+				8C34AEAF180E08E3006A81B3 /* Mobile Clinic Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		8C34AEAE180E08E3006A81B3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C34AEB8180E08E3006A81B3 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EA5272CB1708653E0033604C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -793,6 +874,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		8C34AEAC180E08E3006A81B3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C34AEBA180E08E3006A81B3 /* Mobile_Clinic_Tests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EA5272C91708653E0033604C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -864,7 +953,23 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		8C34AEBD180E08E3006A81B3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EA8D85E916B0C9BF00256495 /* Mobile Clinic */;
+			targetProxy = 8C34AEBC180E08E3006A81B3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
+		8C34AEB6180E08E3006A81B3 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8C34AEB7180E08E3006A81B3 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		EA5272D21708653E0033604C /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -924,6 +1029,63 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		8C34AEBE180E08E3006A81B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Mobile Clinic.app/Contents/MacOS/Mobile Clinic";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Mobile Clinic Tests/Mobile Clinic Tests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "Mobile Clinic Tests/Mobile Clinic Tests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		8C34AEBF180E08E3006A81B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Mobile Clinic.app/Contents/MacOS/Mobile Clinic";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				ENABLE_NS_ASSERTIONS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Mobile Clinic Tests/Mobile Clinic Tests-Prefix.pch";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "Mobile Clinic Tests/Mobile Clinic Tests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
 		EA5272E11708653E0033604C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1050,6 +1212,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8C34AEC0180E08E4006A81B3 /* Build configuration list for PBXNativeTarget "Mobile Clinic Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8C34AEBE180E08E3006A81B3 /* Debug */,
+				8C34AEBF180E08E3006A81B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		EA5272E31708653E0033604C /* Build configuration list for PBXNativeTarget "MC-Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

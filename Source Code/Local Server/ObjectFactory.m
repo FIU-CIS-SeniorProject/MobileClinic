@@ -24,9 +24,7 @@
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 1/27/13.
-//  Copyright (c) 2013 Florida International University. All rights reserved.
 //
-
 #import "ObjectFactory.h"
 #import "UserObject.h"
 #import "PatientObject.h"
@@ -34,6 +32,7 @@
 #import "VisitationObject.h"
 #import "PrescriptionObject.h"
 #import "MedicationObject.h"
+
 @implementation ObjectFactory
 
 +(id<BaseObjectProtocol>)createObjectForType:(NSDictionary*)data

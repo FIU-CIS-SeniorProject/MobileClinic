@@ -24,7 +24,6 @@
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 1/23/13.
-//  Copyright (c) 2013 Florida International University. All rights reserved.
 //
 #import "FIUAppDelegate.h"
 #import "BaseObject.h"

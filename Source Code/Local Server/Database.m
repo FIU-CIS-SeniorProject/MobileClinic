@@ -24,7 +24,6 @@
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 3/18/13.
-//  Copyright (c) 2013 Florida International University. All rights reserved.
 //
 
 #import "Database.h"
@@ -170,6 +169,7 @@
     }
 }
 
+//TODO: Fix implementation and avoid abort()
 - (void)saveContext
 {
     NSError *error = nil;

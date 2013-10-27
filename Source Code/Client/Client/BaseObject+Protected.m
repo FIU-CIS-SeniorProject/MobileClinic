@@ -36,7 +36,7 @@ id<ServerProtocol> serverManager;
 
 -(void)SendData:(NSDictionary *)data toServerWithErrorMessage:(NSString *)msg andResponse:(ObjectResponse)Response
 {
-    [ self tryAndSendData:data withErrorToFire:^(id<BaseObjectProtocol> data, NSError *error)
+    [self tryAndSendData:data withErrorToFire:^(id<BaseObjectProtocol> data, NSError *error)
     {
         Response(nil, error);
     } andWithPositiveResponse:^(id data)
@@ -74,8 +74,7 @@ id<ServerProtocol> serverManager;
 
 -(void)startSearchWithData:(NSDictionary*)data withsearchType:(RemoteCommands)rCommand andOnComplete:(ObjectResponse)response
 {
-    NSMutableDictionary* dataToSend = [[NSMutableDictionary alloc]initWithCapacity:3
-                                       ];
+    NSMutableDictionary* dataToSend = [[NSMutableDictionary alloc]initWithCapacity:3];
     [dataToSend setValue:data forKey:DATABASEOBJECT];
     [dataToSend setValue:[NSNumber numberWithInt:self->CLASSTYPE] forKey:OBJECTTYPE];
     [dataToSend setValue:[NSNumber numberWithInt:rCommand] forKey:OBJECTCOMMAND];

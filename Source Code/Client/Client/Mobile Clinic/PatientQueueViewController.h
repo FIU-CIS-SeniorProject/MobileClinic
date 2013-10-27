@@ -31,6 +31,9 @@
 #import "StationNavigationController.h"
 #import "MenuViewController.h"
 
+#define DOCTORSTATION 2
+#define PHARMACISTSTATION 3
+
 @interface PatientQueueViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *queueTableView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *prioritySelector;

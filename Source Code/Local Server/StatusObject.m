@@ -24,11 +24,9 @@
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 1/27/13.
-//  Copyright (c) 2013 Florida International University. All rights reserved.
 //
 #define ERRORMSG    @"errormsg"
 #import "StatusObject.h"
-
 
 @implementation StatusObject
 
