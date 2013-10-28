@@ -1956,8 +1956,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: James Mendez (M3Z7L64CSY)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: James Mendez (M3Z7L64CSY)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1972,9 +1972,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "CF6AFDD9-8644-4AE4-9E8C-6E629682B108";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CF6AFDD9-8644-4AE4-9E8C-6E629682B108";
-				SDKROOT = iphoneos7.0;
+				PROVISIONING_PROFILE = "D7727EE4-9D2D-42BE-8F2E-D8A846B1BECD";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D7727EE4-9D2D-42BE-8F2E-D8A846B1BECD";
+				SDKROOT = iphoneos6.1;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -1991,8 +1991,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: James Mendez (M3Z7L64CSY)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: James Mendez (M3Z7L64CSY)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -2001,9 +2001,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "CF6AFDD9-8644-4AE4-9E8C-6E629682B108";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CF6AFDD9-8644-4AE4-9E8C-6E629682B108";
-				SDKROOT = iphoneos7.0;
+				PROVISIONING_PROFILE = "D7727EE4-9D2D-42BE-8F2E-D8A846B1BECD";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D7727EE4-9D2D-42BE-8F2E-D8A846B1BECD";
+				SDKROOT = iphoneos6.1;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2012,12 +2012,12 @@
 		4677412E16BD931E002FD4A5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mobile Clinic/Mobile Clinic-Prefix.pch";
 				INFOPLIST_FILE = "Mobile Clinic/Mobile Clinic-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/TestFlightSDK1.1\"",
 					"$(FRANK_LIBRARY_SEARCH_PATHS)",
@@ -2029,7 +2029,6 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 2;
 				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
@@ -2039,13 +2038,13 @@
 		4677412F16BD931E002FD4A5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				COPY_PHASE_STRIP = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mobile Clinic/Mobile Clinic-Prefix.pch";
 				INFOPLIST_FILE = "Mobile Clinic/Mobile Clinic-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/TestFlightSDK1.1\"",
 					"\"$(SRCROOT)/lib\"",
@@ -2053,7 +2052,6 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 2;
 				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;

@@ -73,7 +73,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    // This will should HUD in tableview to show alert the user that the system is working
+    // This will show HUD in tableview to show alert the user that the system is working
     [self showIndeterminateHUDInView:_queueTableView withText:@"Searching" shouldHide:NO afterDelay:0 andShouldDim:NO];
     
     mobileFacade = [[MobileClinicFacade alloc] init];
@@ -99,7 +99,6 @@
                 
                         // Filter results to patient's that haven't seen the doctor
                         NSPredicate * predicate = [NSPredicate predicateWithFormat:@"%K == %@", DOCTOROUT, nil];
-                
                         queueArray = [NSMutableArray arrayWithArray:[queueArray filteredArrayUsingPredicate:predicate]];
                 
                         // Sort queue by priority
