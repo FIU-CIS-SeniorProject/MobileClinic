@@ -24,9 +24,7 @@
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 1/27/13.
-//  Copyright (c) 2013 Florida International University. All rights reserved.
 //
-
 #import "BaseObject.h"
 #import "BaseObject+Protected.h"
 
@@ -47,6 +45,7 @@
     }
     return self;
 }
+
 -(id)initAndMakeNewDatabaseObject
 {
     self = [super init];
@@ -57,6 +56,7 @@
     }
     return self;
 }
+
 - (id)initAndFillWithNewObject:(NSDictionary *)info
 {
     self = [self init];
@@ -67,6 +67,7 @@
     }
     return self;
 }
+
 -(id)initWithCachedObjectWithUpdatedObject:(NSDictionary *)dic
 {
     self = [super init];

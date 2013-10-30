@@ -66,7 +66,7 @@
     return _managedObjectModel;
 }
 
-// Returns the persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it. (The directory for the store is created, if necessary.)
+// Returns the persistent store coordinator for the application. This implementation creates and returns a coordinator, having added the store for the application to it. (The directory for the store is created, if necessary.)
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator
 {
     if (_persistentStoreCoordinator)

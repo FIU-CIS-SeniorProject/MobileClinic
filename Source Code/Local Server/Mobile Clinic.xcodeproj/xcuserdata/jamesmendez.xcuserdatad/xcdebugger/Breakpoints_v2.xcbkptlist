@@ -19,5 +19,113 @@
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Mobile Clinic/FIUAppDelegate.m"
+            timestampString = "404755002.298898"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
+            landmarkName = "-setupTestPatients:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Mobile Clinic/MainMenu.m"
+            timestampString = "404696496.897975"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
+            landmarkName = "-purgeTheSystem:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[MainMenu purgeTheSystem:]"
+                  moduleName = "Mobile Clinic"
+                  urlString = "file://localhost/Users/jamesmendez/Documents/Senior%20Project/MobileClinic%20-%20GIT/Source%20Code/Local%20Server/Mobile%20Clinic/MainMenu.m"
+                  timestampString = "404700122.389041"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "120"
+                  endingLineNumber = "120"
+                  offsetFromSymbolStart = "237">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[MainMenu purgeTheSystem:]"
+                  moduleName = "Mobile Clinic"
+                  urlString = "file://localhost/Users/jamesmendez/Documents/Senior%20Project/MobileClinic%20-%20GIT/Source%20Code/Local%20Server/Mobile%20Clinic/MainMenu.m"
+                  timestampString = "404700122.38967"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "120"
+                  endingLineNumber = "120"
+                  offsetFromSymbolStart = "913">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Mobile Clinic/MainMenu.m"
+            timestampString = "404767236.713378"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
+            landmarkName = "-truePurgeTheSystem:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[MainMenu truePurgeTheSystem:]"
+                  moduleName = "Mobile Clinic"
+                  urlString = "file://localhost/Users/jamesmendez/Documents/Senior%20Project/MobileClinic%20-%20GIT/Source%20Code/Local%20Server/Mobile%20Clinic/MainMenu.m"
+                  timestampString = "404700075.624639"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "149"
+                  endingLineNumber = "149"
+                  offsetFromSymbolStart = "244">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[MainMenu truePurgeTheSystem:]"
+                  moduleName = "Mobile Clinic"
+                  urlString = "file://localhost/Users/jamesmendez/Documents/Senior%20Project/MobileClinic%20-%20GIT/Source%20Code/Local%20Server/Mobile%20Clinic/MainMenu.m"
+                  timestampString = "404700075.625358"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "149"
+                  endingLineNumber = "149"
+                  offsetFromSymbolStart = "650">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

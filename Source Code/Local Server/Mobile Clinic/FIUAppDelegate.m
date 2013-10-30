@@ -74,6 +74,7 @@ Optimizer isOptimized;
     [_window setHidesOnDeactivate:NO];
 }
 
+// Switching to the Test Environment
 - (IBAction)setupTestPatients:(id)sender
 {
     // - DO NOT COMMENT: IF YOUR RESTART YOUR SERVER IT WILL PLACE DEMO PATIENTS INSIDE TO HELP ACCELERATE YOUR TESTING
@@ -81,6 +82,9 @@ Optimizer isOptimized;
     NSError* err = nil;
     NSString* dataPath = [[NSBundle mainBundle] pathForResource:@"PatientFile" ofType:@"json"];
     NSArray* patients = [NSArray arrayWithArray:[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPath]options:0 error:&err]];
+    
+    NSLog(@"Performing a True Purge of the System");
+    [mainView truePurgeTheSystem:nil];
     
     NSLog(@"Imported Patients: %@", patients);
     [patients enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
@@ -108,6 +112,7 @@ Optimizer isOptimized;
     }];
 }
 
+//TODO: Implement switching to the production environment
 - (IBAction)TearDownEnvironment:(id)sender
 {
     

@@ -131,19 +131,21 @@
     return [self FindAllObjects];
 }
 
+//TODO: printFormattedObject needs to be implemented
 -(NSString *)printFormattedObject:(NSDictionary *)object
 {
     return @"Not Implemented Yet";
 }
+
 #pragma mark- Public Methods
 #pragma mark-
-
+//TODO: Not implemented???
 -(void)pushToCloud:(CloudCallback)onComplete
 {
     onComplete(nil,[[NSError alloc]initWithDomain:COMMONDATABASE code:kErrorObjectMisconfiguration userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"This feature is not implemented",NSLocalizedFailureReasonErrorKey, nil]]);
 }
 
-//TODO: Remove Hard Dependencies
+//TODO: Remove Hard Dependencies?
 -(void)pullFromCloud:(CloudCallback)onComplete
 {
     [self makeCloudCallWithCommand:DATABASE withObject:nil onComplete:^(id cloudResults, NSError *error)
@@ -155,7 +157,7 @@
 
 #pragma mark - Private Methods
 #pragma mark -
-
+//TODO: same user object used twice?
 -(void)ValidateAndLoginUser
 {
     // Initially set it to an error, for efficiency.
@@ -168,6 +170,7 @@
     {
         // Its good to send a message
         [status setErrorMessage:@"Username doesnt Exist or was incorrect"];
+        
         // Let the status object send this information
         NSLog(@"Username doesnt Exist or was incorrect");
     }
@@ -176,6 +179,7 @@
         // Validate with information inside database
         user = [filtered objectAtIndex:0];
         
+#warning user comparing to itself?
         if (![user.password isEqualToString:user.password])
         {
             // Its good to send a message

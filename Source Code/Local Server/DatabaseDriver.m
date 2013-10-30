@@ -118,7 +118,6 @@ NSManagedObjectContext* context;
     return [self fetchElementsUsingFetchRequest:fetch withTable:table];
 }
 
-
 -(NSArray*)fetchElementsUsingFetchRequest:(NSFetchRequest*)request withTable:(NSString*)tableName
 {
     NSManagedObjectContext* ctx = database.managedObjectContext;
