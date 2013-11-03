@@ -46,5 +46,7 @@
 - (IBAction)manualTableRefresh:(id)sender;
 - (IBAction)showUserView:(id)sender;
 
+- (IBAction)pushPatientsToCloud:(id)sender;
+
 - (IBAction)emergencyDataDump:(id)sender;
 @end

@@ -65,7 +65,7 @@
         //kURL = @"http://znja-webapp.herokuapp.com/api/";
         //kURL = @"http://staging-webapp.herokuapp.com/";
         //kURL = @"http://pure-refuge-1813.herokuapp.com/";
-        kURL = @"http://pure-island-5858.herokuapp.com"; // Test Cloud
+        kURL = @"http://pure-island-5858.herokuapp.com/"; // Test Cloud
         
         [self getAccessToken:^(BOOL success)
         {

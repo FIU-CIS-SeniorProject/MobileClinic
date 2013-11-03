@@ -124,10 +124,26 @@ NSString* medicationID;
     }];
 }
 
-//TODO: Empty?
+//TODO: NOT YET IMPLEMENTED ON THE CLOUD
 -(void)pushToCloud:(CloudCallback)onComplete
 {
-
+    //NSArray* allMedications= [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:COMMONDATABASE withCustomPredicate:[NSPredicate predicateWithFormat:@"%K == YES",ISDIRTY] andSortByAttribute:FIRSTNAME]];
+    
+    NSArray* allMedications = [self FindAllObjects];
+    
+    // Remove Values that will break during serialization
+    for (NSMutableDictionary* object in allMedications)
+    {
+        NSString* mId = [object objectForKey:MEDICATIONID];
+        mId = [mId stringByReplacingOccurrencesOfString:@"." withString:@""];
+        [object setValue:mId forKey:MEDICATIONID];
+    }
+    
+    [self makeCloudCallWithCommand:UPDATEMEDICATION withObject:[NSDictionary dictionaryWithObject:allMedications forKey:DATABASE] onComplete:^(id cloudResults, NSError *error)
+     {
+         
+         [self handleCloudCallback:onComplete UsingData:allMedications WithPotentialError:error];
+     }];
 }
 
 -(NSArray *)FindAllObjects

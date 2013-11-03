@@ -27,11 +27,12 @@
 //  Copyright (c) 2013 Florida International University. All rights reserved.
 //
 
-// OTHER OBJECTS MAY NEED THESE TWO VARIABLES //
+// OTHER OBJECTS MAY NEED THESE VARIABLES //
 #define PATIENTBYID     @"patient_for_id"
 #define ALLPATIENTS     @"patients"
 #define UPDATEPATIENT     @"update_patient"
 #define CREATEPATIENT   @"create_patient"
+#define UPDATEMEDICATION    @"update_medication"
 #define DATABASEOBJECT @"Database Object"
 
 #import "NSObject+CustomTools.h"

@@ -24,14 +24,13 @@
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 2/27/13.
-//  Copyright (c) 2013 Florida International University. All rights reserved.
 //
-
 #import "PatientTable.h"
-#define INNER   @"Inner"
 #import "DataProcessor.h"
 #import "NSString+Validation.h"
 #import "SystemBackup.h"
+
+#define INNER   @"Inner"
 @interface PatientTable ()
 {
     NSMutableDictionary* selectedVisit;

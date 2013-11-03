@@ -60,7 +60,7 @@
 // Does not need to be implemented  on the client side
 -(void)saveObject:(ObjectResponse)eventResponse
 {
-    NSLog(@"SaveObject Method has not been implemented");
+    NSLog(@"StatusObject: SaveObject Method has not been implemented");
 }
 
 //TODO: Empty?

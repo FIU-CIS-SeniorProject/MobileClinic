@@ -12,6 +12,7 @@
 		8C34AEB2180E08E3006A81B3 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C34AEB1180E08E3006A81B3 /* XCTest.framework */; };
 		8C34AEB8180E08E3006A81B3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8C34AEB6180E08E3006A81B3 /* InfoPlist.strings */; };
 		8C34AEBA180E08E3006A81B3 /* Mobile_Clinic_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C34AEB9180E08E3006A81B3 /* Mobile_Clinic_Tests.m */; };
+		8CAE77581821CFE200C0503B /* UserFile.json in Resources */ = {isa = PBXBuildFile; fileRef = 8CAE77571821CFE200C0503B /* UserFile.json */; };
 		EA09328916F818D200536DF3 /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = EA09328816F818D200536DF3 /* Database.m */; };
 		EA0FE4DC171CB3CA00E68DFD /* SystemBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0FE4DB171CB3CA00E68DFD /* SystemBackup.m */; };
 		EA0FE4DD171CB3CA00E68DFD /* SystemBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0FE4DB171CB3CA00E68DFD /* SystemBackup.m */; };
@@ -131,6 +132,7 @@
 		8C34AEB7180E08E3006A81B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8C34AEB9180E08E3006A81B3 /* Mobile_Clinic_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Mobile_Clinic_Tests.m; sourceTree = "<group>"; };
 		8C34AEBB180E08E3006A81B3 /* Mobile Clinic Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Mobile Clinic Tests-Prefix.pch"; sourceTree = "<group>"; };
+		8CAE77571821CFE200C0503B /* UserFile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UserFile.json; sourceTree = "<group>"; };
 		EA09328716F818D200536DF3 /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
 		EA09328816F818D200536DF3 /* Database.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Database.m; sourceTree = "<group>"; };
 		EA09328A16F81C2800536DF3 /* DatabaseProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseProtocol.h; sourceTree = "<group>"; };
@@ -475,6 +477,7 @@
 				EAC0D7E316FECDF800621DDC /* User View & Controller */,
 				EAC0D7D716FD1A0000621DDC /* Med View & Controller */,
 				EA09328616F8149F00536DF3 /* Cloud API */,
+				8CAE77571821CFE200C0503B /* UserFile.json */,
 				EAADC01D16E0596C009E7AF9 /* PatientFile.json */,
 				0FCC49CD16F3C63400FD3338 /* MedicationFile.json */,
 				EAEF2F9716ED5B7300A9B49A /* Patient Control */,
@@ -861,6 +864,7 @@
 				EA8D85FF16B0C9BF00256495 /* Credits.rtf in Resources */,
 				EA8D860516B0C9C000256495 /* MainMenu.xib in Resources */,
 				EAC19C7F16DE839C00B0B8DA /* PatientTable.xib in Resources */,
+				8CAE77581821CFE200C0503B /* UserFile.json in Resources */,
 				0FCC49CE16F3C63400FD3338 /* MedicationFile.json in Resources */,
 				EAE655E716F5443800139C62 /* MedicationList.xib in Resources */,
 				EAC0D7DD16FE7D6200621DDC /* UserView.xib in Resources */,
@@ -1219,6 +1223,7 @@
 				8C34AEBF180E08E3006A81B3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EA5272E31708653E0033604C /* Build configuration list for PBXNativeTarget "MC-Tests" */ = {
 			isa = XCConfigurationList;

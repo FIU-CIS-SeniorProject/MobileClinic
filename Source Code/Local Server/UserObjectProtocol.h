@@ -45,7 +45,7 @@
 #define USERNAME    @"userName"
 #define PASSWORD    @"password"
 #define USERTYPE    @"userType" //The different user types (look at enum)
-#define SAVE_USER @"savedUser"
+#define SAVE_USER   @"savedUser"
 
 typedef enum
 {

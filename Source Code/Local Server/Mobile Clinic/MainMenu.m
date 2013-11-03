@@ -69,6 +69,25 @@ id<ServerProtocol> connection;
     [NSApp terminate:self];
 }
 
+- (IBAction)showUserView:(id)sender
+{
+    if (!userView)
+    {
+        userView = [[UserView alloc]initWithNibName:@"UserView" bundle:nil];
+    }
+    
+    if (currentView)
+    {
+        [_mainScreen replaceSubview:currentView with:userView.view];
+    }
+    else
+    {
+        [_mainScreen addSubview:userView.view];
+        
+    }
+    currentView = userView.view;
+}
+
 - (IBAction)showMedicationView:(id)sender
 {
     if (!medicationView)
@@ -140,17 +159,21 @@ id<ServerProtocol> connection;
 - (IBAction)truePurgeTheSystem:(id)sender
 {
     VisitationObject* v = [[VisitationObject alloc] init];
-    NSArray* allVisits = [v FindAllObjects];
     PatientObject* p = [[PatientObject alloc] init];
-    NSArray* allPatients = [p FindAllObjects];
     MedicationObject* m = [[MedicationObject alloc] init];
-    NSArray* allMedications = [m FindAllObjects];
+    PrescriptionObject* r = [[PrescriptionObject alloc] init];
     UserObject* u = [[UserObject alloc] init];
+    
+    NSArray* allVisits = [v FindAllObjects];
+    NSArray* allPatients = [p FindAllObjects];
+    NSArray* allMedications = [m FindAllObjects];
+    NSArray* allPrescriptions = [r FindAllObjects];
     NSArray* allUsers = [u FindAllObjects];
     
     int vCounter = 0;
     int pCounter = 0;
     int mCounter = 0;
+    int rCounter = 0;
     int uCounter = 0;
     
     for (NSDictionary* visit in allVisits)
@@ -180,6 +203,15 @@ id<ServerProtocol> connection;
         }
     }
     
+    for (NSDictionary* prescription in allPrescriptions)
+    {
+        BOOL didDelete = [r deleteDatabaseDictionaryObject:prescription];
+        if (didDelete)
+        {
+            rCounter++;
+        }
+    }
+    
     for (NSDictionary* user in allUsers)
     {
         BOOL didDelete = [u deleteDatabaseDictionaryObject:user];
@@ -189,7 +221,7 @@ id<ServerProtocol> connection;
         }
     }
     
-    NSLog(@"Truly Purged The System of %i Visits, %i Patients, %i Medications, and %i Users", vCounter, pCounter, mCounter, uCounter);
+    NSLog(@"Truly Purged The System of %i Visits, %i Patients, %i Medications, %i Prescriptions, and %i Users", vCounter, pCounter, mCounter, rCounter, uCounter);
 }
 
 - (IBAction)manualTableRefresh:(id)sender
@@ -216,25 +248,6 @@ id<ServerProtocol> connection;
             break;
     }
     [_connectionLabel setStringValue:[NSString stringWithFormat:@"%li Device(s) Connected",num]];
-}
-
-- (IBAction)showUserView:(id)sender
-{
-    if (!userView)
-    {
-        userView = [[UserView alloc]initWithNibName:@"UserView" bundle:nil];
-    }
-    
-    if (currentView)
-    {
-        [_mainScreen replaceSubview:currentView with:userView.view];
-    }
-    else
-    {
-        [_mainScreen addSubview:userView.view];
-
-    }
-    currentView = userView.view;
 }
 
 - (IBAction)emergencyDataDump:(id)sender

@@ -80,11 +80,24 @@ Optimizer isOptimized;
     // - DO NOT COMMENT: IF YOUR RESTART YOUR SERVER IT WILL PLACE DEMO PATIENTS INSIDE TO HELP ACCELERATE YOUR TESTING
     // - YOU CAN SEE WHAT PATIENTS ARE ADDED BY CHECKING THE PatientFile.json file
     NSError* err = nil;
-    NSString* dataPath = [[NSBundle mainBundle] pathForResource:@"PatientFile" ofType:@"json"];
-    NSArray* patients = [NSArray arrayWithArray:[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPath]options:0 error:&err]];
     
+    //TODO: Logic to determine if system is in TESTING state or PRODUCTION state
+    //  IF (TESTING) Restore default test parameters? Or cancel?
+    //  IF (PRODUCTION) Sync to Production Cloud before entering TESTING? Ignore Production Cloud Sync? Or Cancel?
+    
+    // Sync Patients
+    [mainView pushPatientsToCloud:nil];
+    
+    //TODO: Set kURL connection string to Cloud
+    // CloudService?
+    
+    // Purge the system
     NSLog(@"Performing a True Purge of the System");
     [mainView truePurgeTheSystem:nil];
+    
+    // Import Patients from JSON files
+    NSString* dataPath = [[NSBundle mainBundle] pathForResource:@"PatientFile" ofType:@"json"];
+    NSArray* patients = [NSArray arrayWithArray:[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPath]options:0 error:&err]];
     
     NSLog(@"Imported Patients: %@", patients);
     [patients enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
@@ -98,8 +111,10 @@ Optimizer isOptimized;
         }];
     }];
     
+    // Import Medications from JSON files
     dataPath = [[NSBundle mainBundle] pathForResource:@"MedicationFile" ofType:@"json"];
     NSArray* Meds = [NSArray arrayWithArray:[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPath]options:0 error:&err]];
+    
     NSLog(@"Imported Medications: %@", Meds.description);
     [Meds enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
     {
@@ -110,12 +125,74 @@ Optimizer isOptimized;
         
         }];
     }];
+    
+    // Import Users from JSON files
+    dataPath = [[NSBundle mainBundle] pathForResource:@"UserFile" ofType:@"json"];
+    NSArray* Users = [NSArray arrayWithArray:[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPath]options:0 error:&err]];
+    NSLog(@"Imported Users: %@", Users.description);
+    [Users enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+     {
+         UserObject* base = [[UserObject alloc]init];
+         NSError* success = [base setValueToDictionaryValues:obj];
+         [base saveObject:^(id<BaseObjectProtocol> data, NSError *error)
+          {
+              
+          }];
+     }];
 }
 
 //TODO: Implement switching to the production environment
 - (IBAction)TearDownEnvironment:(id)sender
 {
+    // - DO NOT COMMENT: IF YOUR RESTART YOUR SERVER IT WILL PLACE DEMO PATIENTS INSIDE TO HELP ACCELERATE YOUR TESTING
+    // - YOU CAN SEE WHAT PATIENTS ARE ADDED BY CHECKING THE PatientFile.json file
     
+    //TODO: Logic to determine if system is in TESTING state or PRODUCTION state
+    //  IF (TESTING) Restore default test parameters? Or cancel?
+    //  IF (PRODUCTION) Sync to Production Cloud before entering TESTING? Ignore Production Cloud Sync? Or Cancel?
+    
+    // Sync Patients
+    [mainView pushPatientsToCloud:nil];
+    
+    //TODO: Set kURL connection string to Production Cloud
+    // CloudService?
+    
+    // Purge the system
+    NSLog(@"Performing a True Purge of the System");
+    [mainView truePurgeTheSystem:nil];
+    
+    // Pull Users from Cloud
+    NSLog(@"Pulling Users from Cloud");
+    UserObject* users = [[UserObject alloc] init];
+    [users pullFromCloud:^(id<BaseObjectProtocol> data, NSError *error)
+     {
+         if (error)
+         {
+             NSLog(@"%@", error);
+         }
+     }];
+    
+    // Pull Patients from the Cloud
+    NSLog(@"Pulling Patients from Cloud");
+    PatientObject* patients = [[PatientObject alloc] init];
+    [patients pullFromCloud:^(id<BaseObjectProtocol> data, NSError *error)
+     {
+         if (error)
+         {
+             NSLog(@"%@", error);
+         }
+     }];
+    
+    // Pull Medications from Cloud
+    NSLog(@"Pulling Medications from Cloud");
+    MedicationObject* medications = [[MedicationObject alloc] init];
+    [medications pullFromCloud:^(id<BaseObjectProtocol> data, NSError *error)
+     {
+         if (error)
+         {
+             NSLog(@"%@", error);
+         }
+     }];
 }
 
 - (void) testCloud

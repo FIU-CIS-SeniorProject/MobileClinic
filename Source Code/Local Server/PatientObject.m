@@ -241,9 +241,9 @@ NSString* isLockedBy;
 -(void)pushToCloud:(CloudCallback)onComplete
 {
     
-    //NSArray* allPatients= [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:COMMONDATABASE withCustomPredicate:[NSPredicate predicateWithFormat:@"%K == YES",ISDIRTY] andSortByAttribute:FIRSTNAME]];
+    NSArray* allPatients= [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:COMMONDATABASE withCustomPredicate:[NSPredicate predicateWithFormat:@"%K == YES",ISDIRTY] andSortByAttribute:FIRSTNAME]];
     
-    NSArray* allPatients= [self FindAllObjects];
+    //NSArray* allPatients= [self FindAllObjects];
     
     // Remove Values that will break during serialization
     for (NSMutableDictionary* object in allPatients)

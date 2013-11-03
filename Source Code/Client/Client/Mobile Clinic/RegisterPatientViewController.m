@@ -151,7 +151,7 @@ UIPopoverController * pop;
 
 - (IBAction)createPatient:(id)sender
 {
-    // Before doing anything else, chech that all of the fields have been completed
+    // Before doing anything else, check that all of the fields have been completed
     if (self.validateRegistration)
     {
         [self.patientNameField resignFirstResponder];

@@ -178,7 +178,6 @@
 
 -(BOOL)setValueToDictionaryValues:(NSDictionary*)values
 {
-    //TODO: Use TRY CATCH and Return a Bool
     @try
     {
         for (NSString* key in values.allKeys)

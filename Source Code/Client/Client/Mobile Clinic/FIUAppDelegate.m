@@ -83,8 +83,8 @@
     //                                       inManagedObjectContext:context];
     //
     //    [medication setValue:@"200" forKey:@"dosage"];
-    ////    [medication setValue:@"" forKey:@"expiration"];
-    ////    [medication setValue:@"" forKey:@"isLockedBy"];
+    //    [medication setValue:@"" forKey:@"expiration"];
+    //    [medication setValue:@"" forKey:@"isLockedBy"];
     //    [medication setValue:@"advil.200" forKey:@"medicationId"];
     //    [medication setValue:@"Advil" forKey:@"medName"];
     //    [medication setValue:[NSNumber numberWithInt:5] forKey:@"numContainers"];

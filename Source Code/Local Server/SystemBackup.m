@@ -78,6 +78,7 @@ NSTimer* saveTimer;
 -(NSError*)overWritePList:(NSDictionary*)fileContainer
 {
     NSSavePanel* savePnl = [NSSavePanel savePanel];
+    NSError* error = nil;
     
     // Set array of file types
     NSArray *fileTypesArray;
@@ -105,8 +106,6 @@ NSTimer* saveTimer;
         
         BOOL canBeConverted = [NSJSONSerialization isValidJSONObject:fileContainer];
         
-        NSError* error = nil;
-        
         if (canBeConverted)
         {
             // Need Proper File location
@@ -120,6 +119,7 @@ NSTimer* saveTimer;
 
         NSLog(@"Saving to: %@",file.path);
     }
+    return error;
 }
 
 +(void)installFromBackup:(NSDictionary*)allObjects
@@ -148,6 +148,7 @@ NSTimer* saveTimer;
         {
             // make data changeable
             NSMutableDictionary* changeObject = [NSDictionary dictionaryWithDictionary:object];
+            
             // get the picture  (which is in string form)
             NSString* picture = [changeObject objectForKey:PICTURE];
             
