@@ -33,6 +33,7 @@
 #import "BaseObject+Protected.h"
 #import "Patients.h"
 #import "FIUAppDelegate.h"
+#import "CloudManagementObject.h"
 
 NSString* firstname;
 NSString* lastname;
@@ -231,11 +232,14 @@ NSString* isLockedBy;
 
 -(void)pullFromCloud:(CloudCallback)onComplete
 {
+    //TODO: replace "withObject:nil" with timestamp dictionary
     [self makeCloudCallWithCommand:DATABASE withObject:nil onComplete:^(id cloudResults, NSError *error)
     {
         NSArray* allPatients = [cloudResults objectForKey:@"data"];
         [self handleCloudCallback:onComplete UsingData:allPatients WithPotentialError:error];
     }];
+    
+    
 }
 
 -(void)pushToCloud:(CloudCallback)onComplete
@@ -271,6 +275,15 @@ NSString* isLockedBy;
         
         [self handleCloudCallback:onComplete UsingData:allPatients WithPotentialError:error];
     }];
+    
+    //TODO: update timestamp
+    
+    // allocate and init a cloud management object
+    // call get active environment
+    // put into mutable dictionary
+    // update timestamp value
+    // put back into cloud management object
+    // save cloud management object
 }
 
 -(NSArray *)covertAllSavedObjectsToJSON

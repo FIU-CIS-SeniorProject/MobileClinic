@@ -38,13 +38,14 @@
 // These are all the classes the server and client will know how to handle
 typedef enum
 {
-    kUserType           = 1,
-    kStatusType         = 2,
-    kPatientType        = 3,
-    kVisitationType     = 4,
-    kPharmacyType       = 5,
-    kPrescriptionType   = 6,
-    kMedicationType     = 7,
+    kUserType               = 1,
+    kStatusType             = 2,
+    kPatientType            = 3,
+    kVisitationType         = 4,
+    kPharmacyType           = 5,
+    kPrescriptionType       = 6,
+    kMedicationType         = 7,
+    kCloudManagementType    = 8,
 }ObjectTypes;
 
 // These are all the commands the server and client will understand

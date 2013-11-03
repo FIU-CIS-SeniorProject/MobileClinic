@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0FCC49CE16F3C63400FD3338 /* MedicationFile.json in Resources */ = {isa = PBXBuildFile; fileRef = 0FCC49CD16F3C63400FD3338 /* MedicationFile.json */; };
 		463294A216C9B97B00C57DCE /* PatientObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 463294A116C9B97B00C57DCE /* PatientObject.m */; };
+		8C145CDF1825ADF600DB2935 /* CloudManagementObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C145CDE1825ADF600DB2935 /* CloudManagementObject.m */; };
 		8C34AEB2180E08E3006A81B3 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C34AEB1180E08E3006A81B3 /* XCTest.framework */; };
 		8C34AEB8180E08E3006A81B3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8C34AEB6180E08E3006A81B3 /* InfoPlist.strings */; };
 		8C34AEBA180E08E3006A81B3 /* Mobile_Clinic_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C34AEB9180E08E3006A81B3 /* Mobile_Clinic_Tests.m */; };
@@ -126,6 +127,9 @@
 		0FCC49CD16F3C63400FD3338 /* MedicationFile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MedicationFile.json; sourceTree = "<group>"; };
 		463294A016C9B97B00C57DCE /* PatientObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatientObject.h; sourceTree = "<group>"; };
 		463294A116C9B97B00C57DCE /* PatientObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatientObject.m; sourceTree = "<group>"; };
+		8C145CDD1825ADF600DB2935 /* CloudManagementObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloudManagementObject.h; sourceTree = "<group>"; };
+		8C145CDE1825ADF600DB2935 /* CloudManagementObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloudManagementObject.m; sourceTree = "<group>"; };
+		8C145CE11825AF4D00DB2935 /* CloudManagementObjectProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloudManagementObjectProtocol.h; sourceTree = "<group>"; };
 		8C34AEB0180E08E3006A81B3 /* Mobile Clinic Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Mobile Clinic Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C34AEB1180E08E3006A81B3 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		8C34AEB5180E08E3006A81B3 /* Mobile Clinic Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Mobile Clinic Tests-Info.plist"; sourceTree = "<group>"; };
@@ -296,6 +300,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C145CDB1825AC0A00DB2935 /* CloudManagement Objects */ = {
+			isa = PBXGroup;
+			children = (
+				8C145CDD1825ADF600DB2935 /* CloudManagementObject.h */,
+				8C145CDE1825ADF600DB2935 /* CloudManagementObject.m */,
+				8C145CE11825AF4D00DB2935 /* CloudManagementObjectProtocol.h */,
+			);
+			name = "CloudManagement Objects";
+			sourceTree = "<group>";
+		};
 		8C34AEB3180E08E3006A81B3 /* Mobile Clinic Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -371,10 +385,10 @@
 		EA172D6616B6134200F00C61 /* MC-> Data Subsystem */ = {
 			isa = PBXGroup;
 			children = (
+				EA9372AE16BC7CBD00D3D617 /* Object Types (USE THESE ONLY) */,
 				EAC19C5216DD24BC00B0B8DA /* Mobile_Clinic.xcdatamodeld */,
 				EA172D6816B615DD00F00C61 /* Factory Pattern */,
 				EA172D6716B6135100F00C61 /* System Objects (Decorator Base) */,
-				EA9372AE16BC7CBD00D3D617 /* Object Types (USE THESE ONLY) */,
 			);
 			name = "MC-> Data Subsystem";
 			sourceTree = "<group>";
@@ -629,6 +643,7 @@
 				EA749BCF16EDAF2E000F849F /* Visitation Objects */,
 				EAC37F0A16F17A9A00836C1C /* Prescription Object */,
 				EAC37F1D16F394E100836C1C /* Medication Objects */,
+				8C145CDB1825AC0A00DB2935 /* CloudManagement Objects */,
 			);
 			name = "Object Types (USE THESE ONLY)";
 			sourceTree = "<group>";
@@ -952,6 +967,7 @@
 				EA0FE4DC171CB3CA00E68DFD /* SystemBackup.m in Sources */,
 				EA0FE4F1171E2B1300E68DFD /* NSData+GZIP.m in Sources */,
 				EA9BAA52172AA9A400773B42 /* NSDataAdditions.m in Sources */,
+				8C145CDF1825ADF600DB2935 /* CloudManagementObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
