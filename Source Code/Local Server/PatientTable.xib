@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
@@ -339,6 +340,8 @@
     </resources>
 </document>
 =======
+=======
+>>>>>>> c2791889ed70235ab372ad3315f2ff06c208bb55
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
@@ -2624,4 +2627,7 @@
 		<bool key="IBDocument.UseAutolayout">YES</bool>
 	</data>
 </archive>
+<<<<<<< HEAD
+>>>>>>> c2791889ed70235ab372ad3315f2ff06c208bb55
+=======
 >>>>>>> c2791889ed70235ab372ad3315f2ff06c208bb55
