@@ -16,8 +16,7 @@ static NSLock *readLock = nil;
 
 + (void)initialize
 {
-	if (self == [ASIInputStream class])
-    {
+	if (self == [ASIInputStream class]) {
 		readLock = [[NSLock alloc] init];
 	}
 }
@@ -50,15 +49,11 @@ static NSLock *readLock = nil;
 {
 	[readLock lock];
 	unsigned long toRead = len;
-	if ([ASIHTTPRequest isBandwidthThrottled])
-    {
+	if ([ASIHTTPRequest isBandwidthThrottled]) {
 		toRead = [ASIHTTPRequest maxUploadReadLength];
-		if (toRead > len)
-        {
+		if (toRead > len) {
 			toRead = len;
-		}
-        else if (toRead == 0)
-        {
+		} else if (toRead == 0) {
 			toRead = 1;
 		}
 		[request performThrottling];
@@ -137,6 +132,7 @@ static NSLock *readLock = nil;
 {
 	[anInvocation invokeWithTarget:stream];
 }
+
 @synthesize stream;
 @synthesize request;
 @end

@@ -1,24 +1,3 @@
-// The MIT License (MIT)
-//
-// Copyright (c) 2013 Florida International University
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
 //
 //  MedicationObject.m
 //  Mobile Clinic
@@ -26,17 +5,16 @@
 //  Created by Michael Montaque on 3/15/13.
 //  Copyright (c) 2013 Florida International University. All rights reserved.
 //
+#define DATABASE    @"Medication"
+
 #import "BaseObject+Protected.h"
 #import "MedicationObject.h"
-
-#define DATABASE    @"Medication"
 
 NSString* medicationID;
 
 @implementation MedicationObject
 
-+(NSString *)DatabaseName
-{
++(NSString *)DatabaseName{
     return DATABASE;
 }
 
@@ -45,49 +23,42 @@ NSString* medicationID;
     [self setupObject];
     return [super init];
 }
-
 -(id)initAndMakeNewDatabaseObject
 {
     [self setupObject];
     return [super initAndMakeNewDatabaseObject];
 }
-
 - (id)initAndFillWithNewObject:(NSDictionary *)info
 {
     [self setupObject];
     return [super initAndFillWithNewObject:info];
 }
-
 -(id)initWithCachedObjectWithUpdatedObject:(NSDictionary *)dic
 {
     [self setupObject];
     return [super initWithCachedObjectWithUpdatedObject:dic];
 }
-
--(void)setupObject
-{
+-(void)setupObject{
+    
     self->COMMONID =  MEDICATIONID;
     self->CLASSTYPE = kMedicationType;
     self->COMMONDATABASE = DATABASE;
 }
-
--(void)ServerCommand:(NSDictionary *)dataToBeRecieved withOnComplete:(ServerCommand)response
-{
+-(void)ServerCommand:(NSDictionary *)dataToBeRecieved withOnComplete:(ServerCommand)response{
     [super ServerCommand:nil withOnComplete:response];
     [self unpackageFileForUser:dataToBeRecieved];
     [self CommonExecution];
 }
 
--(void)unpackageFileForUser:(NSDictionary *)data
-{
+-(void)unpackageFileForUser:(NSDictionary *)data{
     [super unpackageFileForUser:data];
     medicationID = [self->databaseObject valueForKey:MEDICATIONID];
 }
 
+
 -(void)CommonExecution
 {
-    switch (self->commands)
-    {
+    switch (self->commands) {
         case kUpdateObject:
             [super UpdateObjectAndSendToClient];
             break;
@@ -103,18 +74,17 @@ NSString* medicationID;
 
 #pragma mark - COMMON OBJECT Methods
 #pragma mark -
-
--(void)pullFromCloud:(CloudCallback)onComplete
-{
-    [self makeCloudCallWithCommand:DATABASE withObject:nil onComplete:^(id cloudResults, NSError *error)
-    {
-        if (!error)
-        {
+-(void)pullFromCloud:(CloudCallback)onComplete{
+    
+    [self makeCloudCallWithCommand:DATABASE withObject:nil onComplete:^(id cloudResults, NSError *error) {
+        
+        if (!error) {
+            
             NSArray* allMeds = [cloudResults objectForKey:@"data"];
-            NSArray* allError = [self SaveListOfObjectsFromDictionary:allMeds];
+            
+           NSArray* allError = [self SaveListOfObjectsFromDictionary:allMeds];
            
-            if (allError.count > 0)
-            {
+            if (allError.count > 0) {
                 error = [[NSError alloc]initWithDomain:COMMONDATABASE code:kErrorObjectMisconfiguration userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Object was misconfigured",NSLocalizedFailureReasonErrorKey, nil]];
                 onComplete(self,error);
                 return;
@@ -123,46 +93,22 @@ NSString* medicationID;
         onComplete((!error)?self:nil,error);
     }];
 }
+-(void)pushToCloud:(CloudCallback)onComplete{
 
-//TODO: NOT YET IMPLEMENTED ON THE CLOUD
--(void)pushToCloud:(CloudCallback)onComplete
-{
-    //NSArray* allMedications= [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:COMMONDATABASE withCustomPredicate:[NSPredicate predicateWithFormat:@"%K == YES",ISDIRTY] andSortByAttribute:FIRSTNAME]];
-    
-    NSArray* allMedications = [self FindAllObjects];
-    
-    // Remove Values that will break during serialization
-    for (NSMutableDictionary* object in allMedications)
-    {
-        NSString* mId = [object objectForKey:MEDICATIONID];
-        mId = [mId stringByReplacingOccurrencesOfString:@"." withString:@""];
-        [object setValue:mId forKey:MEDICATIONID];
-    }
-    
-    [self makeCloudCallWithCommand:UPDATEMEDICATION withObject:[NSDictionary dictionaryWithObject:allMedications forKey:DATABASE] onComplete:^(id cloudResults, NSError *error)
-     {
-         
-         [self handleCloudCallback:onComplete UsingData:allMedications WithPotentialError:error];
-     }];
 }
-
--(NSArray *)FindAllObjects
-{
+-(NSArray *)FindAllObjects{
+    
     return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:nil andSortByAttribute:MEDNAME]];
 }
-
--(NSArray *)FindAllObjectsUnderParentID:(NSString *)parentID
-{
+-(NSArray *)FindAllObjectsUnderParentID:(NSString *)parentID{
     return [self FindAllObjects];
 }
-
--(NSArray *)covertAllSavedObjectsToJSON
-{
+-(NSArray *)covertAllSavedObjectsToJSON{
+    
     NSArray* allPatients= [self FindObjectInTable:COMMONDATABASE withCustomPredicate:[NSPredicate predicateWithFormat:@"%K == YES",ISDIRTY] andSortByAttribute:MEDICATIONID];
     NSMutableArray* allObject = [[NSMutableArray alloc]initWithCapacity:allPatients.count];
     
-    for (NSManagedObject* obj in allPatients)
-    {
+    for (NSManagedObject* obj in allPatients) {
         [allObject addObject:[obj dictionaryWithValuesForKeys:[obj attributeKeys]]];
     }
     return  allObject;

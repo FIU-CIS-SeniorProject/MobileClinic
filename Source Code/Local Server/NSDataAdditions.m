@@ -15,17 +15,14 @@ static char encodingTable[64] = {
 	'w','x','y','z','0','1','2','3','4','5','6','7','8','9','+','/' };
 
 @implementation NSData (NSDataAdditions)
-+ (NSData *) dataWithBase64EncodedString:(NSString *) string
-{
++ (NSData *) dataWithBase64EncodedString:(NSString *) string {
 	return [[[NSData allocWithZone:nil] initWithBase64EncodedString:string] autorelease];
 }
 
-- (id) initWithBase64EncodedString:(NSString *) string
-{
+- (id) initWithBase64EncodedString:(NSString *) string {
 	NSMutableData *mutableData = nil;
 	
-	if( string )
-    {
+	if( string ) {
 		unsigned long ixtext = 0;
 		unsigned long lentext = 0;
 		unsigned char ch = 0;
@@ -42,58 +39,44 @@ static char encodingTable[64] = {
 		mutableData = [NSMutableData dataWithCapacity:[base64Data length]];
 		lentext = [base64Data length];
 		
-		while (YES)
-        {
-			if (ixtext >= lentext) break;
+		while( YES ) {
+			if( ixtext >= lentext ) break;
 			ch = base64Bytes[ixtext++];
 			flignore = NO;
 			
-			if ((ch >= 'A') && (ch <= 'Z'))
-                ch = ch - 'A';
-			else if ((ch >= 'a') && (ch <= 'z'))
-                ch = ch - 'a' + 26;
-			else if ((ch >= '0') && (ch <= '9'))
-                ch = ch - '0' + 52;
-			else if (ch == '+')
-                ch = 62;
-			else if (ch == '=')
-                flendtext = YES;
-			else if (ch == '/')
-                ch = 63;
-			else
-                flignore = YES;
+			if( ( ch >= 'A' ) && ( ch <= 'Z' ) ) ch = ch - 'A';
+			else if( ( ch >= 'a' ) && ( ch <= 'z' ) ) ch = ch - 'a' + 26;
+			else if( ( ch >= '0' ) && ( ch <= '9' ) ) ch = ch - '0' + 52;
+			else if( ch == '+' ) ch = 62;
+			else if( ch == '=' ) flendtext = YES;
+			else if( ch == '/' ) ch = 63;
+			else flignore = YES;
 			
-			if (!flignore)
-            {
+			if( ! flignore ) {
 				short ctcharsinbuf = 3;
 				BOOL flbreak = NO;
 				
-				if (flendtext)
-                {
-					if (!ixinbuf)
-                        break;
-					if ((ixinbuf == 1) || (ixinbuf == 2))
-                        ctcharsinbuf = 1;
-					else
-                        ctcharsinbuf = 2;
+				if( flendtext ) {
+					if( ! ixinbuf ) break;
+					if( ( ixinbuf == 1 ) || ( ixinbuf == 2 ) ) ctcharsinbuf = 1;
+					else ctcharsinbuf = 2;
 					ixinbuf = 3;
 					flbreak = YES;
 				}
 				
 				inbuf [ixinbuf++] = ch;
 				
-				if (ixinbuf == 4)
-                {
+				if( ixinbuf == 4 ) {
 					ixinbuf = 0;
-					outbuf [0] = (inbuf[0] << 2) | ((inbuf[1] & 0x30) >> 4);
-					outbuf [1] = ((inbuf[1] & 0x0F) << 4) | ((inbuf[2] & 0x3C) >> 2);
-					outbuf [2] = ((inbuf[2] & 0x03) << 6) | (inbuf[3] & 0x3F);
+					outbuf [0] = ( inbuf[0] << 2 ) | ( ( inbuf[1] & 0x30) >> 4 );
+					outbuf [1] = ( ( inbuf[1] & 0x0F ) << 4 ) | ( ( inbuf[2] & 0x3C ) >> 2 );
+					outbuf [2] = ( ( inbuf[2] & 0x03 ) << 6 ) | ( inbuf[3] & 0x3F );
 					
-					for (i = 0; i < ctcharsinbuf; i++)
+					for( i = 0; i < ctcharsinbuf; i++ )
 						[mutableData appendBytes:&outbuf[i] length:1];
 				}
-				if (flbreak)
-                    break;
+				
+				if( flbreak )  break;
 			}
 		}
 	}
@@ -104,13 +87,11 @@ static char encodingTable[64] = {
 
 #pragma mark -
 
-- (NSString *) base64Encoding
-{
+- (NSString *) base64Encoding {
 	return [self base64EncodingWithLineLength:0];
 }
 
-- (NSString *) base64EncodingWithLineLength:(NSUInteger) lineLength
-{
+- (NSString *) base64EncodingWithLineLength:(NSUInteger) lineLength {
 	const unsigned char *bytes = [self bytes];
 	NSMutableString *result = [NSMutableString stringWithCapacity:[self length]];
 	unsigned long ixtext = 0;
@@ -121,19 +102,14 @@ static char encodingTable[64] = {
 	unsigned short charsonline = 0, ctcopy = 0;
 	unsigned long ix = 0;
 	
-	while (YES)
-    {
+	while( YES ) {
 		ctremaining = lentext - ixtext;
-		if (ctremaining <= 0)
-            break;
+		if( ctremaining <= 0 ) break;
 		
-		for (i = 0; i < 3; i++)
-        {
+		for( i = 0; i < 3; i++ ) {
 			ix = ixtext + i;
-			if (ix < lentext)
-                inbuf[i] = bytes[ix];
-			else
-                inbuf [i] = 0;
+			if( ix < lentext ) inbuf[i] = bytes[ix];
+			else inbuf [i] = 0;
 		}
 		
 		outbuf [0] = (inbuf [0] & 0xFC) >> 2;
@@ -142,8 +118,7 @@ static char encodingTable[64] = {
 		outbuf [3] = inbuf [2] & 0x3F;
 		ctcopy = 4;
 		
-		switch (ctremaining)
-        {
+		switch( ctremaining ) {
 	        case 1:
 	            ctcopy = 2;
 	            break;
@@ -152,19 +127,17 @@ static char encodingTable[64] = {
 	            break;
 		}
 		
-		for (i = 0; i < ctcopy; i++)
+		for( i = 0; i < ctcopy; i++ )
 			[result appendFormat:@"%c", encodingTable[outbuf[i]]];
 		
-		for (i = ctcopy; i < 4; i++)
+		for( i = ctcopy; i < 4; i++ )
 			[result appendString:@"="];
 		
 		ixtext += 3;
 		charsonline += 4;
 		
-		if (lineLength > 0)
-        {
-			if (charsonline >= lineLength)
-            {
+		if( lineLength > 0 ) {
+			if( charsonline >= lineLength ) {
 				charsonline = 0;
 				[result appendString:@"\n"];
 			}
@@ -176,35 +149,27 @@ static char encodingTable[64] = {
 
 #pragma mark -
 
-- (BOOL) hasPrefix:(NSData *) prefix
-{
+- (BOOL) hasPrefix:(NSData *) prefix {
 	NSUInteger length = [prefix length];
-	if (!prefix || !length || [self length] < length)
-        return NO;
-	return (memcmp([self bytes], [prefix bytes], length) == 0);
+	if( ! prefix || ! length || [self length] < length ) return NO;
+	return ( memcmp( [self bytes], [prefix bytes], length ) == 0 );
 }
 
-- (BOOL) hasPrefixBytes:(const void *) prefix length:(NSUInteger) length
-{
-	if (!prefix || !length || [self length] < length)
-        return NO;
-	return (memcmp([self bytes], prefix, length) == 0);
+- (BOOL) hasPrefixBytes:(const void *) prefix length:(NSUInteger) length {
+	if( ! prefix || ! length || [self length] < length ) return NO;
+	return ( memcmp( [self bytes], prefix, length ) == 0 );
 }
 
 #pragma mark -
 
-- (BOOL) hasSuffix:(NSData *) suffix
-{
+- (BOOL) hasSuffix:(NSData *) suffix {
 	NSUInteger length = [suffix length];
-	if (!suffix || !length || [self length] < length)
-        return NO;
-	return (memcmp(((const char *)[self bytes] + ([self length] - length)), [suffix bytes], length) == 0);
+	if( ! suffix || ! length || [self length] < length ) return NO;
+	return ( memcmp( ((const char *)[self bytes] + ([self length] - length)), [suffix bytes], length ) == 0 );
 }
 
-- (BOOL) hasSuffixBytes:(const void *) suffix length:(NSUInteger) length
-{
-	if (!suffix || !length || [self length] < length)
-        return NO;
-	return (memcmp(((const char *)[self bytes] + ([self length] - length)), suffix, length) == 0);
+- (BOOL) hasSuffixBytes:(const void *) suffix length:(NSUInteger) length {
+	if( ! suffix || ! length || [self length] < length ) return NO;
+	return ( memcmp( ((const char *)[self bytes] + ([self length] - length)), suffix, length ) == 0 );
 }
 @end

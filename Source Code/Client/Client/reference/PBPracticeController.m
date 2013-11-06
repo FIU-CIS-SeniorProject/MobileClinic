@@ -27,13 +27,18 @@
  * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
  * DAMAGE.
  *
- * $Date: 2012-04-20 13:38:30 +0200 (fr, 20 apr 2012) $ $Rev: 14651 $
+ *
+ * $Date: 2012-04-20 13:38:30 +0200 (fr, 20 apr 2012) $ $Rev: 14651 $ 
+ *
  */
+
 #import "PBPracticeController.h"
+
 #import "PBPractice1Controller.h"
 #import "PBPractice2Controller.h"
 #import "PBPractice3Controller.h"
 #import "PBPractice4Controller.h"
+
 
 @implementation PBPracticeController
 
@@ -90,8 +95,7 @@
     // Do any additional setup after loading the view from its nib.
                         
     /* Add the views of the view controllers into the scrollview. */                                        
-    for (UIViewController* viewController in viewControllers)
-    {
+    for (UIViewController* viewController in viewControllers) {
         [viewController.view removeFromSuperview];
         [scrollView addSubview:viewController.view];
     }
@@ -113,15 +117,12 @@
 {
     [super viewWillAppear:animated];
 
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-    {
-        for (UIViewController* viewController in viewControllers)
-        {
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {  
+        for (UIViewController* viewController in viewControllers) {
             [viewController viewWillAppear:animated];
         }
     }
-    else
-    {
+    else {        
         UIViewController* appearingController = [viewControllers objectAtIndex:pageCurrentlyShown];
         [appearingController viewWillAppear:animated];
     }
@@ -130,43 +131,40 @@
 {
     [super viewDidAppear:animated];
     
-    // Set size and position of the view controllers.
+    /* Set size and position of the view controllers. */
     CGRect frame = CGRectMake(0, 0, 320, 480);
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-    {
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {        
         frame.size.height = 400;
         CGFloat marginHorizontal = (scrollView.frame.size.width - (2 * frame.size.width)) / 3;
         CGFloat marginVertical = (scrollView.frame.size.height - (2 * frame.size.height)) / 3;
         
-        // Upper left.
+        /* Upper left. */
         UIViewController* viewController = [viewControllers objectAtIndex:0];
         frame.origin.x = marginHorizontal;
         frame.origin.y = marginVertical;
         viewController.view.frame = frame;
         
-        // Upper right.
+        /* Upper right. */
         viewController = [viewControllers objectAtIndex:1];
         frame.origin.x = 2 * marginHorizontal + frame.size.width;
         frame.origin.y = marginVertical;
         viewController.view.frame = frame;
         
-        // Lower left.
+        /* Lower left. */
         viewController = [viewControllers objectAtIndex:2];
         frame.origin.x = marginHorizontal;
         frame.origin.y = 2 * marginVertical + frame.size.height;
         viewController.view.frame = frame;
         
-        // Lower right.
+        /* Lower right. */
         viewController = [viewControllers objectAtIndex:3];
         frame.origin.x = 2 * marginHorizontal + frame.size.width;
         frame.origin.y = 2 * marginVertical + frame.size.height;
         viewController.view.frame = frame;
         scrollView.contentSize = CGSizeMake(1, 1);
     }
-    else
-    {
-        for (NSInteger i = 0; i < 4; i++)
-        {
+    else {
+        for (NSInteger i = 0; i < 4; i++) {
             UIViewController* viewController = [viewControllers objectAtIndex:i];
             
             frame.origin.x = frame.size.width * i;
@@ -175,15 +173,12 @@
         scrollView.contentSize = CGSizeMake(4 * frame.size.width, 1);
     }
     
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-    {
-        for (UIViewController* viewController in viewControllers)
-        {
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {  
+        for (UIViewController* viewController in viewControllers) {
             [viewController viewDidAppear:animated];
         }
     }
-    else
-    {
+    else {        
         UIViewController* appearingController = [viewControllers objectAtIndex:pageCurrentlyShown];
         [appearingController viewDidAppear:animated];    
     }
@@ -192,15 +187,12 @@
 {
     [super viewWillDisappear:animated];
     
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-    {
-        for (UIViewController* viewController in viewControllers)
-        {
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {  
+        for (UIViewController* viewController in viewControllers) {
             [viewController viewWillDisappear:animated];
         }
     }
-    else
-    {
+    else {        
         UIViewController* disappearingController = [viewControllers objectAtIndex:pageCurrentlyShown];    
         [disappearingController viewWillDisappear:animated];
     }
@@ -209,15 +201,12 @@
 {
     [super viewDidDisappear:animated];
     
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-    {
-        for (UIViewController* viewController in viewControllers)
-        {
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {  
+        for (UIViewController* viewController in viewControllers) {
             [viewController viewDidDisappear:animated];
         }
     }
-    else
-    {
+    else {        
         UIViewController* disappearingController = [viewControllers objectAtIndex:pageCurrentlyShown];
         [disappearingController viewDidDisappear:animated];
     }
@@ -233,18 +222,15 @@
 {
     CGFloat pageWidth = aScrollView.frame.size.width;
     NSInteger page = floor((aScrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
-    if (page > 3)
-    {
+    if (page > 3) {
         page = 3;
     }
-    if (page < 0)
-    {
+    if (page < 0) {
         page = 0;
     }
     
-    // Handle appear and disappear notifications (since they aren't handled automatically when adding subviews (for some reason?).
-    if (page != pageCurrentlyShown)
-    {
+    /* Handle appear and disappear notifications (since they aren't handled automatically when adding subviews (for some reason?). */
+    if (page != pageCurrentlyShown) {
         UIViewController* disappearingController = [viewControllers objectAtIndex:pageCurrentlyShown];
         UIViewController* appearingController = [viewControllers objectAtIndex:page];
         
@@ -258,13 +244,11 @@
 
 - (void)scrollToX: (CGFloat)x
 {
-    if (isAnimatingScroll)
-    {
-        // Already animating, queue scroll.
+    if (isAnimatingScroll) {
+        /* Already animating, queue scroll. */
         queuedScrollToX = x;
     }
-    else if (x != scrollView.contentOffset.x)
-    {
+    else if (x != scrollView.contentOffset.x) {
         isAnimatingScroll = YES;
         [scrollView setContentOffset:CGPointMake(x, 0) animated:YES];
     }
@@ -273,9 +257,8 @@
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
 {
     isAnimatingScroll = NO;
-    if (queuedScrollToX != CGFLOAT_MIN)
-    {
-        // We have a queued scroll, do that now instead.
+    if (queuedScrollToX != CGFLOAT_MIN) {
+        /* We have a queued scroll, do that now instead. */
         [self scrollToX:queuedScrollToX];
         queuedScrollToX = CGFLOAT_MIN;
     }
@@ -284,6 +267,7 @@
 - (IBAction)scrollLeft:(id)sender
 {
     int page = pageCurrentlyShown - 1;
+	
     [self scrollToX:(scrollView.frame.size.width * page)];
 }
 
@@ -293,4 +277,5 @@
 
     [self scrollToX:(scrollView.frame.size.width * page)];
 }
+
 @end

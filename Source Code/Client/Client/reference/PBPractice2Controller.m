@@ -31,14 +31,16 @@
  * $Date: 2012-04-20 13:38:30 +0200 (fr, 20 apr 2012) $ $Rev: 14651 $ 
  *
  */
+
 #import "PBPractice2Controller.h"
+
+
 @implementation PBPractice2Controller
 
 - (id)initWithPracticeController: (PBPracticeController*)aPracticeController
 {
     self = [super init];
-    if (self)
-    {
+    if (self) {
         self->practiceController = aPracticeController;
         [aPracticeController retain];
     }
@@ -78,8 +80,7 @@
     insideAnimation = NO;
     continueAnimation = NO;
     
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-    {
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         [nextButton setHidden:YES];
     }
 }
@@ -115,9 +116,8 @@
 {
     [super viewWillAppear:animated];
     
-    // Start animation of hand.
-    if (! continueAnimation && ! insideAnimation)
-    {
+    /* Start animation of hand. */
+    if (! continueAnimation && ! insideAnimation) {
         [self animateHand];
     }
     continueAnimation = YES;
@@ -148,4 +148,5 @@
 {
     [practiceController scrollRight:sender];
 }
+
 @end

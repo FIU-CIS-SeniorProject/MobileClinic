@@ -27,19 +27,23 @@
  * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
  * DAMAGE.
  *
- * $Date: 2012-04-20 13:38:30 +0200 (fr, 20 apr 2012) $ $Rev: 14651 $
+ *
+ * $Date: 2012-04-20 13:38:30 +0200 (fr, 20 apr 2012) $ $Rev: 14651 $ 
+ *
  */
+ 
+ 
 #import "PBFingerPickerController.h"
 
 @implementation PBFingerPickerController
 
 @synthesize delegate;
 @synthesize pickableFingers;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self)
-    {
+    if (self) {
         // Custom initialization
         self->delegate = nil;
         self->pickableFingers = nil;
@@ -63,8 +67,10 @@
     [gotoLeftHandButton release];
     [gotoRightHandButton release];
     [scrollView release];
+    
     [delegate release];
     [pickableFingers release];
+    
     [super dealloc];
 }
 
@@ -89,30 +95,28 @@
     
     CGFloat contentWidth;
     
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-    {
-        // Make wider.
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        /* Make wider. */
         CGRect frame = scrollView.frame;
         frame.size.width = 660;
         scrollView.frame = frame;
         
-        // Remove small hands.
+        /* Remove small hands. */
         [gotoLeftHandButton setHidden:YES];
         [gotoRightHandButton setHidden:YES];
         
         contentWidth = scrollView.frame.size.width;
     }
-    else
-    {
+    else {
         contentWidth = 2 * 320;
     }
     
     scrollView.delegate = self;
     
-    // Set content size.
+    /* Set content size. */
     [scrollView setContentSize:CGSizeMake(contentWidth, 1)];
 
-    // Move right hand images to right.
+    /* Move right hand images to right. */
     CGPoint center;
     
     center = rightHandImageView.center;
@@ -121,6 +125,7 @@
     center = gotoLeftHandButton.center;
     center.x += (contentWidth / 2);
     gotoLeftHandButton.center = center;
+    
     center = rightLittleButton.center;
     center.x += (contentWidth / 2);
     rightLittleButton.center = center;
@@ -149,8 +154,7 @@
 
 - (void)scrollLeftAnimated: (BOOL)animated
 {
-    if (! isAnimatingScroll)
-    {
+    if (! isAnimatingScroll) {
         [scrollView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:animated];
         isAnimatingScroll = animated;
     }
@@ -158,8 +162,7 @@
 
 - (void)scrollRightAnimated: (BOOL)animated
 {
-    if (! isAnimatingScroll)
-    {
+    if (! isAnimatingScroll) {
         [scrollView scrollRectToVisible:CGRectMake(2*320-1, 0, 1, 1) animated:animated];
         isAnimatingScroll = animated;
     }
@@ -169,10 +172,10 @@
 {
     [super viewWillAppear:animated];
     
-    // Setting pickable fingers.
+    /* Setting pickable fingers. */
     BOOL defaultValue = (pickableFingers == nil);
     
-    // Default is YES if pickableFingers is nil, otherwise NO.
+    /* Default is YES if pickableFingers is nil, otherwise NO. */
     leftLittleButton.enabled = defaultValue;
     leftRingButton.enabled = defaultValue;
     leftMiddleButton.enabled = defaultValue;
@@ -184,11 +187,9 @@
     rightIndexButton.enabled = defaultValue;
     rightThumbButton.enabled = defaultValue;
     
-    // Set to YES for all fingers set as pickable.
-    for (PBBiometryFinger* finger in pickableFingers)
-    {
-        switch (finger.position)
-        {
+    /* Set to YES for all fingers set as pickable. */
+    for (PBBiometryFinger* finger in pickableFingers) {
+        switch (finger.position) {
             case PBFingerPositionLeftLittle:
                 leftLittleButton.enabled = YES;
                 break;
@@ -219,14 +220,14 @@
             case PBFingerPositionRightThumb:
                 rightThumbButton.enabled = YES;
                 break;
+                
             default:
                 break;
         }
     }
     
-    // Make sure that the user sees the same hand as the last time.
-    if (! [[NSUserDefaults standardUserDefaults] boolForKey:@"PBFingerPickerController.startAtLeftHand"])
-    {
+    /* Make sure that the user sees the same hand as the last time. */
+    if (! [[NSUserDefaults standardUserDefaults] boolForKey:@"PBFingerPickerController.startAtLeftHand"]) {
         [self scrollRightAnimated:NO];
     }
 }
@@ -234,7 +235,7 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     float x = scrollView.contentOffset.x;
-    // Save the current hand for the next time the user gets here.
+    /* Save the current hand for the next time the user gets here. */
     [[NSUserDefaults standardUserDefaults] setBool:x < (320/2) forKey:@"PBFingerPickerController.startAtLeftHand"];
 }
 
@@ -246,46 +247,35 @@
 
 - (IBAction)fingerChosen:(id)sender
 {
-    if ([delegate respondsToSelector:@selector(fingerPickerUserChooseFinger:)])
-    {
-        if ([sender isEqual:leftLittleButton])
-        {
+    if ([delegate respondsToSelector:@selector(fingerPickerUserChooseFinger:)]) {
+        if ([sender isEqual:leftLittleButton]) {
             [delegate fingerPickerUserChooseFinger:PBFingerPositionLeftLittle];
         }
-        else if ([sender isEqual:leftRingButton])
-        {
+        else if ([sender isEqual:leftRingButton]) {
             [delegate fingerPickerUserChooseFinger:PBFingerPositionLeftRing];            
         }
-        else if ([sender isEqual:leftMiddleButton])
-        {
+        else if ([sender isEqual:leftMiddleButton]) {
             [delegate fingerPickerUserChooseFinger:PBFingerPositionLeftMiddle];            
         }
-        else if ([sender isEqual:leftIndexButton])
-        {
+        else if ([sender isEqual:leftIndexButton]) {
             [delegate fingerPickerUserChooseFinger:PBFingerPositionLeftIndex];            
         }
-        else if ([sender isEqual:leftThumbButton])
-        {
+        else if ([sender isEqual:leftThumbButton]) {
             [delegate fingerPickerUserChooseFinger:PBFingerPositionLeftThumb];            
         }
-        else if ([sender isEqual:rightLittleButton])
-        {
+        else if ([sender isEqual:rightLittleButton]) {
             [delegate fingerPickerUserChooseFinger:PBFingerPositionRightLittle];
         }
-        else if ([sender isEqual:rightRingButton])
-        {
+        else if ([sender isEqual:rightRingButton]) {
             [delegate fingerPickerUserChooseFinger:PBFingerPositionRightRing];            
         }
-        else if ([sender isEqual:rightMiddleButton])
-        {
+        else if ([sender isEqual:rightMiddleButton]) {
             [delegate fingerPickerUserChooseFinger:PBFingerPositionRightMiddle];            
         }
-        else if ([sender isEqual:rightIndexButton])
-        {
+        else if ([sender isEqual:rightIndexButton]) {
             [delegate fingerPickerUserChooseFinger:PBFingerPositionRightIndex];            
         }
-        else if ([sender isEqual:rightThumbButton])
-        {
+        else if ([sender isEqual:rightThumbButton]) {
             [delegate fingerPickerUserChooseFinger:PBFingerPositionRightThumb];            
         }
     }
@@ -305,4 +295,6 @@
 {
     isAnimatingScroll = NO;
 }
+
+
 @end

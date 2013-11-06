@@ -31,14 +31,19 @@
  * $Date: 2012-04-20 11:36:52 +0200 (fr, 20 apr 2012) $ $Rev: 14637 $ 
  *
  */
+
+
+
 #import <Foundation/Foundation.h>
 
-// A user of the biometric system.
-@interface PBBiometryUser : NSObject <NSCoding>
-{
-	// The id of the user.
+/** A user of the biometric system. */
+@interface PBBiometryUser : NSObject <NSCoding> {
+	/** The id of the user. */
 	uint32_t id_;
 }
+
 @property (nonatomic, readonly) uint32_t id_;
+
 -(id) initWithUserId: (uint32_t)aUserId;
+
 @end

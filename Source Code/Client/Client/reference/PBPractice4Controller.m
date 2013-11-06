@@ -27,10 +27,15 @@
  * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
  * DAMAGE.
  *
- * $Date: 2012-05-16 16:16:10 +0200 (on, 16 maj 2012) $ $Rev: 14768 $
+ *
+ * $Date: 2012-05-16 16:16:10 +0200 (on, 16 maj 2012) $ $Rev: 14768 $ 
+ *
  */
+
 #import "PBPractice4Controller.h"
+
 #import "PBBiometryEnrollConfig.h"
+
 #import <QuartzCore/CALayer.h>
 
 @implementation PBPractice4Controller
@@ -114,7 +119,7 @@
     
     resultLabel.text = nil;
     
-    // Place in upper right corner.
+    /* Place in upper right corner. */
     NSInteger padding = 1;
     disconnectionView.view.center = CGPointMake([self view].bounds.size.width - ([disconnectionView view].bounds.size.width / 2) - padding, ([disconnectionView view].bounds.size.height / 2) + padding);
 }
@@ -131,10 +136,8 @@
     [disconnectionView viewWillDisappear:NO];
     [[disconnectionView view] removeFromSuperview];
     
-    if (isVisible)
-    {
-        @synchronized (self)
-        {
+    if (isVisible) {
+        @synchronized (self) {
             startNewCapture = YES;
         }        
     }    
@@ -151,8 +154,7 @@
     [[self view] addSubview:[disconnectionView view]];
     
     [[PBBiometry sharedBiometry] cancel];
-    @synchronized (self)
-    {
+    @synchronized (self) {
         startNewCapture = NO;
     }        
 }
@@ -169,44 +171,37 @@
 
 - (void)doImageCapturing
 {
-    while (YES)
-    {
+    while (YES) {
         NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
         
-        if (startNewCapture)
-        {
-            @synchronized (self)
-            {
+        if (startNewCapture) {
+            @synchronized (self) {
                 startNewCapture = NO;
             }
             /* Start image capturing. */
             PBBiometryStatus status = [[PBBiometry sharedBiometry] captureImagesWithGUI:self];
             
             /* Alert user of certain errors. */
-            if (status == PBBiometryStatusReaderBusy)
-            {
+            if (status == PBBiometryStatusReaderBusy) {
                 /* Reader is already used by another application. */
                 UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Tactivo busy" message:@"The Tactivo is already used by another application. Close that application or make sure that it is no longer using the Tactivo before trying again." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
                 [self performSelectorOnMainThread:@selector(showAlertInMainThread:) withObject:alertView waitUntilDone:NO];
                 [alertView release];
             }
-            else if (status == PBBiometryStatusProtocolNotIncluded)
-            {
+            else if (status == PBBiometryStatusProtocolNotIncluded) {
                 /* Reader is not available. */
                 UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Protocol not included" message:@"The protocol string 'com.precisebiometrics.sensor' is not included in the 'UISupportedExternalAccessoryProtocols' key in the Info.plist." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
                 [self performSelectorOnMainThread:@selector(showAlertInMainThread:) withObject:alertView waitUntilDone:NO];
                 [alertView release];
             }
-            else if (status == PBBiometryStatusFatal)
-            {
+            else if (status == PBBiometryStatusFatal) {
                 /* Unknown error. */
                 UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Unknown error!" message:@"An unknown error has occurred. Try disconnecting the Tactivo from the device and then connect it again or restart the application." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
                 [self performSelectorOnMainThread:@selector(showAlertInMainThread:) withObject:alertView waitUntilDone:NO];
                 [alertView release];
             }
         }
-        else
-        {
+        else {
             /* Sleep for 100ms. */
             [NSThread sleepForTimeInterval:0.100];
         }
@@ -222,11 +217,9 @@
 
 - (void)startImageCapturing
 {
-    if ([[PBAccessory sharedClass] isConnected])
-    {
+    if ([[PBAccessory sharedClass] isConnected]) {
         /* Reader is connected, start image capturing. */
-        @synchronized (self)
-        {
+        @synchronized (self) {
             startNewCapture = YES;
         }
     }    
@@ -236,8 +229,7 @@
 {
     /* Stop image capturing. */
     [[PBBiometry sharedBiometry] cancel]; 
-    @synchronized (self)
-    {
+    @synchronized (self) {
         startNewCapture = NO;
     }
 }
@@ -246,13 +238,11 @@
 {
     [super viewDidAppear:animated];
     
-    if ([[PBAccessory sharedClass] isConnected])
-    {
+    if ([[PBAccessory sharedClass] isConnected]) {
         [disconnectionView viewWillDisappear:NO];
         [[disconnectionView view] removeFromSuperview];
     }
-    else
-    {
+    else {
         [disconnectionView viewWillAppear:NO];
         [[self view] addSubview:[disconnectionView view]];
     }
@@ -287,8 +277,7 @@
 {
     NSInteger event_ = (PBEvent)[[params objectAtIndex:0] intValue];
     
-    switch (event_)
-    {
+    switch (event_) {
         case PBEventAlertImageCaptured:
             break;
             
@@ -356,23 +345,19 @@
     BOOL areaIsOk = (area > areaThreshold);
         
     /* Set text and text color. */
-    if (qualityIsOk && areaIsOk)
-    {
+    if (qualityIsOk && areaIsOk) {
         /* Ok. */
         resultLabel.text = @"OK!";
         resultLabel.textColor = [UIColor greenColor];
     }
-    else
-    {
+    else {
         /* Not ok. */
         resultLabel.textColor = [UIColor redColor];
         
-        if (! qualityIsOk)
-        {
+        if (! qualityIsOk) {
             resultLabel.text = @"Insufficient quality";
         }
-        else
-        {
+        else {
             resultLabel.text = @"Finger area too small";
         }
     }
@@ -381,44 +366,34 @@
     area = MIN (9, 10 * area / 210); 
         
     /* Set bar images for quality. */
-    for (NSInteger i = 0; i < 10; i++)
-    {
+    for (NSInteger i = 0; i < 10; i++) {
         PBBarImageView* barImage = [barImages objectAtIndex:i];
         
-        if (imageQuality >= i)
-        {
-            if (qualityIsOk)
-            {
+        if (imageQuality >= i) {
+            if (qualityIsOk) {
                 [barImage setState:PBBarImageStateOnGreen];
             }
-            else
-            {
+            else {
                 [barImage setState:PBBarImageStateOnRed];
             }
         }
-        else
-        {
+        else {
             [barImage setState:PBBarImageStateOff];
         }
     }
     /* Set bar images for area. */
-    for (NSInteger i = 0; i < 10; i++)
-    {
+    for (NSInteger i = 0; i < 10; i++) {
         PBBarImageView* barImage = [barImagesA objectAtIndex:i];
         
-        if (area >= i)
-        {
-            if (areaIsOk)
-            {
+        if (area >= i) {
+            if (areaIsOk) {
                 [barImage setState:PBBarImageStateOnGreen];
             }
-            else
-            {
+            else {
                 [barImage setState:PBBarImageStateOnRed];
             }
         }
-        else
-        {
+        else {
             [barImage setState:PBBarImageStateOff];
         }
     }
@@ -459,16 +434,14 @@
 
 - (void)applicationWillResignActive: (NSNotification*)notification
 {
-    if (isVisible)
-    {
+    if (isVisible) {
         [self stopImageCapturing];
     }
 }
 
 - (void)applicationDidBecomeActive: (NSNotification*)notification
 {
-    if (isVisible)
-    {
+    if (isVisible) {
         [self startImageCapturing];
     }
 }

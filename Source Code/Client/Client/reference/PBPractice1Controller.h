@@ -37,8 +37,7 @@
 #import "PBPracticeController.h"
 
 /** Teaches the user which area of the finger to swipe. */
-@interface PBPractice1Controller : UIViewController
-{
+@interface PBPractice1Controller : UIViewController {
     BOOL continueAnimation;
     BOOL insideAnimation;    
     
@@ -48,6 +47,9 @@
     
     PBPracticeController* practiceController;
 }
+
 - (id)initWithPracticeController: (PBPracticeController*)aPracticeController;
+
 - (IBAction)next: (id)sender;
+
 @end

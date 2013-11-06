@@ -27,9 +27,13 @@
  * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
  * DAMAGE.
  *
- * $Date: 2012-04-20 13:38:30 +0200 (fr, 20 apr 2012) $ $Rev: 14651 $
+ *
+ * $Date: 2012-04-20 13:38:30 +0200 (fr, 20 apr 2012) $ $Rev: 14651 $ 
+ *
  */
+
 #import <UIKit/UIKit.h>
+
 #import "PBBiometryGUI.h"
 #import "PBBiometry.h"
 #import "PBBiometryDatabase.h"
@@ -66,8 +70,7 @@
   *  
   *  [self presentModalViewController:navController animated:YES]; 
   */
-@interface PBVerificationController : UIViewController <PBBiometryGUI, UIAlertViewDelegate>
-{
+@interface PBVerificationController : UIViewController <PBBiometryGUI, UIAlertViewDelegate> {
     /* The inside view used for centering the content when e.g. viewed on iPad. */
     IBOutlet UIView* insideView;
     
@@ -135,4 +138,5 @@
 
 -(IBAction)choosePreviousFinger:(id)sender;
 -(IBAction)chooseNextFinger:(id)sender;
+
 @end

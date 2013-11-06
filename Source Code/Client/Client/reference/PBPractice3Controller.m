@@ -27,17 +27,20 @@
  * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
  * DAMAGE.
  *
- * $Date: 2012-04-20 13:38:30 +0200 (fr, 20 apr 2012) $ $Rev: 14651 $
+ *
+ * $Date: 2012-04-20 13:38:30 +0200 (fr, 20 apr 2012) $ $Rev: 14651 $ 
+ *
  */
+
 #import "PBPractice3Controller.h"
+
 
 @implementation PBPractice3Controller
 
 - (id)initWithPracticeController: (PBPracticeController*)aPracticeController
 {
     self = [super init];
-    if (self)
-    {
+    if (self) {
         self->practiceController = aPracticeController;
         [aPracticeController retain];
     }
@@ -79,8 +82,7 @@
     insideAnimation = NO;
     handImage2.alpha = 0;
     
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-    {
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         [nextButton setHidden:YES];
     }
 }
@@ -155,4 +157,5 @@
 {
     [practiceController scrollRight:sender];
 }
+
 @end

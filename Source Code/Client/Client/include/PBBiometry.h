@@ -31,6 +31,8 @@
  * $Date: 2012-04-20 11:36:52 +0200 (fr, 20 apr 2012) $ $Rev: 14637 $ 
  *
  */
+
+
 #import <Foundation/Foundation.h>
 #import "PBBiometryDatabase.h"
 #import "PBBiometryGUI.h"
@@ -38,75 +40,74 @@
 #import "PBBiometryEnrollConfig.h"
 #import "PBBiometryVerifyConfig.h"
 
-// Status (return) codes.
+/* Status (return) codes. */
 typedef enum {
-    // The function returned without errors.
+    /** The function returned without errors. */
     PBBiometryStatusOK,
     
-    // At least one of the parameters is invalid.
+    /** At least one of the parameters is invalid. */
     PBBiometryStatusInvalidParameter,
     
-    // The data passed to the function has the wrong format.
+    /** The data passed to the function has the wrong format. */
     PBBiometryStatusWrongDataFormat,
     
-    // At least one buffer has an incorrect size.
+    /** At least one buffer has an incorrect size. */
     PBBiometryStatusWrongBufferSize,
     
-    // A function is called before the interface being initialized.
+    /** A function is called before the interface being initialized. */
     PBBiometryStatusNotInitialized,
     
-    // The requested item was not found.
+    /** The requested item was not found. */
     PBBiometryStatusNotFound,
     
-    // The function returned because the caller canceled it.
+    /** The function returned because the caller canceled it. */
     PBBiometryStatusCancelled,
     
-    // The operation timed-out before it could finish the operation.
+    /** The operation timed-out before it could finish the operation. */
     PBBiometryStatusTimedOut,
     
-    // Cannot allocate enough memory.
+    /** Cannot allocate enough memory. */
     PBBiometryStatusMemoryAllocationFailed,
     
-    // Unable to open, read from or write to a file.
+    /** Unable to open, read from or write to a file. */
     PBBiometryStatusFileError,
     
-    // Reader is not connected or not started.
+    /** Reader is not connected or not started. */
     PBBiometryStatusReaderNotAvailable,
     
-    // Reader has been locked by another user.
+    /** Reader has been locked by another user. */
     PBBiometryStatusReaderBusy,
     
-    // The enrollment failed because none of the images matched each
-    // other. This only applies if multiple images are required for
-    // enrollment.
+    /** The enrollment failed because none of the images matched each
+      * other. This only applies if multiple images are required for
+      * enrollment. */    
     PBBiometryStatusEnrollmentVerificationFailed,
     
-    // The finger has been blocked for further verifications. The finger
-    // will be unblocked after a while. A block of the finger is due to
-    // that multiple subsequent rejects has been recorded for that finger.
+    /** The finger has been blocked for further verifications. The finger 
+      * will be unblocked after a while. A block of the finger is due to 
+      * that multiple subsequent rejects has been recorded for that finger. */
 	PBBiometryStatusFingerBlocked,
     
-    // The protocol string "com.precisebiometrics.sensor" has not been
-    // included for the "UISupportedExternalAccessoryProtocols" key in
-    // the Info.plist.
+    /** The protocol string "com.precisebiometrics.sensor" has not been 
+      * included for the "UISupportedExternalAccessoryProtocols" key in
+      * the Info.plist. */
     PBBiometryStatusProtocolNotIncluded,
     
-    // An undefined fatal error has occurred. This error code is used
-    // for errors that "cannot happen" and isn't covered by any other
-    // error code.
+    /** An undefined fatal error has occurred. This error code is used
+      * for errors that "cannot happen" and isn't covered by any other
+      * error code. */
     PBBiometryStatusFatal
 } PBBiometryStatus;
 
-// Class containing the main biometric operations, enrollFinger and
-// verifyFinger.
-@interface PBBiometry : NSObject
-{
+/** Class containing the main biometric operations, enrollFinger and 
+  * verifyFinger. */
+@interface PBBiometry : NSObject {
     BOOL isEnrolling;
     BOOL isVerifying;
     BOOL isCapturing;
 }
 
-// Class method for receiving the singleton object.
+/* Class method for receiving the singleton object. */
 + (PBBiometry*) sharedBiometry;
 
 /** Captures x images from a fingerprint sensor. A template is then
@@ -222,4 +223,5 @@ typedef enum {
 
 /** Converts a biometry status code to a readable string. */
 +(NSString*) stringFromStatus: (PBBiometryStatus) status;
+
 @end

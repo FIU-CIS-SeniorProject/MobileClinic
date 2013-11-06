@@ -27,13 +27,17 @@
  * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
  * DAMAGE.
  *
- * $Date: 2012-04-20 13:38:30 +0200 (fr, 20 apr 2012) $ $Rev: 14651 $
+ *
+ * $Date: 2012-04-20 13:38:30 +0200 (fr, 20 apr 2012) $ $Rev: 14651 $ 
+ *
  */
+
+
 #import <Foundation/Foundation.h>
 
-// Subclass of UIImageView that sets the basic layouts for a fingerprint image.
-@interface PBFingerImageView : UIImageView
-{
-
+/** Subclass of UIImageView that sets the basic layouts for a fingerprint image. */
+@interface PBFingerImageView : UIImageView {
+    
 }
+
 @end

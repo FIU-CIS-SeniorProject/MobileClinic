@@ -31,13 +31,17 @@
  * $Date: 2012-04-20 11:34:15 +0200 (fr, 20 apr 2012) $ $Rev: 14636 $ 
  *
  */
+
+
 #import <UIKit/UIKit.h>
+
 #import "PBBiometryFinger.h"
 #import "PBBiometryTemplate.h"
 
-// Protocol for a biometric database. The database is responsible
-// for storing and retrieving fingerprint templates.
+/** Protocol for a biometric database. The database is responsible
+  * for storing and retrieving fingerprint templates. */
 @protocol PBBiometryDatabase <NSObject>
+
 @required
 
 /** Inserts a template of the specified finger in the database. If a template 
@@ -89,4 +93,5 @@
   * @return an array of the enrolled fingers.
   */
 -(NSArray*) getEnrolledFingers;
+
 @end

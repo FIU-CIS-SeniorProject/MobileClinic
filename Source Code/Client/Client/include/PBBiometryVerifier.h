@@ -28,9 +28,12 @@
  * DAMAGE.
  *
  *
- * $Date: 2012-04-20 11:36:52 +0200 (fr, 20 apr 2012) $ $Rev: 14637 $
+ * $Date: 2012-04-20 11:36:52 +0200 (fr, 20 apr 2012) $ $Rev: 14637 $ 
+ *
  */
+
 #import <Foundation/Foundation.h>
+
 #import "PBBiometryTemplate.h"
 #import "PBBiometryFinger.h"
 #import "PBBiometryVerifyConfig.h"

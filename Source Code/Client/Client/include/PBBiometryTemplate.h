@@ -31,22 +31,22 @@
  * $Date: 2012-04-20 11:36:52 +0200 (fr, 20 apr 2012) $ $Rev: 14637 $ 
  *
  */
+
+
 #import <Foundation/Foundation.h>
 
-// The type of template.
+/** The type of template. */
 typedef enum {
     PBBiometryTemplateUnknown,
     
-    // Standardized template formats.
+    /* Standardized template formats. */
     
-    /// The ISO 19794-2 Record Format.
+    /** The ISO 19794-2 Record Format. */
     PBBiometryTemplateTypeISO,
-    
-    // The ISO 19794-2 Compact Card Format. The default template type
-    // used by the internal extractor and verifier.
+    /** The ISO 19794-2 Compact Card Format. The default template type
+      * used by the internal extractor and verifier. */
     PBBiometryTemplateTypeISOCompactCard,
-    
-    // The ANSI-378 Record Format.
+    /** The ANSI-378 Record Format. */
     PBBiometryTemplateTypeANSI,
     
     /* Proprietary template formats. */
@@ -60,28 +60,29 @@ typedef enum {
     PBBiometryTemplateTypeBioMatch3Header
 } PBBiometryTemplateType;
 
-// A biometric (fingerprint) template. A template contains extracted
-// features from the fingerprint, e.g. minutiae points.
-@interface PBBiometryTemplate : NSObject
-{
-	// The binary data containing the template.
+/** A biometric (fingerprint) template. A template contains extracted
+  * features from the fingerprint, e.g. minutiae points. */
+@interface PBBiometryTemplate : NSObject {
+	/** The binary data containing the template. */
 	uint8_t* data;
-	// The size of the binary data, in bytes.
+	/** The size of the binary data, in bytes. */
 	uint16_t dataSize;
-    // The type of template.
+    /** The type of template. */
     PBBiometryTemplateType templateType;
 }
+
 @property (nonatomic, readonly) uint8_t* data;
 @property (nonatomic, readonly) uint16_t dataSize;
 @property (nonatomic, readonly) PBBiometryTemplateType templateType;
 
-// Initiates the template object with template data. The template
-// type will be set to PBBiometryTemplateTypeISOCompactCard.
+/** Initiates the template object with template data. The template 
+  * type will be set to PBBiometryTemplateTypeISOCompactCard. */
 -(id) initWithData : (const uint8_t*)aData 
         andDataSize: (uint16_t)aDataSize; 
 
-// Initiates the template object with template data and type.
+/** Initiates the template object with template data and type. */
 -(id) initWithData : (const uint8_t*)aData 
         andDataSize: (uint16_t)aDataSize
     andTemplateType: (PBBiometryTemplateType)aTemplateType;
+
 @end

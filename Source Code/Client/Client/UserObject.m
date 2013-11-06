@@ -1,24 +1,3 @@
-// The MIT License (MIT)
-//
-// Copyright (c) 2013 Florida International University
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
 //
 //  UserObject.m
 //  Mobile Clinic
@@ -26,6 +5,8 @@
 //  Created by Michael Montaque on 1/27/13.
 //  Copyright (c) 2013 Florida International University. All rights reserved.
 //
+
+
 #define ALL_USERS   @"all users"
 #define DATABASE    @"Users"
 
@@ -43,8 +24,7 @@ NSString* tempPassword;
 #pragma mark - Default Methods
 #pragma mark -
 
-+(NSString *)DatabaseName
-{
++(NSString *)DatabaseName{
     return DATABASE;
 }
 
@@ -53,58 +33,54 @@ NSString* tempPassword;
     [self setupObject];
     return [super init];
 }
-
 -(id)initAndMakeNewDatabaseObject
 {
     [self setupObject];
     return [super initAndMakeNewDatabaseObject];
 }
-
 - (id)initAndFillWithNewObject:(NSDictionary *)info
 {
     [self setupObject];
     return [super initAndFillWithNewObject:info];
 }
-
 -(id)initWithCachedObjectWithUpdatedObject:(NSDictionary *)dic
 {
     [self setupObject];
     return [super initWithCachedObjectWithUpdatedObject:dic];
 }
 
--(void)setupObject
-{
+-(void)setupObject{
+    
     self->COMMONID =  USERNAME;
     self->CLASSTYPE = kPatientType;
     self->COMMONDATABASE = DATABASE;
 }
 
--(void)linkDatabase
-{
+-(void)linkDatabase{
     user = (Users*)self->databaseObject;
 }
 
 #pragma mark - User Login & Creation
 #pragma mark -
--(void)UpdateObjectAndShouldLock:(BOOL)shouldLock witData:(NSMutableDictionary *)dataToSend AndInstructions:(NSInteger)instruction onCompletion:(ObjectResponse)response
-{
+
+-(void)UpdateObjectAndShouldLock:(BOOL)shouldLock witData:(NSMutableDictionary *)dataToSend AndInstructions:(NSInteger)instruction onCompletion:(ObjectResponse)response{
     [self UpdateObject:response shouldLock:shouldLock andSendObjects:dataToSend withInstruction:instruction];
 }
 
--(void)loginWithUsername:(NSString*)username andPassword:(NSString*)password onCompletion:(void(^)(id <BaseObjectProtocol> data, NSError* error, Users* userA))onSuccessHandler
-{
+-(void)loginWithUsername:(NSString*)username andPassword:(NSString*)password onCompletion:(void(^)(id <BaseObjectProtocol> data, NSError* error, Users* userA))onSuccessHandler{
+    
     username = [username lowercaseString];
     // Sync all the users from server to the client
-    [self getUsersFromServer:^(id<BaseObjectProtocol> data, NSError *error)
-    {
+    [self getUsersFromServer:^(id<BaseObjectProtocol> data, NSError *error) {
+
         // Try to find user from username in local DB
         BOOL didFindUser = [self loadObjectForID:username];
         
         // link databaseObject to convenience Object named "user" 
         [self linkDatabase];
         // if we find the user locally then....
-        if (didFindUser)
-        {
+        if (didFindUser) {
+            
             // Check if the user has permissions
             if (user.status.boolValue)
             {
@@ -133,6 +109,17 @@ NSString* tempPassword;
     }];
     
 }
+-(UserTypes)getUsertypeForCurrentUser{
+  
+    NSArray* users = [self FindObjectInTable:DATABASE withName:[BaseObject getCurrenUserName] forAttribute:USERNAME];
+   
+    if (users.count > 0) {
+        Users* localUser = users.lastObject;
+        return localUser.userType.integerValue;
+    }
+    
+    return -1;
+}
 
 -(void)getUsersFromServer:(ObjectResponse)withResponse
 {
@@ -142,4 +129,5 @@ NSString* tempPassword;
     [self SendData:dataToSend toServerWithErrorMessage:@"Could not connect to server. Validating against cache" andResponse:withResponse];
 
 }
+
 @end

@@ -27,9 +27,14 @@
  * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
  * DAMAGE.
  *
- * $Date: 2012-04-20 13:38:30 +0200 (fr, 20 apr 2012) $ $Rev: 14651 $
+ *
+ * $Date: 2012-04-20 13:38:30 +0200 (fr, 20 apr 2012) $ $Rev: 14651 $ 
+ *
  */
+
+
 #import <UIKit/UIKit.h>
+
 #import "PBBiometry.h"
 
 /** A view controller giving the user information about how to use the sensor. 
@@ -60,14 +65,18 @@
   *  [navController pushViewController:practiceController animated:NO];
   *  [tabBarController setViewControllers:[NSArray arrayWithObjects:navController, nil]];
   */
-@interface PBPracticeController : UIViewController <UIScrollViewDelegate>
-{
+@interface PBPracticeController : UIViewController <UIScrollViewDelegate> {
     IBOutlet UIScrollView* scrollView;
+    
     NSMutableArray* viewControllers;
+    
     NSInteger pageCurrentlyShown;
+    
     BOOL isAnimatingScroll;
     CGFloat queuedScrollToX;
 }
+
 - (IBAction)scrollLeft:(id)sender;
 - (IBAction)scrollRight:(id)sender;
+
 @end

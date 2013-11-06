@@ -27,7 +27,9 @@
  * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
  * DAMAGE.
  *
- * $Date: 2012-04-20 13:38:30 +0200 (fr, 20 apr 2012) $ $Rev: 14651 $
+ *
+ * $Date: 2012-04-20 13:38:30 +0200 (fr, 20 apr 2012) $ $Rev: 14651 $ 
+ *
  */
 
 #import "PBDisconnectionViewController.h"
@@ -38,8 +40,7 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self)
-    {
+    if (self) {
         // Custom initialization
     }
     return self;
@@ -56,10 +57,12 @@
 {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
+    
     // Release any cached data, images, etc that aren't in use.
 }
 
 #pragma mark - View lifecycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -82,20 +85,18 @@
     insideAnimation = YES;
     [UIView animateWithDuration:1 delay:1 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         phoneImageView.transform = CGAffineTransformMakeTranslation(0, 32);
-    } completion:^(BOOL finished) {
+    } completion:^(BOOL finished){
         [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
             phoneImageView.alpha = 0;
-        } completion:^(BOOL finished) {
+        } completion:^(BOOL finished){
             phoneImageView.transform = CGAffineTransformMakeTranslation(0, 0);
             [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
                 phoneImageView.alpha = 1;
-            } completion:^(BOOL finished) {
-                if (continueAnimation)
-                {
+            } completion:^(BOOL finished){
+                if (continueAnimation) {
                     [self animatePhone];
                 }
-                else
-                {
+                else {
                     insideAnimation = NO;
                 }
             }];
@@ -107,9 +108,8 @@
 {
     [super viewWillAppear:animated];
     
-    // Start animation of iphone.
-    if (! continueAnimation && ! insideAnimation)
-    {
+    /* Start animation of iphone. */
+    if (! continueAnimation && ! insideAnimation) {
         [self animatePhone];
     }
     continueAnimation = YES;
@@ -119,7 +119,7 @@
 {
     [super viewWillDisappear:animated];
     
-    // Stop animation of iphone.
+    /* Stop animation of iphone. */
     continueAnimation = NO;
 }
 
@@ -128,4 +128,5 @@
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
+
 @end

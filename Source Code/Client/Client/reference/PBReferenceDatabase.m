@@ -27,9 +27,13 @@
  * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
  * DAMAGE.
  *
- * $Date: 2012-04-20 13:38:30 +0200 (fr, 20 apr 2012) $ $Rev: 14651 $
+ *
+ * $Date: 2012-04-20 13:38:30 +0200 (fr, 20 apr 2012) $ $Rev: 14651 $ 
+ *
  */
+
 #import "PBReferenceDatabase.h"
+
 #import "PBBiometryTemplate.h"
 #import "PBBiometryFinger.h"
 
@@ -43,13 +47,11 @@
     NSString *filePath = [NSString stringWithFormat:@"%@/enrolledFingers.plist", [libraryPaths objectAtIndex:0]];    
     self->enrolledFingers = [NSKeyedUnarchiver unarchiveObjectWithFile: filePath];
     
-    if (self->enrolledFingers == nil)
-    {
+    if (self->enrolledFingers == nil) {
         NSLog (@"Unable to unarchive the enrolled fingers!\n");
         self->enrolledFingers = [[NSMutableArray alloc] init];
     }
-    else
-    {
+    else {
         [self->enrolledFingers retain];
     }
     
@@ -60,6 +62,7 @@
 -(NSString*) serializeFinger: (PBBiometryFinger*) finger
 {
     NSString* serializedFinger = [NSString stringWithFormat:@"%09d_%02d", finger.user.id_, finger.position];
+    
     return serializedFinger;
 }
 
@@ -102,29 +105,25 @@
     [templateData release];
     [attributes release];
     
-    if (osStatus == errSecSuccess)
-    {
+    if (osStatus == errSecSuccess) {
         /* Add finger to list of enrolled fingers. */
         [enrolledFingers addObject:finger];
         [self writeEnrolledFingers];
     
         return YES;
     }
-    else
-    {
+    else {
         return NO;
     }
 }
 
 -(PBBiometryTemplateType) getTemplateTypeFromString: (NSString*)templateTypeString
 {
-    if ((templateTypeString == nil) || [templateTypeString isEqualToString:@""])
-    {
+    if ((templateTypeString == nil) || [templateTypeString isEqualToString:@""]) {
         /* Undefined template type, use default. */
         return PBBiometryTemplateTypeISOCompactCard;
     }
-    else
-    {
+    else {
         return [templateTypeString integerValue];
     }
 }
@@ -133,8 +132,7 @@
 {
     BOOL fingerIsRegistered = [self templateIsEnrolledForFinger:finger];
     
-    if (fingerIsRegistered)
-    {
+    if (fingerIsRegistered) {
         NSMutableDictionary* query = [[NSMutableDictionary alloc] init];
         NSMutableDictionary* outDictionary = nil;
         
@@ -147,8 +145,7 @@
         SecItemCopyMatching((CFDictionaryRef)query, (CFTypeRef*)&outDictionary);
         [query release];
         
-        if (outDictionary != nil)
-        {
+        if (outDictionary != nil) {
             /* Convert keychain item to PBBiometryTemplate. */
             NSData* templateData = [outDictionary objectForKey:(id)kSecAttrGeneric];
             PBBiometryTemplateType templateType = [self getTemplateTypeFromString: [outDictionary objectForKey:(id)kSecAttrService]];
@@ -158,13 +155,11 @@
             
             return template_;
         }
-        else
-        {
+        else {
             return nil;
         }
     }
-    else
-    {
+    else {
         return nil;
     }
 }
@@ -182,12 +177,10 @@
     SecItemDelete ((CFDictionaryRef)query);
     [query release];
     
-    for (NSInteger i = 0; i < [enrolledFingers count]; i++)
-    {
+    for (NSInteger i = 0; i < [enrolledFingers count]; i++) {
         PBBiometryFinger* enrolledFinger = (PBBiometryFinger*)[enrolledFingers objectAtIndex:i];
         
-        if ([finger isEqualToFinger:enrolledFinger])
-        {
+        if ([finger isEqualToFinger:enrolledFinger]) {
             [enrolledFingers removeObjectAtIndex:i];
             [self writeEnrolledFingers];
             break;
@@ -201,10 +194,8 @@
 {
     PBBiometryFinger* enrolledFinger;
     
-    for (enrolledFinger in enrolledFingers)
-    {
-        if ([enrolledFinger isEqualToFinger:finger])
-        {
+    for (enrolledFinger in enrolledFingers) {
+        if ([enrolledFinger isEqualToFinger:finger]) {
             return YES;
         }
     }
@@ -231,8 +222,7 @@ static PBReferenceDatabase* _sharedReferenceDatabase = nil;
 {
     @synchronized ([PBReferenceDatabase class]) 
     {
-        if (_sharedReferenceDatabase == nil)
-        {
+        if (_sharedReferenceDatabase == nil) {
             _sharedReferenceDatabase = [[super allocWithZone:NULL] init];
         }
         return _sharedReferenceDatabase;
@@ -271,4 +261,6 @@ static PBReferenceDatabase* _sharedReferenceDatabase = nil;
 {
     return self;
 }
+
+
 @end

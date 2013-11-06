@@ -27,28 +27,31 @@
  * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
  * DAMAGE.
  *
- * $Date: 2012-04-20 13:38:30 +0200 (fr, 20 apr 2012) $ $Rev: 14651 $
+ *
+ * $Date: 2012-04-20 13:38:30 +0200 (fr, 20 apr 2012) $ $Rev: 14651 $ 
+ *
  */
+
 #import <Foundation/Foundation.h>
 
-typedef enum
-{
+typedef enum {
     PBBarImageStateOff,
     PBBarImageStateOnGreen,
     PBBarImageStateOnRed
 } PBBarImageState;
 
-// Subclass of UIImageView that sets the basic layouts of a "bar image".
-// Used e.g. for displaying a bar for the image quality of a fingerprint.
-@interface PBBarImageView : UIImageView
-{
+/** Subclass of UIImageView that sets the basic layouts of a "bar image". 
+  * Used e.g. for displaying a bar for the image quality of a fingerprint. */
+@interface PBBarImageView : UIImageView {
     PBBarImageState state;
 }
 
 @property (nonatomic, readonly) PBBarImageState state;
+
 - (id)initWithCoder:(NSCoder *)aDecoder;
 
-// Changes the state of the bar image, which automatically changes
-// the image of the bar image.
+/** Changes the state of the bar image, which automatically changes
+  * the image of the bar image. */
 - (void)setState: (PBBarImageState) aState;
+
 @end

@@ -43,15 +43,13 @@ extern NSString *ASIHTTPRequestVersion;
 	#define __MAC_10_6 1060
 #endif
 
-typedef enum _ASIAuthenticationState
-{
+typedef enum _ASIAuthenticationState {
 	ASINoAuthenticationNeededYet = 0,
 	ASIHTTPAuthenticationNeeded = 1,
 	ASIProxyAuthenticationNeeded = 2
 } ASIAuthenticationState;
 
-typedef enum _ASINetworkErrorType
-{
+typedef enum _ASINetworkErrorType {
     ASIConnectionFailureErrorType = 1,
     ASIRequestTimedOutErrorType = 2,
     ASIAuthenticationErrorType = 3,
@@ -63,6 +61,7 @@ typedef enum _ASINetworkErrorType
 	ASITooMuchRedirectionErrorType = 9,
 	ASIUnhandledExceptionError = 10,
 	ASICompressionError = 11
+	
 } ASINetworkErrorType;
 
 
@@ -82,8 +81,8 @@ typedef void (^ASIProgressBlock)(unsigned long long size, unsigned long long tot
 typedef void (^ASIDataBlock)(NSData *data);
 #endif
 
-@interface ASIHTTPRequest : NSOperation <NSCopying>
-{
+@interface ASIHTTPRequest : NSOperation <NSCopying> {
+	
 	// The url for this operation, should include GET params in the query string where appropriate
 	NSURL *url; 
 	
@@ -548,6 +547,7 @@ typedef void (^ASIDataBlock)(NSData *data);
 
 // Convenience constructor
 + (id)requestWithURL:(NSURL *)newURL;
+
 + (id)requestWithURL:(NSURL *)newURL usingCache:(id <ASICacheDelegate>)cache;
 + (id)requestWithURL:(NSURL *)newURL usingCache:(id <ASICacheDelegate>)cache andCachePolicy:(ASICachePolicy)policy;
 
@@ -839,6 +839,7 @@ typedef void (^ASIDataBlock)(NSData *data);
 
 // Returns YES when an iPhone OS device is connected via WWAN, false when connected via WIFI or not connected
 + (BOOL)isNetworkReachableViaWWAN;
+
 #endif
 
 #pragma mark queue
@@ -857,6 +858,7 @@ typedef void (^ASIDataBlock)(NSData *data);
 #pragma mark network activity
 
 + (BOOL)isNetworkInUse;
+
 + (void)setShouldUpdateNetworkActivityIndicator:(BOOL)shouldUpdate;
 
 // Shows the network activity spinner thing on iOS. You may wish to override this to do something else in Mac projects
@@ -903,12 +905,15 @@ typedef void (^ASIDataBlock)(NSData *data);
 @property (retain) NSString *password;
 @property (retain) NSString *userAgentString;
 @property (retain) NSString *domain;
+
 @property (retain) NSString *proxyUsername;
 @property (retain) NSString *proxyPassword;
 @property (retain) NSString *proxyDomain;
+
 @property (retain) NSString *proxyHost;
 @property (assign) int proxyPort;
 @property (retain) NSString *proxyType;
+
 @property (retain,setter=setURL:, nonatomic) NSURL *url;
 @property (retain) NSURL *originalURL;
 @property (assign, nonatomic) id delegate;
@@ -990,10 +995,10 @@ typedef void (^ASIDataBlock)(NSData *data);
 @property (assign, readonly) BOOL didUseCachedResponse;
 @property (assign) NSTimeInterval secondsToCache;
 @property (retain) NSArray *clientCertificates;
-@property (retain) ASIDataDecompressor *dataDecompressor;
-@property (assign) BOOL shouldWaitToInflateCompressedResponses;
-
 #if TARGET_OS_IPHONE && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_4_0
 @property (assign) BOOL shouldContinueWhenAppEntersBackground;
 #endif
+@property (retain) ASIDataDecompressor *dataDecompressor;
+@property (assign) BOOL shouldWaitToInflateCompressedResponses;
+
 @end

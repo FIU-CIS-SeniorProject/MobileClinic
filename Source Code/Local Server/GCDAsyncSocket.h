@@ -66,16 +66,13 @@ extern NSString *const GCDAsyncSocketQueueName;
 extern NSString *const GCDAsyncSocketThreadName;
 
 #if SECURE_TRANSPORT_MAYBE_AVAILABLE
-    extern NSString *const GCDAsyncSocketSSLCipherSuites;
-
-    #if TARGET_OS_IPHONE
-    extern NSString *const GCDAsyncSocketSSLProtocolVersionMin;
-    extern NSString *const GCDAsyncSocketSSLProtocolVersionMax;
-    #else
-
-    extern NSString *const GCDAsyncSocketSSLDiffieHellmanParameters;
+extern NSString *const GCDAsyncSocketSSLCipherSuites;
+#if TARGET_OS_IPHONE
+extern NSString *const GCDAsyncSocketSSLProtocolVersionMin;
+extern NSString *const GCDAsyncSocketSSLProtocolVersionMax;
+#else
+extern NSString *const GCDAsyncSocketSSLDiffieHellmanParameters;
 #endif
-
 #endif
 
 enum GCDAsyncSocketError
@@ -92,7 +89,9 @@ enum GCDAsyncSocketError
 };
 typedef enum GCDAsyncSocketError GCDAsyncSocketError;
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark -
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 @interface GCDAsyncSocket : NSObject
 

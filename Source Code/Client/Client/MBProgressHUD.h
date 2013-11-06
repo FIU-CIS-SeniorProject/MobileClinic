@@ -32,8 +32,8 @@
 
 @protocol MBProgressHUDDelegate;
 
-typedef enum
-{
+
+typedef enum {
 	/** Progress is shown using an UIActivityIndicatorView. This is the default. */
 	MBProgressHUDModeIndeterminate,
 	/** Progress is shown using a round, pie-chart like, progress view. */
@@ -46,8 +46,7 @@ typedef enum
 	MBProgressHUDModeText
 } MBProgressHUDMode;
 
-typedef enum
-{
+typedef enum {
 	/** Opacity animation */
 	MBProgressHUDAnimationFade,
 	/** Opacity + scale animation */
@@ -72,6 +71,7 @@ typedef enum
 	#define MB_WEAK assign
 #endif
 #endif
+
 
 /** 
  * Displays a simple HUD window containing a progress indicator and two optional labels for short messages.
@@ -340,7 +340,9 @@ typedef enum
  * Force the HUD dimensions to be equal if possible. 
  */
 @property (assign, getter = isSquare) BOOL square;
+
 @end
+
 
 @protocol MBProgressHUDDelegate <NSObject>
 
@@ -350,6 +352,7 @@ typedef enum
  * Called after the HUD was fully hidden from the screen. 
  */
 - (void)hudWasHidden:(MBProgressHUD *)hud;
+
 @end
 
 
@@ -367,4 +370,5 @@ typedef enum
  * Display mode - NO = round or YES = annular. Defaults to round.
  */
 @property (nonatomic, assign, getter = isAnnular) BOOL annular;
+
 @end

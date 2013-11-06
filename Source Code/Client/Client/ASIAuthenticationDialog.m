@@ -50,8 +50,7 @@ static const NSUInteger kDomainSection = 1;
 
 + (void)initialize
 {
-	if (self == [ASIAuthenticationDialog class])
-    {
+	if (self == [ASIAuthenticationDialog class]) {
 		requestsNeedingAuthentication = [[NSMutableArray array] retain];
 	}
 }
@@ -59,38 +58,29 @@ static const NSUInteger kDomainSection = 1;
 + (void)presentAuthenticationDialogForRequest:(ASIHTTPRequest *)theRequest
 {
 	// No need for a lock here, this will always be called on the main thread
-	if (!sharedDialog)
-    {
+	if (!sharedDialog) {
 		sharedDialog = [[self alloc] init];
 		[sharedDialog setRequest:theRequest];
-		if ([theRequest authenticationNeeded] == ASIProxyAuthenticationNeeded)
-        {
+		if ([theRequest authenticationNeeded] == ASIProxyAuthenticationNeeded) {
 			[sharedDialog setType:ASIProxyAuthenticationType];
-		}
-        else
-        {
+		} else {
 			[sharedDialog setType:ASIStandardAuthenticationType];
 		}
 		[sharedDialog show];
-	}
-    else
-    {
+	} else {
 		[requestsNeedingAuthentication addObject:theRequest];
 	}
 }
 
 - (id)init
 {
-	if ((self = [self initWithNibName:nil bundle:nil]))
-    {
+	if ((self = [self initWithNibName:nil bundle:nil])) {
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_3_2
-		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-        {
+		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
 #endif
-			if (![UIDevice currentDevice].generatesDeviceOrientationNotifications)
-            {
+			if (![UIDevice currentDevice].generatesDeviceOrientationNotifications) {
 				[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
 				[self setDidEnableRotationNotifications:YES];
 			}
@@ -104,12 +94,10 @@ static const NSUInteger kDomainSection = 1;
 
 - (void)dealloc
 {
-	if ([self didEnableRotationNotifications])
-    {
+	if ([self didEnableRotationNotifications]) {
 		[[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
 	}
-	
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
 
 	[request release];
 	[tableView release];
@@ -123,8 +111,7 @@ static const NSUInteger kDomainSection = 1;
 - (void)keyboardWillShow:(NSNotification *)notification
 {
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_3_2
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-    {
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
 #endif
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_3_2
 		NSValue *keyboardBoundsValue = [[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey];
@@ -148,8 +135,7 @@ static const NSUInteger kDomainSection = 1;
 	
 	UIInterfaceOrientation o = (UIInterfaceOrientation)[[UIApplication sharedApplication] statusBarOrientation];
 	CGFloat angle = 0;
-	switch (o)
-    {
+	switch (o) {
 		case UIDeviceOrientationLandscapeLeft: angle = 90; break;
 		case UIDeviceOrientationLandscapeRight: angle = -90; break;
 		case UIDeviceOrientationPortraitUpsideDown: angle = 180; break;
@@ -159,8 +145,7 @@ static const NSUInteger kDomainSection = 1;
 	CGRect f = [[UIScreen mainScreen] applicationFrame];
 
 	// Swap the frame height and width if necessary
- 	if (UIDeviceOrientationIsLandscape(o))
-    {
+ 	if (UIDeviceOrientationIsLandscape(o)) {
 		CGFloat t;
 		t = f.size.width;
 		f.size.width = f.size.height;
@@ -192,8 +177,7 @@ static const NSUInteger kDomainSection = 1;
 
 - (UIViewController *)presentingController
 {
-	if (!presentingController)
-    {
+	if (!presentingController) {
 		presentingController = [[ASIAutorotatingViewController alloc] initWithNibName:nil bundle:nil];
 
 		// Attach to the window, but don't interfere.
@@ -249,20 +233,13 @@ static const NSUInteger kDomainSection = 1;
 
 - (void)dismiss
 {
-	if (self == sharedDialog)
-    {
+	if (self == sharedDialog) {
 		[[self class] dismiss];
-	}
-    else
-    {
+	} else {
 		if ([self respondsToSelector:@selector(presentingViewController)])
-        {
 			[[self presentingViewController] dismissModalViewControllerAnimated:YES];
-		}
-        else
-        {
+		else
 			[[self parentViewController] dismissModalViewControllerAnimated:YES];
-        }
 	}
 }
 
@@ -270,20 +247,14 @@ static const NSUInteger kDomainSection = 1;
 {
 	UINavigationBar *navigationBar = [[[self view] subviews] objectAtIndex:0];
 	UINavigationItem *navItem = [[navigationBar items] objectAtIndex:0];
-	if (UIInterfaceOrientationIsPortrait([[UIDevice currentDevice] orientation]))
-    {
+	if (UIInterfaceOrientationIsPortrait([[UIDevice currentDevice] orientation])) {
 		// Setup the title
-		if ([self type] == ASIProxyAuthenticationType)
-        {
+		if ([self type] == ASIProxyAuthenticationType) {
 			[navItem setPrompt:@"Login to this secure proxy server."];
-		}
-        else
-        {
+		} else {
 			[navItem setPrompt:@"Login to this secure server."];
 		}
-	}
-    else
-    {
+	} else {
 		[navItem setPrompt:nil];
 	}
 	[navigationBar sizeToFit];
@@ -297,8 +268,7 @@ static const NSUInteger kDomainSection = 1;
 {
 	// Remove all subviews
 	UIView *v;
-	while ((v = [[[self view] subviews] lastObject]))
-    {
+	while ((v = [[[self view] subviews] lastObject])) {
 		[v removeFromSuperview];
 	}
 
@@ -314,12 +284,9 @@ static const NSUInteger kDomainSection = 1;
 	[self showTitle];
 
 	// Setup toolbar buttons
-	if ([self type] == ASIProxyAuthenticationType)
-    {
+	if ([self type] == ASIProxyAuthenticationType) {
 		[navItem setTitle:[[self request] proxyHost]];
-	}
-    else
-    {
+	} else {
 		[navItem setTitle:[[[self request] url] host]];
 	}
 
@@ -343,8 +310,7 @@ static const NSUInteger kDomainSection = 1;
 	[[[[[self tableView] cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]].contentView subviews] objectAtIndex:0] becomeFirstResponder];
 
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_3_2
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-    {
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 		[self setModalPresentationStyle:UIModalPresentationFormSheet];
 	}
 #endif
@@ -356,8 +322,7 @@ static const NSUInteger kDomainSection = 1;
 
 - (void)cancelAuthenticationFromDialog:(id)sender
 {
-	for (ASIHTTPRequest *theRequest in [self requestsRequiringTheseCredentials])
-    {
+	for (ASIHTTPRequest *theRequest in [self requestsRequiringTheseCredentials]) {
 		[theRequest cancelAuthentication];
 		[requestsNeedingAuthentication removeObject:theRequest];
 	}
@@ -368,11 +333,9 @@ static const NSUInteger kDomainSection = 1;
 {
 	NSMutableArray *requestsRequiringTheseCredentials = [NSMutableArray array];
 	NSURL *requestURL = [[self request] url];
-	for (ASIHTTPRequest *otherRequest in requestsNeedingAuthentication)
-    {
+	for (ASIHTTPRequest *otherRequest in requestsNeedingAuthentication) {
 		NSURL *theURL = [otherRequest url];
-		if (([otherRequest authenticationNeeded] == [[self request] authenticationNeeded]) && [[theURL host] isEqualToString:[requestURL host]] && ([theURL port] == [requestURL port] || ([requestURL port] && [[theURL port] isEqualToNumber:[requestURL port]])) && [[theURL scheme] isEqualToString:[requestURL scheme]] && ((![otherRequest authenticationRealm] && ![[self request] authenticationRealm]) || ([otherRequest authenticationRealm] && [[self request] authenticationRealm] && [[[self request] authenticationRealm] isEqualToString:[otherRequest authenticationRealm]])))
-        {
+		if (([otherRequest authenticationNeeded] == [[self request] authenticationNeeded]) && [[theURL host] isEqualToString:[requestURL host]] && ([theURL port] == [requestURL port] || ([requestURL port] && [[theURL port] isEqualToNumber:[requestURL port]])) && [[theURL scheme] isEqualToString:[requestURL scheme]] && ((![otherRequest authenticationRealm] && ![[self request] authenticationRealm]) || ([otherRequest authenticationRealm] && [[self request] authenticationRealm] && [[[self request] authenticationRealm] isEqualToString:[otherRequest authenticationRealm]]))) {
 			[requestsRequiringTheseCredentials addObject:otherRequest];
 		}
 	}
@@ -382,8 +345,7 @@ static const NSUInteger kDomainSection = 1;
 
 - (void)presentNextDialog
 {
-	if ([requestsNeedingAuthentication count])
-    {
+	if ([requestsNeedingAuthentication count]) {
 		ASIHTTPRequest *nextRequest = [requestsNeedingAuthentication objectAtIndex:0];
 		[requestsNeedingAuthentication removeObjectAtIndex:0];
 		[[self class] presentAuthenticationDialogForRequest:nextRequest];
@@ -393,43 +355,29 @@ static const NSUInteger kDomainSection = 1;
 
 - (void)loginWithCredentialsFromDialog:(id)sender
 {
-	for (ASIHTTPRequest *theRequest in [self requestsRequiringTheseCredentials])
-    {
+	for (ASIHTTPRequest *theRequest in [self requestsRequiringTheseCredentials]) {
+
 		NSString *username = [[self usernameField] text];
 		NSString *password = [[self passwordField] text];
 
-		if (username == nil)
-        {
-            username = @"";
-        }
-        
-		if (password == nil)
-        {
-            password = @"";
-        }
+		if (username == nil) { username = @""; }
+		if (password == nil) { password = @""; }
 
-		if ([self type] == ASIProxyAuthenticationType)
-        {
+		if ([self type] == ASIProxyAuthenticationType) {
 			[theRequest setProxyUsername:username];
 			[theRequest setProxyPassword:password];
-		}
-        else
-        {
+		} else {
 			[theRequest setUsername:username];
 			[theRequest setPassword:password];
 		}
 
 		// Handle NTLM domains
 		NSString *scheme = ([self type] == ASIStandardAuthenticationType) ? [[self request] authenticationScheme] : [[self request] proxyAuthenticationScheme];
-		if ([scheme isEqualToString:(NSString *)kCFHTTPAuthenticationSchemeNTLM])
-        {
+		if ([scheme isEqualToString:(NSString *)kCFHTTPAuthenticationSchemeNTLM]) {
 			NSString *domain = [[self domainField] text];
-			if ([self type] == ASIProxyAuthenticationType)
-            {
+			if ([self type] == ASIProxyAuthenticationType) {
 				[theRequest setProxyDomain:domain];
-			}
-            else
-            {
+			} else {
 				[theRequest setDomain:domain];
 			}
 		}
@@ -445,8 +393,7 @@ static const NSUInteger kDomainSection = 1;
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)aTableView
 {
 	NSString *scheme = ([self type] == ASIStandardAuthenticationType) ? [[self request] authenticationScheme] : [[self request] proxyAuthenticationScheme];
-	if ([scheme isEqualToString:(NSString *)kCFHTTPAuthenticationSchemeNTLM])
-    {
+	if ([scheme isEqualToString:(NSString *)kCFHTTPAuthenticationSchemeNTLM]) {
 		return 2;
 	}
 	return 1;
@@ -454,8 +401,7 @@ static const NSUInteger kDomainSection = 1;
 
 - (CGFloat)tableView:(UITableView *)aTableView heightForFooterInSection:(NSInteger)section
 {
-	if (section == [self numberOfSectionsInTableView:aTableView]-1)
-    {
+	if (section == [self numberOfSectionsInTableView:aTableView]-1) {
 		return 30;
 	}
 	return 0;
@@ -463,11 +409,9 @@ static const NSUInteger kDomainSection = 1;
 
 - (CGFloat)tableView:(UITableView *)aTableView heightForHeaderInSection:(NSInteger)section
 {
-	if (section == 0)
-    {
+	if (section == 0) {
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_3_2
-		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-        {
+		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 			return 54;
 		}
 #endif
@@ -478,8 +422,7 @@ static const NSUInteger kDomainSection = 1;
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-	if (section == 0)
-    {
+	if (section == 0) {
 		return [[self request] authenticationRealm];
 	}
 	return nil;
@@ -504,17 +447,12 @@ static const NSUInteger kDomainSection = 1;
 	NSUInteger s = [indexPath section];
 	NSUInteger r = [indexPath row];
 
-	if (s == kUsernameSection && r == kUsernameRow)
-    {
+	if (s == kUsernameSection && r == kUsernameRow) {
 		[textField setPlaceholder:@"User"];
-	}
-    else if (s == kPasswordSection && r == kPasswordRow)
-    {
+	} else if (s == kPasswordSection && r == kPasswordRow) {
 		[textField setPlaceholder:@"Password"];
 		[textField setSecureTextEntry:YES];
-	}
-    else if (s == kDomainSection && r == kDomainRow)
-    {
+	} else if (s == kDomainSection && r == kDomainRow) {
 		[textField setPlaceholder:@"Domain"];
 	}
 	[cell.contentView addSubview:textField];
@@ -524,28 +462,21 @@ static const NSUInteger kDomainSection = 1;
 
 - (NSInteger)tableView:(UITableView *)aTableView numberOfRowsInSection:(NSInteger)section
 {
-	if (section == 0)
-    {
+	if (section == 0) {
 		return 2;
-	}
-    else
-    {
+	} else {
 		return 1;
 	}
 }
 
 - (NSString *)tableView:(UITableView *)aTableView titleForFooterInSection:(NSInteger)section
 {
-	if (section == [self numberOfSectionsInTableView:aTableView]-1)
-    {
+	if (section == [self numberOfSectionsInTableView:aTableView]-1) {
 		// If we're using Basic authentication and the connection is not using SSL, we'll show the plain text message
-		if ([[[self request] authenticationScheme] isEqualToString:(NSString *)kCFHTTPAuthenticationSchemeBasic] && ![[[[self request] url] scheme] isEqualToString:@"https"])
-        {
+		if ([[[self request] authenticationScheme] isEqualToString:(NSString *)kCFHTTPAuthenticationSchemeBasic] && ![[[[self request] url] scheme] isEqualToString:@"https"]) {
 			return @"Password will be sent in the clear.";
 		// We are using Digest, NTLM, or any scheme over SSL
-		}
-        else
-        {
+		} else {
 			return @"Password will be sent securely.";
 		}
 	}

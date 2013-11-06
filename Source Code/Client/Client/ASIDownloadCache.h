@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "ASICacheDelegate.h"
 
-@interface ASIDownloadCache : NSObject <ASICacheDelegate>
-{	
+@interface ASIDownloadCache : NSObject <ASICacheDelegate> {
+	
 	// The default cache policy for this cache
 	// Requests that store data in the cache will use this cache policy if their cache policy is set to ASIUseDefaultCachePolicy
 	// Defaults to ASIAskServerIfModifiedWhenStaleCachePolicy

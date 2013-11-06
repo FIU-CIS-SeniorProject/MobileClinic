@@ -27,14 +27,17 @@
  * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
  * DAMAGE.
  *
- * $Date: 2012-04-20 13:38:30 +0200 (fr, 20 apr 2012) $ $Rev: 14651 $
+ *
+ * $Date: 2012-04-20 13:38:30 +0200 (fr, 20 apr 2012) $ $Rev: 14651 $ 
+ *
  */
+
 #import <UIKit/UIKit.h>
+
 #import "PBPracticeController.h"
 
 /** Teaches the user the correct orientation of the finger when swiping. */
-@interface PBPractice3Controller : UIViewController
-{
+@interface PBPractice3Controller : UIViewController {
     IBOutlet UIImageView* handImage1;
     IBOutlet UIImageView* handImage2;
     BOOL continueAnimation;
@@ -43,6 +46,9 @@
     
     PBPracticeController* practiceController;
 }
+
 - (id)initWithPracticeController: (PBPracticeController*)aPracticeController;
+
 - (IBAction)next: (id)sender;
+
 @end

@@ -1,24 +1,3 @@
-// The MIT License (MIT)
-//
-// Copyright (c) 2013 Florida International University
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
 //
 //  MedicineSearchViewController.h
 //  Mobile Clinic
@@ -26,16 +5,31 @@
 //  Created by Steven Berlanga on 2/24/13.
 //  Copyright (c) 2013 Steven Berlanga. All rights reserved.
 //
+
 #import <UIKit/UIKit.h>
 #import "MedicineSearchResultCell.h"
+#import "GenericCellProtocol.h"
+#import "CancelDelegate.h"
 //#import "PrescriptionObjectProtocol.h"
+@protocol MedicineSearchViewProtocol <NSObject>
+-(void)addPrescription:(NSMutableDictionary*)prescription;
+@end
 
 @interface MedicineSearchViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *medicineField;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property(nonatomic, weak) id<MedicineSearchViewProtocol> delegate;
 @property (nonatomic, strong) NSMutableDictionary *prescriptionData;
+@property (weak, nonatomic) IBOutlet UITextField *drugName;
+@property (weak, nonatomic) IBOutlet UITextField *duration;
+@property (weak, nonatomic) IBOutlet UITextField *timeOfDay;
+@property (weak, nonatomic) IBOutlet UIStepper *durationIncrementer;
+@property (weak, nonatomic) IBOutlet UITextField *dosage;
 
+- (IBAction)AddTimeOfDay:(id)sender;
+-(void)resetView;
+- (IBAction)alterAmountOfTablets:(id)sender;
 - (IBAction)moveBackToPrescription:(id)sender;
 - (IBAction)searchMedicine:(id)sender;
 

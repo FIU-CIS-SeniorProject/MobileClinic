@@ -27,12 +27,17 @@
  * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
  * DAMAGE.
  *
- * $Date: 2012-04-20 13:38:30 +0200 (fr, 20 apr 2012) $ $Rev: 14651 $
+ *
+ * $Date: 2012-04-20 13:38:30 +0200 (fr, 20 apr 2012) $ $Rev: 14651 $ 
+ *
  */
+
 #import "PBBarImageView.h"
+
 #import <QuartzCore/QuartzCore.h>
 
 @implementation PBBarImageView
+
 @synthesize state;
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -57,8 +62,7 @@
 - (void)setState: (PBBarImageState) aState
 {
     state = aState;
-    switch (state)
-    {
+    switch (state) {
         case PBBarImageStateOff:
             self.image = nil;
             break;
@@ -75,4 +79,5 @@
             break;
     }
 }
+
 @end

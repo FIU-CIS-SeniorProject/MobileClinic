@@ -26,8 +26,7 @@
 
 - (void)dealloc
 {
-	if (streamReady)
-    {
+	if (streamReady) {
 		[self closeStream];
 	}
 	[super dealloc];
@@ -35,8 +34,7 @@
 
 - (NSError *)setupStream
 {
-	if (streamReady)
-    {
+	if (streamReady) {
 		return nil;
 	}
 	// Setup the inflate stream
@@ -46,8 +44,7 @@
 	zStream.avail_in = 0;
 	zStream.next_in = 0;
 	int status = inflateInit2(&zStream, (15+32));
-	if (status != Z_OK)
-    {
+	if (status != Z_OK) {
 		return [[self class] inflateErrorWithCode:status];
 	}
 	streamReady = YES;
@@ -56,8 +53,7 @@
 
 - (NSError *)closeStream
 {
-	if (!streamReady)
-    {
+	if (!streamReady) {
 		return nil;
 	}
 	// Close the inflate stream
@@ -83,10 +79,9 @@
 	zStream.avail_out = 0;
 	
 	NSInteger bytesProcessedAlready = zStream.total_out;
-	while (zStream.avail_in != 0)
-    {
-		if (zStream.total_out-bytesProcessedAlready >= [outputData length])
-        {
+	while (zStream.avail_in != 0) {
+		
+		if (zStream.total_out-bytesProcessedAlready >= [outputData length]) {
 			[outputData increaseLengthBy:halfLength];
 		}
 		
@@ -95,14 +90,10 @@
 		
 		status = inflate(&zStream, Z_NO_FLUSH);
 		
-		if (status == Z_STREAM_END)
-        {
+		if (status == Z_STREAM_END) {
 			break;
-		}
-        else if (status != Z_OK)
-        {
-			if (err)
-            {
+		} else if (status != Z_OK) {
+			if (err) {
 				*err = [[self class] inflateErrorWithCode:status];
 			}
 			return nil;
@@ -119,10 +110,8 @@
 {
 	NSError *theError = nil;
 	NSData *outputData = [[ASIDataDecompressor decompressor] uncompressBytes:(Bytef *)[compressedData bytes] length:[compressedData length] error:&theError];
-	if (theError)
-    {
-		if (err)
-        {
+	if (theError) {
+		if (err) {
 			*err = theError;
 		}
 		return nil;
@@ -135,20 +124,16 @@
 	NSFileManager *fileManager = [[[NSFileManager alloc] init] autorelease];
 
 	// Create an empty file at the destination path
-	if (![fileManager createFileAtPath:destinationPath contents:[NSData data] attributes:nil])
-    {
-		if (err)
-        {
+	if (![fileManager createFileAtPath:destinationPath contents:[NSData data] attributes:nil]) {
+		if (err) {
 			*err = [NSError errorWithDomain:NetworkRequestErrorDomain code:ASICompressionError userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Decompression of %@ failed because we were to create a file at %@",sourcePath,destinationPath],NSLocalizedDescriptionKey,nil]];
 		}
 		return NO;
 	}
 	
 	// Ensure the source file exists
-	if (![fileManager fileExistsAtPath:sourcePath])
-    {
-		if (err)
-        {
+	if (![fileManager fileExistsAtPath:sourcePath]) {
+		if (err) {
 			*err = [NSError errorWithDomain:NetworkRequestErrorDomain code:ASICompressionError userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Decompression of %@ failed the file does not exist",sourcePath],NSLocalizedDescriptionKey,nil]];
 		}
 		return NO;
@@ -167,34 +152,28 @@
 	NSOutputStream *outputStream = [NSOutputStream outputStreamToFileAtPath:destinationPath append:NO];
 	[outputStream open];
 	
-    while ([decompressor streamReady])
-    {
+    while ([decompressor streamReady]) {
+		
 		// Read some data from the file
 		readLength = [inputStream read:inputData maxLength:DATA_CHUNK_SIZE]; 
 		
 		// Make sure nothing went wrong
-		if ([inputStream streamStatus] == NSStreamEventErrorOccurred)
-        {
-            if (err)
-            {
+		if ([inputStream streamStatus] == NSStreamEventErrorOccurred) {
+			if (err) {
 				*err = [NSError errorWithDomain:NetworkRequestErrorDomain code:ASICompressionError userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Decompression of %@ failed because we were unable to read from the source data file",sourcePath],NSLocalizedDescriptionKey,[inputStream streamError],NSUnderlyingErrorKey,nil]];
 			}
             [decompressor closeStream];
 			return NO;
 		}
-        
 		// Have we reached the end of the input data?
-		if (!readLength)
-        {
+		if (!readLength) {
 			break;
 		}
 
 		// Attempt to inflate the chunk of data
 		outputData = [decompressor uncompressBytes:inputData length:readLength error:&theError];
-		if (theError)
-        {
-			if (err)
-            {
+		if (theError) {
+			if (err) {
 				*err = theError;
 			}
 			[decompressor closeStream];
@@ -205,31 +184,30 @@
 		[outputStream write:(Bytef*)[outputData bytes] maxLength:[outputData length]];
 		
 		// Make sure nothing went wrong
-		if ([inputStream streamStatus] == NSStreamEventErrorOccurred)
-        {
-			if (err)
-            {
+		if ([inputStream streamStatus] == NSStreamEventErrorOccurred) {
+			if (err) {
 				*err = [NSError errorWithDomain:NetworkRequestErrorDomain code:ASICompressionError userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Decompression of %@ failed because we were unable to write to the destination data file at %@",sourcePath,destinationPath],NSLocalizedDescriptionKey,[outputStream streamError],NSUnderlyingErrorKey,nil]];
             }
 			[decompressor closeStream];
 			return NO;
 		}
+		
     }
 	
 	[inputStream close];
 	[outputStream close];
 
 	NSError *error = [decompressor closeStream];
-	if (error)
-    {
-		if (err)
-        {
+	if (error) {
+		if (err) {
 			*err = error;
 		}
 		return NO;
 	}
+
 	return YES;
 }
+
 
 + (NSError *)inflateErrorWithCode:(int)code
 {
