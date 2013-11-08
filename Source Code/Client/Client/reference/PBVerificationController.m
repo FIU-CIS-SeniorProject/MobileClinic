@@ -27,9 +27,14 @@
  * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
  * DAMAGE.
  *
- * $Date: 2012-06-28 15:20:10 +0200 (to, 28 jun 2012) $ $Rev: 15253 $
+ *
+ * $Date: 2012-06-28 15:20:10 +0200 (to, 28 jun 2012) $ $Rev: 15253 $ 
+ *
  */
+
+
 #import "PBVerificationController.h"
+
 #import <AudioToolbox/AudioToolbox.h>
 #import <QuartzCore/QuartzCore.h>
 
@@ -83,13 +88,13 @@
     [fadeLabel release];
     [previousFingerButton release];
     [nextFingerButton release];
+    
     [database release];
     [fingers release];
     [firstFinger release];
     [delegate release];
     [title release];
-    if (verifier != nil)
-    {
+    if (verifier != nil) {
         [verifier release];
     }
     [config release];
@@ -180,28 +185,23 @@
     }
     else {
         decisionImage.image = [UIImage imageNamed:@"reject.png"];
-        if ([decision intValue] == PB_DISPLAY_DECISION_REJECT_BLOCKED)
-        {
+        if ([decision intValue] == PB_DISPLAY_DECISION_REJECT_BLOCKED) {
             decisionLabel.text = @"Blocked";
         }
-        else if ([decision intValue] == PB_DISPLAY_DECISION_REJECT_CANCELLED)
-        {
+        else if ([decision intValue] == PB_DISPLAY_DECISION_REJECT_CANCELLED) {
             decisionLabel.text = @"Cancelled";
         }
-        else if ([decision intValue] == PB_DISPLAY_DECISION_REJECT_TIMEDOUT)
-        {
+        else if ([decision intValue] == PB_DISPLAY_DECISION_REJECT_TIMEDOUT) {
             decisionLabel.text = @"Timed out";
         }
-        else
-        {
+        else {
             decisionLabel.text = @"Unknown error";
         }
 
         [decisionLabel setHidden:NO];
 
         /* Play reject sound, if allowed. */
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PBPlaySounds"])
-        {
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PBPlaySounds"]) {
             [self playSound:@"PBVerificationRejected"];
         }
     }
@@ -224,12 +224,10 @@
     PBBiometryFinger* matchingFinger = nil;
     NSArray* verifyAgainstFingers = nil;
     
-    if (verifyAgainstAllFingers)
-    {
+    if (verifyAgainstAllFingers) {
         verifyAgainstFingers = fingers;
     }
-    else
-    {
+    else {
         /* Only verify against chosen finger. */
         verifyAgainstFingers = [NSArray arrayWithObject:[fingers objectAtIndex:indexOfFingerToVerifyAgainst]];
     }
@@ -238,11 +236,9 @@
     status = [[PBBiometry sharedBiometry] verifyFingers:verifyAgainstFingers database:database gui:self verifier:verifier config:config matchingFinger:&matchingFinger];
     
     /* Notify user the status of the operation. */
-    if (status == PBBiometryStatusOK)
-    {
+    if (status == PBBiometryStatusOK) {
         /* Display decision to user. */
-        if (matchingFinger != nil)
-        {
+        if (matchingFinger != nil) {
             /* Store last finger for future verifications. */
             [[NSUserDefaults standardUserDefaults] setInteger:matchingFinger.position forKey:@"PBVerificationController.lastFingerPosition"];
             /* Display accept to user. */
@@ -251,62 +247,51 @@
         
         [(NSObject*)delegate performSelectorOnMainThread:@selector(verificationVerifiedFinger:) withObject:matchingFinger waitUntilDone:NO];
     }
-    else if (status == PBBiometryStatusReaderBusy)
-    {
+    else if (status == PBBiometryStatusReaderBusy) {
         /* Reader is already used by another application. */
         UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Tactivo busy" message:@"The Tactivo is already used by another application. Close that application or make sure that it is no longer using the Tactivo before trying again." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
         [self performSelectorOnMainThread:@selector(showAlertInMainThread:) withObject:alertView waitUntilDone:NO];
         [alertView release];
     }
-    else if (status == PBBiometryStatusReaderNotAvailable)
-    {
+    else if (status == PBBiometryStatusReaderNotAvailable) {
         /* Reader is not available. */
         UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Tactivo not accessible" message:@"The Tactivo is not connected to the device or is waiting to be authenticated. Please connect the Tactivo or wait for the authentication to be completed." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
         [self performSelectorOnMainThread:@selector(showAlertInMainThread:) withObject:alertView waitUntilDone:NO];
         [alertView release];
     }
-    else if (status == PBBiometryStatusProtocolNotIncluded)
-    {
+    else if (status == PBBiometryStatusProtocolNotIncluded) {
         /* Reader is not available. */
         UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Protocol not included" message:@"The protocol string 'com.precisebiometrics.sensor' is not included in the 'UISupportedExternalAccessoryProtocols' key in the Info.plist." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
         [self performSelectorOnMainThread:@selector(showAlertInMainThread:) withObject:alertView waitUntilDone:NO];
         [alertView release];
     }
-    else if (status == PBBiometryStatusFatal)
-    {
+    else if (status == PBBiometryStatusFatal) {
         /* Unknown error. */
         UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Unknown error!" message:@"An unknown error has occurred. Try disconnecting the Tactivo from the device and then connect it again or restart the application." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
         [self performSelectorOnMainThread:@selector(showAlertInMainThread:) withObject:alertView waitUntilDone:NO];
         [alertView release];
     }
-    else
-    {
+    else {
         NSNumber* decisionNumber;
         
-        if (status == PBBiometryStatusCancelled)
-        {
+        if (status == PBBiometryStatusCancelled) {
             decisionNumber = [NSNumber numberWithInt:PB_DISPLAY_DECISION_REJECT_CANCELLED];
         }
-        else if (status == PBBiometryStatusTimedOut)
-        {
+        else if (status == PBBiometryStatusTimedOut) {
             decisionNumber = [NSNumber numberWithInt:PB_DISPLAY_DECISION_REJECT_TIMEDOUT];
         }
-        else if (status == PBBiometryStatusFingerBlocked)
-        {
+        else if (status == PBBiometryStatusFingerBlocked) {
             decisionNumber = [NSNumber numberWithInt:PB_DISPLAY_DECISION_REJECT_BLOCKED];
         }
-        else
-        {
+        else {
             decisionNumber = [NSNumber numberWithInt:PB_DISPLAY_DECISION_REJECT_UNKNOWN];
         }
         
-        if (restartVerification)
-        {
+        if (restartVerification) {
             /* The cancel was triggered by the user choosing another finger. */
             restartVerification = NO;
         }
-        else
-        {
+        else {
             /* Display reject decision to user. */
             [self performSelectorOnMainThread:@selector(displayDecision:) withObject:decisionNumber waitUntilDone:NO];
             /* Sleep for a short while so user has time to see what went wrong. */
@@ -356,8 +341,7 @@
 
 - (UIImage*)imageForFinger: (PBBiometryFinger*)finger
 {
-    switch (finger.position)
-    {
+    switch (finger.position) {
         case PBFingerPositionLeftLittle:
             return [UIImage imageNamed:@"left_little.png"];
         case PBFingerPositionLeftRing:
@@ -386,23 +370,19 @@
 - (void)displayFingersForIndex: (NSUInteger)index
 {
     /* Set previous finger image, if applicable. */
-    if (index == 0)
-    {
+    if (index == 0) {
         [previousFingerButton setHidden:YES];
     }
-    else
-    {
+    else {
         [previousFingerButton setImage:[self imageForFinger:[fingers objectAtIndex:index - 1]] forState:UIControlStateNormal];
         [previousFingerButton setHidden:NO];
     }
     
     /* Set next finger image, if applicable. */
-    if (index == [fingers count] - 1)
-    {
+    if (index == [fingers count] - 1) {
         [nextFingerButton setHidden:YES];
     }
-    else
-    {
+    else {
         [nextFingerButton setImage:[self imageForFinger:[fingers objectAtIndex:index + 1]] forState:UIControlStateNormal];
         [nextFingerButton setHidden:NO];
     }
@@ -416,16 +396,13 @@
                  previousIndex: (NSUInteger)previousIndex
                       animated: (BOOL)animated
 {    
-    if (verifyAgainstAllFingers)
-    {
+    if (verifyAgainstAllFingers) {
         [nextFingerButton setHidden:YES];
         [previousFingerButton setHidden:YES];
         [currentFingerImage setImage:[self imageForFinger:[fingers objectAtIndex:indexOfFingerToVerifyAgainst]]];
     }
-    else
-    {
-        if (animated)
-        {
+    else {
+        if (animated) {
             /* Create copies of the current fingers to use for animation. */
             UIImageView* previousCopy = [[UIImageView alloc] initWithImage:[previousFingerButton imageForState:UIControlStateNormal]];
             UIImageView* currentCopy = [[UIImageView alloc] initWithImage:currentFingerImage.image];
@@ -464,8 +441,7 @@
 
             /* Animate switch between fingers, using the copied image views. */
             [UIView animateWithDuration:0.2 animations:^{
-                if (previousIndex > index)
-                {
+                if (previousIndex > index) {
                     previousCopy.frame = currentFingerImage.frame;
                     currentCopy.frame = nextFingerButton.frame;
                     CGRect frame = nextCopy.frame;
@@ -475,8 +451,7 @@
                     frame.origin.y += 90;
                     nextCopy.frame = frame;
                 }
-                else
-                {
+                else {
                     nextCopy.frame = currentFingerImage.frame;
                     currentCopy.frame = previousFingerButton.frame;
                     CGRect frame = previousCopy.frame;
@@ -486,8 +461,7 @@
                     frame.origin.y += 90;
                     previousCopy.frame = frame;
                 }
-            } completion:^(BOOL finished)
-            {
+            } completion:^(BOOL finished) {
                 [previousCopy removeFromSuperview];
                 [currentCopy removeFromSuperview];
                 [nextCopy removeFromSuperview];
@@ -507,8 +481,7 @@
                 [NSThread detachNewThreadSelector:@selector(doVerification) toTarget:self withObject:nil];
             }];
         }
-        else
-        {
+        else {
             [self displayFingersForIndex:index];
         }
     }    
@@ -525,17 +498,14 @@
     /* Check if the last finger is found amongst the fingers to verify 
      * against. Use first enrolled finger if not found. */
     indexOfFingerToVerifyAgainst = 0;
-    for (NSUInteger f = 0; f < [fingers count]; f++)
-    {
+    for (NSUInteger f = 0; f < [fingers count]; f++) {
         PBBiometryFinger* finger = [fingers objectAtIndex:f];
         
-        if (finger.position == lastFingerPosition)
-        {
+        if (finger.position == lastFingerPosition) {
             indexOfFingerToVerifyAgainst = f;
             break;
         }
-        else if ([finger isEqualToFinger:firstFinger])
-        {
+        else if ([finger isEqualToFinger:firstFinger]) {
             /* Store index of first finger (fingers have been resorted) in case the last
              * finger position is not found. */
             indexOfFingerToVerifyAgainst = f;
@@ -559,8 +529,7 @@
     [self displayFingersForIndex:indexOfFingerToVerifyAgainst previousIndex:0 animated:NO];
      
     /* Start animation of hand. */
-    if (! continueAnimation && ! insideAnimation)
-    {
+    if (! continueAnimation && ! insideAnimation) {
         [self animateHand];
     }
     continueAnimation = YES;
@@ -630,13 +599,11 @@
 - (void)vibrate
 {
     /* Play swipe error sound, if allowed. */
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PBPlaySounds"])
-    {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PBPlaySounds"]) {
         [self playSound:@"PBSwipeFailed"];
     }
     /* Vibrate, if allowed. */
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PBVibrateForSwipeFailure"])
-    {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PBVibrateForSwipeFailure"]) {
         AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);        
     }
     [self earthquake:self.view amplitude:2.0 repeatCount:5 animationDuration:0.05];
@@ -647,8 +614,7 @@
 {
     NSInteger event_ = (PBEvent)[[params objectAtIndex:0] intValue];
     
-    switch (event_)
-    {
+    switch (event_) {
         case PBEventAlertFingerRejected:
             [self displayError:@"Finger did not match"];
             [self vibrate];
@@ -713,8 +679,7 @@
 
 -(IBAction)choosePreviousFinger:(id)sender
 {
-    if (indexOfFingerToVerifyAgainst > 0)
-    {
+    if (indexOfFingerToVerifyAgainst > 0) {
         indexOfFingerToVerifyAgainst--;
         
         /* Store last finger for future verifications. */
@@ -732,8 +697,7 @@
 
 -(IBAction)chooseNextFinger:(id)sender
 {
-    if (indexOfFingerToVerifyAgainst < ([fingers count] - 1))
-    {
+    if (indexOfFingerToVerifyAgainst < ([fingers count] - 1)) {
         indexOfFingerToVerifyAgainst++;
         
         /* Store last finger for future verifications. */
@@ -748,4 +712,5 @@
         [[PBBiometry sharedBiometry] cancel];
     }
 }
+
 @end

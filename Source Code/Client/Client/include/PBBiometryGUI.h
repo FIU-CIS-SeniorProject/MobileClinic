@@ -31,44 +31,49 @@
  * $Date: 2012-04-20 11:36:52 +0200 (fr, 20 apr 2012) $ $Rev: 14637 $ 
  *
  */
+
+
+
 #import <UIKit/UIKit.h>
+
 #import "PBBiometryFinger.h"
 
-// Event types.
-typedef enum
-{
-    // Prompt the user to swipe his/her finger on the sensor.
+/** Event types. */
+typedef enum {
+    /** Prompt the user to swipe his/her finger on the sensor. */
     PBEventPromptSwipeFinger,
 
-    // Alert the user that the swipe was too fast.
+    /** Alert the user that the swipe was too fast. */
 	PBEventAlertSwipeTooFast,
 
-    // Alert the user that an image has been captured.
+    /** Alert the user that an image has been captured. */
 	PBEventAlertImageCaptured,
 	
-    // Alert the user that a template has been extracted.
+    /** Alert the user that a template has been extracted. */
 	PBEventAlertTemplateExtracted,
-    
-    // Alert the user that the extracted template has been enrolled in the database.
+    /** Alert the user that the extracted template has been enrolled in the 
+      * database. */
 	PBEventAlertTemplateEnrolled,
 	
-    // Alert the user that the finger presented for verification was rejected.
+    /** Alert the user that the finger presented for verification was rejected. */
     PBEventAlertFingerRejected,
     
-    // Alert the user that the quality of the image was too bad.
+    /** Alert the user that the quality of the image was too bad. */
     PBEventAlertQualityTooBad,
 
-    // Alert the user that the area of the fingerprint within the
-    // image was too small.
+    /** Alert the user that the area of the fingerprint within the 
+     * image was too small. */
     PBEventAlertAreaTooSmall    
 } PBEvent;
 
-// Protocol for a biometric GUI. The GUI is used to display to the
-// user what is happening when enrolling or verifying.
-@protocol PBBiometryGUI <NSObject>
-// add <NSObject> otherwise the retain cannot be performed.
+/** Protocol for a biometric GUI. The GUI is used to display to the  
+  * user what is happening when enrolling or verifying. */
+@protocol PBBiometryGUI <NSObject> /* add <NSObject> otherwise the retain cannot be performed */
+
 
 @optional
+
+
 /** Tells the GUI to display to the user that an event has occurred, for 
   * possible events, see PBEvent. The GUI chooses what will happen for each 
   * event, it could e.g. display a text or image for the user indicating what 
@@ -120,4 +125,5 @@ typedef enum
                andArea: (uint32_t) area
  imageQualityThreshold: (uint8_t) imageQualityThreshold
          areaThreshold: (uint32_t) areaThreshold;
+	
 @end

@@ -31,12 +31,14 @@
  * $Date: 2012-08-16 11:15:11 +0200 (to, 16 aug 2012) $ $Rev: 15397 $ 
  *
  */
+
+
+
 #import <Foundation/Foundation.h>
 #import "PBBiometryUser.h"
 
-// Finger positions.
-typedef enum
-{
+/* Finger positions. */
+typedef enum {
 	PBFingerPositionUnknown,
 	PBFingerPositionRightThumb,
 	PBFingerPositionRightIndex,
@@ -50,12 +52,11 @@ typedef enum
 	PBFingerPositionLeftLittle
 } PBFingerPosition;
 
-// A finger, identified uniquely by it's position and user.
-@interface PBBiometryFinger : NSObject <NSCoding>
-{
-	// The position of the finger, e.g. 'right index' or 'left middle'.
+/** A finger, identified uniquely by it's position and user. */
+@interface PBBiometryFinger : NSObject <NSCoding> {
+	/** The position of the finger, e.g. 'right index' or 'left middle'. */
 	PBFingerPosition position;
-	// The user of the finger.
+	/** The user of the finger. */
 	PBBiometryUser *user;
 }
 @property (nonatomic, readonly) PBFingerPosition position;
@@ -67,14 +68,15 @@ typedef enum
 -(id) initWithPosition: (PBFingerPosition) aPosition 
              andUserId: (uint32_t)aUserId;
 
-// Returns YES if the two fingers are equal, otherwise NO.
+/** Returns YES if the two fingers are equal, otherwise NO. */
 -(BOOL) isEqualToFinger: (PBBiometryFinger*) finger;
 
-// Returns YES if the finger is a finger on the left hand.
+/** Returns YES if the finger is a finger on the left hand. */
 -(BOOL) isOnLeftHand;
 
-// Returns the "visual" position of the finger. This may e.g. be used
-// to tell if a certain finger is 'to the right' of (>) another finger.
-// E.g. left little = 1, left ring = 2, ... , right little = 10.
+/** Returns the "visual" position of the finger. This may e.g. be used
+  * to tell if a certain finger is 'to the right' of (>) another finger.
+  * E.g. left little = 1, left ring = 2, ... , right little = 10. */
 -(NSUInteger) visualPosition;
+
 @end

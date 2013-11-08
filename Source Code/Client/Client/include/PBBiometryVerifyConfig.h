@@ -27,16 +27,20 @@
  * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
  * DAMAGE.
  *
- * $Date: 2012-04-20 11:36:52 +0200 (fr, 20 apr 2012) $ $Rev: 14637 $
+ *
+ * $Date: 2012-04-20 11:36:52 +0200 (fr, 20 apr 2012) $ $Rev: 14637 $ 
+ *
  */
+
+
 #import <Foundation/Foundation.h>
+
 #import "PBBiometryTemplate.h"
 
 /** False Acceptance Rates (FARs). The FAR is a measure of the likelihood that 
   * the access system will wrongly accept an access attempt; that is, will allow 
   * the access attempt from an unauthorized user. */
-typedef enum
-{
+typedef enum {
 	PBFalseAcceptRate5,			/* FAR 1/5 */
 	PBFalseAcceptRate10,		/* FAR 1/10 */
 	PBFalseAcceptRate50,		/* ... */
@@ -51,12 +55,11 @@ typedef enum
 	PBFalseAcceptRate1000000
 } PBFalseAcceptRate;
 
-// Configuration properties for a verification process.
+/** Configuration properties for a verification process. */
 @interface PBBiometryVerifyConfig : NSObject {
     /** The minimum quality required for a fingerprint image to be used for 
       * verification, default 15. The quality value ranges from 0 (worst 
-      * quality) to 100 (best quality). 
-      */
+      * quality) to 100 (best quality). */
     uint8_t minimumQuality;
     
     /** The minimum fingerprint area, in mm^2 required for a fingerprint image 
@@ -65,11 +68,10 @@ typedef enum
     
     /** The timeout for the image capture, in ms. If no image has been captured
       * with the required quality and area within this time, the verification 
-      * function will return, default 7500. 
-      */
+      * function will return, default 7500. */
     uint16_t timeout;
     
-    // The requested false accept rate, default PBFalseAcceptRate10000.
+    /** The requested false accept rate, default PBFalseAcceptRate10000. */
     PBFalseAcceptRate falseAcceptRate;
     
     /** Tells if brute force checks shall be used or not, default YES. If YES,
@@ -83,7 +85,9 @@ typedef enum
       * template from the fingerprint image.. */
      PBBiometryTemplateType templateType;
 }
+
 -(id) init;
+
 @property (nonatomic) uint8_t minimumQuality;
 @property (nonatomic) uint32_t minimumArea;
 @property (nonatomic) uint16_t timeout;
@@ -92,3 +96,4 @@ typedef enum
 @property (nonatomic) PBBiometryTemplateType templateType;
 
 @end
+

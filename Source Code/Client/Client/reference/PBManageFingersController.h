@@ -27,12 +27,16 @@
  * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
  * DAMAGE.
  *
- * $Date: 2012-04-20 13:38:30 +0200 (fr, 20 apr 2012) $ $Rev: 14651 $
+ *
+ * $Date: 2012-04-20 13:38:30 +0200 (fr, 20 apr 2012) $ $Rev: 14651 $ 
+ *
  */
 
 #import <UIKit/UIKit.h>
+
 #import "PBEnrollmentController.h"
 #import "PBVerificationController.h"
+
 #import "PBBiometry.h"
 #import "PBBiometryDatabase.h"
 #import "PBBiometryUser.h"
@@ -70,10 +74,10 @@
   *  [navController pushViewController:manageFingersController animated:NO];
   *  [tabBarController setViewControllers:[NSArray arrayWithObjects:navController, nil]];
   */
-@interface PBManageFingersController : UIViewController <PBEnrollmentDelegate, PBVerificationDelegate, UIActionSheetDelegate, UIScrollViewDelegate>
-{
+@interface PBManageFingersController : UIViewController <PBEnrollmentDelegate, PBVerificationDelegate, UIActionSheetDelegate, UIScrollViewDelegate> {
     IBOutlet UIImageView* leftHandImage;
     IBOutlet UIImageView* rightHandImage;
+    
     IBOutlet UIButton* leftLittle;
     IBOutlet UIButton* leftRing;
     IBOutlet UIButton* leftMiddle;
@@ -84,9 +88,12 @@
     IBOutlet UIButton* rightMiddle;
     IBOutlet UIButton* rightIndex;
     IBOutlet UIButton* rightThumb;
+        
     IBOutlet UIButton* scrollToLeftHandImage;
     IBOutlet UIButton* scrollToRightHandImage;
+    
     IBOutlet UIScrollView* scrollView;
+    
     IBOutlet UILabel* noFingersLabel;
     
     NSArray* fingerButtons;
@@ -134,7 +141,11 @@
   * Call this method e.g. if the enrolled fingers are stored on a smartcard and the 
   * smartcard is inserted or removed from the card reader. */
 - (void)refresh;
+
 - (IBAction)enrollFinger: (id) sender;
+
 - (IBAction)scrollLeft;
+
 - (IBAction)scrollRight;
+
 @end

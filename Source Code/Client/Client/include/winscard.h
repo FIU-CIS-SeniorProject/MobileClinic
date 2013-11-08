@@ -27,8 +27,11 @@
  * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
  * DAMAGE.
  *
- * $Date: 2012-05-28 15:11:34 +0200 (må, 28 maj 2012) $ $Rev: 14828 $
+ *
+ * $Date: 2012-05-28 15:11:34 +0200 (må, 28 maj 2012) $ $Rev: 14828 $ 
+ *
  */
+
 #ifndef _WINSCARD_H_
 #define _WINSCARD_H_
 
@@ -711,6 +714,7 @@ LONG SCardGetAttrib(
     LPBYTE pbAttr,
     LPDWORD pcbAttrLen);
 
+
 #pragma mark Currently not implemented 
 
 /**
@@ -746,3 +750,4 @@ LONG SCardEndTransaction(SCARDHANDLE hCard,
 /*@}*/                         
 
 #endif /* _WINSCARD_H_ */
+

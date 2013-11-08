@@ -10,8 +10,8 @@
 #import "ASIHTTPRequestDelegate.h"
 #import "ASIProgressDelegate.h"
 
-@interface ASINetworkQueue : NSOperationQueue <ASIProgressDelegate, ASIHTTPRequestDelegate, NSCopying>
-{
+@interface ASINetworkQueue : NSOperationQueue <ASIProgressDelegate, ASIHTTPRequestDelegate, NSCopying> {
+	
 	// Delegate will get didFail + didFinish messages (if set)
 	id delegate;
 
@@ -69,6 +69,7 @@
 
 	// Storage container for additional queue information.
 	NSDictionary *userInfo;
+	
 }
 
 // Convenience constructor
@@ -86,6 +87,7 @@
 
 @property (assign, nonatomic, setter=setUploadProgressDelegate:) id uploadProgressDelegate;
 @property (assign, nonatomic, setter=setDownloadProgressDelegate:) id downloadProgressDelegate;
+
 @property (assign) SEL requestDidStartSelector;
 @property (assign) SEL requestDidReceiveResponseHeadersSelector;
 @property (assign) SEL requestWillRedirectSelector;
@@ -97,8 +99,10 @@
 @property (assign) BOOL showAccurateProgress;
 @property (assign, readonly) int requestsCount;
 @property (retain) NSDictionary *userInfo;
+
 @property (assign) unsigned long long bytesUploadedSoFar;
 @property (assign) unsigned long long totalBytesToUpload;
 @property (assign) unsigned long long bytesDownloadedSoFar;
 @property (assign) unsigned long long totalBytesToDownload;
+
 @end

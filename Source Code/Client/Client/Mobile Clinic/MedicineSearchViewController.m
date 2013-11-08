@@ -1,24 +1,3 @@
-// The MIT License (MIT)
-//
-// Copyright (c) 2013 Florida International University
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
 //
 //  MedicineSearchViewController.m
 //  Mobile Clinic
@@ -26,146 +5,249 @@
 //  Created by Steven Berlanga on 2/24/13.
 //  Copyright (c) 2013 Steven Berlanga. All rights reserved.
 //
+
 #import "MedicineSearchViewController.h"
 #import "MobileClinicFacade.h"
 
-@interface MedicineSearchViewController ()
-{
-    NSMutableArray *medicationArray;
+@interface MedicineSearchViewController () {
     NSMutableArray *searchResultArray;
+    NSArray* mainArray;
+    NSMutableSet* timeOfDaySet;
+    
 }
 @end
 
 @implementation MedicineSearchViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self)
-    {
+    if (self) {
         // Custom initialization
     }
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+   
+    [_tableView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"tornMid.png"]]];
+    
+    [ColorMe addBorder:_tableView.layer withWidth:1 withColor:[UIColor blackColor]];
+    
+    [ColorMe addGradientToLayer:self.view.layer colorOne:[ColorMe lightGray] andColorTwo:[ColorMe whitishColor]inFrame:self.view.bounds];
+    
     
     MobileClinicFacade *mobileFacade = [[MobileClinicFacade alloc]init];
     
+    /** This will should HUD in tableview to show alert the user that the system is working */
+    [self showIndeterminateHUDInView:_tableView withText:@"Loading" shouldHide:NO afterDelay:0 andShouldDim:NO];
+    
     // Request all medications in database
-    [mobileFacade findAllMedication:nil AndOnCompletion:^(NSArray *allObjectsFromSearch, NSError *error)
-     {
-        NSLog(@"All Medications:%@",allObjectsFromSearch.description);
-        medicationArray = [NSArray arrayWithArray:allObjectsFromSearch];
-        searchResultArray = [NSArray arrayWithArray:allObjectsFromSearch];
+    [mobileFacade findAllMedication:nil AndOnCompletion:^(NSArray *allObjectsFromSearch, NSError *error) {
         
-        //[searchResultArray filterUsingPredicate:[NSPredicate predicateWithFormat:@"%K != nil",MEDNAME]];
-        [_tableView reloadData];
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]initWithKey:@"medName" ascending:YES];
+        
+        NSArray *sortDescriptorArray = [NSArray arrayWithObject:sortDescriptor];
+        
+        mainArray = [[NSArray arrayWithArray:allObjectsFromSearch] sortedArrayUsingDescriptors:sortDescriptorArray];
+        
+        [self searchMedicine:nil];
+        /** This will remove the HUD since the search is complete */
+        [self HideALLHUDDisplayInView:_tableView];
     }];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)moveBackToPrescription:(id)sender
-{
-    //    [self.prescriptionData setObject:[NSNumber numberWithInt:[self.tableView indexPathForSelectedRow].row] forKey:MEDICATIONID];
-    //    [self.prescriptionData setObject:@"poo" forKey:MEDICATIONID];
-    [[NSNotificationCenter defaultCenter] postNotificationName:MOVE_FROM_SEARCH_FOR_MEDICINE object:_prescriptionData];
+- (IBAction)AddTimeOfDay:(id)sender {
+    if (!timeOfDaySet) {
+        timeOfDaySet = [[NSMutableSet alloc]initWithCapacity:4];
+    }
+    
+NSString* time = [self getTimeOfDay:[sender tag]];
+
+if([timeOfDaySet containsObject:time]){
+    [timeOfDaySet removeObject:time];
+}else{
+    [timeOfDaySet addObject:time];
+}
+[self updateTimeOfDayLabel];
+
+}
+-(void)updateTimeOfDayLabel{
+    NSMutableString* text = [[NSMutableString alloc]initWithCapacity:7];
+
+    for (NSString* day in timeOfDaySet) {
+        [text appendFormat:@"%@, ",day];
+    }
+    
+    [_timeOfDay setText:text];
+}
+- (IBAction)moveBackToPrescription:(id)sender {
+    
+    if ([self validatePrescription]) {
+    // Create a timestamp for Prescribe Time
+    NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
+    [DateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+        
+    NSString *dateStamp = [DateFormatter stringFromDate:[NSDate date]];
+    
+        [_prescriptionData setObject:[NSNumber numberWithInteger:(int)_durationIncrementer.value] forKey:TABLEPERDAY];
+    
+        [_prescriptionData setObject:_timeOfDay.text forKey:TIMEOFDAY];
+    
+        [_prescriptionData setObject:dateStamp forKey:PRESCRIBETIME];
+        
+        [_prescriptionData setObject:_dosage.text forKey:INSTRUCTIONS];
+
+        [_delegate addPrescription:_prescriptionData];
+    }
+}
+-(void)resetView{
+    [_durationIncrementer setValue:30];
+    [_drugName setText:@""];
+    if (timeOfDaySet) {
+        [timeOfDaySet removeAllObjects];
+    }
+    [_timeOfDay setText:@""];
+    [self alterAmountOfTablets:_durationIncrementer];
+    _prescriptionData = nil;
+    [_dosage setText:@""];
+
+    
 }
 
-- (void)viewDidUnload
-{
+- (IBAction)alterAmountOfTablets:(id)sender {
+    
+    UIStepper* step = sender;
+    
+    [_duration setText:[NSString stringWithFormat:@"%i Days",(int)step.value]];
+}
+
+- (BOOL)validatePrescription {
+    BOOL inputIsValid = YES;
+    NSString *errorMsg;
+    
+    if([_drugName.text isEqualToString:@""] || _drugName.text == nil) {
+        errorMsg = @"Missing medication";
+        inputIsValid = NO;
+    } else if([_dosage.text isEqualToString:@""] || _duration.text == nil) {
+        errorMsg = @"Missing Dosage";
+        inputIsValid = NO;
+    } else if([_timeOfDay.text isEqualToString:@""] || _timeOfDay.text == nil) {
+        errorMsg = @"Choose time of day";
+        inputIsValid = NO;
+    }
+    
+    // Display error message on invalid input
+    if(inputIsValid == NO){
+        UIAlertView *validateDiagnosisAlert = [[UIAlertView alloc] initWithTitle:nil message:errorMsg delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [validateDiagnosisAlert show];
+    }
+    
+    return inputIsValid;
+}
+
+- (NSString *)getTimeOfDay:(int)num {
+    switch (num) {
+        case 0:
+            return @"Morning";
+            break;
+        case 1:
+            return @"Mid-Afternoon";
+            break;
+        case 2:
+            return @"Midday";
+            break;
+        case 3:
+            return @"Evening";
+            break;
+        default:
+            return @"";
+            break;
+    }
+}
+
+- (void)viewDidUnload {
     [self setMedicineField:nil];
     [self setTableView:nil];
     [super viewDidUnload];
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    //    return medicationArray.count;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+
     return searchResultArray.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    MedicineSearchResultCell * cell = [tableView dequeueReusableCellWithIdentifier:@"medicineResult"];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+   
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
 
-    if(!cell)
-    {
-        cell = [[MedicineSearchResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"medicineResult"];
+    if(!cell){
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
         UINib * mNib = [UINib nibWithNibName:@"MedicineSearchResultView" bundle:nil];
         cell = [mNib instantiateWithOwner:nil options:nil][0];
     }
 
     NSDictionary *medDic = [searchResultArray objectAtIndex:indexPath.row];
     
-    cell.medicineName.text = [medDic objectForKey:MEDNAME];
-    cell.medicineDose.text = [medDic objectForKey:DOSAGE];
+    cell.detailTextLabel.text = [medDic objectForKey:MEDNAME];
     
+    [cell.textLabel setText:[NSString stringWithFormat:@"%i",indexPath.row]];
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 30;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     // Display get medication at the specified index
     NSDictionary *myDic = [searchResultArray objectAtIndex:indexPath.row];
-    
-    // get desired values
-    NSString *medName = [myDic objectForKey:MEDNAME];
-    NSString *dosage = [myDic objectForKey:DOSAGE];
-    
+
     // Construct a text
-    _medicineField.text = [NSString stringWithFormat:@"%@ %@", medName, dosage];
+    _drugName.text = [myDic objectForKey:MEDNAME];
     
-    // Create Prescription Dictionary
-    // NSMutableDictionary *prescriptionData = [[NSMutableDictionary alloc] init];
-    
-    // !!!: should reconsider implementation
-    // Save medicationId in Prescription dictionary
-    [_prescriptionData setValue:[myDic objectForKey:MEDICATIONID] forKey:MEDICATIONID];
-    
-    // Send prescription back
-    // [[NSNotificationCenter defaultCenter] postNotificationName:MOVE_FROM_SEARCH_FOR_MEDICINE object:_prescriptionData];
-}
-
-- (IBAction)searchMedicine:(id)sender
-{
-    searchResultArray = [NSArray arrayWithArray:medicationArray];
-
-    if(![_medicineField.text isEqualToString:@""])
-    {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K contains[cd] %@", MEDNAME, _medicineField.text];
-        searchResultArray = [NSMutableArray arrayWithArray:[searchResultArray filteredArrayUsingPredicate:predicate]];
+    // Store Medication ID and name
+    if (!_prescriptionData) {
+        _prescriptionData = [[NSMutableDictionary alloc]init];
     }
     
+    [_prescriptionData setValue:[myDic objectForKey:MEDICATIONID] forKey:MEDICATIONID];
+    
+    [_prescriptionData setValue:[myDic objectForKey:MEDNAME] forKey:MEDNAME];
+    
+}
+
+- (IBAction)searchMedicine:(id)sender {
+
+    NSPredicate *predicate;
+    
+    if(![_medicineField.text isEqualToString:@""]){
+        predicate = [NSPredicate predicateWithFormat:@"%K contains[cd] %@", MEDNAME, _medicineField.text];
+    }else{
+        predicate= [NSPredicate predicateWithFormat:@"%K != %@", MEDNAME, @""];
+    }
+    searchResultArray = [NSMutableArray arrayWithArray:[mainArray filteredArrayUsingPredicate:predicate]];
+    
     [_tableView reloadData];
+    
+    [_medicineField resignFirstResponder];
 }
 
 // Hides keyboard when whitespace is pressed
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
 }
+
 @end

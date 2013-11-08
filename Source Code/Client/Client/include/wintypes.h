@@ -27,9 +27,11 @@
  * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
  * DAMAGE.
  *
+ *
  * $Date: 2012-04-20 11:22:29 +0200 (fr, 20 apr 2012) $ $Rev: 14634 $ 
  *
  */
+
 #ifndef _WINTYPES_H_
 #define _WINTYPES_H_
 

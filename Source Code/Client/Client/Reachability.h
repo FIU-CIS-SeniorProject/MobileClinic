@@ -111,17 +111,18 @@
 // Since NSAssert and NSCAssert are used in this code, 
 // I recommend you set NS_BLOCK_ASSERTIONS=1 in the release versions of your projects.
 
-enum
-{
+enum {
+	
 	// DDG NetworkStatus Constant Names.
 	kNotReachable = 0, // Apple's code depends upon 'NotReachable' being the same value as 'NO'.
 	kReachableViaWWAN, // Switched order from Apple's enum. WWAN is active before WiFi.
 	kReachableViaWiFi
+	
 };
 typedef	uint32_t NetworkStatus;
 
-enum
-{
+enum {
+	
 	// Apple NetworkStatus Constant Names.
 	NotReachable     = kNotReachable,
 	ReachableViaWiFi = kReachableViaWiFi,
@@ -134,10 +135,9 @@ extern NSString *const kInternetConnection;
 extern NSString *const kLocalWiFiConnection;
 extern NSString *const kReachabilityChangedNotification;
 
-@interface Reachability: NSObject
-{
+@interface Reachability: NSObject {
 	
-    @private
+@private
 	NSString                *key_;
 	SCNetworkReachabilityRef reachabilityRef;
 
@@ -190,4 +190,5 @@ extern NSString *const kReachabilityChangedNotification;
 - (BOOL) isReachableViaWiFi;
 
 - (SCNetworkReachabilityFlags) reachabilityFlags;
+
 @end

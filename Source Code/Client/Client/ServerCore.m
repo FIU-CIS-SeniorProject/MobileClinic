@@ -1,33 +1,13 @@
-// The MIT License (MIT)
-//
-// Copyright (c) 2013 Florida International University
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
 //
 //  ServerCore.m
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 1/30/13.
+//  Copyright (c) 2013 Florida International University. All rights reserved.
 //
 #define ARCHIVER        @"archiver"
 #define READING_TIMEOUT 10
-#define CONNECT_TIMEOUT 5
+#define CONNECT_TIMEOUT 3.5
 
 #import "ServerCore.h"
 #import "ObjectFactory.h"
@@ -48,8 +28,8 @@ static BOOL connected;
 
 @implementation ServerCore
 
-+(id)sharedInstance
-{
++(id)sharedInstance{
+    
     static dispatch_once_t onceToken;
     
     dispatch_once(&onceToken, ^{
@@ -59,10 +39,8 @@ static BOOL connected;
     return sharedMyManager;
 }
 
--(id)init
-{
-    if (self=[super init])
-    {
+-(id)init{
+    if (self=[super init]) {
         isProcessing = NO;
         isShuttingDown = NO;
         netServiceBrowser = [[NSNetServiceBrowser alloc] init];
@@ -72,29 +50,26 @@ static BOOL connected;
     return self;
 }
 
--(void)startClient
-{
+-(void)startClient{
+   
     NSLog(@"Client Started Searching");
     
     // If client is not connected, try to connect
     if (!connected) {
-        if (!connectionTimer.isValid)
-        {
+        if (!connectionTimer.isValid) {
             [netServiceBrowser searchForServicesOfType:@"_MC-EMR._tcp." inDomain:@"local."];
             
             // Starts Timeout Timer
            [self StartConnectionTimeoutTimer];
         }
     }
-    else if (connectionSuccessful)
-    {
+    else if (connectionSuccessful) {
             [connectionTimer invalidate];
             [self activateCallBackWithBool:YES andWithError:nil];
     }
 }
 
--(void)StartConnectionTimeoutTimer
-{
+-(void)StartConnectionTimeoutTimer{
     // If the timer is instantiate it invalidate it just in case
     [connectionTimer invalidate];
     
@@ -285,8 +260,8 @@ static BOOL connected;
     [self connectToNextAddress];
 }
 
--(void)clearReadBuffer:(NSTimer*)timer
-{
+-(void)clearReadBuffer:(NSTimer*)timer{
+    
     majorData = nil;
     // Pretend the Data on the server Failed. The Connection Was unsuccessfull
     connectionSuccessful = NO;
@@ -297,36 +272,33 @@ static BOOL connected;
     [self stopClient];
 }
 
--(void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
-{
-    if (!majorData)
-    {
+-(void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag{
+    
+    if (!majorData) {
+        
         NSLog(@"Started Reading Data: %i",data.length);
         
         majorData = [[NSMutableData alloc]initWithData:data];
         
-    }
-    else
-    {
+    }else{
         NSLog(@"Appending Data: %i",data.length);
         
         [majorData appendData:data];
     }
     
-    @try
-    {
+    @try {
+
         NSDictionary* myDictionary = [[NSDictionary alloc]initWithDictionary:[self unarchiveToDictionaryFromData:majorData] copyItems:YES];
         
         // Invalidate Reading Timeout timer
         [connectionTimer invalidate];
         
-        NSLog(@"Client Recieved: %@",myDictionary.allKeys.description);
+        NSLog(@"Client Recieved: %@",myDictionary.allKeys);
         
         // Finished Processing
         isProcessing = NO;
         
-        if(myDictionary.allKeys.count > 0)
-        {
+        if(myDictionary.allKeys.count > 0) {
             // ObjectFactory: Used to instatiate the proper class but returns it generically
             id<BaseObjectProtocol> obj = [ObjectFactory createObjectForType:myDictionary];
             
@@ -335,9 +307,7 @@ static BOOL connected;
 
             onComplete(obj);    
             
-        }
-        else
-        {
+        } else {
             onComplete(nil);
         }
 
@@ -346,22 +316,24 @@ static BOOL connected;
         [self StartConnectionTimeoutTimer];
 
     }
-    @catch (NSException *exception)
-    {
+    @catch (NSException *exception) {
         NSLog(@"Restart Timer and Read Again");
         [self startReadingTimeoutTimer];
         [asyncSocket readDataWithTimeout:-1 tag:tag];
     }
 }
 
--(void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag
-{
+
+-(void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag{
+   
     isProcessing = YES;
+   
     [asyncSocket readDataWithTimeout:-1 tag:tag];
+    
 }
 
--(NSDictionary*)unarchiveToDictionaryFromData:(NSData*)data
-{
+-(NSDictionary*)unarchiveToDictionaryFromData:(NSData*)data{
+
     NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc]initForReadingWithData:data];
     
     NSDictionary* myDictionary = [unarchiver decodeObjectForKey:ARCHIVER];
@@ -371,8 +343,9 @@ static BOOL connected;
     return myDictionary;
 }
 
--(NSData*)ArchiveDictionary:(NSDictionary*)dictionary
-{
+-(NSData*)ArchiveDictionary:(NSDictionary*)dictionary{
+    
+    
     //New mutable data object
     NSMutableData *data = [[NSMutableData alloc] init];
     
@@ -390,19 +363,19 @@ static BOOL connected;
 - (void)sendData:(NSDictionary*)dataToBeSent withOnComplete:(ServerCallback)response
 {
     onComplete = response;
+
 	[asyncSocket writeData:[self ArchiveDictionary:dataToBeSent] withTimeout:-1 tag:10];
+	
 }
 
--(void)activateCallBackWithBool:(BOOL)status andWithError:(NSError*)error
-{
-    if (connectionStatus)
-    {
+-(void)activateCallBackWithBool:(BOOL)status andWithError:(NSError*)error{
+    if (connectionStatus) {
         connectionStatus(status,error);
     }
 }
 
--(void)stopClient
-{
+-(void)stopClient{
+
     [netServiceBrowser stop];
     asyncSocket.delegate = nil;
     [asyncSocket disconnect];
@@ -411,33 +384,27 @@ static BOOL connected;
     serverAddresses = nil;
 }
 
--(NSInteger)numberOfConnections
-{
+-(NSInteger)numberOfConnections{
     return serverAddresses.count;
 }
 
--(BOOL)isClientConntectToServer
-{
+-(BOOL)isClientConntectToServer{
     return connected;
 }
 
--(NSString *)getCurrentConnectionName
-{
+-(NSString *)getCurrentConnectionName{
     return asyncSocket.connectedHost;
 }
 
-- (void)setConnectionStatusHandler:(ClientServerConnect)statusHandler
-{
+- (void)setConnectionStatusHandler:(ClientServerConnect)statusHandler{
     connectionStatus = statusHandler;
 }
 
-- (BOOL)isShuttingDown
-{
+- (BOOL)isShuttingDown{
     return isShuttingDown;
 }
 
-- (BOOL)isProcessing
-{
+- (BOOL)isProcessing{
     return isProcessing;
 }
 @end

@@ -1,24 +1,3 @@
-// The MIT License (MIT)
-//
-// Copyright (c) 2013 Florida International University
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
 //
 //  MySpotlightImporter.m
 //  Mobile ClinicImporter
@@ -26,6 +5,7 @@
 //  Created by Michael Montaque on 1/23/13.
 //  Copyright (c) 2013 Florida International University. All rights reserved.
 //
+
 #import "MySpotlightImporter.h"
 
 #define YOUR_STORE_TYPE NSXMLStoreType
@@ -53,8 +33,7 @@
     NSURL *objectURI = [pathInfo valueForKey:NSObjectURIKey];
     NSManagedObjectID *oid = [[self persistentStoreCoordinator] managedObjectIDForURIRepresentation:objectURI];
 
-    if (!oid)
-    {
+    if (!oid) {
         NSLog(@"%@:%@ to find object id from path %@", [self class], NSStringFromSelector(_cmd), filePath);
         return NO;
     }
@@ -62,11 +41,14 @@
     NSManagedObject *instance = [[self managedObjectContext] objectWithID:oid];
 
     // how you process each instance will depend on the entity that the instance belongs to
-    if ([[[instance entity] name] isEqualToString:@"YOUR_ENTITY_NAME"])
-    {
+
+    if ([[[instance entity] name] isEqualToString:@"YOUR_ENTITY_NAME"]) {
+
         // set the display name for Spotlight search result
+
         NSString *yourDisplayString =  [NSString stringWithFormat:@"YOUR_DISPLAY_STRING %@", [instance valueForKey:@"SOME_KEY"]];
         spotlightData[(NSString *)kMDItemDisplayName] = yourDisplayString;
+        
          /*
             Determine how you want to store the instance information in 'spotlightData' dictionary.
             For each property, pick the key kMDItem... from MDItem.h that best fits its content.  
@@ -79,6 +61,7 @@
             To determine if a property should be indexed, call isIndexedBySpotlight
          */
     }
+
     return YES;
 }
 
@@ -95,17 +78,14 @@ static NSDate				*cachedModelModificationDate =nil;
 	NSDictionary *modelFileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:[self.modelURL path] error:nil];
 	NSDate *modelModificationDate =  modelFileAttributes[NSFileModificationDate];
 	
-	if ([cachedModelURL isEqual:self.modelURL] && [modelModificationDate isEqualToDate:cachedModelModificationDate])
-    {
+	if ([cachedModelURL isEqual:self.modelURL] && [modelModificationDate isEqualToDate:cachedModelModificationDate]) {
 		_managedObjectModel = cachedModel;
 	} 	
 	
-	if (!_managedObjectModel)
-    {
+	if (!_managedObjectModel) {
 		_managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:self.modelURL];
 
-		if (!_managedObjectModel)
-        {
+		if (!_managedObjectModel) {
 			NSLog(@"%@:%@ unable to load model at URL %@", [self class], NSStringFromSelector(_cmd), self.modelURL);
 			return nil;
 		}
@@ -113,8 +93,7 @@ static NSDate				*cachedModelModificationDate =nil;
 		// Clear out all custom classes used by the model to avoid having to link them
 		// with the importer. Remove this code if you need to access your custom logic.
 		NSString *managedObjectClassName = [NSManagedObject className];
-		for (NSEntityDescription *entity in _managedObjectModel)
-        {
+		for (NSEntityDescription *entity in _managedObjectModel) {
 			[entity setManagedObjectClassName:managedObjectClassName];
 		}
 		
@@ -137,10 +116,10 @@ static NSDate				*cachedModelModificationDate =nil;
     NSError *error = nil;
         
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:YOUR_STORE_TYPE configuration:nil URL:self.storeURL options:nil error:&error])
-    {
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:YOUR_STORE_TYPE configuration:nil URL:self.storeURL options:nil error:&error]) {
         NSLog(@"%@:%@ unable to add persistent store coordinator - %@", [self class], NSStringFromSelector(_cmd), error);
-    }
+    }    
+
     return _persistentStoreCoordinator;
 }
 
@@ -151,8 +130,7 @@ static NSDate				*cachedModelModificationDate =nil;
         return _managedObjectContext;
 
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-	if (!coordinator)
-    {
+	if (!coordinator) {
         NSLog(@"%@:%@ unable to get persistent store coordinator", [self class], NSStringFromSelector(_cmd));
 		return nil;
 	}
@@ -162,4 +140,5 @@ static NSDate				*cachedModelModificationDate =nil;
     
     return _managedObjectContext;
 }
+
 @end

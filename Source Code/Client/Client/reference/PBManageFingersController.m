@@ -27,8 +27,12 @@
  * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
  * DAMAGE.
  *
- * $Date: 2012-08-16 11:15:11 +0200 (to, 16 aug 2012) $ $Rev: 15397 $
+ *
+ * $Date: 2012-08-16 11:15:11 +0200 (to, 16 aug 2012) $ $Rev: 15397 $ 
+ *
  */
+
+
 #import "PBManageFingersController.h"
 
 #import <QuartzCore/CALayer.h>
@@ -41,8 +45,7 @@
 @synthesize verifyAgainstAllFingers;
 @synthesize enrollableFingers;
 
--(CGSize)contentSizeForViewInPopover
-{
+-(CGSize)contentSizeForViewInPopover {
     return CGSizeMake(768, 916);
 }
 
@@ -60,18 +63,18 @@
     self->verifier = nil;
     self->verifyConfig = [[PBBiometryVerifyConfig alloc] init];
     self->enrollConfig = [[PBBiometryEnrollConfig alloc] init];
+    
     self->verifyAgainstAllFingers = YES;
+    
     self->enrollableFingers = nil;
     
-    // Set title in case we are added to a navigation controller.
-    if (self.title == nil)
-    {
+    /* Set title in case we are added to a navigation controller. */
+    if (self.title == nil) {
         self.title = @"Manage fingers";
     }
     
-    // Set tab bar item in case we are added in a tab bar controller.
-    if (self.tabBarItem.image == nil)
-    {
+    /* Set tab bar item in case we are added in a tab bar controller. */
+    if (self.tabBarItem.image == nil) {
         UITabBarItem* tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Manage fingers" image:[UIImage imageNamed:@"tab_managefingers.png"] tag:0];
         self.tabBarItem = tabBarItem;
         [tabBarItem release];
@@ -97,6 +100,7 @@
     [noFingersLabel release];
     [scrollToLeftHandImage release];
     [scrollToRightHandImage release];
+    
     [database release];
     [user release];
     [fingerButtons release];
@@ -121,7 +125,7 @@
 {
     BOOL defaultValue = (enrollableFingers == nil);
     
-    // Default is YES if enrollableFingers is nil, otherwise NO.
+    /* Default is YES if enrollableFingers is nil, otherwise NO. */
     leftLittle.enabled = defaultValue;
     leftRing.enabled = defaultValue;
     leftMiddle.enabled = defaultValue;
@@ -133,11 +137,9 @@
     rightIndex.enabled = defaultValue;
     rightThumb.enabled = defaultValue;
     
-    // Set to YES for all fingers set as enrollable.
-    for (PBBiometryFinger* finger in enrollableFingers)
-    {
-        switch (finger.position)
-        {
+    /* Set to YES for all fingers set as enrollable. */
+    for (PBBiometryFinger* finger in enrollableFingers) {
+        switch (finger.position) {
             case PBFingerPositionLeftLittle:
                 leftLittle.enabled = YES;
                 break;
@@ -178,34 +180,27 @@
 
 - (void)setButtons: (BOOL)inEditMode
 {
-    for (NSInteger i = 0; i < 10; i++)
-    {
+    for (NSInteger i = 0; i < 10; i++) {
         UIButton* button = (UIButton*)[fingerButtons objectAtIndex:i];
         PBBiometryFinger* finger = [[PBBiometryFinger alloc] initWithPosition:(i + 1) andUser:user];
         BOOL isEnrolled = [database templateIsEnrolledForFinger:finger];
         [finger release];
         
-        // Set correct button image.
-        if (inEditMode)
-        {
-            if (isEnrolled)
-            {
+        /* Set correct button image. */
+        if (inEditMode) {
+            if (isEnrolled) {
                 [button setImage:[UIImage imageNamed:@"key_delete.png"] forState:UIControlStateNormal];                     
             }
-            else
-            {
+            else {
                 [button setImage:[UIImage imageNamed:@"key_add.png"] forState:UIControlStateNormal];                     
             }
             button.userInteractionEnabled = YES;
         }
-        else
-        {
-            if (isEnrolled)
-            {
+        else {
+            if (isEnrolled) {
                 [button setImage:[UIImage imageNamed:@"key.png"] forState:UIControlStateNormal];                     
             }
-            else
-            {
+            else {
                 [button setImage:nil forState:UIControlStateNormal];                     
             }
             button.userInteractionEnabled = NO;
@@ -213,14 +208,13 @@
         }
     }
         
-    // Set enrollable fingers.
+    /* Set enrollable fingers. */
     [self applyEnrollableFingers];
 }
 
 - (void)scrollLeftAnimated: (BOOL)animated
 {
-    if (! isAnimatingScroll)
-    {
+    if (! isAnimatingScroll) {
         [scrollView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:animated];
         isAnimatingScroll = animated;
     }
@@ -228,8 +222,7 @@
 
 - (void)scrollRightAnimated: (BOOL)animated
 {
-    if (! isAnimatingScroll)
-    {
+    if (! isAnimatingScroll) {
         [scrollView scrollRectToVisible:CGRectMake(2*320-1, 0, 1, 1) animated:animated];
         isAnimatingScroll = animated;
     }
@@ -250,12 +243,10 @@
     CGFloat pageWidth = aScrollView.frame.size.width;
     NSInteger page = floor((aScrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
 
-    if (page != pageCurrentlyShown)
-    {
+    if (page != pageCurrentlyShown) {
         pageCurrentlyShown = page;
         
-        if (UIDeviceOrientationIsPortrait([[UIDevice currentDevice] orientation]))
-        {
+        if (UIDeviceOrientationIsPortrait([[UIDevice currentDevice] orientation])) {
             /* Save the current hand, but only do this while in portrait since when
              * rotating to landscape we might scroll to x = 0 which should not cause a
              * reset of the current hand. */
@@ -274,36 +265,33 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    // Enable paging.
+    /* Enable paging. */
     scrollView.pagingEnabled = YES;
         
-    // Remove small hands.
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-    {
+    /* Remove small hands. */
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         [scrollToLeftHandImage setHidden:YES];
         [scrollToRightHandImage setHidden:YES];
     }
     
-    // Set content size.
-    CGFloat contentWidth;
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-    {
+    /* Set content size. */
+    CGFloat contentWidth;    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         contentWidth = 2 * 320 + 20;
     }
-    else
-    {
+    else {
         contentWidth = 2 * 320;
     }
     [scrollView setContentSize:CGSizeMake(contentWidth, 1)];
     
-    // Create and set edit button.
+    /* Create and set edit button. */
     UIBarButtonItem* editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editFingers)];
     self.navigationItem.rightBarButtonItem = editButton;
     [editButton release];
     
     fingerButtons = [[NSArray alloc] initWithObjects:rightThumb, rightIndex, rightMiddle, rightRing, rightLittle, leftThumb, leftIndex, leftMiddle, leftRing, leftLittle, nil];
     
-    // Move right hand images to the right side.
+    /* Move right hand images to the right side. */
     rightHandImage.transform = CGAffineTransformMake(-1, 0, 0, 1, contentWidth - (2 * rightHandImage.frame.origin.x) - rightHandImage.frame.size.width, 0);
     for (NSInteger i = 0; i < 5; i++) {
         UIButton* button = (UIButton*)[fingerButtons objectAtIndex:i];
@@ -335,23 +323,20 @@
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [self layoutScrollView];
-    if (! [[NSUserDefaults standardUserDefaults] boolForKey:@"PBManageFingersController.startAtLeftHand"])
-    {
+    if (! [[NSUserDefaults standardUserDefaults] boolForKey:@"PBManageFingersController.startAtLeftHand"]) {
         [self scrollRightAnimated:NO];
     }
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-    
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-    
 }
 
-// Displays information to a first time user.
+/** Displays information to a first time user. */
 //- (void)handleFirstTimeUser
 //{
 //    BOOL hasInformedUserAboutFingerRegistration = [[NSUserDefaults standardUserDefaults] boolForKey:@"PBManageFingersController.hasInformedUserAboutFingerRegistration"];
@@ -382,49 +367,41 @@
     
     /* Set frame size. */
     CGRect frame = scrollView.frame;  
-    if (isIPad)
-    {
+    if (isIPad) {
         frame.size.width = 2 * 320 + 20; // Adding additional 20 points for more spacing.
     }
-    else
-    {
-        if (inLandscapeMode)
-        {
+    else {
+        if (inLandscapeMode) {
             frame.size.width = 2 * 320;
         }
-        else
-        {
+        else {
             frame.size.width = 320;
         }
     }
     scrollView.frame = frame;
     
-    // Apply scaling for iPhone landscape mode.
-    if (!isIPad && inLandscapeMode)
-    {
+    /* Apply scaling for iPhone landscape mode. */
+    if (!isIPad && inLandscapeMode) {
         CGFloat scale = 480 / scrollView.frame.size.width;
         scrollView.transform = CGAffineTransformMakeScale(scale, scale);
     }
     
-    // Set frame position.
-    if (isIPad)
-    {
+    /* Set frame position. */
+    if (isIPad) {
         scrollView.center = self.view.center;
     }
-    else
-    {
+    else {
         frame = scrollView.frame;
         frame.origin.x = 0; 
         frame.origin.y = 0;
         scrollView.frame = frame;
     }
     
-    // Center no fingers label.
+    /* Center no fingers label. */
     noFingersLabel.center = self.view.center;
 
-    // Hide small hands for iPhone landscape mode.
-    if (!isIPad)
-    {
+    /* Hide small hands for iPhone landscape mode. */
+    if (!isIPad) {
         scrollToLeftHandImage.hidden = inLandscapeMode;
         scrollToRightHandImage.hidden = inLandscapeMode;
     }
@@ -433,16 +410,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [self layoutScrollView];
-    // Make sure that the user sees the same hand as the last time.
-    if (! [[NSUserDefaults standardUserDefaults] boolForKey:@"PBManageFingersController.startAtLeftHand"])
-    {
+    /* Make sure that the user sees the same hand as the last time. */
+    if (! [[NSUserDefaults standardUserDefaults] boolForKey:@"PBManageFingersController.startAtLeftHand"]) {
         [self scrollRightAnimated:NO];
     }
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -460,24 +435,23 @@
 {
     [self setButtons:YES];
     
-    // Create and set done button.
+    /* Create and set done button. */
     UIBarButtonItem* editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneEditingFingers)];
     self.navigationItem.rightBarButtonItem = editButton;
     [editButton release];
     
-    // Disable back button, if any.
+    /* Disable back button, if any. */
     self.navigationItem.hidesBackButton = YES;
-    // Disable tabs, if any.
+    /* Disable tabs, if any. */
     self.tabBarItem.enabled = NO;
     self.tabBarController.tabBar.userInteractionEnabled = NO;
-    // Hide "No fingers registered".
+    /* Hide "No fingers registered". */
     [noFingersLabel setHidden:YES];
 }
 
 -(NSString*) fingerStringfromFinger: (PBBiometryFinger*) aFinger
 {
-    switch (aFinger.position)
-    {
+    switch (aFinger.position) {
         case PBFingerPositionLeftIndex:
             return @"left index";
         case PBFingerPositionLeftLittle:
@@ -547,33 +521,29 @@ static PBBiometryFinger* fingerToBeDeleted = nil;
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if ((actionSheet == nil) || (actionSheet.tag == ACTION_SHEET_TAG_CONTINUE))
-    {
-        if (buttonIndex == 0)
-        {
-            // The user wants to continue without any registered fingers.
+    if ((actionSheet == nil) || (actionSheet.tag == ACTION_SHEET_TAG_CONTINUE)) {
+        if (buttonIndex == 0) {
+            /* The user wants to continue without any registered fingers. */
             [self setButtons:NO];
             
-            // Create and set edit button.
+            /* Create and set edit button. */
             UIBarButtonItem* editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editFingers)];
             self.navigationItem.rightBarButtonItem = editButton;
             [editButton release];
             
-            // Enable back button, if any.
+            /* Enable back button, if any. */
             self.navigationItem.hidesBackButton = NO;
-            // Enable tab bar, if any.
+            /* Enable tab bar, if any. */
             self.tabBarController.tabBar.userInteractionEnabled = YES;
             self.tabBarItem.enabled = YES;
 
-            // Set 'You have no fingers..' label if applicable.
+            /* Set 'You have no fingers..' label if applicable. */
             [noFingersLabel setHidden:([[database getEnrolledFingers] count] > 0)];    
         }
     }
-    else if (actionSheet.tag == ACTION_SHEET_TAG_DELETE_FINGER)
-    {
-        if (buttonIndex == 0)
-        {
-            // The user wants to delete the finger.
+    else if (actionSheet.tag == ACTION_SHEET_TAG_DELETE_FINGER) {
+        if (buttonIndex == 0) {
+            /* The user wants to delete the finger. */
             [database deleteTemplateForFinger:fingerToBeDeleted];
             
             UIButton* button = (UIButton*)[fingerButtons objectAtIndex:(fingerToBeDeleted.position - 1)];
@@ -589,44 +559,34 @@ static PBBiometryFinger* fingerToBeDeleted = nil;
     UIButton* buttonPressed = (UIButton*) sender;
     PBBiometryFinger* finger = nil;
     
-    if (buttonPressed == leftLittle)
-    {
+    if (buttonPressed == leftLittle) {
         finger = [[PBBiometryFinger alloc] initWithPosition:PBFingerPositionLeftLittle andUser:user];
     }
-    else if (buttonPressed == leftRing)
-    {
+    else if (buttonPressed == leftRing) {
         finger = [[PBBiometryFinger alloc] initWithPosition:PBFingerPositionLeftRing andUser:user];    
     }
-    else if (buttonPressed == leftMiddle)
-    {
+    else if (buttonPressed == leftMiddle) {
         finger = [[PBBiometryFinger alloc] initWithPosition:PBFingerPositionLeftMiddle andUser:user];    
     }
-    else if (buttonPressed == leftIndex)
-    {
+    else if (buttonPressed == leftIndex) {
         finger = [[PBBiometryFinger alloc] initWithPosition:PBFingerPositionLeftIndex andUser:user];    
     }
-    else if (buttonPressed == leftThumb)
-    {
+    else if (buttonPressed == leftThumb) {
         finger = [[PBBiometryFinger alloc] initWithPosition:PBFingerPositionLeftThumb andUser:user];    
     }
-    else if (buttonPressed == rightLittle)
-    {
+    else if (buttonPressed == rightLittle) {
         finger = [[PBBiometryFinger alloc] initWithPosition:PBFingerPositionRightLittle andUser:user];    
     }
-    else if (buttonPressed == rightRing)
-    {
+    else if (buttonPressed == rightRing) {
         finger = [[PBBiometryFinger alloc] initWithPosition:PBFingerPositionRightRing andUser:user];    
     }
-    else if (buttonPressed == rightMiddle)
-    {
+    else if (buttonPressed == rightMiddle) {
         finger = [[PBBiometryFinger alloc] initWithPosition:PBFingerPositionRightMiddle andUser:user];    
     }
-    else if (buttonPressed == rightIndex)
-    {
+    else if (buttonPressed == rightIndex) {
         finger = [[PBBiometryFinger alloc] initWithPosition:PBFingerPositionRightIndex andUser:user];    
     }
-    else if (buttonPressed == rightThumb)
-    {
+    else if (buttonPressed == rightThumb) {
         finger = [[PBBiometryFinger alloc] initWithPosition:PBFingerPositionRightThumb andUser:user];    
     }
     
@@ -635,11 +595,9 @@ static PBBiometryFinger* fingerToBeDeleted = nil;
      * enrolled finger should be the displayed hand. */
     [[NSUserDefaults standardUserDefaults] setBool:[finger isOnLeftHand] forKey:@"PBManageFingersController.startAtLeftHand"];  
     
-    if (finger != nil)
-    {
-        if ([database templateIsEnrolledForFinger:finger])
-        {
-            // Already enrolled, delete.
+    if (finger != nil) {
+        if ([database templateIsEnrolledForFinger:finger]) {
+            /* Already enrolled, delete. */
             UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Delete registered finger" otherButtonTitles:nil];
             
             actionSheet.tag = ACTION_SHEET_TAG_DELETE_FINGER;
@@ -650,15 +608,14 @@ static PBBiometryFinger* fingerToBeDeleted = nil;
             [actionSheet showFromRect:buttonPressed.frame inView:scrollView animated:YES];
             [actionSheet release];
         }
-        else
-        {
-            // Not enrolled, start enrollment.
+        else {
+            /* Not enrolled, start enrollment. */
             PBEnrollmentController* enrollmentController = [[PBEnrollmentController alloc] initWithDatabase:database andFinger:finger andDelegate:self];
             enrollmentController.config = enrollConfig;
             UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:enrollmentController];
             [enrollmentController release];
             
-            // Set bar colors.
+            /* Set bar colors. */
             navController.navigationBar.tintColor = self.navigationController.navigationBar.tintColor;
             navController.toolbar.tintColor = self.navigationController.navigationBar.tintColor;
             
@@ -671,14 +628,12 @@ static PBBiometryFinger* fingerToBeDeleted = nil;
 
 - (void)doneEditingFingers
 {
-    if ([[database getEnrolledFingers] count] >  0)
-    {
-        // At least one finger is registered, continue.
+    if ([[database getEnrolledFingers] count] >  0) {
+        /* At least one finger is registered, continue. */
         [self actionSheet:nil clickedButtonAtIndex:0];
     }
-    else
-    {
-        // No fingers registered, ask user to continue.
+    else {
+        /* No fingers registered, ask user to continue. */
         UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:@"Continue without any registered fingers?" delegate:self cancelButtonTitle:@"Register fingers" destructiveButtonTitle:@"Continue" otherButtonTitles:nil];
         
         actionSheet.tag = ACTION_SHEET_TAG_CONTINUE;
@@ -690,8 +645,7 @@ static PBBiometryFinger* fingerToBeDeleted = nil;
 
 - (void)enrollmentTemplateEnrolledForFinger:(PBBiometryFinger *)finger
 {
-    if (finger)
-    {
+    if (finger) {
         UIButton* button = (UIButton*)[fingerButtons objectAtIndex:(finger.position - 1)];
         [button setImage:[UIImage imageNamed:@"key_delete.png"] forState:UIControlStateNormal];
     }
@@ -701,11 +655,11 @@ static PBBiometryFinger* fingerToBeDeleted = nil;
 
 - (void)verificationVerifiedFinger: (PBBiometryFinger*) finger
 {
-    if (finger)
-    {
+    if (finger) {
         [self doEditFingers];
     }
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 @end

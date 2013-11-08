@@ -31,8 +31,11 @@
  * $Date: 2012-05-16 16:16:10 +0200 (on, 16 maj 2012) $ $Rev: 14768 $
  *
  */
+
+
 #import "PBEnrollmentController.h"
 #import "PBBiometry.h"
+
 #import <QuartzCore/CALayer.h>
 #import <AudioToolbox/AudioToolbox.h>
 
@@ -40,6 +43,7 @@
 #define PB_GUI_NBR_OF_ENROLLMENT_IMAGES 3
 
 @implementation PBEnrollmentController
+
 @synthesize config;
 
 -(id) initWithDatabase: (id<PBBiometryDatabase>) aDatabase
@@ -81,6 +85,7 @@
     [decisionImage release];
     [decisionLabel release];
     [fadeLabel release];
+    
     [database release];
     [finger release];
     [delegate release];
@@ -102,8 +107,7 @@
 
 -(NSString*) fingerStringfromFinger: (PBBiometryFinger*) aFinger
 {
-    switch (aFinger.position)
-    {
+    switch (aFinger.position) {
         case PBFingerPositionLeftIndex:
             return @"left index";
         case PBFingerPositionLeftLittle:
@@ -132,7 +136,7 @@
 - (void)cancelCapture
 {
     enrolling = NO;
-    // Cancel the enrollment.
+    /* Cancel the enrollment. */
     [[PBBiometry sharedBiometry] cancel];
 }
 
@@ -162,41 +166,33 @@
 
 - (void)displayDecision: (NSNumber*) decision
 {
-    if ([decision intValue] == PB_DISPLAY_DECISION_ACCEPT)
-    {
+    if ([decision intValue] == PB_DISPLAY_DECISION_ACCEPT) {
         decisionImage.image = [UIImage imageNamed:@"accept.png"];
         
-        // Play accept sound, if allowed.
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PBPlaySounds"])
-        {
+        /* Play accept sound, if allowed. */
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PBPlaySounds"]) {
             [self playSound:@"PBVerificationAccepted"];
         }
     }
-    else
-    {
+    else {
         decisionImage.image = [UIImage imageNamed:@"reject.png"];
-        if ([decision intValue] == PB_DISPLAY_DECISION_REJECT_CANCELLED)
-        {
+        if ([decision intValue] == PB_DISPLAY_DECISION_REJECT_CANCELLED) {
             decisionLabel.text = @"Cancelled";
         }
-        else if ([decision intValue] == PB_DISPLAY_DECISION_REJECT_TIMEDOUT)
-        {
+        else if ([decision intValue] == PB_DISPLAY_DECISION_REJECT_TIMEDOUT) {
             decisionLabel.text = @"Timed out";
         }
-        else if ([decision intValue] == PB_DISPLAY_DECISION_REJECT_VERIFICATION_FAILED)
-        {
+        else if ([decision intValue] == PB_DISPLAY_DECISION_REJECT_VERIFICATION_FAILED) {
             decisionLabel.text = @"No match";
         }
-        else
-        {
+        else {
             decisionLabel.text = @"Unknown error";
         }
         
         [decisionLabel setHidden:NO];
         
-        // Play reject sound, if allowed.
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PBPlaySounds"])
-        {
+        /* Play reject sound, if allowed. */
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PBPlaySounds"]) {
             [self playSound:@"PBVerificationRejected"];
         }
     }
@@ -213,92 +209,81 @@
 
 -(void) doEnrollment
 {
-    // Create an autorelease pool for the thread.
+    /* Create an autorelease pool for the thread. */
     NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
     PBBiometryStatus status;
     
     currentChosenImage = 0;
     
-    // Start the enrollment process.
+    /* Start the enrollment process. */
     status = [[PBBiometry sharedBiometry] enrollFinger:finger database:database gui:self nbrOfImages:PB_GUI_NBR_OF_ENROLLMENT_IMAGES config:config];
     
     enrolling = NO;
     
-    // Notify user the status of the operation.
-    if (status == PBBiometryStatusOK)
-    {
-        // Display decision to user.
+    /* Notify user the status of the operation. */
+    if (status == PBBiometryStatusOK) {
+        /* Display decision to user. */
         [self performSelectorOnMainThread:@selector(displayDecision:) withObject:[NSNumber numberWithInt: PB_DISPLAY_DECISION_ACCEPT] waitUntilDone:NO];
         
         [(NSObject*)delegate performSelectorOnMainThread:@selector(enrollmentTemplateEnrolledForFinger:) withObject:finger waitUntilDone:NO];
-    }
-    else if (status == PBBiometryStatusReaderBusy)
-    {
-        // Reader is already used by another application.
+            }
+    else if (status == PBBiometryStatusReaderBusy) {
+        /* Reader is already used by another application. */
         UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Tactivo busy" message:@"The Tactivo is already used by another application. Close that application or make sure that it is no longer using the Tactivo before trying again." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
         [self performSelectorOnMainThread:@selector(showAlertInMainThread:) withObject:alertView waitUntilDone:NO];
         [alertView release];
     }
-    else if (status == PBBiometryStatusReaderNotAvailable)
-    {
-        // Reader is not available.
+    else if (status == PBBiometryStatusReaderNotAvailable) {
+        /* Reader is not available. */
         UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Tactivo not accessible" message:@"The Tactivo is not connected to the device or is waiting to be authenticated. Please connect the Tactivo or wait for the authentication to be completed." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
         [self performSelectorOnMainThread:@selector(showAlertInMainThread:) withObject:alertView waitUntilDone:NO];
         [alertView release];
     }
-    else if (status == PBBiometryStatusProtocolNotIncluded)
-    {
-        // Reader is not available.
+    else if (status == PBBiometryStatusProtocolNotIncluded) {
+        /* Reader is not available. */
         UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Protocol not included" message:@"The protocol string 'com.precisebiometrics.sensor' is not included in the 'UISupportedExternalAccessoryProtocols' key in the Info.plist." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
         [self performSelectorOnMainThread:@selector(showAlertInMainThread:) withObject:alertView waitUntilDone:NO];
         [alertView release];
     }
-    else if (status == PBBiometryStatusFatal)
-    {
-        // Unknown error.
+    else if (status == PBBiometryStatusFatal) {
+        /* Unknown error. */
         UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Unknown error!" message:@"An unknown error has occurred. Try disconnecting the Tactivo from the device and then connect it again or restart the application." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
         [self performSelectorOnMainThread:@selector(showAlertInMainThread:) withObject:alertView waitUntilDone:NO];
         [alertView release];
     }
-    else
-    {
+    else {
         NSNumber* decisionNumber;
         
-        if (status == PBBiometryStatusCancelled)
-        {
+        if (status == PBBiometryStatusCancelled) {
             decisionNumber = [NSNumber numberWithInt:PB_DISPLAY_DECISION_REJECT_CANCELLED];
         }
-        else if (status == PBBiometryStatusTimedOut)
-        {
+        else if (status == PBBiometryStatusTimedOut) {
             decisionNumber = [NSNumber numberWithInt:PB_DISPLAY_DECISION_REJECT_TIMEDOUT];
         }
         else if (status == PBBiometryStatusEnrollmentVerificationFailed)
-        {
             decisionNumber = [NSNumber numberWithInt:PB_DISPLAY_DECISION_REJECT_VERIFICATION_FAILED];
-        }
-        else
-        {
+        else {
             decisionNumber = [NSNumber numberWithInt:PB_DISPLAY_DECISION_REJECT_UNKNOWN];
         }
         
-        // Display reject decision to user.
+        /* Display reject decision to user. */
         [self performSelectorOnMainThread:@selector(displayDecision:) withObject:decisionNumber waitUntilDone:NO];
-
-        // Sleep for a short while so user has time to see what went wrong.
+        /* Sleep for a short while so user has time to see what went wrong. */
         [NSThread sleepForTimeInterval:PB_DISPLAY_REJECT_TIME];
         
-        // Cancel or timeout or other event that we don't need to alert the user about.
-        // Notify delegate that the verification failed.
+        /* Cancel or timeout or other event that we don't need to alert the user about.
+         * Notify delegate that the verification failed. */
         [(NSObject*)delegate performSelectorOnMainThread:@selector(enrollmentTemplateEnrolledForFinger:) withObject:nil waitUntilDone:NO];
     }
     
     [activityIndicator stopAnimating];
+    
     [pool release];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    // Notify delegate that the verification failed.
+    /* Notify delegate that the verification failed. */
     [(NSObject*)delegate performSelectorOnMainThread:@selector(enrollmentTemplateEnrolledForFinger:) withObject:nil waitUntilDone:NO];
 }
 
@@ -315,7 +300,7 @@
     
     enrolling = YES;
     
-    // Set cancel button.
+    /* Set cancel button. */
     UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelCapture)];
     
     self.navigationItem.rightBarButtonItem = cancelButton;
@@ -336,13 +321,13 @@
     [decisionLabel setHidden:YES];
     [fadeLabel setHidden:YES];
     
-    // Show toolbar if we are used in a navigation controller.
+    /* Show toolbar if we are used in a navigation controller. */
     [self.navigationController setToolbarHidden:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    // Start the enrollment in a new thread to allow for the UI to be updated while enrolling.
+    /* Start the enrollment in a new thread to allow for the UI to be updated while enrolling. */
     [NSThread detachNewThreadSelector:@selector(doEnrollment) toTarget:self withObject:nil];
 }
 
@@ -367,19 +352,18 @@
     CGAffineTransform leftQuake  = CGAffineTransformTranslate(CGAffineTransformIdentity, amplitude, 0);
     CGAffineTransform rightQuake = CGAffineTransformTranslate(CGAffineTransformIdentity, -amplitude, 0);
     
-    // Start at one side.
+    /* Start at one side. */
     view.transform = leftQuake;
     
     [UIView beginAnimations:@"earthquake" context:view];
-
-    // Autoreversing from start side to end side.
+    /* Autoreversing from start side to end side. */
     [UIView setAnimationRepeatAutoreverses:YES];
     [UIView setAnimationRepeatCount:repeatCount];
     [UIView setAnimationDuration:animationDuration];
     [UIView setAnimationDelegate:self];
     [UIView setAnimationDidStopSelector:@selector(earthquakeEnded:finished:context:)];
     
-    // End at other side.
+    /* End at other side. */
     view.transform = rightQuake;
     
     [UIView commitAnimations];
@@ -396,26 +380,23 @@
 
 - (void)vibrate
 {
-    // Play swipe error sound, if allowed.
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PBPlaySounds"])
-    {
+    /* Play swipe error sound, if allowed. */
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PBPlaySounds"]) {
         [self playSound:@"PBSwipeFailed"];
     }
-    
-    // Vibrate, if allowed.
+    /* Vibrate, if allowed. */
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PBVibrateForSwipeFailure"]) {
         AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
     }
     [self earthquake:self.view amplitude:2.0 repeatCount:5 animationDuration:0.05];
 }
 
-// Helper function to allow for the UI changes to be made by the main thread.
+/** Helper function to allow for the UI changes to be made by the main thread. */
 -(void) displayEventInMainThread: (NSMutableArray*) params
 {
     NSInteger event_ = (PBEvent)[[params objectAtIndex:0] intValue];
     
-    switch (event_)
-    {
+    switch (event_) {
         case PBEventAlertSwipeTooFast:
             [self displayError:@"Swipe was too fast"];
             [self vibrate];
@@ -443,34 +424,34 @@
     NSMutableArray* params = [[NSMutableArray alloc] init];
     NSNumber* number;
     
-    // Create an NSMutableArray object including all the parameters, which can
-    // be sent using the performSelectorOnMainThread message.
+    /* Create an NSMutableArray object including all the parameters, which can
+     * be sent using the performSelectorOnMainThread message. */
     number = [[NSNumber alloc] initWithInt:event_];
     [params addObject:number];
     [number release];
     
-    // Make sure all UI changes are made in the main thread.
+    /* Make sure all UI changes are made in the main thread. */
     [self performSelectorOnMainThread:@selector(displayEventInMainThread:) withObject:params waitUntilDone:NO];
     [params release];
 }
 
-// Helper function to allow for the UI changes to be made by the main thread.
+/** Helper function to allow for the UI changes to be made by the main thread. */
 -(void) displayImageInMainThread: (UIImage*) image
 {
     [mainImage setImage:image];
-    // Restart the idle timer, to simulate the same behavior as when the user
-    // touched the screen. Also un-dimms the screen if it is currently dimmed.
+    /* Restart the idle timer, to simulate the same behavior as when the user
+     * touched the screen. Also un-dimms the screen if it is currently dimmed. */
     [UIApplication sharedApplication].idleTimerDisabled = YES;
     [UIApplication sharedApplication].idleTimerDisabled = NO;
 }
 
 -(void) displayImage: (UIImage*) image
 {
-    // Make sure all UI changes are made in the main thread.
+    /* Make sure all UI changes are made in the main thread. */
     [self performSelectorOnMainThread:@selector(displayImageInMainThread:) withObject:image waitUntilDone:NO];
 }
 
-// Helper function to allow for the UI changes to be made by the main thread.
+/** Helper function to allow for the UI changes to be made by the main thread. */
 -(void) displayChosenImageInMainThread: (UIImage*) image
 {
     UIImageView* imageView = [smallImages objectAtIndex:currentChosenImage];
@@ -483,18 +464,16 @@
     
     [UIView animateWithDuration:0.3 delay:0.3 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         animatingImage.frame = imageView.frame;
-    } completion:^(BOOL finished)
-    {
+    } completion:^(BOOL finished) {
         [label setHidden:YES];
         [imageView setImage:image];
         [animatingImage removeFromSuperview];
         [animatingImage release];
     }];
     
-    if (currentChosenImage == (PB_GUI_NBR_OF_ENROLLMENT_IMAGES - 1))
-    {
-        // Last chosen image, start activity indicator since a lot of processing
-        // will occur now.
+    if (currentChosenImage == (PB_GUI_NBR_OF_ENROLLMENT_IMAGES - 1)) {
+        /* Last chosen image, start activity indicator since a lot of processing
+         * will occur now. */
         [activityIndicator setHidden:NO];
         [activityIndicator startAnimating];
         [infoLabel setText:@"Processing images..."];
@@ -502,7 +481,7 @@
     
     currentChosenImage = (currentChosenImage + 1) % PB_GUI_NBR_OF_ENROLLMENT_IMAGES;
     
-    // Reset error labels.
+    /* Reset error labels. */
     errorLabel1.text = @"";
     errorLabel2.text = @"";
     errorLabel3.text = @"";
@@ -511,14 +490,14 @@
 
 -(void) displayChosenImage: (UIImage*) image
 {
-    // Make sure all UI changes are made in the main thread.
+    /* Make sure all UI changes are made in the main thread. */
     [self performSelectorOnMainThread:@selector(displayChosenImageInMainThread:) withObject:image waitUntilDone:NO];
 }
 
-// Helper function to allow for the UI changes to be made by the main thread.
+/** Helper function to allow for the UI changes to be made by the main thread. */
 -(void) displayQualityInMainThread: (NSMutableArray*) params
 {
-    // Do nothing.
+    /* Do nothing. */
 }
 
 -(void) displayQuality: (uint8_t) imageQuality
@@ -529,8 +508,8 @@
     NSMutableArray* params = [[NSMutableArray alloc] init];
     NSNumber* number;
     
-    // Create an NSMutableArray object including all the parameters, which can
-    // be sent using the performSelectorOnMainThread message.
+    /* Create an NSMutableArray object including all the parameters, which can
+     * be sent using the performSelectorOnMainThread message. */
     number = [[NSNumber alloc] initWithUnsignedChar:imageQuality];
     [params addObject:number];
     [number release];
@@ -544,8 +523,9 @@
     [params addObject:number];
     [number release];
     
-    // Make sure all UI changes are made in the main thread.
+    /* Make sure all UI changes are made in the main thread. */
     [self performSelectorOnMainThread:@selector(displayQualityInMainThread:) withObject:params waitUntilDone:NO];
     [params release];
 }
+
 @end

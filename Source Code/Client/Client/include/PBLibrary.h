@@ -30,18 +30,20 @@
  * $Date: 2012-04-20 11:18:03 +0200 (fr, 20 apr 2012) $ $Rev: 14630 $ 
  *
  */
+ 
 #import <Foundation/Foundation.h>
 
-// Class that handles toolkit/library functionality that is not
-// accessory, biometry or smartcard related.
-@interface PBLibrary : NSObject
-{
-    // The version of the static library.
+/** Class that handles toolkit/library functionality that is not
+  * accessory, biometry or smartcard related. 
+  */
+@interface PBLibrary : NSObject {
+    /** The version of the static library. */
     NSString* version;
 }
 
 @property (nonatomic, readonly, retain) NSString* version;
 
-// Class method for receiving the singleton object.
+/* Class method for receiving the singleton object. */
 + (PBLibrary*) sharedClass;
+
 @end

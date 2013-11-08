@@ -27,21 +27,26 @@
  * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
  * DAMAGE.
  *
- * $Date: 2012-04-20 13:38:30 +0200 (fr, 20 apr 2012) $ $Rev: 14651 $
+ *
+ * $Date: 2012-04-20 13:38:30 +0200 (fr, 20 apr 2012) $ $Rev: 14651 $ 
+ *
  */
+
 #import <UIKit/UIKit.h>
+
 #import "PBPracticeController.h"
 #import "PBBiometry.h"
 #import "PBBiometryGUI.h"
+
 #import "PBFingerImageView.h"
 #import "PBBarImageView.h"
 #import "PBAccessory.h"
 #import "PBDisconnectionViewController.h"
 
-// Lets the user practice swiping the sensor.
-@interface PBPractice4Controller : UIViewController <PBBiometryGUI, UIAlertViewDelegate>
-{
+/** Lets the user practice swiping the sensor. */
+@interface PBPractice4Controller : UIViewController <PBBiometryGUI, UIAlertViewDelegate> {
     IBOutlet PBFingerImageView* largeImage;
+    
     IBOutlet PBBarImageView* barImage0;
     IBOutlet PBBarImageView* barImage1;
     IBOutlet PBBarImageView* barImage2;
@@ -52,6 +57,7 @@
     IBOutlet PBBarImageView* barImage7;
     IBOutlet PBBarImageView* barImage8;
     IBOutlet PBBarImageView* barImage9;
+    
     IBOutlet PBBarImageView* barImageA0;
     IBOutlet PBBarImageView* barImageA1;
     IBOutlet PBBarImageView* barImageA2;
@@ -75,6 +81,9 @@
     BOOL startNewCapture;
     BOOL isVisible;
 }
+
 - (id)initWithPracticeController: (PBPracticeController*)aPracticeController;
+
 - (IBAction)next: (id)sender;
+
 @end

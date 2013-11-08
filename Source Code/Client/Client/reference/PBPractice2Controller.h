@@ -31,12 +31,14 @@
  * $Date: 2012-04-20 13:38:30 +0200 (fr, 20 apr 2012) $ $Rev: 14651 $ 
  *
  */
+
+
 #import <UIKit/UIKit.h>
+
 #import "PBPracticeController.h"
 
-// Teaches the user how to swipe on the sensor.
-@interface PBPractice2Controller : UIViewController
-{
+/** Teaches the user how to swipe on the sensor. */
+@interface PBPractice2Controller : UIViewController {
     IBOutlet UIImageView* handImage;
     BOOL continueAnimation;
     BOOL insideAnimation;
@@ -44,6 +46,9 @@
     
     PBPracticeController* practiceController;
 }
+
 - (id)initWithPracticeController: (PBPracticeController*)aPracticeController;
+
 - (IBAction)next: (id)sender;
+
 @end

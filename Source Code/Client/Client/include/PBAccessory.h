@@ -33,7 +33,10 @@
  */
  
 #import <Foundation/Foundation.h>
+
 #import <ExternalAccessory/ExternalAccessory.h>
+
+
 /* The PBAccessory class delivers specific notifications for when the Tactivo gets connected
  * and is ready for communication and when it gets disconnected. For more detailed information 
  * about accessory connections, use EAAccessoryDidConnectNotification (EAC) and 
@@ -44,16 +47,14 @@
  * EAC will then have an associated accessory containing the correct Tactivo protocol strings, 
  * meaning that the Tactivo is now ready for communication. Also note that if the Tactivo is 
  * removed from the device before the authentication is completed, no EAC with an associated 
- * accessory with the Tactivo protocol strings will be sent.
- */
+ * accessory with the Tactivo protocol strings will be sent. */
+
 
 /** The notification sent when Tactivo is connected and ready for communication. Note that 
   * Tactivo is not ready for communication until iOS has authenticated it, which may take 
-  * 1-2 seconds from that when the device is inserted into the Tactivo.
-  */
+  * 1-2 seconds from that when the device is inserted into the Tactivo. */
 extern NSString *const PBAccessoryDidConnectNotification;
-
-// The notification sent when Tactivo gets disconnected.
+/** The notification sent when Tactivo gets disconnected. */
 extern NSString *const PBAccessoryDidDisconnectNotification;
 
 /** 
@@ -64,11 +65,13 @@ extern NSString *const PBAccessoryDidDisconnectNotification;
 @protocol PBAccessoryDelegate <NSObject>
 
 @optional
-// Method that will be called when the accessory connects to the device.
+
+/** Method that will be called when the accessory connects to the device. */
 - (void)pbAccessoryDidConnect;
 
-// Method that will be called when the accessory disconnects from the device.
+/** Method that will be called when the accessory disconnects from the device. */
 - (void)pbAccessoryDidDisconnect;
+
 @end
 
 /** Class that handles communication with the Tactivo accessory that
@@ -81,35 +84,40 @@ extern NSString *const PBAccessoryDidDisconnectNotification;
   * NSNotificationCenter object:
   *     [[NSNotificationCenter defaultCenter] addObserver:myObject selector:@selector(mySelector:) name:PBAccessoryDidConnectNotification object:[PBAccessory sharedClass]];
   */
-@interface PBAccessory : NSObject
-{
-    // Tells if the accessory is connected or not.
+@interface PBAccessory : NSObject {
+    /** Tells if the accessory is connected or not. */
     BOOL connected;
     
-    // The delegates of the PBAccessory.
+    /** The delegates of the PBAccessory. */
     NSMutableArray* delegates;
     
-    // Notification queue.
+    /** Notification queue. */
     NSMutableArray* notificationQueue;
-    
-    // Semaphore used by the notification handler.
+    /** Semaphore used by the notification handler. */
     dispatch_semaphore_t notificationSemaphore;
 }
 
 @property (nonatomic, readonly, getter = isConnected) BOOL connected;
 
-// Class method for receiving the singleton object.
+/* Class method for receiving the singleton object. */
 + (PBAccessory*) sharedClass;
 
-// DEPRECATED: Use PBAccessoryDidConnect/DisconnectNotification notifications.
-// Adds a delegate.
+/** 
+ * DEPRECATED: Use PBAccessoryDidConnect/DisconnectNotification notifications.
+ * Adds a delegate. 
+ */
 - (void)addDelegate: (id<PBAccessoryDelegate>) delegate;
 
-// DEPRECATED: Use PBAccessoryDidConnect/DisconnectNotification notifications.
-// Removes a delegate.
+/** 
+ * DEPRECATED: Use PBAccessoryDidConnect/DisconnectNotification notifications.
+ * Removes a delegate. 
+ */
 - (void)removeDelegate: (id<PBAccessoryDelegate>) delegate;
 
-// Returns the EAAccessory object for the connected accessory, if any.
-// @return the connected accessory, or nil if no accessory is connected.
+/** Returns the EAAccessory object for the connected accessory, if any. 
+  * 
+  * @return the connected accessory, or nil if no accessory is connected.
+  */
 - (EAAccessory*)getAccessory;
+
 @end

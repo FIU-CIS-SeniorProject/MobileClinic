@@ -27,10 +27,13 @@
  * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
  * DAMAGE.
  *
- * $Date: 2012-04-20 13:38:30 +0200 (fr, 20 apr 2012) $ $Rev: 14651 $
+ *
+ * $Date: 2012-04-20 13:38:30 +0200 (fr, 20 apr 2012) $ $Rev: 14651 $  
+ *
  */
 
 #import <UIKit/UIKit.h>
+
 #import "PBBiometryFinger.h"
 #import "PBBiometryGUI.h"
 #import "PBBiometry.h"
@@ -38,6 +41,7 @@
 #import "PBFingerImageView.h"
 
 @protocol PBEnrollmentDelegate <NSObject>
+
 @required
 
 /** Tells that the enrollment is completed and that a template has been 
@@ -66,8 +70,7 @@
   *  
   *  [self presentModalViewController:navController animated:YES];
   */
-@interface PBEnrollmentController : UIViewController <PBBiometryGUI, UIAlertViewDelegate>
-{
+@interface PBEnrollmentController : UIViewController <PBBiometryGUI, UIAlertViewDelegate> {
     /* The inside view used for centering the content when e.g. viewed on iPad. */
     IBOutlet UIView* insideView;
     
@@ -102,6 +105,7 @@
     BOOL enrolling;
     
     IBOutlet UIActivityIndicatorView* activityIndicator;
+    
     IBOutlet UIImageView* decisionImage;
     IBOutlet UILabel* decisionLabel;
     IBOutlet UILabel* fadeLabel;
@@ -111,7 +115,8 @@
     
     id<PBBiometryDatabase> database;
 
-    // The config parameters for the enrollment. If nil, the default config parameters will be used.
+    /** The config parameters for the enrollment. If nil, the default config
+      * parameters will be used. */ 
     PBBiometryEnrollConfig* config;
 }
 

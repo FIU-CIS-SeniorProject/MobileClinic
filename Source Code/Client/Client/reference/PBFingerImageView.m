@@ -27,9 +27,14 @@
  * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
  * DAMAGE.
  *
- * $Date: 2012-04-20 13:38:30 +0200 (fr, 20 apr 2012) $ $Rev: 14651 $
+ *
+ * $Date: 2012-04-20 13:38:30 +0200 (fr, 20 apr 2012) $ $Rev: 14651 $ 
+ *
  */
+
+
 #import "PBFingerImageView.h"
+
 #import <QuartzCore/QuartzCore.h>
 
 @implementation PBFingerImageView
@@ -37,14 +42,15 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
+    
     self.layer.borderWidth = 1;
     self.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.layer.cornerRadius = self.frame.size.width / 25;
-
-    //self.layer.shadowColor = [[UIColor blackColor] CGColor];
-    //self.layer.shadowOpacity = 1;
-    //self.layer.shadowOffset = CGSizeMake(3, 3);
-
+    /*
+     self.layer.shadowColor = [[UIColor blackColor] CGColor];
+     self.layer.shadowOpacity = 1;
+     self.layer.shadowOffset = CGSizeMake(3, 3);
+     */
     self.clipsToBounds = YES;
     self.backgroundColor = [UIColor whiteColor];
     
@@ -58,11 +64,14 @@
     self.layer.borderWidth = 1;
     self.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.layer.cornerRadius = self.frame.size.width / 25;
-    //self.layer.shadowColor = [[UIColor blackColor] CGColor];
-    //self.layer.shadowOpacity = 1;
-    //self.layer.shadowOffset = CGSizeMake(3, 3);
+    /*
+     self.layer.shadowColor = [[UIColor blackColor] CGColor];
+     self.layer.shadowOpacity = 1;
+     self.layer.shadowOffset = CGSizeMake(3, 3);
+     */
     self.backgroundColor = [UIColor whiteColor];
     
     return self;    
 }
+
 @end

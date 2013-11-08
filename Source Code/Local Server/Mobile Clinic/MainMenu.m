@@ -1,24 +1,3 @@
-// The MIT License (MIT)
-//
-// Copyright (c) 2013 Florida International University
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
 //
 //  MainMenu.m
 //  Mobile Clinic
@@ -41,196 +20,105 @@ id currentView;
 id<ServerProtocol> connection;
 @implementation MainMenu
 
-//TODO: if (self) what?
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self)
-    {
+    if (self) {
+            }
     
-    }
     return self;
 }
-
--(void)windowDidBecomeKey:(NSNotification *)notification
-{
-    if (!connection)
-    {
+-(void)windowDidBecomeKey:(NSNotification *)notification{
+    if (!connection){
+        
         connection = [ServerCore sharedInstance];
+        
         [connection start];
+        
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(manualTableRefresh:) name:SERVER_OBSERVER object:nil];
+        
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(SetStatus:) name:SERVER_STATUS object:[[NSNumber alloc]init]];
+        
         [self manualTableRefresh:nil];
     }
+  
 }
 
-- (IBAction)quitApplication:(id)sender
-{
+
+
+
+- (IBAction)quitApplication:(id)sender {
     [NSApp terminate:self];
 }
 
-- (IBAction)showUserView:(id)sender
-{
-    if (!userView)
-    {
-        userView = [[UserView alloc]initWithNibName:@"UserView" bundle:nil];
-    }
-    
-    if (currentView)
-    {
-        [_mainScreen replaceSubview:currentView with:userView.view];
-    }
-    else
-    {
-        [_mainScreen addSubview:userView.view];
-        
-    }
-    currentView = userView.view;
-}
-
-- (IBAction)showMedicationView:(id)sender
-{
-    if (!medicationView)
-    {
+- (IBAction)showMedicationView:(id)sender {
+    if (!medicationView) {
         medicationView = [[MedicationList alloc]initWithNibName:@"MedicationList" bundle:nil];
     }
-    
-    if (currentView)
-    {
+    if (currentView) {
         [_mainScreen replaceSubview:currentView with:medicationView.view];
         
-    }
-    else
-    {
+    }else{
         [_mainScreen addSubview:medicationView.view];
         
     }
     currentView = medicationView.view;
 }
 
-- (IBAction)showPatientView:(id)sender
-{
-    if (!patientView)
-    {
+- (IBAction)showPatientView:(id)sender {
+    if (!patientView) {
         patientView = [[PatientTable alloc]initWithNibName:@"PatientTable" bundle:nil];
     }
-    
-    if (currentView)
-    {
+    if (currentView) {
         [_mainScreen replaceSubview:currentView with:patientView.view];
         
-    }
-    else
-    {
+    }else{
         [_mainScreen addSubview:patientView.view];
         
     }
     currentView = patientView.view;
 }
 
-- (IBAction)purgeTheSystem:(id)sender
-{
+- (IBAction)purgeTheSystem:(id)sender {
     VisitationObject* v = [[VisitationObject alloc]init];
+    
     NSArray* allVisits =  [v FindAllObjects];
+    
     PatientObject* p = [[PatientObject alloc]init];
+    
     NSArray* allPatient = [p FindAllObjects];
+    
     int counter = 0;
     
-    for (NSDictionary* visit in allVisits)
-    {
+    for (NSDictionary* visit in allVisits) {
+
         NSPredicate* pred = [NSPredicate predicateWithFormat:@"%K == %@",PATIENTID,[visit objectForKey:PATIENTID]];
-        NSArray* filtered = [allPatient filteredArrayUsingPredicate:pred];
         
-        if (filtered.count == 0)
-        {
-            BOOL didDelete =  [v deleteDatabaseDictionaryObject:visit];
-            if (didDelete)
-            {
+       NSArray* filtered = [allPatient filteredArrayUsingPredicate:pred];
+        
+        if (filtered.count == 0) {
+            
+          BOOL didDelete =  [v deleteDatabaseDictionaryObject:visit];
+            if (didDelete) {
                 counter++;
             }
         }
     }
     NSAlert *alert = [[NSAlert alloc] init];
+    
     NSString* msg = [NSString stringWithFormat:@"%i Unlinked visits were removed from the system",counter];
     [alert setMessageText:msg];
+    
     [alert runModal];
 }
 
-- (IBAction)truePurgeTheSystem:(id)sender
-{
-    VisitationObject* v = [[VisitationObject alloc] init];
-    PatientObject* p = [[PatientObject alloc] init];
-    MedicationObject* m = [[MedicationObject alloc] init];
-    PrescriptionObject* r = [[PrescriptionObject alloc] init];
-    UserObject* u = [[UserObject alloc] init];
-    
-    NSArray* allVisits = [v FindAllObjects];
-    NSArray* allPatients = [p FindAllObjects];
-    NSArray* allMedications = [m FindAllObjects];
-    NSArray* allPrescriptions = [r FindAllObjects];
-    NSArray* allUsers = [u FindAllObjects];
-    
-    int vCounter = 0;
-    int pCounter = 0;
-    int mCounter = 0;
-    int rCounter = 0;
-    int uCounter = 0;
-    
-    for (NSDictionary* visit in allVisits)
-    {
-        BOOL didDelete = [v deleteDatabaseDictionaryObject:visit];
-        if (didDelete)
-        {
-            vCounter++;
-        }
-    }
-    
-    for (NSDictionary* patient in allPatients)
-    {
-        BOOL didDelete = [p deleteDatabaseDictionaryObject:patient];
-        if (didDelete)
-        {
-            pCounter++;
-        }
-    }
-    
-    for (NSDictionary* medication in allMedications)
-    {
-        BOOL didDelete = [m deleteDatabaseDictionaryObject:medication];
-        if (didDelete)
-        {
-            mCounter++;
-        }
-    }
-    
-    for (NSDictionary* prescription in allPrescriptions)
-    {
-        BOOL didDelete = [r deleteDatabaseDictionaryObject:prescription];
-        if (didDelete)
-        {
-            rCounter++;
-        }
-    }
-    
-    for (NSDictionary* user in allUsers)
-    {
-        BOOL didDelete = [u deleteDatabaseDictionaryObject:user];
-        if (didDelete)
-        {
-            uCounter++;
-        }
-    }
-    
-    NSLog(@"Truly Purged The System of %i Visits, %i Patients, %i Medications, %i Prescriptions, and %i Users", vCounter, pCounter, mCounter, rCounter, uCounter);
-}
-
-- (IBAction)manualTableRefresh:(id)sender
-{
+- (IBAction)manualTableRefresh:(id)sender {
+   
     NSInteger num = [connection numberOfConnections];
+    
     [_statusIndicator setIntValue:(int)num];
     
-    switch (num)
-    {
+    switch (num) {
         case 0:
         case 1:
         case 2:
@@ -248,47 +136,62 @@ id<ServerProtocol> connection;
             break;
     }
     [_connectionLabel setStringValue:[NSString stringWithFormat:@"%li Device(s) Connected",num]];
+
 }
 
-- (IBAction)emergencyDataDump:(id)sender
-{
-    if (!backup)
-    {
+- (IBAction)showUserView:(id)sender {
+    if (!userView) {
+        userView = [[UserView alloc]initWithNibName:@"UserView" bundle:nil];
+    }
+    if (currentView) {
+        [_mainScreen replaceSubview:currentView with:userView.view];
+       
+    }else{
+        [_mainScreen addSubview:userView.view];
+
+    }
+    currentView = userView.view;
+}
+
+- (IBAction)emergencyDataDump:(id)sender {
+    if (!backup) {
         backup = [[SystemBackup alloc]init];
     }
     
     NSError* error= [backup BackupEverything];
     
-    if (error)
-    {
+    if (error) {
         [NSApp presentError:error];
     }
 }
 
--(void)SetStatus:(NSNotification*)note
-{
+-(void)SetStatus:(NSNotification*)note{
+    
     int i = [note.object intValue];
 
-    switch (i)
-    {
+    switch (i) {
         case 0:
             [_statusLabel setStringValue:@"ON"];
+            
             break;
+
         default:
             [_statusLabel setStringValue:@"OFF"];
             break;
     }
 }
-- (IBAction)pushPatientsToCloud:(id)sender
-{
-    [[[PatientObject alloc]init]pushToCloud:^(id cloudResults, NSError *error)
-    {
-        if (error)
-        {
-            NSAlert *alert = [[NSAlert alloc] init];
-            // NSString* msg = [NSString stringWithFormat:@"%i Unlinked visits were removed from the system",counter];
-            [alert setMessageText:error.localizedDescription];
-            [alert runModal];
+- (IBAction)pushPatientsToCloud:(id)sender {
+    
+    [[[PatientObject alloc]init]pushToCloud:^(id cloudResults, NSError *error) {
+        
+        if (error) {
+        NSAlert *alert = [[NSAlert alloc] init];
+        
+       // NSString* msg = [NSString stringWithFormat:@"%i Unlinked visits were removed from the system",counter];
+        
+        [alert setMessageText:error.localizedDescription];
+        
+        [alert runModal];
         }
     }];
 }

@@ -27,22 +27,25 @@
  * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
  * DAMAGE.
  *
- * $Date: 2012-04-20 13:38:30 +0200 (fr, 20 apr 2012) $ $Rev: 14651 $
+ *
+ * $Date: 2012-04-20 13:38:30 +0200 (fr, 20 apr 2012) $ $Rev: 14651 $ 
+ *
  */
+
 #import <UIKit/UIKit.h>
 #import "PBBiometryFinger.h"
 
 @protocol PBFingerPickerDelegate <NSObject>
 
-// Called when the user chooses a finger.
+/** Called when the user chooses a finger. */
 - (void)fingerPickerUserChooseFinger: (PBFingerPosition)fingerPosition;
 
-// Called when the user chooses to cancel the fingerpicker.
+/** Called when the user chooses to cancel the fingerpicker. */
 //- (void)fingerPickerUserCancelled;
+
 @end
 
-@interface PBFingerPickerController : UIViewController <UIScrollViewDelegate>
-{
+@interface PBFingerPickerController : UIViewController <UIScrollViewDelegate> {
     IBOutlet UIButton* leftLittleButton;
     IBOutlet UIButton* leftRingButton;
     IBOutlet UIButton* leftMiddleButton;
@@ -58,11 +61,11 @@
     IBOutlet UIImageView* rightHandImageView;
     IBOutlet UIScrollView* scrollView;
     
-    // The delegate of the fingerpicker controller. Will be called when the
-    // user has chosen a finger.
+    /** The delegate of the fingerpicker controller. Will be called when the
+      * user has chosen a finger. */
     id<PBFingerPickerDelegate> delegate;
-    // The fingers to choose from. If not set, then all 10 fingers may be
-    // chosen from.
+    /** The fingers to choose from. If not set, then all 10 fingers may be 
+      * chosen from. */
     NSArray* pickableFingers;
     
     BOOL isAnimatingScroll;
@@ -72,6 +75,9 @@
 @property (nonatomic, retain) NSArray* pickableFingers;
 
 - (IBAction)fingerChosen:(id)sender;
+
 - (IBAction)scrollLeft;
+
 - (IBAction)scrollRight;
+
 @end

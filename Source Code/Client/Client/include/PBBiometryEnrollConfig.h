@@ -31,36 +31,39 @@
  * $Date: 2012-04-20 11:36:52 +0200 (fr, 20 apr 2012) $ $Rev: 14637 $ 
  *
  */
+
 #import <Foundation/Foundation.h>
+
 #import "PBBiometryTemplate.h"
 
-// Configuration properties for an enrollment process.
-@interface PBBiometryEnrollConfig : NSObject
-{
-    // The minimum quality required for a fingerprint image to be used for
-    // enrollment, default 20. The quality value ranges from 0 (worst quality)
-    // to 100 (best quality).
+/** Configuration properties for an enrollment process. */
+@interface PBBiometryEnrollConfig : NSObject {
+    /** The minimum quality required for a fingerprint image to be used for 
+      * enrollment, default 20. The quality value ranges from 0 (worst quality)
+      * to 100 (best quality). */
     uint8_t minimumQuality; 
     
-    // The minimum fingerprint area, in mm^2, required for a fingerprint image
-    // to be used for enrollment, default (11 * 11).
+    /** The minimum fingerprint area, in mm^2, required for a fingerprint image 
+      * to be used for enrollment, default (11 * 11). */
     uint32_t minimumArea;
     
-    // The timeout for the image capture, in ms. If no image has been captured
-    // with the required quality and area within this time, the enrollment
-    // function will return, default 10000.
+    /** The timeout for the image capture, in ms. If no image has been captured
+      * with the required quality and area within this time, the enrollment 
+      * function will return, default 10000. */
     uint16_t timeout;
     
-    // The template type for the template to be enrolled, default
-    // PBBiometryTemplateTypeISOCompactCard. The template type will
-    // decide which extractor that will be used when extracting the
-    // template from the fingerprint image.
+    /** The template type for the template to be enrolled, default 
+      * PBBiometryTemplateTypeISOCompactCard. The template type will 
+      * decide which extractor that will be used when extracting the 
+      * template from the fingerprint image. */
     PBBiometryTemplateType templateType;
 }
+     
 -(id) init;
      
 @property (nonatomic) uint8_t minimumQuality;
 @property (nonatomic) uint32_t minimumArea;
 @property (nonatomic) uint16_t timeout;
 @property (nonatomic) PBBiometryTemplateType templateType;
+     
 @end

@@ -40,8 +40,7 @@
   * 
   * The animation will start when viewWillAppear is called and will stop 
   * when viewWillDisappear is called. */
-@interface PBDisconnectionViewController : UIViewController
-{
+@interface PBDisconnectionViewController : UIViewController {
     IBOutlet UIImageView* shellImageView;
     IBOutlet UIImageView* phoneImageView;
     BOOL continueAnimation;

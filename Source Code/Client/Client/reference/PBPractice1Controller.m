@@ -31,15 +31,17 @@
  * $Date: 2012-04-20 13:38:30 +0200 (fr, 20 apr 2012) $ $Rev: 14651 $ 
  *
  */
+
+
 #import "PBPractice1Controller.h"
+
 
 @implementation PBPractice1Controller
 
 - (id)initWithPracticeController: (PBPracticeController*)aPracticeController
 {
     self = [super init];
-    if (self)
-    {
+    if (self) {
         self->practiceController = aPracticeController;
         [aPracticeController retain];
     }
@@ -72,6 +74,7 @@
 }
 */
 
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
@@ -79,8 +82,7 @@
     insideAnimation = NO;
     continueAnimation = NO;
     
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-    {
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         [nextButton setHidden:YES];
     }
 }
@@ -108,8 +110,7 @@
             mark1Image.transform = CGAffineTransformIdentity;
             mark2Image.transform = CGAffineTransformIdentity;
         } completion:^(BOOL finished){
-            if (continueAnimation)
-            {
+            if (continueAnimation) {
                 [self animateMarks];
             }
             else {
@@ -124,9 +125,8 @@
 {
     [super viewWillAppear:animated];
     
-    // Start animation of hand.
-    if (! continueAnimation && ! insideAnimation)
-    {
+    /* Start animation of hand. */
+    if (! continueAnimation && ! insideAnimation) {
         [self animateMarks];
     }
     continueAnimation = YES;
@@ -136,7 +136,7 @@
 {
     [super viewWillDisappear:animated];
     
-    // Stop animation of hand.
+    /* Stop animation of hand. */
     continueAnimation = NO;
 }
 
