@@ -21,6 +21,7 @@
 - (IBAction)showMedicationView:(id)sender;
 - (IBAction)showPatientView:(id)sender;
 - (IBAction)purgeTheSystem:(id)sender;
+- (IBAction)truePurgeTheSystem:(id)sender;
 - (IBAction)manualTableRefresh:(id)sender;
 - (IBAction)showUserView:(id)sender;
 

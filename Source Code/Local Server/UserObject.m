@@ -111,6 +111,7 @@
 #pragma mark- Public Methods
 #pragma mark-
 
+//TODO: Not implemented??
 -(void)pushToCloud:(CloudCallback)onComplete{
    
     onComplete(nil,[[NSError alloc]initWithDomain:COMMONDATABASE code:kErrorObjectMisconfiguration userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"This feature is not implemented",NSLocalizedFailureReasonErrorKey, nil]]);
@@ -132,7 +133,7 @@
 #pragma mark - Private Methods
 #pragma mark -
 
-
+//TODO: Same user object used twice?
 -(void)ValidateAndLoginUser
 {
     // Initially set it to an error, for efficiency.
