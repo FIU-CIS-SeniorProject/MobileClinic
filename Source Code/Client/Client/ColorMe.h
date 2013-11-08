@@ -18,8 +18,6 @@
 -(UIColor*)useSelectedColor;
 -(void)setColor:(int)myColor;
 
-+(void)addGradientToLayer:(CALayer*)layer colorOne:(UIColor*)colorOne andColorTwo:(UIColor*)colorTwo inFrame:(CGRect)rect;
-+(UIColor*)lightGray;
 +(void)addShadowLayer:(CALayer*)layer;
 +(void)addRoundedEdges:(CALayer*)layer;
 +(void)addBorder:(CALayer*)layer withWidth:(CGFloat)width withColor:(UIColor*)color;

@@ -31,23 +31,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [_searchView setBackgroundColor:[ColorMe colorFor:PALEORANGE]];
-    
-    [_searchResultTableView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"tornMid.png"]]];
-    
-    [ColorMe addBorder:_searchResultTableView.layer withWidth:1 withColor:[UIColor blackColor]];
-    
-    [ColorMe addGradientToLayer:self.view.layer colorOne:[ColorMe lightGray] andColorTwo:[ColorMe whitishColor]inFrame:self.view.bounds];
-    
-    
+
     if (!_patientData)
         _patientData = [[NSMutableDictionary alloc]init];
     
     // Set height of rows of result table
+    _searchResultTableView.rowHeight = 75;
     [_searchResultTableView setDelegate:self];
     [_searchResultTableView setDataSource:self];
-    
-    
 }
 
 - (void)setScreenHandler:(ScreenHandler)myHandler {
@@ -135,15 +126,15 @@
     if (isOpen) {
         [ColorMe addBorder:cell.layer withWidth:3 withColor:[UIColor redColor]];
     }else{
-        [ColorMe addBorder:cell.layer withWidth:1 withColor:[UIColor clearColor]];
+        [ColorMe addBorder:cell.layer withWidth:1 withColor:[UIColor blackColor]];
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     // Sets color of cell when selected
-    //[[[tableView cellForRowAtIndexPath:indexPath]contentView]setBackgroundColor:[UIColor grayColor]];
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [[[tableView cellForRowAtIndexPath:indexPath]contentView]setBackgroundColor:[UIColor grayColor]];
+    
     // TODO: MAKE SURE THAT THIS OBJECT IS NOT IN USE AND THAT YOU LOCK IT WHEN YOU USE IT.
     
     _patientData = [NSMutableDictionary dictionaryWithDictionary:[_patientSearchResultsArray objectAtIndex:indexPath.row]];
@@ -153,9 +144,14 @@
 
 - (IBAction)searchByNameButton:(id)sender {
     // Check if there is at least one name
-
-    [self broadSearchForPatient];
-
+    switch (_mode) {
+        case kTriageMode:
+            [self broadSearchForPatient];
+            break;
+        default:
+            [self broadSearchForPatient];
+            break;
+    }
 }
 
 - (void)broadSearchForPatient {
@@ -180,7 +176,6 @@
                 
                 // Redisplay the information
                 [_searchResultTableView reloadData];
-                
                 [FIUAppDelegate getNotificationWithColor:AJNotificationTypeBlue Animation:AJLinedBackgroundTypeAnimated WithMessage:error.localizedDescription inView:self.view];
             }else{
                 [FIUAppDelegate getNotificationWithColor:AJNotificationTypeRed Animation:AJLinedBackgroundTypeAnimated WithMessage:error.localizedDescription inView:self.view];

@@ -12,15 +12,10 @@
 
 @protocol CommonObjectProtocol <NSObject>
 
-/* This interface is used by all Data Model objects that shares a common schema */
-
 +(NSString*)DatabaseName;
 
-@optional
-/** Attaches the current object too the parent */
 -(void)associateObjectToItsSuperParent:(NSDictionary *)parent;
 
-/** Creates a new object */
 -(void)createNewObject:(NSDictionary*) object onCompletion:(ObjectResponse)onSuccessHandler;
 
 -(NSArray *)FindAllObjectsLocallyFromParentObject:(NSDictionary*)parentObject;
@@ -31,6 +26,4 @@
  * Updates the given object and executes the given instruction on the server side
  */
 -(void)UpdateObjectAndShouldLock:(BOOL)shouldLock witData:(NSMutableDictionary*)dataToSend AndInstructions:(NSInteger)instruction onCompletion:(ObjectResponse)response;
-
--(NSArray *)covertAllSavedObjectsToJSON;
 @end

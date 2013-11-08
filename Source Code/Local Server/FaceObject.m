@@ -19,7 +19,7 @@
 NSString* firstname;
 NSString* lastname;
 NSString* isLockedBy;
-NSData * picture;
+NSMutableArray * pictures;
 
 @implementation FaceObject
 +(NSString *)DatabaseName{
@@ -49,7 +49,7 @@ NSData * picture;
 -(void)setupObject{
     
     self->COMMONID =  PATIENTID;
-    self->CLASSTYPE = kPatientType;
+    self->CLASSTYPE = kFaceType;
     self->COMMONDATABASE = DATABASE;
 }
 #pragma mark - BaseObjectProtocol Methods
@@ -60,7 +60,7 @@ NSData * picture;
     
     NSMutableDictionary* consolidate = [[NSMutableDictionary alloc]initWithDictionary:[super consolidateForTransmitting]];
     
-    [consolidate setValue:[NSNumber numberWithInt:kPatientType] forKey:OBJECTTYPE];
+    [consolidate setValue:[NSNumber numberWithInt:kFaceType] forKey:OBJECTTYPE];
     return consolidate;
 }
 
@@ -74,10 +74,10 @@ NSData * picture;
 }
 
 -(void)unpackageFileForUser:(NSDictionary *)data{
-    //[super unpackageFileForUser:data];
-    //picture = [data valueForKey:<#(NSString *)#>]
-    //firstname = [data valueForKey:FIRSTNAME];
-    //lastname = [data valueForKey:FAMILYNAME];
+    [super unpackageFileForUser:data];
+    pictures = [data valueForKey:@"photo"];
+    firstname = [data valueForKey:FIRSTNAME];
+    lastname = [data valueForKey:FAMILYNAME];
 }
 
 /* Depending on the RemoteCommands it will execute a different Command */

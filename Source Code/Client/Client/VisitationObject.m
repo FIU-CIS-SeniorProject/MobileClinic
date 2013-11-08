@@ -106,13 +106,8 @@
 -(void)associateObjectToItsSuperParent:(NSDictionary *)parent
 {
     [self linkVisit];
-    
     NSString* pId = [parent objectForKey:PATIENTID];
-    
     [visit setVisitationId:[NSString stringWithFormat:@"%@_%f",pId,[[NSDate date]timeIntervalSince1970]]];
-   
-    pId = [pId stringByReplacingOccurrencesOfString:@"." withString:@""];
-    
     [visit setPatientId:pId];
 }
 
@@ -135,52 +130,13 @@
    [self startSearchWithData:[[NSDictionary alloc]init] withsearchType:kFindOpenObjects andOnComplete:Response];
 }
 
-// Needed To Write this for background Efficiency
 -(NSArray*)FindAllOpenVisitsLocally{
    //Predicate to return list of Open Objects
-    NSDate* aDayPrior = [[NSDate alloc] initWithTimeInterval:-3600*12 sinceDate:[NSDate date]];
-    NSNumber* hoursBefore = [NSNumber numberWithInteger:[aDayPrior timeIntervalSince1970]];
+    NSPredicate* pred = [NSPredicate predicateWithFormat:@"isOpen == TRUE"];
     
-    NSPredicate* pred = [NSPredicate predicateWithFormat:@"%K == YES && %K >= %@",ISOPEN, TRIAGEOUT, hoursBefore];
-    
-    return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:pred andSortByAttribute:TRIAGEOUT]];
+    return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:pred andSortByAttribute:TRIAGEIN]];
 }
 
--(NSArray*)FindAllVisitsWithinTheLastXHours:(int)hours{
-    NSDate* aDayPrior = [[NSDate alloc] initWithTimeInterval:-3600*hours sinceDate:[NSDate date]];
-    NSNumber* hoursBefore = [NSNumber numberWithInteger:[aDayPrior timeIntervalSince1970]];
-        
-    NSPredicate* pred = [NSPredicate predicateWithFormat:@"%K >= %@",TRIAGEOUT, hoursBefore];
-    
-    return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:pred andSortByAttribute:TRIAGEOUT]];
-}
--(void)FindObjectsUsingPredicateKey:(NSArray *)key PredidcateComparison:(NSArray *)compare PredicateValue:(NSArray *)values andPredicateOperand:(NSArray*)operands withResponse:(ObjectResponse)Response{
-    
-    if (key.count == 0) {
-        Response(nil, [self createErrorWithDescription:@"Improper number of values to create predicate" andErrorCodeNumber:kErrorObjectMisconfiguration inDomain:DATABASE]);
-        return;
-    }
-    if (key.count != compare.count || compare.count != values.count || values.count != operands.count+1) {
-            Response(nil, [self createErrorWithDescription:@"Number of values in predicates " andErrorCodeNumber:kErrorObjectMisconfiguration inDomain:DATABASE]);
-            return;
-        }
-    
-    NSMutableString* pred = [[NSMutableString alloc]init];
-    
-    
-    for (int i = 0; i < key.count; i++) {
-        
-        if (i+1 == key.count ) {
-            [pred appendFormat:@"%@ %@ %@",[key objectAtIndex:i],[compare objectAtIndex:i],[values objectAtIndex:i]];
-        }else{
-            [pred appendFormat:@"%@ %@ %@ %@",[key objectAtIndex:i],[compare objectAtIndex:i],[values objectAtIndex:i],[operands objectAtIndex:i]]; 
-        }
-        
-        
-    }
 
-}
--(NSArray *)covertAllSavedObjectsToJSON{
-    return [self ConvertAllEntriesToJSON];
-}
+
 @end
