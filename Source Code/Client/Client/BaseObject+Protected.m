@@ -17,7 +17,13 @@ id<ServerProtocol> serverManager;
     
     [ self tryAndSendData:data withErrorToFire:^(id<BaseObjectProtocol> data, NSError *error) {
         Response(nil, error);
+<<<<<<< HEAD
+    }
+    andWithPositiveResponse:^(id data)
+    {
+=======
     } andWithPositiveResponse:^(id data) {
+>>>>>>> 55552517216c31171a19741b666304c99ab7d748
         StatusObject* status = data;
         
         [self SaveListOfObjectsFromDictionary:status.data];

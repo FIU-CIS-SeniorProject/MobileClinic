@@ -56,8 +56,15 @@
     UINavigationBar *navbar = [self.navigationController navigationBar];
     
     // Request patient's that are currently checked-in
+<<<<<<< HEAD
+    [mobileFacade findAllOpenVisitsAndOnCompletion:^(NSArray *allObjectsFromSearch, NSError *error)
+    {
+        if (!allObjectsFromSearch && error)
+        {
+=======
     [mobileFacade findAllOpenVisitsAndOnCompletion:^(NSArray *allObjectsFromSearch, NSError *error) {
         if (!allObjectsFromSearch && error ) {
+>>>>>>> 55552517216c31171a19741b666304c99ab7d748
             [FIUAppDelegate getNotificationWithColor:AJNotificationTypeOrange Animation:AJLinedBackgroundTypeAnimated WithMessage:error.localizedDescription inView:self.view];
            
         }else{

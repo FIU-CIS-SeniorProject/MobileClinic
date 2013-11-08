@@ -35,7 +35,7 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    //self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,7 +54,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return self.switchUsersActive ? 5 : 2;
+    return self.switchUsersActive ? 6 : 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -64,6 +64,7 @@
     
     [((UIButton *)[cell viewWithTag:1]) removeTarget:self action:@selector(expandCell) forControlEvents:UIControlEventTouchUpInside];
     [((UIButton *)[cell viewWithTag:1]) removeTarget:self action:@selector(logOff) forControlEvents:UIControlEventTouchUpInside];
+    [((UIButton *)[cell viewWithTag:1]) removeTarget:self action:@selector(resetClient) forControlEvents:UIControlEventTouchUpInside];
     [((UIButton *)[cell viewWithTag:1]) removeTarget:self action:@selector(switchToTriage) forControlEvents:UIControlEventTouchUpInside];
     [((UIButton *)[cell viewWithTag:1]) removeTarget:self action:@selector(switchToDoctor) forControlEvents:UIControlEventTouchUpInside];
     [((UIButton *)[cell viewWithTag:1]) removeTarget:self action:@selector(switchToPharmacy) forControlEvents:UIControlEventTouchUpInside];
@@ -76,7 +77,17 @@
         ((UIButton *)[cell viewWithTag:1]).titleLabel.text = @"Log Off";
         [((UIButton *)[cell viewWithTag:1]) addTarget:self action:@selector(logOff) forControlEvents:UIControlEventTouchUpInside];
     }
+<<<<<<< HEAD
     else if(self.switchUsersActive && indexPath.item == 1){
+=======
+    else if(!self.switchUsersActive && indexPath.item == 2)
+    {
+        ((UIButton *)[cell viewWithTag:1]).titleLabel.text = @"Reset Client";
+        [((UIButton *)[cell viewWithTag:1]) addTarget:self action:@selector(resetClient) forControlEvents:UIControlEventTouchUpInside];
+    }
+    else if(self.switchUsersActive && indexPath.item == 1)
+    {
+>>>>>>> f143e12fd9b043b895a8ca0d769f2049528b321b
         ((UIButton *)[cell viewWithTag:1]).titleLabel.text = @"Triage";
         [((UIButton *)[cell viewWithTag:1]) addTarget:self action:@selector(switchToTriage) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -132,6 +143,11 @@
     [newView setStationChosen:[NSNumber numberWithInt:3]];
     [self presentViewController:newView animated:YES completion:^{
     }];
+}
+
+- (void)resetClient
+{
+    
 }
 
 ////Override to support conditional editing of the table view.
