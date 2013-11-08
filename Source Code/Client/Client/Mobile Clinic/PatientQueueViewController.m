@@ -82,7 +82,7 @@
     // Request patient's that are currently checked-in
     [mobileFacade findAllOpenVisitsAndOnCompletion:^(NSArray *allObjectsFromSearch, NSError *error)
     {
-        if (!allObjectsFromSearch && error )
+        if (!allObjectsFromSearch && error)
         {
             [FIUAppDelegate getNotificationWithColor:AJNotificationTypeOrange Animation:AJLinedBackgroundTypeAnimated WithMessage:error.localizedDescription inView:self.view];
         }

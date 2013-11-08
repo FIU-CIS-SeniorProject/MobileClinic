@@ -56,7 +56,7 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    //self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning
@@ -78,7 +78,7 @@
 {
     #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return self.switchUsersActive ? 5 : 2;
+    return self.switchUsersActive ? 6 : 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -89,6 +89,7 @@
     
     [((UIButton *)[cell viewWithTag:1]) removeTarget:self action:@selector(expandCell) forControlEvents:UIControlEventTouchUpInside];
     [((UIButton *)[cell viewWithTag:1]) removeTarget:self action:@selector(logOff) forControlEvents:UIControlEventTouchUpInside];
+    [((UIButton *)[cell viewWithTag:1]) removeTarget:self action:@selector(resetClient) forControlEvents:UIControlEventTouchUpInside];
     [((UIButton *)[cell viewWithTag:1]) removeTarget:self action:@selector(switchToTriage) forControlEvents:UIControlEventTouchUpInside];
     [((UIButton *)[cell viewWithTag:1]) removeTarget:self action:@selector(switchToDoctor) forControlEvents:UIControlEventTouchUpInside];
     [((UIButton *)[cell viewWithTag:1]) removeTarget:self action:@selector(switchToPharmacy) forControlEvents:UIControlEventTouchUpInside];
@@ -102,6 +103,11 @@
     {
         ((UIButton *)[cell viewWithTag:1]).titleLabel.text = @"Log Off";
         [((UIButton *)[cell viewWithTag:1]) addTarget:self action:@selector(logOff) forControlEvents:UIControlEventTouchUpInside];
+    }
+    else if(!self.switchUsersActive && indexPath.item == 2)
+    {
+        ((UIButton *)[cell viewWithTag:1]).titleLabel.text = @"Reset Client";
+        [((UIButton *)[cell viewWithTag:1]) addTarget:self action:@selector(resetClient) forControlEvents:UIControlEventTouchUpInside];
     }
     else if(self.switchUsersActive && indexPath.item == 1)
     {
@@ -174,6 +180,11 @@
      ^{
          
      }];
+}
+
+- (void)resetClient
+{
+    
 }
 
 ////Override to support conditional editing of the table view.
