@@ -78,8 +78,11 @@
         [((UIButton *)[cell viewWithTag:1]) addTarget:self action:@selector(logOff) forControlEvents:UIControlEventTouchUpInside];
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
     else if(self.switchUsersActive && indexPath.item == 1){
 =======
+=======
+>>>>>>> f143e12fd9b043b895a8ca0d769f2049528b321b
     else if(!self.switchUsersActive && indexPath.item == 2)
     {
         ((UIButton *)[cell viewWithTag:1]).titleLabel.text = @"Reset Client";
@@ -143,6 +146,11 @@
     [newView setStationChosen:[NSNumber numberWithInt:3]];
     [self presentViewController:newView animated:YES completion:^{
     }];
+}
+
+- (void)resetClient
+{
+    
 }
 
 - (void)resetClient
