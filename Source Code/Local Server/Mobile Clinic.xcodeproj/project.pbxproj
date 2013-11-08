@@ -12,6 +12,7 @@
 		893FCE6A1825EB520054402A /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 893FCE691825EB520054402A /* libsqlite3.dylib */; };
 		893FCE6C1825EB800054402A /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 893FCE6B1825EB800054402A /* libsqlite3.0.dylib */; };
 		895D5CCC1825D053005D25A8 /* FaceObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 895D5CCB1825D053005D25A8 /* FaceObject.m */; };
+		8CA37E5A182C6BD3005E932E /* CloudManagementObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA37E58182C6BD3005E932E /* CloudManagementObject.m */; };
 		EA09328916F818D200536DF3 /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = EA09328816F818D200536DF3 /* Database.m */; };
 		EA0FE4DC171CB3CA00E68DFD /* SystemBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0FE4DB171CB3CA00E68DFD /* SystemBackup.m */; };
 		EA0FE4DD171CB3CA00E68DFD /* SystemBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0FE4DB171CB3CA00E68DFD /* SystemBackup.m */; };
@@ -120,6 +121,9 @@
 		895D5CCA1825D053005D25A8 /* FaceObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceObject.h; sourceTree = "<group>"; };
 		895D5CCB1825D053005D25A8 /* FaceObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceObject.m; sourceTree = "<group>"; };
 		895D5CCD1825D07D005D25A8 /* FaceObjectProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceObjectProtocol.h; sourceTree = "<group>"; };
+		8CA37E57182C6BD3005E932E /* CloudManagementObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloudManagementObject.h; sourceTree = "<group>"; };
+		8CA37E58182C6BD3005E932E /* CloudManagementObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloudManagementObject.m; sourceTree = "<group>"; };
+		8CA37E59182C6BD3005E932E /* CloudManagementObjectProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloudManagementObjectProtocol.h; sourceTree = "<group>"; };
 		EA09328716F818D200536DF3 /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
 		EA09328816F818D200536DF3 /* Database.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Database.m; sourceTree = "<group>"; };
 		EA09328A16F81C2800536DF3 /* DatabaseProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseProtocol.h; sourceTree = "<group>"; };
@@ -285,6 +289,16 @@
 				895D5CCD1825D07D005D25A8 /* FaceObjectProtocol.h */,
 			);
 			name = "Face Object";
+			sourceTree = "<group>";
+		};
+		8CA37E56182C6B21005E932E /* CloudManagement Object */ = {
+			isa = PBXGroup;
+			children = (
+				8CA37E57182C6BD3005E932E /* CloudManagementObject.h */,
+				8CA37E58182C6BD3005E932E /* CloudManagementObject.m */,
+				8CA37E59182C6BD3005E932E /* CloudManagementObjectProtocol.h */,
+			);
+			name = "CloudManagement Object";
 			sourceTree = "<group>";
 		};
 		EA09328616F8149F00536DF3 /* Cloud API */ = {
@@ -592,14 +606,15 @@
 		EA9372AE16BC7CBD00D3D617 /* Object Types (USE THESE ONLY) */ = {
 			isa = PBXGroup;
 			children = (
-				895D5CC91825D02B005D25A8 /* Face Object */,
 				EAC37F1716F37A8F00836C1C /* CommonObjectProtocol.h */,
+				895D5CC91825D02B005D25A8 /* Face Object */,
 				EAC37F1916F394B300836C1C /* Status Object */,
 				EAC37F1816F3821F00836C1C /* User Objects */,
 				EA749BD016EDAF3F000F849F /* Patient Objects */,
 				EA749BCF16EDAF2E000F849F /* Visitation Objects */,
 				EAC37F0A16F17A9A00836C1C /* Prescription Object */,
 				EAC37F1D16F394E100836C1C /* Medication Objects */,
+				8CA37E56182C6B21005E932E /* CloudManagement Object */,
 			);
 			name = "Object Types (USE THESE ONLY)";
 			sourceTree = "<group>";
@@ -869,6 +884,7 @@
 				EAC19C7E16DE839C00B0B8DA /* PatientTable.m in Sources */,
 				EAC19C8516DEE40700B0B8DA /* Patients.m in Sources */,
 				EA4CEC1416E3F8F400D6AB58 /* Visitation.m in Sources */,
+				8CA37E5A182C6BD3005E932E /* CloudManagementObject.m in Sources */,
 				EA749BD316EDAF8D000F849F /* PrescriptionObject.m in Sources */,
 				EAC37F1116F213E400836C1C /* Prescription.m in Sources */,
 				EAC37F1516F36DBA00836C1C /* CloudService.m in Sources */,

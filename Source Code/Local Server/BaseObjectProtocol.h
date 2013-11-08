@@ -23,6 +23,7 @@ typedef enum {
     kPharmacyType       = 5,
     kPrescriptionType   = 6,
     kMedicationType     = 7,
+    kCloudManagementType = 8,
     kFaceType           = 10,
 }ObjectTypes;
 
