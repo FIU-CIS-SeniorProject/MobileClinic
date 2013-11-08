@@ -3,13 +3,11 @@
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 1/27/13.
-//  Copyright (c) 2013 Florida International University. All rights reserved.
 //
 
 #import "BaseObject.h"
 #define MAX_NUMBER_ITEMS 4
 #import "BaseObject+Protected.h"
-
 
 @implementation BaseObject
 

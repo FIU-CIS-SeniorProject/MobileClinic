@@ -42,6 +42,7 @@
         isAuthenticated = NO;
         //production
 //        kURL = @"http://znja-webapp.herokuapp.com/api/";
+        kURL = @"http://pure-island-5858.herokuapp.com/"; // Test Cloud
         
         [self getAccessToken:^(BOOL success) {
             if(success)
