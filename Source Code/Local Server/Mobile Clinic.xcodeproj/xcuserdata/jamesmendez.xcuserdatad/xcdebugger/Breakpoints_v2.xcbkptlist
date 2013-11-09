@@ -47,7 +47,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "139"
             endingLineNumber = "139"
-            landmarkName = "-manualTableRefresh:"
+            landmarkName = "-truePurgeTheSystem:"
             landmarkType = "5">
             <Locations>
                <Location
@@ -93,7 +93,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "179"
             endingLineNumber = "179"
-            landmarkName = "-SetStatus:"
+            landmarkName = "-manualTableRefresh:"
             landmarkType = "5">
             <Locations>
                <Location
@@ -139,7 +139,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "188"
             endingLineNumber = "188"
-            landmarkName = "-pushPatientsToCloud:"
+            landmarkName = "-manualTableRefresh:"
             landmarkType = "5">
             <Locations>
                <Location
