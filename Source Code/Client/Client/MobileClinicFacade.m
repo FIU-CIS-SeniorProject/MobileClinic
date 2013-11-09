@@ -36,7 +36,8 @@
 - (id)init
 {
     self = [super init];
-    if (self) {
+    if (self)
+    {
         
     }
     return self;
@@ -49,6 +50,7 @@
 
 #pragma mark- CREATING NEW OBJECTS
 #pragma mark-
+
 // Creates only a local copy of the patient
 -(void)createAndCheckInPatient:(NSDictionary *)patientInfo onCompletion:(MobileClinicCommandResponse)Response
 {
@@ -56,14 +58,13 @@
     
     // Object is Create locally Only
     [self CommonCommandObject:patient ForCreating:patientInfo bindedToParentObjectToUpdate:nil withResults:Response];
-    
-    
 }
 
 // creates a new prescription for a given visit
 -(void)addNewPrescription:(NSDictionary *)Rx ForCurrentVisit:(NSDictionary *)visit AndlockVisit:(BOOL)lock onCompletion:(MobileClinicCommandResponse)Response
 {
-    [self updateVisitRecord:visit andShouldUnlock:!lock andShouldCloseVisit:NO onCompletion:^(NSDictionary *object, NSError *error) {
+    [self updateVisitRecord:visit andShouldUnlock:!lock andShouldCloseVisit:NO onCompletion:^(NSDictionary *object, NSError *error)
+    {
         if (!object)
         {
             Response(object,error);
@@ -94,13 +95,10 @@
             else
             {
                 NSMutableDictionary* openVisit = [[NSMutableDictionary alloc]initWithDictionary:visitInfo];
-                
                 [openVisit setValue:[NSNumber numberWithBool:!checkout] forKey:ISOPEN];
-                
                 [self CommonCommandObject:[[VisitationObject alloc]initAndMakeNewDatabaseObject] ForCreating:openVisit bindedToParentObjectToUpdate:patientInfo withResults:Response];
             }
         }];
-        
     }
     else
     {
@@ -251,7 +249,8 @@
     
     VisitationObject* myVisit = [[VisitationObject alloc]init];
     
-    [self CommonCommandObject:myVisit ShouldLock:NO CommonUpdate:visitDictionary withResults:^(NSDictionary *object, NSError *error) {
+    [self CommonCommandObject:myVisit ShouldLock:NO CommonUpdate:visitDictionary withResults:^(NSDictionary *object, NSError *error)
+    {
         if (object)
         {
             PatientObject* myPatient = [[PatientObject alloc]init];
@@ -303,5 +302,4 @@
         results([data getDictionaryValuesFromManagedObject],error);
     }];
 }
-
 @end

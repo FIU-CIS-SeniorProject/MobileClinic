@@ -128,10 +128,9 @@ typedef void (^MobileClinicSearchResponse)(NSArray* allObjectsFromSearch, NSErro
  * @param Rx the Prescription dicitionary file to update
  */
 -(void) updatePrescription:(NSDictionary*)Rx AndShouldLock:(BOOL)lock onCompletion:(MobileClinicCommandResponse)Response;
-
 -(void) findAllMedication:(NSDictionary*)visit AndOnCompletion:(MobileClinicSearchResponse)Response;
-
 -(void) updateMedication:(NSDictionary*)Rx AndShouldLock:(BOOL)lock onCompletion:(MobileClinicCommandResponse)Response;
+
 /**
  * This will mark the patient and their visit as closed.
  */

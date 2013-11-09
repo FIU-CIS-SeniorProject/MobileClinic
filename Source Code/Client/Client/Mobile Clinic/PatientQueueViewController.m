@@ -56,68 +56,67 @@
     UINavigationBar *navbar = [self.navigationController navigationBar];
     
     // Request patient's that are currently checked-in
-<<<<<<< HEAD
     [mobileFacade findAllOpenVisitsAndOnCompletion:^(NSArray *allObjectsFromSearch, NSError *error)
     {
         if (!allObjectsFromSearch && error)
         {
-=======
-    [mobileFacade findAllOpenVisitsAndOnCompletion:^(NSArray *allObjectsFromSearch, NSError *error) {
-        if (!allObjectsFromSearch && error ) {
->>>>>>> 55552517216c31171a19741b666304c99ab7d748
             [FIUAppDelegate getNotificationWithColor:AJNotificationTypeOrange Animation:AJLinedBackgroundTypeAnimated WithMessage:error.localizedDescription inView:self.view];
-           
-        }else{
+        }
+        else
+        {
+            queueArray = [NSArray arrayWithArray:allObjectsFromSearch];
         
-        queueArray = [NSArray arrayWithArray:allObjectsFromSearch];
-        
-        // Settings with respect to station chosen
-        switch ([[self stationChosen] intValue]) {
-            case 2: {
-                [navbar setTintColor:[UIColor blueColor]];
+            // Settings with respect to station chosen
+            switch ([[self stationChosen] intValue])
+            {
+                case 2:
+                {
+                    [navbar setTintColor:[UIColor blueColor]];
                 
-                // Filter results to patient's that haven't seen the doctor
-                NSPredicate * predicate = [NSPredicate predicateWithFormat:@"%K == %@", DOCTOROUT, nil];
+                    // Filter results to patient's that haven't seen the doctor
+                    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"%K == %@", DOCTOROUT, nil];
                 
-                queueArray = [NSMutableArray arrayWithArray:[queueArray filteredArrayUsingPredicate:predicate]];
+                    queueArray = [NSMutableArray arrayWithArray:[queueArray filteredArrayUsingPredicate:predicate]];
                 
-                // Sort queue by priority
-                [self sortBy:PRIORITY inAscendingOrder:NO];
+                    // Sort queue by priority
+                    [self sortBy:PRIORITY inAscendingOrder:NO];
+                }
+                    break;
+                case 3:
+                {
+                    [navbar setTintColor:[UIColor greenColor]];
+                
+                    // Filter results (Seen doctor & need to see pharmacy)
+                    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"%K != %@", DOCTOROUT, nil];
+                    queueArray = [NSMutableArray arrayWithArray:[queueArray filteredArrayUsingPredicate:predicate]];
+                
+                    // Sort queue by time patient left doctor's station
+                    [self sortBy:DOCTOROUT inAscendingOrder:YES];
+                }
+                    break;
+                default:
+                    break;
             }
-                break;
-            case 3: {
-                [navbar setTintColor:[UIColor greenColor]];
-                
-                // Filter results (Seen doctor & need to see pharmacy)
-                NSPredicate * predicate = [NSPredicate predicateWithFormat:@"%K != %@", DOCTOROUT, nil];
-                queueArray = [NSMutableArray arrayWithArray:[queueArray filteredArrayUsingPredicate:predicate]];
-                
-                // Sort queue by time patient left doctor's station
-                [self sortBy:DOCTOROUT inAscendingOrder:YES];
-            }
-                break;
-            default:
-                break;
+            [_queueTableView reloadData];
         }
         
-        [_queueTableView reloadData];
-        }
-        /** This will remove the HUD since the search is complete */
+        // This will remove the HUD since the search is complete
         [self HideALLHUDDisplayInView:_queueTableView];
     }];
 }
 
 // Sorts queue for category specified in ascending or decending order
-- (void)sortBy:(NSString *)sortCategory inAscendingOrder:(BOOL)order {
-    
+- (void)sortBy:(NSString *)sortCategory inAscendingOrder:(BOOL)order
+{
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]initWithKey:sortCategory ascending:order];
     NSArray *sortDescriptorArray = [NSArray arrayWithObject:sortDescriptor];
     queueArray = [NSMutableArray arrayWithArray:[queueArray sortedArrayUsingDescriptors:sortDescriptorArray]];
 }
 
-- (void)popOverMenu {
-    
-    if(self.pop != nil){
+- (void)popOverMenu
+{
+    if(self.pop != nil)
+    {
         [self.pop dismissPopoverAnimated:YES];
         self.pop = nil;
         return;
