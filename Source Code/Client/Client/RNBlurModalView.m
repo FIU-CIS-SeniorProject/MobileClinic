@@ -84,7 +84,8 @@ typedef void (^RNBlurCompletion)(void);
 
 #pragma mark - RNBlurModalView
 
-@implementation RNBlurModalView {
+@implementation RNBlurModalView
+{
     UIViewController *_controller;
     UIView *_contentView;
     RNCloseButton *_dismissButton;
@@ -92,7 +93,8 @@ typedef void (^RNBlurCompletion)(void);
     RNBlurCompletion _completion;
 }
 
-+ (UIView*)generateModalViewWithTitle:(NSString*)title message:(NSString*)message {
++ (UIView*)generateModalViewWithTitle:(NSString*)title message:(NSString*)message
+{
     CGFloat defaultWidth = 280.f;
     CGRect frame = CGRectMake(0, 0, defaultWidth, 0);
     CGFloat padding = 10.f;
@@ -137,7 +139,8 @@ typedef void (^RNBlurCompletion)(void);
 
 
 - (id)initWithFrame:(CGRect)frame {
-    if (self = [super initWithFrame:frame]) {
+    if (self = [super initWithFrame:frame])
+    {
         _dismissButton = [[RNCloseButton alloc] init];
         _dismissButton.center = CGPointZero;
         [_dismissButton addTarget:self action:@selector(hide) forControlEvents:UIControlEventTouchUpInside];
@@ -159,8 +162,10 @@ typedef void (^RNBlurCompletion)(void);
 }
 
 
-- (id)initWithViewController:(UIViewController*)viewController view:(UIView*)view {
-    if (self = [self initWithFrame:CGRectMake(0, 0, viewController.view.width, viewController.view.height)]) {
+- (id)initWithViewController:(UIViewController*)viewController view:(UIView*)view
+{
+    if (self = [self initWithFrame:CGRectMake(0, 0, viewController.view.width, viewController.view.height)])
+    {
         [self addSubview:view];
         _contentView = view;
         _contentView.center = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
@@ -175,29 +180,35 @@ typedef void (^RNBlurCompletion)(void);
 }
 
 
-- (id)initWithViewController:(UIViewController*)viewController title:(NSString*)title message:(NSString*)message {
+- (id)initWithViewController:(UIViewController*)viewController title:(NSString*)title message:(NSString*)message
+{
     UIView *view = [RNBlurModalView generateModalViewWithTitle:title message:message];
-    if (self = [self initWithViewController:viewController view:view]) {
+    if (self = [self initWithViewController:viewController view:view])
+    {
         // nothing to see here
     }
     return self;
 }
 
 
-- (void)willMoveToSuperview:(UIView *)newSuperview {
+- (void)willMoveToSuperview:(UIView *)newSuperview
+{
     [super willMoveToSuperview:newSuperview];
-    if (newSuperview) {
+    if (newSuperview)
+    {
         self.center = CGPointMake(CGRectGetMidX(newSuperview.frame), CGRectGetMidY(newSuperview.frame));
     }
 }
 
 
-- (void)orientationDidChangeNotification:(NSNotification*)notification {
+- (void)orientationDidChangeNotification:(NSNotification*)notification
+{
     [self performSelector:@selector(updateSubviews) withObject:nil afterDelay:0.3f];
 }
 
 
-- (void)updateSubviews {
+- (void)updateSubviews
+{
     self.hidden = YES;
     
     // get new screenshot after orientation
@@ -213,17 +224,20 @@ typedef void (^RNBlurCompletion)(void);
 }
 
 
-- (void)dealloc {
+- (void)dealloc
+{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
-- (void)show {
+- (void)show
+{
     [self showWithDuration:kRNBlurDefaultDuration delay:0 options:kNilOptions completion:NULL];
 }
 
 
-- (void)showWithDuration:(CGFloat)duration delay:(NSTimeInterval)delay options:(UIViewAnimationOptions)options completion:(void (^)(void))completion {
+- (void)showWithDuration:(CGFloat)duration delay:(NSTimeInterval)delay options:(UIViewAnimationOptions)options completion:(void (^)(void))completion
+{
     self.animationDuration = duration;
     self.animationDelay = delay;
     self.animationOptions = options;
@@ -234,9 +248,12 @@ typedef void (^RNBlurCompletion)(void);
 }
 
 
-- (void)delayedShow {
-    if (! self.isVisible) {
-        if (! self.superview) {
+- (void)delayedShow
+{
+    if (! self.isVisible)
+    {
+        if (! self.superview)
+        {
             [_controller.view addSubview:self];
             self.top = 0;
         }
@@ -250,11 +267,14 @@ typedef void (^RNBlurCompletion)(void);
             _blurView.alpha = 1.f;
             self.alpha = 1.f;
             self.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.f, 1.f);
-        } completion:^(BOOL finished) {
-            if (finished) {
+        } completion:^(BOOL finished)
+        {
+            if (finished)
+            {
                 [[NSNotificationCenter defaultCenter] postNotificationName:kRNBlurDidShowNotification object:nil];
                 self.isVisible = YES;
-                if (_completion) {
+                if (_completion)
+                {
                     _completion();
                 }
             }
@@ -265,13 +285,16 @@ typedef void (^RNBlurCompletion)(void);
 }
 
 
-- (void)hide {
+- (void)hide
+{
     [self hideWithDuration:kRNBlurDefaultDuration delay:0 options:kNilOptions completion:NULL];
 }
 
 
-- (void)hideWithDuration:(CGFloat)duration delay:(NSTimeInterval)delay options:(UIViewAnimationOptions)options completion:(void (^)(void))completion {
-    if (self.isVisible) {
+- (void)hideWithDuration:(CGFloat)duration delay:(NSTimeInterval)delay options:(UIViewAnimationOptions)options completion:(void (^)(void))completion
+{
+    if (self.isVisible)
+    {
         [UIView animateWithDuration:duration
                               delay:delay
                             options:options
@@ -279,15 +302,17 @@ typedef void (^RNBlurCompletion)(void);
                              self.alpha = 0.f;
                              _blurView.alpha = 0.f;
                          }
-                         completion:^(BOOL finished){
-                             if (finished) {
+                         completion:^(BOOL finished) {
+                             if (finished)
+                             {
                                  [_blurView removeFromSuperview];
                                  _blurView = nil;
                                  [self removeFromSuperview];
                                  
                                  [[NSNotificationCenter defaultCenter] postNotificationName:kRNBlurDidHidewNotification object:nil];
                                  self.isVisible = NO;
-                                 if (completion) {
+                                 if (completion)
+                                 {
                                      completion();
                                  }
                              }
@@ -300,12 +325,15 @@ typedef void (^RNBlurCompletion)(void);
 
 #pragma mark - RNBlurView
 
-@implementation RNBlurView {
+@implementation RNBlurView
+{
     UIView *_coverView;
 }
 
-- (id)initWithCoverView:(UIView *)view {
-    if (self = [super initWithFrame:CGRectMake(0, 0, view.bounds.size.width, view.bounds.size.height)]) {
+- (id)initWithCoverView:(UIView *)view
+{
+    if (self = [super initWithFrame:CGRectMake(0, 0, view.bounds.size.width, view.bounds.size.height)])
+    {
         _coverView = view;
         UIImage *blur = [_coverView screenshot];
         self.image = [blur boxblurImageWithBlur:kRNDefaultBlurScale];
@@ -320,7 +348,8 @@ typedef void (^RNBlurCompletion)(void);
 
 @implementation UILabel (AutoSize)
 
-- (void)autoHeight {
+- (void)autoHeight
+{
     CGRect frame = self.frame;
     CGSize maxSize = CGSizeMake(frame.size.width, 9999);
     CGSize expectedSize = [self.text sizeWithFont:self.font constrainedToSize:maxSize lineBreakMode:self.lineBreakMode];
@@ -334,81 +363,97 @@ typedef void (^RNBlurCompletion)(void);
 
 @implementation UIView (Sizes)
 
-- (CGFloat)left {
+- (CGFloat)left
+{
     return self.frame.origin.x;
 }
 
-- (void)setLeft:(CGFloat)x {
+- (void)setLeft:(CGFloat)x
+{
     CGRect frame = self.frame;
     frame.origin.x = x;
     self.frame = frame;
 }
 
-- (CGFloat)top {
+- (CGFloat)top
+{
     return self.frame.origin.y;
 }
 
-- (void)setTop:(CGFloat)y {
+- (void)setTop:(CGFloat)y
+{
     CGRect frame = self.frame;
     frame.origin.y = y;
     self.frame = frame;
 }
 
-- (CGFloat)right {
+- (CGFloat)right
+{
     return self.frame.origin.x + self.frame.size.width;
 }
 
-- (void)setRight:(CGFloat)right {
+- (void)setRight:(CGFloat)right
+{
     CGRect frame = self.frame;
     frame.origin.x = right - frame.size.width;
     self.frame = frame;
 }
 
-- (CGFloat)bottom {
+- (CGFloat)bottom
+{
     return self.frame.origin.y + self.frame.size.height;
 }
 
-- (void)setBottom:(CGFloat)bottom {
+- (void)setBottom:(CGFloat)bottom
+{
     CGRect frame = self.frame;
     frame.origin.y = bottom - frame.size.height;
     self.frame = frame;
 }
 
-- (CGFloat)width {
+- (CGFloat)width
+{
     return self.frame.size.width;
 }
 
-- (void)setWidth:(CGFloat)width {
+- (void)setWidth:(CGFloat)width
+{
     CGRect frame = self.frame;
     frame.size.width = width;
     self.frame = frame;
 }
 
-- (CGFloat)height {
+- (CGFloat)height
+{
     return self.frame.size.height;
 }
 
-- (void)setHeight:(CGFloat)height {
+- (void)setHeight:(CGFloat)height
+{
     CGRect frame = self.frame;
     frame.size.height = height;
     self.frame = frame;
 }
 
-- (CGPoint)origin {
+- (CGPoint)origin
+{
     return self.frame.origin;
 }
 
-- (void)setOrigin:(CGPoint)origin {
+- (void)setOrigin:(CGPoint)origin
+{
     CGRect frame = self.frame;
     frame.origin = origin;
     self.frame = frame;
 }
 
-- (CGSize)size {
+- (CGSize)size
+{
     return self.frame.size;
 }
 
-- (void)setSize:(CGSize)size {
+- (void)setSize:(CGSize)size
+{
     CGRect frame = self.frame;
     frame.size = size;
     self.frame = frame;
@@ -421,7 +466,8 @@ typedef void (^RNBlurCompletion)(void);
 @implementation RNCloseButton
 
 - (id)init{
-    if(!(self = [super initWithFrame:(CGRect){0, 0, 32, 32}])){
+    if(!(self = [super initWithFrame:(CGRect){0, 0, 32, 32}]))
+    {
         return nil;
     }
     static UIImage *closeButtonImage;
@@ -433,7 +479,8 @@ typedef void (^RNBlurCompletion)(void);
     return self;
 }
 
-- (UIImage *)closeButtonImage{
+- (UIImage *)closeButtonImage
+{
     UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0);
     
     //// General Declarations
@@ -473,7 +520,6 @@ typedef void (^RNBlurCompletion)(void);
     [ovalPath stroke];
     CGContextRestoreGState(context);
     
-    
     //// Bezier Drawing
     UIBezierPath *bezierPath = [UIBezierPath bezierPath];
     [bezierPath moveToPoint:CGPointMake(22.36, 11.46)];
@@ -496,7 +542,6 @@ typedef void (^RNBlurCompletion)(void);
     [bezierPath fill];
     CGContextRestoreGState(context);
     
-    
     //// Cleanup
     CGGradientRelease(gradient);
     CGColorSpaceRelease(colorSpace);
@@ -513,7 +558,8 @@ typedef void (^RNBlurCompletion)(void);
 
 @implementation UIView (Screenshot)
 
-- (UIImage*)screenshot {
+- (UIImage*)screenshot
+{
     UIGraphicsBeginImageContext(self.bounds.size);
     [self.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
@@ -532,8 +578,10 @@ typedef void (^RNBlurCompletion)(void);
 
 @implementation UIImage (Blur)
 
--(UIImage *)boxblurImageWithBlur:(CGFloat)blur {
-    if (blur < 0.f || blur > 1.f) {
+-(UIImage *)boxblurImageWithBlur:(CGFloat)blur
+{
+    if (blur < 0.f || blur > 1.f)
+    {
         blur = 0.5f;
     }
     int boxSize = (int)(blur * 50);
@@ -564,7 +612,9 @@ typedef void (^RNBlurCompletion)(void);
     pixelBuffer = malloc(CGImageGetBytesPerRow(img) * CGImageGetHeight(img));
     
     if(pixelBuffer == NULL)
+    {
         NSLog(@"No pixelbuffer");
+    }
     
     outBuffer.data = pixelBuffer;
     outBuffer.width = CGImageGetWidth(img);
@@ -574,8 +624,8 @@ typedef void (^RNBlurCompletion)(void);
     //perform convolution
     error = vImageBoxConvolve_ARGB8888(&inBuffer, &outBuffer, NULL, 0, 0, boxSize, boxSize, NULL, kvImageEdgeExtend);
     
-    
-    if (error) {
+    if (error)
+    {
         NSLog(@"error from convolution %ld", error);
     }
     
@@ -602,5 +652,4 @@ typedef void (^RNBlurCompletion)(void);
     
     return returnImage;
 }
-
 @end

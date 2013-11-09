@@ -1,9 +1,29 @@
+// The MIT License (MIT)
+//
+// Copyright (c) 2013 Florida International University
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 //
 //  ColorMe.m
 //  OmniOrganize
 //
 //  Created by Michael Montaque on 1/11/12.
-//  Copyright (c) 2012 Florida International University. All rights reserved.
 //
 #define GRADIENT @"shadow_Gradient"
 #define GRADIENT_NAME @"GradientBlack"
@@ -11,9 +31,11 @@
 
 @implementation ColorMe
 
-+(UIColor*)colorFor:(int)colorNumber{
++(UIColor*)colorFor:(int)colorNumber
+{
     UIColor *color;
-    switch (colorNumber) {
+    switch (colorNumber)
+    {
         case 0:
             //FireBrick Red
             color = [UIColor colorWithRed:255.0/255.0 green:48.0/255.0 blue:48.0/255.0 alpha:1];
@@ -84,12 +106,13 @@
             break;
     }
     return color;
-    
 }
 
-+(UIColor*)tintColorFor:(int)colorNumber{
++(UIColor*)tintColorFor:(int)colorNumber
+{
     UIColor *color;
-    switch (colorNumber) {
+    switch (colorNumber)
+    {
         case 0:
             //FireBrick Red
             color = [UIColor colorWithRed:255.0/255.0 green:48.0/255.0 blue:48.0/255.0 alpha:.5];
@@ -161,35 +184,42 @@
     return color;
 }
 
-+(void)coloreMeCompletely:(CALayer*)layer andColor:(int)colorNumber{
++(void)coloreMeCompletely:(CALayer*)layer andColor:(int)colorNumber
+{
     [layer setBackgroundColor:[self colorFor:colorNumber].CGColor];
 }
 
-+(void)ColorTint:(CALayer*)layer forCustomColor:(UIColor*)color{
++(void)ColorTint:(CALayer*)layer forCustomColor:(UIColor*)color
+{
     [layer setBackgroundColor:color.CGColor];
 }
 
-+(void)coloreTint:(CALayer*)layer andColor:(int)colorNumber{
++(void)coloreTint:(CALayer*)layer andColor:(int)colorNumber
+{
      [layer setBackgroundColor:[self tintColorFor:colorNumber].CGColor];
 }
 
-+(void)addRoundedBlackBorderWithShadowInRect:(CALayer*)layer{
++(void)addRoundedBlackBorderWithShadowInRect:(CALayer*)layer
+{
     [self addRoundedEdges:layer];
     [self addBorder:layer withWidth:1 withColor:[UIColor blackColor]];
     [self addShadowLayer:layer];
 }
 
-+(void)addBorder:(CALayer*)layer withWidth:(CGFloat)width withColor:(UIColor *)color{
++(void)addBorder:(CALayer*)layer withWidth:(CGFloat)width withColor:(UIColor *)color
+{
     [layer setBorderColor:color.CGColor];
     [layer setBorderWidth:width];
 }
 
-+(void)addRoundedEdges:(CALayer*)layer{
++(void)addRoundedEdges:(CALayer*)layer
+{
     layer.cornerRadius = 7.0;
     layer.masksToBounds = YES;
 }
 
-+(void)addTopRoundedEdges:(CALayer*)layer{
++(void)addTopRoundedEdges:(CALayer*)layer
+{
     
     UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:layer.bounds byRoundingCorners:UIRectCornerTopLeft cornerRadii:CGSizeMake(5.0, 5.0)];
     
@@ -202,15 +232,16 @@
     //layer.masksToBounds = YES;
 }
    
-+(void)addShadowLayer:(CALayer*)layer{
++(void)addShadowLayer:(CALayer*)layer
+{
     [layer setShadowColor:[[UIColor blackColor]CGColor]];
     [layer setShadowOffset:CGSizeMake(3, 3)];
     [layer setShadowOpacity:.8];
     [layer setShadowRadius:3];
 }
 
-+(void)drawGradient:(CGContextRef)context startColor:(UIColor *)color1 stopColor:(UIColor *)color2 addRect:(CGRect)rect colorSpaceRef:(CGColorSpaceRef)colorSpace isVertical:(BOOL)isVertical{
-    
++(void)drawGradient:(CGContextRef)context startColor:(UIColor *)color1 stopColor:(UIColor *)color2 addRect:(CGRect)rect colorSpaceRef:(CGColorSpaceRef)colorSpace isVertical:(BOOL)isVertical
+{
     CGFloat locations[] = { 0.0, 0.3, 0.6, 1.0};
     NSArray *colors = [NSArray arrayWithObjects:(id)[color1 CGColor], (id)[color2 CGColor],(id)[color2 CGColor],(id)[color1 CGColor], nil];
     
@@ -218,10 +249,13 @@
     CGPoint startPoint;
     CGPoint endPoint;
     
-    if(isVertical) {
+    if(isVertical)
+    {
         startPoint = CGPointMake(CGRectGetMinX(rect), CGRectGetMidY(rect));
         endPoint = CGPointMake(CGRectGetMaxX(rect), CGRectGetMidY(rect));
-    }else{
+    }
+    else
+    {
         startPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMinY(rect));
         endPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMaxY(rect));
     }
@@ -238,8 +272,8 @@
     CGColorSpaceRelease(colorSpace);
 }
 
-+(void)drawGlossyBackground:(CGContextRef)context startColor:(UIColor *)color1 stopColor:(UIColor *)color2 addRect:(CGRect)rect colorSpaceRef:(CGColorSpaceRef)colorSpace isVertical:(BOOL)isVertical{
-    
++(void)drawGlossyBackground:(CGContextRef)context startColor:(UIColor *)color1 stopColor:(UIColor *)color2 addRect:(CGRect)rect colorSpaceRef:(CGColorSpaceRef)colorSpace isVertical:(BOOL)isVertical
+{
     [self drawGradient:context startColor:color1 stopColor:color2 addRect:rect colorSpaceRef:colorSpace isVertical:isVertical];
     
     UIColor* glossColor1 = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.45];
@@ -251,16 +285,18 @@
     
 }
 
-+(UIColor*)whitishColor{
++(UIColor*)whitishColor
+{
     return [UIColor colorWithRed:250.0/255 green:250.0/255 blue:250.0/255 alpha:.5];
 }
 
-+(UIColor*)grayishColor{
++(UIColor*)grayishColor
+{
     return [UIColor colorWithRed:180.0/255 green:180.0/255 blue:180.0/255 alpha:.5];
 }
 
-+(void)drawBorder:(CGContextRef)context borderColor:(UIColor *)color1 addRect:(CGRect)rect colorSpaceRef:(CGColorSpaceRef)colorSpace{
-    
++(void)drawBorder:(CGContextRef)context borderColor:(UIColor *)color1 addRect:(CGRect)rect colorSpaceRef:(CGColorSpaceRef)colorSpace
+{
     //Rounded Path   
     //UIBezierPath *roundEdge = [UIBezierPath bezierPathWithRoundedRect:rect byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(30, 30)];
     
@@ -272,25 +308,34 @@
     CGContextStrokeRect(context, rect);
 }
 
--(void)setColor:(int)myColor{
+-(void)setColor:(int)myColor
+{
     pickedColor = myColor;
 }
 
--(UIColor *)useSelectedColor{
+-(UIColor *)useSelectedColor
+{
     return  [ColorMe colorFor:pickedColor];
 }
--(int)selectedColor{
+-(int)selectedColor
+{
     return pickedColor;
 }
 
-+(UIColor*)greenTheme{
++(UIColor*)greenTheme
+{
     return [UIColor colorWithRed:5.0/255 green:85.0/255 blue:85.0/255 alpha:1];
 }
 
-+(void)addFadeGradientToLayer:(CALayer*)layer{
-    for (CALayer* all in layer.sublayers) 
-        if ([all.name isEqualToString:GRADIENT]) 
++(void)addFadeGradientToLayer:(CALayer*)layer
+{
+    for (CALayer* all in layer.sublayers)
+    {
+        if ([all.name isEqualToString:GRADIENT])
+        {
             return;
+        }
+    }
     
     CALayer* gradient = [[CALayer alloc]init];
     
@@ -302,8 +347,6 @@
     [gradient setBackgroundColor:[UIColor colorWithPatternImage:image].CGColor];
 
     [layer addSublayer:gradient];
-    [UIView animateWithDuration:1 animations:^{
-    }];
+    [UIView animateWithDuration:1 animations:^{ }];
 }
-
 @end
