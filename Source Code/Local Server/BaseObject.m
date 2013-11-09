@@ -139,7 +139,8 @@
     // get the UID of the object
     id objID = [databaseObject valueForKey:COMMONID];
     
-    if(!objID){
+    if(!objID)
+    {
         eventResponse(nil,[self createErrorWithDescription:@"Object does not have a primary key ID" andErrorCodeNumber:kErrorObjectMisconfiguration inDomain:COMMONDATABASE]);
         return;
     }
@@ -149,56 +150,64 @@
     // If the old object does not exist OR
     // if the old object is Clean (Unmodified) OR
     // if the old object is dirty (modified) AND the new object is dirty
-    if (!obj || ![obj valueForKey:ISDIRTY] || ([obj valueForKey:ISDIRTY] && [databaseObject valueForKey:ISDIRTY])) {
-    // update the object we found in the database
-    [obj setValuesForKeysWithDictionary:self.getDictionaryValuesFromManagedObject];
-    }else{
+    if (!obj || ![obj valueForKey:ISDIRTY] || ([obj valueForKey:ISDIRTY] && [databaseObject valueForKey:ISDIRTY]))
+    {
+        // update the object we found in the database
+        [obj setValuesForKeysWithDictionary:self.getDictionaryValuesFromManagedObject];
+    }
+    else
+    {
         eventResponse(nil,[self createErrorWithDescription:@"A clean object cannot update a modified object" andErrorCodeNumber:kErrorObjectMisconfiguration inDomain:COMMONDATABASE]);
         return;
     }
     
     // if there is was something to save
-    if (obj){
+    if (obj)
+    {
         // save it
         [self SaveCurrentObjectToDatabase:obj];
-        
-    }else{
-        
+    }
+    else
+    {
         obj = [self CreateANewObjectFromClass:COMMONDATABASE isTemporary:NO];
-        
         [obj setValuesForKeysWithDictionary:self.getDictionaryValuesFromManagedObject];
-        
         [self SaveCurrentObjectToDatabase:obj];
-        
     }
     
-    if (eventResponse) {
+    if (eventResponse)
+    {
         [[NSNotificationCenter defaultCenter]postNotificationName:UPDATEPATIENT object:nil];
         eventResponse(self, nil);
     }
-    
 }
 
--(NSString*)convertDateNumberForPrinting:(NSNumber*)number{
-    if (number) {
+-(NSString*)convertDateNumberForPrinting:(NSNumber*)number
+{
+    if (number)
+    {
         return [[NSDate convertSecondsToNSDate:number]convertNSDateToMonthDayYearTimeString];
     }
     return @"N/A";
 }
 
 
--(BOOL)deleteCurrentlyHeldObjectFromDatabase{
+-(BOOL)deleteCurrentlyHeldObjectFromDatabase
+{
    return [self deleteNSManagedObject:databaseObject];
 }
 
--(BOOL)deleteDatabaseDictionaryObject:(NSDictionary *)object{
+-(BOOL)deleteDatabaseDictionaryObject:(NSDictionary *)object
+{
     return [self deleteObjectsFromDatabase:COMMONDATABASE withDefiningAttribute:[object objectForKey:COMMONID] forKey:COMMONID];
 }
--(NSString*)convertTextForPrinting:(NSString*)text{
+
+-(NSString*)convertTextForPrinting:(NSString*)text
+{
     return ([text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length > 0)?text:@"Incomplete";
 }
 
--(NSDictionary *)consolidateForTransmitting{
+-(NSDictionary *)consolidateForTransmitting
+{
     NSMutableDictionary* consolidate = [[NSMutableDictionary alloc]initWithCapacity:1];
     [consolidate setValue:[databaseObject dictionaryWithValuesForKeys:databaseObject.entity.attributeKeys] forKey:DATABASEOBJECT];
     return consolidate;

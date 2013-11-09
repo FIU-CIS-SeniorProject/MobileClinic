@@ -24,9 +24,7 @@
 //  Mobile Clinic
 //
 //  Created by Kevin Diaz on 11/02/13.
-//  Copyright (c) 2013 Florida International University. All rights reserved.
 //
-
 #import "BaseObject.h"
 #import "CloudManagementObjectProtocol.h"
 

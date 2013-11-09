@@ -1,11 +1,30 @@
+// The MIT License (MIT)
+//
+// Copyright (c) 2013 Florida International University
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 //
 //  SystemBackup.m
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 4/15/13.
-//  Copyright (c) 2013 Florida International University. All rights reserved.
 //
-
 #import "SystemBackup.h"
 #import "PatientObject.h"
 #import "NSDataAdditions.h"
@@ -25,21 +44,18 @@ NSTimer* saveTimer;
 {
     self = [super init];
     
-    if (self) {
-        
-       // saveTimer = [NSTimer timerWithTimeInterval:10 target:self selector:@selector(BackupEverything) userInfo:nil repeats:NO];
-        
-       // NSRunLoop* runLoop = [NSRunLoop mainRunLoop];
-        
-      //  [runLoop addTimer:saveTimer forMode:NSDefaultRunLoopMode];
-        
-       // [self BackupEverything];
+    if (self)
+    {
+        // saveTimer = [NSTimer timerWithTimeInterval:10 target:self selector:@selector(BackupEverything) userInfo:nil repeats:NO];
+        // NSRunLoop* runLoop = [NSRunLoop mainRunLoop];
+        //  [runLoop addTimer:saveTimer forMode:NSDefaultRunLoopMode];
+        // [self BackupEverything];
     }
     return self;
 }
 
--(NSError*)BackupEverything{
-    
+-(NSError*)BackupEverything
+{
     PatientObject* patient = [[PatientObject alloc]init];
     UserObject* user = [[UserObject alloc]init];
     VisitationObject* visit = [[VisitationObject alloc]init];
@@ -57,8 +73,8 @@ NSTimer* saveTimer;
     return [self overWritePList:Container];
 }
 
--(NSError*)overWritePList:(NSDictionary*)fileContainer{
-    
+-(NSError*)overWritePList:(NSDictionary*)fileContainer
+{
     NSSavePanel* savePnl = [NSSavePanel savePanel];
     
     // Set array of file types
@@ -107,15 +123,17 @@ NSTimer* saveTimer;
     
 }
 
-+(void)installFromBackup:(NSDictionary*)allObjects{
++(void)installFromBackup:(NSDictionary*)allObjects
+{
     // Get all the objects from backupFile
-    if (!allObjects) {
+    if (!allObjects)
+    {
         allObjects= [SystemBackup GetAllValuesFromBackUp];
     }
     
     // for all the keys
-    for (NSString* key in allObjects.allKeys) {
-     
+    for (NSString* key in allObjects.allKeys)
+    {
         // create the object that is associated with it
         id<BaseObjectProtocol> base =  [ObjectFactory createObjectForInteger:key];
         
@@ -127,8 +145,8 @@ NSTimer* saveTimer;
         NSArray* internalObjects = [allObjects objectForKey:key];
        
         // for each dictionary in the array
-        for (NSDictionary* object in internalObjects) {
-            
+        for (NSDictionary* object in internalObjects)
+        {
             // make data changeable
             NSMutableDictionary* changeObject = [NSDictionary dictionaryWithDictionary:object];
             // get the picture  (which is in string form)
@@ -144,58 +162,53 @@ NSTimer* saveTimer;
             [base setValueToDictionaryValues:object];
             
             // And save
-            [base saveObject:^(id<BaseObjectProtocol> data, NSError *error) {
+            [base saveObject:^(id<BaseObjectProtocol> data, NSError *error)
+            {
                 NSLog(@"Saved %@ \n\n",object);
             }];
         }
-       
     }
-
 }
 
-+(NSDictionary*)GetAllValuesFromBackUp{
-    
++(NSDictionary*)GetAllValuesFromBackUp
+{
     NSString* fileName = [[[NSBundle mainBundle]resourcePath]stringByAppendingPathComponent:FILE];
-    
     NSFileManager* fm = [NSFileManager defaultManager];
-    
     BOOL canBeConverted = [fm fileExistsAtPath:fileName];
-    
     NSError* error = nil;
     
-    if (canBeConverted) {
-        // Need Proper File location
+    if (canBeConverted)
+    {
+        //TODO: Need Proper File location
         NSInputStream* stream = [NSInputStream inputStreamWithFileAtPath:fileName];
-        
-       return [NSJSONSerialization JSONObjectWithStream:stream options:0 error:&error];
+        return [NSJSONSerialization JSONObjectWithStream:stream options:0 error:&error];
     }
     
     return nil;
 }
-+(NSError*)exportObject:(NSDictionary*)object toFilePath:(NSString*)path{
-    
+
++(NSError*)exportObject:(NSDictionary*)object toFilePath:(NSString*)path
+{
     NSFileManager* fm = [NSFileManager defaultManager];
-    
     BOOL doesExists = [fm fileExistsAtPath:path];
     
-    if (!doesExists) {
+    if (!doesExists)
+    {
         NSLog(@"Created New File: %@",path);
-        
         [fm createFileAtPath:path contents:nil attributes:nil];
     }
     
     BOOL canBeConverted = [NSJSONSerialization isValidJSONObject:object];
-    
     NSError* error = nil;
     
-    if (canBeConverted) {
+    if (canBeConverted)
+    {
         // Need Proper File location
         NSOutputStream* stream = [NSOutputStream outputStreamToFileAtPath:FILE append:NO];
         [stream open];
         [NSJSONSerialization writeJSONObject:object toStream:stream options:NSJSONWritingPrettyPrinted error:&error];
         [stream close];
     }
-    
     return error;
 }
 @end
