@@ -10,13 +10,12 @@
 #import "CurrentVisitTableCell.h"
 #import "PreviousVisitsTableCell.h"
 
-@interface TriagePatientViewController : UIViewController<CancelDelegate>{
-  
+@interface TriagePatientViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
+    ScreenHandler handler;
 }
     
-@property (strong, nonatomic) NSMutableDictionary * visitData;
 @property (strong, nonatomic) NSMutableDictionary * patientData;
-
+@property (strong, nonatomic) CurrentVisitViewController * control1;
 @property (strong, nonatomic) PreviousVisitsViewController * control2;
 
 @property (weak, nonatomic) IBOutlet UITextField *patientNameField;
@@ -25,17 +24,15 @@
 @property (weak, nonatomic) IBOutlet UITextField *patientAgeField;
 @property (weak, nonatomic) IBOutlet UITextField *patientSexField;
 @property (weak, nonatomic) IBOutlet UIImageView *patientPhoto;
-@property (weak, nonatomic) id<CancelDelegate> delegate;
-@property (weak, nonatomic) IBOutlet UIView *patientView;
 
 //@property (weak, nonatomic) IBOutlet UIButton *patientAgeField;
 
 // Objects on View
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolBar;
 @property (nonatomic, retain) IBOutlet UISegmentedControl *segmentedControl;
 
-- (IBAction)toggleViews:(id)sender;
+- (void)setScreenHandler:(ScreenHandler)myHandler;
 
--(void)populateInformation;
 @end
 

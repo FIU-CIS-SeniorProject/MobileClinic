@@ -18,6 +18,6 @@
 +(NSDate *)convertSecondsToNSDate:(NSNumber *)time;
 -(NSNumber *)convertNSDateToSeconds;
 +(NSDate*)convertStringToNSDate:(NSString*)string;
--(NSString*)convertNSDateToMonthDayYearTimeString;
+
 -(NSInteger)getNumberOfYearsElapseFromDate;
 @end

@@ -5,15 +5,9 @@
 //  Created by Steven Berlanga on 2/2/13.
 //  Copyright (c) 2013 Steven Berlanga. All rights reserved.
 //
-#define SYNC_DEFAULT_INTERVAL 600
-#define SYNC_EXTENDED_INTERVAL 1200
 
 #import "FIUAppDelegate.h"
 #import "ServerCore.h"
-#import "QueueManager.h"
-
-
-NSTimer* syncTimer;
 
 @implementation FIUAppDelegate
 @synthesize ServerManager;
@@ -42,9 +36,6 @@ NSTimer* syncTimer;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
-
-    // This is the needed to upload the application into test flight
     #define TESTING 1
         #ifdef TESTING
             [TestFlight setDeviceIdentifier:[[NSUUID UUID]UUIDString]];
@@ -52,35 +43,54 @@ NSTimer* syncTimer;
     
         [TestFlight takeOff:@"afc6ff4013b9e807e5a97743e2a8d270_MTg2NjAwMjAxMy0wMi0xMiAxODozOTozOS41NzU1OTk"];
     
-    [self setupTimer:SYNC_EXTENDED_INTERVAL];
+    // Override point for customization after application launch.
     
     return YES;
 }
--(void)setupTimer:(NSInteger)seconds{
-    syncTimer = [NSTimer timerWithTimeInterval:seconds target:self selector:@selector(syncronize) userInfo:nil repeats:NO];
+
+- (void)RigoMethod {
+    //RIGO - FOR TESTING PURPOSES ONLY
+    //MANUALLY ENTERS DATA INTO THE DATABASE
+    //    NSError *error;
+    //    NSManagedObjectContext *context = [self managedObjectContext];
     
-    NSRunLoop* run = [NSRunLoop mainRunLoop];
+    //    // ADD MEDICATION MANUALLY
+    //    NSManagedObject *medication = [NSEntityDescription
+    //                                       insertNewObjectForEntityForName:@"Medication"
+    //                                       inManagedObjectContext:context];
+    //
+    //    [medication setValue:@"200" forKey:@"dosage"];
+    ////    [medication setValue:@"" forKey:@"expiration"];
+    ////    [medication setValue:@"" forKey:@"isLockedBy"];
+    //    [medication setValue:@"advil.200" forKey:@"medicationId"];
+    //    [medication setValue:@"Advil" forKey:@"medName"];
+    //    [medication setValue:[NSNumber numberWithInt:5] forKey:@"numContainers"];
+    //    [medication setValue:[NSNumber numberWithInt:50] forKey:@"tabletsContainer"];
+    //    [medication setValue:[NSNumber numberWithInt:250] forKey:@"total"];
+    //
+    //    if (![context save:&error]) {
+    //        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    //    }
     
-    [run addTimer:syncTimer forMode:NSDefaultRunLoopMode];
-}
--(void)syncronize{
+    /*
+     // Delete all entries in the Core Data table (ex. Patients)
+     NSFetchRequest *fetchRecords = [[NSFetchRequest alloc] init];
+     [fetchRecords setEntity:[NSEntityDescription entityForName:@"Patients" inManagedObjectContext:context]];
+     
+     NSArray *currentRecords = [context executeFetchRequest:fetchRecords error:&error];
+     
+     for(NSManagedObject *entries in currentRecords) {
+     [context deleteObject:entries];
+     }
+     */
     
-    QueueManager* qm = [[QueueManager alloc]init];
+    // Print (to NSLog) content of table (ex. Patients)
+    //    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    //    [fetchRequest setEntity:[NSEntityDescription entityForName:@"Patients" inManagedObjectContext:context]];
+    //
+    //    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
     
-    NSMutableArray* pendingObject = [NSMutableArray arrayWithArray:[qm getAllQueuedObjects]];
-    
-    if (pendingObject.count > 0) {
-        // Syncs any pending objects
-        [qm sendArrayOfQueuedObjectsToServer:[NSMutableArray arrayWithArray:[qm getAllQueuedObjects]] onCompletion:^(id<BaseObjectProtocol> data, NSError *error) {
-            if (!data && error) {
-                [self setupTimer:SYNC_DEFAULT_INTERVAL];
-            }else{
-                [self setupTimer:SYNC_EXTENDED_INTERVAL];
-            }
-        }];
-    }else{
-        [self setupTimer:SYNC_EXTENDED_INTERVAL];
-    }
+    //    [self saveContext];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

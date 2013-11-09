@@ -7,7 +7,7 @@
 //
 #define ARCHIVER        @"archiver"
 #define READING_TIMEOUT 10
-#define CONNECT_TIMEOUT 3.5
+#define CONNECT_TIMEOUT 5
 
 #import "ServerCore.h"
 #import "ObjectFactory.h"
@@ -293,7 +293,7 @@ static BOOL connected;
         // Invalidate Reading Timeout timer
         [connectionTimer invalidate];
         
-        NSLog(@"Client Recieved: %@",myDictionary.allKeys);
+        NSLog(@"Client Recieved: %@",myDictionary.allKeys.description);
         
         // Finished Processing
         isProcessing = NO;

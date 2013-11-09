@@ -42,6 +42,4 @@
 - (BOOL) isConnectedToServer;
 
 -(NSMutableDictionary*)getDictionaryValuesFromManagedObject:(NSManagedObject*)object;
-
--(NSArray*)ConvertAllEntriesToJSON;
 @end

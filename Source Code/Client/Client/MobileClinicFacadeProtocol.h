@@ -1,16 +1,35 @@
+// The MIT License (MIT)
+//
+// Copyright (c) 2013 Florida International University
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 //
 //  MobileClinicFacadeProtocol.h
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 3/1/13.
-//  Copyright (c) 2013 Steven Berlanga. All rights reserved.
 //
 #define OPEN_VISITS_PATIENT @"Open Visit"
 
 #import "PatientObjectProtocol.h"
 #import "VisitationObjectProtocol.h"
 #import "PrescriptionObjectProtocol.h"
-#import "FaceObjectProtocol.h"
 #import "MedicationObjectProtocol.h"
 #import <Foundation/Foundation.h>
 
@@ -36,7 +55,7 @@ typedef void (^MobileClinicSearchResponse)(NSArray* allObjectsFromSearch, NSErro
  * @param patietnInfo The patient's information in a dictionary form
  */
 -(void) createAndCheckInPatient:(NSDictionary*)patientInfo onCompletion:(MobileClinicCommandResponse)Response;
--(void) createAndCheckInFace:(NSDictionary*)faceInfo onCompletion:(MobileClinicCommandResponse)Response;
+
 /**
  * Locates the patient by First and/or Family name. This method fetches the query from the server and caches it to the device. Then it queries the cache to return a complete list objects that matches the criteria
  * @param firstname the firstname of the patient
@@ -94,11 +113,6 @@ typedef void (^MobileClinicSearchResponse)(NSArray* allObjectsFromSearch, NSErro
  *  @param visit the Visitation Dictionary that you want to search for all prescriptions from
  */
 -(void) findAllPrescriptionForCurrentVisit:(NSDictionary*)visit AndOnCompletion:(MobileClinicSearchResponse)Response;
-/**
- *
- */
--(NSArray*)GetVisitsForOpenPatients:(BOOL)shouldGetOnlyOpenPatients;
-
 /**
  * Creates a new patient and associates it to a given visit.
  * Can also lock the prescription using the AndLockVisit boolean variable

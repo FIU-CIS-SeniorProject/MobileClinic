@@ -10,15 +10,13 @@
 #import "MobileClinicFacade.h"
 #import "CameraFacade.h"
 #import "StationViewHandlerProtocol.h"
-#import "GenericCellProtocol.h"
 
-@interface RegisterPatientViewController : UIViewController<GenericCellProtocol, UITableViewDataSource, UITableViewDelegate>{
+@interface RegisterPatientViewController : UIViewController{
     ScreenHandler handler;
     CameraFacade *facade;
     BOOL shouldDismiss;
 }
 
-@property (weak, nonatomic) id<GenericCellManager> delegate;
 @property (weak, nonatomic) IBOutlet UITextField *patientNameField;
 @property (weak, nonatomic) IBOutlet UITextField *familyNameField;
 @property (weak, nonatomic) IBOutlet UITextField *villageNameField;
@@ -27,27 +25,16 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *patientSexSegment;
 @property (weak, nonatomic) IBOutlet UIButton *createPatientButton;
 @property (weak, nonatomic) IBOutlet UIButton *registerFingerprintsButton;
-
-@property (weak, nonatomic) IBOutlet UIView *searchView;
-@property (strong, nonatomic) IBOutlet UITextField *firstNameField;
-@property (strong, nonatomic) IBOutlet UITextField *lastNameField;
-@property (weak, nonatomic) IBOutlet UITableView *searchResultTableView;
-@property (strong, nonatomic) UIButton *patientFound;
-
 - (IBAction)registerFingerprintsButton:(id)sender;
 
-@property (weak, nonatomic) IBOutlet UIView *registerView;
+@property (strong, nonatomic) NSMutableDictionary *patient;
 
 - (IBAction)patientPhotoButton:(id)sender;
-
 - (IBAction)createPatient:(id)sender;
-- (IBAction)searchByFingerprintButton:(id)sender;
+
 - (BOOL)validateRegistration;
-
-- (IBAction)searchByNameButton:(id)sender ;
-- (IBAction)startOver:(id)sender;
-
 - (IBAction)getAgeOfPatient:(id)sender;
 
+- (void)setScreenHandler:(ScreenHandler)myHandler;
 - (void)resetData;
 @end

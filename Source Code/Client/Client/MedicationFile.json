@@ -1,186 +1,82 @@
-[
+ [
   {
-  "medicationId":"Tylenol",
-  "medName":"Acetaminophen",
-  },
-  {
-  "medicationId":"Albendazole",
-  "medName":"Albendazole",
-  },
-  {
-  "medicationId":"SalbutemolTablet",
-  "medName":"Salbutemol (Tablet)",
+  "dosage":"200",
+  "expiration":"2015-12-01",
+  "isLockedBy":"admin",
+  "medicationId":"advil.200",
+  "medName":"Advil",
+  "numContainers":10,
+  "tabletsContainer":100,
+  "total":1000
   },
   {
-  "medicationId":"SalbutemolInhaler",
-  "medName":"Salbutemol (Inhaler)",
+  "dosage":"500",
+  "expiration":"2015-06-01",
+  "isLockedBy":"admin",
+  "medicationId":"acetamiophene.500",
+  "medName":"Acetamiophene",
+  "numContainers":10,
+  "tabletsContainer":500,
+  "total":5000
   },
   {
-  "medicationId":"Amoxycillin",
-  "medName":"Amoxycillin",
-  },
-  {
-  "medicationId":"Neosporin",
-  "medName":"Antibiotic Ointment",
-  },
-  {
-  "medicationId":"Anti-Diarrheal",
-  "medName":"Loperamide Hydrochloride",
-  },
-  {
-  "medicationId":"Nova-La",
-  "medName":"Artemether Lumefantrine (Nova-La)",
-  },
-  {
-  "medicationId":"Aspirin",
-  "medName":"Aspirin",
-  },
-  {
-  "medicationId":"Azythromycin",
-  "medName":"Azythromycin",
-  },
-  {
-  "medicationId":"Diphenhydramine",
-  "medName":"Diphenhydramine",
-  },
-  {
-  "medicationId":"Bacitracin",
-  "medName":"Bacitracin",
-  },
-  {
-  "medicationId":"Ciprofloxacin",
-  "medName":"Ciprofloxacin",
-  },
-  {
-  "medicationId":"Cimetidine",
-  "medName":"Cimetidine",
-  },
-  {
-  "medicationId":"Clotrimozole",
-  "medName":"Clotrimozole",
-  },
-  {
-  "medicationId":"Diprolene",
-  "medName":"Diprolene",
-  },
-  {
-  "medicationId":"Doxycycline",
-  "medName":"Doxycycline",
-  },
-  {
-  "medicationId":"Dulcolax",
-  "medName":"Dulcolax",
-  },
-  {
-  "medicationId":"Enalapril Maleate",
-  "medName":"Enalapril Maleate",
-  },
-  {
-  "medicationId":"Famotidine",
-  "medName":"Famotidine",
-  },
-  {
-  "medicationId":"Fluconazole",
-  "medName":"Fluconazole",
-  },
-  {
-  "medicationId":"Hydrochlorothiazide",
-  "medName":"HCTZ",
-  },
-  {
-  "medicationId":"HydrocortisoneCream",
-  "medName":"Hydrocortisone Cream",
-  },
-  {
-  "medicationId":"Advil",
-  "medName":"Ibuprofen",
-  },
-  {
-  "medicationId":"Loratadine",
-  "medName":"Loratadine",
-  },
-  {
-  "medicationId":"Metformin",
-  "medName":"Metformin",
-  },
-  {
-  "medicationId":"Metronidazole",
-  "medName":"Metronidazole",
-  },
-  {
-  "medicationId":"SalineDrops",
-  "medName":"Saline Drops",
-  },
-  {
-  "medicationId":"Omeprazole",
-  "medName":"Omeprazole",
-  },
-  {
-  "medicationId":"Prednisone Tablets",
-  "medName":"Prednisone Tablets",
-  },
-  {
-  "medicationId":"Petrolium",
-  "medName":"Petrolium",
-  },
-  {
-  "medicationId":"Phenobarbital",
-  "medName":"Phenobarbital",
-  },
-   {
-  "medicationId":"Phenytoin",
-  "medName":"Phenytoin",
-  },
-   {
-  "medicationId":"Praziquantel",
-  "medName":"Praziquantel",
-  },
-  { 
-  "medicationId":"Atenolol",
-  "medName":"Atenolol",
-  },
-  {
-  "medicationId":"VitaminsAdult",
-  "medName":"Vitamins (Adult)",
-  },
-  {
-  "medicationId":"VitaminsChildren",
-  "medName":"Vitamins (Children Chewables)",
-  },
-  {
-  "medicationId":"VitaminsInfant",
-  "medName":"Vitamins (Infant Drops)",
-  },
-  {
-  "medicationId":"VitaminsIron",
-  "medName":"Vitamins (Iron)",
-  },
-  {
-  "medicationId":"Cephalexin",
+  "dosage":"250",
+  "expiration":"2015-01-01",
+  "isLockedBy":"admin",
+  "medicationId":"cephalexin.250",
   "medName":"Cephalexin",
+  "numContainers":5,
+  "tabletsContainer":500,
+  "total":2500
   },
   {
-  "medicationId":"VitaminsAdult",
-  "medName":"Vitamins (Adult)",
+  "dosage":"250",
+  "expiration":"2014-10-01",
+  "isLockedBy":"admin",
+  "medicationId":"ciprofloxacin.250",
+  "medName":"Ciprofloxacin",
+  "numContainers":15,
+  "tabletsContainer":150,
+  "total":2250
   },
   {
-  "medicationId":"CeftriaxoneInjects",
-  "medName":"Ceftriaxone (Inj)",
+  "dosage":"100",
+  "expiration":"2014-03-01",
+  "isLockedBy":"admin",
+  "medicationId":"doxycycline",
+  "medName":"Doxycycline",
+  "numContainers":5,
+  "tabletsContainer":500,
+  "total":2500
   },
   {
-  "medicationId":"Ondansetron",
-  "medName":"Ondansetron",
+  "dosage":"150",
+  "expiration":"2013-12-31",
+  "isLockedBy":"admin",
+  "medicationId":"fluconazole.150",
+  "medName":"Fluconazole",
+  "numContainers":15,
+  "tabletsContainer":100,
+  "total":1500
   },
   {
-  "medicationId":"Griseofalvin",
-  "medName":"Griseofalvin",
+  "dosage":"10",
+  "expiration":"2014-12-01",
+  "isLockedBy":"admin",
+  "medicationId":"glipizide.10",
+  "medName":"Glipizide",
+  "numContainers":50,
+  "tabletsContainer":50,
+  "total":2500
   },
   {
-  "medicationId":"TobramycinEyeDrops",
-  "medName":"Tobramycin Eye Drops",
-  },
-  {
-  "medicationId":"HaemorrhoidCream",
-  "medName":"Haemorrhoid Cream",
+  "dosage":"25",
+  "expiration":"2014-12-01",
+  "isLockedBy":"admin",
+  "medicationId":"hydralazine.25",
+  "medName":"Hydralazine",
+  "numContainers":20,
+  "tabletsContainer":200,
+  "total":4000
   }
-]
+  ]

@@ -8,14 +8,10 @@
 
 #import "DoctorPrescriptionViewController.h"
 #import "MobileClinicFacade.h"
-#import "PharmacyPatientViewControllerCell.h"
-#import "MedicineSearchViewController.h"
-@interface DoctorPrescriptionViewController ()<MCSwipeTableViewCellDelegate,MedicineSearchViewProtocol,UINavigationControllerDelegate>{
-    NSMutableArray* prescriptions;
-    MedicineSearchViewController* newView;
-}
+@interface DoctorPrescriptionViewController ()
 
 @property (nonatomic) int timeOfDay;
+
 @end
 
 @implementation DoctorPrescriptionViewController
@@ -30,28 +26,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [_instructionLabel setBackgroundColor:[ColorMe colorFor:PALEPURPLE]];
-    [ColorMe addBorder:_medicationNotes.layer withWidth:2 withColor:[UIColor blackColor]];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(syncronizeObject:) name:SYNC_OBJECT object:_patientData];
+	// Do any additional setup after loading the view.
 }
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self.navigationController setDelegate:self];
-    [_drugTableView setDelegate:self];
-    [_drugTableView setDataSource:self];
-    [_medicationNotes setText:[_patientData objectForKey:MEDICATIONNOTES]];
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
--(void)syncronizeObject:(NSNotification*)notif{
-    NSMutableDictionary* sync = notif.object;
-    if (!_patientData) {
-        _patientData = [[NSMutableDictionary alloc]initWithDictionary:sync];
-    }else{
-        for (id key in sync.allKeys) {
-        [_patientData setValue:[sync objectForKey:key] forKey:key];
-        }
-    }
-}
+
 - (void)viewDidUnload {
     [self setTabletsTextField:nil];
     [self setTimeOfDayTextFields:nil];
@@ -62,7 +44,7 @@
 }
 
 - (IBAction)newTimeOfDay:(id)sender {
-   
+    
     for(int i = 0; i < [_timeOfDayButtons count]; i++) {
         if([[_timeOfDayButtons objectAtIndex:i] isEqual:sender]) {
             [((UIButton *)sender) setAlpha:1];
@@ -94,179 +76,39 @@
 }
 
 - (IBAction)findDrugs:(id)sender {
-    if (!newView) {
-        newView = [self getViewControllerFromiPadStoryboardWithName:@"MedicineSearchViewController"];
-        [newView view];
-    }
-    
-    [newView setDelegate:self];
-    [newView resetView];
-    [newView.navigationItem.leftBarButtonItem setTitle:@"Cancel"];
-    
-    [self.navigationController pushViewController:newView animated:YES];
-    
-    [[NSNotificationCenter defaultCenter]postNotificationName:DISABLE_EDIT object:[NSNumber numberWithBool:NO]];
-
-}
-
--(void)configureCell:(PharmacyPatientViewControllerCell*)cell forRow:(NSIndexPath*)indexPath{
-    
-
-    
-    [cell populateFieldsWithData:[prescriptions objectAtIndex:indexPath.row]];
-    
-//    [cell.dosage setText:[NSString stringWithFormat:@"%i Days", [[data objectForKey:TABLEPERDAY] integerValue]]];
-//    
-//    [cell.drugName setText: [data objectForKey:MEDNAME]];
-//    
-//    [cell.timeOfDay setText:[NSString stringWithFormat:@"%@ ", [data objectForKey:TIMEOFDAY]]];
-//    
-//    [cell.instructions setText:[NSString stringWithFormat:@"%@", [data objectForKey:INSTRUCTIONS]]];
-  
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString * currentVisitCellIdentifier = @"Cell";
-    
-    PharmacyPatientViewControllerCell * cell = [tableView dequeueReusableCellWithIdentifier:currentVisitCellIdentifier];
-    
-    if (!cell) {
-        cell = [[PharmacyPatientViewControllerCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:currentVisitCellIdentifier];
-    }
-    
-    [cell setDelegate:self];
-    
-    [cell setFirstStateIconName:nil
-                     firstColor:nil
-            secondStateIconName:@"check.png"
-                    secondColor:[ColorMe colorFor:DARKGREEN]
-                  thirdIconName:nil
-                     thirdColor:nil
-                 fourthIconName:@"cross.png"
-                    fourthColor:[ColorMe colorFor:PALERED]];
-    
-    // Setting the type of the cell
-    [cell setMode:MCSwipeTableViewCellModeSwitch];
-    [cell.contentView setBackgroundColor:[UIColor whiteColor]];
-    [self configureCell:cell forRow:indexPath];
-    
-    return cell;
-}
-
-- (void)swipeTableViewCell:(MCSwipeTableViewCell *)cell didTriggerState:(MCSwipeTableViewCellState)state withMode:(MCSwipeTableViewCellMode)mode
-{
-    
-    // If Switch mode
-    if (mode == MCSwipeTableViewCellModeSwitch)
-    {
-        
-        // Get the row for the cell selected
-        NSIndexPath* index = [_drugTableView indexPathForCell:cell];
-        NSMutableDictionary* data = [prescriptions objectAtIndex:index.row];
-        switch (state) {
-                // If the state is positive
-            case MCSwipeTableViewCellState2:
-            {
-                // Save the prescription object (Should decrement the medication)
-                [self savePrescriptionToServer:data atIndexPath:index];
-            }
-                break;
-            case MCSwipeTableViewCellState4:
-                [prescriptions removeObjectAtIndex:index.row];
-                if (prescriptions.count == 0 ) {
-                    [_checkOutBtn setHidden:NO];
-                }
-                [_drugTableView reloadData];
-                break;
-            default:
-                /** This will remove the HUD since the search is complete */
-                [self HideALLHUDDisplayInView:self.view];
-                break;
-        }
-        
-        [cell setBackgroundColor:[UIColor clearColor]];
-    }
-}
-
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (prescriptions.count == 0) {
-        [_instructionLabel setText:@"Tap \"Checkout\" to dismiss the patient without prescribing medication"];
-        [_checkOutBtn setHidden:NO];
-    }else{
-         [_instructionLabel setText:@"Slide medication to the right to save and send to pharmacy. OR Slide medication to the left to delete"];
-        [_checkOutBtn setHidden:YES];
-    }
-    return prescriptions.count;
-}
-
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
-}
-
-
-
--(void)savePrescriptionToServer:(NSMutableDictionary*)prescription atIndexPath:(NSIndexPath*)path{
-    
-    
-    [_patientData setValue:[NSDate date] forKey:DOCTOROUT];
-    
-    [_patientData setValue:_medicationNotes.text forKey:MEDICATIONNOTES];
-    // You need to save the information on this screen. it will be too much work and complication to save it elsewhere
-    MobileClinicFacade* mcf = [[MobileClinicFacade alloc]init];
-    
-    /** This will should HUD in tableview to show alert the user that the system is working */
-    [self showIndeterminateHUDInView:self.view withText:@"Saving..." shouldHide:NO afterDelay:0 andShouldDim:NO];
-    
-    [mcf addNewPrescription:prescription ForCurrentVisit:_patientData AndlockVisit:NO onCompletion:^(NSDictionary *object, NSError *error) {
-        if (!object)
-            [FIUAppDelegate getNotificationWithColor:AJNotificationTypeOrange Animation:AJLinedBackgroundTypeAnimated WithMessage:error.localizedDescription inView:self.view];
-        else{
-            [prescriptions removeObjectAtIndex:path.row];
-            [_drugTableView reloadData];
-            [self savePrescription:nil];
-        }
-            
-        /** This will remove the HUD since the search is complete */
-        [self HideALLHUDDisplayInView:self.view];
-    }];
+    [[NSNotificationCenter defaultCenter] postNotificationName:MOVE_TO_SEARCH_FOR_MEDICINE object:nil];
 }
 
 // Change name of button (Send to Pharmacy / Checkout)
 - (IBAction)savePrescription:(id)sender {
-     // TODO: NEED TO VALIDATE THAT FIELD ENTRY IS CORRECT (STRING or INTs)
+    if([self validatePrescription]) {
         
-    if (prescriptions.count == 0) {
-        [_delegate cancel];
-    }
-}
-
-- (IBAction)CheckOutPatient:(id)sender {
-    if (prescriptions.count == 0) {
-       
+        // TODO: NEED TO VALIDATE THAT FIELD ENTRY IS CORRECT (STRING or INTs)
+        
+        // Create a timestamp for Prescribe Time
+        NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
+        [DateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+        NSString *dateStamp = [DateFormatter stringFromDate:[NSDate date]];
+        
+        // Save prescription fields
+        [_prescriptionData setObject:_medicationNotes.text forKey:INSTRUCTIONS];
+        [_prescriptionData setObject:[NSNumber numberWithInteger:[_tabletsTextField.text integerValue]] forKey:TABLEPERDAY];
+        [_prescriptionData setObject:[NSNumber numberWithInteger:self.timeOfDay] forKey:TIMEOFDAY];
+        [_prescriptionData setObject:dateStamp forKey:PRESCRIBETIME];
         [_patientData setValue:[NSDate date] forKey:DOCTOROUT];
         
-        [_patientData setValue:_medicationNotes.text forKey:MEDICATIONNOTES];
         // You need to save the information on this screen. it will be too much work and complication to save it elsewhere
         MobileClinicFacade* mcf = [[MobileClinicFacade alloc]init];
         
-        /** This will should HUD in tableview to show alert the user that the system is working */
-        [self showIndeterminateHUDInView:self.view withText:@"Saving..." shouldHide:NO afterDelay:0 andShouldDim:NO];
-        
-        [mcf checkoutVisit:_patientData forPatient:[_patientData objectForKey:OPEN_VISITS_PATIENT] AndWillUlockOnCompletion:^(NSDictionary *object, NSError *error) {
-           
-            if (!object)
-                [FIUAppDelegate getNotificationWithColor:AJNotificationTypeOrange Animation:AJLinedBackgroundTypeAnimated WithMessage:error.localizedDescription inView:self.view];
-            else{
-                [self savePrescription:nil];
-            }
+        /* The _patientData should not be contian patient data but Visit dictionary with the patient data inside Or just the visit data alone. This method will not work if there is no visitation data*/
+        // TODO: Fix this  class so that is has the visit data
 
-            /** This will remove the HUD since the search is complete */
-            [self HideALLHUDDisplayInView:self.view];
+        [mcf addNewPrescription:_prescriptionData ForCurrentVisit:_patientData AndlockVisit:NO onCompletion:^(NSDictionary *object, NSError *error) {
+            if (!object)
+                [FIUAppDelegate getNotificationWithColor:AJNotificationTypeRed Animation:AJLinedBackgroundTypeAnimated WithMessage:error.localizedDescription inView:self.view];
+            else
+                [[NSNotificationCenter defaultCenter] postNotificationName:SAVE_PRESCRIPTION object:_prescriptionData];
         }];
-    }else{
-        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Warning" message:@"Please slide check out medication manually by sliding following instructions at the bottom of the screen" delegate:nil cancelButtonTitle:@"OKAY" otherButtonTitles: nil];
-        [alert show];
     }
 }
 
@@ -279,26 +121,39 @@
     [_medicationNotes setEditable:NO];
     [_tabletsTextField setEnabled:NO];
     [_timeOfDayTextFields setEnabled:NO];
+    
+    
+    for(int i = 0; i <[_timeOfDayButtons count]; i++){
+        [((UIButton *)[_timeOfDayButtons objectAtIndex:i]) setEnabled:NO];
+    }
+}
 
-}
--(void)addPrescription:(NSMutableDictionary *)prescription{
-   
-    if (!prescriptions) {
-        prescriptions = [[NSMutableArray alloc]init];
+- (BOOL)validatePrescription {
+    BOOL inputIsValid = YES;
+    NSString *errorMsg;
+    
+    if([_drugTextField.text isEqualToString:@""] || _drugTextField.text == nil) {
+        errorMsg = @"Missing medication";
+        inputIsValid = NO;
+    } else if([_tabletsTextField.text isEqualToString:@""] || _tabletsTextField.text == nil) {
+        errorMsg = @"Missing number of tablets per day";
+        inputIsValid = NO;
+    } else if([_timeOfDayTextFields.text isEqualToString:@""] || _timeOfDayTextFields.text == nil) {
+        errorMsg = @"Choose time of day";
+        inputIsValid = NO;
     }
     
-    [prescriptions addObject:prescription];
-    
-    [_drugTableView reloadData];
-    
-    [self.navigationController popViewControllerAnimated:YES];
-}
--(void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
-    if (viewController == (UIViewController*)_delegate) {
-         [[NSNotificationCenter defaultCenter]removeObserver:self name:SYNC_OBJECT object:_patientData];
-    }else if (viewController == self){
-        [[NSNotificationCenter defaultCenter]postNotificationName:DISABLE_EDIT object:[NSNumber numberWithBool:YES]];
+    // Display error message on invalid input
+    if(inputIsValid == NO){
+        UIAlertView *validateDiagnosisAlert = [[UIAlertView alloc] initWithTitle:nil message:errorMsg delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [validateDiagnosisAlert show];
     }
+    
+    return inputIsValid;
+}
+
+- (void)setScreenHandler:(ScreenHandler)myHandler {
+    handler = myHandler;
 }
 
 @end

@@ -70,8 +70,4 @@
  
     [self startSearchWithData:parentObject withsearchType:kFindObject andOnComplete:eventResponse];
 }
-
--(NSArray *)covertAllSavedObjectsToJSON{
-    return [self ConvertAllEntriesToJSON];
-}
 @end

@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "CurrentDiagnosisViewController.h"
-#import "GenericTableViewCellProtocol.h"
+
 @interface CurrentDiagnosisTableCell : UITableViewCell
 
-@property (nonatomic, strong) id<GenericCellProtocol> viewController;
+@property (nonatomic, strong) CurrentDiagnosisViewController * viewController;
 
 @end

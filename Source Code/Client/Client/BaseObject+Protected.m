@@ -195,10 +195,4 @@ id<ServerProtocol> serverManager;
     return [serverManager isClientConntectToServer];
 }
 
--(NSArray*)ConvertAllEntriesToJSON{
-    
-    NSArray* allPatients= [self FindObjectInTable:COMMONDATABASE withCustomPredicate:[NSPredicate predicateWithFormat:@"%K == YES",ISDIRTY] andSortByAttribute:COMMONID];
-    
-    return [self convertListOfManagedObjectsToListOfDictionaries:allPatients];
-}
 @end

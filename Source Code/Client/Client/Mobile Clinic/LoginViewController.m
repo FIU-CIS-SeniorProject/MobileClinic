@@ -5,32 +5,19 @@
 //  Created by sebastian a zanlongo on 2/18/13.
 //  Copyright (c) 2013 Steven Berlanga. All rights reserved.
 //
-
-
 #define TESTING @"Test"
-
 #import "MBProgressHUD.h"
 #import "LoginViewController.h"
 #import "MedicationObject.h"
 #import "PatientObject.h"
 #import "ServerCore.h"
-#import "SystemBackup.h"
 @interface LoginViewController (){
     MBProgressHUD* progress;
-    
 }
-@property (nonatomic, retain) UIScrollView* scrollView;
-@property (nonatomic, retain) NSMutableArray* slideImages;
-@property (nonatomic, retain) NSTimer* timer;
-@property (nonatomic, assign) CAGradientLayer *gradient;
-
 @end
 
 @implementation LoginViewController
-@synthesize scrollView = _scrollView;
-@synthesize slideImages = _slideImages;
-@synthesize gradient = _gradient;
-@synthesize usernameTextField, passwordTextField;
+@synthesize usernameTextField, passwordTextField, user;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -42,8 +29,6 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    
-    [ColorMe addGradientToLayer:self.view.layer colorOne:[ColorMe lightGray] andColorTwo:[ColorMe whitishColor]inFrame:self.view.bounds];
 	// Do any additional setup after loading the view.
 }
 
@@ -59,58 +44,31 @@
 }
 
 - (void)setupEnvironment {
-    
-    // This will populate the databaes with values from the JSON files
-    // Use this for testing only
-    
     // Leave this while Device is in Testing mode
     NSUserDefaults* uDefault = [NSUserDefaults standardUserDefaults];
-   
+    
     if (![uDefault boolForKey:TESTING]) {
-        [self setupUser:nil];
         [self createTestMedications:nil];
-        //[self setupTestPatients:nil];
+        [self setupTestPatients:nil];
+        [self setupUser:nil];
         [[NSUserDefaults standardUserDefaults]setBool:YES forKey:TESTING];
     }else{
-       // [self setupUser:nil];
-       // [self DeleteMedications:nil];
-       // [self createTestMedications:nil];
         [usernameTextField setText:[uDefault objectForKey:CURRENT_USER]];
     }
-    
 }
 
-/** Initiates Login */
 - (IBAction)loginButton:(id)sender {
 
     /** This will should HUD in tableview to show alert the user that the system is working */
-    [self showIndeterminateHUDInView:self.view withText:@"Logging In" shouldHide:NO afterDelay:0 andShouldDim:YES];
-   
-    
-    // Dismiss the keyboard
-    [usernameTextField resignFirstResponder];
-    [passwordTextField resignFirstResponder];
-    
-    // format username and login the user
-    [self login:[[UserObject alloc]init] Password:passwordTextField.text Username:[[usernameTextField.text lowercaseString]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
-    
-}
-
-/** Private Method: Login the user and store the username for faster login */
--(void)login:(UserObject*)login Password:(NSString*)password Username:(NSString*)username{
-    
-    // Store Username for application user and login memory
-    [[NSUserDefaults standardUserDefaults]setObject:username forKey:CURRENT_USER];
-    
-    // Save
-    [[NSUserDefaults standardUserDefaults]synchronize];
+    [self showIndeterminateHUDInView:self.view withText:@"Logging In" shouldHide:NO afterDelay:0 andShouldDim:NO];
+    // if user doesn't exist, instantiate the user
+    if (!user)
+        user = [[UserObject alloc]init];
     
     // Attempt to login the user based on username and password
-    [login loginWithUsername:username andPassword:password onCompletion:^(id<BaseObjectProtocol> data, NSError *error, Users *userA) {
-        
+    [user loginWithUsername:usernameTextField.text andPassword:passwordTextField.text onCompletion:^(id<BaseObjectProtocol> data, NSError *error, Users *userA) {
         /** This will remove the HUD since the search is complete */
         [self HideALLHUDDisplayInView:self.view];
-        
         if (error) {
             [FIUAppDelegate getNotificationWithColor:AJNotificationTypeRed Animation:AJLinedBackgroundTypeAnimated WithMessage:error.localizedDescription inView:self.view];
         }
@@ -118,61 +76,47 @@
         {
             // Listens for the logout button
             [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(LogOffDevice) name:LOGOFF object:nil];
-            
-            // Listens for changing views
-            [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(SwitchViews:) name:SWITCH_STATIONS object:nil];
-   
-            // Open the Appropriate View
-            [self loadViewBasedOnUserType:userA.userType.integerValue];
-            
+            [[NSUserDefaults standardUserDefaults]setObject:usernameTextField.text forKey:CURRENT_USER];
+            [[NSUserDefaults standardUserDefaults]synchronize];
+            switch ([userA.userType integerValue]) {
+                case 0:
+                    [self goToGenericStart:1];
+                    break;
+                case 1:
+                    [self goToPatientQueue:2];
+                    break;
+                case 2:
+                    [self goToPatientQueue:3];
+                    break;
+            }
         }
     }];
 }
 
-/** Private Helper Method: Called through notifications to switch views*/
--(void)SwitchViews:(NSNotification*)notification{
-    
-    [self dismissViewControllerAnimated:YES completion:^{
-       
-        int view = [notification.object integerValue];
-        
-        [self loadViewBasedOnUserType:view];
-        
-    }];
-}
-/** Private Method: Closes the view, and clears all text fields and username memory */
 - (void)LogOffDevice {
-    
     [self dismissViewControllerAnimated:YES completion:^{
         // Stops listening
         [passwordTextField setText:@""];
-        
         [[NSUserDefaults standardUserDefaults]setObject:@"" forKey:CURRENT_USER];
         [[NSUserDefaults standardUserDefaults]synchronize];
-        
         [[NSNotificationCenter defaultCenter]removeObserver:self];
     }];
 }
 
-/** Private Method: Switches the view based on the usertype. */
--(void)loadViewBasedOnUserType:(UserTypes)type{
-   
-    UINavigationController * newView;
-   
-    switch (type) {
-        case kTriageNurse:
-        case kAdministrator:
-            newView = [self getViewControllerFromiPadStoryboardWithName:@"triageController"];
-            break;
-        case kDoctor:
-            newView = [self getViewControllerFromiPadStoryboardWithName:@"doctorQueueController"];
-            break;
-        case kPharmacists:
-            newView = [self getViewControllerFromiPadStoryboardWithName:@"PharmacyQueueController"];
-            break;
-        default:
-            break;
-    }
+- (void)goToGenericStart:(int)station {
+    StationNavigationController * newView = [self getViewControllerFromiPadStoryboardWithName:@"genericStartViewController"];
+    
+    [newView setStationChosen:[NSNumber numberWithInt:station]];
+    [self presentViewController:newView animated:YES completion:^{
+        
+    }];
+//    [self.navigationController pushViewController:newView animated:YES];
+}
+
+- (void)goToPatientQueue:(int)station {
+    StationNavigationController * newView = [self getViewControllerFromiPadStoryboardWithName:@"patientQueueViewController"];
+    
+    [newView setStationChosen:[NSNumber numberWithInt:station]];
     
     [self presentViewController:newView animated:YES completion:^{
         
@@ -185,8 +129,10 @@
     [super viewDidUnload];
 }
 
-#pragma mark- Moving Tiles
-#pragma mark-
+//- (IBAction)move:(id)sender {
+//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(LogOffDevice) name:LOGOFF object:nil];
+//    [self navigateToMainScreen];
+//}
 
 - (IBAction)setupTestPatients:(id)sender {
     // - DO NOT COMMENT: IF YOUR RESTART YOUR SERVER IT WILL PLACE DEMO PATIENTS INSIDE TO HELP ACCELERATE YOUR TESTING
@@ -241,18 +187,6 @@
             [base saveObject:^(id<BaseObjectProtocol> data, NSError *error) {
             }];
         }
-    }];
-}
-
-- (IBAction)DeleteMedications:(id)sender {
-
-     MedicationObject *base = [[MedicationObject alloc]init];
- 
-    NSArray* allMeds = [base FindAllObjectsLocallyFromParentObject:nil];
-    
-    [allMeds enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        
-        [base deleteDatabaseDictionaryObject:obj];
     }];
 }
 @end
