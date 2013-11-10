@@ -63,7 +63,10 @@
     NSError *error = nil;
     
     NSDictionary *properties = [applicationFilesDirectory resourceValuesForKeys:@[NSURLIsDirectoryKey] error:&error];
-    
+    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],
+                             NSMigratePersistentStoresAutomaticallyOption,
+                             [NSNumber numberWithBool:YES],
+                             NSInferMappingModelAutomaticallyOption, nil];
     if (!properties) {
         BOOL ok = NO;
         if ([error code] == NSFileReadNoSuchFileError) {
@@ -87,19 +90,20 @@
         }
     }
     
+    
     NSURL *url = [applicationFilesDirectory URLByAppendingPathComponent:@"NewStoreFile.sqldata"];//@"Mobile_Clinic.storedata"];
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
-    if (![coordinator addPersistentStoreWithType:NSXMLStoreType configuration:nil URL:url options:nil error:&error]) {
+    if (![coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:options error:&error]) {
         [[NSApplication sharedApplication] presentError:error];
         return nil;
     }
     _persistentStoreCoordinator = coordinator;
     //added by Humberto
-   /* NSURL *sqlstore = [applicationFilesDirectory URLByAppendingPathComponent:@"NewStoreFile.sqldata"];
+   /* NSURL *sqlstore = [applicationFilesDirectory URLByAppendingPathComponent:@"NewStoreFile1.sqldata"];
     NSPersistentStore *xmlstore = [coordinator persistentStoreForURL:url];
     
-    [coordinator migratePersistentStore:xmlstore toURL:sqlstore options:nil withType:NSSQLiteStoreType error:nil];
-    */
+    [coordinator migratePersistentStore:xmlstore toURL:sqlstore options:nil withType:NSSQLiteStoreType error:nil];*/
+    
     return _persistentStoreCoordinator;
 }
 

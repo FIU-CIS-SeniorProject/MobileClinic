@@ -21,5 +21,5 @@
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 + (id)sharedInstance;
-+ (id) sharedClass;
+
 @end

@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12F37" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Faces" syncable="YES">
-        <attribute name="familyName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="photo" optional="YES" attributeType="Binary" syncable="YES"/>
-    </entity>
+    <entity name="Entity" syncable="YES"/>
     <entity name="Medication" representedClassName="Medication" syncable="YES">
         <attribute name="dosage" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="expiration" optional="YES" attributeType="String" syncable="YES"/>
@@ -89,6 +85,6 @@
         <element name="Prescription" positionX="162" positionY="-207" width="128" height="195"/>
         <element name="Users" positionX="-18" positionY="-54" width="128" height="180"/>
         <element name="Visitation" positionX="-234" positionY="-27" width="128" height="405"/>
-        <element name="Faces" positionX="162" positionY="27" width="128" height="90"/>
+        <element name="Entity" positionX="160" positionY="192" width="128" height="45"/>
     </elements>
 </model>

@@ -10,6 +10,7 @@
 #import "PatientObjectProtocol.h"
 #import "VisitationObjectProtocol.h"
 #import "PrescriptionObjectProtocol.h"
+#import "FaceObjectProtocol.h"
 #import "MedicationObjectProtocol.h"
 #import <Foundation/Foundation.h>
 
@@ -35,7 +36,7 @@ typedef void (^MobileClinicSearchResponse)(NSArray* allObjectsFromSearch, NSErro
  * @param patietnInfo The patient's information in a dictionary form
  */
 -(void) createAndCheckInPatient:(NSDictionary*)patientInfo onCompletion:(MobileClinicCommandResponse)Response;
-
+-(void) createAndCheckInFace:(NSDictionary*)faceInfo onCompletion:(MobileClinicCommandResponse)Response;
 /**
  * Locates the patient by First and/or Family name. This method fetches the query from the server and caches it to the device. Then it queries the cache to return a complete list objects that matches the criteria
  * @param firstname the firstname of the patient
@@ -93,6 +94,11 @@ typedef void (^MobileClinicSearchResponse)(NSArray* allObjectsFromSearch, NSErro
  *  @param visit the Visitation Dictionary that you want to search for all prescriptions from
  */
 -(void) findAllPrescriptionForCurrentVisit:(NSDictionary*)visit AndOnCompletion:(MobileClinicSearchResponse)Response;
+/**
+ *
+ */
+-(NSArray*)GetVisitsForOpenPatients:(BOOL)shouldGetOnlyOpenPatients;
+
 /**
  * Creates a new patient and associates it to a given visit.
  * Can also lock the prescription using the AndLockVisit boolean variable

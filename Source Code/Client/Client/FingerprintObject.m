@@ -161,6 +161,7 @@
         
         [allFingers addObject:theFinger];
     }
+    
     return allFingers;
 }
 

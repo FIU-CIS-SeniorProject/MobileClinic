@@ -26,6 +26,7 @@
 #define TEMPERATURE     @"temperature"
 #define PRIORITY        @"priority"
 #define ISOPEN          @"isOpen"
+#define MEDICATIONNOTES @"medicationNotes"
 
 #import <Foundation/Foundation.h>
 #import "CommonObjectProtocol.h"
@@ -44,4 +45,10 @@
  *
  */
 -(BOOL)shouldSetCurrentVisitToOpen:(BOOL)shouldOpen;
+/**
+ *
+ */
+-(NSArray*)FindAllVisitsWithinTheLastXHours:(int)hours;
+
+
 @end

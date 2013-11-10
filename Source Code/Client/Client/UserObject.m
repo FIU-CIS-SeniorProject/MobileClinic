@@ -109,6 +109,17 @@ NSString* tempPassword;
     }];
     
 }
+-(UserTypes)getUsertypeForCurrentUser{
+  
+    NSArray* users = [self FindObjectInTable:DATABASE withName:[BaseObject getCurrenUserName] forAttribute:USERNAME];
+   
+    if (users.count > 0) {
+        Users* localUser = users.lastObject;
+        return localUser.userType.integerValue;
+    }
+    
+    return -1;
+}
 
 -(void)getUsersFromServer:(ObjectResponse)withResponse
 {

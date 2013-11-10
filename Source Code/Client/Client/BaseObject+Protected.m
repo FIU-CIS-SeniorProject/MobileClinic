@@ -17,13 +17,7 @@ id<ServerProtocol> serverManager;
     
     [ self tryAndSendData:data withErrorToFire:^(id<BaseObjectProtocol> data, NSError *error) {
         Response(nil, error);
-<<<<<<< HEAD
-    }
-    andWithPositiveResponse:^(id data)
-    {
-=======
     } andWithPositiveResponse:^(id data) {
->>>>>>> 55552517216c31171a19741b666304c99ab7d748
         StatusObject* status = data;
         
         [self SaveListOfObjectsFromDictionary:status.data];
@@ -195,4 +189,10 @@ id<ServerProtocol> serverManager;
     return [serverManager isClientConntectToServer];
 }
 
+-(NSArray*)ConvertAllEntriesToJSON{
+    
+    NSArray* allPatients= [self FindObjectInTable:COMMONDATABASE withCustomPredicate:[NSPredicate predicateWithFormat:@"%K == YES",ISDIRTY] andSortByAttribute:COMMONID];
+    
+    return [self convertListOfManagedObjectsToListOfDictionaries:allPatients];
+}
 @end

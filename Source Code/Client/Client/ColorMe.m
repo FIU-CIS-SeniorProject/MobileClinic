@@ -16,7 +16,7 @@
     switch (colorNumber) {
         case 0:
             //FireBrick Red
-            color = [UIColor colorWithRed:255.0/255.0 green:48.0/255.0 blue:48.0/255.0 alpha:1];
+            color = [UIColor colorWithRed:150.0/255.0 green:72.0/255.0 blue:96.0/255.0 alpha:1];
             break;
         case 1:
             //Light GoldenRod 255;236;139
@@ -32,11 +32,11 @@
             break;
         case 4:
             // Medium Purple 171;130;255
-            color = [UIColor colorWithRed:171.0/255.0 green:130.0/255.0 blue:255.0/255.0 alpha:1];
+            color = [UIColor colorWithRed:144.0/255.0 green:126.0/255.0 blue:156.0/255.0 alpha:1];
             break;
         case 5:
             // dark Green
-            color = [UIColor colorWithRed:47.0/255.0 green:85.0/255.0 blue:60.0/255.0 alpha:1];
+            color = [UIColor colorWithRed:126.0/255.0 green:156.0/255.0 blue:128.0/255.0 alpha:1];
             break;
         case 6:
             //Pink
@@ -44,7 +44,7 @@
             break;
         case 7:
             // Orange
-            color = [UIColor colorWithRed:255.0/255.0 green:160.0/255.0 blue:30.0/255.0 alpha:1];
+            color = [UIColor colorWithRed:220.0/255.0 green:172.0/255.0 blue:120.0/255.0 alpha:1];
             break;
         case 8:
             // Deep Blue
@@ -112,7 +112,7 @@
             break;
         case 5:
             // dark Green
-            color = [UIColor colorWithRed:47.0/255.0 green:85.0/255.0 blue:60.0/255.0 alpha:.5];
+            color = [UIColor colorWithRed:126.0/255.0 green:156.0/255.0 blue:128.0/255.0 alpha:.5];
             break;
         case 6:
             //Pink
@@ -189,9 +189,44 @@
     layer.masksToBounds = YES;
 }
 
++(void)addGradientToLayer:(CALayer*)layer colorOne:(UIColor*)colorOne andColorTwo:(UIColor*)colorTwo inFrame:(CGRect)rect{
+   
+    for(CALayer *sublayer in layer.sublayers) {
+        if([sublayer isKindOfClass:[CAGradientLayer class]]) return;
+    }
+
+    //Create your CAGradientLayer
+    CAGradientLayer *gradientOverlay = [CAGradientLayer layer];
+
+    gradientOverlay.colors = [NSArray arrayWithObjects:
+                              (id) colorOne.CGColor,
+                              (id) colorTwo.CGColor,
+                              (id) colorTwo.CGColor,
+                              (id) colorOne.CGColor,
+                              nil];
+    
+    gradientOverlay.locations = [NSArray arrayWithObjects:
+                                 [NSNumber numberWithFloat:0],
+                                 [NSNumber numberWithFloat:0.35],
+                                 [NSNumber numberWithFloat:0.70],
+                                 [NSNumber numberWithFloat:1],
+                                 nil];
+    
+//    CGPoint startPoint = CGPointMake(CGRectGetMinX(layer.frame), CGRectGetMidY(layer.frame));
+//    
+//    CGPoint endPoint = CGPointMake(CGRectGetMaxX(layer.frame), CGRectGetMidY(layer.frame));
+    
+    gradientOverlay.frame = rect;
+
+    //set its opacity from 0 ~ 1
+    //gradientOverlay.opacity = 0.6f;
+    //add it as sublayer of self.layer (it will be over the layer with the background image
+    [layer insertSublayer:gradientOverlay atIndex:0];
+}
+
 +(void)addTopRoundedEdges:(CALayer*)layer{
     
-    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:layer.bounds byRoundingCorners:UIRectCornerTopLeft cornerRadii:CGSizeMake(5.0, 5.0)];
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:layer.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(5.0, 5.0)];
     
     // Create the shape layer and set its path
     CAShapeLayer *maskLayer = [CAShapeLayer layer];
@@ -252,11 +287,15 @@
 }
 
 +(UIColor*)whitishColor{
-    return [UIColor colorWithRed:250.0/255 green:250.0/255 blue:250.0/255 alpha:.5];
+    return [UIColor colorWithRed:250.0/255 green:250.0/255 blue:250.0/255 alpha:.90];
+}
+
++(UIColor*)lightGray{
+    return [UIColor colorWithRed:232.0/255 green:232.0/255 blue:232.0/255 alpha:.9];
 }
 
 +(UIColor*)grayishColor{
-    return [UIColor colorWithRed:180.0/255 green:180.0/255 blue:180.0/255 alpha:.5];
+    return [UIColor colorWithRed:180.0/255 green:180.0/255 blue:180.0/255 alpha:.9];
 }
 
 +(void)drawBorder:(CGContextRef)context borderColor:(UIColor *)color1 addRect:(CGRect)rect colorSpaceRef:(CGColorSpaceRef)colorSpace{

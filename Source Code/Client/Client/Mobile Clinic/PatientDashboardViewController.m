@@ -10,6 +10,11 @@
 
 #import "QueueManager.h"
 #import "BaseObject.h"
+#import "UserObject.h"
+#import "VisitationObject.h"
+#import "PatientObject.h"
+
+
 @interface PatientDashboardViewController () {
     NSMutableArray * doctorWaitArray;
     NSMutableArray * pharmacyWaitArray;
@@ -35,18 +40,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    UINavigationBar *bar =[self.navigationController navigationBar];
+    
+    [bar setTintColor:[ColorMe colorFor:PALEORANGE]];
+    
     qm = [[QueueManager alloc]init];
 	// Do any additional setup after loading the view.
     
     _prioritySelector.selectedSegmentIndex = 0;
     
-    /** This will should HUD in tableview to show alert the user that the system is working */
-    [self showIndeterminateHUDInView:_doctorQueueTableView withText:@"Searching" shouldHide:NO afterDelay:0 andShouldDim:NO];
-    
-    /** This will should HUD in tableview to show alert the user that the system is working */
-    [self showIndeterminateHUDInView:_pharmacyQueueTableView withText:@"Searching" shouldHide:NO afterDelay:0 andShouldDim:NO];
-    
     mobileFacade = [[MobileClinicFacade alloc] init];
+    
+    [self reloadPharmacyAndDoctor];
+}
+
+-(void)reloadPharmacyAndDoctor{
+    /** This will should HUD in tableview to show alert the user that the system is working */
+    [self showIndeterminateHUDInView:_doctorQueueTableView withText:@"Searching" shouldHide:NO afterDelay:0 andShouldDim:YES];
+    [self.pharmacyQueueTableView setScrollEnabled:NO];
+    /** This will should HUD in tableview to show alert the user that the system is working */
+    [self showIndeterminateHUDInView:_pharmacyQueueTableView withText:@"Searching" shouldHide:NO afterDelay:0 andShouldDim:YES];
+    [self.doctorQueueTableView setScrollEnabled:NO];
     
     // Request patient's that are currently checked-in
     [mobileFacade findAllOpenVisitsAndOnCompletion:^(NSArray *allObjectsFromSearch, NSError *error) {
@@ -59,13 +73,7 @@
         
         // Sort queue by priority
         [self sortArray:1 by:PRIORITY inAscendingOrder:NO];
-        
-        // Filter results (Seen doctor & need to see pharmacy)
-        NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"%K != %@", DOCTOROUT, nil];
-        pharmacyWaitArray = [NSMutableArray arrayWithArray:[pharmacyWaitArray filteredArrayUsingPredicate:predicate2]];
-        
-        // Sort queue by time patient left doctor's station
-        [self sortArray:2 by:DOCTOROUT inAscendingOrder:YES];
+        [self FilterPharmacy];
         
         [_doctorQueueTableView reloadData];
         [_pharmacyQueueTableView reloadData];
@@ -75,33 +83,66 @@
         
         /** This will remove the HUD since the search is complete */
         [self HideALLHUDDisplayInView:_doctorQueueTableView];
+        [self.pharmacyQueueTableView setScrollEnabled:YES];
+        [self.doctorQueueTableView setScrollEnabled:YES];
     }];
 }
-
+-(void)FilterPharmacy{
+    // Filter results (Seen doctor & need to see pharmacy)
+    NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"%K != %@", DOCTOROUT, nil];
+    pharmacyWaitArray = [NSMutableArray arrayWithArray:[pharmacyWaitArray filteredArrayUsingPredicate:predicate2]];
+}
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self displayPendingButtonIfNecessary];
+    [_doctorQueueTableView setBackgroundColor:[ColorMe colorFor:PALEPURPLE]];
+    [_pharmacyQueueTableView setBackgroundColor:[ColorMe colorFor:DARKGREEN]];
+    
+    [_refreshDoctor setBackgroundColor:[ColorMe colorFor:PALEPURPLE]];
+    [ColorMe addBorder:_refreshDoctor.layer withWidth:2 withColor:[UIColor blackColor]];
+    
+    [_refreshPharmacy setBackgroundColor:[ColorMe colorFor:DARKGREEN]];
+    [ColorMe addBorder:_refreshPharmacy.layer withWidth:2 withColor:[UIColor blackColor]];
+
+    
 }
 
 -(void)displayPendingButtonIfNecessary{
     pendingPatients = [NSMutableArray arrayWithArray:[qm getAllQueuedObjects]];
     
-    [_PendingSyncButton setTitle:[NSString stringWithFormat:@"Tap to send %i pending objects",pendingPatients.count] forState:UIControlStateNormal];
+    [_PendingSyncButton setTitle:[NSString stringWithFormat:@"Tap to send %i pending patients",pendingPatients.count] forState:UIControlStateNormal];
     
     [_PendingSyncButton setHidden:(pendingPatients.count == 0)];
 }
 // Sorts queue for category specified in ascending or decending order
 - (void)sortArray:(int)array by:(NSString *)sortCategory inAscendingOrder:(BOOL)order {
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]initWithKey:sortCategory ascending:order];
-    NSArray *sortDescriptorArray = [NSArray arrayWithObject:sortDescriptor];
     
-    if(array == 1){
-        doctorWaitArray = [NSMutableArray arrayWithArray:[doctorWaitArray sortedArrayUsingDescriptors:sortDescriptorArray]];
-    }else if(array == 2){
-        pharmacyWaitArray = [NSMutableArray arrayWithArray:[pharmacyWaitArray sortedArrayUsingDescriptors:sortDescriptorArray]];
-    }
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]initWithKey:sortCategory ascending:order];
+    
+    NSArray *sortDescriptorArray = [NSArray arrayWithObject:sortDescriptor];
+
+    doctorWaitArray = [NSMutableArray arrayWithArray:[doctorWaitArray sortedArrayUsingDescriptors:sortDescriptorArray]];
+
 }
 
+-(void)viewDidUnload{
+    
+    [self setPendingSyncButton:nil];
+    [self setDoctorQueueTableView:nil];
+    [self setPharmacyQueueTableView:nil];
+    [self setPrioritySelector:nil];
+    doctorWaitArray = nil;
+    pharmacyWaitArray = nil;
+    pendingPatients = nil;
+    mobileFacade = nil;
+    qm = nil;
+}
+-(void)dealloc{
+    [self.pharmacyQueueTableView setDelegate:nil];
+    [self.doctorQueueTableView setDelegate:nil];
+    [self.pharmacyQueueTableView setDataSource:nil];
+    [self.doctorQueueTableView setDataSource:nil];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -114,12 +155,22 @@
 
 // Defines number of cells in table view
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    int doc = doctorWaitArray.count;
+    int pharm = pharmacyWaitArray.count;
+    
+    [_doctorWaitLabel setText:[NSString stringWithFormat:@"%i Patients waiting to see the doctor",doc]];
+    if (_pharmacyFilter.selectedSegmentIndex == 0) {
+        [_pharmacyWaitLabel setText:[NSString stringWithFormat:@"%i Patients waiting to see the pharmacist",pharm]];
+    }else{
+        [_pharmacyWaitLabel setText:[NSString stringWithFormat:@"%i Patients were seen in the past 24 hours",pharm]];
+    }
+    
+    
     if(tableView == _doctorQueueTableView)
-        return [doctorWaitArray count];
-    else if (tableView == _pharmacyQueueTableView)
-        return [pharmacyWaitArray count];
-    else
-        return 0;
+        return doc;
+    
+    return pharm;
+    
 }
 
 // Populate cells with respective content
@@ -191,46 +242,109 @@
     NSInteger waitInSeconds = floor(secsSinceTriageOut);
     NSInteger waitInMinutes = waitInSeconds / 60;
     
-    cell.patientWaitTime.text = [NSString stringWithFormat:@"%i min(s)", waitInMinutes];
+    if (tableView == _doctorQueueTableView) {
+        cell.patientWaitTime.text = [NSString stringWithFormat:@"%i min(s)", waitInMinutes];
+    }else{
+        [cell.patientWaitTime setText:[triageOut convertNSDateToString]];
+    }
     
     return cell;
 }
 
-//-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-//
-//    NSDictionary* patient;
-//
-//    if (_doctorQueueTableView && doctorWaitArray.count >0) {
-//        patient = [[doctorWaitArray objectAtIndex:indexPath.row] objectForKey:OPEN_VISITS_PATIENT];
-//    }else if(_pharmacyQueueTableView && pharmacyWaitArray.count >0){
-//        patient = [[pharmacyWaitArray objectAtIndex:indexPath.row]objectForKey:OPEN_VISITS_PATIENT];
-//    }
-//
-//    if ([pendingPatients.allKeys containsObject:[patient objectForKey:PATIENTID]]) {
-//        [ColorMe addBorder:cell.layer withWidth:1 withColor:[UIColor yellowColor]];
-//    }
-//}
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    [cell setBackgroundColor:[UIColor whiteColor]];
+}
+#pragma mark - Administrator Deletion
+#pragma mark -
+-(NSDictionary*)getObjectForTable:(UITableView*)table atIndex:(NSIndexPath*)index{
+    NSDictionary* queue;
+    if (table == _doctorQueueTableView) {
+        queue = [doctorWaitArray objectAtIndex:index.row];
+    }else{
+        queue = [pharmacyWaitArray objectAtIndex:index.row];
+    }
+    
+    return queue;
+}
+
+-(BOOL)isLegalObjectForTable:(UITableView*)table forIndex:(NSIndexPath*)index{
+    
+    NSDictionary* patient = [[self getObjectForTable:table atIndex:index]objectForKey:OPEN_VISITS_PATIENT];
+    
+    if ([[patient objectForKey:PATIENTID]length] == 0) {
+        return NO;
+    }
+    return YES;
+    
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (![self isLegalObjectForTable:tableView forIndex:indexPath]) {
+        return @"Purge Patient From System";
+    }
+    return @"Close Patient Visit";
+}
+
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    UserObject* user = [[UserObject alloc]init];
+    
+    if (_pharmacyFilter.selectedSegmentIndex == 1) {
+        return NO;
+    }
+    
+    switch ([user getUsertypeForCurrentUser]) {
+        case kAdministrator:
+            return YES;
+            break;
+        default:
+            return NO;
+            break;
+    }
+}
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    NSMutableDictionary* visit = [NSMutableDictionary dictionaryWithDictionary:[self getObjectForTable:tableView atIndex:indexPath]];
+    
+    if ([self isLegalObjectForTable:tableView forIndex:indexPath]) {
+        /** This will should HUD in tableview to show alert the user that the system is working */
+        [self showIndeterminateHUDInView:self.view withText:@"Syncronizing..." shouldHide:NO afterDelay:0 andShouldDim:YES];
+        MobileClinicFacade* mcf = [[MobileClinicFacade alloc]init];
+        [mcf checkoutVisit:visit forPatient:[visit objectForKey:OPEN_VISITS_PATIENT] AndWillUlockOnCompletion:^(NSDictionary *object, NSError *error) {
+            if (!object) {
+                [FIUAppDelegate getNotificationWithColor:AJNotificationTypeOrange Animation:AJLinedBackgroundTypeAnimated WithMessage:error.localizedDescription inView:self.view];
+            }else{
+                [self reloadPharmacyAndDoctor];
+            }
+            [self HideALLHUDDisplayInView:self.view];
+        }];
+    }else{
+        [[[PatientObject alloc]init]deleteDatabaseDictionaryObject:[visit objectForKey:OPEN_VISITS_PATIENT]];
+        [visit removeObjectForKey:OPEN_VISITS_PATIENT];
+        [[[VisitationObject alloc]init]deleteDatabaseDictionaryObject:visit];
+        [self reloadPharmacyAndDoctor];
+    }
+    
+}
+#pragma mark - Sort Methods
+#pragma mark -
+- (IBAction)refresh:(id)sender {
+    [self reloadPharmacyAndDoctor];
+}
 
 - (IBAction)sortBySelected:(id)sender {
     
-    // Request patient's that are currently checked-in
-    [mobileFacade findAllOpenVisitsAndOnCompletion:^(NSArray *allObjectsFromSearch, NSError *error) {
-        doctorWaitArray = [NSArray arrayWithArray:allObjectsFromSearch];
-        
-        // Filter results to patient's that haven't seen the doctor
-        NSPredicate * predicate = [NSPredicate predicateWithFormat:@"%K == %@", DOCTOROUT, nil];
-        doctorWaitArray = [NSMutableArray arrayWithArray:[doctorWaitArray filteredArrayUsingPredicate:predicate]];
-        
-        if(_prioritySelector.selectedSegmentIndex == 0) {
-            // Sort queue by priority
-            [self sortArray:1 by:PRIORITY inAscendingOrder:NO];
-        }else if(_prioritySelector.selectedSegmentIndex == 1) {
-            // Sort queue by wait time
-            [self sortArray:1 by:TRIAGEOUT inAscendingOrder:YES];
-        }
-        
-        [_doctorQueueTableView reloadData];
-    }];
+    /** Extracted sorting code and removed the other code that made expensive server call */
+    if(_prioritySelector.selectedSegmentIndex == 0) {
+        // Sort queue by priority
+        [self sortArray:1 by:PRIORITY inAscendingOrder:NO];
+    }else if(_prioritySelector.selectedSegmentIndex == 1) {
+        // Sort queue by wait time
+        [self sortArray:1 by:TRIAGEOUT inAscendingOrder:YES];
+    }
+    
+    [_doctorQueueTableView reloadData];
 }
 
 - (IBAction)tryAndSyncAllPendingObjects:(id)sender {
@@ -238,12 +352,35 @@
     [self showIndeterminateHUDInView:self.view withText:@"Searching" shouldHide:NO afterDelay:0 andShouldDim:YES];
     [qm sendArrayOfQueuedObjectsToServer:pendingPatients onCompletion:^(id<BaseObjectProtocol> data, NSError *error) {
         if (!data && error) {
-            [FIUAppDelegate getNotificationWithColor:AJNotificationTypeRed Animation:AJLinedBackgroundTypeAnimated WithMessage:@"Could not sync all pending objects. Try again later." inView:self.view];
+            [FIUAppDelegate getNotificationWithColor:AJNotificationTypeRed Animation:AJLinedBackgroundTypeAnimated WithMessage:@"Could not sync all pending patients. Try again later." inView:self.view];
         }
         [self displayPendingButtonIfNecessary];
         /** This will remove the HUD since the search is complete */
         [self HideALLHUDDisplayInView:self.view];
     }];
+}
+
+- (IBAction)filterBy:(id)sender {
+    UISegmentedControl* seg = sender;
+
+    if (_pharmacyQueueTableView.scrollEnabled && _doctorQueueTableView.scrollEnabled) {
+        [self ShowTextHUDInView:self.pharmacyQueueTableView WithText:@"Fetching..." shouldHide:NO afterDelay:0 andShouldDim:YES];
+        [self.pharmacyQueueTableView setScrollEnabled:NO];
+        if (seg.selectedSegmentIndex == 0) {
+            pharmacyWaitArray = [NSArray arrayWithArray:[mobileFacade GetVisitsForOpenPatients:YES]];
+            [_refreshPharmacy setHidden:NO];
+            [_refreshDoctor setHidden:NO];
+            [self FilterPharmacy];
+        }else{
+            pharmacyWaitArray = [NSArray arrayWithArray:[mobileFacade GetVisitsForOpenPatients:NO]];
+            [_refreshPharmacy setHidden:YES];
+            [_refreshDoctor setHidden:YES];
+        }
+        [_pharmacyQueueTableView reloadData];
+        [self HideALLHUDDisplayInView:self.pharmacyQueueTableView];
+        [self.pharmacyQueueTableView setScrollEnabled:YES];
+    }
+    
 }
 
 @end

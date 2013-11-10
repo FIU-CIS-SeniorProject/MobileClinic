@@ -28,7 +28,7 @@ NSMutableArray * pictures;
 - (id)init
 {
     [self setupObject];
-    return self;
+    return [super init];
 }
 -(id)initAndMakeNewDatabaseObject
 {
@@ -65,10 +65,10 @@ NSMutableArray * pictures;
 }
 
 -(void)ServerCommand:(NSDictionary *)dataToBeRecieved withOnComplete:(ServerCommand)response{
-    //[self ServerCommand:nil withOnComplete:response];
-    response = nil;
+    [super ServerCommand:nil withOnComplete:response];
+    //response = nil;
     [self unpackageFileForUser:dataToBeRecieved];
-    self->commands = kAbort;
+    //self->commands = kAbort;
     
     [self CommonExecution];
 }

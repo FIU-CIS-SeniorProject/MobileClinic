@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 #import "MedicineSearchViewController.h"
 @interface MedicineSearchCell : UITableViewCell
-@property (nonatomic, strong) MedicineSearchViewController * viewController;
+@property (nonatomic, strong) MedicineSearchViewController* viewController;
 @end

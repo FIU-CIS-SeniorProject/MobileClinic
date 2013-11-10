@@ -7,8 +7,12 @@
 //
 
 #import "CurrentDiagnosisViewController.h"
+#import "DoctorPrescriptionViewController.h"
+#import "MobileClinicFacade.h"
 
-@interface CurrentDiagnosisViewController ()
+@interface CurrentDiagnosisViewController ()<CancelDelegate>{
+    DoctorPrescriptionViewController* newView;
+}
 
 @end
 
@@ -25,14 +29,38 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    UINavigationBar *navbar = [self.navigationController navigationBar];
+    [navbar setTintColor:[ColorMe colorFor:PALEPURPLE]];
+    
     _visitationData = [[VisitationObject alloc]init];
+    
+    
+    [ColorMe addBorder:_objectiveTextbox.layer withWidth:1 withColor:[UIColor blackColor]];
+    [ColorMe addBorder:_subjectiveTextbox.layer withWidth:1 withColor:[UIColor blackColor]];
+    [ColorMe addBorder:_assessmentTextbox.layer withWidth:1 withColor:[UIColor blackColor]];
+
+    [ColorMe addTopRoundedEdges:_subjectiveLabel.layer];
+    [ColorMe addTopRoundedEdges:_objectiveLabel.layer];
+    [ColorMe addTopRoundedEdges:_assessmentLabel.layer];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    // Populate condition for doctor to see
-    _subjectiveTextbox.text = [_patientData objectForKey:CONDITION];
-}
+    [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter]postNotificationName:SET_DELEGATE object:self];
 
+    [self.navigationController setTitle:@"Current Visit"];
+}
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self populateView];
+}
+-(void)populateView{
+    [_subjectiveTextbox setText:[_patientData objectForKey:CONDITIONTITLE]];
+    [_assessmentTextbox setText:[_patientData objectForKey:ASSESSMENT]];
+    [_objectiveTextbox setText: [_patientData objectForKey:OBSERVATION]];
+    [[NSNotificationCenter defaultCenter]postNotificationName:SYNC_OBJECT object:_patientData];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -49,13 +77,52 @@
 
 - (IBAction)submitButton:(id)sender {
     // Save diagnosis
-    if (self.validateFields) {
+   
         [_patientData setObject:_objectiveTextbox.text forKey:OBSERVATION];
-        [_patientData setObject:_assessmentTextbox.text forKey:ASSESSMENT];     // TODO: Need to add this to the database
-        [[NSNotificationCenter defaultCenter] postNotificationName:SAVE_VISITATION object:_patientData];
-    }
+        [_patientData setObject:_assessmentTextbox.text forKey:ASSESSMENT];     
+        [_patientData setObject:_subjectiveTextbox.text forKey:CONDITION];
+       
+
+        /** This will should HUD in tableview to show alert the user that the system is working */
+        [self showIndeterminateHUDInView:self.view withText:@"Saving..." shouldHide:NO afterDelay:0 andShouldDim:NO];
+        
+        MobileClinicFacade *mobileFacade = [[MobileClinicFacade alloc]init];
+        
+        [mobileFacade updateVisitRecord:_patientData andShouldUnlock:NO andShouldCloseVisit:NO onCompletion:^(NSDictionary *object, NSError *error) {
+            if(!object)
+                [FIUAppDelegate getNotificationWithColor:AJNotificationTypeOrange Animation:AJLinedBackgroundTypeAnimated WithMessage:error.localizedDescription inView:self.view];
+    
+            else{
+                [self gotoNextView];
+            }
+            /** This will remove the HUD since the search is complete */
+            [self HideALLHUDDisplayInView:self.view];
+        }];
+ 
 }
 
+- (IBAction)cancelDiagnosis:(id)sender {
+    /** This will should HUD in tableview to show alert the user that the system is working */
+    [self showIndeterminateHUDInView:self.view withText:@"Unlocking" shouldHide:NO afterDelay:0 andShouldDim:YES];
+    MobileClinicFacade* mcf = [[MobileClinicFacade alloc]init];
+    [mcf updateVisitRecord:_patientData andShouldUnlock:YES andShouldCloseVisit:NO onCompletion:^(NSDictionary *object, NSError *error) {
+        [self cancel];
+        /** This will remove the HUD since the search is complete */
+        [self HideALLHUDDisplayInView:self.view];
+    }];
+
+}
+-(void)gotoNextView{
+    newView = [self getViewControllerFromiPadStoryboardWithName:@"prescriptionFormViewController"];
+   
+    [newView view];
+    
+    [newView setDelegate:self];
+    
+    [newView setPatientData:_patientData];
+    
+    [self.navigationController pushViewController:newView animated:YES];
+}
 - (BOOL)validateFields {
     BOOL inputIsValid = YES;
     NSString *errorMsg;
@@ -85,8 +152,9 @@
     [self.view endEditing:YES];
 }
 
-- (void)setScreenHandler:(ScreenHandler)myHandler {
-    handler = myHandler;
+
+-(void)cancel{
+    [_delegate cancel];
 }
 
 @end
