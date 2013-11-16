@@ -11,19 +11,18 @@
 #import "HTTPCore.h"
 #import "ServerProtocol.h"
 
-@interface ServerCore : HTTPCore <GCDAsyncSocketDelegate,NSNetServiceBrowserDelegate,NSNetServiceDelegate,ServerProtocol> {
-    
+@interface ServerCore : HTTPCore <GCDAsyncSocketDelegate,NSNetServiceBrowserDelegate,NSNetServiceDelegate,ServerProtocol>
+{
     NSNetServiceBrowser *netServiceBrowser;
 	NSNetService *serverService;
 	NSMutableArray *serverAddresses;
 	GCDAsyncSocket *asyncSocket;
     NSMutableData* globalData;
     ClientServerConnect connectionStatus;
-
 }
 
 -(BOOL)isClientConntectToServer;
 -(NSString*)getCurrentConnectionName;
-- (NSInteger)numberOfConnections;
+-(NSInteger)numberOfConnections;
 
 @end

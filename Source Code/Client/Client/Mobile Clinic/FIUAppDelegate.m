@@ -29,8 +29,8 @@
 #import "ServerCore.h"
 
 @implementation FIUAppDelegate
-@synthesize ServerManager;
 
+@synthesize ServerManager;
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;

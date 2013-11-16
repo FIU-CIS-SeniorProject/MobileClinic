@@ -92,6 +92,11 @@
     NSLog(@"Does not need to be implemented");
 }
 
+-(NSArray *)FindAllObjectsLocally
+{
+    return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:nil andSortByAttribute:MEDNAME]];
+}
+
 -(NSArray *)FindAllObjectsLocallyFromParentObject:(NSDictionary *)parentObject
 {
     return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:nil andSortByAttribute:self->COMMONID]];

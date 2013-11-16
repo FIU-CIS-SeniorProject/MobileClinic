@@ -30,4 +30,5 @@
 
 @interface MedicationObject : BaseObject<MedicationObjectProtocol,CommonObjectProtocol>
 
+-(NSArray*)FindAllObjectsLocally;
 @end

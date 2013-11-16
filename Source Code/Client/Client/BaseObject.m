@@ -33,7 +33,8 @@
 
 #pragma mark- Init Methods
 #pragma mark-
-+(NSString *)getCurrenUserName{
++(NSString *)getCurrentUserName
+{
     return [[NSUserDefaults standardUserDefaults] stringForKey:CURRENT_USER];
 }
 -(id)init
@@ -94,7 +95,7 @@
 
 -(void)CommonExecution
 {
-    NSLog(@"Not Implemented");
+    NSLog(@"BaseObject-CommonExecution: Not Implemented");
 }
 
 -(NSManagedObject*)loadObjectWithID:(NSString *)objectID
@@ -177,6 +178,7 @@
     }
     eventResponse(self, nil);
 }
+
 -(BOOL)setValueToDictionaryValues:(NSDictionary*)values
 {
     //TODO: Use TRY CATCH and Return a Bool
@@ -210,7 +212,7 @@
 
 -(BOOL)loadObjectForID:(NSString *)objectID
 {
-    // checks to see if object exists
+    // Checks to see if object exists
     NSArray* arr = [self FindObjectInTable:self->COMMONDATABASE withName:objectID forAttribute:self->COMMONID];
     
     NSArray* filtered = [arr filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K == %@",self->COMMONID,objectID]];

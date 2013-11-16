@@ -26,6 +26,7 @@
 //  Created by Michael Montaque on 1/27/13.
 //
 #import "StatusObjectProtocol.h"
+
 @interface StatusObject : NSObject <BaseObjectProtocol>
 
 @property(nonatomic, weak)      NSString* errorMessage;

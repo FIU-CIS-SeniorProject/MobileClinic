@@ -37,7 +37,7 @@
 #import <Foundation/Foundation.h>
 #import "ServerProtocol.h"
 
-/* These are all the classes the server and client will know how to handle */
+// These are all the classes the server and client will know how to handle
 typedef enum
 {
     kUserType           = 1,
@@ -50,7 +50,7 @@ typedef enum
     kFingerprintTemplate = 8,
 }ObjectTypes;
 
-/* These are all the commands the server and client will understand */
+// These are all the commands the server and client will understand
 typedef enum
 {
     kAbort                      = -1,

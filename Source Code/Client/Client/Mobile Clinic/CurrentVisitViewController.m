@@ -108,7 +108,7 @@
 
 - (void)setVisitData:(BOOL)type
 {
-    /** This will should HUD in tableview to show alert the user that the system is working */
+    // This will should HUD in tableview to show alert the user that the system is working */
     [self showIndeterminateHUDInView:self.view withText:@"Saving..." shouldHide:NO afterDelay:0 andShouldDim:NO];
     
     if (self.validateCheckin)
@@ -136,7 +136,7 @@
             {
                 handler(object,error);
             }
-            /** This will remove the HUD since the search is complete */
+            // This will remove the HUD since the search is complete
             [self HideALLHUDDisplayInView:self.view];
         }];
     }

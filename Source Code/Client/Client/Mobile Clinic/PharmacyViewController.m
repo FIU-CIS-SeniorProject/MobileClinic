@@ -23,7 +23,8 @@
     return self;
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
@@ -43,7 +44,8 @@
 }
 
 // Transfers the patient's data to the next view controller
-- (void)transferPatientData:(NSNotification *)note {
+- (void)transferPatientData:(NSNotification *)note
+{
     _patientData = note.object;
     
     PharmacyPatientViewController *newView = [self getViewControllerFromiPadStoryboardWithName:@"pharmacyPatientViewController"];
@@ -54,21 +56,25 @@
 }
 
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewDidUnload {
+- (void)viewDidUnload
+{
     [self setTableView:nil];
     [super viewDidUnload];
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return 1;
 }
 

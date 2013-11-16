@@ -5,12 +5,12 @@
 //  Created by Rigo Hernandez on 3/10/13.
 //  Copyright (c) 2013 Steven Berlanga. All rights reserved.
 //
-
 #import "PatientQueueViewController.h"
 #import "DoctorPatientViewController.h"
 #import "PharmacyPatientViewController.h" 
 
-@interface PatientQueueViewController () {
+@interface PatientQueueViewController ()
+{
     NSArray *queueArray;
     MobileClinicFacade *mobileFacade;
 }
@@ -23,15 +23,18 @@
 
 @implementation PatientQueueViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
     }
     return self;
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
@@ -41,15 +44,16 @@
     UIBarButtonItem * menu = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(popOverMenu)];
     [self.navigationItem setLeftBarButtonItem:menu];
     
-    if([[self stationChosen] intValue] == 3){
+    if([[self stationChosen] intValue] == 3)
+    {
         [_prioritySelector setUserInteractionEnabled:NO];
         [_prioritySelector removeSegmentAtIndex:1 animated:NO];
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    
-    /** This will should HUD in tableview to show alert the user that the system is working */
+- (void)viewWillAppear:(BOOL)animated
+{
+    // This will should HUD in tableview to show alert the user that the system is working */
     [self showIndeterminateHUDInView:_queueTableView withText:@"Searching" shouldHide:NO afterDelay:0 andShouldDim:NO];
     
     mobileFacade = [[MobileClinicFacade alloc] init];
@@ -69,6 +73,7 @@
             // Settings with respect to station chosen
             switch ([[self stationChosen] intValue])
             {
+                // DOCTOR QUEUE VIEW
                 case 2:
                 {
                     [navbar setTintColor:[UIColor blueColor]];
@@ -82,11 +87,12 @@
                     [self sortBy:PRIORITY inAscendingOrder:NO];
                 }
                     break;
+                // PHARMACIST QUEUE VIEW
                 case 3:
                 {
                     [navbar setTintColor:[UIColor greenColor]];
                 
-                    // Filter results (Seen doctor & need to see pharmacy)
+                    // Filter results (Open Patient and has seen doctor = need to see pharmacist)
                     NSPredicate * predicate = [NSPredicate predicateWithFormat:@"%K != %@", DOCTOROUT, nil];
                     queueArray = [NSMutableArray arrayWithArray:[queueArray filteredArrayUsingPredicate:predicate]];
                 

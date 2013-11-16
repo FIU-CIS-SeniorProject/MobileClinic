@@ -25,7 +25,6 @@
 //
 //  Created by Michael Montaque on 4/21/13.
 //
-
 #import <Foundation/Foundation.h>
 #import "Queue.h"
 #import "BaseObject.h"
@@ -38,4 +37,5 @@
 -(NSArray*)getAllQueuedObjects;
 -(Queue*)getNewQueue;
 -(void)sendArrayOfQueuedObjectsToServer:(NSMutableArray *)queuedObjects onCompletion:(ObjectResponse)response;
+
 @end

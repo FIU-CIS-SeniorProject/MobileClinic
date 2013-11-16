@@ -30,6 +30,7 @@
 #import "VisitationObject.h"
 #import "PrescriptionObject.h"
 #import "MedicationObject.h"
+#import "UserObject.h"
 
 @implementation MobileClinicFacade
 
@@ -45,7 +46,7 @@
 
 -(NSString *)GetCurrentUsername
 {
-    return [BaseObject getCurrenUserName];
+    return [BaseObject getCurrentUserName];
 }
 
 #pragma mark- CREATING NEW OBJECTS
@@ -60,7 +61,7 @@
     [self CommonCommandObject:patient ForCreating:patientInfo bindedToParentObjectToUpdate:nil withResults:Response];
 }
 
-// creates a new prescription for a given visit
+// Creates a new prescription for a given visit
 -(void)addNewPrescription:(NSDictionary *)Rx ForCurrentVisit:(NSDictionary *)visit AndlockVisit:(BOOL)lock onCompletion:(MobileClinicCommandResponse)Response
 {
     [self updateVisitRecord:visit andShouldUnlock:!lock andShouldCloseVisit:NO onCompletion:^(NSDictionary *object, NSError *error)
@@ -76,13 +77,14 @@
     }];
 }
 
-// Creates a new visit for a given patient.
+// Creates a new visit for a given patient
 -(void)addNewVisit:(NSDictionary *)visitInfo ForCurrentPatient:(NSDictionary *)patientInfo shouldCheckOut:(BOOL)checkout onCompletion:(MobileClinicCommandResponse)Response
 {
     // If Patient being passed is already open do not go further
     if (![[patientInfo objectForKey:ISOPEN]boolValue])
     {
         NSMutableDictionary* openPatient = [[NSMutableDictionary alloc]initWithDictionary:patientInfo];
+        
         // Set patient open status
         [openPatient setValue:[NSNumber numberWithBool:!checkout] forKey:ISOPEN];
         
@@ -109,10 +111,10 @@
 #pragma mark- SEARCHING FOR OBJECTS
 #pragma mark-
 
-//  Use to find patients.
+// Use to find patients.
 -(void)findPatientWithFirstName:(NSString *)firstname orLastName:(NSString *)lastname onCompletion:(MobileClinicSearchResponse)Response
 {
-    /* Create a temporary Patient Object to make request */
+    // Create a temporary Patient Object to make request
     PatientObject* patients = [[PatientObject alloc]init];
     
     NSDictionary* search = [NSDictionary dictionaryWithObjectsAndKeys:firstname,FIRSTNAME,lastname,FAMILYNAME, nil];
@@ -123,7 +125,7 @@
 // Use to find visits for a given patient.
 -(void)findAllVisitsForCurrentPatient:(NSDictionary *)patientInfo AndOnCompletion:(MobileClinicSearchResponse)Response
 {
-    /* Create a temporary Visitation Object to make request */
+    // Create a temporary Visitation Object to make request
     VisitationObject* vObject = [[VisitationObject alloc]init];
     
     [self CommonCommandObject:vObject ForSearch:patientInfo withResults:Response];
@@ -133,7 +135,7 @@
 // Use to find open visits that needs servicing
 -(void)findAllOpenVisitsAndOnCompletion:(MobileClinicSearchResponse)Response
 {
-    /* Create a temporary Visit Object to make request */
+    // Create a temporary Visit Object to make request
     VisitationObject* vObject = [[VisitationObject alloc]init];
     
     // Fetch and Save query results from server
@@ -160,13 +162,15 @@
                     
                     NSString* patientID;
                     
-                    // For every Dictionary in the array...
+                    // For every Dictionary in the array.
                     for (NSMutableDictionary* dic in allVisits)
                     {
                         // Get the patient ID
                         patientID = [dic objectForKey:PATIENTID];
+                        
                         // Find the patient for that ID
                         PatientObject* patients = [[PatientObject alloc]initWithCachedObjectWithUpdatedObject:[NSDictionary dictionaryWithObjectsAndKeys:patientID,PATIENTID, nil]];
+                        
                         // Save the Dictionary value of that patient inside the current dictionary
                         [dic setValue:patients.getDictionaryValuesFromManagedObject forKey:OPEN_VISITS_PATIENT];
                     }
@@ -179,10 +183,10 @@
     }];
 }
 
-// Use to find all Prescriptions
+// Finds all Prescriptions
 -(void)findAllPrescriptionForCurrentVisit:(NSDictionary *)visit AndOnCompletion:(MobileClinicSearchResponse)Response
 {
-    /* Create a temporary Patient Object to make request */
+    // Create a temporary Patient Object to make request
     PrescriptionObject* prObject = [[PrescriptionObject alloc]init];
     
     [self CommonCommandObject:prObject ForSearch:visit withResults:Response];
@@ -238,7 +242,6 @@
 -(void)checkoutVisit:(NSDictionary*)visit forPatient:(NSDictionary*)patient AndWillUlockOnCompletion:(MobileClinicCommandResponse)Response
 {
     NSMutableDictionary* patientDictionary = [NSMutableDictionary dictionaryWithDictionary:patient];
-    
     [patientDictionary setValue:[NSNumber numberWithBool:NO] forKey:ISOPEN];
     
     NSMutableDictionary* visitDictionary = [NSMutableDictionary dictionaryWithDictionary:visit];
@@ -264,12 +267,70 @@
     }];
 }
 
+#pragma mark- PRIVATE CLEAN DATABASE
+#pragma mark-
+
+-(void)purgeTheSystem
+{
+    VisitationObject* v = [[VisitationObject alloc] init];
+    NSArray* allVisits = [v FindAllObjectsLocally];
+    PatientObject* p = [[PatientObject alloc] init];
+    NSArray* allPatients = [p FindAllObjectsLocally];
+    MedicationObject* m = [[MedicationObject alloc] init];
+    NSArray* allMedications = [m FindAllObjectsLocally];
+    UserObject* u = [[UserObject alloc] init];
+    NSArray* allUsers = [u FindAllObjectsLocally];
+    
+    int vCounter = 0;
+    int pCounter = 0;
+    int mCounter = 0;
+    int uCounter = 0;
+    
+    for (NSDictionary* visit in allVisits)
+    {
+        BOOL didDelete = [v deleteDatabaseDictionaryObject:visit];
+        if (didDelete)
+        {
+            vCounter++;
+        }
+    }
+    
+    for (NSDictionary* patient in allPatients)
+    {
+        BOOL didDelete = [p deleteDatabaseDictionaryObject:patient];
+        if (didDelete)
+        {
+            pCounter++;
+        }
+    }
+    
+    for (NSDictionary* medication in allMedications)
+    {
+        BOOL didDelete = [m deleteDatabaseDictionaryObject:medication];
+        if (didDelete)
+        {
+            mCounter++;
+        }
+    }
+    
+    for (NSDictionary* user in allUsers)
+    {
+        BOOL didDelete = [u deleteDatabaseDictionaryObject:user];
+        if (didDelete)
+        {
+            uCounter++;
+        }
+    }
+    
+    NSLog(@"Truly Purged The System of %i Visits, %i Patients, %i Medications, and %i Users", vCounter, pCounter, mCounter, uCounter);
+}
+
 #pragma mark- PRIVATE GENERIC METHODS
 #pragma mark-
 
 -(void)CommonCommandObject:(id<CommonObjectProtocol>)base ShouldLock:(BOOL)lock CommonUpdate:(NSMutableDictionary*)object withResults:(MobileClinicCommandResponse)results
 {
-    /* Call the server to make a request for Visits */
+    // Call the server to make a request for Visits
     [base UpdateObjectAndShouldLock:lock witData:object AndInstructions:kUpdateObject onCompletion:^(id<BaseObjectProtocol> data, NSError *error)
     {
         results([data getDictionaryValuesFromManagedObject],error);
@@ -278,10 +339,10 @@
 
 -(void)CommonCommandObject:(id<CommonObjectProtocol>)commandObject ForSearch:(NSDictionary*)object withResults:(MobileClinicSearchResponse)searchResults
 {
-    /* Call the server to make a request for Visits */
+    // Call the server to make a request for Visits
     [commandObject FindAllObjectsOnServerFromParentObject:object OnCompletion:^(id<BaseObjectProtocol> data, NSError *error)
     {
-        /* get all visits that are stored on the device */
+        // get all visits that are stored on the device
         NSArray* allVisits = [NSArray arrayWithArray:[commandObject FindAllObjectsLocallyFromParentObject:object]];
         
         searchResults(allVisits,error);

@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "ScreenNavigationDelegate.h"
 
-@interface MenuViewController : UITableViewController{
+@interface MenuViewController : UITableViewController
+{
     ScreenHandler handler;
 }
 

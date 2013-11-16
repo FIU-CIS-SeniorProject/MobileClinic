@@ -61,18 +61,21 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(slideToSearchMedicine) name:MOVE_TO_SEARCH_FOR_MEDICINE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(slideFromSearchMedicine:) name:MOVE_FROM_SEARCH_FOR_MEDICINE object:_prescriptionData];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(savePrescription:) name:SAVE_PRESCRIPTION object:_prescriptionData];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closePatient:) name:CLOSE_PATIENT object:_patientData];
 
     visitationHasBeenSaved = NO;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
     //set notifications that will be called when the keyboard is going to be displayed
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide) name:UIKeyboardWillHideNotification object:nil];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated
+{
     [super viewWillDisappear:animated];
     
     //remove the notifications that open the keyboard
@@ -81,7 +84,8 @@
 }
 
 // Display patient info & vitals
-- (void)displayPatientData {
+- (void)displayPatientData
+{
     // Extract patient name/village/etc from visit dictionary
     NSDictionary * patientDic = [_patientData objectForKey:OPEN_VISITS_PATIENT];
     
@@ -104,7 +108,8 @@
 }
 
 // Set controllers used in tableview
-- (void)setControllers {
+- (void)setControllers
+{
     _diagnosisViewController = [self getViewControllerFromiPadStoryboardWithName:@"currentDiagnosisViewController"];
     _previousVisitViewController = [self getViewControllerFromiPadStoryboardWithName:@"previousVisitsViewController"];
     _precriptionViewController = [self getViewControllerFromiPadStoryboardWithName:@"prescriptionFormViewController"];
@@ -112,7 +117,8 @@
 }
 
 // Instantiate views used in tableview
-- (void)instantiateViews {
+- (void)instantiateViews
+{
     [_diagnosisViewController view];
     [_previousVisitViewController view];
     [_precriptionViewController view];
@@ -120,17 +126,22 @@
 }
 
 // Save diagnosis and slide view to enter medication
-- (void)saveVisitation:(NSNotification *)note {
+- (void)saveVisitation:(NSNotification *)note
+{
     // TODO: RECONSIDER
-    /* Because of objects can be locked, you have to handle the saving process on the screen that is responsible for saving this object. That way if something wrong occured the user will not have to redo what they did.
-     */
+    // Because objects can be locked, you have to handle the saving process on the screen that is responsible for saving this object.
+    // That way if something wrong occured the user will not have to redo what they did.
     _patientData = note.object;
     
     MobileClinicFacade *mobileFacade = [[MobileClinicFacade alloc]init];
+    
     [mobileFacade updateVisitRecord:_patientData andShouldUnlock:NO andShouldCloseVisit:NO onCompletion:^(NSDictionary *object, NSError *error) {
         if(!object)
+        {
             [FIUAppDelegate getNotificationWithColor:AJNotificationTypeOrange Animation:AJLinedBackgroundTypeAnimated WithMessage:error.localizedDescription inView:self.view];
-        else{
+        }
+        else
+        {
             visitationHasBeenSaved = YES;
             // MAY HAVE TO REINSTANTIATE _patientData WITH object (CHECK W/ MIKE)
             [_tableView setScrollEnabled:NO];
@@ -140,12 +151,15 @@
     }];
 }
 
-- (void)slideToSearchMedicine {
+- (void)slideToSearchMedicine
+{
     self.medicineViewController.prescriptionData = self.prescriptionData;
+    
     [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForItem:3 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
-- (void)slideFromSearchMedicine:(NSNotification *)note {
+- (void)slideFromSearchMedicine:(NSNotification *)note
+{
     _prescriptionData = note.object;
     
     [_precriptionViewController setPrescriptionData:_prescriptionData];
@@ -154,9 +168,10 @@
     [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForItem:2 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
-- (void)savePrescription:(NSNotification *)note {
-    /* Because of objects can be locked, you have to handle the saving process on the screen that is responsible for saving this object. That way if something wrong occured the user will not have to redo what they did. 
-     */
+- (void)savePrescription:(NSNotification *)note
+{
+    // Because of objects can be locked, you have to handle the saving process on the screen that is responsible for saving this object.
+    // That way if something wrong occured the user will not have to redo what they did.
     [self.navigationController popViewControllerAnimated:YES];
     
     /*
@@ -175,12 +190,20 @@
     */
 }
 
-- (void)didReceiveMemoryWarning {
+// Closes patient and navigates to the Patient List
+- (void)closePatient: (NSNotification *)note
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewDidUnload {
+- (void)viewDidUnload
+{
     [self setPatientNameField:nil];
     [self setFamilyNameField:nil];
     [self setVillageNameField:nil];

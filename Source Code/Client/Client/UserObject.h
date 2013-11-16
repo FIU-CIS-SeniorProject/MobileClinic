@@ -39,11 +39,12 @@
 #import "BaseObject.h"
 #import "Users.h"
 #import "UserObjectProtocol.h"
-/* Users of the system */
 
-@interface UserObject : BaseObject<UserObjectProtocol,CommonObjectProtocol>{
+// Users of the system
+@interface UserObject : BaseObject<UserObjectProtocol,CommonObjectProtocol>
+{
     Users* user;
 }    
 
-
+-(NSArray*)FindAllObjectsLocally;
 @end

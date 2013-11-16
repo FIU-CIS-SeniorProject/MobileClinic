@@ -137,6 +137,13 @@ NSString* tempPassword;
     [dataToSend setValue:[NSNumber numberWithInt:kPullAllUsers] forKey:OBJECTCOMMAND];
     [dataToSend setValue:[NSNumber numberWithInt:kUserType] forKey:OBJECTTYPE];
     [self SendData:dataToSend toServerWithErrorMessage:@"Could not connect to server. Validating against cache" andResponse:withResponse];
+}
 
+#pragma mark- Private Methods
+#pragma mark-
+
+-(NSArray *)FindAllObjectsLocally
+{
+    return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:nil andSortByAttribute:USERNAME]];
 }
 @end

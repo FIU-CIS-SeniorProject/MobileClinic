@@ -73,5 +73,5 @@
     NSInteger CLASSTYPE;
 }
 
-+(NSString*)getCurrenUserName;
++(NSString*)getCurrentUserName;
 @end

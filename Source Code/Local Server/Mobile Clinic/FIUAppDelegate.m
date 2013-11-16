@@ -32,6 +32,7 @@
 #import "MedicationList.h"
 #import "UserView.h"
 #import "Database.h"
+#import "CloudManagementObject.h"
 
 #define PTESTING @"Patients Testing"
 #define MTESTING @"Medicine Testing"
@@ -43,6 +44,7 @@ PatientTable *pTable;
 MainMenu* mainView;
 NSTimer* switchTimer;
 Optimizer isOptimized;
+CloudManagementObject* cloudMO;
 
 @implementation FIUAppDelegate
 
@@ -90,7 +92,7 @@ Optimizer isOptimized;
     NSLog(@"Performing a True Purge of the System");
     [mainView truePurgeTheSystem:nil];
     
-    NSLog(@"Imported Patients: %@", patients);
+    NSLog(@"Imported Patients: \n%@", patients);
     
     [patients enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
     {
@@ -109,14 +111,12 @@ Optimizer isOptimized;
     
     NSArray* Meds = [NSArray arrayWithArray:[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPath]options:0 error:&err]];
     
-    NSLog(@"Imported Medications: %@", Meds.description);
+    NSLog(@"Imported Medications: \n%@", Meds.description);
     
     [Meds enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
     {
         MedicationObject* base = [[MedicationObject alloc]init];
-        
         NSError* success = [base setValueToDictionaryValues:obj];
-
         [base saveObject:^(id<BaseObjectProtocol> data, NSError *error)
         {
                 

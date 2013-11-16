@@ -106,6 +106,11 @@
     }
 }
 
+-(NSArray *)FindAllObjectsLocally
+{
+    return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:nil andSortByAttribute:TRIAGEIN]];
+}
+
 -(NSArray *)FindAllObjectsLocallyFromParentObject:(NSDictionary*)parentObject
 {
     NSPredicate* pred = [NSPredicate predicateWithFormat:@"%K == %@",PATIENTID,[parentObject objectForKey:PATIENTID]];

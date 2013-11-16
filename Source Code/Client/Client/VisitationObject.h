@@ -34,4 +34,6 @@
 {
     Visitation* visit;
 }
+
+-(NSArray*)FindAllObjectsLocally;
 @end
