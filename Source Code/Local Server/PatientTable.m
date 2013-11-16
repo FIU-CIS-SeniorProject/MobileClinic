@@ -218,23 +218,29 @@ id currentTable;
     
 }
 
-- (IBAction)getPatientsFromCloud:(id)sender {
-    
+- (IBAction)getPatientsFromCloud:(id)sender
+{
     [progressIndicator startAnimation:self];
     
-    [[[PatientObject alloc]init] pullFromCloud:^(id cloudResults, NSError *error) {
-        if (!cloudResults && error) {
+    [[[PatientObject alloc]init] pullFromCloud:^(id cloudResults, NSError *error)
+    {
+        if (!cloudResults && error)
+        {
             [NSApp presentError:error];
-        }else{
-            
-            [[[PatientObject alloc]init] pushToCloud:^(id cloudResults, NSError *error) {
-                if (error) {
+        }
+        else
+        {
+            [[[PatientObject alloc]init] pushToCloud:^(id cloudResults, NSError *error)
+            {
+                if (error)
+                {
                     [NSApp presentError:error];
-                }else{
+                }
+                else
+                {
                     [self refreshPatients:nil];
                 }
             }];
-            
         }
         [progressIndicator stopAnimation:self];
     }];

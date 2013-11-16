@@ -43,7 +43,6 @@
  *		2. If you are working with a patient and modifying any of their records make sure you pass the appropriate Bool attribute to lock the patient.(See Note 2 & 3)
  *		3. All(Most) the objects return from the Block response of the methods will be updated values take from the server. So if you tried to lock the object under your userprofile but it was already locked by another user, your returned object from the server will reflect the other user's information and changes. This is to help mitigate RACE conditions
  */
-
 typedef void (^MobileClinicCommandResponse)(NSDictionary* object, NSError* error);
 typedef void (^MobileClinicSearchResponse)(NSArray* allObjectsFromSearch, NSError* error);
 @protocol MobileClinicFacadeProtocol <NSObject>
@@ -89,6 +88,7 @@ typedef void (^MobileClinicSearchResponse)(NSArray* allObjectsFromSearch, NSErro
  * @param patientInfo the patient you want the visits from.
  */
 -(void) findAllVisitsForCurrentPatient:(NSDictionary*)patientInfo AndOnCompletion:(MobileClinicSearchResponse)Response;
+
 /**
  * This method will return all open visits.
  * When a Visit is created in triage it is automatically deemed Open, which means that it should be tracked by the system till the patien leaves.
@@ -100,6 +100,7 @@ typedef void (^MobileClinicSearchResponse)(NSArray* allObjectsFromSearch, NSErro
  which can be retrieved by using the Definition OPEN_VISITS_PATIENT
  */
 -(void) findAllOpenVisitsAndOnCompletion:(MobileClinicSearchResponse)Response;
+
 /**
  * This method will update the patient's Information.
  * If the patient doesn't exist then it will create one
@@ -108,11 +109,13 @@ typedef void (^MobileClinicSearchResponse)(NSArray* allObjectsFromSearch, NSErro
  * @param lock If True then the system will attempt to lock the patient
  */
 -(void) updateCurrentPatient:(NSDictionary*)patientInfo AndShouldLock:(BOOL)lock onCompletion:(MobileClinicCommandResponse)Response;
+
 /**
  *  Locates on the server and client all prescriptions for a given Visit
  *  @param visit the Visitation Dictionary that you want to search for all prescriptions from
  */
 -(void) findAllPrescriptionForCurrentVisit:(NSDictionary*)visit AndOnCompletion:(MobileClinicSearchResponse)Response;
+
 /**
  * Creates a new patient and associates it to a given visit.
  * Can also lock the prescription using the AndLockVisit boolean variable
@@ -128,10 +131,9 @@ typedef void (^MobileClinicSearchResponse)(NSArray* allObjectsFromSearch, NSErro
  * @param Rx the Prescription dicitionary file to update
  */
 -(void) updatePrescription:(NSDictionary*)Rx AndShouldLock:(BOOL)lock onCompletion:(MobileClinicCommandResponse)Response;
-
 -(void) findAllMedication:(NSDictionary*)visit AndOnCompletion:(MobileClinicSearchResponse)Response;
-
 -(void) updateMedication:(NSDictionary*)Rx AndShouldLock:(BOOL)lock onCompletion:(MobileClinicCommandResponse)Response;
+
 /**
  * This will mark the patient and their visit as closed.
  */

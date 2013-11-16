@@ -23,7 +23,8 @@
     return self;
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
@@ -86,11 +87,13 @@
     [super viewDidUnload];
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return self.prescriptions.count;
 }
 
@@ -141,12 +144,13 @@
 }
 
 // Hides keyboard when whitespace is pressed
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
     [self.view endEditing:YES];
 }
 
-- (IBAction)checkoutPatient:(id)sender {
-
+- (IBAction)checkoutPatient:(id)sender
+{
     [[[MobileClinicFacade alloc]init]checkoutVisit:_patientData forPatient:[_patientData objectForKey:OPEN_VISITS_PATIENT] AndWillUlockOnCompletion:^(NSDictionary *object, NSError *error) {
         [self.navigationController popViewControllerAnimated:YES];
     }];

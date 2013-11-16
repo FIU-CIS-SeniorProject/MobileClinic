@@ -78,26 +78,6 @@
     return [self FindAllObjects];
 }
 
--(NSDate *)GetTimestamp: (NSString*)environment
-{
-    NSPredicate* pred = [NSPredicate predicateWithFormat:@"%K == %@",CLOUDURL, environment];
-    NSArray* managedObjects = [self FindObjectInTable:DATABASE withCustomPredicate:pred andSortByAttribute:NAME];
-    NSDate* lastPullTime = nil;
-    
-    if (managedObjects.count == 1)
-    {
-        // take object in array and put into dictionary
-        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-        for (NSManagedObject* objs in managedObjects)
-        {
-            dict = [self getDictionaryValuesFromManagedObject:objs];
-        }
-        lastPullTime = [dict valueForKey:LASTPULLTIME];;
-        // take value for key of last pull in dictionary
-    }
-    return lastPullTime;
-}
-
 -(NSDictionary *)GetActiveEnvironment
 {
     NSPredicate* pred = [NSPredicate predicateWithFormat:@"K == YES", ISACTIVE];
@@ -112,5 +92,51 @@
         }
     }
     return dict;
+}
+
+-(NSDate *)GetActiveTimestamp
+{
+    NSDictionary* dict = [self GetActiveEnvironment];
+    NSDate* lastPullTime = nil;
+    
+    if (dict != nil)
+    {
+        lastPullTime = [dict valueForKey:LASTPULLTIME];
+    }
+    
+    return lastPullTime;
+}
+
+-(NSString *)GetActiveURL
+{
+    NSDictionary* dict = [self GetActiveEnvironment];
+    NSString* activeURL = nil;
+    
+    if (dict != nil)
+    {
+        activeURL = [dict valueForKey:CLOUDURL];
+    }
+    
+    return activeURL;
+}
+
+-(NSDate *)GetTimestamp: (NSString*)environment
+{
+    NSPredicate* pred = [NSPredicate predicateWithFormat:@"%K == %@",NAME, environment];
+    NSArray* managedObjects = [self FindObjectInTable:DATABASE withCustomPredicate:pred andSortByAttribute:NAME];
+    NSDate* lastPullTime = nil;
+    
+    if (managedObjects.count == 1)
+    {
+        // take object in array and put into dictionary
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+        for (NSManagedObject* objs in managedObjects)
+        {
+            dict = [self getDictionaryValuesFromManagedObject:objs];
+        }
+        lastPullTime = [dict valueForKey:LASTPULLTIME];
+        // take value for key of last pull in dictionary
+    }
+    return lastPullTime;
 }
 @end

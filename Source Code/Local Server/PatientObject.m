@@ -1,9 +1,29 @@
+// The MIT License (MIT)
+//
+// Copyright (c) 2013 Florida International University
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 //
 //  PatientObject.m
 //  Mobile Clinic
 //
 //  Created by Steven Berlanga on 2/11/13.
-//  Copyright (c) 2013 Florida International University. All rights reserved.
 //
 #define ISOPEN  @"isOpen"
 
@@ -19,64 +39,74 @@ NSString* lastname;
 NSString* isLockedBy;
 
 @implementation PatientObject
-+(NSString *)DatabaseName{
+
++(NSString *)DatabaseName
+{
     return DATABASE;
 }
+
 - (id)init
 {
     [self setupObject];
     return [super init];
 }
+
 -(id)initAndMakeNewDatabaseObject
 {
     [self setupObject];
     return [super initAndMakeNewDatabaseObject];
 }
+
 - (id)initAndFillWithNewObject:(NSDictionary *)info
 {
     [self setupObject];
     return [super initAndFillWithNewObject:info];
 }
+
 -(id)initWithCachedObjectWithUpdatedObject:(NSDictionary *)dic
 {
     [self setupObject];
     return [super initWithCachedObjectWithUpdatedObject:dic];
 }
 
--(void)setupObject{
-    
+-(void)setupObject
+{
     self->COMMONID =  PATIENTID;
     self->CLASSTYPE = kPatientType;
     self->COMMONDATABASE = DATABASE;
 }
+
 #pragma mark - BaseObjectProtocol Methods
 #pragma mark -
 
-/* The super needs to be called first */
--(NSDictionary *)consolidateForTransmitting{
-    
+// The super needs to be called first
+-(NSDictionary *)consolidateForTransmitting
+{
     NSMutableDictionary* consolidate = [[NSMutableDictionary alloc]initWithDictionary:[super consolidateForTransmitting]];
 
     [consolidate setValue:[NSNumber numberWithInt:kPatientType] forKey:OBJECTTYPE];
     return consolidate;
 }
 
--(void)ServerCommand:(NSDictionary *)dataToBeRecieved withOnComplete:(ServerCommand)response{
+-(void)ServerCommand:(NSDictionary *)dataToBeRecieved withOnComplete:(ServerCommand)response
+{
     [super ServerCommand:nil withOnComplete:response];
     [self unpackageFileForUser:dataToBeRecieved];
     [self CommonExecution];
 }
 
--(void)unpackageFileForUser:(NSDictionary *)data{
+-(void)unpackageFileForUser:(NSDictionary *)data
+{
     [super unpackageFileForUser:data];
     firstname = [self->databaseObject valueForKey:FIRSTNAME];
     lastname = [self->databaseObject valueForKey:FAMILYNAME];
 }
 
-/* Depending on the RemoteCommands it will execute a different Command */
+// Depending on the RemoteCommands it will execute a different Command
 -(void)CommonExecution
 {
-    switch (self->commands) {
+    switch (self->commands)
+    {
         case kAbort:
             break;
         case kUpdateObject:
@@ -87,13 +117,13 @@ NSString* isLockedBy;
             break;
         case kFindOpenObjects:
             [self sendSearchResults:[self OptimizedFindAllObjects]];
-        
         default:
             break;
     }
 }
--(NSArray*)getObjectsUsingCustomPredicate:(NSString*)predicate{
-    
+
+-(NSArray*)getObjectsUsingCustomPredicate:(NSString*)predicate
+{
     NSPredicate* pred = [NSPredicate predicateWithFormat:predicate];
    
     return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:pred andSortByAttribute:FIRSTNAME]];
@@ -101,11 +131,13 @@ NSString* isLockedBy;
 
 #pragma mark - COMMON OBJECT Methods
 #pragma mark -
--(NSArray*)OptimizedFindAllObjects{
-    
+
+-(NSArray*)OptimizedFindAllObjects
+{
     FIUAppDelegate* app = (FIUAppDelegate*)[[NSApplication sharedApplication]delegate];
     
-    switch ([app isOptimized]) {
+    switch ([app isOptimized])
+    {
         case kFirstSync:
             return [self FindAllObjects];
         case kFastSync:
@@ -115,42 +147,40 @@ NSString* isLockedBy;
             return [self FindAllDirtyPatients];
     }
 }
--(NSArray*)FindAllDirtyPatients{
+
+-(NSArray*)FindAllDirtyPatients
+{
     //TODO: Add BETWEEN Comparison
-    
     return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:[NSPredicate predicateWithFormat:@"%K == YES",ISDIRTY] andSortByAttribute:FIRSTNAME]];
 }
--(NSArray*)FindAllOpenPatients{
-    
+
+-(NSArray*)FindAllOpenPatients
+{
     NSPredicate* pred = [NSPredicate predicateWithFormat:@"%K == YES",ISOPEN];
-    
     return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:pred andSortByAttribute:FIRSTNAME]];
 }
 
--(NSArray *)FindAllObjects{
+-(NSArray *)FindAllObjects
+{
     return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:nil andSortByAttribute:FIRSTNAME]]; 
 }
 
--(NSArray*)FindAllObjectsUnderParentID:(NSString*)parentID{
+-(NSArray*)FindAllObjectsUnderParentID:(NSString*)parentID
+{
     return [self FindAllObjects];
 }
 
--(NSAttributedString *)printFormattedObject:(NSDictionary *)object{
-    
+-(NSAttributedString *)printFormattedObject:(NSDictionary *)object
+{
     NSString* titleString = [NSString stringWithFormat:@"Patient Records\n"];
     
     NSMutableAttributedString* title = [[NSMutableAttributedString alloc]initWithString:titleString];
     
     [title addAttribute:NSFontAttributeName value:[NSFont fontWithName:@"Gill Sans" size:22.0] range:[titleString rangeOfString:titleString]];
-    
-   // [title setAlignment:NSCenterTextAlignment range:[titleString rangeOfString:titleString]];
-    
+    //[title setAlignment:NSCenterTextAlignment range:[titleString rangeOfString:titleString]];
     NSMutableAttributedString* container = [[NSMutableAttributedString alloc]initWithAttributedString:title];
-
     
-     NSString* main = [NSString stringWithFormat:@" Patient Name:\t%@ %@ \n Village:\t%@ \n Date of Birth:\t%@ \n Age:\t%li \n Sex:\t%@ \n",[object objectForKey:FIRSTNAME],[object objectForKey:FAMILYNAME],[object objectForKey:VILLAGE],[[NSDate convertSecondsToNSDate:[object objectForKey:DOB]]convertNSDateFullBirthdayString],[[NSDate convertSecondsToNSDate:[object objectForKey:DOB]]getNumberOfYearsElapseFromDate],([[object objectForKey:SEX]integerValue]==0)?@"Female":@"Male"];
-    
-
+    NSString* main = [NSString stringWithFormat:@" Patient Name:\t%@ %@ \n Village:\t%@ \n Date of Birth:\t%@ \n Age:\t%li \n Sex:\t%@ \n",[object objectForKey:FIRSTNAME],[object objectForKey:FAMILYNAME],[object objectForKey:VILLAGE],[[NSDate convertSecondsToNSDate:[object objectForKey:DOB]]convertNSDateFullBirthdayString],[[NSDate convertSecondsToNSDate:[object objectForKey:DOB]]getNumberOfYearsElapseFromDate],([[object objectForKey:SEX]integerValue]==0)?@"Female":@"Male"];
     
     NSMutableAttributedString* line1 = [[NSMutableAttributedString alloc]initWithString:main];
     
@@ -160,32 +190,41 @@ NSString* isLockedBy;
     
     return container;
 }
--(NSString*)convertDateNumberForPrinting:(NSNumber*)number{
-    if (number) {
+
+-(NSString*)convertDateNumberForPrinting:(NSNumber*)number
+{
+    if (number)
+    {
         return [[NSDate convertSecondsToNSDate:number]convertNSDateToMonthDayYearTimeString];
     }
     return @"N/A";
 }
--(NSString*)convertTextForPrinting:(NSString*)text{
+
+-(NSString*)convertTextForPrinting:(NSString*)text
+{
     return ([text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length > 0)?text:@"Incomplete";
 }
+
 #pragma mark - Private Methods
 #pragma mark -
 
--(NSArray *)FindAllObjectsForGivenCriteria{
-    
+-(NSArray *)FindAllObjectsForGivenCriteria
+{
     NSPredicate* pred = [NSPredicate predicateWithFormat:@"%K beginswith[cd] %@ || %K beginswith[cd] %@",FIRSTNAME,firstname,FAMILYNAME,lastname];
     
-    if (!firstname && !lastname) {
+    if (!firstname && !lastname)
+    {
         pred = nil;
     }
     
     return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:pred andSortByAttribute:FIRSTNAME]];
 }
 
--(void)UnlockPatient:(ObjectResponse)onComplete{
+-(void)UnlockPatient:(ObjectResponse)onComplete
+{
     // Unlock patient
     [self->databaseObject setValue:@"" forKey:ISLOCKEDBY];
+    
     // save changes
     [self saveObject:onComplete];
 }
@@ -195,8 +234,26 @@ NSString* isLockedBy;
     //TODO: replace "withObject:nil" with timestamp dictionary
     [self makeCloudCallWithCommand:DATABASE withObject:nil onComplete:^(id cloudResults, NSError *error)
     {
-            NSArray* allPatients = [cloudResults objectForKey:@"data"];
-            [self handleCloudCallback:onComplete UsingData:allPatients WithPotentialError:error];
+        NSArray* allPatients = [cloudResults objectForKey:@"data"];
+        [self handleCloudCallback:onComplete UsingData:allPatients WithPotentialError:error];
+        
+        //TODO: update timestamp
+        // allocate and init a CloudManagementObject
+        CloudManagementObject* CloudMO = [[CloudManagementObject alloc] init];
+        
+        // Call getActiveEnvironment and put it into an NSMutableDictionary
+        NSMutableDictionary* environment = [[CloudMO GetActiveEnvironment] mutableCopy];
+        
+        // Update timestamp in NSMutableDictionary
+        [environment setObject:[NSDate date] forKey:LASTPULLTIME];
+        
+        // Put back into CloudManagementObject
+        CloudMO = [CloudMO initAndFillWithNewObject:environment];
+        
+        // Save CloudManagementObject
+        [CloudMO saveObject:^(id<BaseObjectProtocol> data, NSError *error) {
+            
+        }];
     }];
 }
 
@@ -219,21 +276,15 @@ NSString* isLockedBy;
         
         id dob = [object objectForKey: DOB];
         
-        if(!dob){
+        if(!dob)
+        {
             [object setValue:[NSNumber numberWithInteger:0] forKey:DOB];
         }
     }
     
-    [self makeCloudCallWithCommand:UPDATEPATIENT withObject:[NSDictionary dictionaryWithObject:allPatients forKey:DATABASE] onComplete:^(id cloudResults, NSError *error) {
-        
+    [self makeCloudCallWithCommand:UPDATEPATIENT withObject:[NSDictionary dictionaryWithObject:allPatients forKey:DATABASE] onComplete:^(id cloudResults, NSError *error)
+    {
         [self handleCloudCallback:onComplete UsingData:allPatients WithPotentialError:error];
-        //TODO: update timestamp
-        // allocate and init a CloudManagementObject
-        // Call getActiveEnvironment
-        // Put into a NSMutableDictionary
-        // Update timestamp in NSMutableDictionary
-        // Put back into CloudManagementObject
-        // Save CloudManagementObject
     }];
 }
 

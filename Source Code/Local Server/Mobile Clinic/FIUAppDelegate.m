@@ -1,19 +1,38 @@
+// The MIT License (MIT)
+//
+// Copyright (c) 2013 Florida International University
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 //
 //  FIUAppDelegate.m
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 1/23/13.
-//  Copyright (c) 2013 Florida International University. All rights reserved.
 //
-
 #import "FIUAppDelegate.h"
 #import "BaseObject.h"
 #import "MainMenu.h"
 #import "PatientTable.h"
 #import "MedicationList.h"
 #import "UserView.h"
-
 #import "Database.h"
+#import "CloudManagementObject.h"
 
 #define PTESTING @"Patients Testing"
 #define MTESTING @"Medicine Testing"
@@ -24,8 +43,8 @@ MedicationList* medList;
 PatientTable *pTable;
 MainMenu* mainView;
 NSTimer* switchTimer;
-
 Optimizer isOptimized;
+CloudManagementObject* cloudMO;
 
 @implementation FIUAppDelegate
 
@@ -33,17 +52,22 @@ Optimizer isOptimized;
 //@synthesize managedObjectModel = _managedObjectModel;
 //@synthesize managedObjectContext = _managedObjectContext;
 
-- (void)showPatientsView:(id)sender {
+- (void)showPatientsView:(id)sender
+{
 
 }
 
-- (IBAction)showUserView:(id)sender {
+- (IBAction)showUserView:(id)sender
+{
 
 }
 
-- (void)showUsersView:(id)sender {
-    if(![_window isVisible] )
+- (void)showUsersView:(id)sender
+{
+    if(![_window isVisible])
+    {
         [_window makeKeyAndOrderFront:sender];
+    }
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -68,17 +92,17 @@ Optimizer isOptimized;
     NSLog(@"Performing a True Purge of the System");
     [mainView truePurgeTheSystem:nil];
     
-    NSLog(@"Imported Patients: %@", patients);
+    NSLog(@"Imported Patients: \n%@", patients);
     
-    [patients enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        
+    [patients enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+    {
         NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:obj];
         PatientObject *base = [[PatientObject alloc]init];
         
         NSError* success = [base setValueToDictionaryValues:dic];
-        
 
-        [base saveObject:^(id<BaseObjectProtocol> data, NSError *error) {
+        [base saveObject:^(id<BaseObjectProtocol> data, NSError *error)
+        {
                 
         }];
     }];
@@ -87,22 +111,17 @@ Optimizer isOptimized;
     
     NSArray* Meds = [NSArray arrayWithArray:[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPath]options:0 error:&err]];
     
-    NSLog(@"Imported Medications: %@", Meds.description);
+    NSLog(@"Imported Medications: \n%@", Meds.description);
     
-    [Meds enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        
+    [Meds enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+    {
         MedicationObject* base = [[MedicationObject alloc]init];
-        
         NSError* success = [base setValueToDictionaryValues:obj];
-        
-
-            [base saveObject:^(id<BaseObjectProtocol> data, NSError *error) {
+        [base saveObject:^(id<BaseObjectProtocol> data, NSError *error)
+        {
                 
-            }];
-       
-        
+        }];
     }];
-
 }
 
 // Implement switching to the Production Environment
@@ -111,8 +130,8 @@ Optimizer isOptimized;
     
 }
 
-
-- (void) testCloud {
+- (void) testCloud
+{
 //    BaseObject * obj = [[BaseObject alloc] init];
 //    
 //    NSMutableDictionary * mDic = [[NSMutableDictionary alloc]init];
@@ -129,43 +148,49 @@ Optimizer isOptimized;
 //    }];
 }
 
--(void)applicationWillTerminate:(NSNotification *)notification{
+-(void)applicationWillTerminate:(NSNotification *)notification
+{
     
 }
-
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
 {
     return NSTerminateNow;
 }
 
-
-- (IBAction)restartServer:(id)sender {
-    if (connection.isServerRunning) {
+- (IBAction)restartServer:(id)sender
+{
+    if (connection.isServerRunning)
+    {
         [connection stopServer];
     }
     
     [connection start];
 }
 
-- (IBAction)shutdownServer:(id)sender {
-    if (connection.isServerRunning) {
+- (IBAction)shutdownServer:(id)sender
+{
+    if (connection.isServerRunning)
+    {
         [connection stopServer];
     }
-
 }
 
-- (IBAction)showMedicineView:(id)sender {
+- (IBAction)showMedicineView:(id)sender
+{
     
 }
 
-- (IBAction)showMainServerView:(id)sender {
+- (IBAction)showMainServerView:(id)sender
+{
     if(![_window isVisible] )
         [_window makeKeyAndOrderFront:sender];
 }
-- (IBAction)ToggleOptimization:(id)sender {
-    
-    switch (isOptimized) {
+
+- (IBAction)ToggleOptimization:(id)sender
+{
+    switch (isOptimized)
+    {
         case kFirstSync:
             isOptimized = kFastSync;
             [_OptimizeToggler setTitle:@"Fast Sync -> Stabilize Sync"];
@@ -185,15 +210,14 @@ Optimizer isOptimized;
     }
 }
 
-- (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag {
-    
+- (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag
+{
     [_window makeKeyAndOrderFront:self];
-    
     return YES;
 }
 
--(Optimizer)isOptimized{
+-(Optimizer)isOptimized
+{
     return isOptimized;
 }
-
 @end

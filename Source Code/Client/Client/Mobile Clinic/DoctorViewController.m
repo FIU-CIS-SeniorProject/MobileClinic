@@ -15,15 +15,18 @@
 
 @implementation DoctorViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
     }
     return self;
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
@@ -43,7 +46,8 @@
 }
 
 // Transfers the patient's data to the next view controller
-- (void)transferPatientData:(NSNotification *)note {
+- (void)transferPatientData:(NSNotification *)note
+{
     _patientData =[NSMutableDictionary dictionaryWithDictionary:note.object];
     
     DoctorPatientViewController *newView = [self getViewControllerFromiPadStoryboardWithName:@"doctorPatientViewController"];
@@ -53,30 +57,36 @@
     [self.navigationController pushViewController:newView animated:YES];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewDidUnload {
+- (void)viewDidUnload
+{
     [self setTableView:nil];
     [super viewDidUnload];
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return 1;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     static NSString * searchCellIdentifier = @"searchCell";
     
     SearchPatientTableCell * cell = [tableView dequeueReusableCellWithIdentifier:searchCellIdentifier];
     
-    if(!cell){
+    if(!cell)
+    {
         cell = [[SearchPatientTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:searchCellIdentifier];
         cell.viewController = _control;
     }
@@ -97,7 +107,8 @@
 //    return cell;    
 }
 
-- (UITableViewCell*)setupCell:(id)cell forRow:(NSIndexPath*)path {
+- (UITableViewCell*)setupCell:(id)cell forRow:(NSIndexPath*)path
+{
     // Rotate view vertically on the screen
     
     CGAffineTransform transform = CGAffineTransformMakeRotation(1.5707963);
@@ -105,7 +116,8 @@
     [cell viewController].view.frame = CGRectMake(50, 0, 916, 768);
     
     // Removes previous view (for memory mgmt)
-    for(UIView *mView in [[cell contentView] subviews]){
+    for(UIView *mView in [[cell contentView] subviews])
+    {
         [mView removeFromSuperview];
     }
     
@@ -113,14 +125,16 @@
     [cell addSubview: [cell viewController].view];
     
     //
-    [[cell viewController] setScreenHandler:^(id object, NSError *error) {
+    [[cell viewController] setScreenHandler:^(id object, NSError *error)
+    {
         _patientData = object;
         
         CurrentDiagnosisViewController *newView = [self getViewControllerFromiPadStoryboardWithName:@"doctorPatientViewController"];
         
         [newView setPatientData:_patientData];
         
-        [newView setScreenHandler:^(id object, NSError *error) {
+        [newView setScreenHandler:^(id object, NSError *error)
+        {
             [self.navigationController popViewControllerAnimated:YES];
         }];
         
@@ -135,7 +149,8 @@
 }
 
 
-- (void)setScreenHandler:(ScreenHandler)myHandler {
+- (void)setScreenHandler:(ScreenHandler)myHandler
+{
     handler = myHandler;
 }
 
