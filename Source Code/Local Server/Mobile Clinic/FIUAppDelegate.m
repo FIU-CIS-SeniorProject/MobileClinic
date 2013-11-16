@@ -30,6 +30,7 @@
 #import "MainMenu.h"
 #import "PatientTable.h"
 #import "MedicationList.h"
+#import "LoginView.h"
 #import "UserView.h"
 #import "Database.h"
 #import "CloudManagementObject.h"
