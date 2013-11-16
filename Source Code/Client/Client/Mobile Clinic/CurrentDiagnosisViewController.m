@@ -14,7 +14,8 @@
 
 @implementation CurrentDiagnosisViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -22,23 +23,27 @@
     return self;
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     _visitationData = [[VisitationObject alloc]init];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
     // Populate condition for doctor to see
     _subjectiveTextbox.text = [_patientData objectForKey:CONDITION];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewDidUnload {
+- (void)viewDidUnload
+{
     [self setSubjectiveTextbox:nil];
     [self setObjectiveTextbox:nil];
     [self setAssessmentTextbox:nil];
@@ -53,11 +58,18 @@
     {
         [_patientData setObject:_objectiveTextbox.text forKey:OBSERVATION];
         [_patientData setObject:_assessmentTextbox.text forKey:ASSESSMENT];
+        [_patientData setValue:[[NSDate date]convertNSDateToSeconds] forKey:DOCTOROUT];
         
+        /*
         [[[MobileClinicFacade alloc]init]checkoutVisit:_patientData forPatient:[_patientData objectForKey:OPEN_VISITS_PATIENT] AndWillUlockOnCompletion:^(NSDictionary *object, NSError *error)
         {
             [self.navigationController popViewControllerAnimated:YES];
-        }];
+        }];*/
+        
+        [[[MobileClinicFacade alloc]init]checkoutVisit:_patientData forPatient:[_patientData objectForKey:OPEN_VISITS_PATIENT] AndWillUlockOnCompletion:^(NSDictionary *object, NSError *error)
+         {
+             [self.navigationController popViewControllerAnimated:YES];
+         }];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:CLOSE_PATIENT object:_patientData];
     }
@@ -113,11 +125,13 @@
 }
 
 // Hides keyboard when whitespace is pressed
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
     [self.view endEditing:YES];
 }
 
-- (void)setScreenHandler:(ScreenHandler)myHandler {
+- (void)setScreenHandler:(ScreenHandler)myHandler
+{
     handler = myHandler;
 }
 
