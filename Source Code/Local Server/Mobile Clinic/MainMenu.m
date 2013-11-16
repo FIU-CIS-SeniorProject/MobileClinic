@@ -28,6 +28,7 @@
 #import "MainMenu.h"
 #import "ServerCore.h"
 #import "UserView.h"
+#import "LoginView.h"
 #import "PatientTable.h"
 #import "MedicationList.h"
 #import "SystemBackup.h"
@@ -36,6 +37,8 @@ SystemBackup* backup;
 MedicationList* medicationView;
 PatientTable* patientView;
 UserView* userView;
+LoginView* loginView;
+
 id currentView;
 id<ServerProtocol> connection;
 @implementation MainMenu

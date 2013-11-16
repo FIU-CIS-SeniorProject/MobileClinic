@@ -25,7 +25,6 @@
 //
 //  Created by Michael Montaque on 3/24/13.
 //
-
 #import <Cocoa/Cocoa.h>
 
 @interface MainMenu : NSViewController<NSWindowDelegate>
