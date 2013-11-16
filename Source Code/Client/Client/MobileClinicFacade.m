@@ -252,6 +252,16 @@
     
     VisitationObject* myVisit = [[VisitationObject alloc]init];
     
+    /*// Update visit
+    [self updateVisitRecord:visitDictionary andShouldUnlock:YES andShouldCloseVisit:YES onCompletion:^(NSDictionary *object, NSError *error) {
+        // DO NOTHING??
+    }];
+    
+    // Update Patient
+    [self updateCurrentPatient:patientDictionary AndShouldLock:NO onCompletion:^(NSDictionary *object, NSError *error) {
+        // DO NOTHING??
+    }];//*/
+    
     [self CommonCommandObject:myVisit ShouldLock:NO CommonUpdate:visitDictionary withResults:^(NSDictionary *object, NSError *error)
     {
         if (object)
@@ -264,7 +274,7 @@
         {
             Response(object,error);
         }
-    }];
+    }];//*/
 }
 
 #pragma mark- PRIVATE CLEAN DATABASE

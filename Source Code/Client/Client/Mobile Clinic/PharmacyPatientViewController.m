@@ -71,12 +71,14 @@
     }];  
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewDidUnload {
+- (void)viewDidUnload
+{
     [self setPatientNameField:nil];
     [self setFamilyNameField:nil];
     [self setVillageNameField:nil];
@@ -97,7 +99,8 @@
     return self.prescriptions.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     static NSString * currentVisitCellIdentifier = @"prescriptionCell";
     
     PharmacyPrescriptionCell * cell = [tableView dequeueReusableCellWithIdentifier:currentVisitCellIdentifier];
@@ -113,19 +116,23 @@
     cell.viewController.view.transform = transform;
     cell.viewController.view.frame = CGRectMake(0, 0, 650, 674);
     
-    if([[[self.prescriptions objectAtIndex:indexPath.row] objectForKey:TIMEOFDAY] integerValue] == 0){
+    if([[[self.prescriptions objectAtIndex:indexPath.row] objectForKey:TIMEOFDAY] integerValue] == 0)
+    {
         [cell.viewController.timeOfDayButton setBackgroundImage:[UIImage imageNamed:@"morning"] forState:UIControlStateDisabled];
         cell.viewController.timeOfDayLabel.text = @"Morning";
     }
-    else if([[[self.prescriptions objectAtIndex:indexPath.row] objectForKey:TIMEOFDAY] integerValue] == 1){
+    else if([[[self.prescriptions objectAtIndex:indexPath.row] objectForKey:TIMEOFDAY] integerValue] == 1)
+    {
             [cell.viewController.timeOfDayButton setBackgroundImage:[UIImage imageNamed:@"afternoon"] forState:UIControlStateDisabled];
         cell.viewController.timeOfDayLabel.text = @"Afternoon";
     }
-    else if([[[self.prescriptions objectAtIndex:indexPath.row] objectForKey:TIMEOFDAY] integerValue] == 2){
+    else if([[[self.prescriptions objectAtIndex:indexPath.row] objectForKey:TIMEOFDAY] integerValue] == 2)
+    {
         [cell.viewController.timeOfDayButton setBackgroundImage:[UIImage imageNamed:@"evening"] forState:UIControlStateDisabled];
         cell.viewController.timeOfDayLabel.text = @"Evening";
     }
-    else if([[[self.prescriptions objectAtIndex:indexPath.row] objectForKey:TIMEOFDAY] integerValue] == 3){
+    else if([[[self.prescriptions objectAtIndex:indexPath.row] objectForKey:TIMEOFDAY] integerValue] == 3)
+    {
         [cell.viewController.timeOfDayButton setBackgroundImage:[UIImage imageNamed:@"night"] forState:UIControlStateDisabled];
         cell.viewController.timeOfDayLabel.text = @"Night";
     }
@@ -151,12 +158,14 @@
 
 - (IBAction)checkoutPatient:(id)sender
 {
-    [[[MobileClinicFacade alloc]init]checkoutVisit:_patientData forPatient:[_patientData objectForKey:OPEN_VISITS_PATIENT] AndWillUlockOnCompletion:^(NSDictionary *object, NSError *error) {
+    [[[MobileClinicFacade alloc]init]checkoutVisit:_patientData forPatient:[_patientData objectForKey:OPEN_VISITS_PATIENT] AndWillUlockOnCompletion:^(NSDictionary *object, NSError *error)
+    {
         [self.navigationController popViewControllerAnimated:YES];
     }];
 }
 
-- (void)setScreenHandler:(ScreenHandler)myHandler {
+- (void)setScreenHandler:(ScreenHandler)myHandler
+{
     handler = myHandler;
 }
 

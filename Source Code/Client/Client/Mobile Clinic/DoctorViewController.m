@@ -3,9 +3,8 @@
 //  Mobile Clinic
 //
 //  Created by sebastian a zanlongo on 2/18/13.
-//  Copyright (c) 2013 Steven Berlanga. All rights reserved.
+//  Edited by James Mendez on 11/16/2013
 //
-
 #import "DoctorViewController.h"
 #import "DoctorPatientViewController.h"
 

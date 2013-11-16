@@ -26,17 +26,20 @@
     return self;
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewDidUnload {
+- (void)viewDidUnload
+{
     [self setTabletsTextField:nil];
     [self setTimeOfDayTextFields:nil];
     [self setDrugTextField:nil];
@@ -83,7 +86,8 @@
     }
 }
 
-- (IBAction)findDrugs:(id)sender {
+- (IBAction)findDrugs:(id)sender
+{
     [[NSNotificationCenter defaultCenter] postNotificationName:MOVE_TO_SEARCH_FOR_MEDICINE object:nil];
 }
 
