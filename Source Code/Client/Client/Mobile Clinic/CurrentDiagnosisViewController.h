@@ -11,7 +11,8 @@
 #import "PatientObject.h"
 #import "VisitationObject.h"
 
-@interface CurrentDiagnosisViewController : UIViewController {
+@interface CurrentDiagnosisViewController : UIViewController
+{
     ScreenHandler handler;
 }
 
