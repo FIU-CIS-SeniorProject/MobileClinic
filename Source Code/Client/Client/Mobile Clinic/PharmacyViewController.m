@@ -104,7 +104,8 @@
 //    return cell;
 }
 
-- (UITableViewCell*)setupCell:(id)cell forRow:(NSIndexPath*)path {
+- (UITableViewCell*)setupCell:(id)cell forRow:(NSIndexPath*)path
+{
     // Rotate view vertically on the screen
     CGAffineTransform transform = CGAffineTransformMakeRotation(1.5707963);
     [cell viewController].view.transform = transform;

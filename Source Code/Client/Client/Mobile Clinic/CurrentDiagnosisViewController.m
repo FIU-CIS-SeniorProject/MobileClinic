@@ -58,7 +58,7 @@
     {
         [_patientData setObject:_objectiveTextbox.text forKey:OBSERVATION];
         [_patientData setObject:_assessmentTextbox.text forKey:ASSESSMENT];
-        [_patientData setValue:[[NSDate date]convertNSDateToSeconds] forKey:DOCTOROUT];
+        //[_patientData setValue:[[NSDate date]convertNSDateToSeconds] forKey:DOCTOROUT];
         
         /*
         [[[MobileClinicFacade alloc]init]checkoutVisit:_patientData forPatient:[_patientData objectForKey:OPEN_VISITS_PATIENT] AndWillUlockOnCompletion:^(NSDictionary *object, NSError *error)

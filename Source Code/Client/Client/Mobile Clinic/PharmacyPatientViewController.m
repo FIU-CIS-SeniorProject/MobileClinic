@@ -55,8 +55,8 @@
         
         [mobileFacade findAllMedication:nil AndOnCompletion:^(NSArray *allObjectsFromSearch, NSError *error) {
             
-            for (NSMutableDictionary* prescriptionDic in _prescriptions) {
-               
+            for (NSMutableDictionary* prescriptionDic in _prescriptions)
+            {
                 NSString *medID = [prescriptionDic objectForKey:MEDICATIONID];
                 NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", MEDICATIONID, medID];
                 NSArray *tempArray = [NSMutableArray arrayWithArray:[allObjectsFromSearch filteredArrayUsingPredicate:predicate]];
