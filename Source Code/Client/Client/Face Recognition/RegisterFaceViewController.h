@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <opencv2/highgui/cap_ios.h>
-#import "FaceDetector.h"
+//#import "FaceDetector.h"
 //#import "FaceRecognizer.h"
-#import "DatabaseProtocol.h"
+//#import "DatabaseProtocol.h"
 
 
 
@@ -19,7 +19,7 @@
     NSMutableArray *pictures;
     
 }
-@property(nonatomic, strong) id<DatabaseProtocol> database;
+//@property(nonatomic, strong) id<DatabaseProtocol> database;
 
 
 - (IBAction)savePerson:(id)sender;
@@ -33,8 +33,9 @@
 
 @property (nonatomic, strong) NSString *firstName;
 @property (nonatomic, strong) NSString *familyName;
+@property (strong, nonatomic) NSMutableDictionary * fData;
 
-@property (nonatomic, strong) FaceDetector *faceDetector;
+//@property (nonatomic, strong) FaceDetector *faceDetector;
 //@property (nonatomic, strong) FaceRecognizer *faceRecognizer;
 @property (nonatomic, strong) CvVideoCamera* videoCamera;
 @property (nonatomic, strong) CALayer *featureLayer;
@@ -44,7 +45,7 @@
 
 - (IBAction)cameraButtonClicked:(id)sender;
 - (IBAction)switchCameraButtonClicked:(id)sender;
--(UIImage *)imageWithCVMat:(const cv::Mat&)cvMat;
+//-(UIImage *)imageWithCVMat:(const cv::Mat&)cvMat;
 
 
 @end

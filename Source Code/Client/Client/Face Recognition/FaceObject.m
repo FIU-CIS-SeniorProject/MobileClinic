@@ -115,7 +115,7 @@ Face *face;
 
 -(void)FindAllObjectsOnServerFromParentObject:(NSDictionary*)parentObject OnCompletion:(ObjectResponse)eventResponse{
     
-    [self startSearchWithData:parentObject withsearchType:kFindObject andOnComplete:eventResponse];
+    [self startSearchWithData:parentObject withsearchType:kRecognize andOnComplete:eventResponse];
     
 }
 

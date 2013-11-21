@@ -656,7 +656,7 @@
 		8918BB1F18172B050025D9FC /* RegisterFaceViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RegisterFaceViewController.mm; sourceTree = "<group>"; };
 		893FCE6D18271D1C0054402A /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		893FCE6F18271DD70054402A /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
-		89420CC9182D9ABE0070EFC4 /* Model 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Model 2.xcdatamodel"; sourceTree = "<group>"; };
+		89420CC9182D9ABE0070EFC4 /* Model 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 2.xcdatamodel"; sourceTree = "<group>"; };
 		89454FC91820651C00E93504 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		89454FCB1820659D00E93504 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		89454FCD182065B700E93504 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -2374,6 +2374,7 @@
 					"$(SRCROOT)",
 					"\"$(SRCROOT)/lib\"",
 					"\"$(SRCROOT)/../../../opencv2.framework\"",
+					/opt/local/lib,
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
@@ -2415,6 +2416,7 @@
 					"\"$(SRCROOT)/TestFlightSDK1.1\"",
 					"\"$(SRCROOT)/lib\"",
 					"\"$(SRCROOT)/../../../opencv2.framework\"",
+					/opt/local/lib,
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (

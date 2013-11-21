@@ -2133,7 +2133,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="HPR-BZ-SFY" kind="push" id="c4C-bp-zmf"/>
+                                            <action selector="RegisterFaceButton:" destination="Vvd-v2-eiv" eventType="touchUpInside" id="3Q3-oa-Wdg"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MDH-Rk-reB">
@@ -2379,17 +2379,17 @@
         <!--Register Face View Controller-->
         <scene sceneID="hZW-pa-fYh">
             <objects>
-                <viewController id="HPR-BZ-SFY" customClass="RegisterFaceViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegisterFaceViewController" id="HPR-BZ-SFY" customClass="RegisterFaceViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="81y-cI-AJQ">
-                        <rect key="frame" x="0.0" y="44" width="768" height="916"/>
+                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="iXx-HZ-Bf9">
-                                <rect key="frame" x="0.0" y="187" width="768" height="730"/>
+                                <rect key="frame" x="0.0" y="150" width="768" height="855"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hDb-zY-DKS">
-                                <rect key="frame" x="589" y="136" width="124" height="44"/>
+                                <rect key="frame" x="375" y="81" width="124" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Switch Camera">
@@ -2403,38 +2403,14 @@
                                     <action selector="switchCameraButtonClicked:" destination="HPR-BZ-SFY" eventType="touchUpInside" id="A8E-af-MJ0"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="gaS-qo-psu">
-                                <rect key="frame" x="195" y="87" width="311" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Register Face of Patient" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="a00-U1-0ow">
-                                <rect key="frame" x="187" y="13" width="412" height="59"/>
+                                <rect key="frame" x="187" y="14" width="412" height="59"/>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="43"/>
                                 <color key="textColor" red="0.39096380739999997" green="0.39096380739999997" blue="0.39096380739999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Patient Name:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5wU-ZU-vCf">
-                                <rect key="frame" x="47" y="87" width="116" height="30"/>
-                                <fontDescription key="fontDescription" name="GillSans-Light" family="Gill Sans" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Family Name:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QUr-GY-iXW">
-                                <rect key="frame" x="47" y="125" width="116" height="30"/>
-                                <fontDescription key="fontDescription" name="GillSans-Light" family="Gill Sans" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="b6Z-A8-110">
-                                <rect key="frame" x="195" y="130" width="311" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mPT-9e-Bql">
-                                <rect key="frame" x="589" y="80" width="85" height="44"/>
+                                <rect key="frame" x="260" y="81" width="85" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Register">
@@ -2454,10 +2430,6 @@
                     <navigationItem key="navigationItem" id="Z7W-WK-lIp"/>
                     <connections>
                         <outlet property="Register" destination="mPT-9e-Bql" id="sS6-n8-vVL"/>
-                        <outlet property="familyName" destination="b6Z-A8-110" id="79C-iA-p8y"/>
-                        <outlet property="familyNameField" destination="b6Z-A8-110" id="fcL-mf-s5A"/>
-                        <outlet property="firstName" destination="gaS-qo-psu" id="Jl4-qk-FB9"/>
-                        <outlet property="firstNameField" destination="gaS-qo-psu" id="mdv-HZ-rzo"/>
                         <outlet property="imageView" destination="iXx-HZ-Bf9" id="Y3Y-yS-kKy"/>
                         <outlet property="switchCameraButton" destination="hDb-zY-DKS" id="l5U-Qd-3H2"/>
                     </connections>
@@ -2840,7 +2812,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xAE-l1-sXY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="996" y="-757"/>
+            <point key="canvasLocation" x="952" y="-908"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="EDj-98-lUl">
@@ -3778,11 +3750,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="LoginViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
             <relationships>
-                <relationship kind="action" name="DeleteMedications:"/>
-                <relationship kind="action" name="createTestMedications:"/>
                 <relationship kind="action" name="loginButton:"/>
-                <relationship kind="action" name="setupTestPatients:"/>
-                <relationship kind="action" name="setupUser:"/>
                 <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="usernameTextField" candidateClass="UITextField"/>
             </relationships>

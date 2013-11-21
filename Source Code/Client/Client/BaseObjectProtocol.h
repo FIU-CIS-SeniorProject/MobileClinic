@@ -45,7 +45,7 @@ typedef enum {
     kFindOpenObjects            = 7,
     kConditionalCreate          = 8,
     kFindUsingPredicate         = 9,
-    kRegisterFace               =10,
+    kRecognize                  =11,
 }RemoteCommands;
 
 @protocol BaseObjectProtocol <NSObject> 

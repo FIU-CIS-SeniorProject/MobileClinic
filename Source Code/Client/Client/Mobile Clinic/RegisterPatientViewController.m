@@ -10,7 +10,7 @@
 
 #import "DateController.h"
 #import "RegisterPatientViewController.h"
-
+#import "RegisterFaceViewController.h"
 #import "PBManageFingersController.h"
 #import "FingerprintObject.h"
 #import "PBBiometry.h"
@@ -18,6 +18,7 @@
 #import "PatientResultTableCell.h"
 #import "BaseObject.h"
 #import "StationSwitcher.h"
+
 UIPopoverController * pop;
 
 typedef enum MobileClinicMode{
@@ -34,9 +35,10 @@ typedef enum MobileClinicMode{
     FingerprintObject* fingerPrintDatabase;
     NSNumber* age;
     NSMutableDictionary* patientData;
+    NSMutableDictionary* faceData;
     NSArray * patientSearchResultsArray;
+    
 }
-
 
 @end
 
@@ -127,6 +129,25 @@ typedef enum MobileClinicMode{
         [progress hide:YES];
     }];
 }
+- (IBAction)RegisterFaceButton:(id)sender
+{
+    if (self.validateRegistration){
+    RegisterFaceViewController *faceViewController = [self getViewControllerFromiPadStoryboardWithName:@"RegisterFaceViewController"];
+    [faceViewController view];
+    //[faceData setValue:_patientNameField.text forKey:FIRSTNAME];
+    //[faceData setValue:_familyNameField.text forKey:FAMILYNAME];
+    faceViewController.firstName = _patientNameField.text;
+    faceViewController.familyName = _familyNameField.text;
+    //[faceViewController populateInformation];
+    
+    //[faceViewController setDelegate:self];
+    
+    //[faceViewController.navigationItem setHidesBackButton:YES];
+    
+    [self.navigationController pushViewController:faceViewController animated:YES];
+    }
+}
+
 - (IBAction)createPatient:(id)sender {
     // Before doing anything else, chech that all of the fields have been completed
     if (self.validateRegistration) {
@@ -561,5 +582,8 @@ typedef enum MobileClinicMode{
         /* Match failed, verification rejected. */
     }
 }
-
+-(void)setPatientArray:(NSArray *)patientArray
+{
+    patientSearchResultsArray = patientArray;
+}
 @end

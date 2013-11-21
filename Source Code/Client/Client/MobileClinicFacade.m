@@ -143,6 +143,13 @@
     
     [self CommonCommandObject:vObject ForSearch:patientInfo withResults:Response];
 }
+-(void)findPatientFace:(NSDictionary *)faceInfo AndOnCompletion:(MobileClinicSearchResponse)Response
+{
+    FaceObject* fObject =[[FaceObject alloc]init];
+    [self CommonCommandObject:fObject ForSearch:faceInfo withResults:Response];
+
+}
+
 
 
 

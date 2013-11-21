@@ -7,21 +7,23 @@
 //
 #import "RegisterFaceViewController.h"
 #import "DataR.h"
-#import "PatientObjectProtocol.h"
+//#import "PatientObjectProtocol.h"
 #import "MobileClinicFacade.h"
-#import "BaseObject+Protected.h"
-#import "BaseObject.h"
+//#import "BaseObject+Protected.h"
+//#import "BaseObject.h"
 #import "Face.h"
-#import "DatabaseDriver.h"
-#import <CoreData/CoreData.h>
-
+//#import "DatabaseDriver.h"
+//#import <CoreData/CoreData.h>
+#import "FaceDetector.h"
 
 @implementation RegisterFaceViewController
 
 @synthesize firstName;
 @synthesize familyName;
-@synthesize database;
+//@synthesize database;
+//@synthesize fData;
 
+FaceDetector *faceDetector;
 int label;
 NSManagedObjectContext* context;
 NSDictionary* faceData;
@@ -31,13 +33,11 @@ NSDictionary* faceData;
 {
     [super viewDidLoad];
     pictures = [[NSMutableArray alloc]init];
-    database = [Database sharedInstance];
-    context = database.managedObjectContext;
-    //[self getLastLabelFromDB];
     
-    self.faceDetector = [[FaceDetector alloc] init];
-    //self.faceRecognizer = [[FaceRecognizer alloc] init];
-    label =0;
+    
+    faceDetector = [[FaceDetector alloc] init];
+    
+    label =100;
     NSString *instructions = @"Make sure %@ is holding the phone. "
     "When you are ready, press start. Or select images from your library.";
     //self.instructionsLabel.text = [NSString stringWithFormat:instructions, self.personName];
@@ -79,7 +79,7 @@ NSDictionary* faceData;
     
     // Only process every 60th frame (every 2s)
     if (self.frameNum == 10) {
-        [self parseFaces:[self.faceDetector facesFromImage:image] forImage:image];
+        [self parseFaces:[faceDetector facesFromImage:image] forImage:image];
         
         self.frameNum = 1;
     }
@@ -237,8 +237,9 @@ NSDictionary* faceData;
 - (IBAction)cameraButtonClicked:(id)sender
 {
     
-    firstName = self.firstNameField.text;
-    familyName = self.familyNameField.text;
+    NSTimeInterval timeStamp = [[NSDate date] timeIntervalSince1970];
+    NSNumber *timeStampObj = [NSNumber numberWithDouble: timeStamp];
+    label = timeStampObj.intValue;
     
     [self deleteAllWithFirstName:firstName forFamilyName:familyName];
     

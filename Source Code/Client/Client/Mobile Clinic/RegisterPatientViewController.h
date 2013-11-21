@@ -43,7 +43,7 @@
 - (IBAction)createPatient:(id)sender;
 - (IBAction)searchByFingerprintButton:(id)sender;
 - (BOOL)validateRegistration;
-
+- (void)setPatientArray:(NSArray*)patientArray;
 - (IBAction)searchByNameButton:(id)sender ;
 - (IBAction)startOver:(id)sender;
 

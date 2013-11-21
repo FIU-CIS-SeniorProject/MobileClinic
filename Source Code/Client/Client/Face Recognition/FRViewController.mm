@@ -8,8 +8,9 @@
 
 #import "FRViewController.h"
 #import "DataR.h"
-
-
+#import "MobileClinicFacade.h"
+#import "SearchPatientViewController.h"
+#import "RegisterPatientViewController.h"
 #define CAPTURE_FPS 30
 
 
@@ -25,7 +26,7 @@
     [super viewDidLoad];
 	[self setupCamera];
     self.faceDetector = [[FaceDetector alloc] init];
-    self.faceRecognizer = [[FaceRecognizer alloc] initWithEigenFaceRecognizer];
+    //self.faceRecognizer = [[FaceRecognizer alloc] initWithEigenFaceRecognizer];
     
     
 }
@@ -35,10 +36,10 @@
     [super viewDidAppear:animated];
     [self.videoCamera start];
     // Re-train the model in case more pictures were added
-    self.modelAvailable = [self.faceRecognizer trainModel];
-    if (!self.modelAvailable) {
-        self.instructionLabel.text = @"Add people in the database first";
-    }
+    //self.modelAvailable = [self.faceRecognizer trainModel];
+    //if (!self.modelAvailable) {
+      //  self.instructionLabel.text = @"Add people in the database first";
+    //}
     
 
 }
@@ -76,6 +77,7 @@
 
 - (void)parseFaces:(const std::vector<cv::Rect> &)faces forImage:(cv::Mat&)image
 {
+    NSDictionary* faceData = [[NSMutableDictionary alloc]init];
     // No faces found
     if (faces.size() != 1) {
         [self noFaceToDisplay];
@@ -90,8 +92,37 @@
     NSString *message = @"No match found";
     NSString *confidence = @"";
     
+    cv::Mat faceData1 = [self pullStandardizedFace:face fromImage:image];
+    NSData *serialized = [DataR serializeCvMat:faceData1];
+    MobileClinicFacade* mobileFacade = [[MobileClinicFacade alloc]init];
+    
+    
+    [faceData setValue:serialized forKey:@"photo"];
+    [mobileFacade findPatientFace:faceData AndOnCompletion:^(NSArray *allObjectsFromSearch, NSError *error)
+    {
+        if (allObjectsFromSearch) {
+            RegisterPatientViewController* registerPatientViewController = [self getViewControllerFromiPadStoryboardWithName:@"registerPatientViewController"];
+            [registerPatientViewController view];
+            [registerPatientViewController setPatientArray:[NSArray arrayWithArray:allObjectsFromSearch]];
+            [registerPatientViewController.searchResultTableView reloadData];
+            [self.navigationController pushViewController:registerPatientViewController animated:YES];
+            
+            NSLog(@"IM finally heereeeeeeeee");
+           //  NSDictionary* patient = [NSMutableDictionary dictionaryWithDictionary:[allObjectsFromSearch objectAtIndex:indexPath.row]];
+            // Redisplay the information
+         //   [_searchResultTableView reloadData];
+            
+          //  [FIUAppDelegate getNotificationWithColor:AJNotificationTypeBlue Animation:AJLinedBackgroundTypeAnimated WithMessage:error.localizedDescription inView:self.view];
+        }else{
+           // [FIUAppDelegate getNotificationWithColor:AJNotificationTypeRed Animation:AJLinedBackgroundTypeAnimated WithMessage:error.localizedDescription inView:self.view];
+        }
+        /** This will remove the HUD since the search is complete */
+     
+        
+    }];
+    //[self HideALLHUDDisplayInView:_searchResultTableView];
     // Unless the database is empty, try a match
-    if (self.modelAvailable) {
+    /*if (self.modelAvailable) {
         NSDictionary *match = [self.faceRecognizer recognizeFace:face inImage:image];
         
         // Match found
@@ -107,7 +138,7 @@
             confidence = [NSString stringWithFormat:@"Confidence: %@",
                           [confidenceFormatter stringFromNumber:[match objectForKey:@"confidence"]]];
         }
-    }
+    }*/
     
     // All changes to the UI have to happen on the main thread
     dispatch_sync(dispatch_get_main_queue(), ^{
@@ -116,6 +147,15 @@
         
         [self highlightFace:[DataR  faceToCGRect:face] withColor:highlightColor];
     });
+}
+- (cv::Mat)pullStandardizedFace:(cv::Rect)face fromImage:(cv::Mat&)image
+{
+        // Pull the grayscale face ROI out of the captured image
+        cv::Mat onlyTheFace;
+        cv::cvtColor(image(face), onlyTheFace, CV_RGB2GRAY);
+        // Standardize the face to 100x100 pixels
+        cv::resize(onlyTheFace, onlyTheFace, cv::Size(100, 100), 0, 0);
+        return onlyTheFace;
 }
 
 - (void)noFaceToDisplay

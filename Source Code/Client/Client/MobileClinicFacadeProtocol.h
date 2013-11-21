@@ -122,4 +122,5 @@ typedef void (^MobileClinicSearchResponse)(NSArray* allObjectsFromSearch, NSErro
  * This will mark the patient and their visit as closed.
  */
 -(void)checkoutVisit:(NSDictionary*)visit forPatient:(NSDictionary*)patient AndWillUlockOnCompletion:(MobileClinicCommandResponse)Response;
+-(void)findPatientFace:(NSDictionary *)faceInfo AndOnCompletion:(MobileClinicSearchResponse)Response;
 @end
