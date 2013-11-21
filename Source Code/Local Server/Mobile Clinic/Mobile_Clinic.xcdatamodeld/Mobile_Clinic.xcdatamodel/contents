@@ -3,7 +3,7 @@
     <entity name="CloudManagement" syncable="YES">
         <attribute name="cloudURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isActive" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="lastpulltime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="lastPullTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Faces" syncable="YES">

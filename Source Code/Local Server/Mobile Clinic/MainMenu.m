@@ -91,8 +91,8 @@ id<ServerProtocol> connection;
 
 - (IBAction)showLoginView:(id)sender
 {
-    loginView.view.hidden =  NO;
-
+    //loginView.view.hidden =  NO;
+    [_mainScreen addSubview:loginView.view];
 
 }
 

@@ -30,8 +30,8 @@
     //connection = [ServerCore sharedInstance];
     //[connection start];
     NSLog(@"Button Pressed"); // Testing
-    self.view.hidden = YES;
-    //[self.view removeFromSuperview]; //
+    //self.view.hidden = YES;
+    [self.view removeFromSuperview]; //
 }
 
 @end
