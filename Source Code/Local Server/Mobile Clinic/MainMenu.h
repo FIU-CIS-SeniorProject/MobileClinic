@@ -26,6 +26,7 @@
 //  Created by Michael Montaque on 3/24/13.
 //
 #import <Cocoa/Cocoa.h>
+#import "LoginView.h"
 
 @interface MainMenu : NSViewController<NSWindowDelegate>
 
@@ -37,6 +38,7 @@
 @property (weak) IBOutlet NSTextField *statusLabel;
 - (IBAction)startOptimization:(id)sender;
 - (IBAction)quitApplication:(id)sender;
+- (IBAction)showLoginView:(id)sender;
 - (IBAction)showMedicationView:(id)sender;
 - (IBAction)showPatientView:(id)sender;
 - (IBAction)purgeTheSystem:(id)sender;

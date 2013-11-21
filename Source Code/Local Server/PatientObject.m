@@ -231,13 +231,16 @@ NSString* isLockedBy;
 
 -(void)pullFromCloud:(CloudCallback)onComplete
 {
+    // allocate and init a CloudManagementObject for timestamp
+    CloudManagementObject* TSCloudMO = [[CloudManagementObject alloc] init];
+    NSMutableDictionary* timestamp = [[TSCloudMO GetActiveTimestamp] mutableCopy];
+
     //TODO: replace "withObject:nil" with timestamp dictionary
-    [self makeCloudCallWithCommand:DATABASE withObject:nil onComplete:^(id cloudResults, NSError *error)
+    [self makeCloudCallWithCommand:DATABASE withObject:timestamp onComplete:^(id cloudResults, NSError *error)
     {
         NSArray* allPatients = [cloudResults objectForKey:@"data"];
         [self handleCloudCallback:onComplete UsingData:allPatients WithPotentialError:error];
         
-        //TODO: update timestamp
         // allocate and init a CloudManagementObject
         CloudManagementObject* CloudMO = [[CloudManagementObject alloc] init];
         
