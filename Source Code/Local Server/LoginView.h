@@ -10,8 +10,9 @@
 
 @interface LoginView : NSViewController
 
-@property (weak) IBOutlet NSTextField *Username;
-@property (weak) IBOutlet NSTextField *Password;
+@property (weak) IBOutlet NSTextField *username;
+@property (weak) IBOutlet NSTextField *password;
+
 
 - (IBAction)login:(id)sender;
 

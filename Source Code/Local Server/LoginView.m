@@ -7,11 +7,11 @@
 //
 
 #import "LoginView.h"
-#import "PatientTable.h"
-//#import "ServerCore.h"
+
 @interface LoginView ()
 
 @end
+
 
 //id<ServerProtocol> connection;
 @implementation LoginView
@@ -30,8 +30,19 @@
     //connection = [ServerCore sharedInstance];
     //[connection start];
     NSLog(@"Button Pressed"); // Testing
-    //self.view.hidden = YES;
+
+    
+    //restore initial state of logged out user
+    //[_userButton setEnabled: YES];
+    //[_patientButton setEnabled: YES];
+    //[_medicationButton setEnabled: YES];
+    //[_logoutButton setEnabled: YES];
+    
+    //[ enableAllButtons];
+
+    
     [self.view removeFromSuperview]; //
+    
 }
 
 @end

@@ -33,6 +33,8 @@
 #import "MedicationList.h"
 #import "SystemBackup.h"
 
+
+
 SystemBackup* backup;
 MedicationList* medicationView;
 PatientTable* patientView;
@@ -74,7 +76,12 @@ id<ServerProtocol> connection;
             [_mainScreen addSubview:loginView.view];
         }
         currentView = loginView.view;
-        ;
+        
+        //disable buttons till login
+        [_userButton setEnabled: NO];
+        [_patientButton setEnabled: NO];
+        [_medicationButton setEnabled: NO];
+        //[_logoutButton setEnabled: NO];
         
         connection = [ServerCore sharedInstance];
         [connection start];
@@ -91,9 +98,11 @@ id<ServerProtocol> connection;
 
 - (IBAction)showLoginView:(id)sender
 {
-    //loginView.view.hidden =  NO;
     [_mainScreen addSubview:loginView.view];
-
+    //[_userButton setEnabled: NO];
+    //[_patientButton setEnabled: NO];
+    //[_medicationButton setEnabled: NO];
+    //[_logoutButton setEnabled: NO];
 }
 
 - (IBAction)showMedicationView:(id)sender
