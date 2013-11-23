@@ -205,19 +205,19 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">password</string>
+						<string key="label">passwordTextField</string>
 						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="328820188"/>
 					</object>
-					<int key="connectionID">89</int>
+					<int key="connectionID">91</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">username</string>
+						<string key="label">usernameTextField</string>
 						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="332028413"/>
 					</object>
-					<int key="connectionID">90</int>
+					<int key="connectionID">92</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -680,7 +680,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">90</int>
+			<int key="maxID">92</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>

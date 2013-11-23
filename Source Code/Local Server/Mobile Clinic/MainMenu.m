@@ -24,6 +24,7 @@
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 3/24/13.
+//  Modified by Kevin Diaz on 11/23/13.
 //
 #import "MainMenu.h"
 #import "ServerCore.h"
@@ -81,10 +82,12 @@ id<ServerProtocol> connection;
         [_userButton setEnabled: NO];
         [_patientButton setEnabled: NO];
         [_medicationButton setEnabled: NO];
-        //[_logoutButton setEnabled: NO];
+        [_logoutButton setEnabled: NO];
         
         connection = [ServerCore sharedInstance];
         [connection start];
+        
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(enableButtons:) name:@"LOGIN_OBSERVER" object:nil];
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(manualTableRefresh:) name:SERVER_OBSERVER object:nil];
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(SetStatus:) name:SERVER_STATUS object:[[NSNumber alloc]init]];
         [self manualTableRefresh:nil];
@@ -99,10 +102,10 @@ id<ServerProtocol> connection;
 - (IBAction)showLoginView:(id)sender
 {
     [_mainScreen addSubview:loginView.view];
-    //[_userButton setEnabled: NO];
-    //[_patientButton setEnabled: NO];
-    //[_medicationButton setEnabled: NO];
-    //[_logoutButton setEnabled: NO];
+    [_userButton setEnabled: NO];
+    [_patientButton setEnabled: NO];
+    [_medicationButton setEnabled: NO];
+    [_logoutButton setEnabled: NO];
 }
 
 - (IBAction)showMedicationView:(id)sender
@@ -299,6 +302,17 @@ id<ServerProtocol> connection;
             [_statusLabel setStringValue:@"OFF"];
             break;
     }
+}
+
+-(void)enableButtons:(NSNotification*)note
+{
+    
+    //restore initial state of logged out user
+    [_userButton setEnabled: YES];
+    [_patientButton setEnabled: YES];
+    [_medicationButton setEnabled: YES];
+    [_logoutButton setEnabled: YES];
+
 }
 
 - (IBAction)pushPatientsToCloud:(id)sender

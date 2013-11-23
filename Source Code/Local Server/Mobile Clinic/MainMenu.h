@@ -24,6 +24,7 @@
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 3/24/13.
+//  Modified by Kevin Diaz on 11/23/13.
 //
 #import <Cocoa/Cocoa.h>
 #import "LoginView.h"
