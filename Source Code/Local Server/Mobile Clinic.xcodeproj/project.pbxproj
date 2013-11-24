@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0FCC49CE16F3C63400FD3338 /* MedicationFile.json in Resources */ = {isa = PBXBuildFile; fileRef = 0FCC49CD16F3C63400FD3338 /* MedicationFile.json */; };
+		38AAEEA218429C3900135592 /* exit.png in Resources */ = {isa = PBXBuildFile; fileRef = 38AAEEA118429C3900135592 /* exit.png */; };
+		38AAEEA318429C3900135592 /* exit.png in Resources */ = {isa = PBXBuildFile; fileRef = 38AAEEA118429C3900135592 /* exit.png */; };
 		463294A216C9B97B00C57DCE /* PatientObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 463294A116C9B97B00C57DCE /* PatientObject.m */; };
 		893FCE6A1825EB520054402A /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 893FCE691825EB520054402A /* libsqlite3.dylib */; };
 		893FCE6C1825EB800054402A /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 893FCE6B1825EB800054402A /* libsqlite3.0.dylib */; };
@@ -116,6 +118,7 @@
 
 /* Begin PBXFileReference section */
 		0FCC49CD16F3C63400FD3338 /* MedicationFile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MedicationFile.json; sourceTree = "<group>"; };
+		38AAEEA118429C3900135592 /* exit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = exit.png; sourceTree = "<group>"; };
 		463294A016C9B97B00C57DCE /* PatientObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatientObject.h; sourceTree = "<group>"; };
 		463294A116C9B97B00C57DCE /* PatientObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatientObject.m; sourceTree = "<group>"; };
 		893FCE691825EB520054402A /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -460,6 +463,7 @@
 				EA7D505D1717A044002ED819 /* Pills.png */,
 				EA7D505817179D9E002ED819 /* PatientData.png */,
 				EA7D505917179D9E002ED819 /* PatientFile.png */,
+				38AAEEA118429C3900135592 /* exit.png */,
 			);
 			name = Icons;
 			sourceTree = "<group>";
@@ -823,6 +827,7 @@
 				EA5272D41708653E0033604C /* InfoPlist.strings in Resources */,
 				EA5272DA1708653E0033604C /* Credits.rtf in Resources */,
 				EA5272EA170867800033604C /* RunTests.sh in Resources */,
+				38AAEEA318429C3900135592 /* exit.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -842,6 +847,7 @@
 				EA7D505B17179D9E002ED819 /* PatientFile.png in Resources */,
 				EA7D505E1717A045002ED819 /* Pills.png in Resources */,
 				EA7D50601717A152002ED819 /* DoctorUser.png in Resources */,
+				38AAEEA218429C3900135592 /* exit.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1082,6 +1088,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/MC-Tests\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mobile Clinic/Mobile Clinic-Prefix.pch";
 				INFOPLIST_FILE = "Mobile Clinic/Mobile Clinic-Info.plist";
@@ -1096,6 +1106,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/MC-Tests\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mobile Clinic/Mobile Clinic-Prefix.pch";
 				INFOPLIST_FILE = "Mobile Clinic/Mobile Clinic-Info.plist";
