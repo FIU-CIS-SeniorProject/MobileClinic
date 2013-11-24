@@ -1,12 +1,12 @@
 class CreateMedications < ActiveRecord::Migration
   def change
-    create_table :medications, :id => false do |t|
-      t.integer :medId
-      t.string :name
+    create_table :medications, {:primary_key => :medId} do |t|
+      t.string  :name
       t.integer :numContainers
       t.integer :tabletsPerContainer
-      t.integer :expiration
+      t.date    :expiration
       t.integer :doseOfTablets
+      t.integer :status
       t.timestamps
     end
   end

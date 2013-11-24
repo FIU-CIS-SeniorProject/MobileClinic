@@ -1,13 +1,25 @@
 class UsersController < ApplicationController
-  before_filter :signed_in_user, only: [:edit, :update, :destroy, :create]
-  before_filter :correct_user,   only: [:new, :create]
-
+  before_filter :signed_in_user
+  
   def index
+    if current_user.userType != 0
+      @users = User.where("userType = ? and charityid = ?",current_user.userType,current_user.charityid)
+    else
       @users = User.all
     end
+  end
 
   def show
-    @user = User.find(params[:id])  
+    if current_user.userType != 0
+      @user = User.where("userType = ? and charityid = ?",current_user.userType,current_user.charityid).find(params[:id])
+      @charity = Charity.where("charityid = ?",current_user.charityid).find(@user.charityid)
+    else
+      @user = User.find(params[:id])
+      @charity = Charity.find(@user.charityid)
+    end
+  rescue ActiveRecord::RecordNotFound
+    flash[:success] = "You are not allow to see this user."
+    redirect_to home_path
   end
 
   def new
@@ -15,9 +27,9 @@ class UsersController < ApplicationController
   end
 
   def create
-      @user = User.new(params[:user])
+    @user = User.new(params[:user])
     if @user.save
-      flash[:success] = "You have successfuly Created a user"
+      flash[:notice] = "You have successfully Created a user"
       redirect_to @user
     else
       render 'new'
@@ -25,15 +37,33 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+    if current_user.userType != 0
+      @user = User.where("userType = ? and charityid = ?",current_user.userType,current_user.charityid).find(params[:id])
+    else
+      @user = User.find(params[:id])
+    end
+  rescue ActiveRecord::RecordNotFound
+    flash[:success] = "You are not allow to edit this user."
+    redirect_to home_path
+  end
+  
+  def change_password
+    if current_user.userType != 0
+      @user = User.where("userType = ? and charityid = ?",current_user.userType,current_user.charityid).find(params[:id])
+    else
+      @user = User.find(params[:id])
+    end
+  rescue ActiveRecord::RecordNotFound
+    flash[:success] = "You are not allow to edit this user."
+    redirect_to home_path
   end
 
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user])
-      flash[:success] = "Profile updated"
+      flash[:notice] = "Profile updated"
       if current_user?(@user)
-      sign_in @user  
+        sign_in @user
       end
       redirect_to @user
     else
@@ -47,18 +77,17 @@ class UsersController < ApplicationController
     redirect_to users_index
   end
 
-  private 
+  private
 
-    def signed_in_user
-      redirect_to signin_url, notice: "Please sign in." unless signed_in?
-    end
+  def signed_in_user
+    redirect_to signin_url, notice: "Please sign in." unless signed_in?
+  end
 
-    def correct_user
-      redirect_to(root_path) unless admin_user?
-    end
+  def correct_user
+    redirect_to(home_path) unless admin_user?
+  end
 
-
-    def admin_user
-      redirect_to(root_path) unless current_user.userType == 0
-    end
+  def admin_user
+    current_user.userType == 0
+  end
 end

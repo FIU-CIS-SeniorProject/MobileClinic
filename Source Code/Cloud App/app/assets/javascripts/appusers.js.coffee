@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 jQuery ->
-	$('#datatable_2').dataTable({
+	$('#datatable_appuser').dataTable({
 	"iDisplayLength": 10,
 	"sPaginationType": "full_numbers"
 				});

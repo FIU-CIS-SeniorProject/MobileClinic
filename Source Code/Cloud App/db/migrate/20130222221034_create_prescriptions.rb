@@ -6,7 +6,7 @@ class CreatePrescriptions < ActiveRecord::Migration
       t.integer :tabletsPerDay
       t.string :timeOfDay
       t.string :instruction
-      t.integer :vistitId
+	    t.string :vistitId
       t.timestamps
     end
   end
