@@ -51,6 +51,7 @@ return self;
 }
 
 -(NSManagedObject*)CreateANewObjectFromClass:(NSString *)name isTemporary:(BOOL)temp{
+    
     NSEntityDescription *entity = [NSEntityDescription entityForName:name inManagedObjectContext:database.managedObjectContext];
    
     return [[NSManagedObject alloc]initWithEntity:entity insertIntoManagedObjectContext:(temp)?nil:database.managedObjectContext];

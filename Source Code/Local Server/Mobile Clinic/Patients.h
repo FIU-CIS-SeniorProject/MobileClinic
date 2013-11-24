@@ -25,7 +25,6 @@
 //
 //  Created by Michael Montaque on 2/27/13.
 //
-
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
@@ -43,6 +42,7 @@
 @property (nonatomic, retain) NSString * villageName;
 @property (nonatomic, retain) NSString * isLockedBy;
 @property (nonatomic, retain) NSSet *visit;
+@property (nonatomic, retain) NSNumber * label;
 @end
 
 @interface Patients (CoreDataGeneratedAccessors)

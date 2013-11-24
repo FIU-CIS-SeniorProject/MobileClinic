@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12D78" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12F37" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Faces" syncable="YES">
+        <attribute name="familyName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="label" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="patientId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="photo" optional="YES" attributeType="Binary" syncable="YES"/>
+    </entity>
     <entity name="Medication" representedClassName="Medication" syncable="YES">
         <attribute name="dosage" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="expiration" optional="YES" attributeType="String" syncable="YES"/>
@@ -38,7 +45,7 @@
         <attribute name="prescribedTime" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="prescriptionId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tabletPerDay" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="timeOfDay" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="timeOfDay" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="visitationId" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Queue" representedClassName="Queue" syncable="YES">
@@ -71,6 +78,7 @@
         <attribute name="isGraphic" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="isLockedBy" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isOpen" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="medicationNotes" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="nurseId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="observation" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="patientId" optional="YES" attributeType="String" syncable="YES"/>
@@ -83,11 +91,12 @@
         <attribute name="weight" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Medication" positionX="268" positionY="657" width="128" height="180"/>
-        <element name="Patients" positionX="97" positionY="423" width="128" height="285"/>
-        <element name="Prescription" positionX="97" positionY="657" width="128" height="195"/>
-        <element name="Users" positionX="99" positionY="210" width="128" height="180"/>
-        <element name="Visitation" positionX="-72" positionY="657" width="128" height="390"/>
+        <element name="Faces" positionX="-189" positionY="396" width="128" height="118"/>
+        <element name="Medication" positionX="268" positionY="639" width="128" height="180"/>
+        <element name="Patients" positionX="115" positionY="336" width="128" height="285"/>
+        <element name="Prescription" positionX="97" positionY="669" width="128" height="195"/>
         <element name="Queue" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="Users" positionX="-72" positionY="189" width="128" height="180"/>
+        <element name="Visitation" positionX="-72" positionY="540" width="128" height="405"/>
     </elements>
 </model>

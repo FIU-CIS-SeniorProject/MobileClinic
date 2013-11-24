@@ -51,6 +51,8 @@
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array/>
+	<key>UIFileSharingEnabled</key>
+	<true/>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

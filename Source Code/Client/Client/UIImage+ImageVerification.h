@@ -15,7 +15,7 @@
 - (UIImage*)imageByScalingAndCroppingForSize:(CGSize)targetSize;
 
 
-
++ (UIImage*)imageWithImage:(UIImage*)sourceImage scaledToSize:(CGSize)newSize;
 
 - (CGAffineTransform)transformForOrientation:(CGSize)newSize;
 
