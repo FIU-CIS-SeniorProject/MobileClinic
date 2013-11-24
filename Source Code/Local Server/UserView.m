@@ -36,10 +36,13 @@
 
 @implementation UserView
 @synthesize allUsers,tableView,usernameLabel,primaryRolePicker,loadIndicator;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    
+    if (self)
+    {
         [self refreshTable:nil];
     }
     
@@ -50,10 +53,14 @@
 {
     NSDictionary* user = [allUsers objectAtIndex:rowIndex];
     
-    if ([aTableColumn.identifier isEqualToString:STATUS]) {
+    if ([aTableColumn.identifier isEqualToString:STATUS])
+    {
         return ([[user objectForKey:aTableColumn.identifier]integerValue]==0)?@"Inactive":@"Active";
-    }else if ([aTableColumn.identifier isEqualToString:USERTYPE]){
-        switch ([[user objectForKey:aTableColumn.identifier]integerValue]) {
+    }
+    else if ([aTableColumn.identifier isEqualToString:USERTYPE])
+    {
+        switch ([[user objectForKey:aTableColumn.identifier]integerValue])
+        {
             case kTriageNurse:
                 return @"Triage Nurse";
             case kDoctor:
@@ -91,15 +98,16 @@
     return YES;
 }
 
-- (IBAction)refreshTable:(id)sender {
+- (IBAction)refreshTable:(id)sender
+{
     [loadIndicator startAnimation:self];
     allUsers = [NSArray arrayWithArray:[[[UserObject alloc]init]FindAllObjects]];
     [loadIndicator stopAnimation:self];
     [tableView reloadData];
 }
 
-- (IBAction)commitChanges:(id)sender {
-    
+- (IBAction)commitChanges:(id)sender
+{
     [currentUser setValue:[NSNumber numberWithBool:(_userStatus.indexOfSelectedItem==1)] forKey:STATUS];
     
     UserObject* user =[[UserObject alloc]initWithCachedObjectWithUpdatedObject:currentUser];
@@ -118,7 +126,8 @@
     
     [users pullFromCloud:^(id<BaseObjectProtocol> data, NSError *error) {
       
-        if (error) {
+        if (error)
+        {
             [NSApp presentError:error];
         }
         

@@ -29,7 +29,7 @@
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSURL *appSupportURL = [[fileManager URLsForDirectory:NSApplicationSupportDirectory inDomains:NSUserDomainMask] lastObject];
-    return [appSupportURL URLByAppendingPathComponent:@"NewStoreFile.sqldata"];//@"FIU.Mobile_Clinic"];
+    return [appSupportURL URLByAppendingPathComponent:@"FIU.Mobile_Clinic"];
 }
 
 // Creates if necessary and returns the managed object model for the application.

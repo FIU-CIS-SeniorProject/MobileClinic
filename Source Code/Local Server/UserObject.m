@@ -212,41 +212,44 @@
     // Sync appropriate users from cloud to the server
     [self pullFromCloud:^(id<BaseObjectProtocol> data, NSError *error)
      {
-         // Try to find user from username in local DB
-         BOOL didFindUser = [self loadObjectForID:username];
          
-         // link databaseObject to convenience Object named "user"
-         [self linkDatabase];
-         
-         // if we find the user locally then....
-         if (didFindUser)
-         {
-             // Check if the user has permissions
-             if (user.status.boolValue && user.userType.intValue == 3)
-             {
-                 // Check credentials against the found user
-                 if ([user.password isEqualToString:password])
-                 {
-                     onSuccessHandler(self,nil, user);
-                 }
-                 // If incorrect password then throw an error
-                 else
-                 {
-                     onSuccessHandler(Nil,[self createErrorWithDescription:@"Username & Password combination is incorrect" andErrorCodeNumber:kErrorIncorrectLogin inDomain:self->COMMONDATABASE], user);
-                 }
-             }
-             // If the user doesn't have permission, throw an error
-             else
-             {
-                 onSuccessHandler(Nil,[self createErrorWithDescription:@"You do not have permission to login. Please contact you application administrator" andErrorCodeNumber:kErrorPermissionDenied inDomain:self->COMMONDATABASE], user);
-             }
-         }
-         // if we cannot find the user, throw an error
-         else
-         {
-             onSuccessHandler(Nil,[self createErrorWithDescription:@"The user does not exists" andErrorCodeNumber:kErrorUserDoesNotExist inDomain:self->COMMONDATABASE], user);
-         }
      }];
+    
+    // Try to find user from username in local DB
+    BOOL didFindUser = [self loadObjectForID:username];
+    
+    // link databaseObject to convenience Object named "user"
+    [self linkDatabase];
+    
+    // if we find the user locally then....
+    if (didFindUser)
+    {
+        // Check if the user has permissions
+        if (user.status.boolValue && user.userType.intValue == 3)
+        {
+            // Check credentials against the found user
+            if ([user.password isEqualToString:password])
+            {
+                onSuccessHandler(self,nil, user);
+            }
+            // If incorrect password then throw an error
+            else
+            {
+                onSuccessHandler(Nil,[self createErrorWithDescription:@"Username & Password combination is incorrect" andErrorCodeNumber:kErrorIncorrectLogin inDomain:self->COMMONDATABASE], user);
+            }
+        }
+        // If the user doesn't have permission, throw an error
+        else
+        {
+            onSuccessHandler(Nil,[self createErrorWithDescription:@"You do not have permission to login. Please contact you application administrator" andErrorCodeNumber:kErrorPermissionDenied inDomain:self->COMMONDATABASE], user);
+        }
+    }
+    // if we cannot find the user, throw an error
+    else
+    {
+        onSuccessHandler(Nil,[self createErrorWithDescription:@"The user does not exists" andErrorCodeNumber:kErrorUserDoesNotExist inDomain:self->COMMONDATABASE], user);
+    }
+
 }
 
 -(NSArray *)covertAllSavedObjectsToJSON{
