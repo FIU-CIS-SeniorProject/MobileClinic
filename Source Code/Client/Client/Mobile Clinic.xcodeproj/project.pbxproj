@@ -229,6 +229,7 @@
 		89B00423182AE24F00008104 /* haarcascade_frontalface_alt_tree.xml in Resources */ = {isa = PBXBuildFile; fileRef = 89B00421182AE24F00008104 /* haarcascade_frontalface_alt_tree.xml */; };
 		89B00425182AE39400008104 /* haarcascade_frontalface_alt2.xml in Resources */ = {isa = PBXBuildFile; fileRef = 89B00424182AE39400008104 /* haarcascade_frontalface_alt2.xml */; };
 		89B00426182AE39400008104 /* haarcascade_frontalface_alt2.xml in Resources */ = {isa = PBXBuildFile; fileRef = 89B00424182AE39400008104 /* haarcascade_frontalface_alt2.xml */; };
+		89DA413D183DACD500C096BB /* RecognitionObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DA413C183DACD500C096BB /* RecognitionObject.m */; };
 		89E022281816F4C100CD5C0C /* FaceDetector.mm in Sources */ = {isa = PBXBuildFile; fileRef = 89E022271816F4C100CD5C0C /* FaceDetector.mm */; };
 		89E022291816F4C100CD5C0C /* FaceDetector.mm in Sources */ = {isa = PBXBuildFile; fileRef = 89E022271816F4C100CD5C0C /* FaceDetector.mm */; };
 		89E0222F1816F59F00CD5C0C /* FaceRecognizer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 89E0222E1816F59F00CD5C0C /* FaceRecognizer.mm */; };
@@ -667,8 +668,13 @@
 		89454FE41824469400E93504 /* Face.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Face.h; sourceTree = "<group>"; };
 		89454FE51824469400E93504 /* Face.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Face.m; sourceTree = "<group>"; };
 		89454FE81824482D00E93504 /* FaceObjectProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FaceObjectProtocol.h; sourceTree = "<group>"; };
+		8961827318400D8D00591B20 /* Model 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Model 3.xcdatamodel"; sourceTree = "<group>"; };
+		89618275184015AF00591B20 /* Model 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Model 4.xcdatamodel"; sourceTree = "<group>"; };
 		89B00421182AE24F00008104 /* haarcascade_frontalface_alt_tree.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = haarcascade_frontalface_alt_tree.xml; sourceTree = "<group>"; };
 		89B00424182AE39400008104 /* haarcascade_frontalface_alt2.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = haarcascade_frontalface_alt2.xml; sourceTree = SOURCE_ROOT; };
+		89DA413A183DAC7900C096BB /* RecognitionProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecognitionProtocol.h; sourceTree = "<group>"; };
+		89DA413B183DACD500C096BB /* RecognitionObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecognitionObject.h; sourceTree = "<group>"; };
+		89DA413C183DACD500C096BB /* RecognitionObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecognitionObject.m; sourceTree = "<group>"; };
 		89E022261816F4C100CD5C0C /* FaceDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceDetector.h; sourceTree = "<group>"; };
 		89E022271816F4C100CD5C0C /* FaceDetector.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FaceDetector.mm; sourceTree = "<group>"; };
 		89E0222D1816F59F00CD5C0C /* FaceRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceRecognizer.h; sourceTree = "<group>"; };
@@ -1315,11 +1321,11 @@
 		89E0221A1816E3BF00CD5C0C /* Face Recognition */ = {
 			isa = PBXGroup;
 			children = (
-				89E022261816F4C100CD5C0C /* FaceDetector.h */,
 				89B00424182AE39400008104 /* haarcascade_frontalface_alt2.xml */,
+				89B00421182AE24F00008104 /* haarcascade_frontalface_alt_tree.xml */,
+				89E022261816F4C100CD5C0C /* FaceDetector.h */,
 				89E022271816F4C100CD5C0C /* FaceDetector.mm */,
 				89E0222D1816F59F00CD5C0C /* FaceRecognizer.h */,
-				89B00421182AE24F00008104 /* haarcascade_frontalface_alt_tree.xml */,
 				89E0222E1816F59F00CD5C0C /* FaceRecognizer.mm */,
 				8918BB17181726380025D9FC /* DataR.h */,
 				8918BB18181726380025D9FC /* DataR.mm */,
@@ -1330,6 +1336,9 @@
 				89454FE01823FFF900E93504 /* FaceObject.h */,
 				89454FE11823FFFA00E93504 /* FaceObject.m */,
 				89454FE81824482D00E93504 /* FaceObjectProtocol.h */,
+				89DA413A183DAC7900C096BB /* RecognitionProtocol.h */,
+				89DA413B183DACD500C096BB /* RecognitionObject.h */,
+				89DA413C183DACD500C096BB /* RecognitionObject.m */,
 			);
 			path = "Face Recognition";
 			sourceTree = "<group>";
@@ -2095,6 +2104,7 @@
 				8918BB2018172B050025D9FC /* RegisterFaceViewController.mm in Sources */,
 				89454FE21823FFFA00E93504 /* FaceObject.m in Sources */,
 				89454FE61824469400E93504 /* Face.m in Sources */,
+				89DA413D183DACD500C096BB /* RecognitionObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2468,10 +2478,12 @@
 		4677413516BD9386002FD4A5 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				89618275184015AF00591B20 /* Model 4.xcdatamodel */,
+				8961827318400D8D00591B20 /* Model 3.xcdatamodel */,
 				89420CC9182D9ABE0070EFC4 /* Model 2.xcdatamodel */,
 				4677413616BD9386002FD4A5 /* Model.xcdatamodel */,
 			);
-			currentVersion = 4677413616BD9386002FD4A5 /* Model.xcdatamodel */;
+			currentVersion = 89618275184015AF00591B20 /* Model 4.xcdatamodel */;
 			name = Model.xcdatamodeld;
 			path = "Mobile Clinic/Model.xcdatamodeld";
 			sourceTree = "<group>";

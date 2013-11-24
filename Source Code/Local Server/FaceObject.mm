@@ -98,9 +98,9 @@ NSData * pictures;
             break;
         case kFindOpenObjects:
             [self sendSearchResults:[self OptimizedFindAllObjects]];
-        case kRecognizeFace:
+        /*case kRecognizeFace:
             [self sendSearchResults:[self recognizeFace]];
-            
+          */
         default:
             break;
     }
@@ -111,7 +111,7 @@ NSData * pictures;
     
     return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:pred andSortByAttribute:FIRSTNAME]];
 }
--(NSArray*)recognizeFace
+/*-(NSArray*)recognizeFace
 {
     FaceRecognize *faceRecognizer = [[FaceRecognize alloc] initWithEigenFaceRecognizer];
     [faceRecognizer trainModel];
@@ -138,7 +138,7 @@ NSData * pictures;
     
     return output;
 }
-
+*/
 
 #pragma mark - COMMON OBJECT Methods
 #pragma mark -

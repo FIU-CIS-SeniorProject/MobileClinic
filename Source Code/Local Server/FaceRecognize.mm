@@ -33,7 +33,7 @@ NSDictionary* faceD;
 - (id)initWithEigenFaceRecognizer
 {
     self = [self init];
-    _model = cv::createEigenFaceRecognizer(9,1200.0);
+    _model = cv::createEigenFaceRecognizer(11,2500.0);
     
     return self;
 }
@@ -222,7 +222,7 @@ NSDictionary* faceD;
              }
         }
     return @{
-             @"personID": [NSNumber numberWithInt:predictedLabel],
+             @"label": [NSNumber numberWithInt:predictedLabel],
              @"firstName": firstName,
              @"familyName": familyName,
              @"confidence": [NSNumber numberWithDouble:confidence]

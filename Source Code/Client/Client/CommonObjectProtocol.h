@@ -24,6 +24,7 @@
 -(void)createNewObject:(NSDictionary*) object onCompletion:(ObjectResponse)onSuccessHandler;
 
 -(NSArray *)FindAllObjectsLocallyFromParentObject:(NSDictionary*)parentObject;
+-(NSArray *)FindAllObjectsLocallyFromParentObjectByLabel:(NSDictionary*)parentObject;
 
 -(void)FindAllObjectsOnServerFromParentObject:(NSDictionary*)parentObject OnCompletion:(ObjectResponse)eventResponse;
 

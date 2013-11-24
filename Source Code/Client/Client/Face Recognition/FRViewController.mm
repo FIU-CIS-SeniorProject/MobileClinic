@@ -11,6 +11,9 @@
 #import "MobileClinicFacade.h"
 #import "SearchPatientViewController.h"
 #import "RegisterPatientViewController.h"
+#import "Face.h"
+#import "Database.h"
+
 #define CAPTURE_FPS 30
 
 
@@ -20,10 +23,15 @@
 @end
 
 @implementation FRViewController
-
+@synthesize database;
+int count =0;
+RegisterPatientViewController* registerPatientViewController;
+NSManagedObjectContext* context2;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    database = [Database sharedInstance];
+    context2 = database.managedObjectContext;
 	[self setupCamera];
     self.faceDetector = [[FaceDetector alloc] init];
     //self.faceRecognizer = [[FaceRecognizer alloc] initWithEigenFaceRecognizer];
@@ -51,6 +59,7 @@
 
 - (void)setupCamera
 {
+    self.frameNum =0;
     self.videoCamera = [[CvVideoCamera alloc] initWithParentView:self.imageView];
     self.videoCamera.delegate = self;
     self.videoCamera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionFront;
@@ -58,6 +67,7 @@
     self.videoCamera.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationPortrait;
     self.videoCamera.defaultFPS = CAPTURE_FPS;
     self.videoCamera.grayscaleMode = NO;
+
 }
 
 #pragma mark - Protocol CvVideoCameraDelegate
@@ -67,12 +77,24 @@
 - (void)processImage:(cv::Mat&)image
 {
     // Only process every CAPTURE_FPS'th frame (every 1s)
+   
     if (self.frameNum == CAPTURE_FPS) {
         [self parseFaces:[self.faceDetector facesFromImage:image] forImage:image];
-        self.frameNum = 0;
+        //self.frameNum = 0;
+        
     }
-    
     self.frameNum++;
+    if (self.frameNum == 60)
+    {
+        [self.videoCamera stop];
+        registerPatientViewController = [self getViewControllerFromiPadStoryboardWithName:@"registerPatientViewController"];
+        [registerPatientViewController view];
+        [registerPatientViewController setPatientArray:nil];
+        //[registerPatientViewController setPatientArray:[NSArray arrayWithArray:allObjectsFromSearch1]];
+        [registerPatientViewController.searchResultTableView reloadData];
+        [self.navigationController pushViewController:registerPatientViewController animated:YES];
+        self.frameNum =0;
+    }
 }
 
 - (void)parseFaces:(const std::vector<cv::Rect> &)faces forImage:(cv::Mat&)image
@@ -96,30 +118,64 @@
     NSData *serialized = [DataR serializeCvMat:faceData1];
     MobileClinicFacade* mobileFacade = [[MobileClinicFacade alloc]init];
     
-    
+    NSLog(@"count = %i",count);
     [faceData setValue:serialized forKey:@"photo"];
+    
     [mobileFacade findPatientFace:faceData AndOnCompletion:^(NSArray *allObjectsFromSearch, NSError *error)
     {
         if (allObjectsFromSearch) {
-            RegisterPatientViewController* registerPatientViewController = [self getViewControllerFromiPadStoryboardWithName:@"registerPatientViewController"];
+            if(allObjectsFromSearch.count>0)
+            {
+                NSDictionary* pat = [NSMutableDictionary dictionaryWithDictionary:[allObjectsFromSearch objectAtIndex:0]];
+                NSString *fname = [pat objectForKey:@"firstName"];
+                NSNumber *label = [pat objectForKey:@"label"];
+                NSString *lname = [pat objectForKey:@"familyName"];
+                if([fname length] != 0 && [lname length]!=0 ){
+                
+                    //[mobileFacade findPatientWithFirstName:fname orLastName:lname onCompletion:^(NSArray *allObjectsFromSearch1, NSError *error)
+                 [mobileFacade findPatientWithLabel:label onCompletion:^(NSArray *allObjectsFromSearch1, NSError *error)
+                    {
+                     if(allObjectsFromSearch1){
+                     registerPatientViewController = [self getViewControllerFromiPadStoryboardWithName:@"registerPatientViewController"];
+                     [registerPatientViewController view];
+                     [registerPatientViewController setPatientArray:nil];
+                     [registerPatientViewController setPatientArray:[NSArray arrayWithArray:allObjectsFromSearch1]];
+                     [registerPatientViewController.searchResultTableView reloadData];
+                     [self.navigationController pushViewController:registerPatientViewController animated:YES];
+                     self.frameNum =0;
+                     NSLog(@"IM finally heereeeeeeeee2");
+                     }
+                     else
+                         NSLog(@"IM finally heereeeeeeeee10");
+                 }];}
+            }
+            registerPatientViewController = [self getViewControllerFromiPadStoryboardWithName:@"registerPatientViewController"];
             [registerPatientViewController view];
-            [registerPatientViewController setPatientArray:[NSArray arrayWithArray:allObjectsFromSearch]];
+            [registerPatientViewController setPatientArray:nil];
+            //[registerPatientViewController setPatientArray:[NSArray arrayWithArray:allObjectsFromSearch1]];
             [registerPatientViewController.searchResultTableView reloadData];
             [self.navigationController pushViewController:registerPatientViewController animated:YES];
-            
-            NSLog(@"IM finally heereeeeeeeee");
-           //  NSDictionary* patient = [NSMutableDictionary dictionaryWithDictionary:[allObjectsFromSearch objectAtIndex:indexPath.row]];
-            // Redisplay the information
-         //   [_searchResultTableView reloadData];
-            
-          //  [FIUAppDelegate getNotificationWithColor:AJNotificationTypeBlue Animation:AJLinedBackgroundTypeAnimated WithMessage:error.localizedDescription inView:self.view];
+            self.frameNum =0;
+            NSLog(@"IM finally heereeeeeeeee1");
+     
         }else{
-           // [FIUAppDelegate getNotificationWithColor:AJNotificationTypeRed Animation:AJLinedBackgroundTypeAnimated WithMessage:error.localizedDescription inView:self.view];
+            registerPatientViewController = [self getViewControllerFromiPadStoryboardWithName:@"registerPatientViewController"];
+            [registerPatientViewController view];
+            [registerPatientViewController setPatientArray:nil];
+            //[registerPatientViewController setPatientArray:[NSArray arrayWithArray:allObjectsFromSearch1]];
+            [registerPatientViewController.searchResultTableView reloadData];
+            [self.navigationController pushViewController:registerPatientViewController animated:YES];
+            self.frameNum =0;
+            NSLog(@"IM finally heereeeeeeeee");
         }
         /** This will remove the HUD since the search is complete */
      
         
     }];
+    [self deleteAllFromDatabase];
+    
+    
+
     //[self HideALLHUDDisplayInView:_searchResultTableView];
     // Unless the database is empty, try a match
     /*if (self.modelAvailable) {
@@ -156,6 +212,25 @@
         // Standardize the face to 100x100 pixels
         cv::resize(onlyTheFace, onlyTheFace, cv::Size(100, 100), 0, 0);
         return onlyTheFace;
+}
+- (void) deleteAllFromDatabase
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Faces" inManagedObjectContext:context2];
+    [fetchRequest setEntity:entity];
+    //fetchRequest.predicate = [NSPredicate predicateWithFormat:@"firstName ==nil AND familyName == nil"];
+    
+    //fetchRequest.predicate = [NSPredicate predicateWithFormat:@"firstName == %@ AND familyName == %@",fName,lName];
+    
+    NSError *error;
+    NSArray *listToBeDeleted = [context2 executeFetchRequest:fetchRequest error:&error];
+    
+    for(Face *c in listToBeDeleted)
+    {
+        [context2 deleteObject:c];
+    }
+    error = nil;
+    [context2 save:&error];
 }
 
 - (void)noFaceToDisplay

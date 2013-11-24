@@ -18,6 +18,7 @@
 #define FINGERDATA                  @"fingerData"
 #define DATASIZE                    @"dataSize"
 #define TEMPLATETYPE                @"templateType"
+#define LABEL                       @"label"
 
 #import "DataProcessor.h"
 #import "BaseObjectProtocol.h"

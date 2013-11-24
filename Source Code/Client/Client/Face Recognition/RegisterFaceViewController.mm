@@ -20,11 +20,10 @@
 
 @synthesize firstName;
 @synthesize familyName;
-//@synthesize database;
-//@synthesize fData;
+@synthesize label;
 
 FaceDetector *faceDetector;
-int label;
+//int label;
 NSManagedObjectContext* context;
 NSDictionary* faceData;
 
@@ -37,7 +36,7 @@ NSDictionary* faceData;
     
     faceDetector = [[FaceDetector alloc] init];
     
-    label =100;
+    
     NSString *instructions = @"Make sure %@ is holding the phone. "
     "When you are ready, press start. Or select images from your library.";
     //self.instructionsLabel.text = [NSString stringWithFormat:instructions, self.personName];
@@ -105,7 +104,7 @@ NSDictionary* faceData;
             [self.videoCamera stop];
             
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Done"
-                                                            message:@"10 picture have been taken."
+                                                            message:@"20 picture have been taken."
                                                            delegate:nil
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles:nil];
@@ -115,23 +114,6 @@ NSDictionary* faceData;
         
     });
     
-}
--(void)getLastLabelFromDB
-{
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Faces" inManagedObjectContext:context];
-    [fetchRequest setEntity:entity];
-    
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"label==max(label)"];
-    fetchRequest.sortDescriptors = [NSArray array];
-    
-    NSError *error = nil;
-    NSArray *array = [context executeFetchRequest:fetchRequest error:&error];
-    for(Face *c in array)
-    {
-        label =c.label.intValue+1;
-    }
-
 }
 - (void) deleteAllWithFirstName: (NSString*)fName forFamilyName:(NSString*)lName
 {
@@ -165,7 +147,7 @@ NSDictionary* faceData;
     
     // Learn it
     
-    NSLog(@"PERSON ID = %d",label);
+    NSLog(@"PERSON ID = %d",label.intValue);
     cv::Mat faceData1 = [self pullStandardizedFace:face fromImage:image];
     NSData *serialized = [DataR serializeCvMat:faceData1];
     NSString *patientId;
@@ -178,7 +160,7 @@ NSDictionary* faceData;
     
     //if(self.numPicsTaken == 19) {
     [faceData setValue:serialized forKey:@"photo"];
-    [faceData setValue:[NSNumber numberWithInt:label] forKey:@"label"];
+    [faceData setValue:label forKey:@"label"];
     [faceData setValue:firstName forKey:@"firstName"];
     [faceData setValue:familyName forKey:@"familyName"];
     [faceData setValue:patientId  forKey:PATIENTID];
@@ -237,9 +219,9 @@ NSDictionary* faceData;
 - (IBAction)cameraButtonClicked:(id)sender
 {
     
-    NSTimeInterval timeStamp = [[NSDate date] timeIntervalSince1970];
+   /* NSTimeInterval timeStamp = [[NSDate date] timeIntervalSince1970];
     NSNumber *timeStampObj = [NSNumber numberWithDouble: timeStamp];
-    label = timeStampObj.intValue;
+    self.label =timeStampObj;*/
     
     [self deleteAllWithFirstName:firstName forFamilyName:familyName];
     

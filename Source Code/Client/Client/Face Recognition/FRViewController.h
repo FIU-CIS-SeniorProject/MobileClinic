@@ -22,5 +22,5 @@
 @property (nonatomic, strong) CALayer *featureLayer;
 @property (nonatomic) NSInteger frameNum;
 @property (nonatomic) BOOL modelAvailable;
-
+@property(nonatomic, strong) id<DatabaseProtocol> database;
 @end

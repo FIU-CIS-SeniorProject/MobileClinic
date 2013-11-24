@@ -123,4 +123,5 @@ typedef void (^MobileClinicSearchResponse)(NSArray* allObjectsFromSearch, NSErro
  */
 -(void)checkoutVisit:(NSDictionary*)visit forPatient:(NSDictionary*)patient AndWillUlockOnCompletion:(MobileClinicCommandResponse)Response;
 -(void)findPatientFace:(NSDictionary *)faceInfo AndOnCompletion:(MobileClinicSearchResponse)Response;
+-(void)findPatientWithLabel:(NSNumber *)label onCompletion:(MobileClinicSearchResponse)Response;
 @end

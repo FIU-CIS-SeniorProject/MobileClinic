@@ -29,6 +29,7 @@ typedef enum {
     kMedicationType     = 7,
     kFingerprintTemplate = 8,
     kFaceType           = 10,
+    kFaceRType          = 11,
     
 }ObjectTypes;
 

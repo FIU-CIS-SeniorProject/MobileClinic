@@ -14,6 +14,7 @@
 #import "PrescriptionObject.h"
 #import "MedicationObject.h"
 #import "FaceObject.h"
+#import "Recognition.h"
 
 @implementation ObjectFactory
 
@@ -34,6 +35,9 @@
             return [[PrescriptionObject alloc]init];
         case kMedicationType:
             return [[MedicationObject alloc]init];
+        case kFaceRType:
+            return [[Recognition alloc]init];
+
         case kFaceType:
             return [[FaceObject alloc ]init];//NSLog(@"LLEGUEeeeeEEEEEEEEEEEEEeeeeeee");
         default:

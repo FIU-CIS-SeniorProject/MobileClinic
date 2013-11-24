@@ -33,6 +33,7 @@
 
 @property (nonatomic, strong) NSString *firstName;
 @property (nonatomic, strong) NSString *familyName;
+@property (nonatomic,strong) NSNumber *label;
 @property (strong, nonatomic) NSMutableDictionary * fData;
 
 //@property (nonatomic, strong) FaceDetector *faceDetector;

@@ -13,6 +13,7 @@
 #import "MedicationObject.h"
 #import "QueueManager.h"
 #import "FaceObject.h"
+#import "RecognitionObject.h"
 @implementation MobileClinicFacade
 
 - (id)init
@@ -125,6 +126,16 @@
 #pragma mark- SEARCHING FOR OBJECTS
 #pragma mark-
 //  Use to find patients.
+-(void)findPatientWithLabel:(NSNumber *)label onCompletion:(MobileClinicSearchResponse)Response{
+    
+    /* Create a temporary Patient Object to make request */
+    PatientObject* patients = [[PatientObject alloc]init];
+    
+    NSDictionary* search = [NSDictionary dictionaryWithObjectsAndKeys:label,LABEL ,nil];
+    
+    [self CommonCommandObject:patients ForSearch1:search withResults:Response];
+}
+
 -(void)findPatientWithFirstName:(NSString *)firstname orLastName:(NSString *)lastname onCompletion:(MobileClinicSearchResponse)Response{
     
     /* Create a temporary Patient Object to make request */
@@ -145,7 +156,8 @@
 }
 -(void)findPatientFace:(NSDictionary *)faceInfo AndOnCompletion:(MobileClinicSearchResponse)Response
 {
-    FaceObject* fObject =[[FaceObject alloc]init];
+    RecognitionObject *fObject = [[RecognitionObject alloc]init];
+    //FaceObject* fObject =[[FaceObject alloc]init];
     [self CommonCommandObject:fObject ForSearch:faceInfo withResults:Response];
 
 }
@@ -327,7 +339,17 @@
         searchResults(allVisits,error);
     }];
 }
-
+-(void)CommonCommandObject:(id<CommonObjectProtocol>)commandObject ForSearch1:(NSDictionary*)object withResults:(MobileClinicSearchResponse)searchResults{
+    
+    /* Call the server to make a request for Visits */
+    [commandObject FindAllObjectsOnServerFromParentObject:object OnCompletion:^(id<BaseObjectProtocol> data, NSError *error) {
+        
+        /* get all visits that are stored on the device */
+        NSArray* allVisits =[NSArray arrayWithArray:[commandObject FindAllObjectsLocallyFromParentObjectByLabel:object]];
+        
+        searchResults(allVisits,error);
+    }];
+}
 -(void)CommonCommandObject:(id<CommonObjectProtocol,BaseObjectProtocol>)commandObject ForCreating:(NSDictionary*)object bindedToParentObjectToUpdate:(NSDictionary*)parent withResults:(MobileClinicCommandResponse)results{
     
     // If a parent object exists

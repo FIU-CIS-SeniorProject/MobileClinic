@@ -6,13 +6,6 @@
 //  Copyright (c) 2013 Steven Berlanga. All rights reserved.
 //
 
-/*#import "FaceObject.h"
-
-@implementation FaceObject
-
-
-
-@end*/
 #define PATIENTID   @"patientId"
 #define ALLPATIENTS @"all patients"
 #define DATABASE    @"Faces"

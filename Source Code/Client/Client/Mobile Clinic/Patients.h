@@ -23,6 +23,8 @@
 @property (nonatomic, retain) NSString * villageName;
 @property (nonatomic, retain) NSString * isLockedBy;
 @property (nonatomic, retain) NSSet *visit;
+@property (nonatomic, retain) NSNumber * label;
+
 @end
 
 @interface Patients (CoreDataGeneratedAccessors)

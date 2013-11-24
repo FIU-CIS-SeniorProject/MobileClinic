@@ -16,6 +16,7 @@
 NSString* firstname;
 NSString* lastname;
 NSString* isLockedBy;
+NSNumber* label;
 
 @implementation PatientObject
 +(NSString *)DatabaseName{
@@ -70,7 +71,9 @@ NSString* isLockedBy;
     [super unpackageFileForUser:data];
     firstname = [self->databaseObject valueForKey:FIRSTNAME];
     lastname = [self->databaseObject valueForKey:FAMILYNAME];
+    label = [self->databaseObject valueForKey:LABEL];
 }
+
 
 /* Depending on the RemoteCommands it will execute a different Command */
 -(void)CommonExecution
@@ -172,12 +175,22 @@ NSString* isLockedBy;
 #pragma mark -
 
 -(NSArray *)FindAllObjectsForGivenCriteria{
+    NSPredicate* pred;
+    if(!label)
+    {
+        
     
-    NSPredicate* pred = [NSPredicate predicateWithFormat:@"%K beginswith[cd] %@ || %K beginswith[cd] %@",FIRSTNAME,firstname,FAMILYNAME,lastname];
-    
-    if (!firstname && !lastname) {
-        pred = nil;
+     pred = [NSPredicate predicateWithFormat:@"%K beginswith[cd] %@ || %K beginswith[cd] %@",FIRSTNAME,firstname,FAMILYNAME,lastname];
+        if (!firstname && !lastname) {
+            pred = nil;
+        }
     }
+    else
+    {
+        pred = [NSPredicate predicateWithFormat:@"%K == %@",LABEL,label];
+        
+    }
+    
     
     return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:pred andSortByAttribute:FIRSTNAME]];
 }

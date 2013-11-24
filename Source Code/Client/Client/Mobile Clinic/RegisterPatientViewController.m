@@ -70,7 +70,7 @@ typedef enum MobileClinicMode{
    [_searchView setBackgroundColor:[ColorMe colorFor:PALEORANGE]];
     
     if (!patientData)
-        patientData = [[NSMutableDictionary alloc]initWithCapacity:10];
+        patientData = [[NSMutableDictionary alloc]initWithCapacity:11];
     else
         [self Redisplay];
 }
@@ -131,18 +131,18 @@ typedef enum MobileClinicMode{
 }
 - (IBAction)RegisterFaceButton:(id)sender
 {
+    NSTimeInterval timeStamp = [[NSDate date] timeIntervalSince1970];
+    NSNumber *timeStampObj = [NSNumber numberWithDouble: timeStamp];
+    
     if (self.validateRegistration){
     RegisterFaceViewController *faceViewController = [self getViewControllerFromiPadStoryboardWithName:@"RegisterFaceViewController"];
     [faceViewController view];
-    //[faceData setValue:_patientNameField.text forKey:FIRSTNAME];
-    //[faceData setValue:_familyNameField.text forKey:FAMILYNAME];
     faceViewController.firstName = _patientNameField.text;
     faceViewController.familyName = _familyNameField.text;
-    //[faceViewController populateInformation];
-    
-    //[faceViewController setDelegate:self];
-    
-    //[faceViewController.navigationItem setHidesBackButton:YES];
+    faceViewController.frameNum =0;
+    [patientData setValue:timeStampObj forKey:@"label"];
+        
+    faceViewController.label = timeStampObj;
     
     [self.navigationController pushViewController:faceViewController animated:YES];
     }
