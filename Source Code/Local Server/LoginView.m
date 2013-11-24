@@ -34,8 +34,6 @@
 
 @end
 
-
-//id<ServerProtocol> connection;
 @implementation LoginView
 @synthesize usernameTextField, passwordTextField, user;
 
@@ -50,30 +48,24 @@
 }
 
 - (IBAction)login:(id)sender {
-    
-    NSLog(@"Button Pressed"); // Testing
-
     if (!user)
         user = [[UserObject alloc]init];
-    
 
     [user loginWithUsername:[usernameTextField stringValue] andPassword:[passwordTextField stringValue] onCompletion:^(id<BaseObjectProtocol> data, NSError *error, Users *userA) {
-     
+        
+        //TODO: fix error
         if (error) {
-            //[FIUAppDelegate getNotificationWithColor:AJNotificationTypeRed Animation:AJLinedBackgroundTypeAnimated WithMessage:error.localizedDescription inView:self.view];
+            [[NSApplication sharedApplication] presentError:error];
         }
         else
         {
+            //notification to mainMenu to change view
             [[NSNotificationCenter defaultCenter]postNotificationName:@"LOGIN_OBSERVER" object:nil];
-            [self.view removeFromSuperview];
         }
+        //clear text fields
+        [usernameTextField setStringValue:@""];
+        [passwordTextField setStringValue:@""];
     }];
-
-    
-    [[NSNotificationCenter defaultCenter]postNotificationName:@"LOGIN_OBSERVER" object:nil];
-    [self.view removeFromSuperview];
-    
-    
 }
 
 @end

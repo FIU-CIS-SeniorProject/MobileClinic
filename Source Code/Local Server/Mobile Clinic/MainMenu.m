@@ -101,7 +101,19 @@ id<ServerProtocol> connection;
 
 - (IBAction)showLoginView:(id)sender
 {
+    //reset current view
+    if (currentView == userView.view) {
+        [userView.view removeFromSuperview];
+    } else if (currentView == patientView.view) {
+        [patientView.view removeFromSuperview];
+    } else {
+        [medicationView.view removeFromSuperview];
+    }
+    //set view to login
     [_mainScreen addSubview:loginView.view];
+    currentView = loginView.view;
+    
+    //disable view buttons
     [_userButton setEnabled: NO];
     [_patientButton setEnabled: NO];
     [_medicationButton setEnabled: NO];
@@ -306,7 +318,8 @@ id<ServerProtocol> connection;
 
 -(void)enableButtons:(NSNotification*)note
 {
-    
+    [loginView.view removeFromSuperview];
+    currentView = nil;
     //restore initial state of logged out user
     [_userButton setEnabled: YES];
     [_patientButton setEnabled: YES];

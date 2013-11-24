@@ -36,20 +36,20 @@
     self = [super init];
     if(self)
     {
-        kURL = @"http://staging-webapp.herokuapp.com/";
+        //kURL = @"http://staging-webapp.herokuapp.com/";
         kApiKey = @"12345";
         kAccessToken = @"";
         isAuthenticated = NO;
         //production
-//        kURL = @"http://znja-webapp.herokuapp.com/api/";
-        kURL = @"http://pure-island-5858.herokuapp.com/"; // Test Cloud
+        //kURL = @"http://znja-webapp.herokuapp.com/api/";
+        kURL = @"http://still-citadel-8045.herokuapp.com/"; // Test Cloud
         
         [self getAccessToken:^(BOOL success) {
             if(success)
                 NSLog(@"Connected To Cloud");
         }];
 
-//        kURL = @"http://0.0.0.0:3000/";
+        //kURL = @"http://0.0.0.0:3000/";
     }
     return self;
 }

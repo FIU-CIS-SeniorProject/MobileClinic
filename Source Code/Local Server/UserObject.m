@@ -205,6 +205,7 @@
     
 }
 
+//TODO: Allow login even without cloud connection
 -(void)loginWithUsername:(NSString*)username andPassword:(NSString*)password onCompletion:(void(^)(id <BaseObjectProtocol> data, NSError* error, Users* userA))onSuccessHandler
 {
     username = [username lowercaseString];
@@ -221,8 +222,7 @@
          if (didFindUser)
          {
              // Check if the user has permissions
-             //TODO: check the user's role as well (admin?)
-             if (user.status.boolValue)
+             if (user.status.boolValue && user.userType.intValue == 3)
              {
                  // Check credentials against the found user
                  if ([user.password isEqualToString:password])

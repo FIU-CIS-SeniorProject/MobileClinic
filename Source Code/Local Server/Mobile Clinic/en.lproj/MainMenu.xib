@@ -754,7 +754,6 @@
 									<string key="NSFrame">{{20, 18}, {656, 18}}</string>
 									<reference key="NSSuperview" ref="603201076"/>
 									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView"/>
 									<string key="NSReuseIdentifierKey">_NS:9</string>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSLevelIndicatorCell" key="NSCell" id="332624332">
@@ -1014,36 +1013,12 @@
 					<int key="connectionID">1795</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">showUserView:</string>
-						<reference key="source" ref="626149879"/>
-						<reference key="destination" ref="278418746"/>
-					</object>
-					<int key="connectionID">1432</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">mainScreen</string>
 						<reference key="source" ref="626149879"/>
 						<reference key="destination" ref="888891748"/>
 					</object>
 					<int key="connectionID">1433</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">showPatientView:</string>
-						<reference key="source" ref="626149879"/>
-						<reference key="destination" ref="414118528"/>
-					</object>
-					<int key="connectionID">1494</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">showMedicationView:</string>
-						<reference key="source" ref="626149879"/>
-						<reference key="destination" ref="141700492"/>
-					</object>
-					<int key="connectionID">1495</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -1156,6 +1131,30 @@
 						<reference key="destination" ref="1059248965"/>
 					</object>
 					<int key="connectionID">1796</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showPatientView:</string>
+						<reference key="source" ref="626149879"/>
+						<reference key="destination" ref="414118528"/>
+					</object>
+					<int key="connectionID">1797</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showMedicationView:</string>
+						<reference key="source" ref="626149879"/>
+						<reference key="destination" ref="141700492"/>
+					</object>
+					<int key="connectionID">1798</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showUserView:</string>
+						<reference key="source" ref="626149879"/>
+						<reference key="destination" ref="278418746"/>
+					</object>
+					<int key="connectionID">1799</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -3221,7 +3220,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">1796</int>
+			<int key="maxID">1799</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3230,10 +3229,8 @@
 					<string key="superclassName">NSObject</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="TearDownEnvironment:">id</string>
-						<string key="ToggleOptimization:">id</string>
 						<string key="restartServer:">id</string>
 						<string key="setupTestPatients:">id</string>
-						<string key="showLoginViewTest:">id</string>
 						<string key="showMainServerView:">id</string>
 						<string key="showMedicineView:">id</string>
 						<string key="showPatientsView:">id</string>
@@ -3245,20 +3242,12 @@
 							<string key="name">TearDownEnvironment:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="ToggleOptimization:">
-							<string key="name">ToggleOptimization:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="restartServer:">
 							<string key="name">restartServer:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="setupTestPatients:">
 							<string key="name">setupTestPatients:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="showLoginViewTest:">
-							<string key="name">showLoginViewTest:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="showMainServerView:">
@@ -3286,7 +3275,6 @@
 						<string key="OptimizeToggler">NSMenuItem</string>
 						<string key="createMedicineMenu">NSMenuItem</string>
 						<string key="createPatientMenu">NSMenuItem</string>
-						<string key="mainScreenTest">NSView</string>
 						<string key="window">NSWindow</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -3301,10 +3289,6 @@
 						<object class="IBToOneOutletInfo" key="createPatientMenu">
 							<string key="name">createPatientMenu</string>
 							<string key="candidateClassName">NSMenuItem</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="mainScreenTest">
-							<string key="name">mainScreenTest</string>
-							<string key="candidateClassName">NSView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="window">
 							<string key="name">window</string>
@@ -3323,7 +3307,6 @@
 						<string key="emergencyDataDump:">id</string>
 						<string key="manualTableRefresh:">id</string>
 						<string key="purgeTheSystem:">id</string>
-						<string key="pushPatientsToCloud:">id</string>
 						<string key="quitApplication:">id</string>
 						<string key="showLoginView:">id</string>
 						<string key="showMedicationView:">id</string>
@@ -3343,10 +3326,6 @@
 						</object>
 						<object class="IBActionInfo" key="purgeTheSystem:">
 							<string key="name">purgeTheSystem:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="pushPatientsToCloud:">
-							<string key="name">pushPatientsToCloud:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="quitApplication:">

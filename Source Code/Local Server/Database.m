@@ -87,7 +87,7 @@
         }
     }
     
-    NSURL *url = [applicationFilesDirectory URLByAppendingPathComponent:@"NewStoreFile.sqldata"];//@"Mobile_Clinic.storedata"];
+    NSURL *url = [applicationFilesDirectory URLByAppendingPathComponent:@"Mobile_Clinic.storedata"];
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
     if (![coordinator addPersistentStoreWithType:NSXMLStoreType configuration:nil URL:url options:nil error:&error]) {
         [[NSApplication sharedApplication] presentError:error];

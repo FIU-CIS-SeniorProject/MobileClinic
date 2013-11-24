@@ -33,7 +33,7 @@
 
 @property (strong, nonatomic) UserObject*user;
 @property (weak) IBOutlet NSTextField *usernameTextField;
-@property (weak) IBOutlet NSTextField *passwordTextField;
+@property (weak) IBOutlet NSSecureTextField *passwordTextField;
 
 
 - (IBAction)login:(id)sender;
