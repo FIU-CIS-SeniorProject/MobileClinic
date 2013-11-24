@@ -1,0 +1,43 @@
+<% provide(:title, @charity.name) %>
+<div class="block">
+  <div class="grid">
+    <div class="grid-title">
+     <div class="pull-left">
+      <div class="icon-title"><i class="icon-user"></i></div>
+      <span></span> 
+      <div class="clearfix"></div>
+    </div>
+    <div class="clearfix"></div>  
+  </div>
+  <div class="grid-content padding-none">
+    <table class="table table-striped">
+      <thead><tr></tr><tr></tr></thead>
+      <tbody>
+        <tr>
+          <td style="width: 950px;">
+            <div class="grid-content">
+              <table class="table table-striped">
+                <thead><tr></tr></thead>
+                <tbody>
+                  <tr>
+                    <td>Name: </td>
+                    <td><%= @charity.name %></td>
+                  </tr>
+                  <tr>
+                    <td>Status:</td>
+                    <td> <%= status( @charity.status ) %></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <% if  admin_user? %>
+  	<%= link_to "Edit Profile", edit_charity_path(@charity.charityid),  :class => "btn btn-large btn-block btn-info"%>
+  <% end %>
+  <%= link_to 'Back', charities_path, :class => "btn btn-large btn-block btn-default" %>
+</div>
+</div>
