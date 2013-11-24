@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3396" systemVersion="12F45" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12E55" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="CloudManagement" syncable="YES">
-        <attribute name="cloudURL" optional="YES" syncable="YES"/>
-        <attribute name="isActive" optional="YES" syncable="YES"/>
-        <attribute name="lastpulltime" optional="YES" syncable="YES"/>
-        <attribute name="name" optional="YES" syncable="YES"/>
+        <attribute name="cloudURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isActive" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="lastPullTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Faces" syncable="YES">
         <attribute name="familyName" optional="YES" attributeType="String" syncable="YES"/>
@@ -90,12 +90,12 @@
         <attribute name="weight" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
+        <element name="CloudManagement" positionX="-216" positionY="-180" width="128" height="105"/>
         <element name="Faces" positionX="162" positionY="27" width="128" height="90"/>
         <element name="Medication" positionX="160" positionY="192" width="128" height="180"/>
         <element name="Patients" positionX="-27" positionY="147" width="128" height="285"/>
         <element name="Prescription" positionX="162" positionY="-207" width="128" height="195"/>
         <element name="Users" positionX="-18" positionY="-54" width="128" height="180"/>
         <element name="Visitation" positionX="-234" positionY="-27" width="128" height="405"/>
-        <element name="CloudManagement" positionX="-216" positionY="-180" width="128" height="103"/>
     </elements>
 </model>

@@ -43,6 +43,7 @@ id currentView;
 id<ServerProtocol> connection;
 @implementation MainMenu
 
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -58,6 +59,23 @@ id<ServerProtocol> connection;
 {
     if (!connection)
     {
+        //Set initial view to loginView
+        if (!loginView)
+        {
+            loginView = [[LoginView alloc]initWithNibName:@"LoginView" bundle:nil];
+        }
+        
+        if (currentView)
+        {
+            [_mainScreen replaceSubview:currentView with:loginView.view];
+        }
+        else
+        {
+            [_mainScreen addSubview:loginView.view];
+        }
+        currentView = loginView.view;
+        ;
+        
         connection = [ServerCore sharedInstance];
         [connection start];
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(manualTableRefresh:) name:SERVER_OBSERVER object:nil];
@@ -69,6 +87,13 @@ id<ServerProtocol> connection;
 - (IBAction)quitApplication:(id)sender
 {
     [NSApp terminate:self];
+}
+
+- (IBAction)showLoginView:(id)sender
+{
+    //loginView.view.hidden =  NO;
+    [_mainScreen addSubview:loginView.view];
+
 }
 
 - (IBAction)showMedicationView:(id)sender
