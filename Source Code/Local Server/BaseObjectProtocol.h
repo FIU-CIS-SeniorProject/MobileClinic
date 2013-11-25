@@ -23,6 +23,7 @@ typedef enum {
     kPharmacyType       = 5,
     kPrescriptionType   = 6,
     kMedicationType     = 7,
+    kCloudManagementType = 8,
     kFaceType           = 10,
     kFaceRType          =11,
 }ObjectTypes;
@@ -97,8 +98,8 @@ typedef void (^CloudCallback)(id cloudResults, NSError* error);
  */
 -(BOOL)deleteDatabaseDictionaryObject:(NSDictionary*)object;
 
-
 -(NSError*)setValueToDictionaryValues:(NSDictionary*)values;
 -(NSMutableDictionary*)getDictionaryValuesFromManagedObject;
 -(NSMutableDictionary*)getDictionaryValuesFromManagedObject:(NSManagedObject*)object;
+
 @end

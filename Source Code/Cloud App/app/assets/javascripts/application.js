@@ -12,26 +12,22 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap
+//= require bootstrap
+//= require bootstrap/affix
+//= require bootstrap/alert
+//= require bootstrap/button
+//= require bootstrap/carousel
+//= require bootstrap/collapse 
+//= require bootstrap/dropdown
+//= require bootstrap/tab
+//= require bootstrap/transition
+//= require bootstrap/scrollspy
+//= require bootstrap/modal
+//= require bootstrap/tooltip
+//= require bootstrap/popover
 //= require dataTables/jquery.dataTables
 //= require_tree .
 
-$(document).ready(function() {
- if ($.browser.opera==true) {
-	 
-	 $('#menu').css('left', '-280px');
-	 $("#menu").addClass("sideleft-mob");
-	 
-           $("#menu-link").click(function(){
-			  if($("#menu").hasClass("sideleft-mob")){
-			   $("#menu").removeClass("sideleft-mob");
-			    $('#menu').css('left', '0px');
-			  }else{
-			   $("#menu").addClass("sideleft-mob");
-			    $('#menu').css('left', '-280px');
-			  }
-		   
-			});
-  }
-		
-});
+
+
+

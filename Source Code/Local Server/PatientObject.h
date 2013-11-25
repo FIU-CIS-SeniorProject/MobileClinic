@@ -13,7 +13,6 @@
 #import "VisitationObject.h"
 #import "Patients.h"
 
-
 @interface PatientObject : BaseObject<PatientObjectProtocol,CommonObjectProtocol>{
 
 }

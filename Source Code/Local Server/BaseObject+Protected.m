@@ -10,10 +10,10 @@
 
 @implementation BaseObject (Protected)
 
--(void)makeCloudCallWithCommand:(NSString *)command withObject:(id)object onComplete:(CloudCallback)onComplete{
-    
-    [[CloudService cloud] query:command parameters:object  completion:^(NSError *error, NSDictionary *result) {
-        
+-(void)makeCloudCallWithCommand:(NSString *)command withObject:(id)object onComplete:(CloudCallback)onComplete
+{
+    [[CloudService cloud] query:command parameters:object  completion:^(NSError *error, NSDictionary *result)
+    {
         dispatch_async(dispatch_get_main_queue(), ^{
             onComplete(result,error);
             NSLog(@"BASEOBJECT LOG: %@",result);
@@ -158,7 +158,8 @@
    
     // When Clients send information Everything must be saved
     // So if values cannot be added, Abort
-    if (success) {
+    if (success)
+    {
         self->commands = kAbort;
         [self sendInformation:nil toClientWithStatus:kErrorObjectMisconfiguration andMessage:success.localizedDescription];
     }

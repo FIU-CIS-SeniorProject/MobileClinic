@@ -1,8 +1,8 @@
 class Prescription < ActiveRecord::Base
-  attr_accessible :instruction, :medId, :prescribedAt, :tabletsPerDay, :timeOfDay, :vistitId
+  attr_accessible :instruction, :medId, :prescribedAt, :tabletsPerDay, :timeOfDay, :vistitId,:created_at,:updated_at
 
 
-    set_primary_key :vistitId
+    self.primary_key = "vistitId"
     has_one :medication, :foreign_key => 'medId'
     
 end

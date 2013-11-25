@@ -1,24 +1,30 @@
+// The MIT License (MIT)
+//
+// Copyright (c) 2013 Florida International University
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 //
 //  AJNotificationView.m
 //  AJNotificationViewDemo
 //
 //  Created by Alberto Jerez on 02/08/12.
-//  Copyright (c) 2012 CodeApps. All rights reserved.
 //
-//Copyright © 2012 Alberto Jerez - CodeApps
-//
-//Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”),
-//to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
-//and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-//
-//The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-//
-//THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
-//IN THE SOFTWARE.
-
-
 #import "AJNotificationView.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -52,7 +58,8 @@
 - (id)initWithFrame:(CGRect)frame andResponseBlock:(void (^)(void))response
 {
     self = [super initWithFrame:frame];
-    if (self) {
+    if (self)
+    {
         self.alpha = 0.0f;
         _notificationType = AJNotificationTypeDefault;
         _linedBackground = YES;
@@ -83,35 +90,41 @@
 #pragma mark - Show
 ////////////////////////////////////////////////////////////////////////
 
-+ (AJNotificationView *)showNoticeInView:(UIView *)view title:(NSString *)title{
++ (AJNotificationView *)showNoticeInView:(UIView *)view title:(NSString *)title
+{
     //Use default notification type (gray)
     return [self showNoticeInView:view type:AJNotificationTypeDefault title:title hideAfter:2.5f];
 }
 
-+ (AJNotificationView *)showNoticeInView:(UIView *)view title:(NSString *)title hideAfter:(NSTimeInterval)hideInterval{
++ (AJNotificationView *)showNoticeInView:(UIView *)view title:(NSString *)title hideAfter:(NSTimeInterval)hideInterval
+{
     //Use default notification type (gray)
     return [self showNoticeInView:view type:AJNotificationTypeDefault title:title hideAfter:hideInterval];
 }
 
-+ (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title hideAfter:(NSTimeInterval)hideInterval{
++ (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title hideAfter:(NSTimeInterval)hideInterval
+{
     return [self showNoticeInView:view type:type title:title linedBackground:AJLinedBackgroundTypeStatic hideAfter:hideInterval];
 }
 
-+ (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval{
++ (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval
+{
     return [self showNoticeInView:view type:type title:title linedBackground:backgroundType hideAfter:hideInterval response:nil];
 }
 
-+ (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval response:(void (^)(void))response {
++ (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval response:(void (^)(void))response
+{
     
     return [self showNoticeInView:view type:type title:title linedBackground:backgroundType hideAfter:hideInterval offset:0.0 delay:0.0 response:response];
 }
 
-+ (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval offset:(float)offset {
-    
++ (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval offset:(float)offset
+{
     return [self showNoticeInView:view type:type title:title linedBackground:backgroundType hideAfter:hideInterval offset:offset delay:0.0 response:nil];
 }
 
-+ (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval offset:(float)offset delay:(NSTimeInterval)delayInterval response:(void (^)(void))response {
++ (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval offset:(float)offset delay:(NSTimeInterval)delayInterval response:(void (^)(void))response
+{
     
     AJNotificationView *noticeView = [[self alloc] initWithFrame:CGRectMake(0, 0, view.bounds.size.width, 1) andResponseBlock:response];
     noticeView.notificationType = type;
@@ -133,7 +146,8 @@
                                                                   repeats:YES];
         }
     }
-    else{
+    else
+    {
         if (noticeView.animationTimer && noticeView.animationTimer.isValid)
             [noticeView.animationTimer invalidate];
         
@@ -143,8 +157,8 @@
     //if view is a UIWindow, check if the status bar is showing (and offset the view accordingly)
     double statusBarOffset = ([view isKindOfClass:[UIWindow class]] && (! [[UIApplication sharedApplication] isStatusBarHidden])) ? [[UIApplication sharedApplication] statusBarFrame].size.height : 0.0;
     
-    if ([view isKindOfClass:[UIView class]] && ![view isKindOfClass:[UIWindow class]]) {
-        
+    if ([view isKindOfClass:[UIView class]] && ![view isKindOfClass:[UIWindow class]])
+    {
         statusBarOffset = 0.0;
     }
     offset = fmax(offset, statusBarOffset);
@@ -162,10 +176,13 @@
                          noticeView.titleLabel.alpha = 1.0;
                      }
                      completion:^(BOOL finished) {
-                         if (finished){
+                         if (finished)
+                         {
                              //Hide
                              if (hideInterval > 0)
+                             {
                                  [noticeView performSelector:@selector(hide) withObject:view afterDelay:hideInterval];
+                             }
                          }
                      }];
     
@@ -176,8 +193,10 @@
 #pragma mark - Hide
 ////////////////////////////////////////////////////////////////////////
 
-- (void)hide{
-    if ([self.animationTimer isValid]){
+- (void)hide
+{
+    if ([self.animationTimer isValid])
+    {
         [self.animationTimer invalidate];
         self.animationTimer = nil;
     }
@@ -194,7 +213,8 @@
                          self.titleLabel.alpha = 0.0;
                      }
                      completion:^(BOOL finished) {
-                         if (finished){
+                         if (finished)
+                         {
                              [self performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:0.1f];
                          }
                      }];
@@ -206,7 +226,8 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [self hide];
-    if(self.responseBlock != nil) {
+    if(self.responseBlock != nil)
+    {
         self.responseBlock();
     }
 }
@@ -223,42 +244,55 @@
     UIColor *secondColor = nil;
     UIColor *toplineColor = nil;
     
-    switch (self.notificationType) {
-        case AJNotificationTypeDefault: { //Gray
+    switch (self.notificationType)
+    {
+        case AJNotificationTypeDefault:
+        {
+            //Gray
             firstColor = RGBA(210, 210, 210, 1.0);
             secondColor = RGBA(180, 180, 180, 1.0);
             toplineColor = RGBA(230, 230, 230, 1.0);
             break;
         }
-        case AJNotificationTypeBlue: { //Blue
+        case AJNotificationTypeBlue:
+        {
+            //Blue
             firstColor = RGBA(0, 193, 254, 1.0);
             secondColor = RGBA(0, 129, 182, 1.0);
             toplineColor = RGBA(20, 230, 255, 1.0);
             self.titleLabel.textColor = [UIColor whiteColor];
             break;
         }
-        case AJNotificationTypeGreen: { //Green
+        case AJNotificationTypeGreen:
+        {
+            //Green
             firstColor = RGBA(147, 207, 11, 1.0);
             secondColor = RGBA(99, 168, 1, 1.0);
             toplineColor = RGBA(167, 227, 31, 1.0);
             self.titleLabel.textColor = [UIColor whiteColor];
             break;
         }
-        case AJNotificationTypeRed: { //Red
+        case AJNotificationTypeRed:
+        {
+            //Red
             firstColor = RGBA(204, 53, 60, 1.0);
             secondColor = RGBA(149, 30, 42, 1.0);
             toplineColor = RGBA(224, 73, 80, 1.0);
             self.titleLabel.textColor = [UIColor whiteColor];
             break;
         }
-        case AJNotificationTypeOrange: { //Orange
+        case AJNotificationTypeOrange:
+        {
+            //Orange
             firstColor = RGBA(246, 141, 0, 1.0);
             secondColor = RGBA(232, 90, 6, 1.0);
             toplineColor = RGBA(266, 161, 20, 1.0);
             self.titleLabel.textColor = [UIColor whiteColor];
             break;
         }
-        default: { //Gray
+        default:
+        {
+            //Gray
             firstColor = RGBA(210, 210, 210, 1.0);
             secondColor = RGBA(180, 180, 180, 1.0);
             toplineColor = RGBA(230, 230, 230, 1.0);
@@ -284,9 +318,12 @@
     
     //top line
     CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha = 0.0;
-    if ([toplineColor respondsToSelector:@selector(getRed:green:blue:alpha:)]) {
+    if ([toplineColor respondsToSelector:@selector(getRed:green:blue:alpha:)])
+    {
         [toplineColor getRed:&red green:&green blue:&blue alpha:&alpha];
-    } else {
+    }
+    else
+    {
         const CGFloat *components = CGColorGetComponents(toplineColor.CGColor);
         red = components[0];
         green = components[1];
@@ -323,13 +360,15 @@
     self.layer.shadowRadius = 2.0f;
     
     
-    if (self.linedBackground){
+    if (self.linedBackground)
+    {
         //Lines
         CGContextSaveGState(ctx); 
         CGContextClipToRect(ctx, self.bounds);
         CGMutablePathRef path = CGPathCreateMutable();
         int lines = (self.bounds.size.width/16.0f + self.bounds.size.height);
-        for(int i=1; i<=lines; i++) {
+        for(int i=1; i<=lines; i++)
+        {
             CGPathMoveToPoint(path, NULL, 16.0f * i + -self.moveFactor, 1.0f);
             CGPathAddLineToPoint(path, NULL, 1.0f, 16.0f * i + -self.moveFactor);
         }

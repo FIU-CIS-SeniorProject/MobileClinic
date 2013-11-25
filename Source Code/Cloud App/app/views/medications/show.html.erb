@@ -31,7 +31,7 @@
                 </tr>
                   <tr>
                     <td>Expiration: </td>
-                    <td><%= show_date(@medication.expiration) %></td>
+                    <td><%= @medication.expiration.to_s("%m/%d/%Y") %></td>
                 </tr>
                   <tr>
                     <td>Amount: </td>
@@ -44,4 +44,6 @@
             </tbody>
          </table>
         </div>
+        <%= link_to 'Edit', edit_medication_path, :class => "btn btn-info btn-large btn-block" %>
+        <%= link_to 'Back', medications_path, :class => "btn btn-default btn-large btn-block" %>
 </div>

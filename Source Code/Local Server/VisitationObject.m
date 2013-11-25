@@ -44,14 +44,15 @@ NSString* isLockedBy;
     return [super initWithCachedObjectWithUpdatedObject:dic];
 }
 
--(void)setupObject{
-    
+-(void)setupObject
+{
     self->COMMONID =  VISITID;
     self->CLASSTYPE = kVisitationType;
     self->COMMONDATABASE = DATABASE;
 }
 
--(void)ServerCommand:(NSDictionary *)dataToBeRecieved withOnComplete:(ServerCommand)response{
+-(void)ServerCommand:(NSDictionary *)dataToBeRecieved withOnComplete:(ServerCommand)response
+{
     [super ServerCommand:nil withOnComplete:response];
     [self unpackageFileForUser:dataToBeRecieved];
     [self CommonExecution];
@@ -166,10 +167,14 @@ NSString* isLockedBy;
     }
     return @"N/A";
 }
--(NSString*)convertTextForPrinting:(NSString*)text{
+
+-(NSString*)convertTextForPrinting:(NSString*)text
+{
     return ([text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length > 0)?text:@"Incomplete";
 }
--(NSArray *)FindAllObjects{
+
+-(NSArray *)FindAllObjects
+{
     return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:nil andSortByAttribute:TRIAGEIN]];
 }
 

@@ -5,120 +5,149 @@
 //  Created by Rigo Hernandez on 3/10/13.
 //  Copyright (c) 2013 Steven Berlanga. All rights reserved.
 //
-
 #import "PatientQueueViewController.h"
 #import "DoctorPatientViewController.h"
 #import "PharmacyPatientViewController.h" 
-#import "QueueCell.h"
-#import "StationSwitcher.h"
-#import "ODRefreshControl.h"
-@interface PatientQueueViewController ()<DoctorPatientViewDelegate,UIPopoverControllerDelegate> {
+
+@interface PatientQueueViewController ()
+{
     NSArray *queueArray;
     MobileClinicFacade *mobileFacade;
-    ODRefreshControl* refreshControl;
-    
 }
 
 @property (strong, nonatomic) UIPopoverController * pop;
 @end
 
-
+@implementation QueueTableCell
+@end
 
 @implementation PatientQueueViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
     }
     return self;
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    self.stationChosen = ((StationNavigationController *)self.navigationController).stationChosen;
+    [self.navigationItem setTitle:[self.stationChosen intValue] == 2 ? @"Doctor" : @"Pharmacy"];
+    
+    UIBarButtonItem * menu = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(popOverMenu)];
+    [self.navigationItem setLeftBarButtonItem:menu];
+    
+    if([[self stationChosen] intValue] == 3)
+    {
+        [_prioritySelector setUserInteractionEnabled:NO];
+        [_prioritySelector removeSegmentAtIndex:1 animated:NO];
+    }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    // This will should HUD in tableview to show alert the user that the system is working */
+    [self showIndeterminateHUDInView:_queueTableView withText:@"Searching" shouldHide:NO afterDelay:0 andShouldDim:NO];
+    
     mobileFacade = [[MobileClinicFacade alloc] init];
-    
-    refreshControl = [[ODRefreshControl alloc]initInScrollView:_queueTableView];
-    
-    [refreshControl addTarget:self action:@selector(reloadTable) forControlEvents:UIControlEventValueChanged];
-  
     UINavigationBar *navbar = [self.navigationController navigationBar];
     
-    [navbar setTintColor:[ColorMe colorFor:PALEPURPLE]];
-
-    [_queueTableView setBackgroundColor:[ColorMe colorFor:PALEPURPLE]];
-
-    
-    [self.navigationItem setTitle: @"Doctor Queue"];
-    
-    [self reloadTable];
-   
-}
--(void)reloadTable{
-    
-    /** This will should HUD in tableview to show alert the user that the system is working */
-    [self showIndeterminateHUDInView:_queueTableView withText:@"Loading" shouldHide:NO afterDelay:0 andShouldDim:NO];
-    [self.queueTableView setScrollEnabled:NO];
     // Request patient's that are currently checked-in
-    [mobileFacade findAllOpenVisitsAndOnCompletion:^(NSArray *allObjectsFromSearch, NSError *error) {
-        if (!allObjectsFromSearch && error ) {
+    [mobileFacade findAllOpenVisitsAndOnCompletion:^(NSArray *allObjectsFromSearch, NSError *error)
+    {
+        if (!allObjectsFromSearch && error)
+        {
             [FIUAppDelegate getNotificationWithColor:AJNotificationTypeOrange Animation:AJLinedBackgroundTypeAnimated WithMessage:error.localizedDescription inView:self.view];
-            
-        }else{
-            
+        }
+        else
+        {
             queueArray = [NSArray arrayWithArray:allObjectsFromSearch];
-            
-            NSPredicate * predicate = [NSPredicate predicateWithFormat:@"%K == %@", DOCTOROUT, nil];
-            
-            queueArray = [NSMutableArray arrayWithArray:[queueArray filteredArrayUsingPredicate:predicate]];
-            
-            [self sortBy:PRIORITY inAscendingOrder:NO];
-            
+        
+            // Settings with respect to station chosen
+            switch ([[self stationChosen] intValue])
+            {
+                // DOCTOR QUEUE VIEW
+                case 2:
+                {
+                    [navbar setTintColor:[UIColor blueColor]];
+                
+                    // Filter results to patient's that haven't seen the doctor
+                    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"%K == %@", DOCTOROUT, nil];
+                
+                    queueArray = [NSMutableArray arrayWithArray:[queueArray filteredArrayUsingPredicate:predicate]];
+                
+                    // Sort queue by priority
+                    [self sortBy:PRIORITY inAscendingOrder:NO];
+                }
+                    break;
+                // PHARMACIST QUEUE VIEW
+                case 3:
+                {
+                    [navbar setTintColor:[UIColor greenColor]];
+                
+                    // Filter results (Open Patient and has seen doctor = need to see pharmacist)
+                    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"%K != %@", DOCTOROUT, nil];
+                    queueArray = [NSMutableArray arrayWithArray:[queueArray filteredArrayUsingPredicate:predicate]];
+                
+                    // Sort queue by time patient left doctor's station
+                    [self sortBy:DOCTOROUT inAscendingOrder:YES];
+                }
+                    break;
+                default:
+                    break;
+            }
             [_queueTableView reloadData];
         }
-        /** This will remove the HUD since the search is complete */
-        [self HideALLHUDDisplayInView:_queueTableView];
         
-        [refreshControl endRefreshing];
-        [self.queueTableView setScrollEnabled:YES];
+        // This will remove the HUD since the search is complete
+        [self HideALLHUDDisplayInView:_queueTableView];
     }];
-
 }
 
 // Sorts queue for category specified in ascending or decending order
-- (void)sortBy:(NSString *)sortCategory inAscendingOrder:(BOOL)order {
-    
+- (void)sortBy:(NSString *)sortCategory inAscendingOrder:(BOOL)order
+{
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]initWithKey:sortCategory ascending:order];
-    
     NSArray *sortDescriptorArray = [NSArray arrayWithObject:sortDescriptor];
-    
     queueArray = [NSMutableArray arrayWithArray:[queueArray sortedArrayUsingDescriptors:sortDescriptorArray]];
 }
 
--(void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController{
-    [self.navigationItem.leftBarButtonItem setEnabled:YES];
-}
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if ([segue isKindOfClass:[UIStoryboardPopoverSegue class]]) {
-        UIPopoverController* pop = [(UIStoryboardPopoverSegue*)segue popoverController];
-        StationSwitcher* station =  segue.destinationViewController;
-        [pop setDelegate:self];
-        [station setPopoverController:pop];
-        [self.navigationItem.leftBarButtonItem setEnabled:NO];
+- (void)popOverMenu
+{
+    if(self.pop != nil)
+    {
+        [self.pop dismissPopoverAnimated:YES];
+        self.pop = nil;
+        return;
     }
+    
+    // get datepicker view
+    MenuViewController *menuPicker = [self getViewControllerFromiPadStoryboardWithName:@"menuPopover"];
+    
+    // Instatiate popover if not available
+    self.pop = [[UIPopoverController alloc]initWithContentViewController:menuPicker];
+    
+    // set how the screen should return
+    // set the age to the date the screen returns
+    [menuPicker setScreenHandler:^(id object, NSError *error) {
+        [self.pop dismissPopoverAnimated:YES];
+    }];
+    
+    // show the screen beside the button
+    CGRect leftBarFrame = CGRectMake(0, 5, 10, 15);
+    [self.pop presentPopoverFromRect:leftBarFrame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
 }
 
 - (void)viewDidUnload {
     [self setQueueTableView:nil];
     [self setPrioritySelector:nil];
-    queueArray = nil;
-    mobileFacade = nil;
-    [self setPop:nil];
-    
-    [refreshControl removeTarget:self action:@selector(reloadTable) forControlEvents:UIControlEventValueChanged];
-    refreshControl = nil;
     [super viewDidUnload];
 }
 
@@ -129,7 +158,6 @@
 
 // Defines number of cells in table view
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    [_numberOfPatientsLabel setText:[NSString stringWithFormat:@"%i Patients",queueArray.count]];
     return queueArray.count;
 }
 
@@ -137,17 +165,21 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"queueCell";
     
-    QueueCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    QueueTableCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if(!cell)
-        cell = [[QueueCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[QueueTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     
     NSDictionary *visitDic = [[NSDictionary alloc]initWithDictionary:[queueArray objectAtIndex:indexPath.row]];
     NSDictionary *patientDic = [visitDic objectForKey:OPEN_VISITS_PATIENT];
     
+    // Set Priority Indicator color
+    // Hide it for Pharmacy
+    if([[self stationChosen]intValue] == 3)
+        cell.priorityIndicator.backgroundColor = [UIColor darkGrayColor];
     
     // Show for Doctor
-    if([[visitDic objectForKey:PRIORITY]intValue] == 0)
+    else if([[visitDic objectForKey:PRIORITY]intValue] == 0)
         cell.priorityIndicator.backgroundColor = [UIColor greenColor];
     else if([[visitDic objectForKey:PRIORITY]intValue] == 1)
         cell.priorityIndicator.backgroundColor = [UIColor yellowColor];
@@ -169,18 +201,16 @@
     cell.patientConditionTitle.text = [visitDic objectForKey:CONDITIONTITLE];
     
     // Display Nurse or Doctor's name depending on the station
-    cell.employeeName.text = [visitDic objectForKey:NURSEID];
-
+    if([[self stationChosen]intValue] == 2)
+        cell.employeeName.text = [visitDic objectForKey:NURSEID];
+    else if([[self stationChosen]intValue] == 3)
+        cell.employeeName.text = [visitDic objectForKey:DOCTORID];
     
     // Calculate wait time since patient left triage
     NSDate *now = [NSDate date];
-    
     NSDate *triageOut = [NSDate convertSecondsToNSDate:[visitDic objectForKey:TRIAGEOUT]];
-    
     NSTimeInterval secsSinceTriageOut = [now timeIntervalSinceDate:triageOut];
-    
     NSInteger waitInSeconds = floor(secsSinceTriageOut);
-    
     NSInteger waitInMinutes = waitInSeconds / 60;
     
     cell.patientWaitTime.text = [NSString stringWithFormat:@"%i min(s)", waitInMinutes];
@@ -188,12 +218,14 @@
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    [cell setBackgroundColor:[UIColor whiteColor]];
-}
-
 // Action upon selecting cell
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Sets color of cell when selected
+    [ColorMe ColorTint:[[tableView cellForRowAtIndexPath:indexPath]layer] forCustomColor:[UIColor lightGrayColor]];
+    
+    [UIView animateWithDuration:.3 animations:^{
+        [ColorMe ColorTint:[[tableView cellForRowAtIndexPath:indexPath]layer] forCustomColor:[UIColor clearColor]];
+    }];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
@@ -201,50 +233,62 @@
     // This is Visit and Patient Data Bundle
     NSMutableDictionary * patientDic = [[NSMutableDictionary alloc]initWithDictionary:[queueArray objectAtIndex:indexPath.row]];
     
-    /** This will should HUD in tableview to show alert the user that the system is working */
-    [self showIndeterminateHUDInView:_queueTableView withText:@"Loading..." shouldHide:NO afterDelay:0 andShouldDim:NO];
-    [self.queueTableView setScrollEnabled:NO];
     // Lock patients / visit
-    [[[MobileClinicFacade alloc] init] updateVisitRecord:patientDic andShouldUnlock:NO andShouldCloseVisit:NO onCompletion:^(NSDictionary *object, NSError *error) {
-        /** This will remove the HUD since the search is complete */
-        [self HideALLHUDDisplayInView:_queueTableView];
+    MobileClinicFacade*  mobileFacade = [[MobileClinicFacade alloc] init];
+    [mobileFacade updateVisitRecord:patientDic andShouldUnlock:NO andShouldCloseVisit:NO onCompletion:^(NSDictionary *object, NSError *error) {
         if(!object){
             [FIUAppDelegate getNotificationWithColor:AJNotificationTypeRed Animation:AJLinedBackgroundTypeDisabled WithMessage:error.localizedDescription inView:self.view];
         }else{
-        
-            DoctorPatientViewController * newView = [self getViewControllerFromiPadStoryboardWithName:@"doctorPatientViewController"];
-            [newView view];
-            [newView setDelegate:self];
-            [newView setPatientData:patientDic];
-            [newView.navigationItem setHidesBackButton:YES];
-            [self.navigationController pushViewController:newView animated:YES];
-            
+            if([[self stationChosen]intValue] == 2) {
+                DoctorPatientViewController * newView = [self getViewControllerFromiPadStoryboardWithName:@"doctorPatientViewController"];
+                [newView setPatientData:patientDic];
+                [self.navigationController pushViewController:newView animated:YES];
+            }
+            else if ([[self stationChosen]intValue] == 3) {
+                PharmacyPatientViewController * newView = [self getViewControllerFromiPadStoryboardWithName:@"pharmacyPatientViewController"];
+                [newView setPatientData:patientDic];
+                [self.navigationController pushViewController:newView animated:YES];
+            }
         }
-        [self.queueTableView setScrollEnabled:YES];
     }];
 }
 
-
--(void)DoctorPatientViewUpdateAndClose{
-    [self reloadTable];
-    [self.navigationController popToRootViewControllerAnimated:YES];
-}
+////Coloring cell depending on priority
+//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+//
+//    if([[self stationChosen] intValue] == 2) {
+//        NSDictionary * visitDic = [[NSDictionary alloc]initWithDictionary:[queueArray objectAtIndex:indexPath.row]];
+//
+//        // Set priority color
+//        if([[visitDic objectForKey:PRIORITY]intValue] == 0)
+//            cell.backgroundColor = [UIColor yellowColor];
+//        else if([[visitDic objectForKey:PRIORITY]intValue] == 1)
+//            cell.backgroundColor = [UIColor purpleColor];
+//        else if([[visitDic objectForKey:PRIORITY]intValue] == 2)
+//            cell.backgroundColor = [UIColor redColor];
+//    }
+//}
 
 - (IBAction)sortBySelected:(id)sender {
- 
-    if(_prioritySelector.selectedSegmentIndex == 0) {
-        // Sort queue by priority
-        [self sortBy:PRIORITY inAscendingOrder:NO];
-    }else if(_prioritySelector.selectedSegmentIndex == 1) {
-        // Sort queue by wait time
-        [self sortBy:TRIAGEOUT inAscendingOrder:YES];
-    }
     
-    [_queueTableView reloadData];
+    // Request patient's that are currently checked-in
+    [mobileFacade findAllOpenVisitsAndOnCompletion:^(NSArray *allObjectsFromSearch, NSError *error) {
+        queueArray = [NSArray arrayWithArray:allObjectsFromSearch];
+
+        // Filter results to patient's that haven't seen the doctor
+        NSPredicate * predicate = [NSPredicate predicateWithFormat:@"%K == %@", DOCTOROUT, [NSNumber numberWithInt:0]];
+        queueArray = [NSMutableArray arrayWithArray:[queueArray filteredArrayUsingPredicate:predicate]];
+    
+        if(_prioritySelector.selectedSegmentIndex == 0) {
+            // Sort queue by priority
+            [self sortBy:PRIORITY inAscendingOrder:NO];
+        }else if(_prioritySelector.selectedSegmentIndex == 1) {
+            // Sort queue by wait time
+            [self sortBy:TRIAGEOUT inAscendingOrder:YES];
+        }
+    
+        [_queueTableView reloadData];
+    }];
 }
 
--(void)dealloc{
-    [_queueTableView setDelegate:nil];
-    [_queueTableView setDataSource:nil];
-}
 @end

@@ -1,6 +1,6 @@
 class Patient < ActiveRecord::Base
   
-  attr_accessible :age, :firstName, :familyName, :sex, :villageName, :picture, :patientId
+  attr_accessible :age, :firstName, :familyName, :sex, :villageName, :picture, :patientId,:created_at,:updated_at
 
   validates :age, presence: true, :numericality => { :only_integer => true }
   # validates :createdAt, presence: true 
@@ -12,7 +12,7 @@ class Patient < ActiveRecord::Base
 
   has_attached_file :picture, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :url => "images/:style/missing.png"
 
-  set_primary_key :patientId
+  self.primary_key = "patientId"
   has_many :visits, dependent: :destroy, :foreign_key => 'patientId'
 
   def visitFeed

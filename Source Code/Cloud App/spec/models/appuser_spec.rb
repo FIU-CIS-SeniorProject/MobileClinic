@@ -33,9 +33,7 @@ describe User do
   it { should respond_to(:email) }
   it { should respond_to(:userType) }
   it { should respond_to(:status)}
-
-  # virtual attributes
-  it { should respond_to(:secondaryTypes) }
+  it { should respond_to(:appuserid)}
 
   ####################
   # VALIDATION TESTS #
@@ -97,7 +95,7 @@ describe "when email format is invalid" do
     it "should be valid" do
       addresses = %w[user@foo.COM A_US-ER@f.b.org frst.lst@foo.jp a+b@baz.cn]
       addresses.each do |valid_address|
-        @appuser.email = valid_address
+        @appuser.email = valid_address.downcase
         @appuser.should be_valid
       end      
     end

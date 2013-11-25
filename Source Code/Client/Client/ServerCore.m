@@ -55,8 +55,10 @@ static BOOL connected;
     NSLog(@"Client Started Searching");
     
     // If client is not connected, try to connect
-    if (!connected) {
-        if (!connectionTimer.isValid) {
+    if (!connected)
+    {
+        if (!connectionTimer.isValid)
+        {
             [netServiceBrowser searchForServicesOfType:@"_MC-EMR._tcp." inDomain:@"local."];
             
             // Starts Timeout Timer

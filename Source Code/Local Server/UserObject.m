@@ -1,9 +1,30 @@
+// The MIT License (MIT)
+//
+// Copyright (c) 2013 Florida International University
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 //
 //  UserObject.m
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 1/27/13.
-//  Copyright (c) 2013 Florida International University. All rights reserved.
+//  Modified by Kevin Diaz on 11/23/13.
 //
 
 /* NOTE ABOUT THIS CLASS
@@ -54,6 +75,11 @@
     self->COMMONDATABASE = DATABASE;
 }
 
+-(void)linkDatabase
+{
+    user = (Users*)self->databaseObject;
+}
+
 #pragma mark - BaseObjectProtocol Methods
 #pragma mark -
 
@@ -97,7 +123,9 @@
 
 #pragma mark - COMMON OBJECT Methods
 #pragma mark -
--(NSArray *)FindAllObjects{
+
+-(NSArray *)FindAllObjects
+{
     return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:nil andSortByAttribute:USERNAME]];
 }
 
@@ -111,6 +139,7 @@
 #pragma mark- Public Methods
 #pragma mark-
 
+//TODO: Not implemented??
 -(void)pushToCloud:(CloudCallback)onComplete{
    
     onComplete(nil,[[NSError alloc]initWithDomain:COMMONDATABASE code:kErrorObjectMisconfiguration userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"This feature is not implemented",NSLocalizedFailureReasonErrorKey, nil]]);
@@ -132,7 +161,7 @@
 #pragma mark - Private Methods
 #pragma mark -
 
-
+//TODO: Same user object used twice?
 -(void)ValidateAndLoginUser
 {
     // Initially set it to an error, for efficiency.
@@ -175,6 +204,54 @@
     commandPattern([status consolidateForTransmitting]);
     
 }
+
+//TODO: Allow login even without cloud connection
+-(void)loginWithUsername:(NSString*)username andPassword:(NSString*)password onCompletion:(void(^)(id <BaseObjectProtocol> data, NSError* error, Users* userA))onSuccessHandler
+{
+    username = [username lowercaseString];
+    // Sync appropriate users from cloud to the server
+    [self pullFromCloud:^(id<BaseObjectProtocol> data, NSError *error)
+     {
+         
+     }];
+    
+    // Try to find user from username in local DB
+    BOOL didFindUser = [self loadObjectForID:username];
+    
+    // link databaseObject to convenience Object named "user"
+    [self linkDatabase];
+    
+    // if we find the user locally then....
+    if (didFindUser)
+    {
+        // Check if the user has permissions
+        if (user.status.boolValue && user.userType.intValue == 3)
+        {
+            // Check credentials against the found user
+            if ([user.password isEqualToString:password])
+            {
+                onSuccessHandler(self,nil, user);
+            }
+            // If incorrect password then throw an error
+            else
+            {
+                onSuccessHandler(Nil,[self createErrorWithDescription:@"Username & Password combination is incorrect" andErrorCodeNumber:kErrorIncorrectLogin inDomain:self->COMMONDATABASE], user);
+            }
+        }
+        // If the user doesn't have permission, throw an error
+        else
+        {
+            onSuccessHandler(Nil,[self createErrorWithDescription:@"You do not have permission to login. Please contact you application administrator" andErrorCodeNumber:kErrorPermissionDenied inDomain:self->COMMONDATABASE], user);
+        }
+    }
+    // if we cannot find the user, throw an error
+    else
+    {
+        onSuccessHandler(Nil,[self createErrorWithDescription:@"The user does not exists" andErrorCodeNumber:kErrorUserDoesNotExist inDomain:self->COMMONDATABASE], user);
+    }
+
+}
+
 -(NSArray *)covertAllSavedObjectsToJSON{
     
     NSArray* allPatients= [self FindObjectInTable:COMMONDATABASE withCustomPredicate:[NSPredicate predicateWithFormat:@"%K == YES",ISDIRTY] andSortByAttribute:USERNAME];

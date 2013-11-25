@@ -29,7 +29,7 @@
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSURL *appSupportURL = [[fileManager URLsForDirectory:NSApplicationSupportDirectory inDomains:NSUserDomainMask] lastObject];
-    return [appSupportURL URLByAppendingPathComponent:@"NewStoreFile.sqldata"];//@"FIU.Mobile_Clinic"];
+    return [appSupportURL URLByAppendingPathComponent:@"Mobile_Clinic"];
 }
 
 // Creates if necessary and returns the managed object model for the application.
@@ -63,10 +63,7 @@
     NSError *error = nil;
     
     NSDictionary *properties = [applicationFilesDirectory resourceValuesForKeys:@[NSURLIsDirectoryKey] error:&error];
-    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],
-                             NSMigratePersistentStoresAutomaticallyOption,
-                             [NSNumber numberWithBool:YES],
-                             NSInferMappingModelAutomaticallyOption, nil];
+    
     if (!properties) {
         BOOL ok = NO;
         if ([error code] == NSFileReadNoSuchFileError) {
@@ -90,20 +87,19 @@
         }
     }
     
-    
-    NSURL *url = [applicationFilesDirectory URLByAppendingPathComponent:@"NewStoreFile.sqldata"];//@"Mobile_Clinic.storedata"];
+    NSURL *url = [applicationFilesDirectory URLByAppendingPathComponent:@"Mobile_Clinic.sqldata"];
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
-    if (![coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:options error:&error]) {
+    if (![coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:nil error:&error]) {
         [[NSApplication sharedApplication] presentError:error];
         return nil;
     }
     _persistentStoreCoordinator = coordinator;
     //added by Humberto
-   /* NSURL *sqlstore = [applicationFilesDirectory URLByAppendingPathComponent:@"NewStoreFile1.sqldata"];
+   /* NSURL *sqlstore = [applicationFilesDirectory URLByAppendingPathComponent:@"NewStoreFile.sqldata"];
     NSPersistentStore *xmlstore = [coordinator persistentStoreForURL:url];
     
-    [coordinator migratePersistentStore:xmlstore toURL:sqlstore options:nil withType:NSSQLiteStoreType error:nil];*/
-    
+    [coordinator migratePersistentStore:xmlstore toURL:sqlstore options:nil withType:NSSQLiteStoreType error:nil];
+    */
     return _persistentStoreCoordinator;
 }
 
