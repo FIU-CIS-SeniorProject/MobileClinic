@@ -49,6 +49,7 @@ typedef enum
 @property (nonatomic, strong) ServerCore *server;
 @property (assign) IBOutlet NSWindow *window;
 
+
 - (IBAction)restartServer:(id)sender;
 - (IBAction)shutdownServer:(id)sender;
 
@@ -61,5 +62,6 @@ typedef enum
 
 - (IBAction)showPatientsView:(id)sender;
 - (IBAction)showUserView:(id)sender;
+
 
 @end
