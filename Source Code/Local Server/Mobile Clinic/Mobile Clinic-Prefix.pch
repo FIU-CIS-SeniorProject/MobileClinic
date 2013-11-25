@@ -1,6 +1,9 @@
 //
 // Prefix header for all source files of the 'Mobile Clinic' target in the 'Mobile Clinic' project
 //
+#ifdef __cplusplus
+#import <opencv2/opencv.hpp>
+#endif
 
 #ifdef __OBJC__
     #import <Cocoa/Cocoa.h>
@@ -8,3 +11,5 @@
 #define GLOBAL_STATUS_LISTENER @"listen for my message"
 #define PATIENT_UPDATE @"updated patient"
 #endif
+
+

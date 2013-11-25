@@ -15,11 +15,12 @@
 #import "BaseObject+Protected.h"
 #import "Patients.h"
 #import "FIUAppDelegate.h"
+#import "FaceRecognize.h"
 
 NSString* firstname;
 NSString* lastname;
 NSString* isLockedBy;
-NSMutableArray * pictures;
+NSData * pictures;
 
 @implementation FaceObject
 +(NSString *)DatabaseName{
@@ -28,7 +29,7 @@ NSMutableArray * pictures;
 - (id)init
 {
     [self setupObject];
-    return self;
+    return [super init];
 }
 -(id)initAndMakeNewDatabaseObject
 {
@@ -65,19 +66,22 @@ NSMutableArray * pictures;
 }
 
 -(void)ServerCommand:(NSDictionary *)dataToBeRecieved withOnComplete:(ServerCommand)response{
-    //[self ServerCommand:nil withOnComplete:response];
-    response = nil;
+    [super ServerCommand:nil withOnComplete:response];
+    //response = nil;
     [self unpackageFileForUser:dataToBeRecieved];
-    self->commands = kAbort;
+    //self->commands = kAbort;
     
     [self CommonExecution];
 }
 
 -(void)unpackageFileForUser:(NSDictionary *)data{
     [super unpackageFileForUser:data];
-    pictures = [data valueForKey:@"photo"];
+    pictures = [self->databaseObject valueForKey:@"photo"];
+    firstname =[self->databaseObject valueForKey:FIRSTNAME];
+    lastname = [self->databaseObject valueForKey:FAMILYNAME];
+    /*pictures = [data valueForKey:@"photo"];
     firstname = [data valueForKey:FIRSTNAME];
-    lastname = [data valueForKey:FAMILYNAME];
+    lastname = [data valueForKey:FAMILYNAME];*/
 }
 
 /* Depending on the RemoteCommands it will execute a different Command */
@@ -94,7 +98,9 @@ NSMutableArray * pictures;
             break;
         case kFindOpenObjects:
             [self sendSearchResults:[self OptimizedFindAllObjects]];
-            
+        /*case kRecognizeFace:
+            [self sendSearchResults:[self recognizeFace]];
+          */
         default:
             break;
     }
@@ -105,6 +111,34 @@ NSMutableArray * pictures;
     
     return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:pred andSortByAttribute:FIRSTNAME]];
 }
+/*-(NSArray*)recognizeFace
+{
+    FaceRecognize *faceRecognizer = [[FaceRecognize alloc] initWithEigenFaceRecognizer];
+    [faceRecognizer trainModel];
+    NSDictionary *match = [faceRecognizer recognizeFace:[self dataToMat:pictures width:[NSNumber numberWithInt:100]
+                                                                 height:[NSNumber numberWithInt:100]]];
+    NSLog(@"person id %@ ",[match objectForKey:@"personID"]);
+    NSLog(@"person name %@",[match objectForKey:@"firstName"]);
+    NSLog(@"person last name %@",[match objectForKey:@"familyName"]);
+    
+    NSPredicate* pred = [NSPredicate predicateWithFormat:@"%K beginswith[cd] %@ AND %K beginswith[cd] %@",FIRSTNAME,
+                         [match objectForKey:@"firstName"],FAMILYNAME,[match objectForKey:@"familyName"]];
+    
+    if (!firstname && !lastname) {
+        pred = nil;
+    }
+    
+    return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:@"Patients" withCustomPredicate:pred andSortByAttribute:FIRSTNAME]];
+    
+}
+- (cv::Mat)dataToMat:(NSData *)data width:(NSNumber *)width height:(NSNumber *)height
+{
+    cv::Mat output = cv::Mat([width integerValue], [height integerValue], CV_8UC1);
+    output.data = (unsigned char*)data.bytes;
+    
+    return output;
+}
+*/
 
 #pragma mark - COMMON OBJECT Methods
 #pragma mark -

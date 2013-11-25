@@ -11,21 +11,17 @@
 #import "PatientResultTableCell.h"
 #import "PBVerificationController.h"
 
-typedef enum MobileClinicMode{
-    kTriageMode,
-    kDoctorMode,
-    kPharmacistMode
-} MCMode;
 
 @interface SearchPatientViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, PBVerificationDelegate>{
     ScreenHandler handler;
     BOOL shouldDismiss;
 }
 
-@property (assign) MCMode mode;
+//@property (assign) MCMode mode;
 @property (nonatomic, strong) NSMutableDictionary * patientData;
 @property (nonatomic, strong) NSArray * patientSearchResultsArray;
 
+@property (weak, nonatomic) IBOutlet UIView *searchView;
 @property (strong, nonatomic) IBOutlet UITextField *patientNameField;
 @property (strong, nonatomic) IBOutlet UITextField *familyNameField;
 @property (weak, nonatomic) IBOutlet UITableView *searchResultTableView;

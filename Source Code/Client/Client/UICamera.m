@@ -45,7 +45,7 @@ BOOL isPhoto;
 }
 -(void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController{
     if ([view conformsToProtocol:@protocol(UIPopoverControllerDelegate)]) {
-        [popoverController setDelegate:view];
+        [popoverController setDelegate:(id<UIPopoverControllerDelegate>)view];
     }
     camera(nil);
 }
@@ -113,8 +113,7 @@ BOOL isPhoto;
     //check for working camera
     if ([self checkCameraStatus]) {
         isPhoto = YES;
-        
-        dispatch_async(multiThread, ^{
+
             // Create image picker controller
             UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
             
@@ -123,6 +122,7 @@ BOOL isPhoto;
             
             // Delegate is self
             [imagePicker setDelegate:self];
+        
             
             // Allow editing of image ?
             [imagePicker setEditing:NO animated:YES];
@@ -130,10 +130,7 @@ BOOL isPhoto;
             if (usePopover) {
                 [imagePicker setContentSizeForViewInPopover:CGSizeMake(460,320)];
             }
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                // Show image picker
-                
+
                 if (!usePopover) {
                     [view presentViewController:imagePicker animated:YES completion:nil];
                 }else {
@@ -142,8 +139,7 @@ BOOL isPhoto;
                     [pop presentPopoverFromRect:button
                                          inView:view.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
                 }
-            });
-        });
+
     }else {
         camera(nil);
     }

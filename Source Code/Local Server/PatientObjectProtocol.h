@@ -40,6 +40,7 @@
 #define DATASIZE                    @"dataSize"
 #define TEMPLATETYPE                @"templateType"
 #define DATABASE                    @"Patients"
+#define LABEL                       @"label"
 
 #import <Foundation/Foundation.h>
 #import "CommonObjectProtocol.h"

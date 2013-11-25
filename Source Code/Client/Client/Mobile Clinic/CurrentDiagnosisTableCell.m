@@ -7,14 +7,21 @@
 //
 
 #import "CurrentDiagnosisTableCell.h"
-
+#import "UIViewControllerExt.h"
 @implementation CurrentDiagnosisTableCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    self = [super initWithStyle:style reuseIdentifier:@"currentDiagnosisCell"];
     if (self) {
         [self setSelectionStyle:UITableViewCellSelectionStyleNone];
+        
+        UIStoryboard* story = [UIStoryboard storyboardWithName:@"NewStoryboard" bundle:nil];
+        
+       _viewController = [story instantiateViewControllerWithIdentifier:@"currentDiagnosisViewController"];
+
+        
+        
     }
     return self;
 }
