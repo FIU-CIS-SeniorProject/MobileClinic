@@ -101,7 +101,7 @@
 - (IBAction)refreshTable:(id)sender
 {
     [loadIndicator startAnimation:self];
-    allUsers = [NSArray arrayWithArray:[[[UserObject alloc]init]FindAllObjects]];
+    allUsers = [NSArray arrayWithArray:[[[UserObject alloc]init]FindAllCharityObjects]];
     [loadIndicator stopAnimation:self];
     [tableView reloadData];
 }

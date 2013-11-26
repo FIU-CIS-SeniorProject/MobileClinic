@@ -27,6 +27,7 @@
 //
 #define NAME                @"name"
 #define CLOUDURL            @"cloudURL"
+#define ACTIVEUSER          @"activeUser"
 #define LASTPULLTIME        @"lastPullTime"
 #define ISACTIVE            @"isActive"
 
@@ -37,5 +38,6 @@
 -(NSDictionary *)GetActiveEnvironment;
 -(NSDate *)GetActiveTimestamp;
 -(NSString *)GetActiveURL;
+-(NSString *)GetActiveUser;
 
 @end
