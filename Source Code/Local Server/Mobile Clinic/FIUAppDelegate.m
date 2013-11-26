@@ -93,6 +93,8 @@ CloudManagementObject* cloudMO;
     NSLog(@"Performing a True Purge of the System");
     [mainView truePurgeTheSystem:nil];
     
+    // Set CloudManagementObject
+    
     NSLog(@"Imported Patients: \n%@", patients);
     
     [patients enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)

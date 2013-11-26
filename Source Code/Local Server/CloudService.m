@@ -32,7 +32,8 @@
     return mApi;
 }
 
--(id)init{
+-(id)init
+{
     self = [super init];
     if(self)
     {
@@ -76,16 +77,15 @@
             data = [[NSString stringWithFormat:@"%@",@""] dataUsingEncoding: NSUTF8StringEncoding];
         }
         
-        
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:30];
         
         [request setHTTPMethod:@"POST"];
         [request setHTTPBody: data];
         
-        
         [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error){
             
-            if(!error){
+            if(!error)
+            {
                 NSError *jsonError;
                 
                 //read and print the server response for debug
