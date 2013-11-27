@@ -15,18 +15,18 @@
 #import "MedicineSearchViewController.h"
 #import "MobileClinicFacade.h"
 
-@interface DoctorPatientViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
-    ScreenHandler handler;
+@protocol DoctorPatientViewDelegate <NSObject>
+
+-(void)DoctorPatientViewUpdateAndClose;
+
+@end
+
+
+@interface DoctorPatientViewController : UIViewController {
+
 }
 
 @property (strong, nonatomic) NSMutableDictionary * patientData;
-@property (strong, nonatomic) NSMutableDictionary * visitationData;
-@property (strong, nonatomic) NSMutableDictionary * prescriptionData;
-
-@property (strong, nonatomic) CurrentDiagnosisViewController * diagnosisViewController;
-@property (strong, nonatomic) PreviousVisitsViewController * previousVisitViewController;
-@property (nonatomic, strong) DoctorPrescriptionViewController * precriptionViewController;
-@property (nonatomic, strong) MedicineSearchViewController * medicineViewController;
 
 @property (weak, nonatomic) IBOutlet UITextField *patientNameField;
 @property (weak, nonatomic) IBOutlet UITextField *familyNameField;
@@ -36,13 +36,15 @@
 @property (weak, nonatomic) IBOutlet UIImageView *patientPhoto;
 
 @property (weak, nonatomic) IBOutlet UILabel *patientWeightLabel;
+@property(weak, nonatomic) id<DoctorPatientViewDelegate>delegate;
 @property (weak, nonatomic) IBOutlet UILabel *patientBPLabel;
 @property (weak, nonatomic) IBOutlet UILabel *patientHRLabel;
 @property (weak, nonatomic) IBOutlet UILabel *patientRespirationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *patientTempLabel;
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 @property (weak, nonatomic) IBOutlet UIToolbar *toolBar;
+
 @property (nonatomic, retain) IBOutlet UISegmentedControl *segmentedControl;
 
 - (IBAction)segmentClicked:(id)sender;

@@ -3,12 +3,12 @@
 # Table name: users
 #
 #  id              :integer          not null, primary key
-#  userName       :string(255)
+#  userName        :string(255)
 #  password_digest :string(255)
 #  firstName       :string(255)
 #  lastName        :string(255)
 #  email           :string(255)
-#  userType            :string(255)
+#  userType        :string(255)
 #  status          :string(255)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
@@ -17,19 +17,24 @@
 require 'spec_helper'
 
 describe User do
-  before {@user = User.new(userName: "ccorv001", firstName: "carlos",
-                            lastName: "Corvaia", password: "foobar", password_confirmation: "foobar",
-                            email: "ccorv001@fiu.edu", userType: "admin", status: "active") }
+  before {@user = User.new(userName: "epere250", firstName: "Ernesto",
+                            lastName: "Perez", password: "foobar", password_confirmation: "foobar",
+                            email: "epere250@fiu.edu", userType: 0, status: 1, charityid: "1",
+                            question: "1", answer: "elpidio valdes")}
 
   subject { @user }
 
   # test for the existence of userName, password_digest, firstName, lastName, email, userType Attributes
   it { should respond_to(:userName) }
+  it { should respond_to(:userid) }
   #it { should respond_to(:password_digest) }
   it { should respond_to(:firstName) }
   it { should respond_to(:lastName) }
   it { should respond_to(:email) }
   it { should respond_to(:userType) }
+  it { should respond_to(:charityid) }
+  it { should respond_to(:question) }
+  it { should respond_to(:answer) }
 
   # test for sessions rememeber acction
   it { should respond_to(:password_confirmation) }
@@ -98,14 +103,14 @@ end
 # User authentication tests
 describe "return value of authenticate method" do
   before { @user.save }
-  let(:found_user) { User.find_by_email(@user.email) }
+  let(:found_user) { User.find_by_email(@user.email)}
 
   describe "with valid password" do
-    it { should == found_user.authenticate(@user.password) }
+    it {found_user.authenticate(@user.password.should be_true)}
   end
 
   describe "with invalid password" do
-    let(:user_for_invalid_password) { found_user.authenticate("invalid") }
+    let(:user_for_invalid_password) {found_user.authenticate("invalid") }
 
     it { should_not == user_for_invalid_password }
     specify { user_for_invalid_password.should be_false }
@@ -128,7 +133,7 @@ describe "when email format is invalid" do
     it "should be valid" do
       addresses = %w[user@foo.COM A_US-ER@f.b.org frst.lst@foo.jp a+b@baz.cn]
       addresses.each do |valid_address|
-        @user.email = valid_address
+        @user.email = valid_address.downcase
         @user.should be_valid
       end      
     end

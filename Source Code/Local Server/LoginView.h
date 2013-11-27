@@ -1,49 +1,41 @@
+// The MIT License (MIT)
 //
-//  Login View & Controller.h
+// Copyright (c) 2013 Florida International University
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+//
+//  LoginView.h
 //  Mobile Clinic
 //
-//  Created by kevin a diaz on 11/16/13.
-//  Copyright (c) 2013 Florida International University. All rights reserved.
+//  Created by Kevin Diaz on 11/17/13.
 //
 
 #import <Cocoa/Cocoa.h>
-@interface LoginView : NSViewController<NSTextFieldDelegate>
+#import "UserObject.h"
+
+@interface LoginView : NSViewController
+
+@property (strong, nonatomic) UserObject*user;
+@property (weak) IBOutlet NSTextField *usernameTextField;
+@property (weak) IBOutlet NSSecureTextField *passwordTextField;
 
 
 - (IBAction)login:(id)sender;
 
 @end
-
-
-/*
- //
- //  UserView.h
- //  Mobile Clinic
- //
- //  Created by Michael Montaque on 3/23/13.
- //  Copyright (c) 2013 Florida International University. All rights reserved.
- //
- 
- #import <Cocoa/Cocoa.h>
- #import "UserObject.h"
- @interface UserView : NSViewController<NSTableViewDataSource,NSTableViewDelegate>
- 
- @property (weak) IBOutlet NSTableView *tableView;
- @property (weak) IBOutlet NSTextField *usernameLabel;
- @property (weak) IBOutlet NSComboBox *primaryRolePicker;
- @property (weak) IBOutlet NSProgressIndicator *loadIndicator;
- @property (weak) IBOutlet NSComboBox *userStatus;
- @property (weak) IBOutlet NSButton *sTriage;
- @property (weak) IBOutlet NSButton *sDoctor;
- @property (weak) IBOutlet NSButton *sPharmacist;
- @property (weak) IBOutlet NSButton *sAdministrator;
- 
- - (IBAction)refreshTable:(id)sender;
- - (IBAction)commitChanges:(id)sender;
- - (IBAction)cloudSync:(id)sender;
- 
- @end
-
-
-
-*/

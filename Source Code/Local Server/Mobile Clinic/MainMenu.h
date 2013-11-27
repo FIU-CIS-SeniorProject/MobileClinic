@@ -24,8 +24,10 @@
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 3/24/13.
+//  Modified by Kevin Diaz on 11/23/13.
 //
 #import <Cocoa/Cocoa.h>
+#import "LoginView.h"
 
 @interface MainMenu : NSViewController<NSWindowDelegate>
 
@@ -35,8 +37,13 @@
 @property (weak) IBOutlet NSTextField *activityLabel;
 @property (weak) IBOutlet NSLevelIndicator *statusIndicator;
 @property (weak) IBOutlet NSTextField *statusLabel;
+@property (weak) IBOutlet NSButton *userButton;
+@property (weak) IBOutlet NSButton *patientButton;
+@property (weak) IBOutlet NSButton *medicationButton;
+@property (weak) IBOutlet NSButton *logoutButton;
 - (IBAction)startOptimization:(id)sender;
 - (IBAction)quitApplication:(id)sender;
+- (IBAction)showLoginView:(id)sender;
 - (IBAction)showMedicationView:(id)sender;
 - (IBAction)showPatientView:(id)sender;
 - (IBAction)purgeTheSystem:(id)sender;

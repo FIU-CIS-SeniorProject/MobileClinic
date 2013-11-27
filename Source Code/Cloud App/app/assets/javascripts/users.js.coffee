@@ -2,8 +2,8 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-
 jQuery ->
-	$('#datatable').dataTable({
+	$('#datatable_users').dataTable({
+	"iDisplayLength": 10,
 	"sPaginationType": "full_numbers"
 				});

@@ -40,5 +40,6 @@
 @dynamic villageName;
 @dynamic isLockedBy;
 @dynamic visit;
+@dynamic label;
 
 @end

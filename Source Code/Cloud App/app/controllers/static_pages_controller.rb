@@ -13,8 +13,7 @@ before_filter :signed_in_user
 
 
     def get_visit_count
-    	visits.count
-    	
+    	visits.count    	
     end
 
   private 

@@ -37,5 +37,6 @@
 -(NSDictionary *)GetActiveEnvironment;
 -(NSDate *)GetActiveTimestamp;
 -(NSString *)GetActiveURL;
+-(void *)setActiveEnvironment: (NSString*)environmentName;
 
 @end

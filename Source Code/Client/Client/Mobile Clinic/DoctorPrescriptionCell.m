@@ -15,6 +15,11 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         [self setSelectionStyle:UITableViewCellSelectionStyleNone];
+        
+        UIStoryboard* story = [UIStoryboard storyboardWithName:@"NewStoryboard" bundle:nil];
+        
+        _viewController = [story instantiateViewControllerWithIdentifier:@"prescriptionFormViewController"];
+    
     }
     return self;
 }

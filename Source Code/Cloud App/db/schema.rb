@@ -13,15 +13,15 @@
 
 ActiveRecord::Schema.define(:version => 20130423223018) do
 
-  create_table "appusers", :id => false, :force => true do |t|
+  create_table "appusers", :primary_key => "appuserid", :force => true do |t|
     t.string   "userName"
     t.string   "password"
     t.string   "firstName"
     t.string   "lastName"
     t.string   "email"
+    t.string   "charityid"
     t.integer  "userType"
     t.integer  "status"
-    t.integer  "secondaryTypes"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
     t.string   "avatar_file_name"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(:version => 20130423223018) do
     t.datetime "avatar_updated_at"
   end
 
-  add_index "appusers", ["userName", "email"], :name => "index_appusers_on_userName_and_email", :unique => true
+  add_index "appusers", ["appuserid"], :name => "index_appusers_on_appuserid", :unique => true
 
   create_table "auths", :id => false, :force => true do |t|
     t.integer  "user_id"
@@ -41,13 +41,23 @@ ActiveRecord::Schema.define(:version => 20130423223018) do
     t.datetime "updated_at",   :null => false
   end
 
-  create_table "medications", :id => false, :force => true do |t|
-    t.integer  "medId"
+  create_table "charities", :primary_key => "charityid", :force => true do |t|
+    t.string   "name_lowercase"
+    t.string   "name"
+    t.integer  "status"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "charities", ["charityid"], :name => "index_charities_on_charityid", :unique => true
+
+  create_table "medications", :primary_key => "medId", :force => true do |t|
     t.string   "name"
     t.integer  "numContainers"
     t.integer  "tabletsPerContainer"
-    t.integer  "expiration"
+    t.date     "expiration"
     t.integer  "doseOfTablets"
+    t.integer  "status"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
     t.string   "notes"
@@ -78,21 +88,25 @@ ActiveRecord::Schema.define(:version => 20130423223018) do
     t.integer  "tabletsPerDay"
     t.string   "timeOfDay"
     t.string   "instruction"
-    t.integer  "vistitId"
+    t.string   "vistitId"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
 
   add_index "prescriptions", ["vistitId"], :name => "index_prescriptions_on_vistitId", :unique => true
 
-  create_table "users", :id => false, :force => true do |t|
+  create_table "users", :primary_key => "userid", :force => true do |t|
     t.string   "userName"
     t.string   "password_digest"
     t.string   "firstName"
     t.string   "lastName"
     t.string   "email"
+    t.string   "charityid"
+    t.string   "question"
+    t.string   "answer"
     t.integer  "userType"
     t.integer  "status"
+    t.integer  "reset_password"
     t.string   "remember_token"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
@@ -102,7 +116,7 @@ ActiveRecord::Schema.define(:version => 20130423223018) do
     t.datetime "avatar_updated_at"
   end
 
-  add_index "users", ["userName", "email"], :name => "index_users_on_userName_and_email", :unique => true
+  add_index "users", ["userid"], :name => "index_users_on_userid", :unique => true
 
   create_table "visits", :id => false, :force => true do |t|
     t.integer  "triageIn"

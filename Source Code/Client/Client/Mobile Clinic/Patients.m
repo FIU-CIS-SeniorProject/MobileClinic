@@ -24,6 +24,7 @@
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 2/27/13.
+//  Copyright (c) 2013 Steven Berlanga. All rights reserved.
 //
 #import "Patients.h"
 #import "Visitation.h"
@@ -40,5 +41,6 @@
 @dynamic villageName;
 @dynamic isLockedBy;
 @dynamic visit;
+@dynamic label;
 
 @end

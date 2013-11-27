@@ -1,15 +1,15 @@
 class CreateAppusers < ActiveRecord::Migration
   def change
-    create_table :appusers, :id => false do |t|
+    create_table :appusers, {:primary_key => :appuserid} do |t|
       
-      t.string :userName
-      t.string :password
-      t.string :firstName
-      t.string :lastName
-      t.string :email
+      t.string  :userName
+      t.string  :password
+      t.string  :firstName
+      t.string  :lastName
+      t.string  :email
+      t.string  :charityid
       t.integer :userType
       t.integer :status
-      t.integer :secondaryTypes
 
       t.timestamps
     end

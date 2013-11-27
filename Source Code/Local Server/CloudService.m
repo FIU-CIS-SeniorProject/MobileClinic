@@ -32,24 +32,27 @@
     return mApi;
 }
 
--(id)init{
+-(id)init
+{
     self = [super init];
     if(self)
     {
-        kURL = @"http://staging-webapp.herokuapp.com/";
+        //kURL = @"http://staging-webapp.herokuapp.com/";
         kApiKey = @"12345";
         kAccessToken = @"";
         isAuthenticated = NO;
         //production
-//        kURL = @"http://znja-webapp.herokuapp.com/api/";
-        kURL = @"http://pure-island-5858.herokuapp.com/"; // Test Cloud
+        //kURL = @"http://znja-webapp.herokuapp.com/api/";
+        kURL = @"http://still-citadel-8045.herokuapp.com/"; // Test Cloud
+        //kURL = @"http://localhost:3000/";
         
         [self getAccessToken:^(BOOL success) {
-            if(success)
+            if(success){
                 NSLog(@"Connected To Cloud");
+            }else{
+                NSLog(@"Could Not Connect To Cloud");
+            }
         }];
-
-//        kURL = @"http://0.0.0.0:3000/";
     }
     return self;
 }
@@ -76,16 +79,15 @@
             data = [[NSString stringWithFormat:@"%@",@""] dataUsingEncoding: NSUTF8StringEncoding];
         }
         
-        
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:30];
         
         [request setHTTPMethod:@"POST"];
         [request setHTTPBody: data];
         
-        
         [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error){
             
-            if(!error){
+            if(!error)
+            {
                 NSError *jsonError;
                 
                 //read and print the server response for debug

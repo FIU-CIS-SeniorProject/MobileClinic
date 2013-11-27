@@ -32,6 +32,7 @@
 #import "PatientTable.h"
 #import "MedicationList.h"
 #import "SystemBackup.h"
+#import "CloudManagementObject.h"
 
 SystemBackup* backup;
 MedicationList* medicationView;
@@ -42,6 +43,7 @@ LoginView* loginView;
 id currentView;
 id<ServerProtocol> connection;
 @implementation MainMenu
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -56,8 +58,34 @@ id<ServerProtocol> connection;
 
 -(void)windowDidBecomeKey:(NSNotification *)notification
 {
+    // Initialize the CloudManagementObjects if they do not exist
+    NSDictionary* testDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:@"test", NAME, 0, ISACTIVE, 0, LASTPULLTIME, @"http://still-citadel-8045.herokuapp.com/", CLOUDURL, nil];
+    NSDictionary* productionDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:@"production", NAME, 0, ISACTIVE, 0, LASTPULLTIME, @"http://pure-island-5858.herokuapp.com/", CLOUDURL, nil];
+    
+    CloudManagementObject* testCMO = [[CloudManagementObject alloc] initAndFillWithNewObject:testDictionary];
+    CloudManagementObject* productionCMO = [[CloudManagementObject alloc] initAndFillWithNewObject:productionDictionary];
+    
+    [testCMO saveObject:^(id<BaseObjectProtocol> data, NSError *error) {}];
+    [productionCMO saveObject:^(id<BaseObjectProtocol> data, NSError *error) {}];
+    
     if (!connection)
     {
+        //Set initial view to loginView
+        if (!loginView)
+        {
+            loginView = [[LoginView alloc]initWithNibName:@"LoginView" bundle:nil];
+        }
+        
+        if (currentView)
+        {
+            [_mainScreen replaceSubview:currentView with:loginView.view];
+        }
+        else
+        {
+            [_mainScreen addSubview:loginView.view];
+        }
+        currentView = loginView.view;
+        
         connection = [ServerCore sharedInstance];
         [connection start];
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(manualTableRefresh:) name:SERVER_OBSERVER object:nil];
@@ -69,6 +97,13 @@ id<ServerProtocol> connection;
 - (IBAction)quitApplication:(id)sender
 {
     [NSApp terminate:self];
+}
+
+- (IBAction)showLoginView:(id)sender
+{
+    //loginView.view.hidden =  NO;
+    [_mainScreen addSubview:loginView.view];
+
 }
 
 - (IBAction)showMedicationView:(id)sender

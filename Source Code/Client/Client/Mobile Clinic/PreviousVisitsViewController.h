@@ -8,14 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "PatientHistoryTableCell.h"
-
-@interface PreviousVisitsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>{
+#import "GenericCellProtocol.h"
+@interface PreviousVisitsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate,GenericCellProtocol>{
 
 }
 
 @property (nonatomic, strong) NSMutableDictionary * patientData;
 @property (nonatomic, strong) NSArray * patientHistoryArray;
-
+@property(nonatomic, weak) id<GenericCellManager> delegate;
 @property (weak, nonatomic) IBOutlet UITableView * patientHistoryTableView;
 
 @end

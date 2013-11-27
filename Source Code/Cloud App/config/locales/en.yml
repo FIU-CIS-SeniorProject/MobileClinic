@@ -3,8 +3,11 @@
 
 en:
   hello: "Hello world"
-  time:
+  date:
     formats:
-      default: "%Y/%m/%d"
-      short: "%b %d"
-      long: "%B %d, %Y"
+      default: "%m/%d/%Y"
+      notime: "%m/%d/%Y"
+  activerecord:
+    attributes:
+      charity:
+        name_lowercase: "Charity name"

@@ -1,29 +1,36 @@
-AdminWebapp::Application.routes.draw do
+AdminWebapp::Application.routes.draw do  
   resources :users
   resources :patients
   resources :medications
   resources :sessions, only: [:new , :create, :destroy]
   resources :appusers
+  resources :password_resets
+  resources :charities
 
   root to: 'sessions#new'
 
-  match "/home", to: 'static_pages#home'
+  match '/home', to: 'static_pages#home'
 
-  match "/createuser", to: 'users#new'
+  match '/createuser', to: 'users#new'
   match '/users',  to: 'users#index'
+  resources :users do
+    member do
+      get "change_password"
+    end
+  end
 
   match '/signin',  to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
 
   match '/appusers', to: 'appusers#index'
   match '/createappuser', to: 'appusers#new'
+  resources :appusers do
+    member do
+      get "change_password"
+    end
+  end
 
   match '/patients', to: 'patients#index'
-  match '/createpatient', to: 'patients#new'
-  
-  match '/medications', to: 'medications#index'
-  match '/createmedication', to: 'medications#new'
-  
 
   ############################################
   ############### Api posts ##################
