@@ -47,7 +47,6 @@ NSTimer* switchTimer;
 Optimizer isOptimized;
 CloudManagementObject* cloudMO;
 
-
 @implementation FIUAppDelegate
 
 //@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
@@ -78,8 +77,6 @@ CloudManagementObject* cloudMO;
     [_OptimizeToggler setTitle:@"First Sync -> Fast Sync"];
     [CloudService cloud];
     [_window setHidesOnDeactivate:NO];
-    
-    
 }
 
 // Switching to the Test Environment
@@ -89,16 +86,15 @@ CloudManagementObject* cloudMO;
     // - YOU CAN SEE WHAT PATIENTS ARE ADDED BY CHECKING THE PatientFile.json file
     NSError* err = nil;
     
-    NSString* dataPath = [[NSBundle mainBundle] pathForResource:@"PatientFile" ofType:@"json"];
-    
-    NSArray* patients = [NSArray arrayWithArray:[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPath]options:0 error:&err]];
-    
     NSLog(@"Performing a True Purge of the System");
     [mainView truePurgeTheSystem:nil];
     
     // Set CloudManagementObject
+    [cloudMO setActiveEnvironment:@"test"];
     
-    NSLog(@"Imported Patients: \n%@", patients);
+    NSString* dataPath = [[NSBundle mainBundle] pathForResource:@"PatientFile" ofType:@"json"];
+    
+    NSArray* patients = [NSArray arrayWithArray:[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPath]options:0 error:&err]];
     
     [patients enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
     {
@@ -113,11 +109,11 @@ CloudManagementObject* cloudMO;
         }];
     }];
     
+    NSLog(@"Imported Patients: \n%@", patients);
+    
     dataPath = [[NSBundle mainBundle] pathForResource:@"MedicationFile" ofType:@"json"];
     
     NSArray* Meds = [NSArray arrayWithArray:[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPath]options:0 error:&err]];
-    
-    NSLog(@"Imported Medications: \n%@", Meds.description);
     
     [Meds enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
     {
@@ -128,12 +124,22 @@ CloudManagementObject* cloudMO;
                 
         }];
     }];
+    
+    NSLog(@"Imported Medications: \n%@", Meds.description);
 }
 
 // Implement switching to the Production Environment
 - (IBAction)TearDownEnvironment:(id)sender
 {
+    NSError* err = nil;
     
+    NSLog(@"Performing a True Purge of the System");
+    [mainView truePurgeTheSystem:nil];
+    
+    // Set CloudManagementObject
+    [cloudMO setActiveEnvironment:@"production"];
+    
+    // Sync Patients, Users, Medications, etc.
 }
 
 - (void) testCloud

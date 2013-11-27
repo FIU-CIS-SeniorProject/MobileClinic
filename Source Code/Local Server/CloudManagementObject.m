@@ -139,4 +139,15 @@
     }
     return lastPullTime;
 }
+
+//TODO: Implement
+-(void *)setActiveEnvironment: (NSString*)environmentName
+{
+    NSMutableDictionary* active = [[self GetActiveEnvironment] mutableCopy];
+    
+    if ([active valueForKey:NAME] != environmentName)
+    {
+        
+    }
+}
 @end
