@@ -10,8 +10,11 @@
 #import <opencv2/highgui/cap_ios.h>
 #import "FaceDetector.h"
 #import "FaceRecognizer.h"
-
+#import "CameraFacade.h"
 @interface FRViewController : UIViewController <CvVideoCameraDelegate>
+{
+    CameraFacade *facade;
+}
 
 @property (nonatomic, strong) IBOutlet UIImageView *imageView;
 @property (nonatomic, strong) IBOutlet UILabel *instructionLabel;

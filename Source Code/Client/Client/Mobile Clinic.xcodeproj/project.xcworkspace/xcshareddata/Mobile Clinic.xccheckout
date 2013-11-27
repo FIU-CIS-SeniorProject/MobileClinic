@@ -5,19 +5,19 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>439E5B78-BA82-424B-AE84-FA1834E72688</string>
+	<string>91D56131-D51F-4B9A-8EDA-C9E571C0EF32</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Mobile Clinic</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>6FCB3C48-7279-432A-9E47-ADC3822646BF</key>
+		<key>B081BF93-5DEB-4957-AEDF-B49556BB6EC9</key>
 		<string>https://github.com/FIU-CIS-SeniorProject/MobileClinic.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Source Code/Client/Client/Mobile Clinic.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>6FCB3C48-7279-432A-9E47-ADC3822646BF</key>
+		<key>B081BF93-5DEB-4957-AEDF-B49556BB6EC9</key>
 		<string>../../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -25,14 +25,14 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>6FCB3C48-7279-432A-9E47-ADC3822646BF</string>
+	<string>B081BF93-5DEB-4957-AEDF-B49556BB6EC9</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>6FCB3C48-7279-432A-9E47-ADC3822646BF</string>
+			<string>B081BF93-5DEB-4957-AEDF-B49556BB6EC9</string>
 			<key>IDESourceControlWCCName</key>
 			<string>MobileClinic - GIT</string>
 		</dict>

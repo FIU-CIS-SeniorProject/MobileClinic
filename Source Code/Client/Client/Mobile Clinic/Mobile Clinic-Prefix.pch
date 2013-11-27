@@ -19,7 +19,7 @@
     #import "FIUAppDelegate.h"
     #import "TestFlight.h"
     #import "NSObject+CustomTools.h"
-    #import"ColorMe.h"
+    #import "ColorMe.h"
     
 
     #define DARKGREEN 5
@@ -32,7 +32,6 @@
     #define CREATE_NEW_PATIENT  @"Creating a new patient"
     #define SAVE_VISITATION @"Save visitation object"
     #define SAVE_PRESCRIPTION @"Save prescription object"
-    #define CLOSE_PATIENT @"Close patient"
     #define SEARCH_FOR_PATIENT  @"Searching for a patient"
     #define GLOBAL_STATUS_LISTENER @"listen for my message"
     #define CREATE_NEW_DIAGNOSIS  @"Creating a new diagnosis"

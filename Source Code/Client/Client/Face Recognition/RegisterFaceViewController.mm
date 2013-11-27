@@ -36,19 +36,14 @@ NSDictionary* faceData;
     
     faceDetector = [[FaceDetector alloc] init];
     
-    
-    NSString *instructions = @"Make sure %@ is holding the phone. "
-    "When you are ready, press start. Or select images from your library.";
-    //self.instructionsLabel.text = [NSString stringWithFormat:instructions, self.personName];
-    
     [self setupCamera];
     
-    /*UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Instructions"
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Instructions"
      message:@"When the camera starts, move it around to show different angles of your face."
      delegate:nil
      cancelButtonTitle:@"OK"
      otherButtonTitles:nil];
-     //[alert show];*/
+     [alert show];
      if (!faceData)
         faceData = [[NSMutableDictionary alloc]initWithCapacity:21];
     
@@ -56,6 +51,7 @@ NSDictionary* faceData;
 - (void)viewDidUnload {
     
     [super viewDidUnload];
+    
 }
 
 
@@ -64,7 +60,7 @@ NSDictionary* faceData;
    
     self.videoCamera = [[CvVideoCamera alloc] initWithParentView: self.imageView];
     self.videoCamera.delegate = self;
-    self.videoCamera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionFront;
+    self.videoCamera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionBack;
     self.videoCamera.defaultAVCaptureSessionPreset = AVCaptureSessionPreset352x288;
     self.videoCamera.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationPortrait;
     self.videoCamera.defaultFPS = 30;
@@ -173,16 +169,6 @@ NSDictionary* faceData;
         else
                   NSLog(@"there is no object");
     }];//}
-    /*BaseObject *obj =[[BaseObject alloc] init];
-    
-    [obj tryAndSendData:faceData withErrorToFire:^(id<BaseObjectProtocol> data, NSError *error) {
-        
-    } andWithPositiveResponse:^(id data) {
-        
-    }];*/
-
-
-    //[self.faceRecognizer learnFace:face ofPersonName:[self.personName uppercaseString] fromImage:image];
     
     return YES;
 }
@@ -267,13 +253,6 @@ NSDictionary* faceData;
     [self.videoCamera start];
 }
 
-- (IBAction)savePerson:(id)sender
-{
-    //FaceRecognizer *faceRecognizer = [[FaceRecognizer alloc] init];
-    //[faceRecognizer newPersonWithName:self.nameField.text];
-    
-    /*[self.navigationController popViewControllerAnimated:YES];*/
-}
 
 @end
 

@@ -11,7 +11,7 @@
 
 @interface FaceDetector : NSObject
 {
-    cv::CascadeClassifier _faceCascade;
+   cv::CascadeClassifier _faceCascade;
 }
 
 - (std::vector<cv::Rect>)facesFromImage:(cv::Mat&)image;

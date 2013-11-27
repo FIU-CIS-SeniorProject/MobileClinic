@@ -16,7 +16,7 @@
 #import "Face.h"
 #import "CommonObjectProtocol.h"
 //#import "UIImage+ImageVerification.h"
-//#import "NSDataAdditions.h"
+#import "NSDataAdditions.h"
 Face *face;
 //StatusObject* tempStatusObject;
 
@@ -30,6 +30,7 @@ Face *face;
 - (id)init
 {
     [self setupObject];
+    
     return [super init];
 }
 -(id)initAndMakeNewDatabaseObject
@@ -110,6 +111,26 @@ Face *face;
     
     [self startSearchWithData:parentObject withsearchType:kRecognize andOnComplete:eventResponse];
     
+}
+- (void)deleteAllFromDatabase
+{
+
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Faces" inManagedObjectContext:[self.database managedObjectContext]];
+    [fetchRequest setEntity:entity];
+    //fetchRequest.predicate = [NSPredicate predicateWithFormat:@"firstName ==nil AND familyName == nil"];
+    
+    //fetchRequest.predicate = [NSPredicate predicateWithFormat:@"firstName == %@ AND familyName == %@",fName,lName];
+    
+    NSError *error;
+    NSArray *listToBeDeleted = [[self.database managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
+    for(Face *c in listToBeDeleted)
+    {
+        [[self.database managedObjectContext] deleteObject:c];
+    }
+    error = nil;
+    [[self.database managedObjectContext] save:&error];
 }
 
 -(void)syncAllPatientsAndVisits{

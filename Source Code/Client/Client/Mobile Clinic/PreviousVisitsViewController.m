@@ -26,8 +26,7 @@
     return self;
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
+- (void)viewDidAppear:(BOOL)animated {
     /*
      * Please Look at the API For instructions on the MobileClinicFacade
      * This class is meant to simplify work, reduce code and reduce coupling
