@@ -87,7 +87,7 @@
         }
     }
     
-    NSURL *url = [applicationFilesDirectory URLByAppendingPathComponent:@"Mobile_Clinic.sqldata"];//@"Mobile_Clinic.storedata"];
+    NSURL *url = [applicationFilesDirectory URLByAppendingPathComponent:@"Mobile_Clinic.sqldata"];
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
     if (![coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:nil error:&error]) {
         [[NSApplication sharedApplication] presentError:error];
@@ -95,7 +95,7 @@
     }
     _persistentStoreCoordinator = coordinator;
     //added by Humberto
-    /*NSURL *sqlstore = [applicationFilesDirectory URLByAppendingPathComponent:@"NewStoreFile.sqldata"];
+   /* NSURL *sqlstore = [applicationFilesDirectory URLByAppendingPathComponent:@"NewStoreFile.sqldata"];
     NSPersistentStore *xmlstore = [coordinator persistentStoreForURL:url];
     
     [coordinator migratePersistentStore:xmlstore toURL:sqlstore options:nil withType:NSSQLiteStoreType error:nil];
@@ -106,14 +106,12 @@
 // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.)
 - (NSManagedObjectContext *)managedObjectContext
 {
-    if (_managedObjectContext)
-    {
+    if (_managedObjectContext) {
         return _managedObjectContext;
     }
     
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (!coordinator)
-    {
+    if (!coordinator) {
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         [dict setValue:@"Failed to initialize the store" forKey:NSLocalizedDescriptionKey];
         [dict setValue:@"There was an error building up the data file." forKey:NSLocalizedFailureReasonErrorKey];

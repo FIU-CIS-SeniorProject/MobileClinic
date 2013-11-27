@@ -25,6 +25,7 @@ typedef enum {
     kMedicationType     = 7,
     kCloudManagementType = 8,
     kFaceType           = 10,
+    kFaceRType          =11,
 }ObjectTypes;
 
 /* These are all the commands the server and client will understand */
@@ -41,6 +42,7 @@ typedef enum {
     kConditionalCreate          = 8,
     kFindUsingPredicate         = 9,
     kRegisterFace               =10,
+    kRecognizeFace              =11,
 }RemoteCommands;
 
 @protocol BaseObjectProtocol <NSObject>

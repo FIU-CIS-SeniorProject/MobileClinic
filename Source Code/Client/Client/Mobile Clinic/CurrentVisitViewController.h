@@ -5,12 +5,13 @@
 //  Created by sebastian a zanlongo on 2/18/13.
 //  Copyright (c) 2013 Steven Berlanga. All rights reserved.
 //
-
+#define SET_DELEGATE @"set delegate"
 #import <UIKit/UIKit.h>
+#import "CancelDelegate.h"
 #import "StationViewHandlerProtocol.h"
 
 
-@interface CurrentVisitViewController : UIViewController <UITextViewDelegate> {
+@interface CurrentVisitViewController : UIViewController <UITextViewDelegate,CancelDelegate> {
     ScreenHandler handler;
     NSMutableDictionary *currentVisit;
 }
@@ -42,11 +43,17 @@
 @property (weak, nonatomic) IBOutlet UITextField *conditionTitleField;
 @property (strong, nonatomic) IBOutlet UITextView *conditionsTextbox;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *visitPriority;
+@property (weak, nonatomic) IBOutlet UIButton *checkOutBtn;
+@property (weak, nonatomic) IBOutlet UIButton *SendToDoctor;
+@property (weak, nonatomic) IBOutlet UIButton *sendToPharmacy;
 
 - (IBAction)checkInButton:(id)sender;
 - (IBAction)quickCheckOutButton:(id)sender;
+- (IBAction)cancelNewVisit:(id)sender;
+- (IBAction)sendToPharmacy:(id)sender;
 - (BOOL)validateCheckin;
+- (void)showPreviousVisit;
+- (void)closePreviousVisit;
 
-- (void)setScreenHandler:(ScreenHandler)myHandler;
-
+@property(weak,nonatomic)id<CancelDelegate> delegate;
 @end

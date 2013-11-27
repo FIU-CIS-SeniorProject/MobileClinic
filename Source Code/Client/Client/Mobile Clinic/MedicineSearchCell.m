@@ -14,7 +14,11 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Initialization code
+        [self setSelectionStyle:UITableViewCellSelectionStyleNone];
+        UIStoryboard* story = [UIStoryboard storyboardWithName:@"NewStoryboard" bundle:nil];
+        
+        _viewController = [story instantiateViewControllerWithIdentifier:@"MedicineSearchViewController"];
+
     }
     return self;
 }

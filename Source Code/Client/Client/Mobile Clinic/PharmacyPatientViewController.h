@@ -11,31 +11,35 @@
 #import "DoctorPrescriptionViewController.h"
 #import "MedicineSearchViewController.h"
 #import "StationViewHandlerProtocol.h"
-#import "PharmacyPrescriptionCell.h"
+
 #import "PrescriptionObject.h"
 #import "MedicineSearchCell.h"
 
+@protocol PharmacyPatientViewDelegate <NSObject>
+
+-(void) PharmacyPatientViewUpdatedAndClose;
+
+@end
+
 @interface PharmacyPatientViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>{
-    ScreenHandler handler;
 }
 
 @property (strong, nonatomic) NSMutableDictionary * patientData;
-@property (strong, nonatomic) NSMutableDictionary * prescriptionData;
-@property (strong, nonatomic) NSMutableDictionary * visitationData;
 
 @property (strong, nonatomic) NSMutableArray * prescriptions;
-@property (strong, nonatomic) NSString * medName;
 
+@property (weak, nonatomic) id<PharmacyPatientViewDelegate>delegate;
 @property (weak, nonatomic) IBOutlet UITextField *patientNameField;
 @property (weak, nonatomic) IBOutlet UITextField *familyNameField;
 @property (weak, nonatomic) IBOutlet UITextField *villageNameField;
 @property (weak, nonatomic) IBOutlet UITextField *patientAgeField;
 @property (weak, nonatomic) IBOutlet UITextField *patientSexField;
 @property (weak, nonatomic) IBOutlet UIImageView *patientPhoto;
-
+@property (weak, nonatomic) IBOutlet UITextView *medicalNotes;
+@property (weak, nonatomic) IBOutlet UIView *patientView;
+@property (weak, nonatomic) IBOutlet UIButton *checkoutButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 - (IBAction)checkoutPatient:(id)sender;
-
-- (void)setScreenHandler:(ScreenHandler)myHandler;
 @end
+

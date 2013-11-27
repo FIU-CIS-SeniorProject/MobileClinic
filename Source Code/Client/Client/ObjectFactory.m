@@ -27,8 +27,12 @@
 //
 #import "ObjectFactory.h"
 #import "UserObject.h"
-#import "StatusObject.h"
 #import "PatientObject.h"
+#import "StatusObject.h"
+#import "VisitationObject.h"
+#import "PrescriptionObject.h"
+#import "MedicationObject.h"
+#import "FaceObject.h"
 
 @implementation ObjectFactory
 
@@ -47,6 +51,31 @@
             return [[StatusObject alloc]init];
         case kPatientType:
             return [[PatientObject alloc]init];
+        case kFaceType:
+            return [[FaceObject alloc]init];
+        default:
+            return nil;
+    }
+}
++(id<BaseObjectProtocol>)createObjectForInteger:(NSString*)data{
+    // ObjectType: Used to generically determine what kind of information was passed
+    ObjectTypes type = [data intValue];
+    
+    switch (type) {
+        case kUserType:
+            return [[UserObject alloc]init];
+        case kStatusType:
+            return [[StatusObject alloc]init];
+        case kPatientType:
+            return [[PatientObject alloc]init];
+        case kVisitationType:
+            return [[VisitationObject alloc]init];
+        case kPrescriptionType:
+            return [[PrescriptionObject alloc]init];
+        case kMedicationType:
+            return [[MedicationObject alloc]init];
+        case kFaceType:
+            return [[FaceObject alloc]init];
         default:
             return nil;
     }

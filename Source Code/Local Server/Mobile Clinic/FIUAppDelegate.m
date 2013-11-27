@@ -47,6 +47,7 @@ NSTimer* switchTimer;
 Optimizer isOptimized;
 CloudManagementObject* cloudMO;
 
+
 @implementation FIUAppDelegate
 
 //@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
@@ -77,6 +78,8 @@ CloudManagementObject* cloudMO;
     [_OptimizeToggler setTitle:@"First Sync -> Fast Sync"];
     [CloudService cloud];
     [_window setHidesOnDeactivate:NO];
+    
+    
 }
 
 // Switching to the Test Environment
@@ -189,6 +192,7 @@ CloudManagementObject* cloudMO;
     if(![_window isVisible] )
         [_window makeKeyAndOrderFront:sender];
 }
+
 
 - (IBAction)ToggleOptimization:(id)sender
 {
