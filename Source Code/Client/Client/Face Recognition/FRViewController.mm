@@ -42,7 +42,7 @@ NSManagedObjectContext* context2;
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self.videoCamera start];
+    //[self.videoCamera start];
     // Re-train the model in case more pictures were added
     //self.modelAvailable = [self.faceRecognizer trainModel];
     //if (!self.modelAvailable) {
@@ -80,11 +80,11 @@ NSManagedObjectContext* context2;
    
     if (self.frameNum == CAPTURE_FPS) {
         [self parseFaces:[self.faceDetector facesFromImage:image] forImage:image];
-        //self.frameNum = 0;
+        self.frameNum = 0;
         
     }
     self.frameNum++;
-    if (self.frameNum == 60)
+    /*if (self.frameNum == 60)
     {
         [self.videoCamera stop];
         registerPatientViewController = [self getViewControllerFromiPadStoryboardWithName:@"registerPatientViewController"];
@@ -94,7 +94,7 @@ NSManagedObjectContext* context2;
         [registerPatientViewController.searchResultTableView reloadData];
         [self.navigationController pushViewController:registerPatientViewController animated:YES];
         self.frameNum =0;
-    }
+    }*/
 }
 
 - (void)parseFaces:(const std::vector<cv::Rect> &)faces forImage:(cv::Mat&)image

@@ -17,4 +17,5 @@
 }
 
 +(NSString*)getCurrenUserName;
+-(void)deleteAllfFromDatabase;
 @end
