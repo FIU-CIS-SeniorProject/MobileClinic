@@ -41,6 +41,7 @@
 #import "UserObject.h"
 #import "NSString+Validation.h"
 #import "BaseObject+Protected.h"
+#import "CloudManagementObject.h"
 
 @implementation UserObject
 
@@ -128,6 +129,16 @@
 {
     return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:nil andSortByAttribute:USERNAME]];
 }
+
+//TODO: return list of all users with same charityId as activeUser
+-(NSArray *)FindAllCharityObjects
+{
+    CloudManagementObject* CloudMO = [[CloudManagementObject alloc] init];
+    NSString* activeUser = [CloudMO GetActiveUser];
+    NSPredicate* pred = [NSPredicate predicateWithFormat:@"%K == %@",CHARITYID, activeUser];
+    return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:pred andSortByAttribute:USERNAME]];
+}
+
 
 -(NSArray *)FindAllObjectsUnderParentID:(NSString *)parentID{
     return [self FindAllObjects];
@@ -230,6 +241,15 @@
             // Check credentials against the found user
             if ([user.password isEqualToString:password])
             {
+                // set currentUser
+                CloudManagementObject* CloudMO = [[CloudManagementObject alloc] init];
+                NSMutableDictionary* environment = [[CloudMO GetActiveEnvironment] mutableCopy];
+                [environment setObject:username forKey:ACTIVEUSER];
+                CloudMO = [CloudMO initAndFillWithNewObject:environment];
+                [CloudMO saveObject:^(id<BaseObjectProtocol> data, NSError *error) {
+                    
+                }];
+                //return with success
                 onSuccessHandler(self,nil, user);
             }
             // If incorrect password then throw an error

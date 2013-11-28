@@ -120,6 +120,19 @@
     return activeURL;
 }
 
+-(NSString *)GetActiveUser
+{
+    NSDictionary* dict = [self GetActiveEnvironment];
+    NSString* activeUser = nil;
+    
+    if (dict != nil)
+    {
+        activeUser = [dict valueForKey:ACTIVEUSER];
+    }
+    
+    return activeUser;
+}
+
 -(NSDate *)GetTimestamp: (NSString*)environment
 {
     NSPredicate* pred = [NSPredicate predicateWithFormat:@"%K == %@",NAME, environment];

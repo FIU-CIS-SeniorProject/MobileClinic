@@ -59,6 +59,8 @@
         }
         else
         {
+            //TODO: set currentUser
+            
             //notification to mainMenu to change view
             [[NSNotificationCenter defaultCenter]postNotificationName:@"LOGIN_OBSERVER" object:nil];
         }

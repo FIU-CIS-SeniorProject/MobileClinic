@@ -33,6 +33,7 @@
 #define USERNAME    @"userName"
 #define PASSWORD    @"password"
 #define USERTYPE    @"userType" //The different user types (look at enum)
+#define CHARITYID   @"charityId"
 #define SAVE_USER @"savedUser"
 
 /** Secondary type examples
@@ -57,6 +58,8 @@ typedef enum
 }UserTypes;
 
 @protocol UserObjectProtocol <NSObject>
+
+-(NSArray *)FindAllCharityObjects;
 
 /* call to send this object to be verified by the server */
 -(void)loginWithUsername:(NSString*)username andPassword:(NSString*)password onCompletion:(void(^)(id <BaseObjectProtocol> data, NSError* error, Users* userA))onSuccessHandler;
