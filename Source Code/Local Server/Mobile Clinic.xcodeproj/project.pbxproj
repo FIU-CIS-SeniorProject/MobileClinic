@@ -8,12 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		0FCC49CE16F3C63400FD3338 /* MedicationFile.json in Resources */ = {isa = PBXBuildFile; fileRef = 0FCC49CD16F3C63400FD3338 /* MedicationFile.json */; };
+		388B14671846FE5500D51D86 /* Mobile_Clinic.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 388B14651846FE5500D51D86 /* Mobile_Clinic.xcdatamodeld */; };
 		463294A216C9B97B00C57DCE /* PatientObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 463294A116C9B97B00C57DCE /* PatientObject.m */; };
 		893FCE6A1825EB520054402A /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 893FCE691825EB520054402A /* libsqlite3.dylib */; };
 		893FCE6C1825EB800054402A /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 893FCE6B1825EB800054402A /* libsqlite3.0.dylib */; };
-		89420CEE182DA1E80070EFC4 /* Mobile_Clinic.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 89420CE7182DA1E80070EFC4 /* Mobile_Clinic.xcdatamodeld */; };
-		8961827D1840201600591B20 /* Model.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8961827C1840201600591B20 /* Model.xcmappingmodel */; };
-		89618283184021B800591B20 /* Model.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 89618282184021B800591B20 /* Model.xcmappingmodel */; };
 		897036B21830611E004AA93D /* Face.m in Sources */ = {isa = PBXBuildFile; fileRef = 897036B11830611E004AA93D /* Face.m */; };
 		899B272318317EC200BEC734 /* FaceRecognize.mm in Sources */ = {isa = PBXBuildFile; fileRef = 899B272218317EC200BEC734 /* FaceRecognize.mm */; };
 		899B27251831846400BEC734 /* FaceObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 899B27241831846400BEC734 /* FaceObject.mm */; };
@@ -132,23 +130,13 @@
 
 /* Begin PBXFileReference section */
 		0FCC49CD16F3C63400FD3338 /* MedicationFile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MedicationFile.json; sourceTree = "<group>"; };
+		388B14661846FE5500D51D86 /* Mobile_Clinic.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Mobile_Clinic.xcdatamodel; sourceTree = "<group>"; };
 		463294A016C9B97B00C57DCE /* PatientObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatientObject.h; sourceTree = "<group>"; };
 		463294A116C9B97B00C57DCE /* PatientObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatientObject.m; sourceTree = "<group>"; };
-		892962DB182DAC2100746BAB /* Mobile_Clinic 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Mobile_Clinic 7.xcdatamodel"; sourceTree = "<group>"; };
 		893FCE691825EB520054402A /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		893FCE6B1825EB800054402A /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
-		89420CE8182DA1E80070EFC4 /* Mobile_Clinic 1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Mobile_Clinic 1.xcdatamodel"; sourceTree = "<group>"; };
-		89420CE9182DA1E80070EFC4 /* Mobile_Clinic 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Mobile_Clinic 2.xcdatamodel"; sourceTree = "<group>"; };
-		89420CEA182DA1E80070EFC4 /* Mobile_Clinic 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Mobile_Clinic 3.xcdatamodel"; sourceTree = "<group>"; };
-		89420CEB182DA1E80070EFC4 /* Mobile_Clinic 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Mobile_Clinic 4.xcdatamodel"; sourceTree = "<group>"; };
-		89420CEC182DA1E80070EFC4 /* Mobile_Clinic 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Mobile_Clinic 5.xcdatamodel"; sourceTree = "<group>"; };
-		89420CED182DA1E80070EFC4 /* Mobile_Clinic.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Mobile_Clinic.xcdatamodel; sourceTree = "<group>"; };
-		89420CEF182DA27A0070EFC4 /* Mobile_Clinic 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Mobile_Clinic 6.xcdatamodel"; sourceTree = "<group>"; };
 		895D5CCA1825D053005D25A8 /* FaceObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceObject.h; sourceTree = "<group>"; };
 		895D5CCD1825D07D005D25A8 /* FaceObjectProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceObjectProtocol.h; sourceTree = "<group>"; };
-		8961827418400E9D00591B20 /* Mobile_Clinic 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Mobile_Clinic 8.xcdatamodel"; sourceTree = "<group>"; };
-		8961827C1840201600591B20 /* Model.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model.xcmappingmodel; sourceTree = "<group>"; };
-		89618282184021B800591B20 /* Model.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model.xcmappingmodel; sourceTree = "<group>"; };
 		897036B01830611E004AA93D /* Face.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Face.h; sourceTree = "<group>"; };
 		897036B11830611E004AA93D /* Face.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Face.m; sourceTree = "<group>"; };
 		899B272118317EC200BEC734 /* FaceRecognize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceRecognize.h; sourceTree = "<group>"; };
@@ -455,8 +443,7 @@
 		EA172D6616B6134200F00C61 /* MC-> Data Subsystem */ = {
 			isa = PBXGroup;
 			children = (
-				89618282184021B800591B20 /* Model.xcmappingmodel */,
-				89420CE7182DA1E80070EFC4 /* Mobile_Clinic.xcdatamodeld */,
+				388B14651846FE5500D51D86 /* Mobile_Clinic.xcdatamodeld */,
 				EA172D6816B615DD00F00C61 /* Factory Pattern */,
 				EA172D6716B6135100F00C61 /* System Objects (Decorator Base) */,
 				EA9372AE16BC7CBD00D3D617 /* Object Types (USE THESE ONLY) */,
@@ -552,7 +539,6 @@
 		EA8D85DF16B0C9BF00256495 = {
 			isa = PBXGroup;
 			children = (
-				8961827C1840201600591B20 /* Model.xcmappingmodel */,
 				899B271C18309D4400BEC734 /* OpenCVLib */,
 				89700A4F18304290004AA93D /* Face Recognition */,
 				893FCE6B1825EB800054402A /* libsqlite3.0.dylib */,
@@ -971,7 +957,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89420CEE182DA1E80070EFC4 /* Mobile_Clinic.xcdatamodeld in Sources */,
 				EA8D85FB16B0C9BF00256495 /* main.m in Sources */,
 				EA8D860216B0C9C000256495 /* FIUAppDelegate.m in Sources */,
 				EA172D3616B50A9C00F00C61 /* Server.m in Sources */,
@@ -1011,10 +996,9 @@
 				899B272318317EC200BEC734 /* FaceRecognize.mm in Sources */,
 				899B27251831846400BEC734 /* FaceObject.mm in Sources */,
 				89DA4136183DA67900C096BB /* Recognition.mm in Sources */,
-				8961827D1840201600591B20 /* Model.xcmappingmodel in Sources */,
-				89618283184021B800591B20 /* Model.xcmappingmodel in Sources */,
 				89BCE2CC1842D13B00FCE9DA /* CloudManagementObject.m in Sources */,
 				89BCE2D11842D16F00FCE9DA /* LoginView.m in Sources */,
+				388B14671846FE5500D51D86 /* Mobile_Clinic.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1264,20 +1248,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		89420CE7182DA1E80070EFC4 /* Mobile_Clinic.xcdatamodeld */ = {
+		388B14651846FE5500D51D86 /* Mobile_Clinic.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				8961827418400E9D00591B20 /* Mobile_Clinic 8.xcdatamodel */,
-				89420CEF182DA27A0070EFC4 /* Mobile_Clinic 6.xcdatamodel */,
-				892962DB182DAC2100746BAB /* Mobile_Clinic 7.xcdatamodel */,
-				89420CE8182DA1E80070EFC4 /* Mobile_Clinic 1.xcdatamodel */,
-				89420CE9182DA1E80070EFC4 /* Mobile_Clinic 2.xcdatamodel */,
-				89420CEA182DA1E80070EFC4 /* Mobile_Clinic 3.xcdatamodel */,
-				89420CEB182DA1E80070EFC4 /* Mobile_Clinic 4.xcdatamodel */,
-				89420CEC182DA1E80070EFC4 /* Mobile_Clinic 5.xcdatamodel */,
-				89420CED182DA1E80070EFC4 /* Mobile_Clinic.xcdatamodel */,
+				388B14661846FE5500D51D86 /* Mobile_Clinic.xcdatamodel */,
 			);
-			currentVersion = 892962DB182DAC2100746BAB /* Mobile_Clinic 7.xcdatamodel */;
+			currentVersion = 388B14661846FE5500D51D86 /* Mobile_Clinic.xcdatamodel */;
 			name = Mobile_Clinic.xcdatamodeld;
 			path = "Mobile Clinic/Mobile_Clinic.xcdatamodeld";
 			sourceTree = "<group>";

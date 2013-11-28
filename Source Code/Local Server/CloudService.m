@@ -7,6 +7,7 @@
 //
 
 #import "CloudService.h"
+#import <IOKit/IOKitLib.h>
 
 @interface CloudService()
 {
@@ -30,6 +31,27 @@
     });
     
     return mApi;
+}
+
++ (id)stringWithMachineSerialNumber
+{
+    NSString* result = nil;
+    CFStringRef serialNumber = NULL;
+    
+    io_service_t platformExpert = IOServiceGetMatchingService(kIOMasterPortDefault,IOServiceMatching("IOPlatformExpertDevice"));
+    
+    if (platformExpert)
+    {
+        CFTypeRef serialNumberAsCFString = IORegistryEntryCreateCFProperty(platformExpert,CFSTR(kIOPlatformSerialNumberKey),kCFAllocatorDefault,0);
+        serialNumber = (CFStringRef)serialNumberAsCFString;
+        IOObjectRelease(platformExpert);
+    }
+    
+    if (serialNumber)
+        result = (NSString*)CFBridgingRelease(serialNumber);
+    else
+        result = @"unknown";
+    return result;
 }
 
 -(id)init
@@ -56,6 +78,7 @@
     }
     return self;
 }
+
 
 -(void)getAccessToken:(void(^)(BOOL success)) completion{
     NSMutableDictionary * params = [[NSMutableDictionary alloc]init];
