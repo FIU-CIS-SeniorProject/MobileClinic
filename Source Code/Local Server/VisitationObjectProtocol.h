@@ -24,6 +24,7 @@
 #define RESPIRATION     @"respiration"
 #define PRIORITY        @"priority"
 #define VISITID         @"visitationId"
+#define CHARITYID       @"charityId"
 
 #define ISOPEN      @"isOpen"
 #define MEDICATIONNOTES @"medicationNotes"
