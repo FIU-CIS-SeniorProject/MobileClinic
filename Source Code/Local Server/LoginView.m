@@ -47,14 +47,18 @@
     return self;
 }
 
-- (IBAction)login:(id)sender {
+- (IBAction)login:(id)sender
+{
     if (!user)
+    {
         user = [[UserObject alloc]init];
+    }
 
-    [user loginWithUsername:[usernameTextField stringValue] andPassword:[passwordTextField stringValue] onCompletion:^(id<BaseObjectProtocol> data, NSError *error, Users *userA) {
-        
+    [user loginWithUsername:[usernameTextField stringValue] andPassword:[passwordTextField stringValue] onCompletion:^(id<BaseObjectProtocol> data, NSError *error, Users *userA)
+    {
         //TODO: fix error
-        if (error) {
+        if (error)
+        {
             [[NSApplication sharedApplication] presentError:error];
         }
         else

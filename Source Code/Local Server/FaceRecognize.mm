@@ -119,7 +119,7 @@ NSDictionary* faceD;
     NSArray *array = [context1 executeFetchRequest:fetchRequest error:&error];
     if(array ==nil)
     {
-        NSLog(@"Problem ! @%",error);
+        NSLog(@"Problem ! %@",error);
     }
     
     for(Face *c in array)

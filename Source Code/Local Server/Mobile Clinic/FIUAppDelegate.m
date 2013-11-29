@@ -77,6 +77,43 @@ CloudManagementObject* cloudMO;
     [_OptimizeToggler setTitle:@"First Sync -> Fast Sync"];
     [CloudService cloud];
     [_window setHidesOnDeactivate:NO];
+    
+    // Initialize the CloudManagementObjects if they do not exist
+    // TEST
+    NSMutableDictionary* testDictionary = [[[[CloudManagementObject alloc] init] GetEnvironment:@"test"] mutableCopy];
+    
+    if (testDictionary == nil)
+    {
+        testDictionary = [[NSMutableDictionary alloc] init];
+        [testDictionary setObject:@"test" forKey:NAME];
+        [testDictionary setObject:@(NO) forKey:ISACTIVE];
+        [testDictionary setObject:[[NSDate distantPast] convertNSDateToSeconds] forKey:LASTPULLTIME];
+        [testDictionary setObject:@"http://still-citadel-8045.herokuapp.com/" forKey:CLOUDURL];
+        [testDictionary setObject:@(NO) forKey: ISDIRTY];
+        
+        CloudManagementObject* testCMO = [[CloudManagementObject alloc] initAndMakeNewDatabaseObject];
+        [testCMO setValueToDictionaryValues: testDictionary];
+        [testCMO saveObject:^(id<BaseObjectProtocol> data, NSError *error) {}];
+    }
+    
+    //testing if it works. DELETE when it works!
+    //testDictionary = [[[[CloudManagementObject alloc] init] GetEnvironment:@"test"] mutableCopy];
+    
+    NSMutableDictionary* productionDictionary = [[[[CloudManagementObject alloc] init] GetEnvironment:@"production"] mutableCopy];
+    
+    if (productionDictionary == nil)
+    {
+        productionDictionary = [[NSMutableDictionary alloc] init];
+        [productionDictionary setObject:@"production" forKey:NAME];
+        [productionDictionary setObject:@(YES) forKey:ISACTIVE];
+        [productionDictionary setObject:[[NSDate distantPast] convertNSDateToSeconds] forKey:LASTPULLTIME];
+        [productionDictionary setObject:@"http://pure-island-5858.herokuapp.com/" forKey:CLOUDURL];
+        [productionDictionary setObject:@(NO) forKey: ISDIRTY];
+        
+        CloudManagementObject* productionCMO = [[CloudManagementObject alloc] initAndMakeNewDatabaseObject];
+        [productionCMO setValueToDictionaryValues:productionDictionary];
+        [productionCMO saveObject:^(id<BaseObjectProtocol> data, NSError *error) {}];
+    }
 }
 
 // Switching to the Test Environment

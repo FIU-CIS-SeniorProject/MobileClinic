@@ -24,7 +24,8 @@ MobileClinicFacade * mobileFacade;
 
 @implementation CurrentDiagnosisViewControllerTest
 
-- (void)setUpClass {
+- (void)setUpClass
+{
     // Run at beginning of all tests in the class
     patientData = [[NSMutableDictionary alloc]init];
     visitData = [[NSMutableDictionary alloc]init];

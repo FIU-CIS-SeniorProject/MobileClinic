@@ -106,7 +106,8 @@
 // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.)
 - (NSManagedObjectContext *)managedObjectContext
 {
-    if (_managedObjectContext) {
+    if (_managedObjectContext)
+    {
         return _managedObjectContext;
     }
     

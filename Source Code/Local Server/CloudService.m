@@ -22,7 +22,8 @@
 #pragma mark - Cloud API
 #pragma mark-
 
-+(CloudService *) cloud{
++(CloudService *) cloud
+{
     static CloudService *mApi = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -79,20 +80,21 @@
             data = [[NSString stringWithFormat:@"%@",@""] dataUsingEncoding: NSUTF8StringEncoding];
         }
         
+        
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:30];
         
         [request setHTTPMethod:@"POST"];
         [request setHTTPBody: data];
         
+        
         [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error){
             
-            if(!error)
-            {
+            if(!error){
                 NSError *jsonError;
                 
                 //read and print the server response for debug
                 NSString *myString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-               // NSLog(@"%@", myString);
+                // NSLog(@"%@", myString);
                 
                 NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
                 
@@ -126,7 +128,7 @@
 {
     NSMutableDictionary *mDic = [[NSMutableDictionary alloc]initWithDictionary:params];
     [mDic setObject:kAccessToken forKey:@"access_token"];
-
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),  ^{
         
         [self queryWithPartialURL:[NSString stringWithFormat:@"api/%@", mDic] parameters:params imageData:imageData completion:completion];

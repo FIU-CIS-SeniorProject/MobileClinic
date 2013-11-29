@@ -25,9 +25,14 @@
 //
 //  Created by Kevin Diaz on 11/02/13.
 //
+//#import <Foundation/Foundation.h>
 #import "BaseObject.h"
 #import "CloudManagementObjectProtocol.h"
+#import "CloudManager.h"
 
 @interface CloudManagementObject : BaseObject<CloudManagementObjectProtocol,CommonObjectProtocol>
+{
+    CloudManager* cloudMO;
+}
 
 @end

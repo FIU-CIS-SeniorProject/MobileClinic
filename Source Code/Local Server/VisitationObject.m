@@ -161,8 +161,10 @@ NSString* isLockedBy;
     
     return container;
 }
--(NSString*)convertDateNumberForPrinting:(NSNumber*)number{
-    if (number) {
+-(NSString*)convertDateNumberForPrinting:(NSNumber*)number
+{
+    if (number)
+    {
         return [[NSDate convertSecondsToNSDate:number]convertNSDateToMonthDayYearTimeString];
     }
     return @"N/A";
