@@ -1,0 +1,9 @@
+//
+// Prefix header for all source files of the 'Mobile Clinic' target in the 'Mobile Clinic' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#define SELECTED_A_USER @"selected a user"
+#define GLOBAL_STATUS_LISTENER @"listen for my message"
+#endif

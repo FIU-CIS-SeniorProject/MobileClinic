@@ -1,0 +1,38 @@
+<% provide(:title, "Edit Charity") %>
+<div class="block">
+	<div id="main" role="main">
+		<div class="grid">
+			<div class="grid-title">
+				<div class="pull-left">
+					<div class="icon-title">
+						<i class="icon-edit"></i>
+					</div>
+					<span>Edit Charity</span>
+					<div class="clearfix"></div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="grid-content">
+				<%= form_for(@charity, :html => { :multipart => true, role: "form" }) do |f| %>
+				<%= render 'shared/error_messages_charity' %>
+				<div class="formRow">
+					<%= f.label :name, "Name", class: "label-gray"%>
+					<div class="formRight">
+						<%= f.text_field :name, class: "form-control" %>
+					</div>
+				</div>
+				<div class="formRow">
+					<%= f.label :status, "Status", class: "label-gray"%>
+					<div class="formRight">
+						<%= f.select :status, [['Active',1], ['Inactive',0]], class: "form-control"%>
+					</div>
+				</div>
+				<div style="height: 100px;"></div>
+				<%= f.submit "Save changes", :class => "btn btn-large btn-block btn-info"%>
+				<%= link_to 'Back', @charity,:class => "btn btn-large btn-block btn-default" %>
+				<%- end -%>
+			</div>
+		</div>
+	</div>
+</div>
+

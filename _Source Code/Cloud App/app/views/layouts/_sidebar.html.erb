@@ -1,0 +1,39 @@
+<div id="menu" role="navigation">
+	<ul class="nav nav-pills nav-stacked">
+		<li class="active">
+		<li>
+			<%= link_to home_path do%> 
+				<span class="glyphicon glyphicon-dashboard" id="sideIcon"></span> Dashboard
+			<%end%>
+		</li>
+		<% if  admin_user? %>
+			<li>
+				<%= link_to charities_path do%>
+					<span class="glyphicon glyphicon-th-large" id="sideIcon"></span> Charities
+				<%end%>
+			</li>
+		<% end %>
+			<li>
+				<%= link_to users_path do%>
+					<span class="glyphicon glyphicon-cloud" id="sideIcon"></span> Cloud Users
+				<%end%>
+			</li>
+			<li>
+				<%= link_to appusers_path do%> 
+					<span class="glyphicon glyphicon-user" id="sideIcon"></span> Application Users
+				<%end%>
+			</li>
+		
+		<li>
+			<%= link_to patients_path do%> 
+				<span class="glyphicon glyphicon-file" id="sideIcon"></span> Patient Data
+			<%end%>
+		</li>
+		<li>
+			<%= link_to medications_path do%> 
+				<span class="glyphicon glyphicon-list-alt" id="sideIcon"></span> List of Medication
+			<%end%>
+		</li>
+	</ul>
+	<div class="clearfix"></div>
+</div>

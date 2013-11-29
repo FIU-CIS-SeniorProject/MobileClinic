@@ -1,0 +1,49 @@
+ <div class="block">
+<% provide(:title, @medication.name) %>
+
+        <div class="grid">
+              
+    <div class="grid-title">
+     <div class="pull-left">
+        <div class="icon-title"><i class="icon-user"></i></div>
+        <span>Medication Information</span> 
+        <div class="clearfix"></div>
+     </div>
+    <div class="clearfix"></div>   
+    </div>
+  
+    <div class="grid-content overflow">
+      
+      <table class="table table-bordered table-mod-2">
+            <thead><tr></tr></thead>
+            <tbody>
+                <tr>
+                    <td>Medication Name: </td>
+                    <td><%= @medication.name %> </td>
+                </tr>
+                  <tr>
+                    <td>Number of Containers: </td>
+                    <td><%= @medication.numContainers %></td>
+                </tr>
+                  <tr>
+                    <td>Tablets Per Container: </td>
+                    <td><%= @medication.tabletsPerContainer %> </td>
+                </tr>
+                  <tr>
+                    <td>Expiration: </td>
+                    <td><%= @medication.expiration.to_s("%m/%d/%Y") %></td>
+                </tr>
+                  <tr>
+                    <td>Amount: </td>
+                    <td> <%= @medication.doseOfTablets %> </td>
+                </tr>
+                <tr>
+                    <td>Notes: </td>
+                    <td> <%= @medication.notes %> </td>
+                </tr>
+            </tbody>
+         </table>
+        </div>
+        <%= link_to 'Edit', edit_medication_path, :class => "btn btn-info btn-large btn-block" %>
+        <%= link_to 'Back', medications_path, :class => "btn btn-default btn-large btn-block" %>
+</div>

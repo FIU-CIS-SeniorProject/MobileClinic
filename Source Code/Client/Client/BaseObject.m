@@ -142,18 +142,23 @@
     }
     eventResponse(self, nil);
 }
--(BOOL)setValueToDictionaryValues:(NSDictionary*)values{
+-(BOOL)setValueToDictionaryValues:(NSDictionary*)values
+{
     //TODO: Use TRY CATCH and Return a Bool
-    @try {
-        for (NSString* key in values.allKeys) {
-            if (![[values objectForKey:key]isKindOfClass:[NSNull class]]) {
+    @try
+    {
+        for (NSString* key in values.allKeys)
+        {
+            if (![[values objectForKey:key]isKindOfClass:[NSNull class]])
+            {
                 id obj = [values objectForKey:key];
                 [self->databaseObject setValue:([obj isKindOfClass:[NSDate class]])?[obj convertNSDateToSeconds]:obj forKey:key];
             }
         }
         return YES;
     }
-    @catch (NSException *exception) {
+    @catch (NSException *exception)
+    {
         return NO;
     }
 }

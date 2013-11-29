@@ -167,14 +167,19 @@ id<ServerProtocol> serverManager;
             
             response(nil,[self createErrorWithDescription:status.errorMessage andErrorCodeNumber:status.status inDomain:@"BaseObject"]);
             
-        } else if (status.status == kSuccess) {
+        }
+        else if (status.status == kSuccess)
+        {
             // Save object to this device
-            if([self setValueToDictionaryValues:status.data]){
+            if([self setValueToDictionaryValues:status.data])
+            {
             
-            [self saveObject:^(id<BaseObjectProtocol> data, NSError *error) {
-                response(self,[self createErrorWithDescription:status.errorMessage andErrorCodeNumber:kSuccess inDomain:@"BaseObject"]);
-            }];
-            }else{
+                [self saveObject:^(id<BaseObjectProtocol> data, NSError *error) {
+                    response(self,[self createErrorWithDescription:status.errorMessage andErrorCodeNumber:kSuccess inDomain:@"BaseObject"]);
+                }];
+            }
+            else
+            {
                 response(nil,[self createErrorWithDescription:@"Developer Error: Misconfigured Object" andErrorCodeNumber:kErrorObjectMisconfiguration inDomain:@"BaseObject + Protected"]);
             }
         }

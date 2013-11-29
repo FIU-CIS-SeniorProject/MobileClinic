@@ -1,0 +1,81 @@
+<% provide(:title, @user.firstName) %>
+<div class="block">
+	<div class="grid">
+		<div class="grid-title">
+			<div class="pull-left">
+				<div class="icon-title">
+					<i class="icon-user"></i>
+				</div>
+				<span></span>
+				<div class="clearfix"></div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<div class="grid-content padding-none">
+			<table class="table table-striped">
+				<tbody>
+					<tr>
+						<td>
+						<div class="grid-content">
+							<ul>
+								<div class="thumbnail">
+									<%= image_tag @user.avatar.url(:medium) %>
+									<div class="caption">
+										<h3>Profile Picture</h3>
+									</div>
+								</div>
+								</li>
+							</ul>
+						</div></td>
+						<td style="width: 950px;">
+						<div class="grid-content">
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<td></td>
+										<td></td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>First Name: </td>
+										<td><%= @user.firstName %></td>
+									</tr>
+									<tr>
+										<td>Last Name: </td>
+										<td><%= @user.lastName %> </td>
+									</tr>
+									<tr>
+										<td>User Name: </td>
+										<td><%= @user.userName %> </td>
+									</tr>
+									<tr>
+										<td>Email: </td>
+										<td><%= @user.email %></td>
+									</tr>
+									<tr>
+										<td>Charity </td>
+										<td> <%= @charity.name %> </td>
+									</tr>
+									<tr>
+										<td>User Type:</td>
+										<td> <%= type_of_user(@user.userType) %> </td>
+									</tr>
+									<tr>
+										<td>User Status:</td>
+										<td> <%= status(@user.status) %> </td>
+									</tr>
+								</tbody>
+							</table>
+						</div></td>
+					</tr>
+				</tbody>
+			</table>
+			<% if  admin_user? %>
+				<%= link_to "Edit Profile", edit_user_path(@user.userid),  :class => "btn btn-large btn-block btn-info"%>
+			<% end %>
+			<%= link_to 'Back', users_path, :class => "btn btn-default btn-large btn-block" %>
+		</div>
+	</div>
+</div>
+

@@ -1,0 +1,69 @@
+<% provide(:title, "Edit Charity") %>
+<div class="block">
+	<div id="main" role="main">
+		<div class="grid">
+			<div class="grid-title">
+				<div class="pull-left">
+					<div class="icon-title">
+						<i class="icon-edit"></i>
+					</div>
+					<span>Edit Medication</span>
+					<div class="clearfix"></div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="grid-content">
+				<%= form_for(@medication, :html => { :multipart => true, role: "form" }) do |f| %>
+				<%= render 'shared/error_messages_med' %>
+				<div class="formRow">
+					<%= f.label :name, "Name", class: "label-gray"%>
+					<div class="formRight">
+						<%= f.text_field :name, class: "form-control" %>
+					</div>
+				</div>
+				<div class="formRow">
+					<%= f.label :numContainers, "Number of Containers", class: "label-gray"%>
+					<div class="formRight">
+						<%= f.text_field :numContainers, class: "form-control", type: "number" %>
+					</div>
+				</div>
+				<div class="formRow">
+					<%= f.label :tabletsPerContainer, "Tables per Container", class: "label-gray"%>
+					<div class="formRight">
+						<%= f.text_field :tabletsPerContainer, class: "form-control", type: "number"  %>
+					</div>
+				</div>
+				<div class="formRow">
+					<%= f.label :doseOfTablets, "Dose of Tablets", class: "label-gray"%>
+					<div class="formRight">
+						<%= f.text_field :doseOfTablets, class: "form-control", type: "number"  %>
+					</div>
+				</div>
+				<div class="formRow">
+					<%= f.label :expiration, "Expiration Date", class: "label-gray"%>
+					<div class="formRight">
+						<%= f.text_field :expiration, :value => @medication.expiration.to_s("%m/%d/%Y"), class: "form-control", type: "date"  %>
+					</div>
+				</div>
+				<div class="formRow">
+					<%= f.label :status, "Status", class: "label-gray"%>
+					<div class="formRight">
+						<%= f.select :status, [['Active',1], ['Inactive',0]], class: "form-control"%>
+					</div>
+				</div>
+				<div class="formRow">
+					<%= f.label :notes, "Notes", class: "label-gray"%>
+					<div class="formRight">
+						<%= f.text_area :notes, class: "form-control", type: "text"  %>
+					</div>
+				</div>
+				
+				<div style="height: 100px;"></div>
+				<%= f.submit "Save changes", :class => "btn btn-large btn-block btn-info"%>
+				<%= link_to 'Back', @medication,:class => "btn btn-large btn-block btn-default" %>
+				<%- end -%>
+			</div>
+		</div>
+	</div>
+</div>
+

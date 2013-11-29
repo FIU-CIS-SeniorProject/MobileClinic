@@ -1,0 +1,173 @@
+ <div class="block">
+<% provide(:title, @patient.firstName) %>
+
+<div class="grid">
+  <div class="grid-title">
+
+   <div class="pull-left">
+    <div class="icon-title"><i class="icon-user"></i></div>
+    <span></span> 
+    <div class="clearfix"></div>
+  </div>
+  <div class="clearfix"></div>   
+
+</div>
+<div class="grid-content padding-none">
+  <table class="table table-striped">
+    <thead><tr></tr><tr></tr></thead>
+    <tbody>
+      <tr>
+        <td>
+          <div class="grid-content">
+            <ul>
+              <div class="thumbnail"> <%= image_tag @patient.picture.url(:medium) %>
+                <div class="caption"> <h3>Profile Picture</h3> </div>
+              </div>
+            </li>   
+          </ul>
+        </div>
+      </td>
+      <td style="width: 950px;">
+        <div class="grid-content">
+
+          <table class="table table-striped">
+
+            <thead><tr></tr></thead>
+            <tbody>
+              <tr>
+                <td>First Name: </td>
+                <td><%= @patient.firstName %></td>
+              </tr>
+              <tr>
+                <td>Family Name: </td>
+                <td><%= @patient.familyName %> </td>
+              </tr>
+              <tr>
+                <td>Village: </td>
+                <td><%= @patient.villageName %></td>
+
+                <tr>
+                  <td>Age:</td>
+                  <td> <%= @patient.age %> </td>
+                </tr>
+              </tr>
+              <tr>
+                <td>Sex:</td>
+                <td> <%= sex(@patient.sex) %> </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+
+</table>
+<div>
+  <div class="grid-content">
+  <h2 > Visitation </h2> 
+</div>
+  <div class="accordion" id="accordion2">
+
+    <div class="accordion-group"> 
+     <% @visits.each do |visit| %>
+
+     <div class="accordion-heading">
+
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#<%= visit.id %>" style="color: black;" >
+
+        <h4><%= show_date(visit.triageIn)%></h4>
+      </a>
+    </div>
+
+    <div id="<%= visit.id %>" class="accordion-body collapse">
+     <div class="accordion-inner">
+      <ul class="nav nav-pills" id=" myTab">
+        <li class="active"><a href="#vitals<%= visit.id %>" data-toggle="pill">Vitals</a></li>
+        <li><a href="#nurse<%= visit.id %>"  data-toggle="pill" >Nurse Observation</a></li>
+        <li><a href="#doctor<%= visit.id %>"  data-toggle="pill">Doctor's Diagnosis</a></li>
+        <li><a href="#prescribed<%= visit.id %>"  data-toggle="pill">Prescribed Medication</a></li>
+      </ul>
+
+      <div class="tab-content">
+
+        <div class="tab-pane active" id="vitals<%= visit.id %>">
+          <table class="table table-bordered table-mod-2">
+            <thead>
+            </thead>
+            <tbody>
+              <tr>
+                <td><h4>Weight: </h4></td>
+                <td><%= visit.weight %></td>
+                <td><h4>Blood Pressure: </h4></td>
+                <td><%= visit.bloodPressure %> </td>
+                <!-- <td class="hidden-mobile"><span class="s_green">Approved</span></td> -->
+              </tr>
+              <tr>
+                <td><h4>Heart Rate: </h4> </td>
+                <td><%= visit.heartRate %></td>
+                <td><h4>Respiration: </h4></td>
+                <td><%= visit.respiration %> </td>
+                <!-- <td class="hidden-mobile"><span class="s_green">Approved</span></td> -->
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+        <div class="tab-pane" id="nurse<%= visit.id %>">
+          <table class="table table-bordered table-mod-2">
+            <thead>
+            </thead>
+            <tbody>
+              <tr>
+                <td><h4>Condition: </h4></td>
+                <td><%= visit.conditions %></td>
+                <!-- <td class="hidden-mobile"><span class="s_green">Approved</span></td> -->
+              </tr>
+              <tr>
+                <td><h4>Recorded by Nurse: </h4> </td>
+                <td><%= visit.nurseId %></td>
+                <!-- <td class="hidden-mobile"><span class="s_green">Approved</span></td> -->
+              </tr>
+            </tbody>
+          </table>
+       </div>
+
+
+       <div class="tab-pane" id="doctor<%= visit.id %>">
+        <table class="table table-bordered table-mod-2">
+            <thead>
+            </thead>
+            <tbody>
+              <tr>
+                <td><h4>Observation: </h4></td>
+                <td><%= visit.observation %></td>
+                <!-- <td class="hidden-mobile"><span class="s_green">Approved</span></td> -->
+              </tr>
+              <tr>
+                <td><h4>Recorded By Doctor: </h4> </td>
+                <td><%= visit.doctorId %></td>
+                <!-- <td class="hidden-mobile"><span class="s_green">Approved</span></td> -->
+              </tr>
+            </tbody>
+          </table>
+      </div>
+
+      <div class="tab-pane" id="prescribed<%= visit.id %>">
+        None
+      </div>
+    </div>
+  </div>
+
+</div>
+<% end %>  
+</div>
+</div>
+
+<script>
+$(function () {
+  $('#myTab a:last').tab('show');
+})
+</script>
+
