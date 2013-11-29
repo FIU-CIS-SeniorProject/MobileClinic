@@ -1,0 +1,8 @@
+These categories are used all throughout the application. They make certain actions and functions easier.
+
+ColorMe: For coloring any view that has a layer
+DataProcessor: Used for converting Dates to strings and strings to dates
+CustomTools: Convenience methods to show errors in views
+StringExt: Methods to validate and manipulate strings
+Validation: More string validation
+ImageVerification: Used to manipulate Images, like reducing img sizes or fixing orientations

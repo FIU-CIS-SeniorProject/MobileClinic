@@ -1,0 +1,31 @@
+//
+// Prefix header for all source files of the 'MobileClinicTests' target in the 'MobileClinicTests' project
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_5_0
+#warning "This project uses features only available in iOS SDK 5.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+    #import "TestFlight.h"
+    #import <CoreData/CoreData.h>
+    #import "FIUAppDelegate.h"
+    #import "NSObject+CustomTools.h"
+    #import "UIViewControllerExt.h"
+    #import "ColorMe.h"
+
+    #define LOGOFF                          @"Log off"
+    #define CURRENT_USER                    @"current user of device"
+    #define GLOBAL_STATUS_LISTENER          @"listen for my message"
+    #define CREATE_NEW_PATIENT              @"Creating a new patient"
+    #define MOVE_TO_SEARCH_FOR_MEDICINE     @"Searching for medicine"
+    #define MOVE_FROM_SEARCH_FOR_MEDICINE   @"Back form searching medicine"
+    #define SAVE_VISITATION                 @"Save visitation object"
+    #define SAVE_PRESCRIPTION               @"Save prescription object"
+    #define SEARCH_FOR_PATIENT              @"Searching for a patient"
+    #define CREATE_NEW_DIAGNOSIS            @"Creating a new diagnosis"
+#endif
