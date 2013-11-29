@@ -302,15 +302,18 @@
     // Just in case people become silly
     [visitDictionary removeObjectForKey:OPEN_VISITS_PATIENT];
     
-    
     VisitationObject* myVisit = [[VisitationObject alloc]init];
     
-    [self CommonCommandObject:myVisit ShouldLock:NO CommonUpdate:visitDictionary withResults:^(NSDictionary *object, NSError *error) {
-        if (object) {
+    [self CommonCommandObject:myVisit ShouldLock:NO CommonUpdate:visitDictionary withResults:^(NSDictionary *object, NSError *error)
+    {
+        if (object)
+        {
             PatientObject* myPatient = [[PatientObject alloc]init];
             
             [self CommonCommandObject:myPatient ShouldLock:NO CommonUpdate:patientDictionary withResults:Response];
-        }else{
+        }
+        else
+        {
             Response(object,error);
         }
     }];

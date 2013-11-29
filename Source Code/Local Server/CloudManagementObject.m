@@ -30,6 +30,11 @@
 
 #define DATABASE    @"CloudManagement"
 
+NSString* name;
+NSString* url;
+NSDate* lastPullTime;
+int* isActive;
+
 @implementation CloudManagementObject
 
 +(NSString *)DatabaseName
@@ -66,6 +71,18 @@
     self->COMMONID =  NAME;
     self->CLASSTYPE = kCloudManagementType;
     self->COMMONDATABASE = DATABASE;
+}
+
+-(void)linkDatabase
+{
+    cloudMO = (CloudManager*)self->databaseObject;
+}
+
+-(void)unpackageFileForUser:(NSDictionary *)data
+{
+    [super unpackageFileForUser:data];
+    name = [self->databaseObject valueForKey:NAME];
+    url = [self->databaseObject valueForKey:CLOUDURL];
 }
 
 -(NSArray *)FindAllObjects
@@ -141,13 +158,96 @@
 }
 
 //TODO: Implement
--(void *)setActiveEnvironment: (NSString*)environmentName
+-(void)setActiveEnvironment: (NSString*)environmentName
 {
     NSMutableDictionary* active = [[self GetActiveEnvironment] mutableCopy];
+    CloudManagementObject* activeCMO;
     
-    if ([active valueForKey:NAME] != environmentName)
+    if (active == nil)
     {
+        active = [[self GetEnvironment:environmentName] mutableCopy];
+        [active setObject:[NSNumber numberWithBool:YES] forKey:ISACTIVE];
+        activeCMO = [[CloudManagementObject alloc] initWithCachedObjectWithUpdatedObject:active];
+        [activeCMO saveObject:^(id<BaseObjectProtocol> data, NSError *error)
+        {
+             // Nothing?
+        }];
+    }
+    else if ([active valueForKey:NAME] != environmentName)
+    {
+        // Set Active Environment to inactive
+        [active setObject:[NSNumber numberWithBool:NO] forKey:ISACTIVE];
         
+        // Get requested Environment
+        NSMutableDictionary* requested = [[self GetEnvironment:environmentName] mutableCopy];
+        
+        // Set requested environment to active
+        [requested setObject:[NSNumber numberWithBool:YES] forKey:ISACTIVE];
+        
+        // Save both environments
+        activeCMO = [[CloudManagementObject alloc] initWithCachedObjectWithUpdatedObject:active];
+        [activeCMO saveObject:^(id<BaseObjectProtocol> data, NSError *error)
+        {
+            // Nothing?
+        }];
+        
+        CloudManagementObject* reqCMO = [[CloudManagementObject alloc] initWithCachedObjectWithUpdatedObject:requested];
+        [reqCMO saveObject:^(id<BaseObjectProtocol> data, NSError *error)
+        {
+            // Nothing?
+        }];
+    }
+}
+
+//TODO: Implement
+-(NSDictionary *)GetEnvironment: (NSString*)environment
+{
+    NSMutableDictionary *cmo = [[NSMutableDictionary alloc] init];
+    
+    //NSPredicate* pred = [NSPredicate predicateWithFormat:@"%@ == %@",NAME, environment];
+    //NSArray* managedObjects = [self FindObjectInTable:DATABASE withCustomPredicate:nil andSortByAttribute:NAME];
+    //Compare to finding a user
+    //NSArray* managedObjects = [self FindObjectInTable:DATABASE withName:environment forAttribute:NAME];
+    //NSDate* lastPullTime = nil;
+    
+    // Try to find user from username in local DB
+    BOOL didFindCMO = [self loadObjectForID:environment];
+    
+    // link databaseObject to convenience Object named "user"
+    [self linkDatabase];
+
+    if (didFindCMO)
+    {
+        // take object in array and put into dictionary
+        //dict = [self getDictionaryValuesFromManagedObject:managedObjects[0]];
+        [cmo setObject:cloudMO.name forKey:NAME];
+        [cmo setObject:cloudMO.isActive forKey:ISACTIVE];
+        [cmo setObject:cloudMO.isDirty forKey:ISDIRTY];
+        [cmo setObject:cloudMO.cloudURL forKey:CLOUDURL];
+        [cmo setObject:cloudMO.lastPullTime forKey:LASTPULLTIME];
+    }
+    else
+    {
+        cmo = nil;
+    }
+    
+    return cmo;
+}
+
+// MARK: Loads objects to an instantiated databaseObject
+-(BOOL)loadObjectForID:(NSString *)objectID
+{
+    // checks to see if object exists
+    NSArray* arr = [self FindObjectInTable:DATABASE withName:objectID forAttribute:NAME];
+    
+    if (arr.count == 1)
+    {
+        self->databaseObject = [arr objectAtIndex:0];
+        return  YES;
+    }
+    else
+    {
+        return  NO;
     }
 }
 @end

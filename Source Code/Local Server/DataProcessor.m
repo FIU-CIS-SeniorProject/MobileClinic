@@ -10,7 +10,8 @@
 
 @implementation NSDate (DataProcessor)
 
--(NSString*)convertNSDateToString{
+-(NSString*)convertNSDateToString
+{
     NSDateFormatter *format =[[NSDateFormatter alloc]init];
     
     [format setDateFormat:@"MMM dd, h:mm aa"];
@@ -18,12 +19,14 @@
     return [format stringFromDate:self];
 
 }
+
 +(NSDate *)convertSecondsToNSDate:(NSNumber *)time{
     NSTimeZone* timeZone = [NSTimeZone defaultTimeZone];
     return [NSDate dateWithTimeIntervalSince1970:time.integerValue - timeZone.secondsFromGMT] ;
 }
--(NSNumber *)convertNSDateToSeconds{
-    
+
+-(NSNumber *)convertNSDateToSeconds
+{
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     
     NSDateComponents *components = [[NSDateComponents alloc] init];
@@ -54,8 +57,8 @@
     return [format stringFromDate:self];
 }
 
--(NSString*)convertNSDateToTimeString{
-    
+-(NSString*)convertNSDateToTimeString
+{
     NSDateFormatter *format =[[NSDateFormatter alloc]init];
     [format setDateFormat:@"h:mm aa"];
     return [format stringFromDate:self];

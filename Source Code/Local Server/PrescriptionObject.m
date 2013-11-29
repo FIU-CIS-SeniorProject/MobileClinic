@@ -17,7 +17,8 @@ NSString* isLockedBy;
 #pragma mark - BaseObjectProtocol Methods
 #pragma mark -
 
-+(NSString *)DatabaseName{
++(NSString *)DatabaseName
+{
     return DATABASE;
 }
 
