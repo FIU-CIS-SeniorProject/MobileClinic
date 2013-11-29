@@ -24,7 +24,7 @@
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 3/24/13.
-//  Modified by Kevin Diaz on 11/23/13.
+//  Edited by James Mendez 11/2013
 //
 #import "MainMenu.h"
 #import "ServerCore.h"
@@ -33,8 +33,7 @@
 #import "PatientTable.h"
 #import "MedicationList.h"
 #import "SystemBackup.h"
-
-
+#import "CloudManagementObject.h"
 
 SystemBackup* backup;
 MedicationList* medicationView;
@@ -46,13 +45,12 @@ id currentView;
 id<ServerProtocol> connection;
 @implementation MainMenu
 
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self)
     {
-    
+
     }
     
     return self;
@@ -314,18 +312,6 @@ id<ServerProtocol> connection;
             [_statusLabel setStringValue:@"OFF"];
             break;
     }
-}
-
--(void)enableButtons:(NSNotification*)note
-{
-    [loginView.view removeFromSuperview];
-    currentView = nil;
-    //restore initial state of logged out user
-    [_userButton setEnabled: YES];
-    [_patientButton setEnabled: YES];
-    [_medicationButton setEnabled: YES];
-    [_logoutButton setEnabled: YES];
-
 }
 
 - (IBAction)pushPatientsToCloud:(id)sender

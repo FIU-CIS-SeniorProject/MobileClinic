@@ -1,0 +1,42 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="PharmacyPatientViewController",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="UIViewController",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_u_i_view_controller.html"];
+  Node3 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" medicineViewController" ,fontname="Helvetica"];
+  Node3 [label="MedicineSearchViewController",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interface_medicine_search_view_controller.html"];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" precriptionViewController" ,fontname="Helvetica"];
+  Node4 [label="PharamcyPrescriptionView\lController",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interface_pharamcy_prescription_view_controller.html"];
+  Node2 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" patientData" ,fontname="Helvetica"];
+  Node5 [label="PatientObject",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interface_patient_object.html"];
+  Node6 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="BaseObject",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interface_base_object.html"];
+  Node7 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="DatabaseDriver",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interface_database_driver.html"];
+  Node8 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="NSObject",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_n_s_object.html"];
+  Node9 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="\<DatabaseDriverProtocol\>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$protocol_database_driver_protocol-p.html"];
+  Node10 -> Node7 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" appDelegate" ,fontname="Helvetica"];
+  Node10 [label="FIUAppDelegate",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interface_f_i_u_app_delegate.html"];
+  Node11 -> Node10 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" currentUserName" ,fontname="Helvetica"];
+  Node11 [label="NSString",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_n_s_string.html"];
+  Node12 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="\<BaseObjectProtocol\>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$protocol_base_object_protocol-p.html"];
+  Node13 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node13 [label="\<PatientObjectProtocol\>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$protocol_patient_object_protocol-p.html"];
+  Node14 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" prescriptionData" ,fontname="Helvetica"];
+  Node14 [label="PrescriptionObject",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interface_prescription_object.html"];
+  Node6 -> Node14 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node15 -> Node14 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" prescription" ,fontname="Helvetica"];
+  Node15 [label="Prescription",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interface_prescription.html"];
+  Node11 -> Node15 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" instructions\nprescribedTime\nmedicationId\nvisitId\nprescriptionId" ,fontname="Helvetica"];
+  Node5 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" patientData" ,fontname="Helvetica"];
+  Node14 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" prescriptionData" ,fontname="Helvetica"];
+  Node11 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" medName" ,fontname="Helvetica"];
+}

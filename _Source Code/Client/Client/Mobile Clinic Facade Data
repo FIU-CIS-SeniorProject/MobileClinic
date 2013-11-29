@@ -1,0 +1,7 @@
+This Subsystem is designed to store, manipulate and transfer the data. We used dictionaries on purpose instead of subclassing NSManagedObjects because it is easy to convert the data to an acceptable for for transfering to and from the server. 
+
+Use the MobileClinicFacade as the gatekeeper between sending information to the server. Normally all you need to do is hand it the dictionary you want to send and the fill out the block hanlder and the facade will cache the dictionary to the device as well as send it out to the server. If there is an error the Facade will return it back to you so that you can take appropriate actions. 
+
+For each entity in the database there is a corresponing Data Model, which inherits from the BaseModel. The objects were abstracted to this level to make it easier to create new models and find errors.
+
+The BaseObject Is the middle man between the Server API  (Which is responsible for sending the information to and from the server) and the local database Drivers. Any objects that need to be sent and saved needs to inherit from this object.

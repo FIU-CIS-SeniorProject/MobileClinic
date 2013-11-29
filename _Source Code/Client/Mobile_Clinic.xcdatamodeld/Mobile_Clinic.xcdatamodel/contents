@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2057" systemVersion="12C60" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Patients" representedClassName="Patients" syncable="YES">
+        <attribute name="age" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="familyName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="patientId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="photo" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="sex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="villageName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="visitation" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Visitation" syncable="YES"/>
+    </entity>
+    <entity name="Users" representedClassName="Users" syncable="YES">
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="patient" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Patients" syncable="YES"/>
+    </entity>
+    <entity name="Visitation" representedClassName="Visitation" syncable="YES">
+        <attribute name="checkInTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="checkOutTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="complaint" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="diagnosisNotes" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="diagnosisTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isGraphic" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="physicianUsername" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="visitationId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="weight" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Patients" positionX="376" positionY="198" width="128" height="180"/>
+        <element name="Users" positionX="160" positionY="192" width="128" height="165"/>
+        <element name="Visitation" positionX="160" positionY="192" width="128" height="180"/>
+    </elements>
+</model>

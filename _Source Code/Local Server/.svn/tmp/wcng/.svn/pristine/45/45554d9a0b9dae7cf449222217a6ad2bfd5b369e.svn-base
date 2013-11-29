@@ -1,0 +1,40 @@
+//
+//  ConnectListContent.m
+//  Mobile Clinic
+//
+//  Created by Michael Montaque on 1/28/13.
+//  Copyright (c) 2013 Florida International University. All rights reserved.
+//
+
+#import "ConnectListContent.h"
+#import "UserObject.h"
+@implementation ConnectListContent
+
+-(void)viewDidMoveToSuperview{
+   
+}
+
+-(void)viewWillDraw{
+    if (!appDelegate) {
+        appDelegate = (FIUAppDelegate*)[[NSApplication sharedApplication]delegate];
+        
+        NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
+        // Called when the server saves information
+        [center addObserverForName:SAVE_USER object:nil queue:nil usingBlock:^(NSNotification *note) {
+            [self displayUserInformation:note.object];
+        }];
+        
+        // Called when the user taps a user Row
+        [center addObserverForName:SELECTED_A_USER object:nil queue:nil usingBlock:^(NSNotification *note) {
+            [self displayUserInformation:note.object];
+        }];
+    }
+}
+
+-(void)displayUserInformation:(UserObject*)user{
+    [_titleText setStringValue:user.username];
+    [_info setString:user.description];
+    [_Password setStringValue:user.password];
+    [_userTypeBox selectItemAtIndex:user.type];
+}
+@end
