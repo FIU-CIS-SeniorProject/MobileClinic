@@ -33,7 +33,8 @@
 #define USERNAME    @"userName"
 #define PASSWORD    @"password"
 #define USERTYPE    @"userType" //The different user types (look at enum)
-#define SAVE_USER @"savedUser"
+#define CHARITYID   @"charityId"
+#define SAVE_USER   @"savedUser"
 
 /** Secondary type examples
  * 0001 -> Triage

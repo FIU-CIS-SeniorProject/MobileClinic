@@ -35,30 +35,36 @@
 @end
 
 @implementation LoginView
-@synthesize usernameTextField, passwordTextField, user;
+@synthesize usernameTextField, passwordTextField;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-
+        
     }
     
     return self;
 }
 
-- (IBAction)login:(id)sender
-{
-    if (!user)
-    {
-        user = [[UserObject alloc]init];
-    }
-
-    [user loginWithUsername:[usernameTextField stringValue] andPassword:[passwordTextField stringValue] onCompletion:^(id<BaseObjectProtocol> data, NSError *error, Users *userA)
-    {
+- (IBAction)login:(id)sender {
+    
+    UserObject* users = [[UserObject alloc]init];
+    
+    // Sync appropriate users from cloud to the server
+    [users pullFromCloud:^(id<BaseObjectProtocol> data, NSError *error)
+     {
+         if (error)
+         {
+             [NSApp presentError:error];
+         }
+         
+     }];
+    
+    [users loginWithUsername:[usernameTextField stringValue] andPassword:[passwordTextField stringValue] onCompletion:^(id<BaseObjectProtocol> data, NSError *error, Users *userA) {
+        
         //TODO: fix error
-        if (error)
-        {
+        if (error) {
             [[NSApplication sharedApplication] presentError:error];
         }
         else

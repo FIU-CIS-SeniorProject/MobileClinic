@@ -27,6 +27,7 @@
 //
 #import <Cocoa/Cocoa.h>
 #import "UserObject.h"
+
 @interface UserView : NSViewController<NSTableViewDataSource,NSTableViewDelegate>
 
 @property (weak) IBOutlet NSTableView *tableView;

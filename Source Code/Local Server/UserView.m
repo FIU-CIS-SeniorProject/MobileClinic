@@ -24,6 +24,7 @@
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 3/23/13.
+//  Edited by Kevin Diaz on 11/2013
 //
 
 #import "UserView.h"
@@ -81,8 +82,8 @@
     return allUsers.count;
 }
 
--(BOOL)tableView:(NSTableView *)tableView shouldSelectRow:(NSInteger)row{
-    
+-(BOOL)tableView:(NSTableView *)tableView shouldSelectRow:(NSInteger)row
+{
     currentUser = [NSMutableDictionary dictionaryWithDictionary:[allUsers objectAtIndex:row]];
     
     [primaryRolePicker selectItemAtIndex:[[currentUser objectForKey:USERTYPE]integerValue]];
@@ -112,20 +113,21 @@
     
     UserObject* user =[[UserObject alloc]initWithCachedObjectWithUpdatedObject:currentUser];
     
-    [user saveObject:^(id<BaseObjectProtocol> data, NSError *error) {
+    [user saveObject:^(id<BaseObjectProtocol> data, NSError *error)
+    {
         NSLog(@"User save status:%@",(!error)?@"OK":@"FAILED");
         [self refreshTable:nil];
     }];
 }
 
-- (IBAction)cloudSync:(id)sender {
-    
+- (IBAction)cloudSync:(id)sender
+{
     UserObject* users = [[UserObject alloc]init];
     
     [loadIndicator startAnimation:self];
     
-    [users pullFromCloud:^(id<BaseObjectProtocol> data, NSError *error) {
-      
+    [users pullFromCloud:^(id<BaseObjectProtocol> data, NSError *error)
+    {
         if (error)
         {
             [NSApp presentError:error];
@@ -134,7 +136,6 @@
         [self refreshTable:nil];
         
         [loadIndicator stopAnimation:self];
-            
     }];
 }
 @end
