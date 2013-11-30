@@ -3,11 +3,12 @@
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 3/15/13.
-//  Copyright (c) 2013 Florida International University. All rights reserved.
+//  Edited by Kevin Diaz on 11/2013
 //
 
 #import "CloudService.h"
 #import <IOKit/IOKitLib.h>
+#import <CommonCrypto/CommonCryptor.h>
 
 @interface CloudService()
 {
@@ -293,4 +294,65 @@
     return [[NSString alloc] initWithData:jsonParamsData encoding:NSUTF8StringEncoding];
 }
 
+@end
+
+@implementation NSData (AES256)
+
+- (NSData*) encryptedWithKey: (NSString *) key;
+{
+    // 'key' should be 32 bytes for AES256, will be null-padded otherwise
+    char keyBuffer[kCCKeySizeAES128+1]; // room for terminator (unused)
+    bzero( keyBuffer, sizeof(keyBuffer) ); // fill with zeroes (for padding)
+    
+    [key getCString: keyBuffer maxLength: sizeof(keyBuffer) encoding: NSUTF8StringEncoding];
+    
+    // encrypts in-place, since this is a mutable data object
+    size_t numBytesEncrypted = 0;
+    
+    size_t returnLength = ([self length] + kCCKeySizeAES256) & ~(kCCKeySizeAES256 - 1);
+    
+    // NSMutableData* returnBuffer = [NSMutableData dataWithLength:returnLength];
+    char* returnBuffer = malloc(returnLength * sizeof(uint8_t) );
+    
+    CCCryptorStatus result = CCCrypt(kCCEncrypt, kCCAlgorithmAES128 , kCCOptionPKCS7Padding | kCCOptionECBMode,
+                                     keyBuffer, kCCKeySizeAES128, nil,
+                                     [self bytes], [self length],
+                                     returnBuffer, returnLength,
+                                     &numBytesEncrypted);
+    
+    if(result == kCCSuccess)
+        return [NSData dataWithBytes:returnBuffer length:numBytesEncrypted];
+    else
+        return nil;
+    
+}
+
+- (NSData*) decryptWithKey: (NSString *) key
+{
+    // 'key' should be 32 bytes for AES256, will be null-padded otherwise
+    char keyBuffer[kCCKeySizeAES256+1]; // room for terminator (unused)
+    bzero( keyBuffer, sizeof(keyBuffer) ); // fill with zeroes (for padding)
+    
+    // fetch key data
+    [key getCString: keyBuffer maxLength: sizeof(keyBuffer) encoding: NSUTF8StringEncoding];
+    
+    // encrypts in-place, since this is a mutable data object
+    size_t numBytesEncrypted = 0;
+    
+    size_t returnLength = ([self length] + kCCKeySizeAES256) & ~(kCCKeySizeAES256 - 1);
+    
+    // NSMutableData* returnBuffer = [NSMutableData dataWithLength:returnLength];
+    char* returnBuffer = malloc(returnLength * sizeof(uint8_t) );
+    
+    CCCryptorStatus result = CCCrypt( kCCDecrypt, kCCAlgorithmAES128, kCCOptionPKCS7Padding,
+                                     keyBuffer, kCCKeySizeAES256, nil,
+                                     [self bytes], [self length],
+                                     returnBuffer, returnLength,
+                                     &numBytesEncrypted);
+    
+    if(result == kCCSuccess)
+        return [NSData dataWithBytes:returnBuffer length:numBytesEncrypted];
+    else
+        return nil;
+}
 @end
