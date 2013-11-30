@@ -1,0 +1,105 @@
+<% provide(:title, "Edit user") %>
+<div class="block">
+	<div id="main" role="main">
+		<div class="grid">
+			<div class="grid-title">
+				<div class="pull-left">
+					<div class="icon-title">
+						<i class="icon-edit"></i>
+					</div>
+					<span>Edit User</span>
+					<div class="clearfix"></div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="grid-content">
+				<%= form_for(@user, :html => { :multipart => true, role: "form" }) do |f| %>
+					<%= render 'shared/error_messages' %>
+					<div class="formRow">
+						<%= f.label :firstName, "First Name", class: "label-gray"%>
+						<div class="formRight">
+							<%= f.text_field :firstName, class: "form-control"%>
+						</div>
+					</div>
+					<div class="formRow">
+						<%= f.label :lastName, "Last Name", class: "label-gray"%>
+						<div class="formRight">
+							<%= f.text_field :lastName, class: "form-control" %>
+						</div>
+					</div>
+					<div class="formRow">
+						<%= f.label :email, "Email", class: "label-gray"%>
+						<div class="formRight">
+							<%= f.text_field :email, class: "form-control", type: "email" %>
+						</div>
+					</div>
+					<div class="formRow">
+						<%= f.label :userName, "Username", class: "label-gray"%>
+						<div class="formRight">
+							<%= f.text_field :userName, class: "form-control" %>
+						</div>
+					</div>
+					<% if current_user.userType != 0 %>
+						<div class="formRow">
+							<%= f.label :userType, class: "label-gray"%>
+							<div class="formRight">
+								<%= f.select :userType, [['Charity Local Admin',1]], class: "form-control"%>
+							</div>
+						</div>
+						<div class="formRow">
+							<%= f.label :charityid, class: "label-gray"%>
+							<div class="formRight">
+								<%= f.collection_select :charityid,Charity.where("charityid = ?",current_user.charityid),:charityid,:name, class: "form-control"%>
+							</div>
+						</div>
+					<% else %>
+						<div class="formRow">
+							<%= f.label :userType, class: "label-gray"%>
+							<div class="formRight">
+								<%= f.select :userType, [['Admin',0], ['Charity Local Admin',1]], class: "form-control"%>
+							</div>
+						</div>
+						<div class="formRow">
+							<%= f.label :charityid, class: "label-gray"%>
+							<div class="formRight">
+								<%= f.collection_select :charityid,Charity.all,:charityid,:name, class: "form-control"%>
+							</div>
+						</div>
+					<% end %>
+					<div class="formRow">
+						<%= f.label :status, class: "label-gray"%>
+						<div class="formRight">
+							<%= f.select :status, [['Active',1], ['Inactive',0]], class: "form-control"%>
+						</div>
+					</div>
+					<div class="formRow">
+						<%= f.label "Pictures" , class: "label-gray" %>
+						<div class="formRight">
+							<%= f.file_field :avatar , class: "form-control", type: "file" %>
+						</div>
+					</div>
+					<%- unless @user.new_record? || !@user.avatar? -%>
+						<div class="formRow">
+							<%= f.label(:delete_avatar, 'Delete photo') %>
+							<div class="formRight">
+								<div>
+									<%= f.check_box(:delete_avatar) %>
+								</div>
+							</div>
+						</div>
+						<div class="formRow">
+							<div class="formRight">
+								<%= image_tag(@user.avatar.url(:medium) , :alt => 'Photo', :title => 'Current photo') %>
+							</div>
+						</div>
+					<%- end -%>
+					<%= f.submit "Save changes", :class => "btn btn-large btn-block btn-info" %>
+					<%= link_to 'Back', @user, :class => "btn btn-large btn-block btn-default" %>
+					<% if current_user.userName == @user.userName %>
+					<%= link_to 'Change Password', change_password_user_path(@user.userid), :class => "btn btn-large btn-block btn-warning" %>
+					<% end %>
+				<%- end -%>
+			</div>
+		</div>
+	</div>
+</div>

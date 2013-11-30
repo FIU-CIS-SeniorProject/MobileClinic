@@ -1,0 +1,50 @@
+ [{
+        "email" : "0@0.0",
+        "firstName" : "0",
+        "lastName" : "0",
+        "password" : "0",
+        "secondaryTypes" : 0,
+        "status" : 1,
+        "userName" : "0",
+        "userType" : 1
+    },
+    {
+        "email" : "jmend010@fiu.edu",
+        "firstName" : "James",
+        "lastName" : "Mendez",
+        "password" : "foobar",
+        "secondaryTypes" : 0,
+        "status" : 1,
+        "userName" : "jmendez",
+        "userType" : 1
+    },
+    {
+        "email" : "epere250@fiu.edu",
+        "firstName" : "Ernesto",
+        "lastName" : "Perez",
+        "password" : "foobar",
+        "secondaryTypes" : 0,
+        "status" : 1,
+        "userName" : "eperez",
+        "userType" : 1
+    },
+    {
+        "email" : "kdiaz020@fiu.edu",
+        "firstName" : "Kevin",
+        "lastName" : "Diaz",
+        "password" : "foobar",
+        "secondaryTypes" : 0,
+        "status" : 1,
+        "userName" : "kdiaz",
+        "userType" : 1
+    },
+    {
+        "email" : "hsuar001@fiu.edu",
+        "firstName" : "Humberto",
+        "lastName" : "Suarez",
+        "password" : "foobar",
+        "secondaryTypes" : 0,
+        "status" : 1,
+        "userName" : "hsuarez",
+        "userType" : 1
+    }]

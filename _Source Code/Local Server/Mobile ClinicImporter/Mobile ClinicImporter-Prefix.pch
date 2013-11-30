@@ -1,0 +1,6 @@
+//
+// Prefix header for all source files of the 'Mobile ClinicImporter' target in the 'Mobile ClinicImporter' project
+//
+
+#ifdef __OBJC__
+#endif

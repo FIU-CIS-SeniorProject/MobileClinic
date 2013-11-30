@@ -1,0 +1,21 @@
+//
+//  ConnectionTable.h
+//  Mobile Clinic
+//
+//  Created by Michael Montaque on 1/27/13.
+//  Copyright (c) 2013 Florida International University. All rights reserved.
+//
+
+#import <Cocoa/Cocoa.h>
+#import "FIUAppDelegate.h"
+
+@interface ConnectionTable : NSTableView <NSTableViewDataSource,NSTableViewDelegate>{
+    FIUAppDelegate* appDelegate;
+}
+@property(nonatomic, strong)    NSArray* listOfUsers;
+
+-(IBAction)AuthorizeUser:(id)sender;
+-(IBAction)CommitNewUserInfo:(id)sender;
+-(IBAction)refreshServer:(id)sender;
+-(IBAction)StopServer:(id)sender;
+@end

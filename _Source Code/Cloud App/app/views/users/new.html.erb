@@ -1,0 +1,69 @@
+<% provide(:title, 'Create Cloud User') %>
+<div class="block">
+	<div class="block">
+		<div class="grid">
+			<div class="grid-title">
+				<div class="pull-left">
+					<div class="icon-title">
+						<i class="icon-plus"></i>
+					</div>
+					<span>New User</span>
+					<div class="clearfix"></div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="grid-content">
+				<%= form_for @user, html: {role: "form"} do |f| %>
+				<div class="grid-content overflow">
+					<%= render 'shared/error_messages' %>
+					<%= f.text_field :firstName , :placeholder => 'First Name', class: "form-control", type: "text" %>
+				</div>
+				<div class="grid-content overflow">
+					<%= f.text_field :lastName , :placeholder => 'Last Name', class: "form-control", type: "text" %>
+				</div>
+				<div class="grid-content overflow">
+					<%= f.text_field :email , :placeholder => 'Email', class: "form-control", type: "email" %>
+				</div>
+				<div class="grid-content overflow">
+					<%= f.text_field :userName , :placeholder => 'User Name', class: "form-control", type: "text" %>
+				</div>
+				<div class="grid-content overflow">
+					<%= f.password_field :password , :placeholder => 'Password',class: "form-control", type: "password" %>
+				</div>
+				<div class="grid-content overflow">
+					<%= f.password_field :password_confirmation , class: "span input", :placeholder => 'Repeat Password',class: "form-control", type: "password" %>
+				</div>
+				<div class="grid-content overflow">
+					<%= f.select :question, [['Who was your childhood hero?',1], ['What is the name of the company of your first job?',2], ['What was your childhood nickname?',3], ['What school did you attend for sixth grade?',4], ['What street did you live on in third grade?',5]], class: "form-control" %>
+				</div>
+				<div class="grid-content overflow">
+					<%= f.text_field :answer , :placeholder => 'Enter security answer', class: "form-control", type: "text" %>
+				</div>
+				<% if current_user.userType != 0 %>
+					<div class="grid-content overflow">
+						<%= f.collection_select :charityid, Charity.where("charityid = ?",current_user.charityid),:charityid,:name,class: "form-control" %>
+					</div>
+					<div class="grid-content overflow">
+						<%= f.select :userType, [['Charity Local Admin',1]], class: "form-control" %>
+					</div>
+				<% else %>
+					<div class="grid-content overflow">
+						<%= f.collection_select :charityid, Charity.all,:charityid,:name,class: "form-control" %>
+					</div>
+					<div class="grid-content overflow">
+						<%= f.select :userType, [['Admin',0], ['Charity Local Admin',1]], class: "form-control" %>
+					</div>
+				<% end %>
+				<div class="grid-content overflow">
+					<%= f.select :status, [['Active',1], ['Inactive',0]], class: "form-control" %>
+				</div>
+				<div class="grid-content overflow">
+					<%= f.file_field :avatar , class: "form-control", type: "file"%>
+				</div>
+				<%= f.submit "Create Account", :class => "btn btn-large btn-block btn-info"%>
+				<%= link_to 'Back', users_path, :class => "btn btn-large btn-block btn-default" %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>

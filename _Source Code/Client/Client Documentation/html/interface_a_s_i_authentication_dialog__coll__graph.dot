@@ -1,0 +1,22 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="ASIAuthenticationDialog",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="ASIAutorotatingViewController",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interface_a_s_i_autorotating_view_controller.html"];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="UIViewController",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_u_i_view_controller.html"];
+  Node3 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" presentingController" ,fontname="Helvetica"];
+  Node4 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" request" ,fontname="Helvetica"];
+  Node4 [label="ASIHTTPRequest",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interface_a_s_i_h_t_t_p_request.html"];
+  Node5 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" lastActivityTime" ,fontname="Helvetica"];
+  Node5 [label="NSDate",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_n_s_date.html"];
+  Node6 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" dataDecompressor" ,fontname="Helvetica"];
+  Node6 [label="ASIDataDecompressor",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interface_a_s_i_data_decompressor.html"];
+  Node7 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="NSObject",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_n_s_object.html"];
+  Node8 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" temporaryFileDownloadPath\nproxyAuthenticationScheme\npassword\nproxyUsername\ncompressedPostBodyFilePath\ndomain\nrunLoopMode\nrequestMethod\nproxyType\nresponseStatusMessage\n..." ,fontname="Helvetica"];
+  Node8 [label="NSString",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_n_s_string.html"];
+  Node4 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" PACFileRequest\nmainRequest" ,fontname="Helvetica"];
+}

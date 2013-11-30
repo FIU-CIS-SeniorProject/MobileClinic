@@ -1,0 +1,167 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/mcemr/!svn/ver/76/trunk/Local%20Server/Server
+END
+NSString+Validation.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/mcemr/!svn/ver/76/trunk/Local%20Server/Server/NSString+Validation.h
+END
+ObjectFactory.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/mcemr/!svn/ver/76/trunk/Local%20Server/Server/ObjectFactory.h
+END
+BaseObject.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/mcemr/!svn/ver/76/trunk/Local%20Server/Server/BaseObject.h
+END
+NSString+Validation.m
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/mcemr/!svn/ver/76/trunk/Local%20Server/Server/NSString+Validation.m
+END
+ObjectFactory.m
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/mcemr/!svn/ver/76/trunk/Local%20Server/Server/ObjectFactory.m
+END
+GCDAsyncSocket.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/mcemr/!svn/ver/76/trunk/Local%20Server/Server/GCDAsyncSocket.h
+END
+UserObject.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/mcemr/!svn/ver/76/trunk/Local%20Server/Server/UserObject.h
+END
+BaseObject.m
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/mcemr/!svn/ver/76/trunk/Local%20Server/Server/BaseObject.m
+END
+Server.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/mcemr/!svn/ver/76/trunk/Local%20Server/Server/Server.h
+END
+ConnectionTable.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/mcemr/!svn/ver/76/trunk/Local%20Server/Server/ConnectionTable.h
+END
+ServerWrapper.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/mcemr/!svn/ver/76/trunk/Local%20Server/Server/ServerWrapper.h
+END
+GCDAsyncSocket.m
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/mcemr/!svn/ver/76/trunk/Local%20Server/Server/GCDAsyncSocket.m
+END
+StatusObject.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/mcemr/!svn/ver/76/trunk/Local%20Server/Server/StatusObject.h
+END
+UserObject.m
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/mcemr/!svn/ver/76/trunk/Local%20Server/Server/UserObject.m
+END
+Server.m
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/mcemr/!svn/ver/76/trunk/Local%20Server/Server/Server.m
+END
+ConnectionTable.m
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/mcemr/!svn/ver/76/trunk/Local%20Server/Server/ConnectionTable.m
+END
+ServerWrapper.m
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/mcemr/!svn/ver/76/trunk/Local%20Server/Server/ServerWrapper.m
+END
+HTTPServerCore.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/mcemr/!svn/ver/76/trunk/Local%20Server/Server/HTTPServerCore.h
+END
+ServerCore.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/mcemr/!svn/ver/76/trunk/Local%20Server/Server/ServerCore.h
+END
+StatusObject.m
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/mcemr/!svn/ver/76/trunk/Local%20Server/Server/StatusObject.m
+END
+DatabaseDriver.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/mcemr/!svn/ver/76/trunk/Local%20Server/Server/DatabaseDriver.h
+END
+ConnectListContent.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/mcemr/!svn/ver/76/trunk/Local%20Server/Server/ConnectListContent.h
+END
+BaseObjectProtocol.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/mcemr/!svn/ver/76/trunk/Local%20Server/Server/BaseObjectProtocol.h
+END
+HTTPServerCore.m
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/mcemr/!svn/ver/76/trunk/Local%20Server/Server/HTTPServerCore.m
+END
+ServerCore.m
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/mcemr/!svn/ver/76/trunk/Local%20Server/Server/ServerCore.m
+END
+DatabaseDriver.m
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/mcemr/!svn/ver/76/trunk/Local%20Server/Server/DatabaseDriver.m
+END
+ConnectListContent.m
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/mcemr/!svn/ver/76/trunk/Local%20Server/Server/ConnectListContent.m
+END
