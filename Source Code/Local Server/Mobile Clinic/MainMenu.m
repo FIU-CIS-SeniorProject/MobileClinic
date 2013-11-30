@@ -314,6 +314,17 @@ id<ServerProtocol> connection;
     }
 }
 
+-(void)enableButtons:(NSNotification*)note
+{
+    [loginView.view removeFromSuperview];
+    currentView = nil;
+    //restore initial state of logged out user
+    [_userButton setEnabled: YES];
+    [_patientButton setEnabled: YES];
+    [_medicationButton setEnabled: YES];
+    [_logoutButton setEnabled: YES];
+}
+
 - (IBAction)pushPatientsToCloud:(id)sender
 {
     [[[PatientObject alloc]init]pushToCloud:^(id cloudResults, NSError *error)

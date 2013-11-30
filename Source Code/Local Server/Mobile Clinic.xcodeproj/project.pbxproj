@@ -34,6 +34,7 @@
 		8C0F67C3184A879F0039581E /* CloudManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C0F67C2184A879F0039581E /* CloudManager.m */; };
 		8C3DE3611849471700096CDE /* Mobile_Clinic.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8C3DE35F1849471700096CDE /* Mobile_Clinic.xcdatamodeld */; };
 		8C3DE36318494C3700096CDE /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C3DE36218494C3700096CDE /* IOKit.framework */; };
+		8CA3A94B184AA66500317B04 /* NSMutableData-AES.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA3A94A184AA66500317B04 /* NSMutableData-AES.m */; };
 		EA09328916F818D200536DF3 /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = EA09328816F818D200536DF3 /* Database.m */; };
 		EA0FE4DC171CB3CA00E68DFD /* SystemBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0FE4DB171CB3CA00E68DFD /* SystemBackup.m */; };
 		EA0FE4DD171CB3CA00E68DFD /* SystemBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0FE4DB171CB3CA00E68DFD /* SystemBackup.m */; };
@@ -160,6 +161,8 @@
 		8C0F67C2184A879F0039581E /* CloudManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloudManager.m; sourceTree = "<group>"; };
 		8C3DE3601849471700096CDE /* Mobile_Clinic.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Mobile_Clinic.xcdatamodel; sourceTree = "<group>"; };
 		8C3DE36218494C3700096CDE /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		8CA3A949184AA66500317B04 /* NSMutableData-AES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableData-AES.h"; sourceTree = "<group>"; };
+		8CA3A94A184AA66500317B04 /* NSMutableData-AES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableData-AES.m"; sourceTree = "<group>"; };
 		8CC2A5A41845A119001D7BD1 /* libopencv_calib3d.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libopencv_calib3d.2.4.6.dylib; sourceTree = "<group>"; };
 		8CC2A5A51845A119001D7BD1 /* libopencv_contrib.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libopencv_contrib.2.4.6.dylib; sourceTree = "<group>"; };
 		8CC2A5A61845A119001D7BD1 /* libopencv_core.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libopencv_core.2.4.6.dylib; sourceTree = "<group>"; };
@@ -554,6 +557,8 @@
 				EA0FE4F3171E2BAF00E68DFD /* libz.dylib */,
 				EA0FE4EF171E2B1300E68DFD /* NSData+GZIP.h */,
 				EA0FE4F0171E2B1300E68DFD /* NSData+GZIP.m */,
+				8CA3A949184AA66500317B04 /* NSMutableData-AES.h */,
+				8CA3A94A184AA66500317B04 /* NSMutableData-AES.m */,
 				EA0FE4DA171CB3CA00E68DFD /* SystemBackup.h */,
 				EA0FE4DB171CB3CA00E68DFD /* SystemBackup.m */,
 				EA7D505C17179DA3002ED819 /* Icons */,
@@ -979,6 +984,7 @@
 				EA5D38F816B9E38000377D2C /* GCDAsyncSocket.m in Sources */,
 				EA5D38FE16B9E55D00377D2C /* ServerCore.m in Sources */,
 				EA186A4716BB5BF500977A00 /* HTTPServerCore.m in Sources */,
+				8CA3A94B184AA66500317B04 /* NSMutableData-AES.m in Sources */,
 				EA9372AB16BC6D6300D3D617 /* DatabaseDriver.m in Sources */,
 				EAE6CD9F16BE29B9008949DC /* NSString+Validation.m in Sources */,
 				463294A216C9B97B00C57DCE /* PatientObject.m in Sources */,

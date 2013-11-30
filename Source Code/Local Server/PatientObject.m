@@ -233,10 +233,12 @@ NSString* isLockedBy;
 {
     // allocate and init a CloudManagementObject for timestamp
     CloudManagementObject* TSCloudMO = [[CloudManagementObject alloc] init];
-    NSMutableDictionary* timestamp = [[TSCloudMO GetActiveTimestamp] mutableCopy];
-
+    NSNumber* timestamp = [TSCloudMO GetActiveTimestamp];
+    NSMutableDictionary* timeDic = [[NSMutableDictionary alloc] init];
+    [timeDic setObject:timestamp forKey:@"Timestamp"];
+    
     //TODO: replace "withObject:nil" with timestamp dictionary
-    [self makeCloudCallWithCommand:DATABASE withObject:timestamp onComplete:^(id cloudResults, NSError *error)
+    [self makeCloudCallWithCommand:DATABASE withObject:timeDic onComplete:^(id cloudResults, NSError *error)
     {
         NSArray* allPatients = [cloudResults objectForKey:@"data"];
         [self handleCloudCallback:onComplete UsingData:allPatients WithPotentialError:error];
@@ -248,7 +250,7 @@ NSString* isLockedBy;
         NSMutableDictionary* environment = [[CloudMO GetActiveEnvironment] mutableCopy];
         
         // Update timestamp in NSMutableDictionary
-        [environment setObject:[NSDate date] forKey:LASTPULLTIME];
+        [environment setObject:[[NSDate date] convertNSDateToSeconds] forKey:LASTPULLTIME];
         
         // Put back into CloudManagementObject
         CloudMO = [CloudMO initAndFillWithNewObject:environment];
