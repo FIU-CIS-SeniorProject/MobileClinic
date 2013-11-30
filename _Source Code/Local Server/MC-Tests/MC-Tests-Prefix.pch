@@ -1,7 +1,0 @@
-//
-// Prefix header for all source files of the 'MC-Tests' target in the 'MC-Tests' project
-//
-
-#ifdef __OBJC__
-    #import <Cocoa/Cocoa.h>
-#endif
