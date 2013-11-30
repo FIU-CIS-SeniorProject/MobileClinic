@@ -1,6 +1,0 @@
-digraph G {
-  compound=true
-  node [ fontsize="10", fontname="Helvetica"];
-  edge [ labelfontsize="10", labelfontname="Helvetica"];
-  dir_9c7e14f069bc2ed190ac787811b99994 [shape=box, label="Mobile Clinic", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_9c7e14f069bc2ed190ac787811b99994.html"];
-}
