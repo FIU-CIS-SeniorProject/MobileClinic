@@ -1277,7 +1277,7 @@
 				89420CEC182DA1E80070EFC4 /* Mobile_Clinic 5.xcdatamodel */,
 				89420CED182DA1E80070EFC4 /* Mobile_Clinic.xcdatamodel */,
 			);
-			currentVersion = 892962DB182DAC2100746BAB /* Mobile_Clinic 7.xcdatamodel */;
+			currentVersion = 89420CED182DA1E80070EFC4 /* Mobile_Clinic.xcdatamodel */;
 			name = Mobile_Clinic.xcdatamodeld;
 			path = "Mobile Clinic/Mobile_Clinic.xcdatamodeld";
 			sourceTree = "<group>";
