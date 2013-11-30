@@ -3,7 +3,7 @@
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 3/10/13.
-//  Copyright (c) 2013 Florida International University. All rights reserved.
+//  Edited by Kevin Diaz on 11/2013
 //
 #define TRIAGEIN        @"triageIn"
 #define TRIAGEOUT       @"triageOut"
@@ -24,6 +24,7 @@
 #define RESPIRATION     @"respiration"
 #define PRIORITY        @"priority"
 #define VISITID         @"visitationId"
+#define CHARITYID       @"charityId"
 
 #define ISOPEN      @"isOpen"
 #define MEDICATIONNOTES @"medicationNotes"

@@ -20,28 +20,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 //
-//  UserView.h
+//  Users.m
 //  Mobile Clinic
 //
-//  Created by Michael Montaque on 3/23/13.
+//  Created by Michael Montaque on 2/26/13.
 //
-#import <Cocoa/Cocoa.h>
-#import "UserObject.h"
+#import "Users.h"
+#import "Patients.h"
 
-@interface UserView : NSViewController<NSTableViewDataSource,NSTableViewDelegate>
+@implementation Users
 
-@property (weak) IBOutlet NSTableView *tableView;
-@property (weak) IBOutlet NSTextField *usernameLabel;
-@property (weak) IBOutlet NSComboBox *primaryRolePicker;
-@property (weak) IBOutlet NSProgressIndicator *loadIndicator;
-@property (weak) IBOutlet NSComboBox *userStatus;
-@property (weak) IBOutlet NSButton *sTriage;
-@property (weak) IBOutlet NSButton *sDoctor;
-@property (weak) IBOutlet NSButton *sPharmacist;
-@property (weak) IBOutlet NSButton *sAdministrator;
-
-- (IBAction)refreshTable:(id)sender;
-- (IBAction)commitChanges:(id)sender;
-- (IBAction)cloudSync:(id)sender;
+@dynamic email;
+@dynamic firstName;
+@dynamic lastName;
+@dynamic password;
+@dynamic status;
+@dynamic userName;
+@dynamic userType;
+@dynamic patient;
 
 @end

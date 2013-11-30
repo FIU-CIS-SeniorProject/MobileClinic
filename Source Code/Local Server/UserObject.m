@@ -39,7 +39,6 @@
 #import "UserObject.h"
 #import "NSString+Validation.h"
 #import "BaseObject+Protected.h"
-#import "CloudManagementObject.h"
 
 @implementation UserObject
 
@@ -135,16 +134,6 @@
     return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:nil andSortByAttribute:USERNAME]];
 }
 
-//TODO: return list of all users with same charityId as activeUser
-//TODO: Deprecated, since we will only contain users in the same charity???
-/*-(NSArray *)FindAllCharityObjects
-{
-    CloudManagementObject* CloudMO = [[CloudManagementObject alloc] init];
-    NSString* activeUser = [CloudMO GetActiveUser];
-    NSPredicate* pred = [NSPredicate predicateWithFormat:@"%K == %@",CHARITYID, activeUser];
-    return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:pred andSortByAttribute:USERNAME]];
-}//*/
-
 -(NSArray *)FindAllObjectsUnderParentID:(NSString *)parentID
 {
     return [self FindAllObjects];
@@ -164,13 +153,25 @@
     onComplete(nil,[[NSError alloc]initWithDomain:COMMONDATABASE code:kErrorObjectMisconfiguration userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"This feature is not implemented",NSLocalizedFailureReasonErrorKey, nil]]);
 }
 
--(void)pullFromCloud:(CloudCallback)onComplete
-{
+-(void)pullFromCloud:(CloudCallback)onComplete{
+    
     //TODO: Remove Hard Dependencies
     [self makeCloudCallWithCommand:DATABASE withObject:nil onComplete:^(id cloudResults, NSError *error)
     {
-        NSArray* users = [cloudResults objectForKey:@"data"];
-        [self handleCloudCallback:onComplete UsingData:users WithPotentialError:error];
+        if (!error)
+        {
+            NSArray* users = [cloudResults objectForKey:@"data"];
+            
+            NSArray* allError = [self SaveListOfObjectsFromDictionary:users];
+            
+            if (allError.count > 0)
+            {
+                error = [[NSError alloc]initWithDomain:COMMONDATABASE code:kErrorObjectMisconfiguration userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Object was misconfigured",NSLocalizedFailureReasonErrorKey, nil]];
+                onComplete(self,error);
+                return;
+            }
+        }
+        onComplete((!error)?self:nil,error);
     }];
 }
 
@@ -230,11 +231,6 @@
 -(void)loginWithUsername:(NSString*)username andPassword:(NSString*)password onCompletion:(void(^)(id <BaseObjectProtocol> data, NSError* error, Users* userA))onSuccessHandler
 {
     username = [username lowercaseString];
-    // Sync appropriate users from cloud to the server
-    [self pullFromCloud:^(id<BaseObjectProtocol> data, NSError *error)
-     {
-         
-     }];
     
     // Try to find user from username in local DB
     BOOL didFindUser = [self loadObjectForID:username];
@@ -251,15 +247,6 @@
             // Check credentials against the found user
             if ([user.password isEqualToString:password])
             {
-                // set currentUser
-                // Do not need anymore?
-                /*CloudManagementObject* CloudMO = [[CloudManagementObject alloc] init];
-                NSMutableDictionary* environment = [[CloudMO GetActiveEnvironment] mutableCopy];
-                [environment setObject:username forKey:ACTIVEUSER];
-                CloudMO = [CloudMO initAndFillWithNewObject:environment];
-                [CloudMO saveObject:^(id<BaseObjectProtocol> data, NSError *error) {
-                    
-                }];//*/
                 //return with success
                 onSuccessHandler(self,nil, user);
             }

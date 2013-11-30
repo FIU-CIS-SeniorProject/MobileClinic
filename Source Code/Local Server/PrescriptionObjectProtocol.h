@@ -3,7 +3,7 @@
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 3/11/13.
-//  Copyright (c) 2013 Florida International University. All rights reserved.
+//  Edited by Kevin Diaz 11/2013
 //
 #define INSTRUCTIONS    @"instructions"
 #define MEDICATIONID    @"medicationId"
@@ -13,6 +13,7 @@
 #define PRESCRIPTIONID  @"prescriptionId"
 #define VISITID         @"visitationId"
 #define MEDNAME         @"medName"
+#define CHARITYID       @"charityId"
 
 #import <Foundation/Foundation.h>
 #import "CommonObjectProtocol.h"

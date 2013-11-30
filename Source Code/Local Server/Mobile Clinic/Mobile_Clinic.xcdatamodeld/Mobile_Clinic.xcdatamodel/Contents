@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3396" systemVersion="12F45" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="CloudManagement" syncable="YES">
+        <attribute name="activeUser" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="cloudURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isActive" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="isDirty" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -10,6 +11,11 @@
     <entity name="Faces" syncable="YES">
         <attribute name="familyName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isDirty" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isLockedBy" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isOpen" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="label" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="patientId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="photo" optional="YES" attributeType="Binary" syncable="YES"/>
     </entity>
     <entity name="Medication" representedClassName="Medication" syncable="YES">
@@ -33,6 +39,7 @@
         <attribute name="isDirty" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="isLockedBy" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isOpen" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="label" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="patientId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="photo" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="sex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -42,6 +49,7 @@
         <attribute name="villageName" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Prescription" representedClassName="Prescription" syncable="YES">
+        <attribute name="charityId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="instructions" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isDirty" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="isLockedBy" optional="YES" attributeType="String" syncable="YES"/>
@@ -54,6 +62,7 @@
         <attribute name="visitationId" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Users" representedClassName="Users" syncable="YES">
+        <attribute name="charityId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isDirty" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -67,6 +76,7 @@
     <entity name="Visitation" representedClassName="Visitation" syncable="YES">
         <attribute name="assessment" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="bloodPressure" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="charityId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="condition" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="conditionTitle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="diagnosisTitle" optional="YES" attributeType="String" syncable="YES"/>
@@ -91,12 +101,12 @@
         <attribute name="weight" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CloudManagement" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Faces" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Medication" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Patients" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Prescription" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Users" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Visitation" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="CloudManagement" positionX="-216" positionY="-180" width="128" height="133"/>
+        <element name="Faces" positionX="162" positionY="27" width="128" height="165"/>
+        <element name="Medication" positionX="160" positionY="192" width="128" height="180"/>
+        <element name="Patients" positionX="-27" positionY="147" width="128" height="298"/>
+        <element name="Prescription" positionX="162" positionY="-207" width="128" height="210"/>
+        <element name="Users" positionX="-18" positionY="-54" width="128" height="195"/>
+        <element name="Visitation" positionX="-234" positionY="-27" width="128" height="420"/>
     </elements>
 </model>

@@ -20,28 +20,33 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 //
-//  UserView.h
+//  Users.h
 //  Mobile Clinic
 //
-//  Created by Michael Montaque on 3/23/13.
+//  Created by Michael Montaque on 2/26/13.
 //
-#import <Cocoa/Cocoa.h>
-#import "UserObject.h"
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
-@interface UserView : NSViewController<NSTableViewDataSource,NSTableViewDelegate>
+@class Patients;
 
-@property (weak) IBOutlet NSTableView *tableView;
-@property (weak) IBOutlet NSTextField *usernameLabel;
-@property (weak) IBOutlet NSComboBox *primaryRolePicker;
-@property (weak) IBOutlet NSProgressIndicator *loadIndicator;
-@property (weak) IBOutlet NSComboBox *userStatus;
-@property (weak) IBOutlet NSButton *sTriage;
-@property (weak) IBOutlet NSButton *sDoctor;
-@property (weak) IBOutlet NSButton *sPharmacist;
-@property (weak) IBOutlet NSButton *sAdministrator;
+@interface Users : NSManagedObject
 
-- (IBAction)refreshTable:(id)sender;
-- (IBAction)commitChanges:(id)sender;
-- (IBAction)cloudSync:(id)sender;
+@property (nonatomic, retain) NSString * email;
+@property (nonatomic, retain) NSString * firstName;
+@property (nonatomic, retain) NSString * lastName;
+@property (nonatomic, retain) NSString * password;
+@property (nonatomic, retain) NSNumber * status;
+@property (nonatomic, retain) NSString * userName;
+@property (nonatomic, retain) NSNumber * userType;
+@property (nonatomic, retain) NSSet *patient;
+@end
+
+@interface Users (CoreDataGeneratedAccessors)
+
+- (void)addPatientObject:(Patients *)value;
+- (void)removePatientObject:(Patients *)value;
+- (void)addPatient:(NSSet *)values;
+- (void)removePatient:(NSSet *)values;
 
 @end

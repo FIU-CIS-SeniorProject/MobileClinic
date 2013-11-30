@@ -25,16 +25,13 @@
 //
 //  Created by Kevin Diaz on 11/17/13.
 //
-
 #import <Cocoa/Cocoa.h>
 #import "UserObject.h"
 
 @interface LoginView : NSViewController
 
-@property (strong, nonatomic) UserObject*user;
 @property (weak) IBOutlet NSTextField *usernameTextField;
 @property (weak) IBOutlet NSSecureTextField *passwordTextField;
-
 
 - (IBAction)login:(id)sender;
 
