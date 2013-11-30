@@ -86,7 +86,7 @@ CloudManagementObject* cloudMO;
     {
         testDictionary = [[NSMutableDictionary alloc] init];
         [testDictionary setObject:@"test" forKey:NAME];
-        [testDictionary setObject:@(NO) forKey:ISACTIVE];
+        [testDictionary setObject:@(YES) forKey:ISACTIVE];
         [testDictionary setObject:[[NSDate distantPast] convertNSDateToSeconds] forKey:LASTPULLTIME];
         [testDictionary setObject:@"http://still-citadel-8045.herokuapp.com/" forKey:CLOUDURL];
         [testDictionary setObject:@(NO) forKey: ISDIRTY];
@@ -105,7 +105,7 @@ CloudManagementObject* cloudMO;
     {
         productionDictionary = [[NSMutableDictionary alloc] init];
         [productionDictionary setObject:@"production" forKey:NAME];
-        [productionDictionary setObject:@(YES) forKey:ISACTIVE];
+        [productionDictionary setObject:@(NO) forKey:ISACTIVE];
         [productionDictionary setObject:[[NSDate distantPast] convertNSDateToSeconds] forKey:LASTPULLTIME];
         [productionDictionary setObject:@"http://pure-island-5858.herokuapp.com/" forKey:CLOUDURL];
         [productionDictionary setObject:@(NO) forKey: ISDIRTY];
