@@ -7,7 +7,7 @@
 //
 #define ARCHIVER        @"archiver"
 #define READING_TIMEOUT 10
-#define CONNECT_TIMEOUT 5
+#define CONNECT_TIMEOUT 3.5
 
 #import "ServerCore.h"
 #import "ObjectFactory.h"
@@ -55,10 +55,8 @@ static BOOL connected;
     NSLog(@"Client Started Searching");
     
     // If client is not connected, try to connect
-    if (!connected)
-    {
-        if (!connectionTimer.isValid)
-        {
+    if (!connected) {
+        if (!connectionTimer.isValid) {
             [netServiceBrowser searchForServicesOfType:@"_MC-EMR._tcp." inDomain:@"local."];
             
             // Starts Timeout Timer
@@ -295,7 +293,7 @@ static BOOL connected;
         // Invalidate Reading Timeout timer
         [connectionTimer invalidate];
         
-        NSLog(@"Client Recieved: %@",myDictionary.allKeys.description);
+        NSLog(@"Client Recieved: %@",myDictionary.allKeys);
         
         // Finished Processing
         isProcessing = NO;

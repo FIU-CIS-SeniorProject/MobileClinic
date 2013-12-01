@@ -77,6 +77,43 @@ CloudManagementObject* cloudMO;
     [_OptimizeToggler setTitle:@"First Sync -> Fast Sync"];
     [CloudService cloud];
     [_window setHidesOnDeactivate:NO];
+    
+    // Initialize the CloudManagementObjects if they do not exist
+    // TEST
+    NSMutableDictionary* testDictionary = [[[[CloudManagementObject alloc] init] GetEnvironment:@"test"] mutableCopy];
+    
+    if (testDictionary == nil)
+    {
+        testDictionary = [[NSMutableDictionary alloc] init];
+        [testDictionary setObject:@"test" forKey:NAME];
+        [testDictionary setObject:@(YES) forKey:ISACTIVE];
+        [testDictionary setObject:[[NSDate distantPast] convertNSDateToSeconds] forKey:LASTPULLTIME];
+        [testDictionary setObject:@"http://still-citadel-8045.herokuapp.com/" forKey:CLOUDURL];
+        [testDictionary setObject:@(NO) forKey: ISDIRTY];
+        
+        CloudManagementObject* testCMO = [[CloudManagementObject alloc] initAndMakeNewDatabaseObject];
+        [testCMO setValueToDictionaryValues: testDictionary];
+        [testCMO saveObject:^(id<BaseObjectProtocol> data, NSError *error) {}];
+    }
+    
+    //testing if it works. DELETE when it works!
+    //testDictionary = [[[[CloudManagementObject alloc] init] GetEnvironment:@"test"] mutableCopy];
+    
+    NSMutableDictionary* productionDictionary = [[[[CloudManagementObject alloc] init] GetEnvironment:@"production"] mutableCopy];
+    
+    if (productionDictionary == nil)
+    {
+        productionDictionary = [[NSMutableDictionary alloc] init];
+        [productionDictionary setObject:@"production" forKey:NAME];
+        [productionDictionary setObject:@(NO) forKey:ISACTIVE];
+        [productionDictionary setObject:[[NSDate distantPast] convertNSDateToSeconds] forKey:LASTPULLTIME];
+        [productionDictionary setObject:@"http://pure-island-5858.herokuapp.com/" forKey:CLOUDURL];
+        [productionDictionary setObject:@(NO) forKey: ISDIRTY];
+        
+        CloudManagementObject* productionCMO = [[CloudManagementObject alloc] initAndMakeNewDatabaseObject];
+        [productionCMO setValueToDictionaryValues:productionDictionary];
+        [productionCMO saveObject:^(id<BaseObjectProtocol> data, NSError *error) {}];
+    }
 }
 
 // Switching to the Test Environment
@@ -86,14 +123,15 @@ CloudManagementObject* cloudMO;
     // - YOU CAN SEE WHAT PATIENTS ARE ADDED BY CHECKING THE PatientFile.json file
     NSError* err = nil;
     
-    NSString* dataPath = [[NSBundle mainBundle] pathForResource:@"PatientFile" ofType:@"json"];
-    
-    NSArray* patients = [NSArray arrayWithArray:[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPath]options:0 error:&err]];
-    
     NSLog(@"Performing a True Purge of the System");
     [mainView truePurgeTheSystem:nil];
     
-    NSLog(@"Imported Patients: \n%@", patients);
+    // Set CloudManagementObject
+    [cloudMO setActiveEnvironment:@"test"];
+    
+    NSString* dataPath = [[NSBundle mainBundle] pathForResource:@"PatientFile" ofType:@"json"];
+    
+    NSArray* patients = [NSArray arrayWithArray:[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPath]options:0 error:&err]];
     
     [patients enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
     {
@@ -108,11 +146,11 @@ CloudManagementObject* cloudMO;
         }];
     }];
     
+    NSLog(@"Imported Patients: \n%@", patients);
+    
     dataPath = [[NSBundle mainBundle] pathForResource:@"MedicationFile" ofType:@"json"];
     
     NSArray* Meds = [NSArray arrayWithArray:[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPath]options:0 error:&err]];
-    
-    NSLog(@"Imported Medications: \n%@", Meds.description);
     
     [Meds enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
     {
@@ -123,12 +161,22 @@ CloudManagementObject* cloudMO;
                 
         }];
     }];
+    
+    NSLog(@"Imported Medications: \n%@", Meds.description);
 }
 
 // Implement switching to the Production Environment
 - (IBAction)TearDownEnvironment:(id)sender
 {
+    NSError* err = nil;
     
+    NSLog(@"Performing a True Purge of the System");
+    [mainView truePurgeTheSystem:nil];
+    
+    // Set CloudManagementObject
+    [cloudMO setActiveEnvironment:@"production"];
+    
+    // Sync Patients, Users, Medications, etc.
 }
 
 - (void) testCloud
@@ -187,6 +235,7 @@ CloudManagementObject* cloudMO;
     if(![_window isVisible] )
         [_window makeKeyAndOrderFront:sender];
 }
+
 
 - (IBAction)ToggleOptimization:(id)sender
 {

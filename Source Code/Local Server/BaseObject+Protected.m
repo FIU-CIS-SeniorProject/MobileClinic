@@ -5,7 +5,6 @@
 //  Created by Michael Montaque on 3/26/13.
 //  Copyright (c) 2013 Florida International University. All rights reserved.
 //
-
 #import "BaseObject+Protected.h"
 
 @implementation BaseObject (Protected)
@@ -56,7 +55,8 @@
 }
 
 // MARK: Loads objects to an instantiated databaseObject
--(BOOL)loadObjectForID:(NSString *)objectID{
+-(BOOL)loadObjectForID:(NSString *)objectID
+{
     // checks to see if object exists
     NSArray* arr = [self FindObjectInTable:self->COMMONDATABASE withName:objectID forAttribute:self->COMMONID];
     
@@ -64,13 +64,19 @@
         self->databaseObject = [arr objectAtIndex:0];
         return  YES;
     }
-    return  NO;
+    else
+    {
+        return  NO;
+    }
 }
 
--(NSManagedObject*)loadObjectWithID:(NSString *)objectID{
+-(NSManagedObject*)loadObjectWithID:(NSString *)objectID
+{
     // checks to see if object exists
     NSArray* arr = [self FindObjectInTable:self->COMMONDATABASE withName:objectID forAttribute:self->COMMONID];
-    if (arr.count > 0) {
+
+    if (arr.count > 0)
+    {
         return [arr objectAtIndex:0];
     }
     return nil;

@@ -194,8 +194,8 @@ id currentTable;
     [progressIndicator stopAnimation:self];
 }
 
--(NSArray*)findPatientWithCriteria:(NSPredicate*)criteria{
-    
+-(NSArray*)findPatientWithCriteria:(NSPredicate*)criteria
+{
     NSArray* array = [NSArray arrayWithArray:[[[PatientObject alloc]init]FindAllObjectsUnderParentID:nil]];
     
     if (criteria != nil) {
@@ -206,8 +206,8 @@ id currentTable;
    
 }
 
-- (IBAction)unblockPatients:(id)sender {
-    
+- (IBAction)unblockPatients:(id)sender
+{
     NSMutableDictionary* patient = [patientList objectAtIndex:selectedRow];
     
     [patient setValue:@"" forKey:ISLOCKEDBY];
@@ -215,7 +215,6 @@ id currentTable;
     [[[PatientObject alloc]initWithCachedObjectWithUpdatedObject:patient]saveObject:^(id<BaseObjectProtocol> data, NSError *error) {
         //TODO: Code to change color of object Here
     }];
-    
 }
 
 - (IBAction)getPatientsFromCloud:(id)sender
@@ -304,32 +303,35 @@ id currentTable;
     }
 }
 
-- (IBAction)CloseSelectedPatient:(id)sender {
-    
+- (IBAction)CloseSelectedPatient:(id)sender
+{
     NSInteger pRow = [patientTableView selectedRow];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:UPDATEPATIENT object:nil];
     
-    if (pRow > -1) {
+    if (pRow > -1)
+    {
         NSMutableDictionary* dict = [NSMutableDictionary dictionaryWithDictionary:[patientArray objectAtIndex:pRow]];
         
         [dict setValue:[NSNumber numberWithBool:NO] forKey:ISOPEN];
         
         PatientObject* pObject = [[PatientObject alloc]initWithCachedObjectWithUpdatedObject:dict];
         
-        [pObject saveObject:^(id<BaseObjectProtocol> data, NSError *error) {
+        [pObject saveObject:^(id<BaseObjectProtocol> data, NSError *error)
+        {
             
         }];
     }
-
-        for (NSMutableDictionary* dict in visitArray) {
+    
+        for (NSMutableDictionary* dict in visitArray)
+        {
             [dict setValue:[NSNumber numberWithBool:NO] forKey:ISOPEN];
             
             VisitationObject* vObject = [[VisitationObject alloc]initWithCachedObjectWithUpdatedObject:dict];
             
-            [vObject saveObject:^(id<BaseObjectProtocol> data, NSError *error) {
+            [vObject saveObject:^(id<BaseObjectProtocol> data, NSError *error)
+            {
                 
             }];
-
         }
     
     [self refreshPatients:nil];
@@ -337,8 +339,8 @@ id currentTable;
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(refreshPatients:) name:UPDATEPATIENT object:nil];
 }
 
--(void)addJsonFileToDatabase:(id<BaseObjectProtocol>)base fromArray:(NSArray*)array{
-    
+-(void)addJsonFileToDatabase:(id<BaseObjectProtocol>)base fromArray:(NSArray*)array
+{
     //TODO: Add a completed dialog here
     
     /*

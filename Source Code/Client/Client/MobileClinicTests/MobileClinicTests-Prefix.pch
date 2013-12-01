@@ -26,7 +26,6 @@
     #define MOVE_FROM_SEARCH_FOR_MEDICINE   @"Back form searching medicine"
     #define SAVE_VISITATION                 @"Save visitation object"
     #define SAVE_PRESCRIPTION               @"Save prescription object"
-    #define CLOSE_PATIENT @"Close patient"
     #define SEARCH_FOR_PATIENT              @"Searching for a patient"
     #define CREATE_NEW_DIAGNOSIS            @"Creating a new diagnosis"
 #endif

@@ -26,14 +26,13 @@
     return self;
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
+- (void)viewDidAppear:(BOOL)animated {
     /*
      * Please Look at the API For instructions on the MobileClinicFacade
      * This class is meant to simplify work, reduce code and reduce coupling
      * The Previous Code to populate the cells with information has been reduced to one method call
      */
-    
+    [self.navigationItem setTitle:@"Previous Visits"];
     // Define row height
     _patientHistoryTableView.rowHeight = 110;
     

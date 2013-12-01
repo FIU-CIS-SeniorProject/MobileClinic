@@ -29,13 +29,16 @@
 #define CLOUDURL            @"cloudURL"
 #define LASTPULLTIME        @"lastPullTime"
 #define ISACTIVE            @"isActive"
+#define ISDIRTY             @"isDirty"
 
 #import <Foundation/Foundation.h>
 #import "CommonObjectProtocol.h"
 @protocol CloudManagementObjectProtocol <NSObject>
 
 -(NSDictionary *)GetActiveEnvironment;
--(NSDate *)GetActiveTimestamp;
+-(NSNumber *)GetActiveTimestamp;
 -(NSString *)GetActiveURL;
+-(void)setActiveEnvironment: (NSString*)environmentName;
+-(NSDictionary *)GetEnvironment: (NSString*)environmentName;
 
 @end

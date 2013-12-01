@@ -1,120 +1,144 @@
-// The MIT License (MIT)
-//
-// Copyright (c) 2013 Florida International University
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
 //
 //  MobileClinicFacade.m
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 3/1/13.
+//  Copyright (c) 2013 Steven Berlanga. All rights reserved.
 //
+
 #import "MobileClinicFacade.h"
 #import "PatientObject.h"
 #import "VisitationObject.h"
 #import "PrescriptionObject.h"
 #import "MedicationObject.h"
-#import "UserObject.h"
-
+#import "QueueManager.h"
+#import "FaceObject.h"
+#import "RecognitionObject.h"
 @implementation MobileClinicFacade
 
 - (id)init
 {
     self = [super init];
-    if (self)
-    {
+    if (self) {
         
     }
     return self;
 }
 
--(NSString *)GetCurrentUsername
-{
-    return [BaseObject getCurrentUserName];
+-(NSString *)GetCurrentUsername{
+    return [BaseObject getCurrenUserName];
 }
 
 #pragma mark- CREATING NEW OBJECTS
 #pragma mark-
-
 // Creates only a local copy of the patient
--(void)createAndCheckInPatient:(NSDictionary *)patientInfo onCompletion:(MobileClinicCommandResponse)Response
-{
+-(void)createAndCheckInPatient:(NSDictionary *)patientInfo onCompletion:(MobileClinicCommandResponse)Response{
+    
     PatientObject* patient = [[PatientObject alloc]initAndMakeNewDatabaseObject];
     
     // Object is Create locally Only
     [self CommonCommandObject:patient ForCreating:patientInfo bindedToParentObjectToUpdate:nil withResults:Response];
+    
+    
 }
-
-// Creates a new prescription for a given visit
--(void)addNewPrescription:(NSDictionary *)Rx ForCurrentVisit:(NSDictionary *)visit AndlockVisit:(BOOL)lock onCompletion:(MobileClinicCommandResponse)Response
-{
-    [self updateVisitRecord:visit andShouldUnlock:!lock andShouldCloseVisit:NO onCompletion:^(NSDictionary *object, NSError *error)
-    {
-        if (!object)
-        {
+//Added by Humberto Suarez
+-(void)createAndCheckInFace:(NSDictionary *)faceInfo onCompletion:(MobileClinicCommandResponse)Response{
+    
+    FaceObject* face = [[FaceObject alloc]initAndMakeNewDatabaseObject];
+    
+    NSMutableDictionary* faceDictionary = [NSMutableDictionary dictionaryWithDictionary:faceInfo];
+    
+    [faceDictionary setValue:[NSNumber numberWithBool:NO] forKey:ISOPEN];
+    
+   
+    
+    [self CommonCommandObject:face ShouldLock:NO CommonUpdate:faceDictionary withResults:^(NSDictionary *object, NSError *error) {
+        if (object) {
+            
+        }else{
             Response(object,error);
         }
-        else
-        {
+    }];
+    
+    //[self CommonCommandObject:face ForCreating:faceInfo bindedToParentObjectToUpdate:nil withResults:Response];
+    //FaceObject* facePic = [[FaceObject alloc] initAndMakeNewDatabaseObject]; //initAndMakeNewDatabaseObject];
+    //NSLog(@"llegue aquiiiiiiiiiiiiii");
+    /*if (![[faceInfo objectForKey:ISOPEN]boolValue]) {
+        
+        NSMutableDictionary* openFace = [[NSMutableDictionary alloc]initWithDictionary:faceInfo];
+        // Set patient open status
+        [openFace setValue:[NSNumber numberWithBool:!checkout] forKey:ISOPEN];
+        
+        [self CommonCommandObject:[[FaceObject alloc]init] ShouldLock:NO CommonUpdate:openFace withResults:^(NSDictionary *object, NSError *error) {
+            if (error.code > kErrorDisconnected) {
+                Response(object,error);
+            }}];
+        
+    }else{
+        Response(nil,[self createErrorWithDescription:MULTIPLE_VISIT_ERROR andErrorCodeNumber:kError inDomain:@"MCF"]);
+    }*/
+    
+}
+
+
+// creates a new prescription for a given visit
+-(void)addNewPrescription:(NSDictionary *)Rx ForCurrentVisit:(NSDictionary *)visit AndlockVisit:(BOOL)lock onCompletion:(MobileClinicCommandResponse)Response{
+    
+    [self updateVisitRecord:visit andShouldUnlock:!lock andShouldCloseVisit:NO onCompletion:^(NSDictionary *object, NSError *error) {
+        if (!object) {
+            Response(object,error);
+        }else{
             [self CommonCommandObject:[[PrescriptionObject alloc]initAndMakeNewDatabaseObject] ForCreating:Rx bindedToParentObjectToUpdate:visit withResults:Response];
         }
     }];
 }
 
-// Creates a new visit for a given patient
--(void)addNewVisit:(NSDictionary *)visitInfo ForCurrentPatient:(NSDictionary *)patientInfo shouldCheckOut:(BOOL)checkout onCompletion:(MobileClinicCommandResponse)Response
-{
+// Creates a new visit for a given patient.
+-(void)addNewVisit:(NSDictionary *)visitInfo ForCurrentPatient:(NSDictionary *)patientInfo shouldCheckOut:(BOOL)checkout onCompletion:(MobileClinicCommandResponse)Response{
+    
+    
     // If Patient being passed is already open do not go further
-    if (![[patientInfo objectForKey:ISOPEN]boolValue])
-    {
-        NSMutableDictionary* openPatient = [[NSMutableDictionary alloc]initWithDictionary:patientInfo];
+    if (![[patientInfo objectForKey:ISOPEN]boolValue]) {
         
+        NSMutableDictionary* openPatient = [[NSMutableDictionary alloc]initWithDictionary:patientInfo];
         // Set patient open status
         [openPatient setValue:[NSNumber numberWithBool:!checkout] forKey:ISOPEN];
         
-        [self CommonCommandObject:[[PatientObject alloc]init] ShouldLock:NO CommonUpdate:openPatient withResults:^(NSDictionary *object, NSError *error)
-        {
-            if (!object || error.code > kErrorDisconnected)
-            {
+        [self CommonCommandObject:[[PatientObject alloc]init] ShouldLock:NO CommonUpdate:openPatient withResults:^(NSDictionary *object, NSError *error) {
+            if (error.code > kErrorDisconnected) {
                 Response(object,error);
-            }
-            else
-            {
+            }else{
                 NSMutableDictionary* openVisit = [[NSMutableDictionary alloc]initWithDictionary:visitInfo];
+                
                 [openVisit setValue:[NSNumber numberWithBool:!checkout] forKey:ISOPEN];
+                
                 [self CommonCommandObject:[[VisitationObject alloc]initAndMakeNewDatabaseObject] ForCreating:openVisit bindedToParentObjectToUpdate:patientInfo withResults:Response];
             }
         }];
-    }
-    else
-    {
+        
+    }else{
         Response(nil,[self createErrorWithDescription:MULTIPLE_VISIT_ERROR andErrorCodeNumber:kError inDomain:@"MCF"]);
     }
 }
 
+
+
 #pragma mark- SEARCHING FOR OBJECTS
 #pragma mark-
+//  Use to find patients.
+-(void)findPatientWithLabel:(NSNumber *)label onCompletion:(MobileClinicSearchResponse)Response{
+    
+    /* Create a temporary Patient Object to make request */
+    PatientObject* patients = [[PatientObject alloc]init];
+    
+    NSDictionary* search = [NSDictionary dictionaryWithObjectsAndKeys:label,LABEL ,nil];
+    
+    [self CommonCommandObject:patients ForSearch1:search withResults:Response];
+}
 
-// Use to find patients.
--(void)findPatientWithFirstName:(NSString *)firstname orLastName:(NSString *)lastname onCompletion:(MobileClinicSearchResponse)Response
-{
-    // Create a temporary Patient Object to make request
+-(void)findPatientWithFirstName:(NSString *)firstname orLastName:(NSString *)lastname onCompletion:(MobileClinicSearchResponse)Response{
+    
+    /* Create a temporary Patient Object to make request */
     PatientObject* patients = [[PatientObject alloc]init];
     
     NSDictionary* search = [NSDictionary dictionaryWithObjectsAndKeys:firstname,FIRSTNAME,lastname,FAMILYNAME, nil];
@@ -123,25 +147,36 @@
 }
 
 // Use to find visits for a given patient.
--(void)findAllVisitsForCurrentPatient:(NSDictionary *)patientInfo AndOnCompletion:(MobileClinicSearchResponse)Response
-{
-    // Create a temporary Visitation Object to make request
+-(void)findAllVisitsForCurrentPatient:(NSDictionary *)patientInfo AndOnCompletion:(MobileClinicSearchResponse)Response{
+    
+    /* Create a temporary Visitation Object to make request */
     VisitationObject* vObject = [[VisitationObject alloc]init];
     
     [self CommonCommandObject:vObject ForSearch:patientInfo withResults:Response];
 }
+-(void)findPatientFace:(NSDictionary *)faceInfo AndOnCompletion:(MobileClinicSearchResponse)Response
+{
+    RecognitionObject *fObject = [[RecognitionObject alloc]init];
+    [self CommonCommandObject:fObject ForSearch:faceInfo withResults:Response];
+
+}
+
+
+
+
 
 //TODO: Needs to be optimized
 // Use to find open visits that needs servicing
--(void)findAllOpenVisitsAndOnCompletion:(MobileClinicSearchResponse)Response
-{
-    // Create a temporary Visit Object to make request
+-(void)findAllOpenVisitsAndOnCompletion:(MobileClinicSearchResponse)Response{
+    
+    /* Create a temporary Visit Object to make request */
     VisitationObject* vObject = [[VisitationObject alloc]init];
     
     // Fetch and Save query results from server
-    [vObject SyncAllOpenVisitsOnServer:^(id<BaseObjectProtocol> vData, NSError *error)
-    {
-        if ((error.code != kSuccess && error.code != kErrorDisconnected) && !vData)
+    [vObject SyncAllOpenVisitsOnServer:^(id<BaseObjectProtocol> vData, NSError *error) {
+        
+        if ((error.code != kSuccess
+             && error.code != kErrorDisconnected) && !vData)
         {
             Response(nil,error);
         }
@@ -149,62 +184,81 @@
         {
             PatientObject* pObject = [[PatientObject alloc]init];
             
-            [pObject SyncAllOpenPatietnsOnServer:^(id<BaseObjectProtocol> pData, NSError *error)
-            {
+            [pObject SyncAllOpenPatietnsOnServer:^(id<BaseObjectProtocol> pData, NSError *error) {
+                
                 if (error.code == kError && !pData)
                 {
                     Response(nil,error);
                 }
                 else
-                {
-                    // Array of Visit Dictionaries
-                    NSArray* allVisits = [NSArray arrayWithArray:[vObject FindAllOpenVisitsLocally]];
-                    
-                    NSString* patientID;
-                    
-                    // For every Dictionary in the array.
-                    for (NSMutableDictionary* dic in allVisits)
-                    {
-                        // Get the patient ID
-                        patientID = [dic objectForKey:PATIENTID];
-                        
-                        // Find the patient for that ID
-                        PatientObject* patients = [[PatientObject alloc]initWithCachedObjectWithUpdatedObject:[NSDictionary dictionaryWithObjectsAndKeys:patientID,PATIENTID, nil]];
-                        
-                        // Save the Dictionary value of that patient inside the current dictionary
-                        [dic setValue:patients.getDictionaryValuesFromManagedObject forKey:OPEN_VISITS_PATIENT];
-                    }
-                    
+                { 
                     // Send array Results to caller
-                    Response(allVisits,error);
+                    Response([self GetVisitsForOpenPatients:YES],error);
                 }
             }];
         }
     }];
 }
-
-// Finds all Prescriptions
--(void)findAllPrescriptionForCurrentVisit:(NSDictionary *)visit AndOnCompletion:(MobileClinicSearchResponse)Response
-{
-    // Create a temporary Patient Object to make request
-    PrescriptionObject* prObject = [[PrescriptionObject alloc]init];
+-(NSArray*)GetVisitsForOpenPatients:(BOOL)shouldGetOnlyOpenPatients{
+    // Array of Visit Dictionaries
+    NSArray* allVisits;
     
-    [self CommonCommandObject:prObject ForSearch:visit withResults:Response];
+    if (shouldGetOnlyOpenPatients) {
+        allVisits = [NSArray arrayWithArray:[[[VisitationObject alloc]init] FindAllOpenVisitsLocally]];
+    }else{
+        allVisits = [NSArray arrayWithArray:[[[VisitationObject alloc]init]FindAllVisitsWithinTheLastXHours:24]];
+    }
+    
+    
+    NSMutableArray* deleteFromMe = [[NSMutableArray alloc]initWithCapacity:allVisits.count];
+    
+    NSString* patientID;
+    
+    // For every Dictionary in the array...
+    for (NSMutableDictionary* dic in allVisits) {
+        // Get the patient ID
+        patientID = [dic objectForKey:PATIENTID];
+        // Find the patient for that ID
+        PatientObject* patients = [[PatientObject alloc]initWithCachedObjectWithUpdatedObject:[NSDictionary dictionaryWithObjectsAndKeys:patientID,PATIENTID, nil]];
+        // get the dictionary for that patient
+        NSDictionary* p = patients.getDictionaryValuesFromManagedObject;
+        
+        //if the patient doesn't Exist
+        if (![p objectForKey:PATIENTID]) {
+            
+            [[[VisitationObject alloc]init]deleteDatabaseDictionaryObject:dic];
+            
+        }
+        else {
+            [dic setValue:p forKey:OPEN_VISITS_PATIENT];
+            [deleteFromMe addObject:dic];
+        }
+    }
+    return deleteFromMe;
+}
+// Use to find all Prescriptions
+-(void)findAllPrescriptionForCurrentVisit:(NSDictionary *)visit AndOnCompletion:(MobileClinicSearchResponse)Response{
+    if (visit.allKeys.count > 0) {
+  
+    /* Create a temporary Patient Object to make request */
+    [self CommonCommandObject:[[PrescriptionObject alloc]init] ForSearch:visit withResults:Response];
+    }else{
+        Response(nil,[self createErrorWithDescription:@"Patient's Data was empty. Cannot start the search" andErrorCodeNumber:kErrorObjectMisconfiguration inDomain:@"MCF"]);
+    }
 }
 
 // Finds all the medication
--(void)findAllMedication:(NSDictionary *)visit AndOnCompletion:(MobileClinicSearchResponse)Response
-{
+-(void)findAllMedication:(NSDictionary *)visit AndOnCompletion:(MobileClinicSearchResponse)Response{
     MedicationObject* base = [[MedicationObject alloc]init];
     [self CommonCommandObject:base ForSearch:nil withResults:Response];
 }
 
+
 #pragma mark- UPDATING OBJECTS
 #pragma mark-
-
 // Updates a visitation record and locks it depend the Bool variable
--(void)updateVisitRecord:(NSDictionary *)visitRecord andShouldUnlock:(BOOL)unlock andShouldCloseVisit:(BOOL)closeVisit onCompletion:(MobileClinicCommandResponse)Response
-{
+-(void)updateVisitRecord:(NSDictionary *)visitRecord andShouldUnlock:(BOOL)unlock andShouldCloseVisit:(BOOL)closeVisit onCompletion:(MobileClinicCommandResponse)Response{
+    
     NSMutableDictionary* temp = [NSMutableDictionary dictionaryWithDictionary:visitRecord];
     
     [temp setValue:[NSNumber numberWithBool:!closeVisit] forKey:ISOPEN];
@@ -218,30 +272,28 @@
 }
 
 // Updates the patient and locks based on Bool variable
--(void)updateCurrentPatient:(NSDictionary *)patientInfo AndShouldLock:(BOOL)lock onCompletion:(MobileClinicCommandResponse)Response
-{
+-(void)updateCurrentPatient:(NSDictionary *)patientInfo AndShouldLock:(BOOL)lock onCompletion:(MobileClinicCommandResponse)Response{
+    
     PatientObject* base = [[PatientObject alloc]initWithCachedObjectWithUpdatedObject:patientInfo];
     [self CommonCommandObject:base ShouldLock:lock CommonUpdate:[NSMutableDictionary dictionaryWithDictionary:patientInfo] withResults:Response];
 }
 
 // Updates the prescription and locks based on Bool variable
--(void) updatePrescription:(NSDictionary*)Rx AndShouldLock:(BOOL)lock onCompletion:(MobileClinicCommandResponse)Response
-{
+-(void) updatePrescription:(NSDictionary*)Rx AndShouldLock:(BOOL)lock onCompletion:(MobileClinicCommandResponse)Response{
     PrescriptionObject* base = [[PrescriptionObject alloc]initWithCachedObjectWithUpdatedObject:Rx];
     [self CommonCommandObject:base ShouldLock:lock CommonUpdate:[NSMutableDictionary dictionaryWithDictionary:Rx] withResults:Response];
 }
 
 // Updates the medication and locks it if necessary
--(void)updateMedication:(NSDictionary *)Rx AndShouldLock:(BOOL)lock onCompletion:(MobileClinicCommandResponse)Response
-{
+-(void)updateMedication:(NSDictionary *)Rx AndShouldLock:(BOOL)lock onCompletion:(MobileClinicCommandResponse)Response{
     MedicationObject* base = [[MedicationObject alloc]initWithCachedObjectWithUpdatedObject:Rx];
     [self CommonCommandObject:base ShouldLock:lock CommonUpdate:[NSMutableDictionary dictionaryWithDictionary:Rx] withResults:Response];
 }
-
 // Makes sure that the Patient and the associated Visit is closed
--(void)checkoutVisit:(NSDictionary*)visit forPatient:(NSDictionary*)patient AndWillUlockOnCompletion:(MobileClinicCommandResponse)Response
-{
+-(void)checkoutVisit:(NSDictionary*)visit forPatient:(NSDictionary*)patient AndWillUlockOnCompletion:(MobileClinicCommandResponse)Response{
+    
     NSMutableDictionary* patientDictionary = [NSMutableDictionary dictionaryWithDictionary:patient];
+    
     [patientDictionary setValue:[NSNumber numberWithBool:NO] forKey:ISOPEN];
     
     NSMutableDictionary* visitDictionary = [NSMutableDictionary dictionaryWithDictionary:visit];
@@ -251,16 +303,6 @@
     [visitDictionary removeObjectForKey:OPEN_VISITS_PATIENT];
     
     VisitationObject* myVisit = [[VisitationObject alloc]init];
-    
-    /*// Update visit
-    [self updateVisitRecord:visitDictionary andShouldUnlock:YES andShouldCloseVisit:YES onCompletion:^(NSDictionary *object, NSError *error) {
-        // DO NOTHING??
-    }];
-    
-    // Update Patient
-    [self updateCurrentPatient:patientDictionary AndShouldLock:NO onCompletion:^(NSDictionary *object, NSError *error) {
-        // DO NOTHING??
-    }];//*/
     
     [self CommonCommandObject:myVisit ShouldLock:NO CommonUpdate:visitDictionary withResults:^(NSDictionary *object, NSError *error)
     {
@@ -274,103 +316,53 @@
         {
             Response(object,error);
         }
-    }];//*/
-}
-
-#pragma mark- PRIVATE CLEAN DATABASE
-#pragma mark-
-
--(void)purgeTheSystem
-{
-    VisitationObject* v = [[VisitationObject alloc] init];
-    NSArray* allVisits = [v FindAllObjectsLocally];
-    PatientObject* p = [[PatientObject alloc] init];
-    NSArray* allPatients = [p FindAllObjectsLocally];
-    MedicationObject* m = [[MedicationObject alloc] init];
-    NSArray* allMedications = [m FindAllObjectsLocally];
-    UserObject* u = [[UserObject alloc] init];
-    NSArray* allUsers = [u FindAllObjectsLocally];
-    
-    int vCounter = 0;
-    int pCounter = 0;
-    int mCounter = 0;
-    int uCounter = 0;
-    
-    for (NSDictionary* visit in allVisits)
-    {
-        BOOL didDelete = [v deleteDatabaseDictionaryObject:visit];
-        if (didDelete)
-        {
-            vCounter++;
-        }
-    }
-    
-    for (NSDictionary* patient in allPatients)
-    {
-        BOOL didDelete = [p deleteDatabaseDictionaryObject:patient];
-        if (didDelete)
-        {
-            pCounter++;
-        }
-    }
-    
-    for (NSDictionary* medication in allMedications)
-    {
-        BOOL didDelete = [m deleteDatabaseDictionaryObject:medication];
-        if (didDelete)
-        {
-            mCounter++;
-        }
-    }
-    
-    for (NSDictionary* user in allUsers)
-    {
-        BOOL didDelete = [u deleteDatabaseDictionaryObject:user];
-        if (didDelete)
-        {
-            uCounter++;
-        }
-    }
-    
-    NSLog(@"Truly Purged The System of %i Visits, %i Patients, %i Medications, and %i Users", vCounter, pCounter, mCounter, uCounter);
+    }];
 }
 
 #pragma mark- PRIVATE GENERIC METHODS
 #pragma mark-
-
--(void)CommonCommandObject:(id<CommonObjectProtocol>)base ShouldLock:(BOOL)lock CommonUpdate:(NSMutableDictionary*)object withResults:(MobileClinicCommandResponse)results
-{
-    // Call the server to make a request for Visits
-    [base UpdateObjectAndShouldLock:lock witData:object AndInstructions:kUpdateObject onCompletion:^(id<BaseObjectProtocol> data, NSError *error)
-    {
+-(void)CommonCommandObject:(id<CommonObjectProtocol>)base ShouldLock:(BOOL)lock CommonUpdate:(NSMutableDictionary*)object withResults:(MobileClinicCommandResponse)results{
+    
+    /* Call the server to make a request for Visits */
+    [base UpdateObjectAndShouldLock:lock witData:object AndInstructions:kUpdateObject onCompletion:^(id<BaseObjectProtocol> data, NSError *error) {
         results([data getDictionaryValuesFromManagedObject],error);
     }];
+    
 }
 
--(void)CommonCommandObject:(id<CommonObjectProtocol>)commandObject ForSearch:(NSDictionary*)object withResults:(MobileClinicSearchResponse)searchResults
-{
-    // Call the server to make a request for Visits
-    [commandObject FindAllObjectsOnServerFromParentObject:object OnCompletion:^(id<BaseObjectProtocol> data, NSError *error)
-    {
-        // get all visits that are stored on the device
+-(void)CommonCommandObject:(id<CommonObjectProtocol>)commandObject ForSearch:(NSDictionary*)object withResults:(MobileClinicSearchResponse)searchResults{
+    
+    /* Call the server to make a request for Visits */
+    [commandObject FindAllObjectsOnServerFromParentObject:object OnCompletion:^(id<BaseObjectProtocol> data, NSError *error) {
+        
+        /* get all visits that are stored on the device */
         NSArray* allVisits = [NSArray arrayWithArray:[commandObject FindAllObjectsLocallyFromParentObject:object]];
         
         searchResults(allVisits,error);
     }];
 }
 
--(void)CommonCommandObject:(id<CommonObjectProtocol,BaseObjectProtocol>)commandObject ForCreating:(NSDictionary*)object bindedToParentObjectToUpdate:(NSDictionary*)parent withResults:(MobileClinicCommandResponse)results
-{
+-(void)CommonCommandObject:(id<CommonObjectProtocol>)commandObject ForSearch1:(NSDictionary*)object withResults:(MobileClinicSearchResponse)searchResults{
+    
+    /* Call the server to make a request for Visits */
+    [commandObject FindAllObjectsOnServerFromParentObject:object OnCompletion:^(id<BaseObjectProtocol> data, NSError *error) {
+        
+        /* get all visits that are stored on the device */
+        NSArray* allVisits =[NSArray arrayWithArray:[commandObject FindAllObjectsLocallyFromParentObjectByLabel:object]];
+        
+        searchResults(allVisits,error);
+    }];
+}
+-(void)CommonCommandObject:(id<CommonObjectProtocol,BaseObjectProtocol>)commandObject ForCreating:(NSDictionary*)object bindedToParentObjectToUpdate:(NSDictionary*)parent withResults:(MobileClinicCommandResponse)results{
+    
     // If a parent object exists
     if (parent)
-    {
         // Tie the objects to each other
         [commandObject associateObjectToItsSuperParent:parent];
-    }
     
-    [commandObject createNewObject:object onCompletion:^(id<BaseObjectProtocol> data, NSError *error)
-     {
+    [commandObject createNewObject:object onCompletion:^(id<BaseObjectProtocol> data, NSError *error) {
         results([data getDictionaryValuesFromManagedObject],error);
     }];
 }
+
 @end

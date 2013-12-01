@@ -24,6 +24,7 @@
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 3/24/13.
+//  Edited by James Mendez 11/2013
 //
 #import "MainMenu.h"
 #import "ServerCore.h"
@@ -32,6 +33,7 @@
 #import "PatientTable.h"
 #import "MedicationList.h"
 #import "SystemBackup.h"
+#import "CloudManagementObject.h"
 
 SystemBackup* backup;
 MedicationList* medicationView;
@@ -43,13 +45,12 @@ id currentView;
 id<ServerProtocol> connection;
 @implementation MainMenu
 
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self)
     {
-    
+
     }
     
     return self;
@@ -74,10 +75,17 @@ id<ServerProtocol> connection;
             [_mainScreen addSubview:loginView.view];
         }
         currentView = loginView.view;
-        ;
+        
+        //disable buttons till login
+        [_userButton setEnabled: NO];
+        [_patientButton setEnabled: NO];
+        [_medicationButton setEnabled: NO];
+        [_logoutButton setEnabled: NO];
         
         connection = [ServerCore sharedInstance];
         [connection start];
+        
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(enableButtons:) name:@"LOGIN_OBSERVER" object:nil];
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(manualTableRefresh:) name:SERVER_OBSERVER object:nil];
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(SetStatus:) name:SERVER_STATUS object:[[NSNumber alloc]init]];
         [self manualTableRefresh:nil];
@@ -91,9 +99,23 @@ id<ServerProtocol> connection;
 
 - (IBAction)showLoginView:(id)sender
 {
-    //loginView.view.hidden =  NO;
+    //reset current view
+    if (currentView == userView.view) {
+        [userView.view removeFromSuperview];
+    } else if (currentView == patientView.view) {
+        [patientView.view removeFromSuperview];
+    } else {
+        [medicationView.view removeFromSuperview];
+    }
+    //set view to login
     [_mainScreen addSubview:loginView.view];
-
+    currentView = loginView.view;
+    
+    //disable view buttons
+    [_userButton setEnabled: NO];
+    [_patientButton setEnabled: NO];
+    [_medicationButton setEnabled: NO];
+    [_logoutButton setEnabled: NO];
 }
 
 - (IBAction)showMedicationView:(id)sender
@@ -290,6 +312,17 @@ id<ServerProtocol> connection;
             [_statusLabel setStringValue:@"OFF"];
             break;
     }
+}
+
+-(void)enableButtons:(NSNotification*)note
+{
+    [loginView.view removeFromSuperview];
+    currentView = nil;
+    //restore initial state of logged out user
+    [_userButton setEnabled: YES];
+    [_patientButton setEnabled: YES];
+    [_medicationButton setEnabled: YES];
+    [_logoutButton setEnabled: YES];
 }
 
 - (IBAction)pushPatientsToCloud:(id)sender

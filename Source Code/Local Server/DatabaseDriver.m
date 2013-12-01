@@ -51,6 +51,7 @@ return self;
 }
 
 -(NSManagedObject*)CreateANewObjectFromClass:(NSString *)name isTemporary:(BOOL)temp{
+    
     NSEntityDescription *entity = [NSEntityDescription entityForName:name inManagedObjectContext:database.managedObjectContext];
    
     return [[NSManagedObject alloc]initWithEntity:entity insertIntoManagedObjectContext:(temp)?nil:database.managedObjectContext];
@@ -79,7 +80,6 @@ return self;
         [fetch setPredicate:pred];
     }
     return [self fetchElementsUsingFetchRequest:fetch withTable:table];
-    
 }
 
 -(NSArray *)FindObjectInTable:(NSString *)table withCustomPredicate:(NSPredicate *)predicateString andSortByAttribute:(NSString*)attribute{
@@ -92,7 +92,8 @@ return self;
     
     [fetch setSortDescriptors:sortDescriptors];
     
-    if (predicateString) {
+    if (predicateString)
+    {
         [fetch setPredicate:predicateString];
     }
     
@@ -100,22 +101,22 @@ return self;
 }
 
 
--(NSArray*)fetchElementsUsingFetchRequest:(NSFetchRequest*)request withTable:(NSString*)tableName{
-    
+-(NSArray*)fetchElementsUsingFetchRequest:(NSFetchRequest*)request withTable:(NSString*)tableName
+{
     NSManagedObjectContext* ctx = database.managedObjectContext;
     
-    if (ctx) {
+    if (ctx)
+    {
         NSEntityDescription* semesterEntity = [NSEntityDescription entityForName:tableName inManagedObjectContext: ctx];
-        
         [request setEntity:semesterEntity];
-        
         [request setFetchBatchSize:15];
         
         NSError *error  = nil;
         
         NSArray*  temp = [NSArray arrayWithArray: [ctx executeFetchRequest:request error:&error]];
         
-        if (error) {
+        if (error)
+        {
             NSLog(@"ERROR: DATAMODEL COULD NOT FETCH");
             return nil;
         }
@@ -123,6 +124,7 @@ return self;
     }
     return nil;
 }
+
 -(void)setObject:(id)object withAttribute:(NSString*)attribute inDatabaseObject:(NSManagedObject*)DBObject{
     [DBObject setValue:object forKey:attribute];
 }
