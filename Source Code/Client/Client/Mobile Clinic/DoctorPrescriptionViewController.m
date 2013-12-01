@@ -16,25 +16,30 @@
 
 @implementation DoctorPrescriptionViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
     }
     return self;
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewDidUnload {
+- (void)viewDidUnload
+{
     [self setTabletsTextField:nil];
     [self setTimeOfDayTextFields:nil];
     [self setDrugTextField:nil];
@@ -43,19 +48,25 @@
     [super viewDidUnload];
 }
 
-- (IBAction)newTimeOfDay:(id)sender {
-    
-    for(int i = 0; i < [_timeOfDayButtons count]; i++) {
-        if([[_timeOfDayButtons objectAtIndex:i] isEqual:sender]) {
+- (IBAction)newTimeOfDay:(id)sender
+{
+    for(int i = 0; i < [_timeOfDayButtons count]; i++)
+    {
+        if([[_timeOfDayButtons objectAtIndex:i] isEqual:sender])
+        {
             [((UIButton *)sender) setAlpha:1];
             _timeOfDayTextFields.text = [self getTimeOfDay:((UIButton *)sender).tag];
             self.timeOfDay = ((UIButton *)sender).tag;
-        }else
+        }
+        else
+        {
             [((UIButton *)[_timeOfDayButtons objectAtIndex:i]) setAlpha:0.35];
+        }
     }
 }
 
-- (NSString *)getTimeOfDay:(int)num {
+- (NSString *)getTimeOfDay:(int)num
+{
     switch (num) {
         case 0:
             return @"Morning";
@@ -75,14 +86,16 @@
     }
 }
 
-- (IBAction)findDrugs:(id)sender {
+- (IBAction)findDrugs:(id)sender
+{
     [[NSNotificationCenter defaultCenter] postNotificationName:MOVE_TO_SEARCH_FOR_MEDICINE object:nil];
 }
 
 // Change name of button (Send to Pharmacy / Checkout)
-- (IBAction)savePrescription:(id)sender {
-    if([self validatePrescription]) {
-        
+- (IBAction)savePrescription:(id)sender
+{
+    if([self validatePrescription])
+    {
         // TODO: NEED TO VALIDATE THAT FIELD ENTRY IS CORRECT (STRING or INTs)
         
         // Create a timestamp for Prescribe Time
@@ -100,24 +113,31 @@
         // You need to save the information on this screen. it will be too much work and complication to save it elsewhere
         MobileClinicFacade* mcf = [[MobileClinicFacade alloc]init];
         
-        /* The _patientData should not be contian patient data but Visit dictionary with the patient data inside Or just the visit data alone. This method will not work if there is no visitation data*/
+        // The _patientData should not be contian patient data but Visit dictionary with the patient data inside Or just the visit data alone. This method will not work if there is no visitation data
+        
         // TODO: Fix this  class so that is has the visit data
-
-        [mcf addNewPrescription:_prescriptionData ForCurrentVisit:_patientData AndlockVisit:NO onCompletion:^(NSDictionary *object, NSError *error) {
+        [mcf addNewPrescription:_prescriptionData ForCurrentVisit:_patientData AndlockVisit:NO onCompletion:^(NSDictionary *object, NSError *error)
+        {
             if (!object)
+            {
                 [FIUAppDelegate getNotificationWithColor:AJNotificationTypeRed Animation:AJLinedBackgroundTypeAnimated WithMessage:error.localizedDescription inView:self.view];
+            }
             else
+            {
                 [[NSNotificationCenter defaultCenter] postNotificationName:SAVE_PRESCRIPTION object:_prescriptionData];
+            }
         }];
     }
 }
 
 // Hides keyboard when whitespace is pressed
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
     [self.view endEditing:YES];
 }
 
-- (void)deactivateControllerFields {
+- (void)deactivateControllerFields
+{
     [_medicationNotes setEditable:NO];
     [_tabletsTextField setEnabled:NO];
     [_timeOfDayTextFields setEnabled:NO];
@@ -128,7 +148,8 @@
     }
 }
 
-- (BOOL)validatePrescription {
+- (BOOL)validatePrescription
+{
     BOOL inputIsValid = YES;
     NSString *errorMsg;
     
@@ -152,7 +173,8 @@
     return inputIsValid;
 }
 
-- (void)setScreenHandler:(ScreenHandler)myHandler {
+- (void)setScreenHandler:(ScreenHandler)myHandler
+{
     handler = myHandler;
 }
 

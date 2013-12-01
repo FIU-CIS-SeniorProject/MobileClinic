@@ -27,7 +27,8 @@
 #import "BaseObjectProtocol.h"
 #import "CommonObjectProtocol.h"
 
-typedef enum {
+typedef enum
+{
     kTriageNurse    = 0,
     kDoctor         = 1,
     kPharmacists    = 2,

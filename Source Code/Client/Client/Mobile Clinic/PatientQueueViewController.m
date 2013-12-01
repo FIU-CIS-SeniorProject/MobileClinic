@@ -5,12 +5,12 @@
 //  Created by Rigo Hernandez on 3/10/13.
 //  Copyright (c) 2013 Steven Berlanga. All rights reserved.
 //
-
 #import "PatientQueueViewController.h"
 #import "DoctorPatientViewController.h"
 #import "PharmacyPatientViewController.h" 
 
-@interface PatientQueueViewController () {
+@interface PatientQueueViewController ()
+{
     NSArray *queueArray;
     MobileClinicFacade *mobileFacade;
 }
@@ -23,15 +23,18 @@
 
 @implementation PatientQueueViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
     }
     return self;
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
@@ -41,83 +44,85 @@
     UIBarButtonItem * menu = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(popOverMenu)];
     [self.navigationItem setLeftBarButtonItem:menu];
     
-    if([[self stationChosen] intValue] == 3){
+    if([[self stationChosen] intValue] == 3)
+    {
         [_prioritySelector setUserInteractionEnabled:NO];
         [_prioritySelector removeSegmentAtIndex:1 animated:NO];
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    
-    /** This will should HUD in tableview to show alert the user that the system is working */
+- (void)viewWillAppear:(BOOL)animated
+{
+    // This will should HUD in tableview to show alert the user that the system is working */
     [self showIndeterminateHUDInView:_queueTableView withText:@"Searching" shouldHide:NO afterDelay:0 andShouldDim:NO];
     
     mobileFacade = [[MobileClinicFacade alloc] init];
     UINavigationBar *navbar = [self.navigationController navigationBar];
     
     // Request patient's that are currently checked-in
-<<<<<<< HEAD
     [mobileFacade findAllOpenVisitsAndOnCompletion:^(NSArray *allObjectsFromSearch, NSError *error)
     {
         if (!allObjectsFromSearch && error)
         {
-=======
-    [mobileFacade findAllOpenVisitsAndOnCompletion:^(NSArray *allObjectsFromSearch, NSError *error) {
-        if (!allObjectsFromSearch && error ) {
->>>>>>> 55552517216c31171a19741b666304c99ab7d748
             [FIUAppDelegate getNotificationWithColor:AJNotificationTypeOrange Animation:AJLinedBackgroundTypeAnimated WithMessage:error.localizedDescription inView:self.view];
-           
-        }else{
+        }
+        else
+        {
+            queueArray = [NSArray arrayWithArray:allObjectsFromSearch];
         
-        queueArray = [NSArray arrayWithArray:allObjectsFromSearch];
-        
-        // Settings with respect to station chosen
-        switch ([[self stationChosen] intValue]) {
-            case 2: {
-                [navbar setTintColor:[UIColor blueColor]];
+            // Settings with respect to station chosen
+            switch ([[self stationChosen] intValue])
+            {
+                // DOCTOR QUEUE VIEW
+                case 2:
+                {
+                    [navbar setTintColor:[UIColor blueColor]];
                 
-                // Filter results to patient's that haven't seen the doctor
-                NSPredicate * predicate = [NSPredicate predicateWithFormat:@"%K == %@", DOCTOROUT, nil];
+                    // Filter results to patient's that haven't seen the doctor
+                    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"%K == %@", DOCTOROUT, nil];
                 
-                queueArray = [NSMutableArray arrayWithArray:[queueArray filteredArrayUsingPredicate:predicate]];
+                    queueArray = [NSMutableArray arrayWithArray:[queueArray filteredArrayUsingPredicate:predicate]];
                 
-                // Sort queue by priority
-                [self sortBy:PRIORITY inAscendingOrder:NO];
+                    // Sort queue by priority
+                    [self sortBy:PRIORITY inAscendingOrder:NO];
+                }
+                    break;
+                // PHARMACIST QUEUE VIEW
+                case 3:
+                {
+                    [navbar setTintColor:[UIColor greenColor]];
+                
+                    // Filter results (Open Patient and has seen doctor = need to see pharmacist)
+                    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"%K != %@", DOCTOROUT, nil];
+                    queueArray = [NSMutableArray arrayWithArray:[queueArray filteredArrayUsingPredicate:predicate]];
+                
+                    // Sort queue by time patient left doctor's station
+                    [self sortBy:DOCTOROUT inAscendingOrder:YES];
+                }
+                    break;
+                default:
+                    break;
             }
-                break;
-            case 3: {
-                [navbar setTintColor:[UIColor greenColor]];
-                
-                // Filter results (Seen doctor & need to see pharmacy)
-                NSPredicate * predicate = [NSPredicate predicateWithFormat:@"%K != %@", DOCTOROUT, nil];
-                queueArray = [NSMutableArray arrayWithArray:[queueArray filteredArrayUsingPredicate:predicate]];
-                
-                // Sort queue by time patient left doctor's station
-                [self sortBy:DOCTOROUT inAscendingOrder:YES];
-            }
-                break;
-            default:
-                break;
+            [_queueTableView reloadData];
         }
         
-        [_queueTableView reloadData];
-        }
-        /** This will remove the HUD since the search is complete */
+        // This will remove the HUD since the search is complete
         [self HideALLHUDDisplayInView:_queueTableView];
     }];
 }
 
 // Sorts queue for category specified in ascending or decending order
-- (void)sortBy:(NSString *)sortCategory inAscendingOrder:(BOOL)order {
-    
+- (void)sortBy:(NSString *)sortCategory inAscendingOrder:(BOOL)order
+{
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]initWithKey:sortCategory ascending:order];
     NSArray *sortDescriptorArray = [NSArray arrayWithObject:sortDescriptor];
     queueArray = [NSMutableArray arrayWithArray:[queueArray sortedArrayUsingDescriptors:sortDescriptorArray]];
 }
 
-- (void)popOverMenu {
-    
-    if(self.pop != nil){
+- (void)popOverMenu
+{
+    if(self.pop != nil)
+    {
         [self.pop dismissPopoverAnimated:YES];
         self.pop = nil;
         return;

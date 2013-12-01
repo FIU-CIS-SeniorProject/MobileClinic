@@ -1223,6 +1223,15 @@
 			path = Smartcard;
 			sourceTree = "<group>";
 		};
+		8CA37E5B18347825005E932E /* Queue Object */ = {
+			isa = PBXGroup;
+			children = (
+				EAD8F5681723A21300AEF023 /* Queue.h */,
+				EAD8F5691723A21300AEF023 /* Queue.m */,
+			);
+			name = "Queue Object";
+			sourceTree = "<group>";
+		};
 		EA6F747816E8181F001FD385 /* MobileClinicTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1322,8 +1331,7 @@
 			isa = PBXGroup;
 			children = (
 				4677413516BD9386002FD4A5 /* Model.xcdatamodeld */,
-				EAD8F5681723A21300AEF023 /* Queue.h */,
-				EAD8F5691723A21300AEF023 /* Queue.m */,
+				8CA37E5B18347825005E932E /* Queue Object */,
 				EAE6CDEB16BE4701008949DC /* System Objects */,
 				EAADC02416E113D2009E7AF9 /* MobileClinicFacadeProtocol.h */,
 				EAADC02016E113A5009E7AF9 /* MobileClinicFacade.h */,
@@ -2065,9 +2073,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MobileClinicTests/MobileClinicTests-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/MobileClinicTests\" /** $(SRCROOT) \"$(SRCROOT)/TestFlightSDK1.1\"",
-				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/MobileClinicTests\" /** $(SRCROOT) \"$(SRCROOT)/TestFlightSDK1.1\"";
 				INFOPLIST_FILE = "MobileClinicTests/MobileClinicTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
@@ -2101,9 +2107,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MobileClinicTests/MobileClinicTests-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/MobileClinicTests\" /** $(SRCROOT) \"$(SRCROOT)/TestFlightSDK1.1\"",
-				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/MobileClinicTests\" /** $(SRCROOT) \"$(SRCROOT)/TestFlightSDK1.1\"";
 				INFOPLIST_FILE = "MobileClinicTests/MobileClinicTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (

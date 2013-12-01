@@ -24,7 +24,6 @@
 //  Mobile Clinic
 //
 //  Created by Kevin Diaz on 11/02/13.
-//  Copyright (c) 2013 Florida International University. All rights reserved.
 //
 #define NAME                @"name"
 #define CLOUDURL            @"cloudURL"
@@ -34,5 +33,9 @@
 #import <Foundation/Foundation.h>
 #import "CommonObjectProtocol.h"
 @protocol CloudManagementObjectProtocol <NSObject>
+
+-(NSDictionary *)GetActiveEnvironment;
+-(NSDate *)GetActiveTimestamp;
+-(NSString *)GetActiveURL;
 
 @end

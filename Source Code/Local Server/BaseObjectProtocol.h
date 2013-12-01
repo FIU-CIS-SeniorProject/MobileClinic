@@ -96,8 +96,8 @@ typedef void (^CloudCallback)(id cloudResults, NSError* error);
  */
 -(BOOL)deleteDatabaseDictionaryObject:(NSDictionary*)object;
 
-
 -(NSError*)setValueToDictionaryValues:(NSDictionary*)values;
 -(NSMutableDictionary*)getDictionaryValuesFromManagedObject;
 -(NSMutableDictionary*)getDictionaryValuesFromManagedObject:(NSManagedObject*)object;
+
 @end

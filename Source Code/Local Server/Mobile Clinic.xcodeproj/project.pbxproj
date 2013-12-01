@@ -12,6 +12,8 @@
 		893FCE6A1825EB520054402A /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 893FCE691825EB520054402A /* libsqlite3.dylib */; };
 		893FCE6C1825EB800054402A /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 893FCE6B1825EB800054402A /* libsqlite3.0.dylib */; };
 		895D5CCC1825D053005D25A8 /* FaceObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 895D5CCB1825D053005D25A8 /* FaceObject.m */; };
+		8C30F2B21838202100A7A339 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C30F2B01838202100A7A339 /* LoginView.m */; };
+		8C30F2B31838202100A7A339 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C30F2B11838202100A7A339 /* LoginView.xib */; };
 		8CA37E5A182C6BD3005E932E /* CloudManagementObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA37E58182C6BD3005E932E /* CloudManagementObject.m */; };
 		EA09328916F818D200536DF3 /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = EA09328816F818D200536DF3 /* Database.m */; };
 		EA0FE4DC171CB3CA00E68DFD /* SystemBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0FE4DB171CB3CA00E68DFD /* SystemBackup.m */; };
@@ -121,6 +123,9 @@
 		895D5CCA1825D053005D25A8 /* FaceObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceObject.h; sourceTree = "<group>"; };
 		895D5CCB1825D053005D25A8 /* FaceObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceObject.m; sourceTree = "<group>"; };
 		895D5CCD1825D07D005D25A8 /* FaceObjectProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceObjectProtocol.h; sourceTree = "<group>"; };
+		8C30F2AF1838202100A7A339 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
+		8C30F2B01838202100A7A339 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
+		8C30F2B11838202100A7A339 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
 		8CA37E57182C6BD3005E932E /* CloudManagementObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloudManagementObject.h; sourceTree = "<group>"; };
 		8CA37E58182C6BD3005E932E /* CloudManagementObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloudManagementObject.m; sourceTree = "<group>"; };
 		8CA37E59182C6BD3005E932E /* CloudManagementObjectProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloudManagementObjectProtocol.h; sourceTree = "<group>"; };
@@ -289,6 +294,16 @@
 				895D5CCD1825D07D005D25A8 /* FaceObjectProtocol.h */,
 			);
 			name = "Face Object";
+			sourceTree = "<group>";
+		};
+		8C30F2AE1838200300A7A339 /* Login View & Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8C30F2AF1838202100A7A339 /* LoginView.h */,
+				8C30F2B01838202100A7A339 /* LoginView.m */,
+				8C30F2B11838202100A7A339 /* LoginView.xib */,
+			);
+			name = "Login View & Controller";
 			sourceTree = "<group>";
 		};
 		8CA37E56182C6B21005E932E /* CloudManagement Object */ = {
@@ -462,6 +477,7 @@
 				EA0FE4DA171CB3CA00E68DFD /* SystemBackup.h */,
 				EA0FE4DB171CB3CA00E68DFD /* SystemBackup.m */,
 				EA7D505C17179DA3002ED819 /* Icons */,
+				8C30F2AE1838200300A7A339 /* Login View & Controller */,
 				EAC0D7E316FECDF800621DDC /* User View & Controller */,
 				EAC0D7D716FD1A0000621DDC /* Med View & Controller */,
 				EA09328616F8149F00536DF3 /* Cloud API */,
@@ -816,6 +832,7 @@
 			files = (
 				EA8D85F916B0C9BF00256495 /* InfoPlist.strings in Resources */,
 				EA8D85FF16B0C9BF00256495 /* Credits.rtf in Resources */,
+				8C30F2B31838202100A7A339 /* LoginView.xib in Resources */,
 				EA8D860516B0C9C000256495 /* MainMenu.xib in Resources */,
 				EAC19C7F16DE839C00B0B8DA /* PatientTable.xib in Resources */,
 				0FCC49CE16F3C63400FD3338 /* MedicationFile.json in Resources */,
@@ -885,6 +902,7 @@
 				EAC19C8516DEE40700B0B8DA /* Patients.m in Sources */,
 				EA4CEC1416E3F8F400D6AB58 /* Visitation.m in Sources */,
 				8CA37E5A182C6BD3005E932E /* CloudManagementObject.m in Sources */,
+				8C30F2B21838202100A7A339 /* LoginView.m in Sources */,
 				EA749BD316EDAF8D000F849F /* PrescriptionObject.m in Sources */,
 				EAC37F1116F213E400836C1C /* Prescription.m in Sources */,
 				EAC37F1516F36DBA00836C1C /* CloudService.m in Sources */,

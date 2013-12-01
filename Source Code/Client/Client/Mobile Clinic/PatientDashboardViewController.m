@@ -24,15 +24,18 @@
 
 @implementation PatientDashboardViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
     }
     return self;
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     qm = [[QueueManager alloc]init];
@@ -40,10 +43,10 @@
     
     _prioritySelector.selectedSegmentIndex = 0;
     
-    /** This will should HUD in tableview to show alert the user that the system is working */
+    // This will should HUD in tableview to show alert the user that the system is working
     [self showIndeterminateHUDInView:_doctorQueueTableView withText:@"Searching" shouldHide:NO afterDelay:0 andShouldDim:NO];
     
-    /** This will should HUD in tableview to show alert the user that the system is working */
+    // This will should HUD in tableview to show alert the user that the system is working
     [self showIndeterminateHUDInView:_pharmacyQueueTableView withText:@"Searching" shouldHide:NO afterDelay:0 andShouldDim:NO];
     
     mobileFacade = [[MobileClinicFacade alloc] init];
@@ -70,10 +73,10 @@
         [_doctorQueueTableView reloadData];
         [_pharmacyQueueTableView reloadData];
         
-        /** This will remove the HUD since the search is complete */
+        // This will remove the HUD since the search is complete
         [self HideALLHUDDisplayInView:_pharmacyQueueTableView];
         
-        /** This will remove the HUD since the search is complete */
+        // This will remove the HUD since the search is complete
         [self HideALLHUDDisplayInView:_doctorQueueTableView];
     }];
 }
@@ -123,26 +126,32 @@
 }
 
 // Populate cells with respective content
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     NSDictionary *visitDic;
     NSDictionary *patientDic;
     
     static NSString *CellIdentifier = @"dashboardCell";
     DashboardTableCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    if(!cell){
+    if(!cell)
+    {
         cell = [[DashboardTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     NSArray *queueArray;
     
-    if(tableView == _doctorQueueTableView) {
+    if(tableView == _doctorQueueTableView)
+    {
         queueArray = [NSArray arrayWithArray:doctorWaitArray];
-    }else if(tableView == _pharmacyQueueTableView){
+    }
+    else if(tableView == _pharmacyQueueTableView)
+    {
         queueArray = [NSArray arrayWithArray:pharmacyWaitArray];
-    }else{
-        NSLog(@"CRASHED!!!!!!!!");
+    }
+    else
+    {
+        NSLog(@"PatientDashboardViewController: tableView - CRASHED!!!!!!!!");
         return cell;
     }
     
@@ -234,10 +243,12 @@
 }
 
 - (IBAction)tryAndSyncAllPendingObjects:(id)sender {
-    /** This will should HUD in tableview to show alert the user that the system is working */
+    // This will show HUD in tableview to show alert the user that the system is working
     [self showIndeterminateHUDInView:self.view withText:@"Searching" shouldHide:NO afterDelay:0 andShouldDim:YES];
-    [qm sendArrayOfQueuedObjectsToServer:pendingPatients onCompletion:^(id<BaseObjectProtocol> data, NSError *error) {
-        if (!data && error) {
+    [qm sendArrayOfQueuedObjectsToServer:pendingPatients onCompletion:^(id<BaseObjectProtocol> data, NSError *error)
+    {
+        if (!data && error)
+        {
             [FIUAppDelegate getNotificationWithColor:AJNotificationTypeRed Animation:AJLinedBackgroundTypeAnimated WithMessage:@"Could not sync all pending objects. Try again later." inView:self.view];
         }
         [self displayPendingButtonIfNecessary];
