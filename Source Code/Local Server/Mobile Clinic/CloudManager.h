@@ -15,5 +15,6 @@
 @property (nonatomic, retain) NSNumber * isActive;
 @property (nonatomic, retain) NSNumber * isDirty;
 @property (nonatomic, retain) NSDate * lastPullTime;
+@property (nonatomic, retain) NSString * activeUser;
 
 @end

@@ -67,20 +67,20 @@ NSString* tempPassword;
     [self UpdateObject:response shouldLock:shouldLock andSendObjects:dataToSend withInstruction:instruction];
 }
 
--(void)loginWithUsername:(NSString*)username andPassword:(NSString*)password onCompletion:(void(^)(id <BaseObjectProtocol> data, NSError* error, Users* userA))onSuccessHandler{
-    
+-(void)loginWithUsername:(NSString*)username andPassword:(NSString*)password onCompletion:(void(^)(id <BaseObjectProtocol> data, NSError* error, Users* userA))onSuccessHandler
+{
     username = [username lowercaseString];
     // Sync all the users from server to the client
-    [self getUsersFromServer:^(id<BaseObjectProtocol> data, NSError *error) {
-
+    [self getUsersFromServer:^(id<BaseObjectProtocol> data, NSError *error)
+    {
         // Try to find user from username in local DB
         BOOL didFindUser = [self loadObjectForID:username];
         
         // link databaseObject to convenience Object named "user" 
         [self linkDatabase];
         // if we find the user locally then....
-        if (didFindUser) {
-            
+        if (didFindUser)
+        {
             // Check if the user has permissions
             if (user.status.boolValue)
             {

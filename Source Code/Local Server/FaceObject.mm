@@ -5,10 +5,7 @@
 //  Created by Humberto Suarez on 11/2/13.
 //  Copyright (c) 2013 Florida International University. All rights reserved.
 //
-
-
 #define ISOPEN  @"isOpen"
-
 
 #import "FaceObject.h"
 #import "NSDataAdditions.h"
@@ -235,40 +232,41 @@ NSData * pictures;
     
     [self makeCloudCallWithCommand:DATABASE withObject:nil onComplete:^(id cloudResults, NSError *error) {
         
-        NSArray* allPatients = [cloudResults objectForKey:@"data"];
+        NSArray* allFaces = [cloudResults objectForKey:@"data"];
         
-        [self handleCloudCallback:onComplete UsingData:allPatients WithPotentialError:error];
+        [self handleCloudCallback:onComplete UsingData:allFaces WithPotentialError:error];
         
     }];
 }
 
 -(void)pushToCloud:(CloudCallback)onComplete{
     
-  /*  //    NSArray* allPatients= [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:COMMONDATABASE withCustomPredicate:[NSPredicate predicateWithFormat:@"%K == YES",ISDIRTY] andSortByAttribute:FIRSTNAME]];
+      NSArray* allFaces= [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:COMMONDATABASE withCustomPredicate:[NSPredicate predicateWithFormat:@"%K == YES",ISDIRTY] andSortByAttribute:FIRSTNAME]];
     
-    NSArray* allPatients= [self FindAllObjects];
+  //  NSArray* allPatients= [self FindAllObjects];
     
     // Remove Values that will break during serialization
-    for (NSMutableDictionary* object in allPatients) {
+    for (NSMutableDictionary* object in allFaces ) {
         NSString* pId = [object objectForKey:PATIENTID];
         pId = [pId stringByReplacingOccurrencesOfString:@"." withString:@""];
         [object setValue:pId forKey:PATIENTID];
         // Remove Pictures (NSData)
         [object setValue:nil forKey:PICTURE];
         // Remove FingerPrint (NSData)
-        [object setValue:nil forKey:FINGERDATA];
+        //[object setValue:nil forKey:FINGERDATA];
         
-        id dob = [object objectForKey: DOB];
+        //id dob = [object objectForKey: DOB];
         
-        if(!dob){
+        /*if(!dob){
             [object setValue:[NSNumber numberWithInteger:0] forKey:DOB];
-        }
+        }*/
     }
     
-    [self makeCloudCallWithCommand:UPDATEPATIENT withObject:[NSDictionary dictionaryWithObject:allPatients forKey:DATABASE] onComplete:^(id cloudResults, NSError *error) {
+    [self makeCloudCallWithCommand:UPDATEFACES withObject:[NSDictionary dictionaryWithObject:allFaces
+                                                                                    forKey:DATABASE] onComplete:^(id cloudResults, NSError *error) {
         
-        [self handleCloudCallback:onComplete UsingData:allPatients WithPotentialError:error];
-    }];*/
+        [self handleCloudCallback:onComplete UsingData:allFaces WithPotentialError:error];
+    }];
 }
 
 -(NSArray *)covertAllSavedObjectsToJSON{
