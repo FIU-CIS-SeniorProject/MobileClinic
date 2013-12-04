@@ -187,6 +187,15 @@ id<ServerProtocol> connection;
 - (IBAction)truePurgeTheSystem:(id)sender
 {
     NSAlert* alert = [[NSAlert alloc] init];
+    
+//    if ([[[CloudManagementObject alloc]init] GetActiveUser] == nil)
+    if (NO)
+    {
+        [alert setMessageText:@"You must be logged in to Purge the System"];
+        [alert setAlertStyle:NSWarningAlertStyle];
+        return;
+    }
+    
     [alert addButtonWithTitle:@"Yes"];
     [alert addButtonWithTitle:@"No"];
     [alert setMessageText:@"Confirm System Purge"];
@@ -347,10 +356,5 @@ id<ServerProtocol> connection;
             [alert runModal];
         }
     }];
-}
-
-- (BOOL) validateUserInterfaceItem: (id <NSValidatedUserInterfaceItem>)anItem
-{
-    
 }
 @end
