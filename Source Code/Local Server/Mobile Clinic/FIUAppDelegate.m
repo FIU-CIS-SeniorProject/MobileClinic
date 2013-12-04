@@ -119,50 +119,141 @@ CloudManagementObject* cloudMO;
 // Switching to the Test Environment
 - (IBAction)setupTestPatients:(id)sender
 {
-    // - DO NOT COMMENT: IF YOUR RESTART YOUR SERVER IT WILL PLACE DEMO PATIENTS INSIDE TO HELP ACCELERATE YOUR TESTING
-    // - YOU CAN SEE WHAT PATIENTS ARE ADDED BY CHECKING THE PatientFile.json file
-    NSError* err = nil;
     
-    NSLog(@"Performing a True Purge of the System");
-    [mainView truePurgeTheSystem:nil];
+    NSAlert* alert = [[NSAlert alloc] init];
+    [alert addButtonWithTitle:@"Yes"];
+    [alert addButtonWithTitle:@"No"];
+    [alert setMessageText:@"Confirm System Purge"];
+    [alert setInformativeText:@"Delete all Patient and User data?"];
     
-    // Set CloudManagementObject
-    [cloudMO setActiveEnvironment:@"test"];
-    
-    NSString* dataPath = [[NSBundle mainBundle] pathForResource:@"PatientFile" ofType:@"json"];
-    
-    NSArray* patients = [NSArray arrayWithArray:[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPath]options:0 error:&err]];
-    
-    [patients enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+    if ([alert runModal] == NSAlertFirstButtonReturn)
     {
-        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:obj];
-        PatientObject *base = [[PatientObject alloc]init];
+        BOOL syncWithCloudFirst;
+        BOOL loadJSON;
+        BOOL syncWithCloudSecond;
         
-        NSError* success = [base setValueToDictionaryValues:dic];
+        // Ask to sync with cloud before purging the system
+        alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:@"Yes"];
+        [alert addButtonWithTitle:@"No"];
+        [alert addButtonWithTitle:@"Cancel"];
+        [alert setMessageText:@"Syncronize with Cloud before Purging the system?"];
+        [alert setAlertStyle:NSWarningAlertStyle];
+        
+        NSInteger* choice = [alert runModal];
+        
+        switch ((int)choice)
+        {
+            case NSAlertFirstButtonReturn:
+                syncWithCloudFirst = YES;
+                break;
+            case NSAlertSecondButtonReturn:
+                syncWithCloudFirst = NO;
+                break;
+            case NSAlertThirdButtonReturn:
+                return;
+                break;
+            default:
+                return;
+                break;
+        }
+        
+        // Ask to load from JSON files after purging the system
+        alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:@"Yes"];
+        [alert addButtonWithTitle:@"No"];
+        [alert addButtonWithTitle:@"Cancel"];
+        [alert setMessageText:@"Load JSON files after Purging the system?"];
+        [alert setAlertStyle:NSWarningAlertStyle];
+        
+        choice = [alert runModal];
+        
+        switch ((int)choice)
+        {
+            case NSAlertFirstButtonReturn:
+                loadJSON = YES;
+                break;
+            case NSAlertSecondButtonReturn:
+                loadJSON = NO;
+                break;
+            case NSAlertThirdButtonReturn:
+                return;
+                break;
+            default:
+                return;
+                break;
+        }
+        
+        alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:@"Yes"];
+        [alert addButtonWithTitle:@"No"];
+        [alert addButtonWithTitle:@"Cancel"];
+        [alert setMessageText:@"Syncronize with Cloud after Purging the system?"];
+        [alert setAlertStyle:NSWarningAlertStyle];
+        
+        choice = [alert runModal];
+        
+        switch ((int)choice)
+        {
+            case NSAlertFirstButtonReturn:
+                syncWithCloudSecond = YES;
+                break;
+            case NSAlertSecondButtonReturn:
+                syncWithCloudSecond = NO;
+                break;
+            case NSAlertThirdButtonReturn:
+                return;
+                break;
+            default:
+                return;
+                break;
+        }
+        
+        // - DO NOT COMMENT: IF YOUR RESTART YOUR SERVER IT WILL PLACE DEMO PATIENTS INSIDE TO HELP ACCELERATE YOUR TESTING
+        // - YOU CAN SEE WHAT PATIENTS ARE ADDED BY CHECKING THE PatientFile.json file
+        NSError* err = nil;
+        
+        NSLog(@"Performing a True Purge of the System");
+        [mainView truePurgeTheSystem:nil];
+        
+        // Set CloudManagementObject
+        [cloudMO setActiveEnvironment:@"test"];
+        
+        NSString* dataPath = [[NSBundle mainBundle] pathForResource:@"PatientFile" ofType:@"json"];
+        
+        NSArray* patients = [NSArray arrayWithArray:[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPath]options:0 error:&err]];
+        
+        [patients enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+        {
+            NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:obj];
+            PatientObject *base = [[PatientObject alloc]init];
+            
+            NSError* success = [base setValueToDictionaryValues:dic];
 
-        [base saveObject:^(id<BaseObjectProtocol> data, NSError *error)
-        {
-                
+            [base saveObject:^(id<BaseObjectProtocol> data, NSError *error)
+            {
+                    
+            }];
         }];
-    }];
-    
-    NSLog(@"Imported Patients: \n%@", patients);
-    
-    dataPath = [[NSBundle mainBundle] pathForResource:@"MedicationFile" ofType:@"json"];
-    
-    NSArray* Meds = [NSArray arrayWithArray:[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPath]options:0 error:&err]];
-    
-    [Meds enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
-    {
-        MedicationObject* base = [[MedicationObject alloc]init];
-        NSError* success = [base setValueToDictionaryValues:obj];
-        [base saveObject:^(id<BaseObjectProtocol> data, NSError *error)
+        
+        NSLog(@"Imported Patients: \n%@", patients);
+        
+        dataPath = [[NSBundle mainBundle] pathForResource:@"MedicationFile" ofType:@"json"];
+        
+        NSArray* Meds = [NSArray arrayWithArray:[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPath]options:0 error:&err]];
+        
+        [Meds enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
         {
-                
+            MedicationObject* base = [[MedicationObject alloc]init];
+            NSError* success = [base setValueToDictionaryValues:obj];
+            [base saveObject:^(id<BaseObjectProtocol> data, NSError *error)
+            {
+                    
+            }];
         }];
-    }];
-    
-    NSLog(@"Imported Medications: \n%@", Meds.description);
+        
+        NSLog(@"Imported Medications: \n%@", Meds.description);
+    }
 }
 
 // Implement switching to the Production Environment
