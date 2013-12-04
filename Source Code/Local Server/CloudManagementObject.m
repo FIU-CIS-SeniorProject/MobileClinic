@@ -225,6 +225,7 @@ int* isActive;
         [cmo setObject:cloudMO.isDirty forKey:ISDIRTY];
         [cmo setObject:cloudMO.cloudURL forKey:CLOUDURL];
         [cmo setObject:cloudMO.lastPullTime forKey:LASTPULLTIME];
+//        [cmo setObject:cloudMO.activeUser forKey:ACTIVEUSER];
     }
     else
     {
@@ -232,6 +233,21 @@ int* isActive;
     }
     
     return cmo;
+}
+
+-(NSString *)GetActiveUser
+{
+    NSDictionary* active = [self GetActiveEnvironment];
+//    NSString* user = [active valueForKey:ACTIVEUSER];
+}
+
+-(void) updateTimestamp
+{
+    NSMutableDictionary* active = [[self GetActiveEnvironment] mutableCopy];
+    if (active != nil)
+    {
+        [active setObject:[[NSDate date] convertNSDateToSeconds] forKey:lastPullTime];
+    }
 }
 
 // MARK: Loads objects to an instantiated databaseObject
