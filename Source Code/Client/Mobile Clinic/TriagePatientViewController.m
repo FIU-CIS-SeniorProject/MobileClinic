@@ -9,6 +9,7 @@
 #import "TriagePatientViewController.h"
 #import "CurrentVisitViewController.h"
 #import "PreviousVisitsViewController.h"
+#import "TakePicturesViewController.h"
 #import "MobileClinicFacade.h"
 @interface TriagePatientViewController (){
     MobileClinicFacade* mcf;
@@ -112,4 +113,20 @@
     }
 }
 
+- (IBAction)addVisitationPictures:(id)sender
+{
+    TakePicturesViewController* takePicturesViewController = [self getViewControllerFromiPadStoryboardWithName:@"takePicturesViewController"];
+    [takePicturesViewController view];
+    
+    //[triagePatientViewController setPatientData:patientData];
+    
+    //[triagePatientViewController populateInformation];
+    
+    //[triagePatientViewController setDelegate:self];
+    
+    //[triagePatientViewController.navigationItem setHidesBackButton:YES];
+    
+    [self.navigationController pushViewController:takePicturesViewController animated:YES];
+    
+}
 @end

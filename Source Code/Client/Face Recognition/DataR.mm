@@ -43,8 +43,7 @@
         colorSpace = CGColorSpaceCreateDeviceGray();
     } else {
         colorSpace = CGColorSpaceCreateDeviceRGB();
-    }
-    
+      }
     CGDataProviderRef provider = CGDataProviderCreateWithCFData((__bridge CFDataRef)data);
     CGImageRef imageRef = CGImageCreate(
                                         image.cols,                                 //width

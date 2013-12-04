@@ -144,6 +144,7 @@ typedef enum MobileClinicMode{
     
     if (self.validateRegistration){
     RegisterFaceViewController *faceViewController = [self getViewControllerFromiPadStoryboardWithName:@"RegisterFaceViewController"];
+        faceViewController.delegate1 = self;
     [faceViewController view];
     faceViewController.firstName = _patientNameField.text;
     faceViewController.familyName = _familyNameField.text;
@@ -154,6 +155,22 @@ typedef enum MobileClinicMode{
     
     [self.navigationController pushViewController:faceViewController animated:YES];
     }
+}
+- (void)addItemViewController:(RegisterFaceViewController *)controller didFinishEnteringItem:(UIImage *)item
+{
+    //using delegate method, get data back from second page view controller and set it to property declared in here
+    NSLog(@"This was returned from secondPageViewController: %@",item);
+    self.returnedImage=item;
+    UIImage* image = self.returnedImage;
+    
+    UIImage* scaled = [image imageByScalingAndCroppingForSize:CGSizeMake(150, 150)];
+    
+    // Set the image
+    [_patientPhoto setImage:scaled];
+    // save picture to object
+    [patientData setValue:[scaled convertImageToPNGBinaryData] forKey:PICTURE];
+    
+    //add item to array here and call reload
 }
 -(IBAction)faceRecognition:(id)sender
 {

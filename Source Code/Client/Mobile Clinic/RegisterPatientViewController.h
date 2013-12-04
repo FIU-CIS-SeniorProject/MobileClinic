@@ -11,14 +11,20 @@
 #import "CameraFacade.h"
 #import "StationViewHandlerProtocol.h"
 #import "GenericCellProtocol.h"
+#import <Foundation/Foundation.h>
+#import "RegisterFaceViewController.h"
 
-@interface RegisterPatientViewController : UIViewController<GenericCellProtocol, UITableViewDataSource, UITableViewDelegate>{
+
+
+@interface RegisterPatientViewController : UIViewController<GenericCellProtocol, UITableViewDataSource, UITableViewDelegate,faceViewDelegate>{
+    
     ScreenHandler handler;
     CameraFacade *facade;
     BOOL shouldDismiss;
 }
+@property (nonatomic) UIImage *returnedImage;
 
-@property (weak, nonatomic) id<GenericCellManager> delegate;
+@property (weak, nonatomic) id	<GenericCellManager> delegate;
 @property (weak, nonatomic) IBOutlet UITextField *patientNameField;
 @property (weak, nonatomic) IBOutlet UITextField *familyNameField;
 @property (weak, nonatomic) IBOutlet UITextField *villageNameField;
@@ -50,4 +56,9 @@
 - (IBAction)getAgeOfPatient:(id)sender;
 
 - (void)resetData;
+
+
+
+
+
 @end

@@ -158,7 +158,7 @@ Face *face;
 }
 -(NSArray *)covertAllSavedObjectsToJSON{
     
-   /* NSMutableArray* allObject = [NSMutableArray arrayWithArray:[self ConvertAllEntriesToJSON]];
+   /*NSMutableArray* allObject = [NSMutableArray arrayWithArray:[self ConvertAllEntriesToJSON]];
     
     for (NSMutableDictionary* obj in allObject) {
         

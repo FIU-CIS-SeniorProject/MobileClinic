@@ -13,6 +13,7 @@
 @interface TriagePatientViewController : UIViewController<CancelDelegate>{
   
 }
+- (IBAction)addVisitationPictures:(id)sender;
     
 @property (strong, nonatomic) NSMutableDictionary * visitData;
 @property (strong, nonatomic) NSMutableDictionary * patientData;

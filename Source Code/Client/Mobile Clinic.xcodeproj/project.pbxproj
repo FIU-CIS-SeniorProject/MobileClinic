@@ -225,6 +225,9 @@
 		89454FE31823FFFA00E93504 /* FaceObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 89454FE11823FFFA00E93504 /* FaceObject.m */; };
 		89454FE61824469400E93504 /* Face.m in Sources */ = {isa = PBXBuildFile; fileRef = 89454FE51824469400E93504 /* Face.m */; };
 		89454FE71824469400E93504 /* Face.m in Sources */ = {isa = PBXBuildFile; fileRef = 89454FE51824469400E93504 /* Face.m */; };
+		89493CCC184E4D8700ED9D10 /* NSDataAdditions.h in Sources */ = {isa = PBXBuildFile; fileRef = 89493CCA184E4D8700ED9D10 /* NSDataAdditions.h */; };
+		89493CCD184E4D8700ED9D10 /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 89493CCB184E4D8700ED9D10 /* NSDataAdditions.m */; };
+		89493CD1184EA17100ED9D10 /* TakePicturesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89493CD0184EA17100ED9D10 /* TakePicturesViewController.m */; };
 		89B00422182AE24F00008104 /* haarcascade_frontalface_alt_tree.xml in Resources */ = {isa = PBXBuildFile; fileRef = 89B00421182AE24F00008104 /* haarcascade_frontalface_alt_tree.xml */; };
 		89B00423182AE24F00008104 /* haarcascade_frontalface_alt_tree.xml in Resources */ = {isa = PBXBuildFile; fileRef = 89B00421182AE24F00008104 /* haarcascade_frontalface_alt_tree.xml */; };
 		89B00425182AE39400008104 /* haarcascade_frontalface_alt2.xml in Resources */ = {isa = PBXBuildFile; fileRef = 89B00424182AE39400008104 /* haarcascade_frontalface_alt2.xml */; };
@@ -282,7 +285,6 @@
 		EA7CDC7316ED0B0C005A9070 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46E773D416CB0BFB00242454 /* libTestFlight.a */; };
 		EA8DFE301756E8E600DD76EB /* SystemBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = EA8DFE2F1756E8E600DD76EB /* SystemBackup.m */; };
 		EA8DFE311756E8E600DD76EB /* SystemBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = EA8DFE2F1756E8E600DD76EB /* SystemBackup.m */; };
-		EA8DFE341756EDC500DD76EB /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = EA8DFE331756EDC500DD76EB /* NSDataAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		EA8DFE351756EDC500DD76EB /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = EA8DFE331756EDC500DD76EB /* NSDataAdditions.m */; };
 		EA9AC88416C8606C00493485 /* DataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9AC88316C8606C00493485 /* DataProcessor.m */; };
 		EA9C2F3B16BF624F000F38CD /* UIViewControllerExt.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9C2F3A16BF624F000F38CD /* UIViewControllerExt.m */; };
@@ -668,6 +670,11 @@
 		89454FE41824469400E93504 /* Face.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Face.h; sourceTree = "<group>"; };
 		89454FE51824469400E93504 /* Face.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Face.m; sourceTree = "<group>"; };
 		89454FE81824482D00E93504 /* FaceObjectProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FaceObjectProtocol.h; sourceTree = "<group>"; };
+		89493CCA184E4D8700ED9D10 /* NSDataAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSDataAdditions.h; sourceTree = "<group>"; };
+		89493CCB184E4D8700ED9D10 /* NSDataAdditions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSDataAdditions.m; sourceTree = "<group>"; };
+		89493CCE184E5E7E00ED9D10 /* setPhotoProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = setPhotoProtocol.h; sourceTree = "<group>"; };
+		89493CCF184EA17000ED9D10 /* TakePicturesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TakePicturesViewController.h; sourceTree = "<group>"; };
+		89493CD0184EA17100ED9D10 /* TakePicturesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TakePicturesViewController.m; sourceTree = "<group>"; };
 		8961827318400D8D00591B20 /* Model 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 3.xcdatamodel"; sourceTree = "<group>"; };
 		89618275184015AF00591B20 /* Model 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 4.xcdatamodel"; sourceTree = "<group>"; };
 		89B00421182AE24F00008104 /* haarcascade_frontalface_alt_tree.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = haarcascade_frontalface_alt_tree.xml; sourceTree = "<group>"; };
@@ -943,6 +950,7 @@
 				EADB7913172F87A8002F5D91 /* GenericCellManager.h */,
 				EA54D98A17398B9700BD23FE /* QueueCell.h */,
 				EA54D98B17398B9700BD23FE /* QueueCell.m */,
+				89493CCE184E5E7E00ED9D10 /* setPhotoProtocol.h */,
 			);
 			name = General;
 			sourceTree = "<group>";
@@ -1008,6 +1016,8 @@
 		467740EC16BD931E002FD4A5 = {
 			isa = PBXGroup;
 			children = (
+				89493CCA184E4D8700ED9D10 /* NSDataAdditions.h */,
+				89493CCB184E4D8700ED9D10 /* NSDataAdditions.m */,
 				893FCE6F18271DD70054402A /* libsqlite3.0.dylib */,
 				893FCE6D18271D1C0054402A /* libsqlite3.dylib */,
 				89454FDE1820768A00E93504 /* CoreVideo.framework */,
@@ -1339,6 +1349,8 @@
 				89DA413A183DAC7900C096BB /* RecognitionProtocol.h */,
 				89DA413B183DACD500C096BB /* RecognitionObject.h */,
 				89DA413C183DACD500C096BB /* RecognitionObject.m */,
+				89493CCF184EA17000ED9D10 /* TakePicturesViewController.h */,
+				89493CD0184EA17100ED9D10 /* TakePicturesViewController.m */,
 			);
 			path = "Face Recognition";
 			sourceTree = "<group>";
@@ -1994,6 +2006,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89493CCC184E4D8700ED9D10 /* NSDataAdditions.h in Sources */,
+				89493CCD184E4D8700ED9D10 /* NSDataAdditions.m in Sources */,
 				0FCB7C2B16EA535B008F434C /* CurrentVisitTableCell.m in Sources */,
 				0FECD55D16DA92A6008B4041 /* PatientResultTableCell.m in Sources */,
 				4677410516BD931E002FD4A5 /* main.m in Sources */,
@@ -2096,7 +2110,6 @@
 				EA54D9941739BF3B00BD23FE /* EditVisit.m in Sources */,
 				EA54D998173AD3B400BD23FE /* OptimizedServer.m in Sources */,
 				EA8DFE301756E8E600DD76EB /* SystemBackup.m in Sources */,
-				EA8DFE341756EDC500DD76EB /* NSDataAdditions.m in Sources */,
 				89E022281816F4C100CD5C0C /* FaceDetector.mm in Sources */,
 				89E0222F1816F59F00CD5C0C /* FaceRecognizer.mm in Sources */,
 				8918BB19181726380025D9FC /* DataR.mm in Sources */,
@@ -2105,6 +2118,7 @@
 				89454FE21823FFFA00E93504 /* FaceObject.m in Sources */,
 				89454FE61824469400E93504 /* Face.m in Sources */,
 				89DA413D183DACD500C096BB /* RecognitionObject.m in Sources */,
+				89493CD1184EA17100ED9D10 /* TakePicturesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

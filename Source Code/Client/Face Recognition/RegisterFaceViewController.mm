@@ -7,14 +7,10 @@
 //
 #import "RegisterFaceViewController.h"
 #import "DataR.h"
-//#import "PatientObjectProtocol.h"
 #import "MobileClinicFacade.h"
-//#import "BaseObject+Protected.h"
-//#import "BaseObject.h"
 #import "Face.h"
-//#import "DatabaseDriver.h"
-//#import <CoreData/CoreData.h>
 #import "FaceDetector.h"
+#import "RegisterPatientViewController.h"
 
 @implementation RegisterFaceViewController
 
@@ -65,6 +61,7 @@ NSDictionary* faceData;
     self.videoCamera.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationPortrait;
     self.videoCamera.defaultFPS = 30;
     self.videoCamera.grayscaleMode = NO;
+    self.switchCameraButton.hidden = YES;
     //[self.videoCamera start];
 }
 //#pragma mark - Protocol CvVideoCameraDelegate
@@ -88,7 +85,10 @@ NSDictionary* faceData;
     if (![self learnFace:faces forImage:image]) {
         return;
     };
-    
+    if(self.numPicsTaken ==1)
+    {
+     [self.delegate1 addItemViewController:self didFinishEnteringItem:[ DataR UIImageFromMat:image]];
+    }
     self.numPicsTaken++;
     NSLog(@"number %@",USERID);
     dispatch_sync(dispatch_get_main_queue(), ^{
@@ -205,37 +205,28 @@ NSDictionary* faceData;
 - (IBAction)cameraButtonClicked:(id)sender
 {
     
-   /* NSTimeInterval timeStamp = [[NSDate date] timeIntervalSince1970];
-    NSNumber *timeStampObj = [NSNumber numberWithDouble: timeStamp];
-    self.label =timeStampObj;*/
+    [self.navigationItem setHidesBackButton:YES];
+    //[self deleteAllWithFirstName:firstName forFamilyName:familyName];
+    self.switchCameraButton.hidden = YES;
     
-    [self deleteAllWithFirstName:firstName forFamilyName:familyName];
-    
-    //[_nameField resignFirstResponder];
     if (self.videoCamera.running){
+        [self.navigationItem setHidesBackButton:NO];
         self.switchCameraButton.hidden = YES;
         
         [self.Register setTitle:@"Register" forState:UIControlStateNormal];
         self.featureLayer.hidden = YES;
         
         [self.videoCamera stop];
-        
-        //self.instructionsLabel.text = [NSString stringWithFormat:@"Make sure %@ is holding the phone. When you are ready, press start. Or select images from your library.", self.personName];
-        
+    
     } else {
         self.imageScrollView.hidden = YES;
         
         [self.Register setTitle:@"Stop" forState:UIControlStateNormal];
         self.switchCameraButton.hidden = NO;
        
-        // First, forget all previous pictures of this person
-        //[self.faceRecognizer forgetAllFacesForPersonID:[self.personID integerValue]];
-        
-        // Reset the counter, start taking pictures
         self.numPicsTaken = 0;
         [self.videoCamera start];
-        
-        //self.instructionsLabel.text = @"Taking pictures...";
+    
     }
 }
 

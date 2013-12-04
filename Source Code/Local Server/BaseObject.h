@@ -9,8 +9,9 @@
 // OTHER OBJECTS MAY NEED THESE TWO VARIABLES //
 #define PATIENTBYID     @"patient_for_id"
 #define ALLPATIENTS     @"patients"
-#define UPDATEPATIENT     @"update_patient"
+#define UPDATEPATIENT   @"update_patient"
 #define CREATEPATIENT   @"create_patient"
+#define UPDATEFACES     @"update_faces"
 
 
 #define DATABASEOBJECT @"Database Object"
