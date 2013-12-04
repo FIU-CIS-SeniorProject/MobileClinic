@@ -13,9 +13,8 @@
 #import "Visitation.h"
 #import "BaseObject+Protected.h"
 #import "FIUAppDelegate.h"
-#import "CloudManagementObject.h"
 
-#define DATABASE    @"Visitations"
+#define DATABASE    @"Visitation"
 NSString* patientID;
 NSString* isLockedBy;
 @implementation VisitationObject
@@ -205,35 +204,5 @@ NSString* isLockedBy;
     }
     return  allObject;
 }
-
--(void)pushToCloud:(CloudCallback)onComplete
-{
-    NSArray* allVisits= [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:COMMONDATABASE withCustomPredicate:[NSPredicate predicateWithFormat:@"%K == YES",ISDIRTY] andSortByAttribute:PATIENTID]];
-    
-    
-    
-    [self makeCloudCallWithCommand:UPDATEVISIT withObject:[NSDictionary dictionaryWithObject:allVisits forKey:DATABASE] onComplete:^(id cloudResults, NSError *error)
-     {
-         [self handleCloudCallback:onComplete UsingData:allVisits WithPotentialError:error];
-     }];
-}
-
--(void)pullFromCloud:(CloudCallback)onComplete
-{
-    // allocate and init a CloudManagementObject for timestamp
-    CloudManagementObject* TSCloudMO = [[CloudManagementObject alloc] init];
-    NSNumber* timestamp = [TSCloudMO GetActiveTimestamp];
-    NSMutableDictionary* timeDic = [[NSMutableDictionary alloc] init];
-    [timeDic setObject:timestamp forKey:@"Timestamp"];
-    
-    //TODO: replace "withObject:nil" with timestamp dictionary
-    [self makeCloudCallWithCommand:DATABASE withObject:timeDic onComplete:^(id cloudResults, NSError *error)
-     {
-         NSArray* allVisits = [cloudResults objectForKey:@"data"];
-         [self handleCloudCallback:onComplete UsingData:allVisits WithPotentialError:error];
-         
-     }];
-}
-
 
 @end

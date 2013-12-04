@@ -12,5 +12,5 @@
 #import "FaceObjectProtocol.h"
 
 @interface Recognition : BaseObject <FaceObjectProtocol,CommonObjectProtocol>
-@property (nonatomic) BOOL modelAvailable;
+
 @end

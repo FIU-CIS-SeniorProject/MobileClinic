@@ -119,20 +119,12 @@ CloudManagementObject* cloudMO;
 // Switching to the Test Environment
 - (IBAction)setupTestPatients:(id)sender
 {
+    
     NSAlert* alert = [[NSAlert alloc] init];
-    
-    if ([[[CloudManagementObject alloc]init] GetActiveUser] == nil)
-    {
-        [alert setMessageText:@"You must be logged in to Purge the System"];
-        [alert setAlertStyle:NSWarningAlertStyle];
-        [alert runModal];
-        return;
-    }
-    
     [alert addButtonWithTitle:@"Yes"];
     [alert addButtonWithTitle:@"No"];
-    [alert setMessageText:@"Confirm Switch to Test Environment"];
-    [alert setInformativeText:@"Switching to the test environment will purge the system of Patient and User data."];
+    [alert setMessageText:@"Confirm System Purge"];
+    [alert setInformativeText:@"Delete all Patient and User data?"];
     
     if ([alert runModal] == NSAlertFirstButtonReturn)
     {
@@ -221,22 +213,8 @@ CloudManagementObject* cloudMO;
         // - YOU CAN SEE WHAT PATIENTS ARE ADDED BY CHECKING THE PatientFile.json file
         NSError* err = nil;
         
-        //TODO: Sync with cloud first
-        if (syncWithCloudFirst)
-        {
-            [[[PatientObject alloc] init] pushToCloud:^(id cloudResults, NSError *error)
-            {
-                // Nothing
-            }];
-            
-            [[[VisitationObject alloc] init] pushToCloud:^(id cloudResults, NSError *error)
-             {
-                 // Nothing
-             }];
-        }
-        
         NSLog(@"Performing a True Purge of the System");
-        [mainView completeSystemPurge];
+        [mainView truePurgeTheSystem:nil];
         
         // Set CloudManagementObject
         [cloudMO setActiveEnvironment:@"test"];
@@ -281,33 +259,15 @@ CloudManagementObject* cloudMO;
 // Implement switching to the Production Environment
 - (IBAction)TearDownEnvironment:(id)sender
 {
-    NSAlert* alert = [[NSAlert alloc] init];
+    NSError* err = nil;
     
-    if ([[[CloudManagementObject alloc]init] GetActiveUser] == nil)
-    {
-        [alert setMessageText:@"You must be logged in to Purge the System"];
-        [alert setAlertStyle:NSWarningAlertStyle];
-        [alert runModal];
-        return;
-    }
+    NSLog(@"Performing a True Purge of the System");
+    [mainView truePurgeTheSystem:nil];
     
-    [alert addButtonWithTitle:@"Yes"];
-    [alert addButtonWithTitle:@"No"];
-    [alert setMessageText:@"Confirm Switch to Production Environment"];
-    [alert setInformativeText:@"Switching to the test environment will purge the system of Patient and User data."];
+    // Set CloudManagementObject
+    [cloudMO setActiveEnvironment:@"production"];
     
-    if ([alert runModal] == NSAlertFirstButtonReturn)
-    {
-        NSError* err = nil;
-        
-        NSLog(@"Performing a True Purge of the System");
-        [mainView truePurgeTheSystem:nil];
-        
-        // Set CloudManagementObject
-        [cloudMO setActiveEnvironment:@"production"];
-        
-        // Sync Patients, Users, Medications, etc.
-    }
+    // Sync Patients, Users, Medications, etc.
 }
 
 - (void) testCloud

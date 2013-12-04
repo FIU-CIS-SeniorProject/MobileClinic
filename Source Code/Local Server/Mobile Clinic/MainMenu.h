@@ -48,7 +48,6 @@
 - (IBAction)showPatientView:(id)sender;
 - (IBAction)purgeTheSystem:(id)sender;
 - (IBAction)truePurgeTheSystem:(id)sender;
-- (void)completeSystemPurge;
 - (IBAction)manualTableRefresh:(id)sender;
 - (IBAction)showUserView:(id)sender;
 - (IBAction)emergencyDataDump:(id)sender;

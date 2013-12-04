@@ -94,26 +94,19 @@ id<ServerProtocol> connection;
 
 - (IBAction)quitApplication:(id)sender
 {
-    [[[CloudManagementObject alloc]init] updateActiveUser:@""];
     [NSApp terminate:self];
 }
 
 - (IBAction)showLoginView:(id)sender
 {
     //reset current view
-    if (currentView == userView.view)
-    {
+    if (currentView == userView.view) {
         [userView.view removeFromSuperview];
-    }
-    else if (currentView == patientView.view)
-    {
+    } else if (currentView == patientView.view) {
         [patientView.view removeFromSuperview];
-    }
-    else
-    {
+    } else {
         [medicationView.view removeFromSuperview];
     }
-    
     //set view to login
     [_mainScreen addSubview:loginView.view];
     currentView = loginView.view;
@@ -123,8 +116,6 @@ id<ServerProtocol> connection;
     [_patientButton setEnabled: NO];
     [_medicationButton setEnabled: NO];
     [_logoutButton setEnabled: NO];
-    
-    [[[CloudManagementObject alloc] init] updateActiveUser:@""];
 }
 
 - (IBAction)showMedicationView:(id)sender
@@ -197,11 +188,11 @@ id<ServerProtocol> connection;
 {
     NSAlert* alert = [[NSAlert alloc] init];
     
-    if ([[[CloudManagementObject alloc]init] GetActiveUser] == nil)
+//    if ([[[CloudManagementObject alloc]init] GetActiveUser] == nil)
+    if (NO)
     {
         [alert setMessageText:@"You must be logged in to Purge the System"];
         [alert setAlertStyle:NSWarningAlertStyle];
-        [alert runModal];
         return;
     }
     
@@ -213,63 +204,58 @@ id<ServerProtocol> connection;
     
     if ([alert runModal] == NSAlertFirstButtonReturn)
     {
-        [self completeSystemPurge];
-    }
-}
+        VisitationObject* v = [[VisitationObject alloc] init];
+        NSArray* allVisits = [v FindAllObjects];
+        PatientObject* p = [[PatientObject alloc] init];
+        NSArray* allPatients = [p FindAllObjects];
+        MedicationObject* m = [[MedicationObject alloc] init];
+        NSArray* allMedications = [m FindAllObjects];
+        UserObject* u = [[UserObject alloc] init];
+        NSArray* allUsers = [u FindAllObjects];
 
--(void)completeSystemPurge
-{
-    VisitationObject* v = [[VisitationObject alloc] init];
-    NSArray* allVisits = [v FindAllObjects];
-    PatientObject* p = [[PatientObject alloc] init];
-    NSArray* allPatients = [p FindAllObjects];
-    MedicationObject* m = [[MedicationObject alloc] init];
-    NSArray* allMedications = [m FindAllObjects];
-    UserObject* u = [[UserObject alloc] init];
-    NSArray* allUsers = [u FindAllObjects];
-    
-    int vCounter = 0;
-    int pCounter = 0;
-    int mCounter = 0;
-    int uCounter = 0;
-    
-    for (NSDictionary* visit in allVisits)
-    {
-        BOOL didDelete = [v deleteDatabaseDictionaryObject:visit];
-        if (didDelete)
+        int vCounter = 0;
+        int pCounter = 0;
+        int mCounter = 0;
+        int uCounter = 0;
+
+        for (NSDictionary* visit in allVisits)
         {
-            vCounter++;
+            BOOL didDelete = [v deleteDatabaseDictionaryObject:visit];
+            if (didDelete)
+            {
+                vCounter++;
+            }
         }
-    }
-    
-    for (NSDictionary* patient in allPatients)
-    {
-        BOOL didDelete = [p deleteDatabaseDictionaryObject:patient];
-        if (didDelete)
+        
+        for (NSDictionary* patient in allPatients)
         {
-            pCounter++;
+            BOOL didDelete = [p deleteDatabaseDictionaryObject:patient];
+            if (didDelete)
+            {
+                pCounter++;
+            }
         }
-    }
-    
-    for (NSDictionary* medication in allMedications)
-    {
-        BOOL didDelete = [m deleteDatabaseDictionaryObject:medication];
-        if (didDelete)
+        
+        for (NSDictionary* medication in allMedications)
         {
-            mCounter++;
+            BOOL didDelete = [m deleteDatabaseDictionaryObject:medication];
+            if (didDelete)
+            {
+                mCounter++;
+            }
         }
-    }
-    
-    for (NSDictionary* user in allUsers)
-    {
-        BOOL didDelete = [u deleteDatabaseDictionaryObject:user];
-        if (didDelete)
+
+        for (NSDictionary* user in allUsers)
         {
-            uCounter++;
+            BOOL didDelete = [u deleteDatabaseDictionaryObject:user];
+            if (didDelete)
+            {
+                uCounter++;
+            }
         }
+        
+        NSLog(@"Truly Purged The System of %i Visits, %i Patients, %i Medications, and %i Users", vCounter, pCounter, mCounter, uCounter);
     }
-    
-    NSLog(@"Completely Purged The System of %i Visits, %i Patients, %i Medications, and %i Users", vCounter, pCounter, mCounter, uCounter);
 }
 
 - (IBAction)manualTableRefresh:(id)sender
@@ -356,7 +342,6 @@ id<ServerProtocol> connection;
     [_patientButton setEnabled: YES];
     [_medicationButton setEnabled: YES];
     [_logoutButton setEnabled: YES];
-    [[[CloudManagementObject alloc] init] updateActiveUser:[note object]];
 }
 
 - (IBAction)pushPatientsToCloud:(id)sender

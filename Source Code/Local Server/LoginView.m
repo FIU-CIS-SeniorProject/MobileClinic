@@ -47,8 +47,8 @@
     return self;
 }
 
-- (IBAction)login:(id)sender
-{
+- (IBAction)login:(id)sender {
+    
     UserObject* users = [[UserObject alloc]init];
     
     // Sync appropriate users from cloud to the server
@@ -64,14 +64,13 @@
     [users loginWithUsername:[usernameTextField stringValue] andPassword:[passwordTextField stringValue] onCompletion:^(id<BaseObjectProtocol> data, NSError *error, Users *userA) {
         
         //TODO: fix error
-        if (error)
-        {
+        if (error) {
             [[NSApplication sharedApplication] presentError:error];
         }
         else
         {
             //notification to mainMenu to change view
-            [[NSNotificationCenter defaultCenter]postNotificationName:@"LOGIN_OBSERVER" object:[usernameTextField stringValue]];
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"LOGIN_OBSERVER" object:nil];
         }
         //clear text fields
         [usernameTextField setStringValue:@""];

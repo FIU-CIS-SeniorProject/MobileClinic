@@ -30,7 +30,7 @@
 #define LASTPULLTIME        @"lastPullTime"
 #define ISACTIVE            @"isActive"
 #define ISDIRTY             @"isDirty"
-#define ACTIVEUSER          @"activeUser"
+#define ACTIVEUSER          @"activeUser";
 
 #import <Foundation/Foundation.h>
 #import "CommonObjectProtocol.h"
@@ -39,10 +39,8 @@
 -(NSDictionary *)GetActiveEnvironment;
 -(NSNumber *)GetActiveTimestamp;
 -(NSString *)GetActiveURL;
--(NSString *)GetActiveUser;
 -(void)setActiveEnvironment: (NSString*)environmentName;
 -(NSDictionary *)GetEnvironment: (NSString*)environmentName;
--(void)updateTimestamp;
--(void)updateActiveUser: (NSString*)currentUser;
+-(void) updateTimestamp;
 
 @end
