@@ -5,10 +5,7 @@
 //  Created by Humberto Suarez on 11/2/13.
 //  Copyright (c) 2013 Florida International University. All rights reserved.
 //
-
-
 #define ISOPEN  @"isOpen"
-
 
 #import "FaceObject.h"
 #import "NSDataAdditions.h"

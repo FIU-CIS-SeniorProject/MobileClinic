@@ -12,12 +12,10 @@
 #define UPDATEPATIENT   @"update_patient"
 #define CREATEPATIENT   @"create_patient"
 #define UPDATEVISIT     @"update_visit"
-
-
-
+#define UPDATEFACES     @"update_faces"
 #define DATABASEOBJECT @"Database Object"
-#import "NSObject+CustomTools.h"
 
+#import "NSObject+CustomTools.h"
 #import <Foundation/Foundation.h>
 #import "DatabaseDriver.h"
 #import "BaseObjectProtocol.h"
