@@ -114,7 +114,9 @@ NSData * rpictures;
 -(NSArray*)recognizeFace
 {
     FaceRecognize *faceRecognizer = [[FaceRecognize alloc] initWithEigenFaceRecognizer];
-    [faceRecognizer trainModel];
+    self.modelAvailable =[faceRecognizer trainModel];
+    if(self.modelAvailable)
+    {
     NSDictionary *match = [faceRecognizer recognizeFace:[self dataToMat:rpictures width:[NSNumber numberWithInt:100]
                                                                  height:[NSNumber numberWithInt:100]]];
     NSLog(@"person id %@ ",[match objectForKey:@"label"]);
@@ -150,7 +152,7 @@ NSData * rpictures;
     }
     else
         return nil;
-    
+    }
 }
 - (cv::Mat)dataToMat:(NSData *)data width:(NSNumber *)width height:(NSNumber *)height
 {

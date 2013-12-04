@@ -1,0 +1,186 @@
+[
+  {
+  "medicationId":"Tylenol",
+  "medName":"Acetaminophen",
+  },
+  {
+  "medicationId":"Albendazole",
+  "medName":"Albendazole",
+  },
+  {
+  "medicationId":"SalbutemolTablet",
+  "medName":"Salbutemol (Tablet)",
+  },
+  {
+  "medicationId":"SalbutemolInhaler",
+  "medName":"Salbutemol (Inhaler)",
+  },
+  {
+  "medicationId":"Amoxycillin",
+  "medName":"Amoxycillin",
+  },
+  {
+  "medicationId":"Neosporin",
+  "medName":"Antibiotic Ointment",
+  },
+  {
+  "medicationId":"Anti-Diarrheal",
+  "medName":"Loperamide Hydrochloride",
+  },
+  {
+  "medicationId":"Nova-La",
+  "medName":"Artemether Lumefantrine (Nova-La)",
+  },
+  {
+  "medicationId":"Aspirin",
+  "medName":"Aspirin",
+  },
+  {
+  "medicationId":"Azythromycin",
+  "medName":"Azythromycin",
+  },
+  {
+  "medicationId":"Diphenhydramine",
+  "medName":"Diphenhydramine",
+  },
+  {
+  "medicationId":"Bacitracin",
+  "medName":"Bacitracin",
+  },
+  {
+  "medicationId":"Ciprofloxacin",
+  "medName":"Ciprofloxacin",
+  },
+  {
+  "medicationId":"Cimetidine",
+  "medName":"Cimetidine",
+  },
+  {
+  "medicationId":"Clotrimozole",
+  "medName":"Clotrimozole",
+  },
+  {
+  "medicationId":"Diprolene",
+  "medName":"Diprolene",
+  },
+  {
+  "medicationId":"Doxycycline",
+  "medName":"Doxycycline",
+  },
+  {
+  "medicationId":"Dulcolax",
+  "medName":"Dulcolax",
+  },
+  {
+  "medicationId":"Enalapril Maleate",
+  "medName":"Enalapril Maleate",
+  },
+  {
+  "medicationId":"Famotidine",
+  "medName":"Famotidine",
+  },
+  {
+  "medicationId":"Fluconazole",
+  "medName":"Fluconazole",
+  },
+  {
+  "medicationId":"Hydrochlorothiazide",
+  "medName":"HCTZ",
+  },
+  {
+  "medicationId":"HydrocortisoneCream",
+  "medName":"Hydrocortisone Cream",
+  },
+  {
+  "medicationId":"Advil",
+  "medName":"Ibuprofen",
+  },
+  {
+  "medicationId":"Loratadine",
+  "medName":"Loratadine",
+  },
+  {
+  "medicationId":"Metformin",
+  "medName":"Metformin",
+  },
+  {
+  "medicationId":"Metronidazole",
+  "medName":"Metronidazole",
+  },
+  {
+  "medicationId":"SalineDrops",
+  "medName":"Saline Drops",
+  },
+  {
+  "medicationId":"Omeprazole",
+  "medName":"Omeprazole",
+  },
+  {
+  "medicationId":"Prednisone Tablets",
+  "medName":"Prednisone Tablets",
+  },
+  {
+  "medicationId":"Petrolium",
+  "medName":"Petrolium",
+  },
+  {
+  "medicationId":"Phenobarbital",
+  "medName":"Phenobarbital",
+  },
+   {
+  "medicationId":"Phenytoin",
+  "medName":"Phenytoin",
+  },
+   {
+  "medicationId":"Praziquantel",
+  "medName":"Praziquantel",
+  },
+  { 
+  "medicationId":"Atenolol",
+  "medName":"Atenolol",
+  },
+  {
+  "medicationId":"VitaminsAdult",
+  "medName":"Vitamins (Adult)",
+  },
+  {
+  "medicationId":"VitaminsChildren",
+  "medName":"Vitamins (Children Chewables)",
+  },
+  {
+  "medicationId":"VitaminsInfant",
+  "medName":"Vitamins (Infant Drops)",
+  },
+  {
+  "medicationId":"VitaminsIron",
+  "medName":"Vitamins (Iron)",
+  },
+  {
+  "medicationId":"Cephalexin",
+  "medName":"Cephalexin",
+  },
+  {
+  "medicationId":"VitaminsAdult",
+  "medName":"Vitamins (Adult)",
+  },
+  {
+  "medicationId":"CeftriaxoneInjects",
+  "medName":"Ceftriaxone (Inj)",
+  },
+  {
+  "medicationId":"Ondansetron",
+  "medName":"Ondansetron",
+  },
+  {
+  "medicationId":"Griseofalvin",
+  "medName":"Griseofalvin",
+  },
+  {
+  "medicationId":"TobramycinEyeDrops",
+  "medName":"Tobramycin Eye Drops",
+  },
+  {
+  "medicationId":"HaemorrhoidCream",
+  "medName":"Haemorrhoid Cream",
+  }
+]
