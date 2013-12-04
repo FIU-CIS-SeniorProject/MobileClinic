@@ -243,28 +243,12 @@ NSString* isLockedBy;
         NSArray* allPatients = [cloudResults objectForKey:@"data"];
         [self handleCloudCallback:onComplete UsingData:allPatients WithPotentialError:error];
         
-        // allocate and init a CloudManagementObject
-        CloudManagementObject* CloudMO = [[CloudManagementObject alloc] init];
-        
-        // Call getActiveEnvironment and put it into an NSMutableDictionary
-        NSMutableDictionary* environment = [[CloudMO GetActiveEnvironment] mutableCopy];
-        
-        // Update timestamp in NSMutableDictionary
-        [environment setObject:[[NSDate date] convertNSDateToSeconds] forKey:LASTPULLTIME];
-        
-        // Put back into CloudManagementObject
-        CloudMO = [CloudMO initAndFillWithNewObject:environment];
-        
-        // Save CloudManagementObject
-        [CloudMO saveObject:^(id<BaseObjectProtocol> data, NSError *error) {
-            
-        }];
     }];
 }
 
 -(void)pushToCloud:(CloudCallback)onComplete
 {
-    NSArray* allPatients= [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:COMMONDATABASE withCustomPredicate:[NSPredicate predicateWithFormat:@"%K == YES",ISDIRTY] andSortByAttribute:FIRSTNAME]];
+    NSArray* allPatients = [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:COMMONDATABASE withCustomPredicate:[NSPredicate predicateWithFormat:@"%K == YES",ISDIRTY] andSortByAttribute:FIRSTNAME]];
     
     //NSArray* allPatients= [self FindAllObjects];
     
@@ -274,8 +258,10 @@ NSString* isLockedBy;
         NSString* pId = [object objectForKey:PATIENTID];
         pId = [pId stringByReplacingOccurrencesOfString:@"." withString:@""];
         [object setValue:pId forKey:PATIENTID];
+        
         // Remove Pictures (NSData)
         [object setValue:nil forKey:PICTURE];
+        
         // Remove FingerPrint (NSData)
         [object setValue:nil forKey:FINGERDATA];
         

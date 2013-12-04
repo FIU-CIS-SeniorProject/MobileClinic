@@ -11,6 +11,7 @@
 #import "DataProcessor.h"
 #import "NSString+Validation.h"
 #import "SystemBackup.h"
+#import "CloudManagementObject.h"
 @interface PatientTable (){
     NSMutableDictionary* selectedVisit;
 }
@@ -222,27 +223,53 @@ id currentTable;
     [progressIndicator startAnimation:self];
     
     [[[PatientObject alloc]init] pullFromCloud:^(id cloudResults, NSError *error)
-    {
-        if (!cloudResults && error)
-        {
-            [NSApp presentError:error];
-        }
-        else
-        {
-            [[[PatientObject alloc]init] pushToCloud:^(id cloudResults, NSError *error)
-            {
-                if (error)
-                {
-                    [NSApp presentError:error];
-                }
-                else
-                {
-                    [self refreshPatients:nil];
-                }
-            }];
-        }
-        [progressIndicator stopAnimation:self];
-    }];
+     {
+         if (!cloudResults && error)
+         {
+             [NSApp presentError:error];
+         }
+         else
+         {
+             [[[PatientObject alloc]init] pushToCloud:^(id cloudResults, NSError *error)
+              {
+                  if (error)
+                  {
+                      [NSApp presentError:error];
+                  }
+                  else
+                  {
+                      [self refreshPatients:nil];
+                  }
+              }];
+         }
+         [progressIndicator stopAnimation:self];
+     }];
+    
+    [[[VisitationObject alloc]init] pullFromCloud:^(id cloudResults, NSError *error)
+     {
+         if (!cloudResults && error)
+         {
+             [NSApp presentError:error];
+         }
+         else
+         {
+             [[[VisitationObject alloc]init] pushToCloud:^(id cloudResults, NSError *error)
+              {
+                  if (error)
+                  {
+                      [NSApp presentError:error];
+                  }
+                  else
+                  {
+                      [self refreshPatients:nil];
+                  }
+              }];
+         }
+         [progressIndicator stopAnimation:self];
+     }];
+    
+    // allocate and init a CloudManagementObject, then update timestamp
+    [[[CloudManagementObject alloc] init] updateTimestamp];
 }
 
 - (IBAction)exportPatientData:(id)sender {
