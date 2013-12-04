@@ -1,0 +1,8 @@
+diff a/Client/Mobile Clinic/LoginViewController.m b/Client/Mobile Clinic/LoginViewController.m	(rejected hunks)
+@@ -193,6 +193,5 @@
+         [base saveObject:^(id<BaseObjectProtocol> data, NSError *error) {
+         }];
+     }];
+-    
+ }
+ @end

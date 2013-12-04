@@ -1,0 +1,32 @@
+dependencies: \
+  /Users/montaque22/MC-EMR/mobile-clinic-electronic-medical-records-client/Client/MobileClinicTests/BaseObjectTest.m \
+  /Users/montaque22/MC-EMR/mobile-clinic-electronic-medical-records-client/Client/MobileClinicTests/GHUnitIOS.framework/Headers/GHUnit.h \
+  /Users/montaque22/MC-EMR/mobile-clinic-electronic-medical-records-client/Client/MobileClinicTests/GHUnitIOS.framework/Headers/GHTestCase.h \
+  /Users/montaque22/MC-EMR/mobile-clinic-electronic-medical-records-client/Client/MobileClinicTests/GHUnitIOS.framework/Headers/GHTestMacros.h \
+  /Users/montaque22/MC-EMR/mobile-clinic-electronic-medical-records-client/Client/MobileClinicTests/GHUnitIOS.framework/Headers/NSException+GHTestFailureExceptions.h \
+  /Users/montaque22/MC-EMR/mobile-clinic-electronic-medical-records-client/Client/MobileClinicTests/GHUnitIOS.framework/Headers/NSValue+GHValueFormatter.h \
+  /Users/montaque22/MC-EMR/mobile-clinic-electronic-medical-records-client/Client/MobileClinicTests/GHUnitIOS.framework/Headers/GHTest.h \
+  /Users/montaque22/MC-EMR/mobile-clinic-electronic-medical-records-client/Client/MobileClinicTests/GHUnitIOS.framework/Headers/GHAsyncTestCase.h \
+  /Users/montaque22/MC-EMR/mobile-clinic-electronic-medical-records-client/Client/MobileClinicTests/GHUnitIOS.framework/Headers/GHTestSuite.h \
+  /Users/montaque22/MC-EMR/mobile-clinic-electronic-medical-records-client/Client/MobileClinicTests/GHUnitIOS.framework/Headers/GHTestGroup.h \
+  /Users/montaque22/MC-EMR/mobile-clinic-electronic-medical-records-client/Client/MobileClinicTests/GHUnitIOS.framework/Headers/GHTestRunner.h \
+  /Users/montaque22/MC-EMR/mobile-clinic-electronic-medical-records-client/Client/MobileClinicTests/GHUnitIOS.framework/Headers/GHTesting.h \
+  /Users/montaque22/MC-EMR/mobile-clinic-electronic-medical-records-client/Client/MobileClinicTests/GHUnitIOS.framework/Headers/GHTestOperation.h \
+  /Users/montaque22/MC-EMR/mobile-clinic-electronic-medical-records-client/Client/MobileClinicTests/GHUnitIOS.framework/Headers/GHTest+JUnitXML.h \
+  /Users/montaque22/MC-EMR/mobile-clinic-electronic-medical-records-client/Client/MobileClinicTests/GHUnitIOS.framework/Headers/GHTestGroup+JUnitXML.h \
+  /Users/montaque22/MC-EMR/mobile-clinic-electronic-medical-records-client/Client/MobileClinicTests/GHUnitIOS.framework/Headers/GHTestUtils.h \
+  /Users/montaque22/MC-EMR/mobile-clinic-electronic-medical-records-client/Client/MobileClinicTests/GHUnitIOS.framework/Headers/GHUnitIOSAppDelegate.h \
+  /Users/montaque22/MC-EMR/mobile-clinic-electronic-medical-records-client/Client/MobileClinicTests/GHUnitIOS.framework/Headers/GHViewTestCase.h \
+  /Users/montaque22/MC-EMR/mobile-clinic-electronic-medical-records-client/Client/BaseObject.h \
+  /Users/montaque22/MC-EMR/mobile-clinic-electronic-medical-records-client/Client/DatabaseDriver.h \
+  /Users/montaque22/MC-EMR/mobile-clinic-electronic-medical-records-client/Client/Database.h \
+  /Users/montaque22/MC-EMR/mobile-clinic-electronic-medical-records-client/Client/DatabaseProtocol.h \
+  /Users/montaque22/MC-EMR/mobile-clinic-electronic-medical-records-client/Client/ServerProtocol.h \
+  /Users/montaque22/MC-EMR/mobile-clinic-electronic-medical-records-client/Client/DatabaseDriverProtocol.h \
+  /Users/montaque22/MC-EMR/mobile-clinic-electronic-medical-records-client/Client/BaseObjectProtocol.h \
+  /Users/montaque22/MC-EMR/mobile-clinic-electronic-medical-records-client/Client/DataProcessor.h \
+  /Users/montaque22/MC-EMR/mobile-clinic-electronic-medical-records-client/Client/NSString+StringExt.h \
+  /Users/montaque22/MC-EMR/mobile-clinic-electronic-medical-records-client/Client/NSObject+CustomTools.h \
+  /Users/montaque22/MC-EMR/mobile-clinic-electronic-medical-records-client/Client/PatientObject.h \
+  /Users/montaque22/MC-EMR/mobile-clinic-electronic-medical-records-client/Client/PatientObjectProtocol.h \
+  /Users/montaque22/MC-EMR/mobile-clinic-electronic-medical-records-client/Client/CommonObjectProtocol.h
