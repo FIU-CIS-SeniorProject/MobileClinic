@@ -262,11 +262,11 @@ NSData * pictures;
         }*/
     }
     
-    [self makeCloudCallWithCommand:UPDATEFACES withObject:[NSDictionary dictionaryWithObject:allFaces
+    /*[self makeCloudCallWithCommand:UPDATEFACES withObject:[NSDictionary dictionaryWithObject:allFaces
                                                                                     forKey:DATABASE] onComplete:^(id cloudResults, NSError *error) {
-        
+     
         [self handleCloudCallback:onComplete UsingData:allFaces WithPotentialError:error];
-    }];
+    }];*/
 }
 
 -(NSArray *)covertAllSavedObjectsToJSON{

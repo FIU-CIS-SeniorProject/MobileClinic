@@ -3750,6 +3750,349 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="night.png" width="157" height="134"/>
         <image name="userImage.jpeg" width="120" height="120"/>
     </resources>
+    <classes>
+        <class className="CurrentDiagnosisViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CurrentDiagnosisViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="cancelDiagnosis:"/>
+                <relationship kind="action" name="submitButton:"/>
+                <relationship kind="outlet" name="assessmentLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="assessmentTextbox" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="objectiveLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="objectiveTextbox" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="subjectiveLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="subjectiveTextbox" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="submitButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="view" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="CurrentVisitViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CurrentVisitViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="cancelNewVisit:"/>
+                <relationship kind="action" name="checkInButton:"/>
+                <relationship kind="action" name="quickCheckOutButton:"/>
+                <relationship kind="action" name="sendToPharmacy:"/>
+                <relationship kind="outlet" name="SendToDoctor" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="bloodPressureDivider" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="bloodPressureLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="bloodPressureMeasurementLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="checkOutBtn" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="conditionTitleField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="conditionsTextbox" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="diastolicField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="heartField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="heartFieldLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="heartMeasurementLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="patientWeightField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="patientWeightLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="patientWeightMeasurementLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="respirationField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="respirationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="respirationMeasurementLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="sendToPharmacy" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="systolicField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="tempField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="tempLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="tempMeasurementLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="visitPriority" candidateClass="UISegmentedControl"/>
+            </relationships>
+        </class>
+        <class className="DashboardTableCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DashboardTableCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="employeeName" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="patientConditionTitle" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="patientName" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="patientPhoto" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="patientWaitTime" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="priorityIndicator" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+        <class className="DateController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DateController.h"/>
+            <relationships>
+                <relationship kind="action" name="saveNewDate:"/>
+                <relationship kind="outlet" name="dateLbl" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
+            </relationships>
+        </class>
+        <class className="DoctorPatientViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DoctorPatientViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="segmentClicked:"/>
+                <relationship kind="outlet" name="familyNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="patientAgeField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="patientBPLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="patientHRLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="patientNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="patientPhoto" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="patientRespirationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="patientSexField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="patientTempLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="patientWeightLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="segmentedControl" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="toolBar" candidateClass="UIToolbar"/>
+                <relationship kind="outlet" name="villageNameField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="DoctorPrescriptionViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DoctorPrescriptionViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="CheckOutPatient:"/>
+                <relationship kind="action" name="findDrugs:"/>
+                <relationship kind="action" name="newTimeOfDay:"/>
+                <relationship kind="action" name="savePrescription:"/>
+                <relationship kind="outlet" name="checkOutBtn" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="drugTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="drugTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="instructionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="medicationNotes" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="tabletsTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="timeOfDayTextFields" candidateClass="UITextField"/>
+                <relationship kind="outletCollection" name="timeOfDayButtons" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="EditVisit" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EditVisit.h"/>
+            <relationships>
+                <relationship kind="action" name="saveandClose:"/>
+                <relationship kind="outlet" name="conditionTitleField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="conditionsTextbox" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="diastolicField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="heartField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="respirationField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="systolicField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="tempField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="weight" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="FRViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FRViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="confidenceLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="instructionLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="LoginViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="loginButton:"/>
+                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="usernameTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="MCSwipeTableViewCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MCSwipeTableViewCell.h"/>
+        </class>
+        <class className="MedicineSearchViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MedicineSearchViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="AddTimeOfDay:"/>
+                <relationship kind="action" name="alterAmountOfTablets:"/>
+                <relationship kind="action" name="moveBackToPrescription:"/>
+                <relationship kind="action" name="searchMedicine:"/>
+                <relationship kind="outlet" name="dosage" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="drugName" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="duration" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="durationIncrementer" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="medicineField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="timeOfDay" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="PatientDashboardViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PatientDashboardViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="filterBy:"/>
+                <relationship kind="action" name="refresh:"/>
+                <relationship kind="action" name="sortBySelected:"/>
+                <relationship kind="action" name="tryAndSyncAllPendingObjects:"/>
+                <relationship kind="outlet" name="PendingSyncButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="doctorQueueTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="doctorWaitLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="pharmacyFilter" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="pharmacyQueueTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="pharmacyWaitLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="prioritySelector" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="refreshDoctor" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="refreshPharmacy" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="totalTimeLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="PatientHistoryTableCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PatientHistoryTableCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="patientBPLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="patientConditionTitleTextView" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="patientConditionsTextView" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="patientHeartLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="patientRespirationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="patientTemperatureLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="patientVisitDateLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="patientWeightLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="PatientQueueViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PatientQueueViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="sortBySelected:"/>
+                <relationship kind="outlet" name="numberOfPatientsLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="prioritySelector" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="queueTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="PatientResultTableCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PatientResultTableCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="patientAge" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="patientDOB" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="patientImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="patientName" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="PharmacyPatientViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PharmacyPatientViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="checkoutPatient:"/>
+                <relationship kind="outlet" name="checkoutButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="familyNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="medicalNotes" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="patientAgeField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="patientNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="patientPhoto" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="patientSexField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="patientView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="villageNameField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="PharmacyPatientViewControllerCell" superclassName="MCSwipeTableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PharmacyPatientViewControllerCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="dosage" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="drugName" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="timeOfDay" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="PharmacyQueueController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PharmacyQueueController.h"/>
+            <relationships>
+                <relationship kind="action" name="sortBySelected:"/>
+                <relationship kind="outlet" name="numberOfPatientsLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="prioritySelector" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="queueTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="PreviousVisitsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PreviousVisitsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="patientHistoryTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="QueueCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/QueueCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="employeeName" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="patientConditionTitle" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="patientName" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="patientPhoto" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="patientWaitTime" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="priorityIndicator" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+        <class className="RegisterFaceViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RegisterFaceViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="cameraButtonClicked:"/>
+                <relationship kind="action" name="savePerson:"/>
+                <relationship kind="action" name="switchCameraButtonClicked:"/>
+                <relationship kind="outlet" name="Register" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="familyNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="firstNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="imageScrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="switchCameraButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="RegisterPatientViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RegisterPatientViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="RegisterFaceButton:"/>
+                <relationship kind="action" name="createPatient:"/>
+                <relationship kind="action" name="faceRecognition:"/>
+                <relationship kind="action" name="getAgeOfPatient:"/>
+                <relationship kind="action" name="patientPhotoButton:"/>
+                <relationship kind="action" name="registerFingerprintsButton:"/>
+                <relationship kind="action" name="searchByFingerprintButton:"/>
+                <relationship kind="action" name="searchByNameButton:"/>
+                <relationship kind="action" name="startOver:"/>
+                <relationship kind="outlet" name="createPatientButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="familyNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="firstNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="lastNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="patientAgeField" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="patientNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="patientPhoto" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="patientSexSegment" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="registerFingerprintsButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="registerView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="searchResultTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="searchView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="villageNameField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="SearchPatientViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SearchPatientViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="searchByFingerprintButton:"/>
+                <relationship kind="action" name="searchByNameButton:"/>
+                <relationship kind="outlet" name="familyNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="patientNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="searchResultTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="searchView" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="StationSwitcher" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/StationSwitcher.h"/>
+        </class>
+        <class className="StationSwitcherCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/StationSwitcherCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="stationTitle" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="TakePicturesViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TakePicturesViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="addPicture1:"/>
+                <relationship kind="action" name="addPicture2:"/>
+                <relationship kind="action" name="addPicture3:"/>
+                <relationship kind="action" name="addPicture4:"/>
+                <relationship kind="outlet" name="picture1" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="picture2" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="picture3" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="picture4" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="TriagePatientViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TriagePatientViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="addVisitationPictures:"/>
+                <relationship kind="action" name="toggleViews:"/>
+                <relationship kind="outlet" name="familyNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="patientAgeField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="patientNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="patientPhoto" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="patientSexField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="patientView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="segmentedControl" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="toolBar" candidateClass="UIToolbar"/>
+                <relationship kind="outlet" name="villageNameField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
