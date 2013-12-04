@@ -97,7 +97,7 @@ int* isActive;
 
 -(NSDictionary *)GetActiveEnvironment
 {
-    NSPredicate* pred = [NSPredicate predicateWithFormat:@"K == YES", ISACTIVE];
+    NSPredicate* pred = [NSPredicate predicateWithFormat:@"%K == YES", ISACTIVE];
     NSArray* managedObjects = [self FindObjectInTable:DATABASE withCustomPredicate:pred andSortByAttribute:NAME];
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     
@@ -111,10 +111,10 @@ int* isActive;
     return dict;
 }
 
--(NSDate *)GetActiveTimestamp
+-(NSNumber *)GetActiveTimestamp
 {
     NSDictionary* dict = [self GetActiveEnvironment];
-    NSDate* lastPullTime = nil;
+    NSNumber* lastPullTime = nil;
     
     if (dict != nil)
     {

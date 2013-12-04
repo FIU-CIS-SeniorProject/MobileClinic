@@ -3,11 +3,14 @@
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 3/15/13.
-//  Copyright (c) 2013 Florida International University. All rights reserved.
+//  Edited by Kevin Diaz on 11/2013
 //
 
 #import "CloudService.h"
+#import "CloudManagementObject.h"
+#import "NSMutableData-AES.h"
 #import <IOKit/IOKitLib.h>
+//#import <CommonCrypto/CommonCryptor.h>
 
 @interface CloudService()
 {
@@ -34,7 +37,7 @@
     return mApi;
 }
 
-+ (id)stringWithMachineSerialNumber
+-(NSString*)stringWithMachineSerialNumber
 {
     NSString* result = nil;
     CFStringRef serialNumber = NULL;
@@ -60,14 +63,23 @@
     self = [super init];
     if(self)
     {
-        //kURL = @"http://staging-webapp.herokuapp.com/";
+        //TODO: Use serialNumber as kApiKey when cloud allows for local server registration.
+        NSString* serialNumber = [self stringWithMachineSerialNumber];
+        NSLog(@"Serial Number: %@", serialNumber);
+        
         kApiKey = @"12345";
         kAccessToken = @"";
         isAuthenticated = NO;
-        //production
-        //kURL = @"http://znja-webapp.herokuapp.com/api/";
+        
+        //TODO: gets url of active cloud server (causes infinite loop with init)
+        //kURL = [[[CloudManagementObject alloc] init] GetActiveURL];
+    
+        //kURL = @"http://pure-island-5858.herokuapp.com/"; // Production Cloud
         kURL = @"http://still-citadel-8045.herokuapp.com/"; // Test Cloud
-        //kURL = @"http://localhost:3000/";
+        
+        //kURL = @"http://localhost:3000/"; // local host for testing the Cloud Server
+        //kURL = @"http://staging-webapp.herokuapp.com/";
+        //kURL = @"http://znja-webapp.herokuapp.com/api/";
         
         [self getAccessToken:^(BOOL success) {
             if(success){
@@ -213,6 +225,10 @@
     
     [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", POSTBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
     
+    // TODO: encrypt "body"
+    [body EncryptAES:@"EncryptKey"];
+    
+    //[NSData data] AESEncrypt
     // setting the body of the post to the reqeust
     [request setHTTPBody:body];
     
@@ -232,26 +248,28 @@
     
     NSURL *url = [NSURL  URLWithString:[NSString stringWithFormat:@"%@%@", kURL, partialURL]];
     
-    NSData *data;
+    NSMutableData *body = [NSMutableData data];
     
     if (param) {
         NSData *json = [NSJSONSerialization dataWithJSONObject:param options:NSJSONWritingPrettyPrinted error:nil];
         
-        data = [[NSString stringWithFormat:@"%@%@",
+        [body appendData:[[NSString stringWithFormat:@"%@%@",
                  @"&params=",[[NSString alloc] initWithData:json encoding:NSUTF8StringEncoding] ]
-                dataUsingEncoding: NSUTF8StringEncoding];
+                dataUsingEncoding: NSUTF8StringEncoding]];
     }
     else
     {
-        data = [[NSString stringWithFormat:@"%@",@""] dataUsingEncoding: NSUTF8StringEncoding];
+        [body appendData:[[NSString stringWithFormat:@"%@",@""] dataUsingEncoding: NSUTF8StringEncoding]];
     }
     
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:30];
     
-    [request setHTTPMethod:@"POST"];
-    [request setHTTPBody: data];
+    //TODO: encrypt body
+    [body EncryptAES:@"EncryptKey"];
     
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody: body];
     
     [self sendAsyncRequest:request completion:completion];
 }
@@ -259,10 +277,17 @@
 -(void)sendAsyncRequest:(NSURLRequest *)request completion:(void(^)(NSError *error, NSDictionary *result)) completion
 {
     
-    [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error){
-        
-        if(!error){
+    [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
+    {
+        if(!error)
+        {
             NSError *jsonError;
+            
+            //TODO: Decrypt Maybe?
+            NSMutableData *body = [NSMutableData data];
+            [body appendData: data];
+            // decrypts boby
+            [body DecryptAES:@"EncryptKey" andForData:body];
             
             //read and print the server response for debug
             NSString *myString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];

@@ -36,7 +36,7 @@
 @protocol CloudManagementObjectProtocol <NSObject>
 
 -(NSDictionary *)GetActiveEnvironment;
--(NSDate *)GetActiveTimestamp;
+-(NSNumber *)GetActiveTimestamp;
 -(NSString *)GetActiveURL;
 -(void)setActiveEnvironment: (NSString*)environmentName;
 -(NSDictionary *)GetEnvironment: (NSString*)environmentName;

@@ -265,7 +265,7 @@
     // if we cannot find the user, throw an error
     else
     {
-        onSuccessHandler(Nil,[self createErrorWithDescription:@"The user does not exists" andErrorCodeNumber:kErrorUserDoesNotExist inDomain:self->COMMONDATABASE], user);
+        onSuccessHandler(Nil,[self createErrorWithDescription:@"The user does not exist" andErrorCodeNumber:kErrorUserDoesNotExist inDomain:self->COMMONDATABASE], user);
     }
 }
 
