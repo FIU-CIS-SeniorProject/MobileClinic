@@ -73,12 +73,14 @@ NSDictionary* faceData;
 {
     
     // Only process every 60th frame (every 2s)
-    if (self.frameNum == 10) {
+    if (self.frameNum == 10)
+    {
         [self parseFaces:[faceDetector facesFromImage:image] forImage:image];
         
         self.frameNum = 1;
     }
-    else {
+    else
+    {
         self.frameNum++;
     }
 }
@@ -88,7 +90,10 @@ NSDictionary* faceData;
     if (![self learnFace:faces forImage:image]) {
         return;
     };
-    
+    if(self.numPicsTaken ==1)
+    {
+        [self.delegate1 addItemViewController:self didFinishEnteringItem:[DataR UIImageFromMat:image]];
+    }
     self.numPicsTaken++;
     NSLog(@"number %@",USERID);
     dispatch_sync(dispatch_get_main_queue(), ^{

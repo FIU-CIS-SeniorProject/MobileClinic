@@ -11,12 +11,14 @@
 #import "CameraFacade.h"
 #import "StationViewHandlerProtocol.h"
 #import "GenericCellProtocol.h"
-
-@interface RegisterPatientViewController : UIViewController<GenericCellProtocol, UITableViewDataSource, UITableViewDelegate>{
+#import <Foundation/Foundation.h>
+#import "RegisterFaceViewController.h"
+@interface RegisterPatientViewController : UIViewController<GenericCellProtocol, UITableViewDataSource, UITableViewDelegate,faceViewDelegate>{
     ScreenHandler handler;
     CameraFacade *facade;
     BOOL shouldDismiss;
 }
+@property(nonatomic) UIImage *returnedImage;
 
 @property (weak, nonatomic) id<GenericCellManager> delegate;
 @property (weak, nonatomic) IBOutlet UITextField *patientNameField;

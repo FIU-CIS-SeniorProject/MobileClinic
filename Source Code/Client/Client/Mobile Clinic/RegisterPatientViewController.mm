@@ -155,6 +155,15 @@ typedef enum MobileClinicMode{
     [self.navigationController pushViewController:faceViewController animated:YES];
     }
 }
+-(void)addItemViewController:(RegisterFaceViewController*)controller didFinishEnteringItem:(UIImage *)item
+{
+    self.returnedImage = item;
+    UIImage *image = self.returnedImage;
+    UIImage *scaled = [image imageByScalingAndCroppingForSize:CGSizeMake(150, 150)];
+    [_patientPhoto setImage:scaled];
+    [patientData setValue:[scaled convertImageToPNGBinaryData] forKey:PICTURE];
+    
+}
 -(IBAction)faceRecognition:(id)sender
 {
     [self resetData];
