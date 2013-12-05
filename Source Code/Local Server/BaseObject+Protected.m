@@ -60,7 +60,8 @@
     // checks to see if object exists
     NSArray* arr = [self FindObjectInTable:self->COMMONDATABASE withName:objectID forAttribute:self->COMMONID];
     
-    if (arr.count == 1) {
+    if (arr.count == 1)
+    {
         self->databaseObject = [arr objectAtIndex:0];
         return  YES;
     }

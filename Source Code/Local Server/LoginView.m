@@ -61,7 +61,7 @@
          
      }];
     
-    [users loginWithUsername:[usernameTextField stringValue] andPassword:[passwordTextField stringValue] onCompletion:^(id<BaseObjectProtocol> data, NSError *error, Users *userA) {
+    [users loginWithUsername:[usernameTextField stringValue] andPassword:[passwordTextField stringValue] onCompletion:^(id<BaseObjectProtocol> data, NSError *error, NSDictionary *userA) {
         
         //TODO: fix error
         if (error)

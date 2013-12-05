@@ -228,44 +228,45 @@
 }
 
 //TODO: Allow login even without cloud connection
--(void)loginWithUsername:(NSString*)username andPassword:(NSString*)password onCompletion:(void(^)(id <BaseObjectProtocol> data, NSError* error, Users* userA))onSuccessHandler
+//-(void)loginWithUsername:(NSString*)username andPassword:(NSString*)password onCompletion:(void(^)(id <BaseObjectProtocol> data, NSError* error, Users* userA))onSuccessHandler
+-(void)loginWithUsername:(NSString*)username andPassword:(NSString*)password onCompletion:(void(^)(id <BaseObjectProtocol> data, NSError* error, NSDictionary* userDict))onSuccessHandler
 {
     username = [username lowercaseString];
     
     // Try to find user from username in local DB
-    BOOL didFindUser = [self loadObjectForID:username];
-    
-    // link databaseObject to convenience Object named "user"
-    [self linkDatabase];
+    NSArray* userArray = [[self FindAllObjects] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K == %@", USERNAME, username]];
+    NSDictionary* theUser;
     
     // if we find the user locally then....
-    if (didFindUser)
+    if (userArray.count == 1)
     {
+        theUser = [userArray objectAtIndex:0];
+        
         // Check if the user has permissions
-        if (user.status.boolValue && user.userType.intValue == 3)
+        if ([[theUser valueForKey:STATUS] boolValue] && [[theUser valueForKey:USERTYPE] integerValue] == 3)
         {
             // Check credentials against the found user
-            if ([user.password isEqualToString:password])
+            if ([[theUser valueForKey:PASSWORD] isEqualToString:password])
             {
                 //return with success
-                onSuccessHandler(self,nil, user);
+                onSuccessHandler(self,nil, theUser);
             }
             // If incorrect password then throw an error
             else
             {
-                onSuccessHandler(Nil,[self createErrorWithDescription:@"Username & Password combination is incorrect" andErrorCodeNumber:kErrorIncorrectLogin inDomain:self->COMMONDATABASE], user);
+                onSuccessHandler(Nil,[self createErrorWithDescription:@"Username & Password combination is incorrect" andErrorCodeNumber:kErrorIncorrectLogin inDomain:self->COMMONDATABASE], theUser);
             }
         }
         // If the user doesn't have permission, throw an error
         else
         {
-            onSuccessHandler(Nil,[self createErrorWithDescription:@"You do not have permission to login. Please contact you application administrator" andErrorCodeNumber:kErrorPermissionDenied inDomain:self->COMMONDATABASE], user);
+            onSuccessHandler(Nil,[self createErrorWithDescription:@"You do not have permission to login. Please contact you application administrator" andErrorCodeNumber:kErrorPermissionDenied inDomain:self->COMMONDATABASE], theUser);
         }
     }
     // if we cannot find the user, throw an error
     else
     {
-        onSuccessHandler(Nil,[self createErrorWithDescription:@"The user does not exist" andErrorCodeNumber:kErrorUserDoesNotExist inDomain:self->COMMONDATABASE], user);
+        onSuccessHandler(Nil,[self createErrorWithDescription:@"The user does not exist" andErrorCodeNumber:kErrorUserDoesNotExist inDomain:self->COMMONDATABASE], theUser);
     }
 }
 
@@ -279,10 +280,5 @@
         [allObject addObject:[obj dictionaryWithValuesForKeys:[obj attributeKeys]]];
     }
     return  allObject;
-}
-
--(void)linkDatabaseObjects
-{
-    user = (Users*) self->databaseObject;
 }
 @end
