@@ -122,7 +122,7 @@ NSData * rpictures;
     NSLog(@"person id %@ ",[match objectForKey:@"label"]);
     NSLog(@"person name %@",[match objectForKey:@"firstName"]);
     NSLog(@"person last name %@",[match objectForKey:@"familyName"]);
-    int label =[[match objectForKey:@"personID"] intValue];
+    int label =[[match objectForKey:@"label"] intValue];
     NSPredicate* pred = [NSPredicate predicateWithFormat:@"%K beginswith[cd] %@ AND %K beginswith[cd] %@",FIRSTNAME,
                          [match objectForKey:@"firstName"],FAMILYNAME,[match objectForKey:@"familyName"]];
     
@@ -153,6 +153,12 @@ NSData * rpictures;
     else
         return nil;
     }
+    else
+    {
+        NSLog((@"Please add face"));
+        return nil;
+    }
+    
 }
 - (cv::Mat)dataToMat:(NSData *)data width:(NSNumber *)width height:(NSNumber *)height
 {

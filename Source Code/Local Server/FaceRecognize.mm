@@ -33,7 +33,7 @@ NSDictionary* faceD;
 - (id)initWithEigenFaceRecognizer
 {
     self = [self init];
-    _model = cv::createEigenFaceRecognizer(11,2500.0);
+    _model = cv::createEigenFaceRecognizer(9,2500.0);
     
     return self;
 }
@@ -119,7 +119,7 @@ NSDictionary* faceD;
     NSArray *array = [context1 executeFetchRequest:fetchRequest error:&error];
     if(array ==nil)
     {
-        NSLog(@"Problem ! %@",error);
+        NSLog(@"Problem ! @%",error);
     }
     
     for(Face *c in array)

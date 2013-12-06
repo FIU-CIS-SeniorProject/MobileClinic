@@ -16,6 +16,7 @@
 #define DATABASEOBJECT @"Database Object"
 
 #import "NSObject+CustomTools.h"
+
 #import <Foundation/Foundation.h>
 #import "DatabaseDriver.h"
 #import "BaseObjectProtocol.h"

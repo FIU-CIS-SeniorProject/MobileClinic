@@ -1,7 +1,6 @@
 //
 // Prefix header for all source files of the 'Mobile Clinic' target in the 'Mobile Clinic' project
 //
-
 #import <Availability.h>
 
 #ifndef __IPHONE_5_0
