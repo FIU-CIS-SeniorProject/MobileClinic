@@ -683,7 +683,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="h9E-od-07h">
-                                <rect key="frame" x="38" y="457" width="93" height="29"/>
+                                <rect key="frame" x="85" y="473" width="93" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -695,6 +695,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="addPicture1:" destination="dgP-ac-6fq" eventType="touchUpInside" id="jmA-AT-G7X"/>
                                     <action selector="quickCheckOutButton:" destination="dgP-ac-6fq" eventType="touchUpInside" id="irO-um-spc"/>
                                 </connections>
                             </button>
@@ -726,6 +727,7 @@
                         <outlet property="patientWeightField" destination="nHy-7l-RjE" id="a1i-Aj-vb0"/>
                         <outlet property="patientWeightLabel" destination="WuN-4M-B0H" id="ZEF-tO-adp"/>
                         <outlet property="patientWeightMeasurementLabel" destination="d5F-WY-PLN" id="f1a-tL-6Di"/>
+                        <outlet property="picture1" destination="ILB-8E-UUb" id="0PZ-MY-t20"/>
                         <outlet property="respirationField" destination="df4-pQ-0bT" id="RIb-mS-q0Y"/>
                         <outlet property="respirationLabel" destination="qDy-C5-KZH" id="yYr-wA-1T3"/>
                         <outlet property="respirationMeasurementLabel" destination="QH8-TQ-dZZ" id="7aa-O5-21f"/>
@@ -3667,6 +3669,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="CurrentVisitViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CurrentVisitViewController.h"/>
             <relationships>
+                <relationship kind="action" name="addPicture1:"/>
                 <relationship kind="action" name="cancelNewVisit:"/>
                 <relationship kind="action" name="checkInButton:"/>
                 <relationship kind="action" name="quickCheckOutButton:"/>
@@ -3685,6 +3688,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="patientWeightField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="patientWeightLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="patientWeightMeasurementLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="picture1" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="picture2" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="picture3" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="respirationField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="respirationLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="respirationMeasurementLabel" candidateClass="UILabel"/>

@@ -123,7 +123,7 @@ NSDictionary* faceD;
         NSLog(@"Problem ! @%",error);
     }
     
-    for(Face *c in array)
+    /*for(Face *c in array)
     {
          int label = c.label.intValue;
          NSData *imageD = c.photo;
@@ -132,7 +132,7 @@ NSDictionary* faceD;
                                      height:[NSNumber numberWithInt:100]];
          images.push_back(faceData);
          labels.push_back(label);
-    }
+    }*/
     if (images.size() > 0 && labels.size() > 0) {
         _model->train(images, labels);
         return YES;

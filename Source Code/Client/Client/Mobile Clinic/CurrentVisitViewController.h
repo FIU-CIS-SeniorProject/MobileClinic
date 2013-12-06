@@ -16,7 +16,14 @@
     NSMutableDictionary *currentVisit;
 }
 
+- (IBAction)addPicture1:(id)sender;
+@property (weak, nonatomic) IBOutlet UIImageView *picture1;
+@property (weak, nonatomic) IBOutlet UIImageView *picture2;
+@property (weak, nonatomic) IBOutlet UIImageView *picture3;
+
 @property (strong, nonatomic) NSMutableDictionary *patientData;
+//- (IBAction)addPicture2:(id)sender;
+//- (IBAction)addPicture3:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UILabel *patientWeightLabel;
 @property (weak, nonatomic) IBOutlet UILabel *patientWeightMeasurementLabel;

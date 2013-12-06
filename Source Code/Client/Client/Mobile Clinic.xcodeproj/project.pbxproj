@@ -203,6 +203,8 @@
 		6DD5D90216D3158E007C3F74 /* SearchPatientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD5D90116D3158E007C3F74 /* SearchPatientViewController.m */; };
 		6DD5D90516D315DD007C3F74 /* CurrentVisitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD5D90416D315DD007C3F74 /* CurrentVisitViewController.m */; };
 		6DD5D90816D315F3007C3F74 /* PreviousVisitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD5D90716D315F3007C3F74 /* PreviousVisitsViewController.m */; };
+		8918BB15181724E00025D9FC /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8918BB14181724E00025D9FC /* opencv2.framework */; };
+		8918BB161817250C0025D9FC /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8918BB14181724E00025D9FC /* opencv2.framework */; };
 		8918BB19181726380025D9FC /* DataR.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8918BB18181726380025D9FC /* DataR.mm */; };
 		8918BB1C181729FB0025D9FC /* FRViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8918BB1B181729FB0025D9FC /* FRViewController.mm */; };
 		8918BB1D181729FB0025D9FC /* FRViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8918BB1B181729FB0025D9FC /* FRViewController.mm */; };
@@ -223,17 +225,6 @@
 		89454FE31823FFFA00E93504 /* FaceObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 89454FE11823FFFA00E93504 /* FaceObject.m */; };
 		89454FE61824469400E93504 /* Face.m in Sources */ = {isa = PBXBuildFile; fileRef = 89454FE51824469400E93504 /* Face.m */; };
 		89454FE71824469400E93504 /* Face.m in Sources */ = {isa = PBXBuildFile; fileRef = 89454FE51824469400E93504 /* Face.m */; };
-		894C63B3184950CF00E18351 /* libopencv_calib3d.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 894C63A9184950CF00E18351 /* libopencv_calib3d.2.4.6.dylib */; };
-		894C63B4184950CF00E18351 /* libopencv_contrib.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 894C63AA184950CF00E18351 /* libopencv_contrib.2.4.6.dylib */; };
-		894C63B5184950CF00E18351 /* libopencv_core.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 894C63AB184950CF00E18351 /* libopencv_core.2.4.6.dylib */; };
-		894C63B6184950CF00E18351 /* libopencv_features2d.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 894C63AC184950CF00E18351 /* libopencv_features2d.2.4.6.dylib */; };
-		894C63B7184950CF00E18351 /* libopencv_flann.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 894C63AD184950CF00E18351 /* libopencv_flann.2.4.6.dylib */; };
-		894C63B8184950CF00E18351 /* libopencv_highgui.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 894C63AE184950CF00E18351 /* libopencv_highgui.2.4.6.dylib */; };
-		894C63B9184950CF00E18351 /* libopencv_imgproc.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 894C63AF184950CF00E18351 /* libopencv_imgproc.2.4.6.dylib */; };
-		894C63BA184950CF00E18351 /* libopencv_objdetect.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 894C63B0184950CF00E18351 /* libopencv_objdetect.2.4.6.dylib */; };
-		894C63BB184950CF00E18351 /* libopencv_photo.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 894C63B1184950CF00E18351 /* libopencv_photo.2.4.6.dylib */; };
-		894C63BC184950CF00E18351 /* libopencv_stitching.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 894C63B2184950CF00E18351 /* libopencv_stitching.2.4.6.dylib */; };
-		894C63BE184950F200E18351 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 894C63BD184950F200E18351 /* opencv2.framework */; };
 		89B00422182AE24F00008104 /* haarcascade_frontalface_alt_tree.xml in Resources */ = {isa = PBXBuildFile; fileRef = 89B00421182AE24F00008104 /* haarcascade_frontalface_alt_tree.xml */; };
 		89B00423182AE24F00008104 /* haarcascade_frontalface_alt_tree.xml in Resources */ = {isa = PBXBuildFile; fileRef = 89B00421182AE24F00008104 /* haarcascade_frontalface_alt_tree.xml */; };
 		89B00425182AE39400008104 /* haarcascade_frontalface_alt2.xml in Resources */ = {isa = PBXBuildFile; fileRef = 89B00424182AE39400008104 /* haarcascade_frontalface_alt2.xml */; };
@@ -243,7 +234,6 @@
 		89E022291816F4C100CD5C0C /* FaceDetector.mm in Sources */ = {isa = PBXBuildFile; fileRef = 89E022271816F4C100CD5C0C /* FaceDetector.mm */; };
 		89E0222F1816F59F00CD5C0C /* FaceRecognizer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 89E0222E1816F59F00CD5C0C /* FaceRecognizer.mm */; };
 		89E022301816F59F00CD5C0C /* FaceRecognizer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 89E0222E1816F59F00CD5C0C /* FaceRecognizer.mm */; };
-		8CD6743718468DC900C0316A /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD6743618468DC900C0316A /* NSDataAdditions.m */; };
 		EA09329B16F8F77600536DF3 /* PatientFile.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = EAADC01A16E05554009E7AF9 /* PatientFile.json */; };
 		EA0932A716FAD85200536DF3 /* User.json in Resources */ = {isa = PBXBuildFile; fileRef = EA0932A516FAD85100536DF3 /* User.json */; };
 		EA0932A816FAD96E00536DF3 /* User.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = EA0932A516FAD85100536DF3 /* User.json */; };
@@ -292,6 +282,7 @@
 		EA7CDC7316ED0B0C005A9070 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46E773D416CB0BFB00242454 /* libTestFlight.a */; };
 		EA8DFE301756E8E600DD76EB /* SystemBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = EA8DFE2F1756E8E600DD76EB /* SystemBackup.m */; };
 		EA8DFE311756E8E600DD76EB /* SystemBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = EA8DFE2F1756E8E600DD76EB /* SystemBackup.m */; };
+		EA8DFE341756EDC500DD76EB /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = EA8DFE331756EDC500DD76EB /* NSDataAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		EA8DFE351756EDC500DD76EB /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = EA8DFE331756EDC500DD76EB /* NSDataAdditions.m */; };
 		EA9AC88416C8606C00493485 /* DataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9AC88316C8606C00493485 /* DataProcessor.m */; };
 		EA9C2F3B16BF624F000F38CD /* UIViewControllerExt.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9C2F3A16BF624F000F38CD /* UIViewControllerExt.m */; };
@@ -657,6 +648,7 @@
 		6DD5D90416D315DD007C3F74 /* CurrentVisitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentVisitViewController.m; sourceTree = "<group>"; };
 		6DD5D90616D315F3007C3F74 /* PreviousVisitsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviousVisitsViewController.h; sourceTree = "<group>"; };
 		6DD5D90716D315F3007C3F74 /* PreviousVisitsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviousVisitsViewController.m; sourceTree = "<group>"; };
+		8918BB14181724E00025D9FC /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ../../../opencv2.framework; sourceTree = "<group>"; };
 		8918BB17181726380025D9FC /* DataR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataR.h; sourceTree = "<group>"; };
 		8918BB18181726380025D9FC /* DataR.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DataR.mm; sourceTree = "<group>"; };
 		8918BB1A181729FB0025D9FC /* FRViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRViewController.h; sourceTree = "<group>"; };
@@ -676,17 +668,6 @@
 		89454FE41824469400E93504 /* Face.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Face.h; sourceTree = "<group>"; };
 		89454FE51824469400E93504 /* Face.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Face.m; sourceTree = "<group>"; };
 		89454FE81824482D00E93504 /* FaceObjectProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FaceObjectProtocol.h; sourceTree = "<group>"; };
-		894C63A9184950CF00E18351 /* libopencv_calib3d.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_calib3d.2.4.6.dylib; path = "../../Facial Recognition Libraries/libopencv_calib3d.2.4.6.dylib"; sourceTree = "<group>"; };
-		894C63AA184950CF00E18351 /* libopencv_contrib.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_contrib.2.4.6.dylib; path = "../../Facial Recognition Libraries/libopencv_contrib.2.4.6.dylib"; sourceTree = "<group>"; };
-		894C63AB184950CF00E18351 /* libopencv_core.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_core.2.4.6.dylib; path = "../../Facial Recognition Libraries/libopencv_core.2.4.6.dylib"; sourceTree = "<group>"; };
-		894C63AC184950CF00E18351 /* libopencv_features2d.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_features2d.2.4.6.dylib; path = "../../Facial Recognition Libraries/libopencv_features2d.2.4.6.dylib"; sourceTree = "<group>"; };
-		894C63AD184950CF00E18351 /* libopencv_flann.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_flann.2.4.6.dylib; path = "../../Facial Recognition Libraries/libopencv_flann.2.4.6.dylib"; sourceTree = "<group>"; };
-		894C63AE184950CF00E18351 /* libopencv_highgui.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_highgui.2.4.6.dylib; path = "../../Facial Recognition Libraries/libopencv_highgui.2.4.6.dylib"; sourceTree = "<group>"; };
-		894C63AF184950CF00E18351 /* libopencv_imgproc.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_imgproc.2.4.6.dylib; path = "../../Facial Recognition Libraries/libopencv_imgproc.2.4.6.dylib"; sourceTree = "<group>"; };
-		894C63B0184950CF00E18351 /* libopencv_objdetect.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_objdetect.2.4.6.dylib; path = "../../Facial Recognition Libraries/libopencv_objdetect.2.4.6.dylib"; sourceTree = "<group>"; };
-		894C63B1184950CF00E18351 /* libopencv_photo.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_photo.2.4.6.dylib; path = "../../Facial Recognition Libraries/libopencv_photo.2.4.6.dylib"; sourceTree = "<group>"; };
-		894C63B2184950CF00E18351 /* libopencv_stitching.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_stitching.2.4.6.dylib; path = "../../Facial Recognition Libraries/libopencv_stitching.2.4.6.dylib"; sourceTree = "<group>"; };
-		894C63BD184950F200E18351 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = "../../Facial Recognition Libraries/opencv2.framework"; sourceTree = "<group>"; };
 		8961827318400D8D00591B20 /* Model 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 3.xcdatamodel"; sourceTree = "<group>"; };
 		89618275184015AF00591B20 /* Model 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 4.xcdatamodel"; sourceTree = "<group>"; };
 		89B00421182AE24F00008104 /* haarcascade_frontalface_alt_tree.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = haarcascade_frontalface_alt_tree.xml; sourceTree = "<group>"; };
@@ -698,8 +679,6 @@
 		89E022271816F4C100CD5C0C /* FaceDetector.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FaceDetector.mm; sourceTree = "<group>"; };
 		89E0222D1816F59F00CD5C0C /* FaceRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceRecognizer.h; sourceTree = "<group>"; };
 		89E0222E1816F59F00CD5C0C /* FaceRecognizer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FaceRecognizer.mm; sourceTree = "<group>"; };
-		8CD6743518468DC900C0316A /* NSDataAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataAdditions.h; sourceTree = "<group>"; };
-		8CD6743618468DC900C0316A /* NSDataAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataAdditions.m; sourceTree = "<group>"; };
 		EA0932A516FAD85100536DF3 /* User.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = User.json; sourceTree = "<group>"; };
 		EA15ED0517282F2F00410661 /* StationSwitcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StationSwitcher.h; path = ../StationSwitcher.h; sourceTree = "<group>"; };
 		EA15ED0617282F2F00410661 /* StationSwitcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StationSwitcher.m; path = ../StationSwitcher.m; sourceTree = "<group>"; };
@@ -876,21 +855,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				894C63BE184950F200E18351 /* opencv2.framework in Frameworks */,
-				894C63B3184950CF00E18351 /* libopencv_calib3d.2.4.6.dylib in Frameworks */,
-				894C63B4184950CF00E18351 /* libopencv_contrib.2.4.6.dylib in Frameworks */,
-				894C63B5184950CF00E18351 /* libopencv_core.2.4.6.dylib in Frameworks */,
-				894C63B6184950CF00E18351 /* libopencv_features2d.2.4.6.dylib in Frameworks */,
-				894C63B7184950CF00E18351 /* libopencv_flann.2.4.6.dylib in Frameworks */,
-				894C63B8184950CF00E18351 /* libopencv_highgui.2.4.6.dylib in Frameworks */,
-				894C63B9184950CF00E18351 /* libopencv_imgproc.2.4.6.dylib in Frameworks */,
-				894C63BA184950CF00E18351 /* libopencv_objdetect.2.4.6.dylib in Frameworks */,
-				894C63BB184950CF00E18351 /* libopencv_photo.2.4.6.dylib in Frameworks */,
-				894C63BC184950CF00E18351 /* libopencv_stitching.2.4.6.dylib in Frameworks */,
 				893FCE7018271DD70054402A /* libsqlite3.0.dylib in Frameworks */,
 				893FCE6E18271D1C0054402A /* libsqlite3.dylib in Frameworks */,
 				89454FDF1820768A00E93504 /* CoreVideo.framework in Frameworks */,
 				89454FD71820726E00E93504 /* AssetsLibrary.framework in Frameworks */,
+				8918BB161817250C0025D9FC /* opencv2.framework in Frameworks */,
 				6D747C9916FE355600CE3F71 /* ExternalAccessory.framework in Frameworks */,
 				6D747C9716FE354F00CE3F71 /* AudioToolbox.framework in Frameworks */,
 				EAE6CDFF16BE4998008949DC /* libz.dylib in Frameworks */,
@@ -921,6 +890,7 @@
 				89454FCE182065B700E93504 /* CoreMedia.framework in Frameworks */,
 				89454FCC1820659D00E93504 /* AssetsLibrary.framework in Frameworks */,
 				89454FCA1820651C00E93504 /* AVFoundation.framework in Frameworks */,
+				8918BB15181724E00025D9FC /* opencv2.framework in Frameworks */,
 				EAEA9E8C170A77C5005F1202 /* ExternalAccessory.framework in Frameworks */,
 				EAEA9E85170A757F005F1202 /* AudioToolbox.framework in Frameworks */,
 				EA7CDC7216ED0AFB005A9070 /* CoreData.framework in Frameworks */,
@@ -1038,19 +1008,6 @@
 		467740EC16BD931E002FD4A5 = {
 			isa = PBXGroup;
 			children = (
-				894C63BD184950F200E18351 /* opencv2.framework */,
-				894C63A9184950CF00E18351 /* libopencv_calib3d.2.4.6.dylib */,
-				894C63AA184950CF00E18351 /* libopencv_contrib.2.4.6.dylib */,
-				894C63AB184950CF00E18351 /* libopencv_core.2.4.6.dylib */,
-				894C63AC184950CF00E18351 /* libopencv_features2d.2.4.6.dylib */,
-				894C63AD184950CF00E18351 /* libopencv_flann.2.4.6.dylib */,
-				894C63AE184950CF00E18351 /* libopencv_highgui.2.4.6.dylib */,
-				894C63AF184950CF00E18351 /* libopencv_imgproc.2.4.6.dylib */,
-				894C63B0184950CF00E18351 /* libopencv_objdetect.2.4.6.dylib */,
-				894C63B1184950CF00E18351 /* libopencv_photo.2.4.6.dylib */,
-				894C63B2184950CF00E18351 /* libopencv_stitching.2.4.6.dylib */,
-				8CD6743518468DC900C0316A /* NSDataAdditions.h */,
-				8CD6743618468DC900C0316A /* NSDataAdditions.m */,
 				893FCE6F18271DD70054402A /* libsqlite3.0.dylib */,
 				893FCE6D18271D1C0054402A /* libsqlite3.dylib */,
 				89454FDE1820768A00E93504 /* CoreVideo.framework */,
@@ -1058,6 +1015,7 @@
 				89454FCD182065B700E93504 /* CoreMedia.framework */,
 				89454FCB1820659D00E93504 /* AssetsLibrary.framework */,
 				89454FC91820651C00E93504 /* AVFoundation.framework */,
+				8918BB14181724E00025D9FC /* opencv2.framework */,
 				89E0221A1816E3BF00CD5C0C /* Face Recognition */,
 				EAA56B921795AA0C00C49E09 /* Emergency Fix */,
 				EAA56B881794EA8E00C49E09 /* 3rd Party Open Source Files */,
@@ -2058,7 +2016,6 @@
 				EAE6CDE616BE46CC008949DC /* ObjectFactory.m in Sources */,
 				EAE6CDE816BE46CC008949DC /* UserObject.m in Sources */,
 				EAE6CDF616BE48AE008949DC /* HTTPCore.m in Sources */,
-				8CD6743718468DC900C0316A /* NSDataAdditions.m in Sources */,
 				EAE6CE0616BE552B008949DC /* NSString+Validation.m in Sources */,
 				EACEB53916BEC4E100685AE8 /* RNBlurModalView.m in Sources */,
 				EACEB53F16BED11B00685AE8 /* DatabaseDriver.m in Sources */,
@@ -2139,6 +2096,7 @@
 				EA54D9941739BF3B00BD23FE /* EditVisit.m in Sources */,
 				EA54D998173AD3B400BD23FE /* OptimizedServer.m in Sources */,
 				EA8DFE301756E8E600DD76EB /* SystemBackup.m in Sources */,
+				EA8DFE341756EDC500DD76EB /* NSDataAdditions.m in Sources */,
 				89E022281816F4C100CD5C0C /* FaceDetector.mm in Sources */,
 				89E0222F1816F59F00CD5C0C /* FaceRecognizer.mm in Sources */,
 				8918BB19181726380025D9FC /* DataR.mm in Sources */,
@@ -2339,14 +2297,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\\\\\"$(SRCROOT)/../../..\\\\\\\"",
-					/Users/jamesmendez/Documents/Senior,
-					Project/MobileClinic,
-					"-",
-					GIT/Source,
-					Code/Client,
-					"/Users/jamesmendez/Documents/Senior\\ Project/MobileClinic\\ -\\ GIT/Source\\ Code/Facial\\ Recognition\\ Libraries",
-					"\"$(SRCROOT)/../../Facial Recognition Libraries\"",
+					"\"$(SRCROOT)/../../..\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2359,7 +2310,6 @@
 					"\"$(SRCROOT)/lib\"",
 					"\"$(SRCROOT)/../../../opencv2.framework\"",
 					/opt/local/lib,
-					"\"$(SRCROOT)/../../Facial Recognition Libraries\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -2370,7 +2320,7 @@
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 2;
-				USER_HEADER_SEARCH_PATHS = /opt/local/include;
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2385,14 +2335,7 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\\\\\"$(SRCROOT)/../../..\\\\\\\"",
-					/Users/jamesmendez/Documents/Senior,
-					Project/MobileClinic,
-					"-",
-					GIT/Source,
-					Code/Client,
-					"/Users/jamesmendez/Documents/Senior\\ Project/MobileClinic\\ -\\ GIT/Source\\ Code/Facial\\ Recognition\\ Libraries",
-					"\"$(SRCROOT)/../../Facial Recognition Libraries\"",
+					"\"$(SRCROOT)/../../..\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2404,14 +2347,13 @@
 					"\"$(SRCROOT)/lib\"",
 					"\"$(SRCROOT)/../../../opencv2.framework\"",
 					/opt/local/lib,
-					"\"$(SRCROOT)/../../Facial Recognition Libraries\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 2;
-				USER_HEADER_SEARCH_PATHS = /opt/local/include;
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -156,6 +156,7 @@ NSManagedObjectContext* context2;
             [registerPatientViewController.searchResultTableView reloadData];
             [self.navigationController pushViewController:registerPatientViewController animated:YES];
             self.frameNum =0;
+     
             NSLog(@"IM finally heereeeeeeeee1");
      
         }else{
@@ -201,7 +202,7 @@ NSManagedObjectContext* context2;
         self.instructionLabel.text = message;
         self.confidenceLabel.text = confidence;
         
-        [self highlightFace:[DataR  faceToCGRect:face] withColor:highlightColor];
+        //[self highlightFace:[DataR  faceToCGRect:face] withColor:highlightColor];
     });
 }
 - (cv::Mat)pullStandardizedFace:(cv::Rect)face fromImage:(cv::Mat&)image

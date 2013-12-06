@@ -13,11 +13,11 @@
 #import "BaseObject+Protected.h"
 #import "FaceObjectProtocol.h"
 #import "FaceObject.h"
-#import "Face.h"
+//#import "Face.h"
 #import "CommonObjectProtocol.h"
 //#import "UIImage+ImageVerification.h"
-#import "NSDataAdditions.h"
-Face *face;
+//#import "NSDataAdditions.h"
+//Face *face;
 //StatusObject* tempStatusObject;
 
 @implementation FaceObject
