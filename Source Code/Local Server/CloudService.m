@@ -67,7 +67,8 @@
         NSString* serialNumber = [self stringWithMachineSerialNumber];
         NSLog(@"Serial Number: %@", serialNumber);
         
-        kApiKey = @"12345";
+        //kApiKey = @"12345";
+        kApiKey = serialNumber;
         kAccessToken = @"";
         isAuthenticated = NO;
         
@@ -81,10 +82,14 @@
         //kURL = @"http://staging-webapp.herokuapp.com/";
         //kURL = @"http://znja-webapp.herokuapp.com/api/";
         
-        [self getAccessToken:^(BOOL success) {
-            if(success){
+        [self getAccessToken:^(BOOL success)
+        {
+            if(success)
+            {
                 NSLog(@"Connected To Cloud");
-            }else{
+            }
+            else
+            {
                 NSLog(@"Could Not Connect To Cloud");
             }
         }];
@@ -92,7 +97,8 @@
     return self;
 }
 
--(void)getAccessToken:(void(^)(BOOL success)) completion{
+-(void)getAccessToken:(void(^)(BOOL success)) completion
+{
     NSMutableDictionary * params = [[NSMutableDictionary alloc]init];
     [params setObject:kApiKey forKey:@"api_key"];
     
@@ -102,7 +108,8 @@
         
         NSData *data;
         
-        if (params) {
+        if (params)
+        {
             NSData *json = [NSJSONSerialization dataWithJSONObject:params options:NSJSONWritingPrettyPrinted error:nil];
             
             data = [[NSString stringWithFormat:@"%@%@",
@@ -121,20 +128,29 @@
         [request setHTTPBody: data];
         
         
-        [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error){
-            
-            if(!error){
+        [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
+        {
+            if(!error)
+            {
                 NSError *jsonError;
                 
                 //read and print the server response for debug
                 NSString *myString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                // NSLog(@"%@", myString);
+                NSLog(@"%@", myString);
                 
                 NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
                 
-                if ((completion && json) || (completion && jsonError)) {
-                    kAccessToken = [[json objectForKey:@"data"] objectForKey:@"access_token"];
-                    completion(YES);
+                if ((completion && json) || (completion && jsonError))
+                {
+                    if ([[json objectForKey:@"data"] isKindOfClass:[NSString class]])
+                    {
+                        completion(NO);
+                    }
+                    else
+                    {
+                        kAccessToken = [[json objectForKey:@"data"] objectForKey:@"access_token"];
+                        completion(YES);
+                    }
                 }
             }
             else

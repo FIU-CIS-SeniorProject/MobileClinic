@@ -153,8 +153,8 @@
     onComplete(nil,[[NSError alloc]initWithDomain:COMMONDATABASE code:kErrorObjectMisconfiguration userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"This feature is not implemented",NSLocalizedFailureReasonErrorKey, nil]]);
 }
 
--(void)pullFromCloud:(CloudCallback)onComplete{
-    
+-(void)pullFromCloud:(CloudCallback)onComplete
+{    
     //TODO: Remove Hard Dependencies
     [self makeCloudCallWithCommand:DATABASE withObject:nil onComplete:^(id cloudResults, NSError *error)
     {
