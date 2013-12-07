@@ -48,7 +48,7 @@
         <attribute name="userID" optional="YES" attributeType="Integer 32" syncable="YES"/>
         <attribute name="villageName" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Prescription" representedClassName="Prescription" syncable="YES">
+    <entity name="Prescriptions" representedClassName="Prescription" syncable="YES">
         <attribute name="charityid" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="instructions" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isDirty" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -73,7 +73,7 @@
         <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
-    <entity name="Visitation" representedClassName="Visitation" syncable="YES">
+    <entity name="Visitations" representedClassName="Visitation" syncable="YES">
         <attribute name="assessment" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="bloodPressure" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="charityid" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -105,8 +105,8 @@
         <element name="Faces" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Medication" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Patients" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Prescription" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Prescriptions" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Users" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Visitation" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Visitations" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

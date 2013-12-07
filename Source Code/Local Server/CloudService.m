@@ -127,7 +127,6 @@
         [request setHTTPMethod:@"POST"];
         [request setHTTPBody: data];
         
-        
         [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
          {
              NSError *jsonError;
@@ -295,7 +294,6 @@
 
 -(void)sendAsyncRequest:(NSURLRequest *)request completion:(void(^)(NSError *error, NSDictionary *result)) completion
 {
-    
     [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
     {
         if(!error)
@@ -310,9 +308,18 @@
             
             //read and print the server response for debug
             NSString *myString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            NSLog(@"%@", myString);
+            NSLog(@"CloudService: SendAsyncRequest myString:%@", myString);
             
-            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
+            NSDictionary *json;
+            
+            if (data)
+            {
+                json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
+            }
+            else
+            {
+                json = nil;
+            }
             
             if ((completion && json) || (completion && jsonError)) {
                 completion(jsonError, json);

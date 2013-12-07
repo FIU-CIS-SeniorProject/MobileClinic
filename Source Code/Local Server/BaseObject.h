@@ -7,13 +7,14 @@
 //
 
 // OTHER OBJECTS MAY NEED THESE TWO VARIABLES //
-#define PATIENTBYID     @"patient_for_id"
-#define ALLPATIENTS     @"patients"
-#define UPDATEPATIENT   @"update_patient"
-#define CREATEPATIENT   @"create_patient"
-#define UPDATEVISIT     @"update_visit"
-#define UPDATEFACES     @"update_faces"
-#define DATABASEOBJECT @"Database Object"
+#define PATIENTBYID         @"patient_for_id"
+#define ALLPATIENTS         @"patients"
+#define UPDATEPATIENT       @"update_patient"
+#define CREATEPATIENT       @"create_patient"
+#define UPDATEVISIT         @"update_visit"
+#define UPDATEFACES         @"update_faces"
+#define UPDATEPRESCRIPTION  @"update_prescription"
+#define DATABASEOBJECT      @"Database Object"
 
 #import "NSObject+CustomTools.h"
 

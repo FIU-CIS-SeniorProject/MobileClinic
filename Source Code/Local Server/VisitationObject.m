@@ -208,7 +208,7 @@ NSString* isLockedBy;
 
 -(void)pushToCloud:(CloudCallback)onComplete
 {
-    NSArray* allVisits= [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:COMMONDATABASE withCustomPredicate:[NSPredicate predicateWithFormat:@"%K == YES",ISDIRTY] andSortByAttribute:PATIENTID]];
+    NSArray* allVisits= [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:COMMONDATABASE withCustomPredicate:[NSPredicate predicateWithFormat:@"%K == YES",ISDIRTY] andSortByAttribute:VISITID]];
     
     
     
@@ -231,9 +231,7 @@ NSString* isLockedBy;
      {
          NSArray* allVisits = [cloudResults objectForKey:@"data"];
          [self handleCloudCallback:onComplete UsingData:allVisits WithPotentialError:error];
-         
      }];
 }
-
 
 @end

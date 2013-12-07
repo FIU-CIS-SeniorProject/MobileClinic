@@ -172,12 +172,12 @@
     }
 }
 
--(void)handleCloudCallback:(CloudCallback)callBack UsingData:(NSArray*)data WithPotentialError:(NSError *)error{
-  
+-(void)handleCloudCallback:(CloudCallback)callBack UsingData:(NSArray*)data WithPotentialError:(NSError *)error
+{
     NSMutableArray* newObjects = [[NSMutableArray alloc]initWithCapacity:data.count];
     
-    if (!error) {
-        
+    if (!error)
+    {
         for (NSMutableDictionary* object in data) {
             NSMutableDictionary* unlocked = [NSMutableDictionary dictionaryWithDictionary:object];
             [unlocked setValue:[NSNumber numberWithBool:NO] forKey:ISDIRTY];

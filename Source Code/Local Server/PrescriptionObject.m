@@ -8,8 +8,10 @@
 
 #import "PrescriptionObject.h"
 #import "BaseObject+Protected.h"
+#import "CloudManagementObject.h"
 
-#define DATABASE    @"Prescription"
+#define DATABASE    @"Prescriptions"
+
 NSString* visitID;
 NSString* isLockedBy;
 @implementation PrescriptionObject
@@ -139,5 +141,32 @@ NSString* main = [NSString stringWithFormat:@" Medication Name:\t%@ \n Dose:\t%@
         [allObject addObject:[obj dictionaryWithValuesForKeys:[obj attributeKeys]]];
     }
     return  allObject;
+}
+
+-(void)pushToCloud:(CloudCallback)onComplete
+{
+    NSArray* allPrescriptions = [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:COMMONDATABASE withCustomPredicate:[NSPredicate predicateWithFormat:@"%K == YES",ISDIRTY] andSortByAttribute:PRESCRIPTIONID]];
+    
+    [self makeCloudCallWithCommand:UPDATEPRESCRIPTION withObject:[NSDictionary dictionaryWithObject:allPrescriptions forKey:DATABASE] onComplete:^(id cloudResults, NSError *error)
+     {
+         [self handleCloudCallback:onComplete UsingData:allPrescriptions WithPotentialError:error];
+     }];
+}
+
+-(void)pullFromCloud:(CloudCallback)onComplete
+{
+    // allocate and init a CloudManagementObject for timestamp
+    CloudManagementObject* TSCloudMO = [[CloudManagementObject alloc] init];
+    NSNumber* timestamp = [TSCloudMO GetActiveTimestamp];
+    NSMutableDictionary* timeDic = [[NSMutableDictionary alloc] init];
+    [timeDic setObject:timestamp forKey:@"Timestamp"];
+    
+    //TODO: replace "withObject:nil" with timestamp dictionary
+    [self makeCloudCallWithCommand:DATABASE withObject:timeDic onComplete:^(id cloudResults, NSError *error)
+     {
+         NSArray* allPrescriptions = [cloudResults objectForKey:@"data"];
+         [self handleCloudCallback:onComplete UsingData:allPrescriptions WithPotentialError:error];
+         
+     }];
 }
 @end

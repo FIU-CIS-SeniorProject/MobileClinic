@@ -243,7 +243,7 @@ id currentTable;
               }];
          }
          [progressIndicator stopAnimation:self];
-     }];
+     }];//*/
     
     [[[VisitationObject alloc]init] pullFromCloud:^(id cloudResults, NSError *error)
      {
@@ -266,7 +266,30 @@ id currentTable;
               }];
          }
          [progressIndicator stopAnimation:self];
-     }];
+     }];//*/
+    
+    [[[PrescriptionObject alloc]init] pullFromCloud:^(id cloudResults, NSError *error)
+     {
+         if (!cloudResults && error)
+         {
+             [NSApp presentError:error];
+         }
+         else
+         {
+             [[[PrescriptionObject alloc]init] pushToCloud:^(id cloudResults, NSError *error)
+              {
+                  if (error)
+                  {
+                      [NSApp presentError:error];
+                  }
+                  else
+                  {
+                      [self refreshPatients:nil];
+                  }
+              }];
+         }
+         [progressIndicator stopAnimation:self];
+     }];//*/
     
     // allocate and init a CloudManagementObject, then update timestamp
     [[[CloudManagementObject alloc] init] updateTimestamp];
@@ -398,7 +421,6 @@ id currentTable;
         [pi setHorizontallyCentered:NO];
         [pi setOrientation:NSPortraitOrientation];
         [pi setScalingFactor:1];
-        
         [pi setPaperName:@"Letter"];
         [op setPrintInfo:pi];
         [op setShowsPrintPanel:YES];
