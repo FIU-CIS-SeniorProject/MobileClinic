@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0F0172A616DBEBC1000A7F3B /* PatientHistoryTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0172A516DBEBC1000A7F3B /* PatientHistoryTableCell.m */; };
-		0F134D0616F7D6D4003F4CE6 /* DoctorPatientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D2D28BE16D7DD10007FB79F /* DoctorPatientViewController.m */; };
+		0F134D0616F7D6D4003F4CE6 /* DoctorPatientViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D2D28BE16D7DD10007FB79F /* DoctorPatientViewController.mm */; };
 		0F134D0716F7D77D003F4CE6 /* NSObject+CustomTools.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3856A716C0E80D00FA83FD /* NSObject+CustomTools.m */; };
 		0F134D0816F7D78B003F4CE6 /* UIViewControllerExt.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9C2F3A16BF624F000F38CD /* UIViewControllerExt.m */; };
 		0F134D0916F7D805003F4CE6 /* CurrentVisitTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F1A596716D8327600C121BA /* CurrentVisitTableCell.m */; };
@@ -111,7 +111,7 @@
 		6D0BC38E170372F200493FDE /* clinicLogo72.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BC38D170372F200493FDE /* clinicLogo72.png */; };
 		6D0BC390170372FC00493FDE /* clinicLogo144.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BC38F170372FC00493FDE /* clinicLogo144.png */; };
 		6D0D701E16D97EE4005A8C1F /* PreviousVisitsTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0D701D16D97EE4005A8C1F /* PreviousVisitsTableCell.m */; };
-		6D2D28BF16D7DD10007FB79F /* DoctorPatientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D2D28BE16D7DD10007FB79F /* DoctorPatientViewController.m */; };
+		6D2D28BF16D7DD10007FB79F /* DoctorPatientViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D2D28BE16D7DD10007FB79F /* DoctorPatientViewController.mm */; };
 		6D3A635D16C8472D003B79F7 /* CameraFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D3A635A16C8472D003B79F7 /* CameraFacade.m */; };
 		6D3A635F16C8472D003B79F7 /* UICamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D3A635C16C8472D003B79F7 /* UICamera.m */; };
 		6D3C00021704AC3F0010EB72 /* RegisterPatientViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D3C00011704AC3F0010EB72 /* RegisterPatientViewControllerTest.m */; };
@@ -203,6 +203,8 @@
 		6DD5D90216D3158E007C3F74 /* SearchPatientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD5D90116D3158E007C3F74 /* SearchPatientViewController.m */; };
 		6DD5D90516D315DD007C3F74 /* CurrentVisitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD5D90416D315DD007C3F74 /* CurrentVisitViewController.m */; };
 		6DD5D90816D315F3007C3F74 /* PreviousVisitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD5D90716D315F3007C3F74 /* PreviousVisitsViewController.m */; };
+		8918BB15181724E00025D9FC /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8918BB14181724E00025D9FC /* opencv2.framework */; };
+		8918BB161817250C0025D9FC /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8918BB14181724E00025D9FC /* opencv2.framework */; };
 		8918BB19181726380025D9FC /* DataR.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8918BB18181726380025D9FC /* DataR.mm */; };
 		8918BB1C181729FB0025D9FC /* FRViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8918BB1B181729FB0025D9FC /* FRViewController.mm */; };
 		8918BB1D181729FB0025D9FC /* FRViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8918BB1B181729FB0025D9FC /* FRViewController.mm */; };
@@ -232,7 +234,6 @@
 		89E022291816F4C100CD5C0C /* FaceDetector.mm in Sources */ = {isa = PBXBuildFile; fileRef = 89E022271816F4C100CD5C0C /* FaceDetector.mm */; };
 		89E0222F1816F59F00CD5C0C /* FaceRecognizer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 89E0222E1816F59F00CD5C0C /* FaceRecognizer.mm */; };
 		89E022301816F59F00CD5C0C /* FaceRecognizer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 89E0222E1816F59F00CD5C0C /* FaceRecognizer.mm */; };
-		8C7DD6B51851641500B51F6A /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C7DD6B41851641500B51F6A /* opencv2.framework */; };
 		EA09329B16F8F77600536DF3 /* PatientFile.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = EAADC01A16E05554009E7AF9 /* PatientFile.json */; };
 		EA0932A716FAD85200536DF3 /* User.json in Resources */ = {isa = PBXBuildFile; fileRef = EA0932A516FAD85100536DF3 /* User.json */; };
 		EA0932A816FAD96E00536DF3 /* User.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = EA0932A516FAD85100536DF3 /* User.json */; };
@@ -281,6 +282,7 @@
 		EA7CDC7316ED0B0C005A9070 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46E773D416CB0BFB00242454 /* libTestFlight.a */; };
 		EA8DFE301756E8E600DD76EB /* SystemBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = EA8DFE2F1756E8E600DD76EB /* SystemBackup.m */; };
 		EA8DFE311756E8E600DD76EB /* SystemBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = EA8DFE2F1756E8E600DD76EB /* SystemBackup.m */; };
+		EA8DFE341756EDC500DD76EB /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = EA8DFE331756EDC500DD76EB /* NSDataAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		EA8DFE351756EDC500DD76EB /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = EA8DFE331756EDC500DD76EB /* NSDataAdditions.m */; };
 		EA9AC88416C8606C00493485 /* DataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9AC88316C8606C00493485 /* DataProcessor.m */; };
 		EA9C2F3B16BF624F000F38CD /* UIViewControllerExt.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9C2F3A16BF624F000F38CD /* UIViewControllerExt.m */; };
@@ -506,7 +508,7 @@
 		6D0D701C16D97EE4005A8C1F /* PreviousVisitsTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviousVisitsTableCell.h; sourceTree = "<group>"; };
 		6D0D701D16D97EE4005A8C1F /* PreviousVisitsTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviousVisitsTableCell.m; sourceTree = "<group>"; };
 		6D2D28BD16D7DD10007FB79F /* DoctorPatientViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoctorPatientViewController.h; sourceTree = "<group>"; };
-		6D2D28BE16D7DD10007FB79F /* DoctorPatientViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoctorPatientViewController.m; sourceTree = "<group>"; };
+		6D2D28BE16D7DD10007FB79F /* DoctorPatientViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DoctorPatientViewController.mm; sourceTree = "<group>"; };
 		6D3A635916C8472D003B79F7 /* CameraFacade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraFacade.h; sourceTree = "<group>"; };
 		6D3A635A16C8472D003B79F7 /* CameraFacade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraFacade.m; sourceTree = "<group>"; };
 		6D3A635B16C8472D003B79F7 /* UICamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICamera.h; sourceTree = "<group>"; };
@@ -646,6 +648,7 @@
 		6DD5D90416D315DD007C3F74 /* CurrentVisitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentVisitViewController.m; sourceTree = "<group>"; };
 		6DD5D90616D315F3007C3F74 /* PreviousVisitsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviousVisitsViewController.h; sourceTree = "<group>"; };
 		6DD5D90716D315F3007C3F74 /* PreviousVisitsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviousVisitsViewController.m; sourceTree = "<group>"; };
+		8918BB14181724E00025D9FC /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ../../../opencv2.framework; sourceTree = "<group>"; };
 		8918BB17181726380025D9FC /* DataR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataR.h; sourceTree = "<group>"; };
 		8918BB18181726380025D9FC /* DataR.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DataR.mm; sourceTree = "<group>"; };
 		8918BB1A181729FB0025D9FC /* FRViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRViewController.h; sourceTree = "<group>"; };
@@ -676,7 +679,6 @@
 		89E022271816F4C100CD5C0C /* FaceDetector.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FaceDetector.mm; sourceTree = "<group>"; };
 		89E0222D1816F59F00CD5C0C /* FaceRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceRecognizer.h; sourceTree = "<group>"; };
 		89E0222E1816F59F00CD5C0C /* FaceRecognizer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FaceRecognizer.mm; sourceTree = "<group>"; };
-		8C7DD6B41851641500B51F6A /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		EA0932A516FAD85100536DF3 /* User.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = User.json; sourceTree = "<group>"; };
 		EA15ED0517282F2F00410661 /* StationSwitcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StationSwitcher.h; path = ../StationSwitcher.h; sourceTree = "<group>"; };
 		EA15ED0617282F2F00410661 /* StationSwitcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StationSwitcher.m; path = ../StationSwitcher.m; sourceTree = "<group>"; };
@@ -857,6 +859,7 @@
 				893FCE6E18271D1C0054402A /* libsqlite3.dylib in Frameworks */,
 				89454FDF1820768A00E93504 /* CoreVideo.framework in Frameworks */,
 				89454FD71820726E00E93504 /* AssetsLibrary.framework in Frameworks */,
+				8918BB161817250C0025D9FC /* opencv2.framework in Frameworks */,
 				6D747C9916FE355600CE3F71 /* ExternalAccessory.framework in Frameworks */,
 				6D747C9716FE354F00CE3F71 /* AudioToolbox.framework in Frameworks */,
 				EAE6CDFF16BE4998008949DC /* libz.dylib in Frameworks */,
@@ -872,7 +875,6 @@
 				467740FD16BD931E002FD4A5 /* CoreGraphics.framework in Frameworks */,
 				46E773D816CB0BFB00242454 /* libTestFlight.a in Frameworks */,
 				6D747BE816FE329400CE3F71 /* libiOSLibrary.a in Frameworks */,
-				8C7DD6B51851641500B51F6A /* opencv2.framework in Frameworks */,
 				89454FD81820756800E93504 /* AVFoundation.framework in Frameworks */,
 				89454FD91820756F00E93504 /* CoreMedia.framework in Frameworks */,
 				89454FDA1820757200E93504 /* CoreImage.framework in Frameworks */,
@@ -888,6 +890,7 @@
 				89454FCE182065B700E93504 /* CoreMedia.framework in Frameworks */,
 				89454FCC1820659D00E93504 /* AssetsLibrary.framework in Frameworks */,
 				89454FCA1820651C00E93504 /* AVFoundation.framework in Frameworks */,
+				8918BB15181724E00025D9FC /* opencv2.framework in Frameworks */,
 				EAEA9E8C170A77C5005F1202 /* ExternalAccessory.framework in Frameworks */,
 				EAEA9E85170A757F005F1202 /* AudioToolbox.framework in Frameworks */,
 				EA7CDC7216ED0AFB005A9070 /* CoreData.framework in Frameworks */,
@@ -1007,12 +1010,12 @@
 			children = (
 				893FCE6F18271DD70054402A /* libsqlite3.0.dylib */,
 				893FCE6D18271D1C0054402A /* libsqlite3.dylib */,
-				8C7DD6B41851641500B51F6A /* opencv2.framework */,
 				89454FDE1820768A00E93504 /* CoreVideo.framework */,
 				89454FCF182065C200E93504 /* CoreImage.framework */,
 				89454FCD182065B700E93504 /* CoreMedia.framework */,
 				89454FCB1820659D00E93504 /* AssetsLibrary.framework */,
 				89454FC91820651C00E93504 /* AVFoundation.framework */,
+				8918BB14181724E00025D9FC /* opencv2.framework */,
 				89E0221A1816E3BF00CD5C0C /* Face Recognition */,
 				EAA56B921795AA0C00C49E09 /* Emergency Fix */,
 				EAA56B881794EA8E00C49E09 /* 3rd Party Open Source Files */,
@@ -1128,7 +1131,7 @@
 				0FDE47BD16ED0CFB00966C77 /* PatientQueueViewController.h */,
 				0FDE47BE16ED0CFB00966C77 /* PatientQueueViewController.m */,
 				6D2D28BD16D7DD10007FB79F /* DoctorPatientViewController.h */,
-				6D2D28BE16D7DD10007FB79F /* DoctorPatientViewController.m */,
+				6D2D28BE16D7DD10007FB79F /* DoctorPatientViewController.mm */,
 				6DB0676816D7DDF000D177E7 /* CurrentDiagnosisViewController.h */,
 				6DB0676916D7DDF000D177E7 /* CurrentDiagnosisViewController.m */,
 				46B11A2616DB1C0E008CD600 /* DoctorPrescriptionViewController.h */,
@@ -1527,11 +1530,11 @@
 			isa = PBXGroup;
 			children = (
 				4677413516BD9386002FD4A5 /* Model.xcdatamodeld */,
-				EAE6CDEB16BE4701008949DC /* System Objects */,
 				EAD8F5681723A21300AEF023 /* Queue.h */,
 				EAD8F5691723A21300AEF023 /* Queue.m */,
 				EAD8F5641723A1CE00AEF023 /* QueueManager.h */,
 				EAD8F5651723A1CE00AEF023 /* QueueManager.m */,
+				EAE6CDEB16BE4701008949DC /* System Objects */,
 				EAADC02416E113D2009E7AF9 /* MobileClinicFacadeProtocol.h */,
 				EAADC02016E113A5009E7AF9 /* MobileClinicFacade.h */,
 				EAADC02116E113A5009E7AF9 /* MobileClinicFacade.m */,
@@ -2035,7 +2038,7 @@
 				6DD5D90816D315F3007C3F74 /* PreviousVisitsViewController.m in Sources */,
 				0F428B8016D4073D00E25B4B /* RegisterPatientTableCell.m in Sources */,
 				0F428B8416D40AA800E25B4B /* SearchPatientTableCell.m in Sources */,
-				6D2D28BF16D7DD10007FB79F /* DoctorPatientViewController.m in Sources */,
+				6D2D28BF16D7DD10007FB79F /* DoctorPatientViewController.mm in Sources */,
 				6DB0676A16D7DDF000D177E7 /* CurrentDiagnosisViewController.m in Sources */,
 				6D0D701E16D97EE4005A8C1F /* PreviousVisitsTableCell.m in Sources */,
 				6D522C9816DADAA3004FFC21 /* CurrentDiagnosisTableCell.m in Sources */,
@@ -2093,6 +2096,7 @@
 				EA54D9941739BF3B00BD23FE /* EditVisit.m in Sources */,
 				EA54D998173AD3B400BD23FE /* OptimizedServer.m in Sources */,
 				EA8DFE301756E8E600DD76EB /* SystemBackup.m in Sources */,
+				EA8DFE341756EDC500DD76EB /* NSDataAdditions.m in Sources */,
 				89E022281816F4C100CD5C0C /* FaceDetector.mm in Sources */,
 				89E0222F1816F59F00CD5C0C /* FaceRecognizer.mm in Sources */,
 				8918BB19181726380025D9FC /* DataR.mm in Sources */,
@@ -2157,7 +2161,7 @@
 				0F134D0A16F7D805003F4CE6 /* DoctorPrescriptionCell.m in Sources */,
 				0F134D0816F7D78B003F4CE6 /* UIViewControllerExt.m in Sources */,
 				0F134D0716F7D77D003F4CE6 /* NSObject+CustomTools.m in Sources */,
-				0F134D0616F7D6D4003F4CE6 /* DoctorPatientViewController.m in Sources */,
+				0F134D0616F7D6D4003F4CE6 /* DoctorPatientViewController.mm in Sources */,
 				EAC37F0516F099C300836C1C /* Model.xcdatamodeld in Sources */,
 				EAC37EFF16EFF56800836C1C /* AJNotificationView.m in Sources */,
 				EAC37EFE16EFF4E600836C1C /* FIUAppDelegate.m in Sources */,
@@ -2293,8 +2297,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)/../../..\\\"",
-					"/Users/jamesmendez/Documents/Senior\\ Project/MobileClinic\\ -\\ GIT/Source\\ Code/Client/Client",
+					"\"$(SRCROOT)/../../..\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2332,8 +2335,7 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)/../../..\\\"",
-					"/Users/jamesmendez/Documents/Senior\\ Project/MobileClinic\\ -\\ GIT/Source\\ Code/Client/Client",
+					"\"$(SRCROOT)/../../..\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2370,7 +2372,9 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MobileClinicTests/MobileClinicTests-Prefix.pch";
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/MobileClinicTests\" /** $(SRCROOT) \"$(SRCROOT)/TestFlightSDK1.1\"";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/MobileClinicTests\" /** $(SRCROOT) \"$(SRCROOT)/TestFlightSDK1.1\"",
+				);
 				INFOPLIST_FILE = "MobileClinicTests/MobileClinicTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
@@ -2412,7 +2416,9 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MobileClinicTests/MobileClinicTests-Prefix.pch";
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/MobileClinicTests\" /** $(SRCROOT) \"$(SRCROOT)/TestFlightSDK1.1\"";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/MobileClinicTests\" /** $(SRCROOT) \"$(SRCROOT)/TestFlightSDK1.1\"",
+				);
 				INFOPLIST_FILE = "MobileClinicTests/MobileClinicTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (

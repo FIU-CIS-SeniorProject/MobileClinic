@@ -60,11 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MobileClinicFacade.m"
-         timestampString = "406696387.676089"
+         timestampString = "408082882.531112"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "97"
-         endingLineNumber = "97"
+         startingLineNumber = "79"
+         endingLineNumber = "79"
          landmarkName = "-addNewVisit:ForCurrentPatient:shouldCheckOut:onCompletion:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -121,7 +121,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "No"
+         shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Face Recognition/RegisterFaceViewController.mm"
@@ -502,11 +502,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MobileClinicFacade.m"
-         timestampString = "406865925.171663"
+         timestampString = "408082882.531112"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "129"
-         endingLineNumber = "129"
+         startingLineNumber = "111"
+         endingLineNumber = "111"
          landmarkName = "-findPatientWithLabel:onCompletion:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -528,11 +528,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MobileClinicFacade.m"
-         timestampString = "407200956.324197"
+         timestampString = "408082882.531112"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "347"
-         endingLineNumber = "347"
+         startingLineNumber = "329"
+         endingLineNumber = "329"
          landmarkName = "-CommonCommandObject:ForSearch1:withResults:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -541,11 +541,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MobileClinicFacade.m"
-         timestampString = "407200956.324197"
+         timestampString = "408082882.531112"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "350"
-         endingLineNumber = "350"
+         startingLineNumber = "332"
+         endingLineNumber = "332"
          landmarkName = "-CommonCommandObject:ForSearch1:withResults:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -745,7 +745,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Mobile Clinic/RegisterPatientViewController.mm"
@@ -755,6 +755,32 @@
          startingLineNumber = "160"
          endingLineNumber = "160"
          landmarkName = "-addItemViewController:didFinishEnteringItem:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Mobile Clinic/DoctorPatientViewController.mm"
+         timestampString = "408000156.411757"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "252"
+         endingLineNumber = "252"
+         landmarkName = "-verify:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Mobile Clinic/DoctorPatientViewController.mm"
+         timestampString = "408000278.294906"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "238"
+         endingLineNumber = "238"
+         landmarkName = "-verify:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
