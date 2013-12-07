@@ -49,7 +49,7 @@
         <attribute name="villageName" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Prescription" representedClassName="Prescription" syncable="YES">
-        <attribute name="charityId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="charityid" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="instructions" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isDirty" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="isLockedBy" optional="YES" attributeType="String" syncable="YES"/>
@@ -62,7 +62,7 @@
         <attribute name="visitationId" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Users" representedClassName="Users" syncable="YES">
-        <attribute name="charityId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="charityid" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isDirty" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -76,7 +76,7 @@
     <entity name="Visitation" representedClassName="Visitation" syncable="YES">
         <attribute name="assessment" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="bloodPressure" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="charityId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="charityid" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="condition" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="conditionTitle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="diagnosisTitle" optional="YES" attributeType="String" syncable="YES"/>
@@ -101,12 +101,12 @@
         <attribute name="weight" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CloudManagement" positionX="0" positionY="0" width="128" height="135"/>
-        <element name="Faces" positionX="0" positionY="0" width="128" height="163"/>
-        <element name="Medication" positionX="0" positionY="0" width="128" height="180"/>
-        <element name="Patients" positionX="0" positionY="0" width="128" height="300"/>
-        <element name="Prescription" positionX="0" positionY="0" width="128" height="210"/>
-        <element name="Users" positionX="0" positionY="0" width="128" height="195"/>
-        <element name="Visitation" positionX="0" positionY="0" width="128" height="420"/>
+        <element name="CloudManagement" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Faces" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Medication" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Patients" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Prescription" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Users" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Visitation" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

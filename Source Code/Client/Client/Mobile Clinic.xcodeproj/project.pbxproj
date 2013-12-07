@@ -203,8 +203,6 @@
 		6DD5D90216D3158E007C3F74 /* SearchPatientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD5D90116D3158E007C3F74 /* SearchPatientViewController.m */; };
 		6DD5D90516D315DD007C3F74 /* CurrentVisitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD5D90416D315DD007C3F74 /* CurrentVisitViewController.m */; };
 		6DD5D90816D315F3007C3F74 /* PreviousVisitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD5D90716D315F3007C3F74 /* PreviousVisitsViewController.m */; };
-		8918BB15181724E00025D9FC /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8918BB14181724E00025D9FC /* opencv2.framework */; };
-		8918BB161817250C0025D9FC /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8918BB14181724E00025D9FC /* opencv2.framework */; };
 		8918BB19181726380025D9FC /* DataR.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8918BB18181726380025D9FC /* DataR.mm */; };
 		8918BB1C181729FB0025D9FC /* FRViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8918BB1B181729FB0025D9FC /* FRViewController.mm */; };
 		8918BB1D181729FB0025D9FC /* FRViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8918BB1B181729FB0025D9FC /* FRViewController.mm */; };
@@ -234,6 +232,8 @@
 		89E022291816F4C100CD5C0C /* FaceDetector.mm in Sources */ = {isa = PBXBuildFile; fileRef = 89E022271816F4C100CD5C0C /* FaceDetector.mm */; };
 		89E0222F1816F59F00CD5C0C /* FaceRecognizer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 89E0222E1816F59F00CD5C0C /* FaceRecognizer.mm */; };
 		89E022301816F59F00CD5C0C /* FaceRecognizer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 89E0222E1816F59F00CD5C0C /* FaceRecognizer.mm */; };
+		8C323F4D1852FAD6007B06F3 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C323F4C1852FAD5007B06F3 /* opencv2.framework */; };
+		8C323F501852FB3F007B06F3 /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C323F4F1852FB3F007B06F3 /* NSDataAdditions.m */; };
 		EA09329B16F8F77600536DF3 /* PatientFile.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = EAADC01A16E05554009E7AF9 /* PatientFile.json */; };
 		EA0932A716FAD85200536DF3 /* User.json in Resources */ = {isa = PBXBuildFile; fileRef = EA0932A516FAD85100536DF3 /* User.json */; };
 		EA0932A816FAD96E00536DF3 /* User.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = EA0932A516FAD85100536DF3 /* User.json */; };
@@ -282,7 +282,6 @@
 		EA7CDC7316ED0B0C005A9070 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46E773D416CB0BFB00242454 /* libTestFlight.a */; };
 		EA8DFE301756E8E600DD76EB /* SystemBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = EA8DFE2F1756E8E600DD76EB /* SystemBackup.m */; };
 		EA8DFE311756E8E600DD76EB /* SystemBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = EA8DFE2F1756E8E600DD76EB /* SystemBackup.m */; };
-		EA8DFE341756EDC500DD76EB /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = EA8DFE331756EDC500DD76EB /* NSDataAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		EA8DFE351756EDC500DD76EB /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = EA8DFE331756EDC500DD76EB /* NSDataAdditions.m */; };
 		EA9AC88416C8606C00493485 /* DataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9AC88316C8606C00493485 /* DataProcessor.m */; };
 		EA9C2F3B16BF624F000F38CD /* UIViewControllerExt.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9C2F3A16BF624F000F38CD /* UIViewControllerExt.m */; };
@@ -648,7 +647,6 @@
 		6DD5D90416D315DD007C3F74 /* CurrentVisitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentVisitViewController.m; sourceTree = "<group>"; };
 		6DD5D90616D315F3007C3F74 /* PreviousVisitsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviousVisitsViewController.h; sourceTree = "<group>"; };
 		6DD5D90716D315F3007C3F74 /* PreviousVisitsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviousVisitsViewController.m; sourceTree = "<group>"; };
-		8918BB14181724E00025D9FC /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ../../../opencv2.framework; sourceTree = "<group>"; };
 		8918BB17181726380025D9FC /* DataR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataR.h; sourceTree = "<group>"; };
 		8918BB18181726380025D9FC /* DataR.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DataR.mm; sourceTree = "<group>"; };
 		8918BB1A181729FB0025D9FC /* FRViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRViewController.h; sourceTree = "<group>"; };
@@ -679,6 +677,9 @@
 		89E022271816F4C100CD5C0C /* FaceDetector.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FaceDetector.mm; sourceTree = "<group>"; };
 		89E0222D1816F59F00CD5C0C /* FaceRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceRecognizer.h; sourceTree = "<group>"; };
 		89E0222E1816F59F00CD5C0C /* FaceRecognizer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FaceRecognizer.mm; sourceTree = "<group>"; };
+		8C323F4C1852FAD5007B06F3 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
+		8C323F4E1852FB3F007B06F3 /* NSDataAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataAdditions.h; sourceTree = "<group>"; };
+		8C323F4F1852FB3F007B06F3 /* NSDataAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataAdditions.m; sourceTree = "<group>"; };
 		EA0932A516FAD85100536DF3 /* User.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = User.json; sourceTree = "<group>"; };
 		EA15ED0517282F2F00410661 /* StationSwitcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StationSwitcher.h; path = ../StationSwitcher.h; sourceTree = "<group>"; };
 		EA15ED0617282F2F00410661 /* StationSwitcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StationSwitcher.m; path = ../StationSwitcher.m; sourceTree = "<group>"; };
@@ -859,7 +860,6 @@
 				893FCE6E18271D1C0054402A /* libsqlite3.dylib in Frameworks */,
 				89454FDF1820768A00E93504 /* CoreVideo.framework in Frameworks */,
 				89454FD71820726E00E93504 /* AssetsLibrary.framework in Frameworks */,
-				8918BB161817250C0025D9FC /* opencv2.framework in Frameworks */,
 				6D747C9916FE355600CE3F71 /* ExternalAccessory.framework in Frameworks */,
 				6D747C9716FE354F00CE3F71 /* AudioToolbox.framework in Frameworks */,
 				EAE6CDFF16BE4998008949DC /* libz.dylib in Frameworks */,
@@ -875,6 +875,7 @@
 				467740FD16BD931E002FD4A5 /* CoreGraphics.framework in Frameworks */,
 				46E773D816CB0BFB00242454 /* libTestFlight.a in Frameworks */,
 				6D747BE816FE329400CE3F71 /* libiOSLibrary.a in Frameworks */,
+				8C323F4D1852FAD6007B06F3 /* opencv2.framework in Frameworks */,
 				89454FD81820756800E93504 /* AVFoundation.framework in Frameworks */,
 				89454FD91820756F00E93504 /* CoreMedia.framework in Frameworks */,
 				89454FDA1820757200E93504 /* CoreImage.framework in Frameworks */,
@@ -890,7 +891,6 @@
 				89454FCE182065B700E93504 /* CoreMedia.framework in Frameworks */,
 				89454FCC1820659D00E93504 /* AssetsLibrary.framework in Frameworks */,
 				89454FCA1820651C00E93504 /* AVFoundation.framework in Frameworks */,
-				8918BB15181724E00025D9FC /* opencv2.framework in Frameworks */,
 				EAEA9E8C170A77C5005F1202 /* ExternalAccessory.framework in Frameworks */,
 				EAEA9E85170A757F005F1202 /* AudioToolbox.framework in Frameworks */,
 				EA7CDC7216ED0AFB005A9070 /* CoreData.framework in Frameworks */,
@@ -1010,12 +1010,14 @@
 			children = (
 				893FCE6F18271DD70054402A /* libsqlite3.0.dylib */,
 				893FCE6D18271D1C0054402A /* libsqlite3.dylib */,
+				8C323F4E1852FB3F007B06F3 /* NSDataAdditions.h */,
+				8C323F4F1852FB3F007B06F3 /* NSDataAdditions.m */,
+				8C323F4C1852FAD5007B06F3 /* opencv2.framework */,
 				89454FDE1820768A00E93504 /* CoreVideo.framework */,
 				89454FCF182065C200E93504 /* CoreImage.framework */,
 				89454FCD182065B700E93504 /* CoreMedia.framework */,
 				89454FCB1820659D00E93504 /* AssetsLibrary.framework */,
 				89454FC91820651C00E93504 /* AVFoundation.framework */,
-				8918BB14181724E00025D9FC /* opencv2.framework */,
 				89E0221A1816E3BF00CD5C0C /* Face Recognition */,
 				EAA56B921795AA0C00C49E09 /* Emergency Fix */,
 				EAA56B881794EA8E00C49E09 /* 3rd Party Open Source Files */,
@@ -2042,6 +2044,7 @@
 				6DB0676A16D7DDF000D177E7 /* CurrentDiagnosisViewController.m in Sources */,
 				6D0D701E16D97EE4005A8C1F /* PreviousVisitsTableCell.m in Sources */,
 				6D522C9816DADAA3004FFC21 /* CurrentDiagnosisTableCell.m in Sources */,
+				8C323F501852FB3F007B06F3 /* NSDataAdditions.m in Sources */,
 				6DC75C5D16DAED47000F527A /* PharmacyPatientViewController.m in Sources */,
 				EA9E98E616DC475D002BEB87 /* PrescriptionObject.m in Sources */,
 				EA9E98E916DC58AF002BEB87 /* Prescription.m in Sources */,
@@ -2096,7 +2099,6 @@
 				EA54D9941739BF3B00BD23FE /* EditVisit.m in Sources */,
 				EA54D998173AD3B400BD23FE /* OptimizedServer.m in Sources */,
 				EA8DFE301756E8E600DD76EB /* SystemBackup.m in Sources */,
-				EA8DFE341756EDC500DD76EB /* NSDataAdditions.m in Sources */,
 				89E022281816F4C100CD5C0C /* FaceDetector.mm in Sources */,
 				89E0222F1816F59F00CD5C0C /* FaceRecognizer.mm in Sources */,
 				8918BB19181726380025D9FC /* DataR.mm in Sources */,
@@ -2297,7 +2299,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../..\"",
+					"\\\"$(SRCROOT)/../../..\\\"",
+					"/Users/jamesmendez/Documents/Senior\\ Project/MobileClinic\\ -\\ GIT/Source\\ Code/Client/Client",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2335,7 +2338,8 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../..\"",
+					"\\\"$(SRCROOT)/../../..\\\"",
+					"/Users/jamesmendez/Documents/Senior\\ Project/MobileClinic\\ -\\ GIT/Source\\ Code/Client/Client",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2372,9 +2376,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MobileClinicTests/MobileClinicTests-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/MobileClinicTests\" /** $(SRCROOT) \"$(SRCROOT)/TestFlightSDK1.1\"",
-				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/MobileClinicTests\" /** $(SRCROOT) \"$(SRCROOT)/TestFlightSDK1.1\"";
 				INFOPLIST_FILE = "MobileClinicTests/MobileClinicTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
@@ -2416,9 +2418,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MobileClinicTests/MobileClinicTests-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/MobileClinicTests\" /** $(SRCROOT) \"$(SRCROOT)/TestFlightSDK1.1\"",
-				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/MobileClinicTests\" /** $(SRCROOT) \"$(SRCROOT)/TestFlightSDK1.1\"";
 				INFOPLIST_FILE = "MobileClinicTests/MobileClinicTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (

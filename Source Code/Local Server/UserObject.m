@@ -158,7 +158,8 @@
     //TODO: Remove Hard Dependencies
     [self makeCloudCallWithCommand:DATABASE withObject:nil onComplete:^(id cloudResults, NSError *error)
     {
-        if (!error)
+        //if (!error) //Not receiving error from cloud, receiving result, data json dictionary instead
+        if ([[cloudResults objectForKey:@"result"] isEqualToString:@"true"])
         {
             NSArray* users = [cloudResults objectForKey:@"data"];
             
@@ -171,7 +172,16 @@
                 return;
             }
         }
-        onComplete((!error)?self:nil,error);
+        else
+        {
+            NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+            NSString* errorValue = @"Error from Cloud: ";
+            errorValue = [errorValue stringByAppendingString:[cloudResults objectForKey:@"data"]];
+            
+            [errorDetail setValue:errorValue forKey:NSLocalizedDescriptionKey];
+            error = [NSError errorWithDomain:@"UserObject:pullFromCloud" code:100 userInfo:errorDetail];
+            onComplete((!error)?self:nil,error);
+        }
     }];
 }
 
@@ -234,7 +244,8 @@
     username = [username lowercaseString];
     
     // Try to find user from username in local DB
-    NSArray* userArray = [[self FindAllObjects] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K == %@", USERNAME, username]];
+    NSArray* arrayOfUsers = [self FindAllObjects];
+    NSArray* userArray = [arrayOfUsers filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K == %@", USERNAME, username]];
     NSDictionary* theUser;
     
     // if we find the user locally then....

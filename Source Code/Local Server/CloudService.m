@@ -129,16 +129,17 @@
         
         
         [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
-        {
-            if(!error)
+         {
+             NSError *jsonError;
+             NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
+             
+            //if(!error) //Not getting an error from the cloud, getting "result: false" instead
+             if (!jsonError && [[json objectForKey:@"result"] isEqualToString:@"true"])
             {
-                NSError *jsonError;
                 
                 //read and print the server response for debug
                 NSString *myString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                NSLog(@"%@", myString);
-                
-                NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
+                NSLog(@"CloudService.m: myString printed: %@", myString);
                 
                 if ((completion && json) || (completion && jsonError))
                 {
@@ -149,12 +150,14 @@
                     else
                     {
                         kAccessToken = [[json objectForKey:@"data"] objectForKey:@"access_token"];
+                        NSLog(@"CloudService.m: AccessToken: %@", kAccessToken);
                         completion(YES);
                     }
                 }
             }
-            else
+            else if (!jsonError)
             {
+                NSLog(@"Error data from Cloud: %@", [json objectForKey:@"data"]);
                 completion(NO);
             }
             
