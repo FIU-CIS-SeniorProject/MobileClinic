@@ -204,12 +204,6 @@ int* isActive;
 {
     NSMutableDictionary *cmo = [[NSMutableDictionary alloc] init];
     
-    //NSPredicate* pred = [NSPredicate predicateWithFormat:@"%@ == %@",NAME, environment];
-    //NSArray* managedObjects = [self FindObjectInTable:DATABASE withCustomPredicate:nil andSortByAttribute:NAME];
-    //Compare to finding a user
-    //NSArray* managedObjects = [self FindObjectInTable:DATABASE withName:environment forAttribute:NAME];
-    //NSDate* lastPullTime = nil;
-    
     // Try to find user from username in local DB
     BOOL didFindCMO = [self loadObjectForID:environment];
     
@@ -239,14 +233,8 @@ int* isActive;
 {
     NSDictionary* active = [self GetActiveEnvironment];
     NSString* user = [active objectForKey:ACTIVEUSER];
-    if (![user  isEqual: @""])
-    {
-        return user;
-    }
-    else
-    {
-        return nil;
-    }
+    
+    return user;
 }
 
 -(void)updateTimestamp

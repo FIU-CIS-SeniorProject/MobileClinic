@@ -5,8 +5,6 @@
 //  Created by Michael Montaque on 3/1/13.
 //  Copyright (c) 2013 Steven Berlanga. All rights reserved.
 //
-#define OPEN_VISITS_PATIENT @"Open Visit"
-
 #import "PatientObjectProtocol.h"
 #import "VisitationObjectProtocol.h"
 #import "PrescriptionObjectProtocol.h"
@@ -14,6 +12,7 @@
 #import "MedicationObjectProtocol.h"
 #import <Foundation/Foundation.h>
 
+#define OPEN_VISITS_PATIENT @"Open Visit"
 /**
  * WorkFLow
  *	- Triage:
@@ -24,7 +23,6 @@
  *		2. If you are working with a patient and modifying any of their records make sure you pass the appropriate Bool attribute to lock the patient.(See Note 2 & 3)
  *		3. All(Most) the objects return from the Block response of the methods will be updated values take from the server. So if you tried to lock the object under your userprofile but it was already locked by another user, your returned object from the server will reflect the other user's information and changes. This is to help mitigate RACE conditions
  */
-
 typedef void (^MobileClinicCommandResponse)(NSDictionary* object, NSError* error);
 typedef void (^MobileClinicSearchResponse)(NSArray* allObjectsFromSearch, NSError* error);
 @protocol MobileClinicFacadeProtocol <NSObject>

@@ -90,6 +90,7 @@ CloudManagementObject* cloudMO;
         [testDictionary setObject:[[NSDate distantPast] convertNSDateToSeconds] forKey:LASTPULLTIME];
         [testDictionary setObject:@"http://still-citadel-8045.herokuapp.com/" forKey:CLOUDURL];
         [testDictionary setObject:@(NO) forKey: ISDIRTY];
+        [testDictionary setObject:@"" forKey: ACTIVEUSER];
         
         CloudManagementObject* testCMO = [[CloudManagementObject alloc] initAndMakeNewDatabaseObject];
         [testCMO setValueToDictionaryValues: testDictionary];
@@ -109,11 +110,14 @@ CloudManagementObject* cloudMO;
         [productionDictionary setObject:[[NSDate distantPast] convertNSDateToSeconds] forKey:LASTPULLTIME];
         [productionDictionary setObject:@"http://pure-island-5858.herokuapp.com/" forKey:CLOUDURL];
         [productionDictionary setObject:@(NO) forKey: ISDIRTY];
+        [productionDictionary setObject:@"" forKey: ACTIVEUSER];
         
         CloudManagementObject* productionCMO = [[CloudManagementObject alloc] initAndMakeNewDatabaseObject];
         [productionCMO setValueToDictionaryValues:productionDictionary];
         [productionCMO saveObject:^(id<BaseObjectProtocol> data, NSError *error) {}];
     }
+    
+    [self loadDefaultUser];
 }
 
 // Switching to the Test Environment
@@ -121,7 +125,7 @@ CloudManagementObject* cloudMO;
 {
     NSAlert* alert = [[NSAlert alloc] init];
     
-    if ([[[CloudManagementObject alloc]init] GetActiveUser] == nil)
+    if ([[[[CloudManagementObject alloc]init] GetActiveUser] isEqual: @""])
     {
         [alert setMessageText:@"You must be logged in to Purge the System"];
         [alert setAlertStyle:NSWarningAlertStyle];
@@ -283,7 +287,7 @@ CloudManagementObject* cloudMO;
 {
     NSAlert* alert = [[NSAlert alloc] init];
     
-    if ([[[CloudManagementObject alloc]init] GetActiveUser] == nil)
+    if ([[[[CloudManagementObject alloc]init] GetActiveUser] isEqual: @""])
     {
         [alert setMessageText:@"You must be logged in to Purge the System"];
         [alert setAlertStyle:NSWarningAlertStyle];
@@ -400,5 +404,28 @@ CloudManagementObject* cloudMO;
 -(Optimizer)isOptimized
 {
     return isOptimized;
+}
+
+-(void)loadDefaultUser
+{
+    NSArray* userArray = [[[UserObject alloc] init] FindAllObjects];
+    
+    if ([userArray count] <= 0)
+    {
+        NSMutableDictionary* defaultUser = [[NSMutableDictionary alloc] init];
+        [defaultUser setObject:@"defaultuser@default.com" forKey:EMAIL];
+        [defaultUser setObject:@"John" forKey:FIRSTNAME];
+        [defaultUser setObject:@"Smith" forKey:LASTNAME];
+        [defaultUser setObject:@(3) forKey:USERTYPE];
+        [defaultUser setObject:@"jsmith13" forKey:USERNAME];
+        [defaultUser setObject:@"orant" forKey:PASSWORD];
+        [defaultUser setObject:@(YES) forKey:STATUS];
+        [defaultUser setObject:@(0) forKey:CHARITYID];
+        [defaultUser setObject:@(NO) forKey: ISDIRTY];
+        
+        UserObject* newDefaultUser = [[UserObject alloc] initAndMakeNewDatabaseObject];
+        [newDefaultUser setValueToDictionaryValues:defaultUser];
+        [newDefaultUser saveObject:^(id<BaseObjectProtocol> data, NSError *error) {}];
+    }
 }
 @end

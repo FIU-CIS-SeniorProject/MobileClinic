@@ -197,7 +197,7 @@ id<ServerProtocol> connection;
 {
     NSAlert* alert = [[NSAlert alloc] init];
     
-    if ([[[CloudManagementObject alloc]init] GetActiveUser] == nil)
+    if ([[[[CloudManagementObject alloc]init] GetActiveUser] isEqual: @""])
     {
         [alert setMessageText:@"You must be logged in to Purge the System"];
         [alert setAlertStyle:NSWarningAlertStyle];

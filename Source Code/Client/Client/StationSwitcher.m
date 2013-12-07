@@ -5,7 +5,6 @@
 //  Created by Michael Montaque on 4/24/13.
 //  Copyright (c) 2013 Steven Berlanga. All rights reserved.
 //
-
 #import "StationSwitcher.h"
 
 @implementation StationSwitcherCell
@@ -84,28 +83,31 @@
     return cell;
 }
 
-
-
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [popover dismissPopoverAnimated:YES];
-    if (indexPath.row < 3) {
+    if (indexPath.row < 3)
+    {
         [[NSNotificationCenter defaultCenter]postNotificationName:SWITCH_STATIONS object:[NSNumber numberWithInteger:indexPath.row]];
-    }else{
+    }
+    else
+    {
         [[NSNotificationCenter defaultCenter] postNotificationName:LOGOFF object:nil];
     }
 
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
--(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
     StationSwitcherCell* station = (StationSwitcherCell*)cell;
     [station.stationTitle setTextColor:[UIColor whiteColor]];
     [ColorMe addBorder:cell.layer withWidth:1 withColor:[UIColor blackColor]];
     
-    switch (indexPath.row) {
+    switch (indexPath.row)
+    {
         case 0:
             [cell setBackgroundColor:[ColorMe colorFor:PALEORANGE]];
             break;
@@ -122,7 +124,9 @@
             break;
     }
 }
--(void)setPopoverController:(UIPopoverController *)pop{
+
+-(void)setPopoverController:(UIPopoverController *)pop
+{
     popover = pop;
 }
 @end

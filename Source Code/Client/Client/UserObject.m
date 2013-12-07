@@ -78,6 +78,7 @@ NSString* tempPassword;
         
         // link databaseObject to convenience Object named "user" 
         [self linkDatabase];
+        
         // if we find the user locally then....
         if (didFindUser)
         {

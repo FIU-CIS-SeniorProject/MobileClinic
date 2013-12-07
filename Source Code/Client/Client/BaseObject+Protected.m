@@ -5,7 +5,6 @@
 //  Created by Michael Montaque on 3/21/13.
 //  Copyright (c) 2013 Steven Berlanga. All rights reserved.
 //
-
 #import "BaseObject+Protected.h"
 #import "ServerCore.h"
 #import "QueueManager.h"
@@ -17,7 +16,8 @@ id<ServerProtocol> serverManager;
     
     [ self tryAndSendData:data withErrorToFire:^(id<BaseObjectProtocol> data, NSError *error) {
         Response(nil, error);
-    } andWithPositiveResponse:^(id data) {
+    } andWithPositiveResponse:^(id data)
+    {
         StatusObject* status = data;
         
         [self SaveListOfObjectsFromDictionary:status.data];

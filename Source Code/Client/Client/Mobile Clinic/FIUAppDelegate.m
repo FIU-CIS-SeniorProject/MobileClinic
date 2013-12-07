@@ -12,7 +12,6 @@
 #import "ServerCore.h"
 #import "QueueManager.h"
 
-
 NSTimer* syncTimer;
 
 @implementation FIUAppDelegate
@@ -22,10 +21,12 @@ NSTimer* syncTimer;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
-+ (UIViewController*) topMostController {
++ (UIViewController*) topMostController
+{
     UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
     
-    while (topController.presentedViewController) {
+    while (topController.presentedViewController)
+    {
         topController = topController.presentedViewController;
     }
     

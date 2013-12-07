@@ -1527,11 +1527,11 @@
 			isa = PBXGroup;
 			children = (
 				4677413516BD9386002FD4A5 /* Model.xcdatamodeld */,
+				EAE6CDEB16BE4701008949DC /* System Objects */,
 				EAD8F5681723A21300AEF023 /* Queue.h */,
 				EAD8F5691723A21300AEF023 /* Queue.m */,
 				EAD8F5641723A1CE00AEF023 /* QueueManager.h */,
 				EAD8F5651723A1CE00AEF023 /* QueueManager.m */,
-				EAE6CDEB16BE4701008949DC /* System Objects */,
 				EAADC02416E113D2009E7AF9 /* MobileClinicFacadeProtocol.h */,
 				EAADC02016E113A5009E7AF9 /* MobileClinicFacade.h */,
 				EAADC02116E113A5009E7AF9 /* MobileClinicFacade.m */,

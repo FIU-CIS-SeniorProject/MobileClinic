@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12F37" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="4V1-xg-f76">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="4V1-xg-f76">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
+        <deployment defaultVersion="1536" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
@@ -9,7 +10,7 @@
             <objects>
                 <viewController id="4V1-xg-f76" customClass="LoginViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Kwf-uO-Lgt">
-                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" image="kids.png" id="dsA-0B-JeB">
@@ -17,34 +18,34 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="clinicLogo.jpg" id="VUm-iJ-2NR">
-                                <rect key="frame" x="291" y="283" width="188" height="150"/>
+                                <rect key="frame" x="291" y="289" width="188" height="150"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Mobile Clinic" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3PA-7p-3q3">
-                                <rect key="frame" x="168" y="422" width="431" height="71"/>
+                                <rect key="frame" x="168" y="431" width="431" height="71"/>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="50"/>
                                 <color key="textColor" red="0.27698501275510201" green="0.27698501275510201" blue="0.27698501275510201" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="One village at a time!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="K2A-1A-tnp">
-                                <rect key="frame" x="281" y="485" width="205" height="30"/>
+                                <rect key="frame" x="281" y="495" width="205" height="30"/>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="23"/>
                                 <color key="textColor" red="0.41639429209183676" green="0.41639429209183676" blue="0.41639429209183676" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" id="2Mo-44-xPO">
-                                <rect key="frame" x="245" y="576" width="280" height="30"/>
+                                <rect key="frame" x="245" y="587" width="280" height="30"/>
                                 <color key="textColor" red="0.41639429210000001" green="0.41639429210000001" blue="0.41639429210000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" id="F1l-FR-70h">
-                                <rect key="frame" x="245" y="614" width="280" height="30"/>
+                                <rect key="frame" x="245" y="626" width="280" height="30"/>
                                 <color key="textColor" red="0.41639429210000001" green="0.41639429210000001" blue="0.41639429210000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="izW-J9-kRl">
-                                <rect key="frame" x="245" y="652" width="280" height="45"/>
+                                <rect key="frame" x="245" y="665" width="280" height="45"/>
                                 <color key="backgroundColor" red="1" green="0.8636992847759063" blue="0.38177067835898004" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="GillSans-Bold" family="Gill Sans" pointSize="25"/>
                                 <state key="normal" title="Login">
@@ -58,7 +59,7 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" text="Welcome!" textAlignment="center" id="FkS-Dw-jBB">
-                                <rect key="frame" x="244" y="523" width="280" height="45"/>
+                                <rect key="frame" x="244" y="534" width="280" height="45"/>
                                 <color key="backgroundColor" red="0.21014030612244894" green="0.21014030612244894" blue="0.21014030612244894" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="textColor" red="0.8970424107142857" green="0.8970424107142857" blue="0.8970424107142857" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="GillSans-Bold" family="Gill Sans" pointSize="25"/>
@@ -83,16 +84,16 @@
         <!--Table View Controller - Root View Controller-->
         <scene sceneID="Rhq-ke-Q5g">
             <objects>
-                <tableViewController storyboardIdentifier="" clearsSelectionOnViewWillAppear="NO" id="D2W-aS-m8T" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="lKu-CV-H7r">
-                        <rect key="frame" x="0.0" y="20" width="550" height="1004"/>
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="D2W-aS-m8T" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="lKu-CV-H7r">
+                        <rect key="frame" x="0.0" y="0.0" width="550" height="1004"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="166" id="zAb-Xj-gvh">
                                 <rect key="frame" x="0.0" y="22" width="550" height="166"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zAb-Xj-gvh" id="cyO-vp-D2h">
                                     <rect key="frame" x="0.0" y="0.0" width="550" height="165"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
@@ -123,8 +124,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                     </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
+                                </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -144,8 +144,8 @@
         <scene sceneID="iVL-oP-1h5">
             <objects>
                 <tableViewController id="Uuy-CL-yZ6" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="166" sectionHeaderHeight="22" sectionFooterHeight="22" id="zSu-2u-nEB">
-                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="166" sectionHeaderHeight="22" sectionFooterHeight="22" id="zSu-2u-nEB">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="vjn-iB-G6i">
@@ -153,7 +153,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="lzo-l1-TAH">
-                                    <rect key="frame" x="183" y="20" width="478" height="44"/>
+                                    <rect key="frame" x="183" y="20" width="478" height="29"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <segments>
                                         <segment title="Date &amp; Time"/>
@@ -182,14 +182,14 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="65" sectionHeaderHeight="22" sectionFooterHeight="22" id="DUL-08-27D">
-                                <rect key="frame" x="72" y="235.5" width="624" height="639"/>
+                                <rect key="frame" x="72" y="235" width="624" height="639"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="resultCell" rowHeight="65" id="wHe-k3-IJS" customClass="PatientResultTableCell">
                                         <rect key="frame" x="0.0" y="22" width="624" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="624" height="64"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wHe-k3-IJS" id="RwJ-LO-afL">
+                                            <rect key="frame" x="0.0" y="0.0" width="624" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Rigo Hernandez" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WZA-Xd-KwR">
@@ -200,7 +200,7 @@
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="September 31, 2000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UMQ-Ry-CpZ">
-                                                    <rect key="frame" x="119" y="38" width="123" height="21"/>
+                                                    <rect key="frame" x="119" y="39" width="123" height="21"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -210,14 +210,13 @@
                                                     <rect key="frame" x="51" y="2" width="60" height="60"/>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="(30 Years Old)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eeG-va-EZ6">
-                                                    <rect key="frame" x="511" y="38" width="93" height="21"/>
+                                                    <rect key="frame" x="511" y="39" width="93" height="21"/>
                                                     <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
+                                        </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="patientAge" destination="eeG-va-EZ6" id="mKp-AA-MDl"/>
@@ -256,11 +255,7 @@
                                         <rect key="frame" x="514" y="24" width="140" height="30"/>
                                         <fontDescription key="fontDescription" name="GillSans-Bold" family="Gill Sans" pointSize="16"/>
                                         <state key="normal" title="Search">
-                                            <color key="titleColor" red="0.19607843137254902" green="0.30980392156862746" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="searchByNameButton:" destination="fpB-Tu-8RI" eventType="touchUpInside" id="VN5-ir-5rj"/>
@@ -270,11 +265,7 @@
                                         <rect key="frame" x="514" y="62" width="140" height="30"/>
                                         <fontDescription key="fontDescription" name="GillSans-Bold" family="Gill Sans" pointSize="16"/>
                                         <state key="normal" title="Fingerprint">
-                                            <color key="titleColor" red="0.19607843137254902" green="0.30980392156862746" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="searchByFingerprintButton:" destination="fpB-Tu-8RI" eventType="touchUpInside" id="yvw-Ui-xNY"/>
@@ -327,14 +318,14 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="95" sectionHeaderHeight="22" sectionFooterHeight="22" id="sJb-8J-oeM">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="95" sectionHeaderHeight="22" sectionFooterHeight="22" id="sJb-8J-oeM">
                                 <rect key="frame" x="52" y="61" width="665" height="611"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="visitationCell" rowHeight="95" id="zZE-5N-Edw" customClass="PatientHistoryTableCell">
                                         <rect key="frame" x="0.0" y="22" width="665" height="95"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zZE-5N-Edw" id="3Bw-1Z-b8G">
                                             <rect key="frame" x="0.0" y="0.0" width="665" height="94"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -429,8 +420,7 @@
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
+                                        </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="patientBPLabel" destination="cZw-5q-ry5" id="yqb-TA-Enj"/>
@@ -483,7 +473,7 @@
             <objects>
                 <viewController storyboardIdentifier="currentVisitViewController" id="dgP-ac-6fq" customClass="CurrentVisitViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cgU-5r-ytO">
-                        <rect key="frame" x="0.0" y="44" width="768" height="711"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="711"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Vitals" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fjK-a5-oLr">
@@ -748,16 +738,16 @@
             <objects>
                 <viewController storyboardIdentifier="patientDashboardViewController" id="r6V-uQ-Kq9" customClass="PatientDashboardViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="shM-qk-5nT">
-                        <rect key="frame" x="0.0" y="44" width="768" height="916"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="960"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="bHA-is-exY">
-                                <rect key="frame" x="59" y="155" width="650" height="262"/>
+                                <rect key="frame" x="59" y="155" width="650" height="306"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <button key="tableHeaderView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="QWk-AG-DV2">
-                                    <rect key="frame" x="0.0" y="0.0" width="650" height="44"/>
+                                    <rect key="frame" x="0.0" y="44" width="650" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -774,9 +764,9 @@
                                 </button>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="dashboardCell" rowHeight="60" id="R3d-Ak-q28" customClass="DashboardTableCell">
-                                        <rect key="frame" x="0.0" y="66" width="650" height="61"/>
+                                        <rect key="frame" x="0.0" y="110" width="650" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="R3d-Ak-q28" id="9js-ez-LP1">
                                             <rect key="frame" x="0.0" y="0.0" width="650" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -816,8 +806,7 @@
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
                                             </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
+                                        </tableViewCellContentView>
                                         <connections>
                                             <outlet property="employeeName" destination="iAJ-eJ-D80" id="uIx-Uh-nnJ"/>
                                             <outlet property="patientConditionTitle" destination="0GL-z1-E3E" id="ywc-ot-PbU"/>
@@ -834,7 +823,7 @@
                                 </connections>
                             </tableView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="8f7-yL-mEq">
-                                <rect key="frame" x="59" y="569" width="650" height="262"/>
+                                <rect key="frame" x="59" y="569" width="650" height="306"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -855,9 +844,9 @@
                                 </button>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="dashboardCell" rowHeight="60" id="JES-rp-P2e" customClass="DashboardTableCell">
-                                        <rect key="frame" x="0.0" y="66" width="650" height="61"/>
+                                        <rect key="frame" x="0.0" y="66" width="650" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JES-rp-P2e" id="e4Y-Yx-Jdk">
                                             <rect key="frame" x="0.0" y="0.0" width="650" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -897,8 +886,7 @@
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
                                             </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
+                                        </tableViewCellContentView>
                                         <connections>
                                             <outlet property="employeeName" destination="Fhf-cs-Kh8" id="fxu-y0-nGS"/>
                                             <outlet property="patientConditionTitle" destination="wqm-jA-wF3" id="Eke-S4-bxR"/>
@@ -915,7 +903,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Dashboard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MOG-UR-u6d">
-                                <rect key="frame" x="284" y="42" width="200" height="45"/>
+                                <rect key="frame" x="284" y="44" width="200" height="45"/>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="43"/>
                                 <color key="textColor" red="0.39096380739999997" green="0.39096380739999997" blue="0.39096380739999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1011,13 +999,13 @@
         <!--Station View Controller - Change Station-->
         <scene sceneID="48z-Ya-HO0">
             <objects>
-                <viewController storyboardIdentifier="" id="QXw-lH-2IZ" customClass="StationViewController" sceneMemberID="viewController">
+                <viewController id="QXw-lH-2IZ" customClass="StationViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DFK-9L-djK">
-                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7rj-kP-dkB">
-                                <rect key="frame" x="184" y="371" width="400" height="100"/>
+                                <rect key="frame" x="184" y="379" width="400" height="100"/>
                                 <color key="backgroundColor" red="0.88360969387755106" green="0.41827362915972305" blue="0.034783189866394157" alpha="0.70000000000000007" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="40"/>
                                 <state key="normal" title="Triage">
@@ -1032,7 +1020,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ln0-Hc-eJY">
-                                <rect key="frame" x="184" y="503" width="400" height="100"/>
+                                <rect key="frame" x="184" y="514" width="400" height="100"/>
                                 <color key="backgroundColor" red="0.0" green="0.25724524294880657" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="40"/>
                                 <state key="normal" title="Doctor">
@@ -1047,7 +1035,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3Yq-Eo-8li">
-                                <rect key="frame" x="184" y="639" width="400" height="100"/>
+                                <rect key="frame" x="184" y="653" width="400" height="100"/>
                                 <color key="backgroundColor" red="0.20538799219916321" green="0.7299107142857143" blue="0.35875381141351281" alpha="0.70000000000000007" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="40"/>
                                 <state key="normal" title="Pharmacy">
@@ -1062,7 +1050,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Choose Station" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kM2-Ba-k8L">
-                                <rect key="frame" x="244" y="179" width="281" height="144"/>
+                                <rect key="frame" x="244" y="183" width="281" height="144"/>
                                 <fontDescription key="fontDescription" name="GillSans-Bold" family="Gill Sans" pointSize="55"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -1102,9 +1090,9 @@
         <!--Patient Queue View Controller-->
         <scene sceneID="skW-tX-e2a">
             <objects>
-                <viewController storyboardIdentifier="" useStoryboardIdentifierAsRestorationIdentifier="YES" id="PPP-xq-jTq" customClass="PatientQueueViewController" sceneMemberID="viewController">
+                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="PPP-xq-jTq" customClass="PatientQueueViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hYX-ZI-bZg">
-                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Sort By:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3ms-NN-z5G">
@@ -1115,21 +1103,21 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Patient Queue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OqD-GA-CZH">
-                                <rect key="frame" x="197" y="19" width="374" height="59"/>
+                                <rect key="frame" x="197" y="20" width="374" height="59"/>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="43"/>
                                 <color key="textColor" red="0.39096380739999997" green="0.39096380739999997" blue="0.39096380739999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" rowHeight="65" sectionHeaderHeight="22" sectionFooterHeight="22" id="4gW-xJ-gYh">
-                                <rect key="frame" x="72" y="119" width="625" height="782"/>
+                                <rect key="frame" x="72" y="119" width="625" height="846"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="queueCell" rowHeight="65" id="Vge-9V-3xX" customClass="QueueCell">
-                                        <rect key="frame" x="0.0" y="22" width="625" height="66"/>
+                                        <rect key="frame" x="0.0" y="22" width="625" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Vge-9V-3xX" id="1NS-H2-CZ5">
                                             <rect key="frame" x="0.0" y="0.0" width="625" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -1169,8 +1157,7 @@
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
                                             </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
+                                        </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="employeeName" destination="c60-aO-ItW" id="XyK-C5-hvC"/>
@@ -1247,15 +1234,15 @@
         <scene sceneID="5bI-8p-MpY">
             <objects>
                 <tableViewController storyboardIdentifier="stationSwitch" id="9X5-6u-FE6" customClass="StationSwitcher" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="75" sectionHeaderHeight="22" sectionFooterHeight="22" id="yVi-CP-faZ">
-                        <rect key="frame" x="0.0" y="20" width="300" height="340"/>
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" sectionHeaderHeight="22" sectionFooterHeight="22" id="yVi-CP-faZ">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="340"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="menu" rowHeight="74" id="HL0-FS-cGh" customClass="StationSwitcherCell">
                                 <rect key="frame" x="0.0" y="22" width="300" height="74"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HL0-FS-cGh" id="h9c-5Z-gee">
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="73"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
@@ -1267,8 +1254,7 @@
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
+                                </tableViewCellContentView>
                                 <connections>
                                     <outlet property="stationTitle" destination="qbd-Fy-eOS" id="ZVb-1M-DfL"/>
                                 </connections>
@@ -1291,17 +1277,17 @@
             <objects>
                 <viewController storyboardIdentifier="doctorPatientViewController" id="KSs-EN-HjT" customClass="DoctorPatientViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Emx-xJ-MbT">
-                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="ocm-wc-NlD">
-                                <rect key="frame" x="0.0" y="960" width="768" height="44"/>
+                                <rect key="frame" x="0.0" y="980" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="1od-eI-jAA"/>
                                     <barButtonItem style="plain" id="dSz-kF-iN4">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="KVN-d1-eap">
-                                            <rect key="frame" x="284" y="8" width="200" height="30"/>
+                                            <rect key="frame" x="284" y="7" width="200" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Diagnosis"/>
@@ -1316,7 +1302,7 @@
                                 </items>
                             </toolbar>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Name:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GWG-Hr-OLt">
-                                <rect key="frame" x="224" y="48" width="50" height="21"/>
+                                <rect key="frame" x="224" y="49" width="50" height="21"/>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -1523,7 +1509,7 @@
             <objects>
                 <viewController storyboardIdentifier="pharmacyPatientViewController" id="Iw3-0E-8E0" customClass="PharmacyPatientViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cyC-9I-JUi">
-                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="AE1-pL-px2">
@@ -1601,15 +1587,15 @@
                                 <color key="backgroundColor" red="0.26795536015221183" green="0.48718510841836737" blue="0.29111556309311848" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="65" sectionHeaderHeight="22" sectionFooterHeight="22" id="EmF-XB-rI7">
-                                <rect key="frame" x="47" y="354" width="674" height="457"/>
+                                <rect key="frame" x="47" y="354" width="674" height="477"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleAspectFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" rowHeight="65" id="6ex-HI-ygJ" customClass="PharmacyPatientViewControllerCell">
                                         <rect key="frame" x="0.0" y="22" width="674" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="674" height="64"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6ex-HI-ygJ" id="t9X-oc-gKV">
+                                            <rect key="frame" x="0.0" y="0.0" width="674" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Time of Day:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eim-dT-5pa">
@@ -1634,8 +1620,7 @@
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
+                                        </tableViewCellContentView>
                                         <connections>
                                             <outlet property="dosage" destination="If3-aZ-GsQ" id="irt-vx-2Ho"/>
                                             <outlet property="drugName" destination="AF2-K2-caG" id="RFA-C5-mR6"/>
@@ -1721,7 +1706,7 @@
             <objects>
                 <viewController storyboardIdentifier="pharmacyPatientVC" id="Y6x-hR-agI" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AzQ-MD-bx7">
-                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Name:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QTn-fY-j4K">
@@ -1764,66 +1749,66 @@
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Family:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TUZ-wg-gog">
-                                <rect key="frame" x="224" y="72" width="50" height="20"/>
+                                <rect key="frame" x="224" y="73" width="50" height="20"/>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Village:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HSU-vZ-5R3">
-                                <rect key="frame" x="224" y="99" width="50" height="21"/>
+                                <rect key="frame" x="224" y="101" width="50" height="21"/>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Age:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CXH-rh-5q2">
-                                <rect key="frame" x="224" y="129" width="50" height="21"/>
+                                <rect key="frame" x="224" y="131" width="50" height="21"/>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Sex:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PiG-Vg-9gH">
-                                <rect key="frame" x="224" y="158" width="50" height="21"/>
+                                <rect key="frame" x="224" y="161" width="50" height="21"/>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="N/A" minimumFontSize="17" id="i7o-et-Av8">
-                                <rect key="frame" x="281" y="72" width="188" height="20"/>
+                                <rect key="frame" x="281" y="73" width="188" height="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="N/A" minimumFontSize="17" id="MA9-3J-vnM">
-                                <rect key="frame" x="281" y="101" width="188" height="18"/>
+                                <rect key="frame" x="281" y="103" width="188" height="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="N/A" minimumFontSize="17" id="XOy-in-eWO">
-                                <rect key="frame" x="282" y="160" width="188" height="18"/>
+                                <rect key="frame" x="282" y="163" width="188" height="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Medication" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eda-4o-R6K">
-                                <rect key="frame" x="285" y="251" width="200" height="59"/>
+                                <rect key="frame" x="285" y="256" width="200" height="59"/>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="43"/>
                                 <color key="textColor" red="0.39096380739999997" green="0.39096380739999997" blue="0.39096380739999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="107" sectionHeaderHeight="22" sectionFooterHeight="22" id="cJE-8x-yed">
-                                <rect key="frame" x="134" y="318" width="500" height="350"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="107" sectionHeaderHeight="22" sectionFooterHeight="22" id="cJE-8x-yed">
+                                <rect key="frame" x="134" y="318" width="500" height="370"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" rowHeight="107" id="G1S-PV-hmc">
                                         <rect key="frame" x="0.0" y="22" width="500" height="107"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="G1S-PV-hmc" id="aIx-Gb-Klc">
                                             <rect key="frame" x="0.0" y="0.0" width="500" height="106"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -1882,8 +1867,7 @@
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
+                                        </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -1894,13 +1878,8 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jAV-tb-0Iv">
                                 <rect key="frame" x="525" y="836" width="93" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Checkout">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="00S-au-Sf3">
@@ -1922,7 +1901,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Doctor's Notes:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QJN-EZ-K5f">
-                                <rect key="frame" x="135" y="693" width="196" height="33"/>
+                                <rect key="frame" x="135" y="707" width="196" height="33"/>
                                 <fontDescription key="fontDescription" name="GillSans-Bold" family="Gill Sans" pointSize="21"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -2060,11 +2039,11 @@
             <objects>
                 <viewController storyboardIdentifier="registerPatientViewController" id="Vvd-v2-eiv" customClass="RegisterPatientViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="a1N-ht-X1k">
-                        <rect key="frame" x="0.0" y="44" width="768" height="960"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="960"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Register New Patient" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pZg-eg-xaw">
-                                <rect key="frame" x="197" y="29.5" width="374" height="59"/>
+                                <rect key="frame" x="197" y="29" width="374" height="59"/>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="43"/>
                                 <color key="textColor" red="0.39096380739999997" green="0.39096380739999997" blue="0.39096380739999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -2142,11 +2121,7 @@
                                         <rect key="frame" x="537" y="236" width="185" height="58"/>
                                         <fontDescription key="fontDescription" name="GillSans-Bold" family="Gill Sans" pointSize="16"/>
                                         <state key="normal" title="Create Patient">
-                                            <color key="titleColor" red="0.1960784314" green="0.30980392159999998" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="createPatient:" destination="Vvd-v2-eiv" eventType="touchUpInside" id="3u8-Dg-zpF"/>
@@ -2156,11 +2131,7 @@
                                         <rect key="frame" x="391" y="235" width="144" height="58"/>
                                         <fontDescription key="fontDescription" name="GillSans-Bold" family="Gill Sans" pointSize="16"/>
                                         <state key="normal" title="Register Face">
-                                            <color key="titleColor" red="0.1960784314" green="0.30980392159999998" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="RegisterFaceButton:" destination="Vvd-v2-eiv" eventType="touchUpInside" id="3Q3-oa-Wdg"/>
@@ -2170,11 +2141,7 @@
                                         <rect key="frame" x="372" y="152" width="313" height="41"/>
                                         <fontDescription key="fontDescription" name="GillSans-Bold" family="Gill Sans" pointSize="18"/>
                                         <state key="normal" title="Tap to set Age">
-                                            <color key="titleColor" red="0.1960784314" green="0.30980392159999998" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="getAgeOfPatient:" destination="Vvd-v2-eiv" eventType="touchUpInside" id="Buc-la-NgF"/>
@@ -2184,11 +2151,7 @@
                                         <rect key="frame" x="273" y="236" width="116" height="58"/>
                                         <fontDescription key="fontDescription" name="GillSans-Bold" family="Gill Sans" pointSize="16"/>
                                         <state key="normal" title="Start Over">
-                                            <color key="titleColor" red="0.1960784314" green="0.30980392159999998" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="startOver:" destination="Vvd-v2-eiv" eventType="touchUpInside" id="gWe-3n-7bI"/>
@@ -2204,8 +2167,8 @@
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="resultCell" rowHeight="65" id="ujt-69-YnP" customClass="PatientResultTableCell">
                                         <rect key="frame" x="0.0" y="22" width="624" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="624" height="64"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ujt-69-YnP" id="9nx-p6-bmj">
+                                            <rect key="frame" x="0.0" y="0.0" width="624" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Rigo Hernandez" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Cl7-DK-xkk">
@@ -2216,7 +2179,7 @@
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="September 31, 2000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="u5M-Qn-Pwp">
-                                                    <rect key="frame" x="119" y="38" width="123" height="21"/>
+                                                    <rect key="frame" x="119" y="39" width="123" height="21"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -2226,14 +2189,13 @@
                                                     <rect key="frame" x="51" y="2" width="60" height="60"/>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="(30 Years Old)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="604-dx-osV">
-                                                    <rect key="frame" x="511" y="38" width="93" height="21"/>
+                                                    <rect key="frame" x="511" y="39" width="93" height="21"/>
                                                     <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
+                                        </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="patientAge" destination="604-dx-osV" id="jv0-oC-asU"/>
@@ -2272,11 +2234,7 @@
                                         <rect key="frame" x="514" y="24" width="145" height="30"/>
                                         <fontDescription key="fontDescription" name="GillSans-Bold" family="Gill Sans" pointSize="16"/>
                                         <state key="normal" title="Search">
-                                            <color key="titleColor" red="0.1960784314" green="0.30980392159999998" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="searchByNameButton:" destination="Vvd-v2-eiv" eventType="touchUpInside" id="yfF-Zp-dYt"/>
@@ -2297,13 +2255,8 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="3MN-1z-LEL">
                                         <rect key="frame" x="514" y="61" width="145" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="Face Recogntion">
-                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="faceRecognition:" destination="Vvd-v2-eiv" eventType="touchUpInside" id="lyM-sa-zbS"/>
@@ -2356,11 +2309,11 @@
             <objects>
                 <viewController id="6yD-dd-C43" customClass="FRViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xXZ-Mw-Dfa">
-                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="E06-WC-nEf">
-                                <rect key="frame" x="0.0" y="100" width="768" height="904"/>
+                                <rect key="frame" x="0.0" y="100" width="768" height="924"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Syi-bb-8PS">
@@ -2373,13 +2326,8 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="T3s-Vm-uYB">
                                 <rect key="frame" x="574" y="32" width="73" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Switch">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="switchCameraClicked:" destination="6yD-dd-C43" eventType="touchUpInside" id="ySe-es-qra"/>
@@ -2409,23 +2357,18 @@
             <objects>
                 <viewController storyboardIdentifier="RegisterFaceViewController" id="HPR-BZ-SFY" customClass="RegisterFaceViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="81y-cI-AJQ">
-                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="iXx-HZ-Bf9">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="1005"/>
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1025"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hDb-zY-DKS">
                                 <rect key="frame" x="504" y="891" width="86" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Switch">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="switchCameraButtonClicked:" destination="HPR-BZ-SFY" eventType="touchUpInside" id="A8E-af-MJ0"/>
@@ -2440,13 +2383,8 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mPT-9e-Bql">
                                 <rect key="frame" x="615" y="891" width="85" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Register">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="cameraButtonClicked:" destination="HPR-BZ-SFY" eventType="touchUpInside" id="s6N-TA-ksG"/>
@@ -2470,7 +2408,7 @@
         <scene sceneID="Pqk-Ba-swa">
             <objects>
                 <tableViewController storyboardIdentifier="menuPopover" id="IZw-7W-rlH" customClass="MenuViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Dv9-Vn-8lL">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Dv9-Vn-8lL">
                         <rect key="frame" x="0.0" y="0.0" width="200" height="220"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2478,7 +2416,7 @@
                             <tableViewCell contentMode="scaleToFill" restorationIdentifier="Cell" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="o8H-es-0Jp">
                                 <rect key="frame" x="0.0" y="22" width="200" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="o8H-es-0Jp" id="2sl-qg-GfM">
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
@@ -2495,8 +2433,7 @@
                                             </state>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
+                                </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
@@ -2616,7 +2553,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <viewController storyboardIdentifier="currentDiagnosisViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="KL3-5f-8cJ" customClass="CurrentDiagnosisViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="r9k-es-OZb">
-                        <rect key="frame" x="0.0" y="44" width="768" height="709"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="753"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="PuO-Tb-i3B">
@@ -2637,20 +2574,20 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Objective:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nMR-wY-0sU">
-                                <rect key="frame" x="40" y="141" width="688" height="33"/>
+                                <rect key="frame" x="40" y="150" width="688" height="33"/>
                                 <color key="backgroundColor" red="0.3637420831" green="0.40504617790000003" blue="0.50095663270000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="GillSans-Bold" family="Gill Sans" pointSize="26"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" id="dUy-rm-V1F">
-                                <rect key="frame" x="40" y="172" width="688" height="104"/>
+                                <rect key="frame" x="40" y="184" width="688" height="104"/>
                                 <color key="backgroundColor" red="0.939453125" green="0.939453125" blue="0.939453125" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" id="5o7-AN-YaM">
-                                <rect key="frame" x="40" y="55" width="688" height="78"/>
+                                <rect key="frame" x="40" y="58" width="688" height="78"/>
                                 <color key="backgroundColor" red="0.96811224489795922" green="0.96811224489795922" blue="0.96811224489795922" alpha="1" colorSpace="calibratedRGB"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <bool key="isElement" value="NO"/>
@@ -2659,7 +2596,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lZQ-s0-l8m">
-                                <rect key="frame" x="40" y="20" width="688" height="33"/>
+                                <rect key="frame" x="40" y="21" width="688" height="33"/>
                                 <color key="backgroundColor" red="0.3637420831" green="0.40504617790000003" blue="0.50095663270000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Subjective:">
@@ -2673,14 +2610,14 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Assessment:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0Q1-BJ-YvN">
-                                <rect key="frame" x="40" y="284" width="688" height="33"/>
+                                <rect key="frame" x="40" y="302" width="688" height="33"/>
                                 <color key="backgroundColor" red="0.3637420831" green="0.40504617790000003" blue="0.50095663270000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="GillSans-Bold" family="Gill Sans" pointSize="26"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" id="Nzk-tt-mvZ">
-                                <rect key="frame" x="40" y="315" width="688" height="120"/>
+                                <rect key="frame" x="40" y="338" width="688" height="120"/>
                                 <color key="backgroundColor" red="0.939453125" green="0.939453125" blue="0.939453125" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -2716,16 +2653,16 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <viewController storyboardIdentifier="triagePatientViewController" id="Hf5-oa-1pu" customClass="TriagePatientViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iHO-yQ-dUF">
-                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Hm5-SL-hav">
-                                <rect key="frame" x="0.0" y="916" width="768" height="44"/>
+                                <rect key="frame" x="0.0" y="980" width="768" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="in5-6B-7xs"/>
                                     <barButtonItem style="plain" id="7vU-kT-5Cl">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="5H4-h8-Vj9">
-                                            <rect key="frame" x="282" y="7" width="203" height="32"/>
+                                            <rect key="frame" x="282" y="6" width="203" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Current Visit"/>
@@ -2740,7 +2677,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </items>
                             </toolbar>
                             <view contentMode="scaleToFill" id="NbG-4X-iQe">
-                                <rect key="frame" x="0.0" y="29" width="768" height="168"/>
+                                <rect key="frame" x="0.0" y="31" width="768" height="168"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" image="userImage.jpeg" id="XzT-5q-r8s">
                                         <rect key="frame" x="20" y="6" width="195" height="155"/>
@@ -2845,7 +2782,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <!--View Controller-->
         <scene sceneID="EDj-98-lUl">
             <objects>
-                <viewController storyboardIdentifier="" id="hcs-ty-94e" sceneMemberID="viewController">
+                <viewController id="hcs-ty-94e" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Mk-Xa-yEG">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="745"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2871,13 +2808,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="F7H-a0-LJi">
                                 <rect key="frame" x="549" y="160" width="100" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Find Drug">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="findDrugs:" destination="hcs-ty-94e" eventType="touchUpInside" id="ZRF-Nf-0O5"/>
@@ -2886,13 +2818,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ftw-vW-aHP">
                                 <rect key="frame" x="479" y="526" width="155" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Send to Pharmacy">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="savePrescription:" destination="hcs-ty-94e" eventType="touchUpInside" id="Wid-uM-KCg"/>
@@ -3004,7 +2931,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <rect key="frame" x="0.0" y="0.0" width="768" height="709"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="34" sectionHeaderHeight="22" sectionFooterHeight="22" id="rSj-NZ-rAx">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="34" sectionHeaderHeight="22" sectionFooterHeight="22" id="rSj-NZ-rAx">
                                 <rect key="frame" x="54" y="126" width="660" height="563"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -3118,7 +3045,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="1000" id="nHT-SH-eUZ">
-                                            <rect key="frame" x="337" y="100" width="94" height="27"/>
+                                            <rect key="frame" x="337" y="104" width="94" height="23"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <connections>
                                                 <action selector="alterAmountOfTablets:" destination="BFJ-qB-Mtr" eventType="valueChanged" id="xVH-YV-K0G"/>
@@ -3137,27 +3064,26 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="Cell" textLabel="3uq-Fn-ZeN" detailTextLabel="7sF-r6-6i0" rowHeight="34" style="IBUITableViewCellStyleValue2" id="HSH-b9-N3E">
                                         <rect key="frame" x="0.0" y="335" width="660" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HSH-b9-N3E" id="HID-1F-ybz">
                                             <rect key="frame" x="0.0" y="0.0" width="660" height="33"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3uq-Fn-ZeN">
-                                                    <rect key="frame" x="10" y="10" width="91" height="15"/>
+                                                    <rect key="frame" x="15" y="11" width="91" height="15"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                                     <color key="textColor" red="0.32156862745098042" green="0.40000000000000002" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7sF-r6-6i0">
-                                                    <rect key="frame" x="107" y="7" width="41" height="19"/>
+                                                    <rect key="frame" x="112" y="8" width="41" height="18"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
+                                        </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                 </prototypes>
@@ -3224,7 +3150,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <viewController storyboardIdentifier="EditVisit" wantsFullScreenLayout="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0lM-PZ-Lw1" customClass="EditVisit" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IuE-tU-Rda">
-                        <rect key="frame" x="0.0" y="20" width="768" height="200"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="200"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Vitals" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5k0-OQ-1DY">
@@ -3370,7 +3296,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <viewController storyboardIdentifier="prescriptionFormViewController" id="RlJ-OR-l6g" customClass="DoctorPrescriptionViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="czA-zX-ud9">
-                        <rect key="frame" x="0.0" y="44" width="768" height="709"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="709"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bvj-qv-cIh">
@@ -3402,7 +3328,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="81" sectionHeaderHeight="22" sectionFooterHeight="22" id="Ner-qf-1Rf">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="81" sectionHeaderHeight="22" sectionFooterHeight="22" id="Ner-qf-1Rf">
                                 <rect key="frame" x="0.0" y="242" width="768" height="362"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -3410,7 +3336,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <tableViewCell contentMode="scaleAspectFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" rowHeight="65" id="yfX-3R-bOF" customClass="PharmacyPatientViewControllerCell">
                                         <rect key="frame" x="0.0" y="22" width="768" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yfX-3R-bOF" id="Rq6-XL-6Xu">
                                             <rect key="frame" x="0.0" y="0.0" width="768" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -3436,8 +3362,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
+                                        </tableViewCellContentView>
                                         <connections>
                                             <outlet property="dosage" destination="ZpP-mY-Bgr" id="lOT-F0-Edr"/>
                                             <outlet property="drugName" destination="oh2-JR-erv" id="YC3-Tf-46W"/>
@@ -3513,9 +3438,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <!--Pharmacy Queue Controller-->
         <scene sceneID="vWO-ZC-7oM">
             <objects>
-                <viewController storyboardIdentifier="" useStoryboardIdentifierAsRestorationIdentifier="YES" id="q5b-bl-tRg" customClass="PharmacyQueueController" sceneMemberID="viewController">
+                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="q5b-bl-tRg" customClass="PharmacyQueueController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FTD-VS-Gf1">
-                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Sort By:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5eD-HS-4Mq">
@@ -3526,21 +3451,21 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Patient Queue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fHW-R0-yvm">
-                                <rect key="frame" x="197" y="19" width="374" height="59"/>
+                                <rect key="frame" x="197" y="20" width="374" height="59"/>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="43"/>
                                 <color key="textColor" red="0.39096380739999997" green="0.39096380739999997" blue="0.39096380739999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" rowHeight="65" sectionHeaderHeight="22" sectionFooterHeight="22" id="zZz-0s-Jem">
-                                <rect key="frame" x="72" y="119" width="625" height="782"/>
+                                <rect key="frame" x="72" y="119" width="625" height="846"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="queueCell" rowHeight="65" id="P8U-db-jCB" customClass="QueueCell">
-                                        <rect key="frame" x="0.0" y="22" width="625" height="66"/>
+                                        <rect key="frame" x="0.0" y="22" width="625" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="P8U-db-jCB" id="j3v-6m-jrl">
                                             <rect key="frame" x="0.0" y="0.0" width="625" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -3580,8 +3505,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
                                             </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
+                                        </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="employeeName" destination="EjL-tH-Abc" id="adN-Rs-s6D"/>
@@ -3650,339 +3574,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="night.png" width="157" height="134"/>
         <image name="userImage.jpeg" width="120" height="120"/>
     </resources>
-    <classes>
-        <class className="CurrentDiagnosisViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CurrentDiagnosisViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="cancelDiagnosis:"/>
-                <relationship kind="action" name="submitButton:"/>
-                <relationship kind="outlet" name="assessmentLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="assessmentTextbox" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="objectiveLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="objectiveTextbox" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="subjectiveLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="subjectiveTextbox" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="submitButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="view" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="CurrentVisitViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CurrentVisitViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="addPicture1:"/>
-                <relationship kind="action" name="cancelNewVisit:"/>
-                <relationship kind="action" name="checkInButton:"/>
-                <relationship kind="action" name="quickCheckOutButton:"/>
-                <relationship kind="action" name="sendToPharmacy:"/>
-                <relationship kind="outlet" name="SendToDoctor" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="bloodPressureDivider" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="bloodPressureLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="bloodPressureMeasurementLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="checkOutBtn" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="conditionTitleField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="conditionsTextbox" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="diastolicField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="heartField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="heartFieldLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="heartMeasurementLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="patientWeightField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="patientWeightLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="patientWeightMeasurementLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="picture1" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="picture2" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="picture3" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="respirationField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="respirationLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="respirationMeasurementLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="sendToPharmacy" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="systolicField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tempField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tempLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="tempMeasurementLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="visitPriority" candidateClass="UISegmentedControl"/>
-            </relationships>
-        </class>
-        <class className="DashboardTableCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DashboardTableCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="employeeName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="patientConditionTitle" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="patientName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="patientPhoto" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="patientWaitTime" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="priorityIndicator" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-        <class className="DateController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DateController.h"/>
-            <relationships>
-                <relationship kind="action" name="saveNewDate:"/>
-                <relationship kind="outlet" name="dateLbl" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
-            </relationships>
-        </class>
-        <class className="DoctorPatientViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DoctorPatientViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="segmentClicked:"/>
-                <relationship kind="outlet" name="familyNameField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="patientAgeField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="patientBPLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="patientHRLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="patientNameField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="patientPhoto" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="patientRespirationLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="patientSexField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="patientTempLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="patientWeightLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="segmentedControl" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="toolBar" candidateClass="UIToolbar"/>
-                <relationship kind="outlet" name="villageNameField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="DoctorPrescriptionViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DoctorPrescriptionViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="CheckOutPatient:"/>
-                <relationship kind="action" name="findDrugs:"/>
-                <relationship kind="action" name="newTimeOfDay:"/>
-                <relationship kind="action" name="savePrescription:"/>
-                <relationship kind="outlet" name="checkOutBtn" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="drugTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="drugTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="instructionLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="medicationNotes" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="tabletsTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="timeOfDayTextFields" candidateClass="UITextField"/>
-                <relationship kind="outletCollection" name="timeOfDayButtons" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="EditVisit" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/EditVisit.h"/>
-            <relationships>
-                <relationship kind="action" name="saveandClose:"/>
-                <relationship kind="outlet" name="conditionTitleField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="conditionsTextbox" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="diastolicField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="heartField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="respirationField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="systolicField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tempField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="weight" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="FRViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FRViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="confidenceLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="instructionLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="LoginViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="loginButton:"/>
-                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="usernameTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="MCSwipeTableViewCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MCSwipeTableViewCell.h"/>
-        </class>
-        <class className="MedicineSearchViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MedicineSearchViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="AddTimeOfDay:"/>
-                <relationship kind="action" name="alterAmountOfTablets:"/>
-                <relationship kind="action" name="moveBackToPrescription:"/>
-                <relationship kind="action" name="searchMedicine:"/>
-                <relationship kind="outlet" name="dosage" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="drugName" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="duration" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="durationIncrementer" candidateClass="UIStepper"/>
-                <relationship kind="outlet" name="medicineField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="timeOfDay" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="PatientDashboardViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PatientDashboardViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="filterBy:"/>
-                <relationship kind="action" name="refresh:"/>
-                <relationship kind="action" name="sortBySelected:"/>
-                <relationship kind="action" name="tryAndSyncAllPendingObjects:"/>
-                <relationship kind="outlet" name="PendingSyncButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="doctorQueueTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="doctorWaitLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="pharmacyFilter" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="pharmacyQueueTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="pharmacyWaitLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="prioritySelector" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="refreshDoctor" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="refreshPharmacy" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="totalTimeLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="PatientHistoryTableCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PatientHistoryTableCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="patientBPLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="patientConditionTitleTextView" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="patientConditionsTextView" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="patientHeartLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="patientRespirationLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="patientTemperatureLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="patientVisitDateLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="patientWeightLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="PatientQueueViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PatientQueueViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="sortBySelected:"/>
-                <relationship kind="outlet" name="numberOfPatientsLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="prioritySelector" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="queueTableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="PatientResultTableCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PatientResultTableCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="patientAge" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="patientDOB" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="patientImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="patientName" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="PharmacyPatientViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PharmacyPatientViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="checkoutPatient:"/>
-                <relationship kind="outlet" name="checkoutButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="familyNameField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="medicalNotes" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="patientAgeField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="patientNameField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="patientPhoto" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="patientSexField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="patientView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="villageNameField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="PharmacyPatientViewControllerCell" superclassName="MCSwipeTableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PharmacyPatientViewControllerCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="dosage" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="drugName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="timeOfDay" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="PharmacyQueueController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PharmacyQueueController.h"/>
-            <relationships>
-                <relationship kind="action" name="sortBySelected:"/>
-                <relationship kind="outlet" name="numberOfPatientsLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="prioritySelector" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="queueTableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="PreviousVisitsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PreviousVisitsViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="patientHistoryTableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="QueueCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/QueueCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="employeeName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="patientConditionTitle" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="patientName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="patientPhoto" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="patientWaitTime" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="priorityIndicator" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-        <class className="RegisterFaceViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RegisterFaceViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="cameraButtonClicked:"/>
-                <relationship kind="action" name="savePerson:"/>
-                <relationship kind="action" name="switchCameraButtonClicked:"/>
-                <relationship kind="outlet" name="Register" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="familyNameField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="firstNameField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="imageScrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="switchCameraButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="RegisterPatientViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RegisterPatientViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="createPatient:"/>
-                <relationship kind="action" name="getAgeOfPatient:"/>
-                <relationship kind="action" name="patientPhotoButton:"/>
-                <relationship kind="action" name="registerFingerprintsButton:"/>
-                <relationship kind="action" name="searchByFingerprintButton:"/>
-                <relationship kind="action" name="searchByNameButton:"/>
-                <relationship kind="action" name="startOver:"/>
-                <relationship kind="outlet" name="createPatientButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="familyNameField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="firstNameField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="lastNameField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="patientAgeField" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="patientNameField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="patientPhoto" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="patientSexSegment" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="registerFingerprintsButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="registerView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="searchResultTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="searchView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="villageNameField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="SearchPatientViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SearchPatientViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="searchByFingerprintButton:"/>
-                <relationship kind="action" name="searchByNameButton:"/>
-                <relationship kind="outlet" name="familyNameField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="patientNameField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="searchResultTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="searchView" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="StationSwitcher" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/StationSwitcher.h"/>
-        </class>
-        <class className="StationSwitcherCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/StationSwitcherCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="stationTitle" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="TriagePatientViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TriagePatientViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="toggleViews:"/>
-                <relationship kind="outlet" name="familyNameField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="patientAgeField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="patientNameField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="patientPhoto" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="patientSexField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="patientView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="segmentedControl" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="toolBar" candidateClass="UIToolbar"/>
-                <relationship kind="outlet" name="villageNameField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
+        <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
