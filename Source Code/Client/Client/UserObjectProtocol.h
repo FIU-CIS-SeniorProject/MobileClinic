@@ -19,4 +19,5 @@ typedef enum {
 /* call to send this object to be verified by the server */
 -(void)loginWithUsername:(NSString*)username andPassword:(NSString*)password onCompletion:(void(^)(id <BaseObjectProtocol> data, NSError* error, Users* userA))onSuccessHandler;
 -(UserTypes)getUsertypeForCurrentUser;
+-(NSArray*)FindAllObjectsLocally;
 @end

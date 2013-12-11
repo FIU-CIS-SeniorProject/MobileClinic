@@ -54,5 +54,5 @@ NSString* COMMONID;
 NSInteger CLASSTYPE;
 }
 
-+(NSString*)getCurrenUserName;
++(NSString*)getCurrentUserName;
 @end

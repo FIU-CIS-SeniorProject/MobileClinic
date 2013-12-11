@@ -16,6 +16,6 @@
 #import <Foundation/Foundation.h>
 #import "CommonObjectProtocol.h"
 @protocol PrescriptionObjectProtocol <NSObject>
-
+-(NSArray*)FindAllObjectsLocally;
 
 @end

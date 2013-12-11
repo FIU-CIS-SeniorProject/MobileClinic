@@ -15,25 +15,31 @@
 
 #pragma mark- Init Methods
 #pragma mark-
-+(NSString *)getCurrenUserName{
++(NSString *)getCurrentUserName
+{
     return [[NSUserDefaults standardUserDefaults] stringForKey:CURRENT_USER];
 }
+
 -(id)init
 {
     self = [super init];
-    if (self) {
+    if (self)
+    {
         self->databaseObject = [super CreateANewObjectFromClass:self->COMMONDATABASE isTemporary:YES];
     }
     return self;
 }
+
 -(id)initAndMakeNewDatabaseObject
 {
     self = [super init];
-    if (self) {
+    if (self)
+    {
         self->databaseObject = [super CreateANewObjectFromClass:self->COMMONDATABASE isTemporary:NO];
     }
     return self;
 }
+
 - (id)initAndFillWithNewObject:(NSDictionary *)info
 {
     self = [self init];

@@ -48,12 +48,10 @@ id<ServerProtocol> serverManager;
     }
 }
 
--(void)startSearchWithData:(NSDictionary*)data withsearchType:(RemoteCommands)rCommand andOnComplete:(ObjectResponse)response {
-    
-    NSMutableDictionary* dataToSend = [[NSMutableDictionary alloc]initWithCapacity:3
-                                       ];
+-(void)startSearchWithData:(NSDictionary*)data withsearchType:(RemoteCommands)rCommand andOnComplete:(ObjectResponse)response
+{
+    NSMutableDictionary* dataToSend = [[NSMutableDictionary alloc]initWithCapacity:3];
     [dataToSend setValue:data forKey:DATABASEOBJECT];
-    
     [dataToSend setValue:[NSNumber numberWithInt:self->CLASSTYPE] forKey:OBJECTTYPE];
     [dataToSend setValue:[NSNumber numberWithInt:rCommand] forKey:OBJECTCOMMAND];
     
@@ -110,10 +108,10 @@ id<ServerProtocol> serverManager;
     // Set/Clear the lock on the object
     NSMutableDictionary* container = [NSMutableDictionary dictionaryWithCapacity:3];
     
-    NSString* lock = (shouldLock)?[BaseObject getCurrenUserName]:@"";
+    NSString* lock = (shouldLock)?[BaseObject getCurrentUserName]:@"";
     
     //So the reciever knows who sent this data
-    [container setValue:[BaseObject getCurrenUserName] forKey:ISLOCKEDBY];
+    [container setValue:[BaseObject getCurrentUserName] forKey:ISLOCKEDBY];
     
     // determines whether or not object is locked
     [dataToSend setValue:lock forKey:ISLOCKEDBY];
@@ -134,7 +132,8 @@ id<ServerProtocol> serverManager;
     [self tryAndSendData:container withErrorToFire:^(id<BaseObjectProtocol> data, NSError *error) {
         
         // Make sure that the object is attached to this object
-        if([self setValueToDictionaryValues:dataToSend]){
+        if([self setValueToDictionaryValues:dataToSend])
+        {
             // Create New Queue Manager
             QueueManager* qm = [[QueueManager alloc]init];
             // Create a new Queue Object
@@ -149,11 +148,14 @@ id<ServerProtocol> serverManager;
             [qm addQueueToDatabase:queue];
             
             // Save current information if cannot connect
-            [self saveObject:^(id<BaseObjectProtocol> data, NSError *noError) {
-            response(data,error);
-        }];
+            [self saveObject:^(id<BaseObjectProtocol> data, NSError *noError)
+            {
+                response(data,error);
+            }];
             
-        }else{
+        }
+        else
+        {
             response(nil,[self createErrorWithDescription:@"Developer Error: Misconfigured Object" andErrorCodeNumber:kErrorObjectMisconfiguration inDomain:@"BaseObject + Protected"]);
             return;
         }

@@ -17,5 +17,5 @@
 #import "CommonObjectProtocol.h"
 
 @protocol MedicationObjectProtocol <NSObject>
-
+-(NSArray*)FindAllObjectsLocally;
 @end

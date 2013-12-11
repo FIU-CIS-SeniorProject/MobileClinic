@@ -52,16 +52,19 @@
     [_sendToPharmacy setBackgroundColor:[ColorMe colorFor:DARKGREEN]];
         
 }
--(void)viewWillAppear:(BOOL)animated{
+-(void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter]postNotificationName:SET_DELEGATE object:self];
 }
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewDidUnload {
+- (void)viewDidUnload
+{
     [self setPatientWeightField:nil];
     [self setSystolicField:nil];
     [self setDiastolicField:nil];
@@ -74,7 +77,8 @@
 }
 
 // Creates a visit for the patient and checks them in
-- (IBAction)checkInButton:(id)sender {
+- (IBAction)checkInButton:(id)sender
+{
     [self setVisitData:NO isGoingToPharmacy:NO];
 }
 
@@ -85,25 +89,24 @@
 - (IBAction)sendToPharmacy:(id)sender {
     [self setVisitData:NO isGoingToPharmacy:YES];
 }
-- (IBAction)cancelNewVisit:(id)sender {
+- (IBAction)cancelNewVisit:(id)sender
+{
     [self showIndeterminateHUDInView:self.view withText:@"Unlocking..." shouldHide:NO afterDelay:0 andShouldDim:YES];
     
     MobileClinicFacade* mcf = [[MobileClinicFacade alloc]init];
    
-    [mcf updateCurrentPatient:_patientData AndShouldLock:NO onCompletion:^(NSDictionary *object, NSError *error) {
+    [mcf updateCurrentPatient:_patientData AndShouldLock:NO onCompletion:^(NSDictionary *object, NSError *error)
+    {
         [_delegate cancel];
         [self HideALLHUDDisplayInView:self.view];
     }];
     
 }
 
-
-
-- (void)setVisitData:(BOOL)type isGoingToPharmacy:(BOOL)toPharmacy {
-    
-    
-    
-    if (self.validateCheckin) {
+- (void)setVisitData:(BOOL)type isGoingToPharmacy:(BOOL)toPharmacy
+{
+    if (self.validateCheckin)
+    {
         MobileClinicFacade* mobileFacade = [[MobileClinicFacade alloc]init];
         
         [currentVisit setValue:[NSNumber numberWithInt:[_patientWeightField.text intValue]] forKey:WEIGHT];

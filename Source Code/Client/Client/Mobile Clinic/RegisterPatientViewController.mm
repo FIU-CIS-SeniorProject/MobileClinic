@@ -614,23 +614,29 @@ typedef enum MobileClinicMode{
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-  
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
     NSDictionary* patient = [NSMutableDictionary dictionaryWithDictionary:[patientSearchResultsArray objectAtIndex:indexPath.row]];
    
     NSString * lockedBy = [patient  objectForKey:ISLOCKEDBY];
     
     BOOL isOpen = [[patient  objectForKey:ISOPEN]boolValue];
     
-    if(![lockedBy isEqualToString:[BaseObject getCurrenUserName ]]) {
+    if(![lockedBy isEqualToString:[BaseObject getCurrentUserName ]])
+    {
         [[[tableView cellForRowAtIndexPath:indexPath]contentView]setBackgroundColor:[UIColor yellowColor]];
-    }else{
+    }
+    else
+    {
         [[[tableView cellForRowAtIndexPath:indexPath]contentView]setBackgroundColor:[UIColor whiteColor]];
     }
     
-    if (isOpen) {
+    if (isOpen)
+    {
         [ColorMe addBorder:cell.layer withWidth:3 withColor:[UIColor redColor]];
-    }else{
+    }
+    else
+    {
         [ColorMe addBorder:cell.layer withWidth:1 withColor:[UIColor clearColor]];
     }
 }
@@ -649,34 +655,39 @@ typedef enum MobileClinicMode{
     [_createPatientButton setTitle:@"Update Patient" forState:UIControlStateNormal];
 }
 
-- (IBAction)searchByNameButton:(id)sender {
-
+- (IBAction)searchByNameButton:(id)sender
+{
     [self broadSearchForPatient];
-
 }
 
-- (IBAction)startOver:(id)sender {
+- (IBAction)startOver:(id)sender
+{
     [self resetData];
 }
 
-- (void)broadSearchForPatient {
-    
-    
+- (void)broadSearchForPatient
+{
     //this will remove spaces BEFORE AND AFTER the string. I am leaving spaces in the middle because we might have names that are 2+ words
     //this also updates the fields with the new format so the user knows that its being trimmed
     //also, keep in mind that adding several spaces after text adds a period
     
-    _firstNameField.text = [_firstNameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    _lastNameField.text = [_lastNameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    //_firstNameField.text = [_firstNameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    //_lastNameField.text = [_lastNameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    NSString* searchFirstName = [_firstNameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString* searchLastName = [_lastNameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     MobileClinicFacade* mobileFacade = [[MobileClinicFacade alloc]init];
     
-    if (_firstNameField.text.isNotEmpty || _lastNameField.text.isNotEmpty) {
-        /** This will should HUD in tableview to show alert the user that the system is working */
+    if (searchFirstName.isNotEmpty || searchLastName.isNotEmpty)
+    {
+        /** This will show the HUD in tableview to alert the user that the system is working */
         [self showIndeterminateHUDInView:_searchResultTableView withText:@"Searching" shouldHide:NO afterDelay:0 andShouldDim:NO];
         
-        [mobileFacade findPatientWithFirstName:_firstNameField.text orLastName:_familyNameField.text onCompletion:^(NSArray *allObjectsFromSearch, NSError *error) {
-            if (allObjectsFromSearch) {
+        [mobileFacade findPatientWithFirstName:searchFirstName orLastName:searchLastName onCompletion:^(NSArray *allObjectsFromSearch, NSError *error)
+        {
+            if (allObjectsFromSearch)
+            {
                 // Get all the result from the query
                 patientSearchResultsArray  = [NSArray arrayWithArray:allObjectsFromSearch];
                 
@@ -684,9 +695,12 @@ typedef enum MobileClinicMode{
                 [_searchResultTableView reloadData];
                 
                 [FIUAppDelegate getNotificationWithColor:AJNotificationTypeBlue Animation:AJLinedBackgroundTypeAnimated WithMessage:error.localizedDescription inView:self.view];
-            }else{
+            }
+            else
+            {
                 [FIUAppDelegate getNotificationWithColor:AJNotificationTypeRed Animation:AJLinedBackgroundTypeAnimated WithMessage:error.localizedDescription inView:self.view];
             }
+            
             /** This will remove the HUD since the search is complete */
             [self HideALLHUDDisplayInView:_searchResultTableView];
         }];

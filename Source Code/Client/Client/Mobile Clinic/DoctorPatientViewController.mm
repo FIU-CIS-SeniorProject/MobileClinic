@@ -5,7 +5,6 @@
 //  Created by sebastian a zanlongo on 2/18/13.
 //  Copyright (c) 2013 Steven Berlanga. All rights reserved.
 //
-
 #import "DoctorPatientViewController.h"
 #import "CurrentDiagnosisViewController.h"
 #import "EditVisit.h"
@@ -26,6 +25,7 @@
     UIPopoverController* pop;
      UIImage *imageFR;
     NSManagedObjectContext *context;
+    CameraFacade* facade;
 }
 
 @end

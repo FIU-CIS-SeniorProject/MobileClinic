@@ -56,7 +56,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 4;
+    return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -74,6 +74,9 @@
             break;
         case 2:
             [cell.stationTitle setText:@"Pharmacy Station"];
+            break;
+        case 3:
+            [cell.stationTitle setText:@"Purge System"];
             break;
         default:
             [cell.stationTitle setText:@"Log Off"];
@@ -119,6 +122,9 @@
             break;
         case 3:
             [cell setBackgroundColor:[ColorMe colorFor:PALERED]];
+            break;
+        case 4:
+            [cell setBackgroundColor:[ColorMe colorFor:PALEORANGE]];
             break;
         default:
             break;

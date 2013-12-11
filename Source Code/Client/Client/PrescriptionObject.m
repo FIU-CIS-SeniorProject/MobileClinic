@@ -76,6 +76,11 @@
     [super UpdateObject:onSuccessHandler shouldLock:NO andSendObjects:[self getDictionaryValuesFromManagedObject] withInstruction:kUpdateObject];
 }
 
+-(NSArray *)FindAllObjectsLocally
+{
+    return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:nil andSortByAttribute:PRESCRIPTIONID]];
+}
+
 -(NSArray *)FindAllObjectsLocallyFromParentObject:(NSDictionary*)parentObject{
     
     NSPredicate* pred = [NSPredicate predicateWithFormat:@"%K == %@",VISITID,[parentObject objectForKey:VISITID]];

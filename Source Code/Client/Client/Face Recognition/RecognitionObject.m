@@ -72,7 +72,7 @@ Face *face;
     if (![databaseObject valueForKey:PATIENTID]) {
         
         // Adds an ID if it is not present
-        NSString* username = [BaseObject getCurrenUserName];
+        NSString* username = [BaseObject getCurrentUserName];
         
         NSString* usernameID = [NSString stringWithFormat:@"TestUser_%f",[[NSDate date]timeIntervalSince1970]];
         

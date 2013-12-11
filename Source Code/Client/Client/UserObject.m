@@ -5,8 +5,6 @@
 //  Created by Michael Montaque on 1/27/13.
 //  Copyright (c) 2013 Florida International University. All rights reserved.
 //
-
-
 #define ALL_USERS   @"all users"
 #define DATABASE    @"Users"
 
@@ -14,6 +12,7 @@
 #import "StatusObject.h"
 #import "NSString+Validation.h"
 #import "BaseObject+Protected.h"
+
 StatusObject* tempObject;
 ObjectResponse classResponder;
 NSString* tempUsername;
@@ -112,7 +111,7 @@ NSString* tempPassword;
 }
 -(UserTypes)getUsertypeForCurrentUser{
   
-    NSArray* users = [self FindObjectInTable:DATABASE withName:[BaseObject getCurrenUserName] forAttribute:USERNAME];
+    NSArray* users = [self FindObjectInTable:DATABASE withName:[BaseObject getCurrentUserName] forAttribute:USERNAME];
    
     if (users.count > 0) {
         Users* localUser = users.lastObject;
@@ -129,6 +128,11 @@ NSString* tempPassword;
     [dataToSend setValue:[NSNumber numberWithInt:kUserType] forKey:OBJECTTYPE];
     [self SendData:dataToSend toServerWithErrorMessage:@"Could not connect to server. Validating against cache" andResponse:withResponse];
 
+}
+
+-(NSArray *)FindAllObjectsLocally
+{
+    return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:nil andSortByAttribute:FIRSTNAME]];
 }
 
 @end

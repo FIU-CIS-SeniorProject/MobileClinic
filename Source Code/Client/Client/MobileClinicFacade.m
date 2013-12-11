@@ -13,6 +13,8 @@
 #import "QueueManager.h"
 #import "FaceObject.h"
 #import "RecognitionObject.h"
+#import "UserObject.h"
+
 @implementation MobileClinicFacade
 
 - (id)init
@@ -24,8 +26,9 @@
     return self;
 }
 
--(NSString *)GetCurrentUsername{
-    return [BaseObject getCurrenUserName];
+-(NSString *)GetCurrentUsername
+{
+    return [BaseObject getCurrentUserName];
 }
 
 #pragma mark- CREATING NEW OBJECTS
@@ -40,6 +43,7 @@
     
     
 }
+
 //Added by Humberto Suarez
 -(void)createAndCheckInFace:(NSDictionary *)faceInfo onCompletion:(MobileClinicCommandResponse)Response{
     
@@ -49,8 +53,6 @@
     
     [faceDictionary setValue:[NSNumber numberWithBool:NO] forKey:ISOPEN];
     
-   
-    
     [self CommonCommandObject:face ShouldLock:NO CommonUpdate:faceDictionary withResults:^(NSDictionary *object, NSError *error) {
         if (object) {
             
@@ -59,8 +61,25 @@
         }
     }];
     
+    //[self CommonCommandObject:face ForCreating:faceInfo bindedToParentObjectToUpdate:nil withResults:Response];
+    //FaceObject* facePic = [[FaceObject alloc] initAndMakeNewDatabaseObject]; //initAndMakeNewDatabaseObject];
+    //NSLog(@"llegue aquiiiiiiiiiiiiii");
+    /*if (![[faceInfo objectForKey:ISOPEN]boolValue]) {
+        
+        NSMutableDictionary* openFace = [[NSMutableDictionary alloc]initWithDictionary:faceInfo];
+        // Set patient open status
+        [openFace setValue:[NSNumber numberWithBool:!checkout] forKey:ISOPEN];
+        
+        [self CommonCommandObject:[[FaceObject alloc]init] ShouldLock:NO CommonUpdate:openFace withResults:^(NSDictionary *object, NSError *error) {
+            if (error.code > kErrorDisconnected) {
+                Response(object,error);
+            }}];
+        
+    }else{
+        Response(nil,[self createErrorWithDescription:MULTIPLE_VISIT_ERROR andErrorCodeNumber:kError inDomain:@"MCF"]);
+    }*/
+    
 }
-
 
 // creates a new prescription for a given visit
 -(void)addNewPrescription:(NSDictionary *)Rx ForCurrentVisit:(NSDictionary *)visit AndlockVisit:(BOOL)lock onCompletion:(MobileClinicCommandResponse)Response{
@@ -75,9 +94,8 @@
 }
 
 // Creates a new visit for a given patient.
--(void)addNewVisit:(NSDictionary *)visitInfo ForCurrentPatient:(NSDictionary *)patientInfo shouldCheckOut:(BOOL)checkout onCompletion:(MobileClinicCommandResponse)Response{
-    
-    
+-(void)addNewVisit:(NSDictionary *)visitInfo ForCurrentPatient:(NSDictionary *)patientInfo shouldCheckOut:(BOOL)checkout onCompletion:(MobileClinicCommandResponse)Response
+{
     // If Patient being passed is already open do not go further
     if (![[patientInfo objectForKey:ISOPEN]boolValue]) {
         
@@ -117,8 +135,8 @@
     [self CommonCommandObject:patients ForSearch1:search withResults:Response];
 }
 
--(void)findPatientWithFirstName:(NSString *)firstname orLastName:(NSString *)lastname onCompletion:(MobileClinicSearchResponse)Response{
-    
+-(void)findPatientWithFirstName:(NSString *)firstname orLastName:(NSString *)lastname onCompletion:(MobileClinicSearchResponse)Response
+{
     /* Create a temporary Patient Object to make request */
     PatientObject* patients = [[PatientObject alloc]init];
     
@@ -283,15 +301,18 @@
     // Just in case people become silly
     [visitDictionary removeObjectForKey:OPEN_VISITS_PATIENT];
     
-    
     VisitationObject* myVisit = [[VisitationObject alloc]init];
     
-    [self CommonCommandObject:myVisit ShouldLock:NO CommonUpdate:visitDictionary withResults:^(NSDictionary *object, NSError *error) {
-        if (object) {
+    [self CommonCommandObject:myVisit ShouldLock:NO CommonUpdate:visitDictionary withResults:^(NSDictionary *object, NSError *error)
+    {
+        if (object)
+        {
             PatientObject* myPatient = [[PatientObject alloc]init];
             
             [self CommonCommandObject:myPatient ShouldLock:NO CommonUpdate:patientDictionary withResults:Response];
-        }else{
+        }
+        else
+        {
             Response(object,error);
         }
     }];
@@ -308,11 +329,11 @@
     
 }
 
--(void)CommonCommandObject:(id<CommonObjectProtocol>)commandObject ForSearch:(NSDictionary*)object withResults:(MobileClinicSearchResponse)searchResults{
-    
+-(void)CommonCommandObject:(id<CommonObjectProtocol>)commandObject ForSearch:(NSDictionary*)object withResults:(MobileClinicSearchResponse)searchResults
+{
     /* Call the server to make a request for Visits */
-    [commandObject FindAllObjectsOnServerFromParentObject:object OnCompletion:^(id<BaseObjectProtocol> data, NSError *error) {
-        
+    [commandObject FindAllObjectsOnServerFromParentObject:object OnCompletion:^(id<BaseObjectProtocol> data, NSError *error)
+    {
         /* get all visits that are stored on the device */
         NSArray* allVisits = [NSArray arrayWithArray:[commandObject FindAllObjectsLocallyFromParentObject:object]];
         
@@ -341,6 +362,73 @@
     [commandObject createNewObject:object onCompletion:^(id<BaseObjectProtocol> data, NSError *error) {
         results([data getDictionaryValuesFromManagedObject],error);
     }];
+}
+
+-(void)completeSystemPurge
+{
+    VisitationObject* v = [[VisitationObject alloc] init];
+    NSArray* allVisits = [v FindAllObjectsLocally];
+    PatientObject* p = [[PatientObject alloc] init];
+    NSArray* allPatients = [p FindAllObjectsLocally];
+    MedicationObject* m = [[MedicationObject alloc] init];
+    NSArray* allMedications = [m FindAllObjectsLocally];
+    UserObject* u = [[UserObject alloc] init];
+    NSArray* allUsers = [u FindAllObjectsLocally];
+    PrescriptionObject* r = [[PrescriptionObject alloc] init];
+    NSArray* allPrescriptions = [r FindAllObjectsLocally];
+    
+    int vCounter = 0;
+    int pCounter = 0;
+    int mCounter = 0;
+    int uCounter = 0;
+    int rCounter = 0;
+    
+    for (NSDictionary* visit in allVisits)
+    {
+        BOOL didDelete = [v deleteDatabaseDictionaryObject:visit];
+        if (didDelete)
+        {
+            vCounter++;
+        }
+    }
+    
+    for (NSDictionary* patient in allPatients)
+    {
+        BOOL didDelete = [p deleteDatabaseDictionaryObject:patient];
+        if (didDelete)
+        {
+            pCounter++;
+        }
+    }
+    
+    for (NSDictionary* medication in allMedications)
+    {
+        BOOL didDelete = [m deleteDatabaseDictionaryObject:medication];
+        if (didDelete)
+        {
+            mCounter++;
+        }
+    }
+    
+    for (NSDictionary* user in allUsers)
+    {
+        BOOL didDelete = [u deleteDatabaseDictionaryObject:user];
+        if (didDelete)
+        {
+            uCounter++;
+        }
+    }
+    
+    for (NSDictionary* prescription in allPrescriptions)
+    {
+        BOOL didDelete = [r deleteDatabaseDictionaryObject:prescription];
+        if (didDelete)
+        {
+            rCounter++;
+        }
+    }
+    
+    NSLog(@"Completely Purged The System of %i Visits, %i Patients, %i Medications, and %i Users", vCounter, pCounter, mCounter, uCounter);
 }
 
 @end

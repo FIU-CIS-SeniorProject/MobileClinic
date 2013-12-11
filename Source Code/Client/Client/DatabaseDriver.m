@@ -84,8 +84,8 @@ return NO;
     [context refreshObject:object mergeChanges:YES];
 }
 
--(NSArray *)FindObjectInTable:(NSString *)table withCustomPredicate:(NSPredicate *)predicateString andSortByAttribute:(NSString*)attribute{
-
+-(NSArray *)FindObjectInTable:(NSString *)table withCustomPredicate:(NSPredicate *)predicateString andSortByAttribute:(NSString*)attribute
+{
     NSFetchRequest *fetch = [[NSFetchRequest alloc]init];
     
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:attribute ascending:YES];
@@ -93,28 +93,29 @@ return NO;
     NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
     
     [fetch setSortDescriptors:sortDescriptors];
-   
-    if (predicateString) {
+    
+    if (predicateString)
+    {
         [fetch setPredicate:predicateString];
     }
     
     return [self fetchElementsUsingFetchRequest:fetch withTable:table];
 }
 
--(NSArray*)fetchElementsUsingFetchRequest:(NSFetchRequest*)request withTable:(NSString*)tableName{
-    
-    if (context) {
+-(NSArray*)fetchElementsUsingFetchRequest:(NSFetchRequest*)request withTable:(NSString*)tableName
+{    
+    if (context)
+    {
         NSEntityDescription* semesterEntity = [NSEntityDescription entityForName:tableName inManagedObjectContext: context];
-
         [request setEntity:semesterEntity];
-        
         [request setFetchBatchSize:15];
         
         NSError *error  = nil;
         
         NSArray*  temp = [NSArray arrayWithArray: [context executeFetchRequest:request error:&error]];
         
-        if (error) {
+        if (error)
+        {
             NSLog(@"ERROR: DATAMODEL COULD NOT FETCH");
             return nil;
         }
