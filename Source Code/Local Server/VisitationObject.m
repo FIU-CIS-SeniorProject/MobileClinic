@@ -210,8 +210,6 @@ NSString* isLockedBy;
 {
     NSArray* allVisits= [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:COMMONDATABASE withCustomPredicate:[NSPredicate predicateWithFormat:@"%K == YES",ISDIRTY] andSortByAttribute:VISITID]];
     
-    
-    
     [self makeCloudCallWithCommand:UPDATEVISIT withObject:[NSDictionary dictionaryWithObject:allVisits forKey:DATABASE] onComplete:^(id cloudResults, NSError *error)
      {
          [self handleCloudCallback:onComplete UsingData:allVisits WithPotentialError:error];

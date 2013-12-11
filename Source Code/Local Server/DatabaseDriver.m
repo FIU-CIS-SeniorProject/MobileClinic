@@ -97,7 +97,7 @@ return self;
         [fetch setPredicate:predicateString];
     }
     
-     return [self fetchElementsUsingFetchRequest:fetch withTable:table];
+    return [self fetchElementsUsingFetchRequest:fetch withTable:table];
 }
 
 

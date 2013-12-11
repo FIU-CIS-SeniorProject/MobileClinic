@@ -130,13 +130,22 @@
         [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
          {
              NSError *jsonError;
+             //NSLog(@"CloudService: getAccessToken: sendAsynchronousRequest: %@", data);
+             
+             // If we get nil data, the application crashes on
+             //JSONObjectWithData:data, alloc and init data
+             if (data == nil)
+             {
+                 data = [[NSData alloc] init];
+             }
+             
              NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
              
-            //if(!error) //Not getting an error from the cloud, getting "result: false" instead
+             //if(!error) //Not getting an error from the cloud, getting "result: false" instead
              if (!jsonError && [[json objectForKey:@"result"] isEqualToString:@"true"])
-            {
+             {
                 
-                //read and print the server response for debug
+                 //read and print the server response for debug
                 NSString *myString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                 NSLog(@"CloudService.m: myString printed: %@", myString);
                 
