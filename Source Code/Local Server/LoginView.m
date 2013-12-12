@@ -61,6 +61,8 @@
          
      }];
     
+    [NSThread sleepForTimeInterval:1.0f];
+    
     [users loginWithUsername:[usernameTextField stringValue] andPassword:[passwordTextField stringValue] onCompletion:^(id<BaseObjectProtocol> data, NSError *error, NSDictionary *userA) {
         
         //TODO: fix error
