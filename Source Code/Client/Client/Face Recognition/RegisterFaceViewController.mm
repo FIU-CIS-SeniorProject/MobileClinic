@@ -72,7 +72,6 @@ NSDictionary* faceData;
 
 - (void)processImage:(cv::Mat&)image
 {
-    
     // Only process every 60th frame (every 2s)
     if (self.frameNum == 10) {
         [self parseFaces:[faceDetector facesFromImage:image] forImage:image];
@@ -89,7 +88,7 @@ NSDictionary* faceData;
     if (![self learnFace:faces forImage:image]) {
         return;
     };
-    if(self.numPicsTaken ==1)
+    if(self.numPicsTaken ==18)
     {
         [self.delegate1 addItemViewController:self didFinishEnteringItem:[DataR UIImageFromMat:image]];
         //[self.delegate1 addItemViewController:self didFinishEnteringItem:[ DataR UIImageFromMat:image]];

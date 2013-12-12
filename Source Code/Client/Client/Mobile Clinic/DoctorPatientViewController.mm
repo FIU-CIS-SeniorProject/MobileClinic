@@ -5,6 +5,7 @@
 //  Created by sebastian a zanlongo on 2/18/13.
 //  Copyright (c) 2013 Steven Berlanga. All rights reserved.
 //
+
 #import "DoctorPatientViewController.h"
 #import "CurrentDiagnosisViewController.h"
 #import "EditVisit.h"
@@ -25,7 +26,6 @@
     UIPopoverController* pop;
      UIImage *imageFR;
     NSManagedObjectContext *context;
-    CameraFacade* facade;
 }
 
 @end
@@ -244,8 +244,11 @@
                              NSString *lname = [pat objectForKey:@"familyName"];
                              
                              
+                             double delayInSeconds = 1.5;
+                             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+                             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                              
-                             if([fname length] != 0 && [lname length]!=0 ){
+                                 if([fname length] != 0 && [lname length]!=0 ){
                                  
                                  //[mobileFacade findPatientWithFirstName:fname orLastName:lname onCompletion:^(NSArray *allObjectsFromSearch1, NSError *error)
                                  [mobileFacade findPatientWithLabel:label onCompletion:^(NSArray *allObjectsFromSearch1, NSError *error)
@@ -277,8 +280,10 @@
                                                                        otherButtonTitles:nil];
                                  [alert show];
                              }
+                             });
+                             
                          }
-                         
+                                             
                          
                      }else{
                          NSLog(@"Imheerereereererere 1");

@@ -15,6 +15,8 @@
 #import "MedicineSearchViewController.h"
 #import "MobileClinicFacade.h"
 #import "CameraFacade.h"
+//#import "FaceDetector.h"
+//@class FaceDetector;
 
 @protocol DoctorPatientViewDelegate <NSObject>
 
@@ -23,24 +25,31 @@
 @end
 
 
-@interface DoctorPatientViewController : UIViewController {
-
+@interface DoctorPatientViewController : UIViewController
+{
+     CameraFacade *facade;
 }
+- (IBAction)verify:(id)sender;
 
 @property (strong, nonatomic) NSMutableDictionary * patientData;
+
 @property (weak, nonatomic) IBOutlet UITextField *patientNameField;
 @property (weak, nonatomic) IBOutlet UITextField *familyNameField;
 @property (weak, nonatomic) IBOutlet UITextField *villageNameField;
 @property (weak, nonatomic) IBOutlet UITextField *patientAgeField;
 @property (weak, nonatomic) IBOutlet UITextField *patientSexField;
 @property (weak, nonatomic) IBOutlet UIImageView *patientPhoto;
+
 @property (weak, nonatomic) IBOutlet UILabel *patientWeightLabel;
-@property (weak, nonatomic) id<DoctorPatientViewDelegate>delegate;
+@property(weak, nonatomic) id<DoctorPatientViewDelegate>delegate;
 @property (weak, nonatomic) IBOutlet UILabel *patientBPLabel;
 @property (weak, nonatomic) IBOutlet UILabel *patientHRLabel;
 @property (weak, nonatomic) IBOutlet UILabel *patientRespirationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *patientTempLabel;
+
+
 @property (weak, nonatomic) IBOutlet UIToolbar *toolBar;
+
 @property (nonatomic, retain) IBOutlet UISegmentedControl *segmentedControl;
 
 - (IBAction)segmentClicked:(id)sender;
