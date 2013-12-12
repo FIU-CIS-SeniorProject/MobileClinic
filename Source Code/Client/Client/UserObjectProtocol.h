@@ -13,6 +13,7 @@ typedef enum {
     kDoctor         = 1,
     kPharmacists    = 2,
     kAdministrator  = 3,
+    kPurgeSystem    = 4,
 }UserTypes;
 @protocol UserObjectProtocol <NSObject>
 

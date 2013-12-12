@@ -109,9 +109,13 @@ id<ServerProtocol> connection;
     {
         [patientView.view removeFromSuperview];
     }
-    else
+    else if (currentView == medicationView.view)
     {
         [medicationView.view removeFromSuperview];
+    }
+    else
+    {
+        // ERROR: Unrecognized current view
     }
     
     //set view to login
@@ -270,6 +274,8 @@ id<ServerProtocol> connection;
     }
     
     NSLog(@"Completely Purged The System of %i Visits, %i Patients, %i Medications, and %i Users", vCounter, pCounter, mCounter, uCounter);
+    
+    [self showLoginView:nil];
 }
 
 - (IBAction)manualTableRefresh:(id)sender

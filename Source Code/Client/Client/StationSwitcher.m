@@ -91,9 +91,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [popover dismissPopoverAnimated:YES];
-    if (indexPath.row < 3)
+    if (indexPath.row < 4)
     {
-        [[NSNotificationCenter defaultCenter]postNotificationName:SWITCH_STATIONS object:[NSNumber numberWithInteger:indexPath.row]];
+        NSNumber* indexRow = [NSNumber numberWithInteger:indexPath.row];
+        // Because of an index issue with kAdministrator userType = 3, and the index of Purge System also being at 3,
+        //   it is important to set the Notification object to kPurgeSystem = 4
+        if (indexPath.row == 3)
+        {
+            indexRow = [NSNumber numberWithInteger:4];
+        }
+        [[NSNotificationCenter defaultCenter]postNotificationName:SWITCH_STATIONS object:indexRow];
     }
     else
     {

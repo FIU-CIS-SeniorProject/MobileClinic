@@ -47,7 +47,9 @@ return self;
     }
     
     NSError* error = nil;
-    return ![context save:&error];
+    BOOL* successful = [context save:&error];
+    
+    return !successful;
 }
 
 -(NSManagedObject*)CreateANewObjectFromClass:(NSString *)name isTemporary:(BOOL)temp{

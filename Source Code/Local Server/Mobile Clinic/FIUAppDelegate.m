@@ -118,6 +118,8 @@ CloudManagementObject* cloudMO;
     }
     
     [self loadDefaultUser];
+    
+    [[[CloudManagementObject alloc] init] updateActiveUser:@""];
 }
 
 // Switching to the Test Environment

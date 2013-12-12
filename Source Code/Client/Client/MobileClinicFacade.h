@@ -22,4 +22,5 @@
 @interface MobileClinicFacade : NSObject <MobileClinicFacadeProtocol>
 -(id)init;
 -(NSString*)GetCurrentUsername;
+-(void)completeSystemPurge;
 @end
