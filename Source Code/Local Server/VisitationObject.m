@@ -224,11 +224,43 @@ NSString* isLockedBy;
     NSMutableDictionary* timeDic = [[NSMutableDictionary alloc] init];
     [timeDic setObject:timestamp forKey:@"Timestamp"];
     
-    //TODO: replace "withObject:nil" with timestamp dictionary
     [self makeCloudCallWithCommand:DATABASE withObject:timeDic onComplete:^(id cloudResults, NSError *error)
      {
-         NSArray* allVisits = [cloudResults objectForKey:@"data"];
-         [self handleCloudCallback:onComplete UsingData:allVisits WithPotentialError:error];
+         //NSArray* allVisits = [cloudResults objectForKey:@"data"];
+         //[self handleCloudCallback:onComplete UsingData:allVisits WithPotentialError:error];
+         
+         if (cloudResults == nil) // NO CLOUD CONNECTION
+         {
+             NSString* errorValue = @"No connection to the Cloud";
+             NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+             [errorDetail setValue:errorValue forKey:NSLocalizedDescriptionKey];
+             error = [NSError errorWithDomain:@"UserObject:pullFromCloud" code:100 userInfo:errorDetail];
+             onComplete((!error)?self:nil,error);
+         }
+         else if ([[cloudResults objectForKey:@"result"] isEqualToString:@"true"]) // SUCCESS
+         {
+             NSArray* visitsFromCloud = [cloudResults objectForKey:@"data"];
+             
+             NSArray* allError = [self SaveListOfObjectsFromDictionary:visitsFromCloud];
+             
+             if (allError.count > 0)
+             {
+                 error = [[NSError alloc]initWithDomain:COMMONDATABASE code:kErrorObjectMisconfiguration userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Object was misconfigured",NSLocalizedFailureReasonErrorKey, nil]];
+                 onComplete(self,error);
+                 return;
+             }
+             onComplete((!error)?self:nil,error);
+         }
+         else // SOME ERROR FROM CLOUD
+         {
+             NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+             NSString* errorValue = @"Error from Cloud: ";
+             errorValue = [errorValue stringByAppendingString:[cloudResults objectForKey:@"data"]];
+             
+             [errorDetail setValue:errorValue forKey:NSLocalizedDescriptionKey];
+             error = [NSError errorWithDomain:@"VistationObject:pullFromCloud" code:100 userInfo:errorDetail];
+             onComplete((!error)?self:nil,error);
+         }
      }];
 }
 

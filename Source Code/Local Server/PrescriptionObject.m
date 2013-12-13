@@ -165,7 +165,10 @@ NSString* main = [NSString stringWithFormat:@" Medication Name:\t%@ \n Dose:\t%@
     [self makeCloudCallWithCommand:DATABASE withObject:timeDic onComplete:^(id cloudResults, NSError *error)
      {
          NSArray* allPrescriptions = [cloudResults objectForKey:@"data"];
-         [self handleCloudCallback:onComplete UsingData:allPrescriptions WithPotentialError:error];
+         if ([allPrescriptions count] > 0)
+         {
+             [self handleCloudCallback:onComplete UsingData:allPrescriptions WithPotentialError:error];
+         }
          
      }];
 }

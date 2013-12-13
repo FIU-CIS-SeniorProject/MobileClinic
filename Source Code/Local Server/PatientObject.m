@@ -241,8 +241,10 @@ NSString* isLockedBy;
     [self makeCloudCallWithCommand:DATABASE withObject:timeDic onComplete:^(id cloudResults, NSError *error)
     {
         NSArray* allPatients = [cloudResults objectForKey:@"data"];
-        [self handleCloudCallback:onComplete UsingData:allPatients WithPotentialError:error];
-        
+        if ([allPatients count] > 0)
+        {
+            [self handleCloudCallback:onComplete UsingData:allPatients WithPotentialError:error];
+        }
     }];
 }
 

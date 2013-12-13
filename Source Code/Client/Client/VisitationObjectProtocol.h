@@ -50,5 +50,5 @@
  */
 -(NSArray*)FindAllVisitsWithinTheLastXHours:(int)hours;
 
-
+-(NSArray*)FindAllObjectsLocally;
 @end

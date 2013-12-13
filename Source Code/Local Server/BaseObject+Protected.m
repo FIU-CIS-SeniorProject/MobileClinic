@@ -211,7 +211,8 @@
         }
         
         // Try and save while handling duplication control
-        [self saveObject:^(id<BaseObjectProtocol> data, NSError *error) {
+        [self saveObject:^(id<BaseObjectProtocol> data, NSError *error)
+        {
             databaseObject = [self CreateANewObjectFromClass:COMMONDATABASE isTemporary:YES];
         }];
     }

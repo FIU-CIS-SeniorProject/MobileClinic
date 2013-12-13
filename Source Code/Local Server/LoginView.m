@@ -50,18 +50,21 @@
 - (IBAction)login:(id)sender
 {
     UserObject* users = [[UserObject alloc]init];
+    //dispatch_semaphore_t barrier = dispatch_semaphore_create(0);
+    
     
     // Sync appropriate users from cloud to the server
     [users pullFromCloud:^(id<BaseObjectProtocol> data, NSError *error)
      {
+         //dispatch_semaphore_signal(barrier);
          if (error)
          {
              [NSApp presentError:error];
          }
-         
      }];
     
-    [NSThread sleepForTimeInterval:1.0f];
+    //[NSThread sleepForTimeInterval:1.0f];
+    //dispatch_semaphore_wait(barrier, DISPATCH_TIME_FOREVER);
     
     [users loginWithUsername:[usernameTextField stringValue] andPassword:[passwordTextField stringValue] onCompletion:^(id<BaseObjectProtocol> data, NSError *error, NSDictionary *userA) {
         

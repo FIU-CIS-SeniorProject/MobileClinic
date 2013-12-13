@@ -76,7 +76,8 @@
         //kURL = [[[CloudManagementObject alloc] init] GetActiveURL];
     
         //kURL = @"http://pure-island-5858.herokuapp.com/"; // Production Cloud
-        kURL = @"http://still-citadel-8045.herokuapp.com/"; // Test Cloud
+        //kURL = @"http://still-citadel-8045.herokuapp.com/"; // Test Cloud
+        kURL = @"http://stark-hollows-5161.herokuapp.com/";
         
         //kURL = @"http://localhost:3000/"; // local host for testing the Cloud Server
         //kURL = @"http://staging-webapp.herokuapp.com/";
