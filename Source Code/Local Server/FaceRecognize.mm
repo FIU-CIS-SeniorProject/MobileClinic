@@ -33,7 +33,7 @@ NSDictionary* faceD;
 - (id)initWithEigenFaceRecognizer
 {
     self = [self init];
-    _model = cv::createEigenFaceRecognizer(9,2500.0);
+    _model = cv::createEigenFaceRecognizer(9,1700.0);
     
     return self;
 }
