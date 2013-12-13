@@ -52,19 +52,16 @@
     [_sendToPharmacy setBackgroundColor:[ColorMe colorFor:DARKGREEN]];
         
 }
--(void)viewWillAppear:(BOOL)animated
-{
+-(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter]postNotificationName:SET_DELEGATE object:self];
 }
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [self setPatientWeightField:nil];
     [self setSystolicField:nil];
     [self setDiastolicField:nil];
@@ -77,8 +74,7 @@
 }
 
 // Creates a visit for the patient and checks them in
-- (IBAction)checkInButton:(id)sender
-{
+- (IBAction)checkInButton:(id)sender {
     [self setVisitData:NO isGoingToPharmacy:NO];
 }
 
@@ -89,24 +85,25 @@
 - (IBAction)sendToPharmacy:(id)sender {
     [self setVisitData:NO isGoingToPharmacy:YES];
 }
-- (IBAction)cancelNewVisit:(id)sender
-{
+- (IBAction)cancelNewVisit:(id)sender {
     [self showIndeterminateHUDInView:self.view withText:@"Unlocking..." shouldHide:NO afterDelay:0 andShouldDim:YES];
     
     MobileClinicFacade* mcf = [[MobileClinicFacade alloc]init];
    
-    [mcf updateCurrentPatient:_patientData AndShouldLock:NO onCompletion:^(NSDictionary *object, NSError *error)
-    {
+    [mcf updateCurrentPatient:_patientData AndShouldLock:NO onCompletion:^(NSDictionary *object, NSError *error) {
         [_delegate cancel];
         [self HideALLHUDDisplayInView:self.view];
     }];
     
 }
 
-- (void)setVisitData:(BOOL)type isGoingToPharmacy:(BOOL)toPharmacy
-{
-    if (self.validateCheckin)
-    {
+
+
+- (void)setVisitData:(BOOL)type isGoingToPharmacy:(BOOL)toPharmacy {
+    
+    
+    
+    if (self.validateCheckin) {
         MobileClinicFacade* mobileFacade = [[MobileClinicFacade alloc]init];
         
         [currentVisit setValue:[NSNumber numberWithInt:[_patientWeightField.text intValue]] forKey:WEIGHT];
@@ -194,6 +191,67 @@
 -(void)closePreviousVisit{
     [self.navigationController popViewControllerAnimated:YES];
 }
+- (IBAction)addPicture2:(id)sender {
+    if (!facade) {
+        facade = [[CameraFacade alloc] initWithView:self];
+    }
+    
+    // Added Indeterminate Loader
+    MBProgressHUD *progress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    [progress setMode:MBProgressHUDModeIndeterminate];
+    
+    [facade TakePictureWithCompletion:^(id img) {
+        
+        if(img) {
+            // Reduce Image Size
+            UIImage* image = img;
+            
+            UIImage* scaled = [image imageByScalingAndCroppingForSize:CGSizeMake(150, 150)];
+            [scaled drawInRect:CGRectMake(0.0f, 0.0f, 90, 90)];
+            // Set the image
+            [_picture2 setImage:scaled];
+            //[currentVisit setValue:[scaled convertImageToPNGBinaryData]forKey:@"picture1"];
+            // save picture to object
+            //[patientData setValue:[scaled convertImageToPNGBinaryData] forKey:PICTURE];
+            
+        }
+        
+        [progress hide:YES];
+    }];
+}
+
+- (IBAction)addPicture3:(id)sender
+{
+    if (!facade) {
+        facade = [[CameraFacade alloc] initWithView:self];
+    }
+    
+    // Added Indeterminate Loader
+    MBProgressHUD *progress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    [progress setMode:MBProgressHUDModeIndeterminate];
+    
+    [facade TakePictureWithCompletion:^(id img) {
+        
+        if(img) {
+            // Reduce Image Size
+            UIImage* image = img;
+            
+            UIImage* scaled = [image imageByScalingAndCroppingForSize:CGSizeMake(150, 150)];
+            [scaled drawInRect:CGRectMake(0.0f, 0.0f, 90, 90)];
+            // Set the image
+            [_picture3 setImage:scaled];
+            //[currentVisit setValue:[scaled convertImageToPNGBinaryData]forKey:@"picture1"];
+            // save picture to object
+            //[patientData setValue:[scaled convertImageToPNGBinaryData] forKey:PICTURE];
+            
+        }
+        
+        [progress hide:YES];
+    }];
+}
+
 - (IBAction)addPicture1:(id)sender
 {
     if (!facade) {
@@ -212,7 +270,7 @@
             UIImage* image = img;
             
             UIImage* scaled = [image imageByScalingAndCroppingForSize:CGSizeMake(150, 150)];
-            
+            [scaled drawInRect:CGRectMake(0.0f, 0.0f, 90, 90)];
             // Set the image
             [_picture1 setImage:scaled];
             //[currentVisit setValue:[scaled convertImageToPNGBinaryData]forKey:@"picture1"];

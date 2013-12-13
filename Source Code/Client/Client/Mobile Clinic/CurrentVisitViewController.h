@@ -15,7 +15,8 @@
     ScreenHandler handler;
     NSMutableDictionary *currentVisit;
 }
-
+- (IBAction)addPicture2:(id)sender;
+- (IBAction)addPicture3:(id)sender;
 - (IBAction)addPicture1:(id)sender;
 @property (weak, nonatomic) IBOutlet UIImageView *picture1;
 @property (weak, nonatomic) IBOutlet UIImageView *picture2;

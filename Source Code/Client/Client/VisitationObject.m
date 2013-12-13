@@ -5,6 +5,7 @@
 //  Created by Michael Montaque on 2/11/13.
 //  Copyright (c) 2013 Steven Berlanga. All rights reserved.
 //
+
 #import "VisitationObject.h"
 #import "BaseObject+Protected.h"
 #import "Visitation.h"
@@ -73,11 +74,6 @@
         onSuccessHandler(nil,[self createErrorWithDescription:MULTIPLE_VISIT_ERROR andErrorCodeNumber:kError inDomain:self->COMMONDATABASE]);
     }
    
-}
-
--(NSArray *)FindAllObjectsLocally
-{
-    return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:nil andSortByAttribute:PATIENTID]];
 }
 
 -(NSArray *)FindAllObjectsLocallyFromParentObject:(NSDictionary*)parentObject{

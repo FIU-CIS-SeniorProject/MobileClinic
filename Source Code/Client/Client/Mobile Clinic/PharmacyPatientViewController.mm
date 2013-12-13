@@ -9,10 +9,17 @@
 #import "MobileClinicFacade.h"
 #import "PharmacyPatientViewController.h"
 #import "PharmacyPatientViewControllerCell.h"
+#import "FaceDetector.h"
+#import <opencv2/highgui/cap_ios.h>
+#import "FaceObject.h"
+#import "DatabaseDriver.h"
+#import "DataR.h"
 
 @interface PharmacyPatientViewController ()<MCSwipeTableViewCellDelegate>{
     NSMutableArray* timeOfDayArray;
     NSMutableArray* prescriptionQueue;
+    UIImage *imageFR;
+    NSManagedObjectContext *context;
 }
 
 @end
@@ -223,6 +230,146 @@
     }
 
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+- (IBAction)verify:(id)sender
+{
+//[self resetData];
+FaceDetector *faceDetector =[[FaceDetector alloc]init];
+if (!facade) {
+    facade = [[CameraFacade alloc]initWithView:self];
+}
+
+// Added Indeterminate Loader
+//MBProgressHUD *progress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
+//[progress setMode:MBProgressHUDModeIndeterminate];
+
+[facade TakePictureWithCompletion:^(id img) {
+    
+    if(img) {
+        // Reduce Image Size
+        
+        imageFR = img;
+        cv::Mat image1 = [DataR cvMatFromUIImage:imageFR];
+        const std::vector<cv::Rect> faces = [faceDetector facesFromImage:image1];
+        if (faces.size() == 1) {
+            
+            
+            
+            NSDictionary* faceData = [[NSMutableDictionary alloc]init];
+            cv::Rect face = faces[0];
+            
+            // By default highlight the face in red, no match found
+            
+            cv::Mat faceData1 = [self pullStandardizedFace:face fromImage:image1];
+            NSData *serialized = [DataR serializeCvMat:faceData1];
+            MobileClinicFacade* mobileFacade = [[MobileClinicFacade alloc]init];
+            FaceObject *deleteObject = [[FaceObject alloc]initAndMakeNewDatabaseObject];
+            
+            context = deleteObject.database.managedObjectContext;
+            [self deleteAllFromDatabase];
+            [faceData setValue:serialized forKey:@"photo"];
+            [mobileFacade findPatientFace:faceData AndOnCompletion:^(NSArray *allObjectsFromSearch, NSError *error)
+             {
+                 if (allObjectsFromSearch) {
+                     if(allObjectsFromSearch.count>0)
+                     {
+                         NSDictionary* pat = [NSMutableDictionary dictionaryWithDictionary:[allObjectsFromSearch objectAtIndex:0]];
+                         NSString *fname = [pat objectForKey:@"firstName"];
+                         NSNumber *label = [pat objectForKey:@"label"];
+                         NSString *lname = [pat objectForKey:@"familyName"];
+                         
+                         
+                         double delayInSeconds = 1.5;
+                         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+                         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                             
+                             if([fname length] != 0 && [lname length]!=0 ){
+                                 
+                                 //[mobileFacade findPatientWithFirstName:fname orLastName:lname onCompletion:^(NSArray *allObjectsFromSearch1, NSError *error)
+                                 [mobileFacade findPatientWithLabel:label onCompletion:^(NSArray *allObjectsFromSearch1, NSError *error)
+                                  {
+                                      if(allObjectsFromSearch1){
+                                          NSString *fname1 = [pat objectForKey:@"firstName"];
+                                          NSString *lname1 = [pat objectForKey:@"familyName"];
+                                          NSString* messageString = [NSString stringWithFormat:@"First Name: %@ \n Family Name: %@",fname1,lname1];
+                                          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Match Found!"
+                                                                                          message:messageString
+                                                                                         delegate:nil
+                                                                                cancelButtonTitle:@"OK"
+                                                                                otherButtonTitles:nil];
+                                          [alert show];
+                                      }
+                                      else
+                                      {
+                                          NSLog(@"Imheerereereererere 1");
+                                      }
+                                      
+                                  }];
+                             }
+                             else
+                             {
+                                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Done"
+                                                                                 message:@"No match was found. Please try again!"
+                                                                                delegate:nil
+                                                                       cancelButtonTitle:@"OK"
+                                                                       otherButtonTitles:nil];
+                                 [alert show];
+                             }
+                         });
+                         
+                     }
+                     
+                     
+                 }else{
+                     NSLog(@"Imheerereereererere 1");
+                 }
+                 
+             }];
+        }//end size
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Done"
+                                                            message:@"No faces were found on the picure. Please try again"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            
+        }
+        
+    }//end img
+    
+    // [progress hide:YES];
+}];
+}
+- (cv::Mat)pullStandardizedFace:(cv::Rect)face fromImage:(cv::Mat&)image
+{
+    // Pull the grayscale face ROI out of the captured image
+    cv::Mat onlyTheFace;
+    //cv::cvtColor(image(face), onlyTheFace, CV_RGB2GRAY);
+    // Standardize the face to 100x100 pixels
+    cv::resize(image(face), onlyTheFace, cv::Size(100, 100), 0, 0);
+    return onlyTheFace;
+}
+- (void) deleteAllFromDatabase
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Faces" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    //fetchRequest.predicate = [NSPredicate predicateWithFormat:@"firstName ==nil AND familyName == nil"];
+    
+    //fetchRequest.predicate = [NSPredicate predicateWithFormat:@"firstName == %@ AND familyName == %@",fName,lName];
+    
+    NSError *error;
+    NSArray *listToBeDeleted = [context executeFetchRequest:fetchRequest error:&error];
+    
+    for(Face *c in listToBeDeleted)
+    {
+        [context deleteObject:c];
+    }
+    error = nil;
+    [context save:&error];
 }
 
 @end

@@ -43,7 +43,7 @@
 		0F134D3716F7DBA1003F4CE6 /* CurrentDiagnosisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0676916D7DDF000D177E7 /* CurrentDiagnosisViewController.m */; };
 		0F134D3816F7DBA1003F4CE6 /* DoctorPrescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46B11A2716DB1C0E008CD600 /* DoctorPrescriptionViewController.m */; };
 		0F134D3916F7DBA1003F4CE6 /* MedicineSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46B11A3516DB21E4008CD600 /* MedicineSearchViewController.m */; };
-		0F134D3B16F7DBA1003F4CE6 /* PharmacyPatientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DC75C5C16DAED47000F527A /* PharmacyPatientViewController.m */; };
+		0F134D3B16F7DBA1003F4CE6 /* PharmacyPatientViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DC75C5C16DAED47000F527A /* PharmacyPatientViewController.mm */; };
 		0F134D3C16F7DBA1003F4CE6 /* Users.m in Sources */ = {isa = PBXBuildFile; fileRef = EA27F9CB16DCB7C9008D7DA9 /* Users.m */; };
 		0F134D3D16F7DBA1003F4CE6 /* Patients.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC19C8116DEC07500B0B8DA /* Patients.m */; };
 		0F134D3E16F7DBA1003F4CE6 /* Visitation.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC19C7416DDB72A00B0B8DA /* Visitation.m */; };
@@ -105,6 +105,9 @@
 		46B11A4916DB6DA8008CD600 /* morning.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FB2B9C316DB54E100F334F7 /* morning.png */; };
 		46B11A4A16DB6DA8008CD600 /* night.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FB2B9C416DB54E100F334F7 /* night.png */; };
 		46B11A4B16DB6DA8008CD600 /* clinicLogo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0FFA78D816D1E64500F04E15 /* clinicLogo.jpg */; };
+		46E773D816CB0BFB00242454 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46E773D416CB0BFB00242454 /* libTestFlight.a */; };
+		46E773D916CB0BFB00242454 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 46E773D516CB0BFB00242454 /* README.md */; };
+		46E773DA16CB0BFB00242454 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 46E773D616CB0BFB00242454 /* release_notes.md */; };
 		6D0BC38E170372F200493FDE /* clinicLogo72.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BC38D170372F200493FDE /* clinicLogo72.png */; };
 		6D0BC390170372FC00493FDE /* clinicLogo144.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BC38F170372FC00493FDE /* clinicLogo144.png */; };
 		6D0D701E16D97EE4005A8C1F /* PreviousVisitsTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0D701D16D97EE4005A8C1F /* PreviousVisitsTableCell.m */; };
@@ -193,7 +196,7 @@
 		6D747C9916FE355600CE3F71 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D747C9816FE355600CE3F71 /* ExternalAccessory.framework */; };
 		6DB0676A16D7DDF000D177E7 /* CurrentDiagnosisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0676916D7DDF000D177E7 /* CurrentDiagnosisViewController.m */; };
 		6DB5994C16EA463D0016AE82 /* PatientQueueTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DB5994B16EA463D0016AE82 /* PatientQueueTableCell.m */; };
-		6DC75C5D16DAED47000F527A /* PharmacyPatientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DC75C5C16DAED47000F527A /* PharmacyPatientViewController.m */; };
+		6DC75C5D16DAED47000F527A /* PharmacyPatientViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DC75C5C16DAED47000F527A /* PharmacyPatientViewController.mm */; };
 		6DD5D8F316D313E7007C3F74 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD5D8F216D313E7007C3F74 /* LoginViewController.m */; };
 		6DD5D8FC16D3155D007C3F74 /* TriagePatientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD5D8FB16D3155D007C3F74 /* TriagePatientViewController.m */; };
 		6DD5D8FF16D31580007C3F74 /* RegisterPatientViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DD5D8FE16D3157F007C3F74 /* RegisterPatientViewController.mm */; };
@@ -229,26 +232,19 @@
 		89E022291816F4C100CD5C0C /* FaceDetector.mm in Sources */ = {isa = PBXBuildFile; fileRef = 89E022271816F4C100CD5C0C /* FaceDetector.mm */; };
 		89E0222F1816F59F00CD5C0C /* FaceRecognizer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 89E0222E1816F59F00CD5C0C /* FaceRecognizer.mm */; };
 		89E022301816F59F00CD5C0C /* FaceRecognizer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 89E0222E1816F59F00CD5C0C /* FaceRecognizer.mm */; };
+		89F996811858240500262FB4 /* libopencv_calib3d.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F996761858240500262FB4 /* libopencv_calib3d.2.4.6.dylib */; };
+		89F996821858240500262FB4 /* libopencv_contrib.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F996771858240500262FB4 /* libopencv_contrib.2.4.6.dylib */; };
+		89F996831858240500262FB4 /* libopencv_core.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F996781858240500262FB4 /* libopencv_core.2.4.6.dylib */; };
+		89F996841858240500262FB4 /* libopencv_features2d.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F996791858240500262FB4 /* libopencv_features2d.2.4.6.dylib */; };
+		89F996851858240500262FB4 /* libopencv_flann.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F9967A1858240500262FB4 /* libopencv_flann.2.4.6.dylib */; };
+		89F996861858240500262FB4 /* libopencv_highgui.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F9967B1858240500262FB4 /* libopencv_highgui.2.4.6.dylib */; };
+		89F996871858240500262FB4 /* libopencv_imgproc.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F9967C1858240500262FB4 /* libopencv_imgproc.2.4.6.dylib */; };
+		89F996881858240500262FB4 /* libopencv_objdetect.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F9967D1858240500262FB4 /* libopencv_objdetect.2.4.6.dylib */; };
+		89F996891858240500262FB4 /* libopencv_photo.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F9967E1858240500262FB4 /* libopencv_photo.2.4.6.dylib */; };
+		89F9968A1858240500262FB4 /* libopencv_stitching.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F9967F1858240500262FB4 /* libopencv_stitching.2.4.6.dylib */; };
+		89F9968B1858240500262FB4 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F996801858240500262FB4 /* opencv2.framework */; };
 		8C323F4D1852FAD6007B06F3 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C323F4C1852FAD5007B06F3 /* opencv2.framework */; };
 		8C323F501852FB3F007B06F3 /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C323F4F1852FB3F007B06F3 /* NSDataAdditions.m */; };
-		8C3B62EE185A6E7C007D95A1 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C3B62E7185A6E7C007D95A1 /* libTestFlight.a */; };
-		8C3B62EF185A6E7C007D95A1 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 8C3B62E8185A6E7C007D95A1 /* README.md */; };
-		8C3B62F0185A6E7C007D95A1 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 8C3B62E8185A6E7C007D95A1 /* README.md */; };
-		8C3B62F1185A6E7C007D95A1 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 8C3B62E9185A6E7C007D95A1 /* release_notes.md */; };
-		8C3B62F2185A6E7C007D95A1 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 8C3B62E9185A6E7C007D95A1 /* release_notes.md */; };
-		8C3B62F3185A6F0A007D95A1 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C3B62E7185A6E7C007D95A1 /* libTestFlight.a */; };
-		8C5C6823185A4EC70005247D /* libopencv_calib3d.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C5C6818185A4EC70005247D /* libopencv_calib3d.2.4.6.dylib */; };
-		8C5C6824185A4EC70005247D /* libopencv_contrib.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C5C6819185A4EC70005247D /* libopencv_contrib.2.4.6.dylib */; };
-		8C5C6825185A4EC70005247D /* libopencv_core.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C5C681A185A4EC70005247D /* libopencv_core.2.4.6.dylib */; };
-		8C5C6826185A4EC70005247D /* libopencv_features2d.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C5C681B185A4EC70005247D /* libopencv_features2d.2.4.6.dylib */; };
-		8C5C6827185A4EC70005247D /* libopencv_flann.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C5C681C185A4EC70005247D /* libopencv_flann.2.4.6.dylib */; };
-		8C5C6828185A4EC70005247D /* libopencv_highgui.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C5C681D185A4EC70005247D /* libopencv_highgui.2.4.6.dylib */; };
-		8C5C6829185A4EC70005247D /* libopencv_imgproc.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C5C681E185A4EC70005247D /* libopencv_imgproc.2.4.6.dylib */; };
-		8C5C682A185A4EC70005247D /* libopencv_objdetect.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C5C681F185A4EC70005247D /* libopencv_objdetect.2.4.6.dylib */; };
-		8C5C682B185A4EC70005247D /* libopencv_photo.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C5C6820185A4EC70005247D /* libopencv_photo.2.4.6.dylib */; };
-		8C5C682C185A4EC70005247D /* libopencv_stitching.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C5C6821185A4EC70005247D /* libopencv_stitching.2.4.6.dylib */; };
-		8C5C682D185A4EC70005247D /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C5C6822185A4EC70005247D /* opencv2.framework */; };
-		8CC2645D185A501C00FA76BD /* libiOSLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CC2645C185A501C00FA76BD /* libiOSLibrary.a */; };
 		EA09329B16F8F77600536DF3 /* PatientFile.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = EAADC01A16E05554009E7AF9 /* PatientFile.json */; };
 		EA0932A716FAD85200536DF3 /* User.json in Resources */ = {isa = PBXBuildFile; fileRef = EA0932A516FAD85100536DF3 /* User.json */; };
 		EA0932A816FAD96E00536DF3 /* User.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = EA0932A516FAD85100536DF3 /* User.json */; };
@@ -649,7 +645,7 @@
 		6DB5994A16EA463D0016AE82 /* PatientQueueTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatientQueueTableCell.h; sourceTree = "<group>"; };
 		6DB5994B16EA463D0016AE82 /* PatientQueueTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatientQueueTableCell.m; sourceTree = "<group>"; };
 		6DC75C5B16DAED47000F527A /* PharmacyPatientViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PharmacyPatientViewController.h; sourceTree = "<group>"; };
-		6DC75C5C16DAED47000F527A /* PharmacyPatientViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PharmacyPatientViewController.m; sourceTree = "<group>"; };
+		6DC75C5C16DAED47000F527A /* PharmacyPatientViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PharmacyPatientViewController.mm; sourceTree = "<group>"; };
 		6DD5D8F116D313E7007C3F74 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		6DD5D8F216D313E7007C3F74 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		6DD5D8FA16D3155D007C3F74 /* TriagePatientViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TriagePatientViewController.h; sourceTree = "<group>"; };
@@ -692,27 +688,20 @@
 		89E022271816F4C100CD5C0C /* FaceDetector.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FaceDetector.mm; sourceTree = "<group>"; };
 		89E0222D1816F59F00CD5C0C /* FaceRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceRecognizer.h; sourceTree = "<group>"; };
 		89E0222E1816F59F00CD5C0C /* FaceRecognizer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FaceRecognizer.mm; sourceTree = "<group>"; };
+		89F996761858240500262FB4 /* libopencv_calib3d.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_calib3d.2.4.6.dylib; path = ../../FRLibraries/libopencv_calib3d.2.4.6.dylib; sourceTree = "<group>"; };
+		89F996771858240500262FB4 /* libopencv_contrib.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_contrib.2.4.6.dylib; path = ../../FRLibraries/libopencv_contrib.2.4.6.dylib; sourceTree = "<group>"; };
+		89F996781858240500262FB4 /* libopencv_core.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_core.2.4.6.dylib; path = ../../FRLibraries/libopencv_core.2.4.6.dylib; sourceTree = "<group>"; };
+		89F996791858240500262FB4 /* libopencv_features2d.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_features2d.2.4.6.dylib; path = ../../FRLibraries/libopencv_features2d.2.4.6.dylib; sourceTree = "<group>"; };
+		89F9967A1858240500262FB4 /* libopencv_flann.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_flann.2.4.6.dylib; path = ../../FRLibraries/libopencv_flann.2.4.6.dylib; sourceTree = "<group>"; };
+		89F9967B1858240500262FB4 /* libopencv_highgui.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_highgui.2.4.6.dylib; path = ../../FRLibraries/libopencv_highgui.2.4.6.dylib; sourceTree = "<group>"; };
+		89F9967C1858240500262FB4 /* libopencv_imgproc.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_imgproc.2.4.6.dylib; path = ../../FRLibraries/libopencv_imgproc.2.4.6.dylib; sourceTree = "<group>"; };
+		89F9967D1858240500262FB4 /* libopencv_objdetect.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_objdetect.2.4.6.dylib; path = ../../FRLibraries/libopencv_objdetect.2.4.6.dylib; sourceTree = "<group>"; };
+		89F9967E1858240500262FB4 /* libopencv_photo.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_photo.2.4.6.dylib; path = ../../FRLibraries/libopencv_photo.2.4.6.dylib; sourceTree = "<group>"; };
+		89F9967F1858240500262FB4 /* libopencv_stitching.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_stitching.2.4.6.dylib; path = ../../FRLibraries/libopencv_stitching.2.4.6.dylib; sourceTree = "<group>"; };
+		89F996801858240500262FB4 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ../../FRLibraries/opencv2.framework; sourceTree = "<group>"; };
 		8C323F4C1852FAD5007B06F3 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		8C323F4E1852FB3F007B06F3 /* NSDataAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataAdditions.h; sourceTree = "<group>"; };
 		8C323F4F1852FB3F007B06F3 /* NSDataAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataAdditions.m; sourceTree = "<group>"; };
-		8C3B62E7185A6E7C007D95A1 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
-		8C3B62E8185A6E7C007D95A1 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		8C3B62E9185A6E7C007D95A1 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
-		8C3B62EA185A6E7C007D95A1 /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
-		8C3B62EB185A6E7C007D95A1 /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
-		8C3B62EC185A6E7C007D95A1 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
-		8C5C6818185A4EC70005247D /* libopencv_calib3d.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_calib3d.2.4.6.dylib; path = "../../Facial Recognition Libraries/libopencv_calib3d.2.4.6.dylib"; sourceTree = "<group>"; };
-		8C5C6819185A4EC70005247D /* libopencv_contrib.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_contrib.2.4.6.dylib; path = "../../Facial Recognition Libraries/libopencv_contrib.2.4.6.dylib"; sourceTree = "<group>"; };
-		8C5C681A185A4EC70005247D /* libopencv_core.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_core.2.4.6.dylib; path = "../../Facial Recognition Libraries/libopencv_core.2.4.6.dylib"; sourceTree = "<group>"; };
-		8C5C681B185A4EC70005247D /* libopencv_features2d.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_features2d.2.4.6.dylib; path = "../../Facial Recognition Libraries/libopencv_features2d.2.4.6.dylib"; sourceTree = "<group>"; };
-		8C5C681C185A4EC70005247D /* libopencv_flann.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_flann.2.4.6.dylib; path = "../../Facial Recognition Libraries/libopencv_flann.2.4.6.dylib"; sourceTree = "<group>"; };
-		8C5C681D185A4EC70005247D /* libopencv_highgui.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_highgui.2.4.6.dylib; path = "../../Facial Recognition Libraries/libopencv_highgui.2.4.6.dylib"; sourceTree = "<group>"; };
-		8C5C681E185A4EC70005247D /* libopencv_imgproc.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_imgproc.2.4.6.dylib; path = "../../Facial Recognition Libraries/libopencv_imgproc.2.4.6.dylib"; sourceTree = "<group>"; };
-		8C5C681F185A4EC70005247D /* libopencv_objdetect.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_objdetect.2.4.6.dylib; path = "../../Facial Recognition Libraries/libopencv_objdetect.2.4.6.dylib"; sourceTree = "<group>"; };
-		8C5C6820185A4EC70005247D /* libopencv_photo.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_photo.2.4.6.dylib; path = "../../Facial Recognition Libraries/libopencv_photo.2.4.6.dylib"; sourceTree = "<group>"; };
-		8C5C6821185A4EC70005247D /* libopencv_stitching.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_stitching.2.4.6.dylib; path = "../../Facial Recognition Libraries/libopencv_stitching.2.4.6.dylib"; sourceTree = "<group>"; };
-		8C5C6822185A4EC70005247D /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = "../../Facial Recognition Libraries/opencv2.framework"; sourceTree = "<group>"; };
-		8CC2645C185A501C00FA76BD /* libiOSLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libiOSLibrary.a; path = lib/libiOSLibrary.a; sourceTree = "<group>"; };
 		EA0932A516FAD85100536DF3 /* User.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = User.json; sourceTree = "<group>"; };
 		EA15ED0517282F2F00410661 /* StationSwitcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StationSwitcher.h; path = ../StationSwitcher.h; sourceTree = "<group>"; };
 		EA15ED0617282F2F00410661 /* StationSwitcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StationSwitcher.m; path = ../StationSwitcher.m; sourceTree = "<group>"; };
@@ -889,19 +878,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89F996811858240500262FB4 /* libopencv_calib3d.2.4.6.dylib in Frameworks */,
+				89F996821858240500262FB4 /* libopencv_contrib.2.4.6.dylib in Frameworks */,
+				89F996831858240500262FB4 /* libopencv_core.2.4.6.dylib in Frameworks */,
+				89F996841858240500262FB4 /* libopencv_features2d.2.4.6.dylib in Frameworks */,
+				89F996851858240500262FB4 /* libopencv_flann.2.4.6.dylib in Frameworks */,
+				89F996861858240500262FB4 /* libopencv_highgui.2.4.6.dylib in Frameworks */,
+				89F996871858240500262FB4 /* libopencv_imgproc.2.4.6.dylib in Frameworks */,
+				89F996881858240500262FB4 /* libopencv_objdetect.2.4.6.dylib in Frameworks */,
+				89F996891858240500262FB4 /* libopencv_photo.2.4.6.dylib in Frameworks */,
+				89F9968A1858240500262FB4 /* libopencv_stitching.2.4.6.dylib in Frameworks */,
+				89F9968B1858240500262FB4 /* opencv2.framework in Frameworks */,
 				893FCE7018271DD70054402A /* libsqlite3.0.dylib in Frameworks */,
-				8C5C6823185A4EC70005247D /* libopencv_calib3d.2.4.6.dylib in Frameworks */,
-				8C5C6824185A4EC70005247D /* libopencv_contrib.2.4.6.dylib in Frameworks */,
-				8C5C6825185A4EC70005247D /* libopencv_core.2.4.6.dylib in Frameworks */,
-				8C5C6826185A4EC70005247D /* libopencv_features2d.2.4.6.dylib in Frameworks */,
-				8C5C6827185A4EC70005247D /* libopencv_flann.2.4.6.dylib in Frameworks */,
-				8C5C6828185A4EC70005247D /* libopencv_highgui.2.4.6.dylib in Frameworks */,
-				8C5C6829185A4EC70005247D /* libopencv_imgproc.2.4.6.dylib in Frameworks */,
-				8C5C682A185A4EC70005247D /* libopencv_objdetect.2.4.6.dylib in Frameworks */,
-				8C5C682B185A4EC70005247D /* libopencv_photo.2.4.6.dylib in Frameworks */,
-				8C5C682C185A4EC70005247D /* libopencv_stitching.2.4.6.dylib in Frameworks */,
-				8C3B62F3185A6F0A007D95A1 /* libTestFlight.a in Frameworks */,
-				8C5C682D185A4EC70005247D /* opencv2.framework in Frameworks */,
 				893FCE6E18271D1C0054402A /* libsqlite3.dylib in Frameworks */,
 				89454FDF1820768A00E93504 /* CoreVideo.framework in Frameworks */,
 				89454FD71820726E00E93504 /* AssetsLibrary.framework in Frameworks */,
@@ -918,7 +906,7 @@
 				467740F916BD931E002FD4A5 /* UIKit.framework in Frameworks */,
 				467740FB16BD931E002FD4A5 /* Foundation.framework in Frameworks */,
 				467740FD16BD931E002FD4A5 /* CoreGraphics.framework in Frameworks */,
-				8CC2645D185A501C00FA76BD /* libiOSLibrary.a in Frameworks */,
+				46E773D816CB0BFB00242454 /* libTestFlight.a in Frameworks */,
 				6D747BE816FE329400CE3F71 /* libiOSLibrary.a in Frameworks */,
 				8C323F4D1852FAD6007B06F3 /* opencv2.framework in Frameworks */,
 				89454FD81820756800E93504 /* AVFoundation.framework in Frameworks */,
@@ -946,7 +934,6 @@
 				EA7CDC6C16ED0AB9005A9070 /* Accelerate.framework in Frameworks */,
 				EA7CDC6D16ED0AB9005A9070 /* Security.framework in Frameworks */,
 				EA6F747516E8181F001FD385 /* UIKit.framework in Frameworks */,
-				8C3B62EE185A6E7C007D95A1 /* libTestFlight.a in Frameworks */,
 				EA6F747616E8181F001FD385 /* Foundation.framework in Frameworks */,
 				EA6F747716E8181F001FD385 /* CoreGraphics.framework in Frameworks */,
 				EAEA9E8B170A7785005F1202 /* libiOSLibrary.a in Frameworks */,
@@ -1054,8 +1041,17 @@
 		467740EC16BD931E002FD4A5 = {
 			isa = PBXGroup;
 			children = (
-				8C3B62E6185A6E7C007D95A1 /* TestFlightSDK2.0.2 */,
-				8CC2645C185A501C00FA76BD /* libiOSLibrary.a */,
+				89F996761858240500262FB4 /* libopencv_calib3d.2.4.6.dylib */,
+				89F996771858240500262FB4 /* libopencv_contrib.2.4.6.dylib */,
+				89F996781858240500262FB4 /* libopencv_core.2.4.6.dylib */,
+				89F996791858240500262FB4 /* libopencv_features2d.2.4.6.dylib */,
+				89F9967A1858240500262FB4 /* libopencv_flann.2.4.6.dylib */,
+				89F9967B1858240500262FB4 /* libopencv_highgui.2.4.6.dylib */,
+				89F9967C1858240500262FB4 /* libopencv_imgproc.2.4.6.dylib */,
+				89F9967D1858240500262FB4 /* libopencv_objdetect.2.4.6.dylib */,
+				89F9967E1858240500262FB4 /* libopencv_photo.2.4.6.dylib */,
+				89F9967F1858240500262FB4 /* libopencv_stitching.2.4.6.dylib */,
+				89F996801858240500262FB4 /* opencv2.framework */,
 				893FCE6D18271D1C0054402A /* libsqlite3.dylib */,
 				893FCE6F18271DD70054402A /* libsqlite3.0.dylib */,
 				8C323F4E1852FB3F007B06F3 /* NSDataAdditions.h */,
@@ -1095,17 +1091,6 @@
 		467740F716BD931E002FD4A5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8C5C6818185A4EC70005247D /* libopencv_calib3d.2.4.6.dylib */,
-				8C5C6819185A4EC70005247D /* libopencv_contrib.2.4.6.dylib */,
-				8C5C681A185A4EC70005247D /* libopencv_core.2.4.6.dylib */,
-				8C5C681B185A4EC70005247D /* libopencv_features2d.2.4.6.dylib */,
-				8C5C681C185A4EC70005247D /* libopencv_flann.2.4.6.dylib */,
-				8C5C681D185A4EC70005247D /* libopencv_highgui.2.4.6.dylib */,
-				8C5C681E185A4EC70005247D /* libopencv_imgproc.2.4.6.dylib */,
-				8C5C681F185A4EC70005247D /* libopencv_objdetect.2.4.6.dylib */,
-				8C5C6820185A4EC70005247D /* libopencv_photo.2.4.6.dylib */,
-				8C5C6821185A4EC70005247D /* libopencv_stitching.2.4.6.dylib */,
-				8C5C6822185A4EC70005247D /* opencv2.framework */,
 				6D747C9816FE355600CE3F71 /* ExternalAccessory.framework */,
 				6D747C9616FE354F00CE3F71 /* AudioToolbox.framework */,
 				EACEB53B16BECEB700685AE8 /* Accelerate.framework */,
@@ -1211,7 +1196,7 @@
 				EA54D9861739010200BD23FE /* PharmacyQueueController.h */,
 				EA54D9871739010300BD23FE /* PharmacyQueueController.m */,
 				6DC75C5B16DAED47000F527A /* PharmacyPatientViewController.h */,
-				6DC75C5C16DAED47000F527A /* PharmacyPatientViewController.m */,
+				6DC75C5C16DAED47000F527A /* PharmacyPatientViewController.mm */,
 			);
 			name = Pharmacy;
 			sourceTree = "<group>";
@@ -1402,19 +1387,6 @@
 				89DA413C183DACD500C096BB /* RecognitionObject.m */,
 			);
 			path = "Face Recognition";
-			sourceTree = "<group>";
-		};
-		8C3B62E6185A6E7C007D95A1 /* TestFlightSDK2.0.2 */ = {
-			isa = PBXGroup;
-			children = (
-				8C3B62E7185A6E7C007D95A1 /* libTestFlight.a */,
-				8C3B62E8185A6E7C007D95A1 /* README.md */,
-				8C3B62E9185A6E7C007D95A1 /* release_notes.md */,
-				8C3B62EA185A6E7C007D95A1 /* TestFlight+AsyncLogging.h */,
-				8C3B62EB185A6E7C007D95A1 /* TestFlight+ManualSessions.h */,
-				8C3B62EC185A6E7C007D95A1 /* TestFlight.h */,
-			);
-			path = TestFlightSDK2.0.2;
 			sourceTree = "<group>";
 		};
 		EA6F747816E8181F001FD385 /* MobileClinicTests */ = {
@@ -1913,6 +1885,8 @@
 				4614288A16BF7F2900802410 /* userImage.jpeg in Resources */,
 				EA38569F16C0844C00FA83FD /* black-ui-kit.png in Resources */,
 				EA3856A116C089AF00FA83FD /* clearSearchBar.png in Resources */,
+				46E773D916CB0BFB00242454 /* README.md in Resources */,
+				46E773DA16CB0BFB00242454 /* release_notes.md in Resources */,
 				0F9E6BA616D17FDB008AFB49 /* NewStoryboard.storyboard in Resources */,
 				46B11A4616DB693F008CD600 /* MedicineSearchResultView.xib in Resources */,
 				EA7CDC2616ECF700005A9070 /* RunTests.sh in Resources */,
@@ -1922,8 +1896,6 @@
 				6D747C4F16FE32A100CE3F71 /* PBPractice4.xib in Resources */,
 				6D747C5016FE32A100CE3F71 /* PBPractice3.xib in Resources */,
 				6D747C5116FE32A100CE3F71 /* PBDisconnectionViewController.xib in Resources */,
-				8C3B62EF185A6E7C007D95A1 /* README.md in Resources */,
-				8C3B62F1185A6E7C007D95A1 /* release_notes.md in Resources */,
 				6D747C5216FE32A100CE3F71 /* right_index.png in Resources */,
 				6D747C5316FE32A100CE3F71 /* left_index.png in Resources */,
 				6D747C5416FE32A100CE3F71 /* greenbackground.png in Resources */,
@@ -2028,7 +2000,6 @@
 				EA0932A716FAD85200536DF3 /* User.json in Resources */,
 				EAC84DA51730E12500E7027B /* ipadNurse.png in Resources */,
 				EAC84DA71730E12500E7027B /* mcAfrica.png in Resources */,
-				8C3B62F2185A6E7C007D95A1 /* release_notes.md in Resources */,
 				EAC84DA91730E12500E7027B /* mcAfrica2.png in Resources */,
 				EAC84DAC1730E58200E7027B /* kids.png in Resources */,
 				EAC84DAF1730E93A00E7027B /* fields.png in Resources */,
@@ -2038,7 +2009,6 @@
 				EAC84DC71731D3BD00E7027B /* clock@2x.png in Resources */,
 				EAC84DC91731D3BD00E7027B /* cross.png in Resources */,
 				EAC84DCB1731D3BD00E7027B /* cross@2x.png in Resources */,
-				8C3B62F0185A6E7C007D95A1 /* README.md in Resources */,
 				EAC84DCD1731D3BD00E7027B /* list.png in Resources */,
 				EAC84DCF1731D3BD00E7027B /* list@2x.png in Resources */,
 				EAC84DD21731DEC000E7027B /* smoothNoise.jpg in Resources */,
@@ -2119,7 +2089,7 @@
 				6D0D701E16D97EE4005A8C1F /* PreviousVisitsTableCell.m in Sources */,
 				6D522C9816DADAA3004FFC21 /* CurrentDiagnosisTableCell.m in Sources */,
 				8C323F501852FB3F007B06F3 /* NSDataAdditions.m in Sources */,
-				6DC75C5D16DAED47000F527A /* PharmacyPatientViewController.m in Sources */,
+				6DC75C5D16DAED47000F527A /* PharmacyPatientViewController.mm in Sources */,
 				EA9E98E616DC475D002BEB87 /* PrescriptionObject.m in Sources */,
 				EA9E98E916DC58AF002BEB87 /* Prescription.m in Sources */,
 				46B11A2816DB1C0E008CD600 /* DoctorPrescriptionViewController.m in Sources */,
@@ -2220,7 +2190,7 @@
 				0F134D3716F7DBA1003F4CE6 /* CurrentDiagnosisViewController.m in Sources */,
 				0F134D3816F7DBA1003F4CE6 /* DoctorPrescriptionViewController.m in Sources */,
 				0F134D3916F7DBA1003F4CE6 /* MedicineSearchViewController.m in Sources */,
-				0F134D3B16F7DBA1003F4CE6 /* PharmacyPatientViewController.m in Sources */,
+				0F134D3B16F7DBA1003F4CE6 /* PharmacyPatientViewController.mm in Sources */,
 				0F134D3C16F7DBA1003F4CE6 /* Users.m in Sources */,
 				0F134D3D16F7DBA1003F4CE6 /* Patients.m in Sources */,
 				0F134D3E16F7DBA1003F4CE6 /* Visitation.m in Sources */,
@@ -2373,11 +2343,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\\\\\"$(SRCROOT)/../../..\\\\\\\"",
+					"\\\"$(SRCROOT)/../../..\\\"",
 					"/Users/jamesmendez/Documents/Senior\\ Project/MobileClinic\\ -\\ GIT/Source\\ Code/Client/Client",
-					"\\\"$(SRCROOT)/../../MC-EMR/mobile-clinic-electronic-medical-records-client/Facial\\ Recognition\\ Libraries\\\"",
-					"\\\"$(SRCROOT)/../../FRLibraries\\\"",
-					"/Users/jamesmendez/Documents/Senior\\ Project/MobileClinic\\ -\\ GIT/Source\\ Code/Facial\\ Recognition\\ Libraries",
+					"\"$(SRCROOT)/../../MC-EMR/mobile-clinic-electronic-medical-records-client/Facial Recognition Libraries\"",
+					"\"$(SRCROOT)/../../FRLibraries\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2390,12 +2359,8 @@
 					"\"$(SRCROOT)/lib\"",
 					"\"$(SRCROOT)/../../../opencv2.framework\"",
 					/opt/local/lib,
-					"\\\\\\\\\\\\\\\"$(SRCROOT)/../../MC-EMR/mobile-clinic-electronic-medical-records-client/Facial\\\\\\\\\\\\\\ Recognition\\\\\\\\\\\\\\ Libraries\\\\\\\\\\\\\\\"",
-					"\\\\\\\\\\\\\\\"$(SRCROOT)/../../FRLibraries\\\\\\\\\\\\\\\"",
-					"/Users/jamesmendez/Documents/Senior\\ Project/MobileClinic\\ -\\ GIT/Source\\ Code/Facial\\ Recognition\\ Libraries",
-					"/Users/jamesmendez/Documents/Senior\\ Project/MobileClinic\\ -\\ GIT/Source\\ Code/Client/Client/TestFlightSDK1.1",
-					"/Users/jamesmendez/Documents/Senior\\ Project/MobileClinic\\ -\\ GIT/Source\\ Code/Client/Client/lib",
-					"/Users/jamesmendez/Documents/Senior\\ Project/MobileClinic\\ -\\ GIT/Source\\ Code/Client/Client/TestFlightSDK2.0.2",
+					"\"$(SRCROOT)/../../MC-EMR/mobile-clinic-electronic-medical-records-client/Facial Recognition Libraries\"",
+					"\"$(SRCROOT)/../../FRLibraries\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -2404,8 +2369,9 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 2;
-				USER_HEADER_SEARCH_PATHS = "$(inherited)";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2420,11 +2386,10 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\\\\\"$(SRCROOT)/../../..\\\\\\\"",
+					"\\\"$(SRCROOT)/../../..\\\"",
 					"/Users/jamesmendez/Documents/Senior\\ Project/MobileClinic\\ -\\ GIT/Source\\ Code/Client/Client",
-					"\\\"$(SRCROOT)/../../MC-EMR/mobile-clinic-electronic-medical-records-client/Facial\\ Recognition\\ Libraries\\\"",
-					"\\\"$(SRCROOT)/../../FRLibraries\\\"",
-					"/Users/jamesmendez/Documents/Senior\\ Project/MobileClinic\\ -\\ GIT/Source\\ Code/Facial\\ Recognition\\ Libraries",
+					"\"$(SRCROOT)/../../MC-EMR/mobile-clinic-electronic-medical-records-client/Facial Recognition Libraries\"",
+					"\"$(SRCROOT)/../../FRLibraries\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2432,22 +2397,19 @@
 				INFOPLIST_FILE = "Mobile Clinic/Mobile Clinic-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
-					"\"$(SRCROOT)/TestFlightSDK2.0.2\"",
-					"\\\\\\\\\\\\\\\"$(SRCROOT)/lib\\\\\\\\\\\\\\\"",
-					"\\\\\\\\\\\\\\\"$(SRCROOT)/../../../opencv2.framework\\\\\\\\\\\\\\\"",
+					"\"$(SRCROOT)/TestFlightSDK1.1\"",
+					"\"$(SRCROOT)/lib\"",
+					"\"$(SRCROOT)/../../../opencv2.framework\"",
 					/opt/local/lib,
-					"\\\\\\\\\\\\\\\"$(SRCROOT)/../../MC-EMR/mobile-clinic-electronic-medical-records-client/Facial\\\\\\\\\\\\\\ Recognition\\\\\\\\\\\\\\ Libraries\\\\\\\\\\\\\\\"",
-					"\\\\\\\\\\\\\\\"$(SRCROOT)/../../FRLibraries\\\\\\\\\\\\\\\"",
-					"/Users/jamesmendez/Documents/Senior\\ Project/MobileClinic\\ -\\ GIT/Source\\ Code/Facial\\ Recognition\\ Libraries",
-					"/Users/jamesmendez/Documents/Senior\\ Project/MobileClinic\\ -\\ GIT/Source\\ Code/Client/Client/TestFlightSDK1.1",
-					"/Users/jamesmendez/Documents/Senior\\ Project/MobileClinic\\ -\\ GIT/Source\\ Code/Client/Client/lib",
-					"/Users/jamesmendez/Documents/Senior\\ Project/MobileClinic\\ -\\ GIT/Source\\ Code/Client/Client/TestFlightSDK2.0.2",
+					"\"$(SRCROOT)/../../MC-EMR/mobile-clinic-electronic-medical-records-client/Facial Recognition Libraries\"",
+					"\"$(SRCROOT)/../../FRLibraries\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 2;
-				USER_HEADER_SEARCH_PATHS = "$(inherited)";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -2466,18 +2428,19 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MobileClinicTests/MobileClinicTests-Prefix.pch";
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/MobileClinicTests\" /** $(SRCROOT) \"$(SRCROOT)/TestFlightSDK1.1\"";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/MobileClinicTests\" /** $(SRCROOT) \"$(SRCROOT)/TestFlightSDK1.1\"",
+				);
 				INFOPLIST_FILE = "MobileClinicTests/MobileClinicTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FRANK_LIBRARY_SEARCH_PATHS)",
-					"\\\"$(SRCROOT)/TestFlightSDK1.1\\\"",
+					"\"$(SRCROOT)/TestFlightSDK1.1\"",
 					"$(SRCROOT)",
-					"\\\"$(SRCROOT)/lib\\\"",
-					"\\\"$(SRCROOT)/../../../opencv2.framework\\\"",
+					"\"$(SRCROOT)/lib\"",
+					"\"$(SRCROOT)/../../../opencv2.framework\"",
 					/opt/local/lib,
-					"/Users/jamesmendez/Documents/Senior\\ Project/MobileClinic\\ -\\ GIT/Source\\ Code/Client/Client/TestFlightSDK2.0.2",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
@@ -2509,16 +2472,17 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MobileClinicTests/MobileClinicTests-Prefix.pch";
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/MobileClinicTests\" /** $(SRCROOT) \"$(SRCROOT)/TestFlightSDK1.1\"";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/MobileClinicTests\" /** $(SRCROOT) \"$(SRCROOT)/TestFlightSDK1.1\"",
+				);
 				INFOPLIST_FILE = "MobileClinicTests/MobileClinicTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)/TestFlightSDK1.1\\\"",
-					"\\\"$(SRCROOT)/lib\\\"",
-					"\\\"$(SRCROOT)/../../../opencv2.framework\\\"",
+					"\"$(SRCROOT)/TestFlightSDK1.1\"",
+					"\"$(SRCROOT)/lib\"",
+					"\"$(SRCROOT)/../../../opencv2.framework\"",
 					/opt/local/lib,
-					"/Users/jamesmendez/Documents/Senior\\ Project/MobileClinic\\ -\\ GIT/Source\\ Code/Client/Client/TestFlightSDK2.0.2",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (

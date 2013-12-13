@@ -41,7 +41,6 @@
  *
  */
 -(NSArray*) FindAllOpenVisitsLocally;
--(NSArray*) FindAllObjectsLocally;
 /**
  *
  */

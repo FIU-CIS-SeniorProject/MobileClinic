@@ -11,7 +11,7 @@
 #import "DoctorPrescriptionViewController.h"
 #import "MedicineSearchViewController.h"
 #import "StationViewHandlerProtocol.h"
-
+#import "CameraFacade.h"
 #import "PrescriptionObject.h"
 #import "MedicineSearchCell.h"
 
@@ -21,10 +21,13 @@
 
 @end
 
-@interface PharmacyPatientViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>{
+@interface PharmacyPatientViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+{
+    CameraFacade *facade;
 }
 
 @property (strong, nonatomic) NSMutableDictionary * patientData;
+- (IBAction)verify:(id)sender;
 
 @property (strong, nonatomic) NSMutableArray * prescriptions;
 
