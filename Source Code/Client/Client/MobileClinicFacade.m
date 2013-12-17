@@ -60,25 +60,6 @@
             Response(object,error);
         }
     }];
-    
-    //[self CommonCommandObject:face ForCreating:faceInfo bindedToParentObjectToUpdate:nil withResults:Response];
-    //FaceObject* facePic = [[FaceObject alloc] initAndMakeNewDatabaseObject]; //initAndMakeNewDatabaseObject];
-    //NSLog(@"llegue aquiiiiiiiiiiiiii");
-    /*if (![[faceInfo objectForKey:ISOPEN]boolValue]) {
-        
-        NSMutableDictionary* openFace = [[NSMutableDictionary alloc]initWithDictionary:faceInfo];
-        // Set patient open status
-        [openFace setValue:[NSNumber numberWithBool:!checkout] forKey:ISOPEN];
-        
-        [self CommonCommandObject:[[FaceObject alloc]init] ShouldLock:NO CommonUpdate:openFace withResults:^(NSDictionary *object, NSError *error) {
-            if (error.code > kErrorDisconnected) {
-                Response(object,error);
-            }}];
-        
-    }else{
-        Response(nil,[self createErrorWithDescription:MULTIPLE_VISIT_ERROR andErrorCodeNumber:kError inDomain:@"MCF"]);
-    }*/
-    
 }
 
 // creates a new prescription for a given visit
