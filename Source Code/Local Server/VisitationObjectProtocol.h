@@ -16,7 +16,7 @@
 #define CONDITIONTITLE  @"conditionTitle"
 #define DTITLE          @"diagnosisTitle"
 #define GRAPHIC         @"isGraphic"
-#define WEIGHT          @"weight" //The different user types (look at enum)
+#define WEIGHT          @"weight"
 #define OBSERVATION     @"observation"
 #define NURSEID         @"nurseId"
 #define BLOODPRESSURE   @"bloodPressure"
@@ -25,8 +25,7 @@
 #define PRIORITY        @"priority"
 #define VISITID         @"visitationId"
 #define CHARITYID       @"charityid"
-
-#define ISOPEN      @"isOpen"
+#define ISOPEN          @"isOpen"
 #define MEDICATIONNOTES @"medicationNotes"
 
 #import "CommonObjectProtocol.h"

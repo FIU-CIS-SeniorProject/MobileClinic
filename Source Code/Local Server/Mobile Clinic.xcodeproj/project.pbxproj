@@ -21,6 +21,7 @@
 		89DA4136183DA67900C096BB /* Recognition.mm in Sources */ = {isa = PBXBuildFile; fileRef = 89DA4135183DA67900C096BB /* Recognition.mm */; };
 		8C2CBC84185185BE006CE67C /* Mobile_Clinic.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CBC82185185BE006CE67C /* Mobile_Clinic.xcdatamodeld */; };
 		8C4DCA241851848B009FA3C7 /* NSMutableData-AES.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4DCA231851848B009FA3C7 /* NSMutableData-AES.m */; };
+		8C4EA135185AFF8D00A38039 /* Visitations.json in Resources */ = {isa = PBXBuildFile; fileRef = 8C4EA134185AFF8D00A38039 /* Visitations.json */; };
 		8CD2C94D18516FCE00511580 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD2C94C18516FCE00511580 /* IOKit.framework */; };
 		8CD2C94F18516FE500511580 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD2C94E18516FE500511580 /* opencv2.framework */; };
 		8CD2C95A18516FF300511580 /* libopencv_calib3d.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD2C95018516FF200511580 /* libopencv_calib3d.2.4.6.dylib */; };
@@ -156,6 +157,7 @@
 		8C2CBC83185185BE006CE67C /* Mobile_Clinic.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Mobile_Clinic.xcdatamodel; sourceTree = "<group>"; };
 		8C4DCA221851848B009FA3C7 /* NSMutableData-AES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableData-AES.h"; sourceTree = "<group>"; };
 		8C4DCA231851848B009FA3C7 /* NSMutableData-AES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableData-AES.m"; sourceTree = "<group>"; };
+		8C4EA134185AFF8D00A38039 /* Visitations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Visitations.json; sourceTree = "<group>"; };
 		8CD2C94C18516FCE00511580 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		8CD2C94E18516FE500511580 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		8CD2C95018516FF200511580 /* libopencv_calib3d.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_calib3d.2.4.6.dylib; path = "../Facial Recognition Libraries/libopencv_calib3d.2.4.6.dylib"; sourceTree = "<group>"; };
@@ -375,6 +377,16 @@
 			name = "Login View & Controller";
 			sourceTree = "<group>";
 		};
+		8C4EA133185AF72200A38039 /* Recognition Object */ = {
+			isa = PBXGroup;
+			children = (
+				89DA4134183DA67900C096BB /* Recognition.h */,
+				89DA4135183DA67900C096BB /* Recognition.mm */,
+				89DA4137183DA72400C096BB /* RecognitionProtocol.h */,
+			);
+			name = "Recognition Object";
+			sourceTree = "<group>";
+		};
 		EA09328616F8149F00536DF3 /* Cloud API */ = {
 			isa = PBXGroup;
 			children = (
@@ -546,6 +558,7 @@
 				89BCE2CD1842D15300FCE9DA /* Login View & Controller */,
 				EA09328616F8149F00536DF3 /* Cloud API */,
 				EAADC01D16E0596C009E7AF9 /* PatientFile.json */,
+				8C4EA134185AFF8D00A38039 /* Visitations.json */,
 				0FCC49CD16F3C63400FD3338 /* MedicationFile.json */,
 				EAEF2F9716ED5B7300A9B49A /* Patient Control */,
 				EA172D7C16B6412600F00C61 /* ConnectListContent.h */,
@@ -699,6 +712,7 @@
 		EA9372AE16BC7CBD00D3D617 /* Object Types (USE THESE ONLY) */ = {
 			isa = PBXGroup;
 			children = (
+				8C4EA133185AF72200A38039 /* Recognition Object */,
 				89BCE2C81842D12000FCE9DA /* CloudManagement Object */,
 				895D5CC91825D02B005D25A8 /* Face Object */,
 				EAC37F1716F37A8F00836C1C /* CommonObjectProtocol.h */,
@@ -708,9 +722,6 @@
 				EA749BCF16EDAF2E000F849F /* Visitation Objects */,
 				EAC37F0A16F17A9A00836C1C /* Prescription Object */,
 				EAC37F1D16F394E100836C1C /* Medication Objects */,
-				89DA4134183DA67900C096BB /* Recognition.h */,
-				89DA4135183DA67900C096BB /* Recognition.mm */,
-				89DA4137183DA72400C096BB /* RecognitionProtocol.h */,
 			);
 			name = "Object Types (USE THESE ONLY)";
 			sourceTree = "<group>";
@@ -917,6 +928,7 @@
 				0FCC49CE16F3C63400FD3338 /* MedicationFile.json in Resources */,
 				EAE655E716F5443800139C62 /* MedicationList.xib in Resources */,
 				EAC0D7DD16FE7D6200621DDC /* UserView.xib in Resources */,
+				8C4EA135185AFF8D00A38039 /* Visitations.json in Resources */,
 				EA7D505A17179D9E002ED819 /* PatientData.png in Resources */,
 				EA7D505B17179D9E002ED819 /* PatientFile.png in Resources */,
 				EA7D505E1717A045002ED819 /* Pills.png in Resources */,
@@ -1184,7 +1196,7 @@
 					/opt/local/lib,
 					"/Users/jamesmendez/Documents/Senior\\ Project/MobileClinic\\ -\\ GIT/Source\\ Code/Facial\\ Recognition\\ Libraries",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1213,7 +1225,7 @@
 					/opt/local/lib,
 					"/Users/jamesmendez/Documents/Senior\\ Project/MobileClinic\\ -\\ GIT/Source\\ Code/Facial\\ Recognition\\ Libraries",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

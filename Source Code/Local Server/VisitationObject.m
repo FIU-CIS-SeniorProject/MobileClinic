@@ -197,7 +197,8 @@ NSString* isLockedBy;
 
 -(NSArray *)covertAllSavedObjectsToJSON{
     
-    NSArray* allPatients= [self FindObjectInTable:COMMONDATABASE withCustomPredicate:[NSPredicate predicateWithFormat:@"%K == YES",ISDIRTY] andSortByAttribute:VISITID];
+    NSArray* allPatients = [self FindObjectInTable:COMMONDATABASE withCustomPredicate:[NSPredicate predicateWithFormat:@"%K == YES",ISDIRTY] andSortByAttribute:VISITID];
+    
     NSMutableArray* allObject = [[NSMutableArray alloc]initWithCapacity:allPatients.count];
     
     for (NSManagedObject* obj in allPatients) {

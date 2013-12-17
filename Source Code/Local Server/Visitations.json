@@ -1,0 +1,22 @@
+[{
+	"bloodPressure" : "120/80",
+	"condition" : "condition goes here",
+	"conditionTitle" : "ConditionTitle",
+	"doctorId" : null,
+	"doctorin" : null,
+	"doctorout" : null,
+	"heartRate" : "69",
+	"isDirty" : 1,
+	"isGraphic" : null,
+	"isLockedBy" : "",
+	"isOpen" : 1,
+	"nurseId" : "jamesmendez",
+	"patientId" : "Kayla_James_1362023922_023225",
+	"priority" : 0,
+	"respiration" : "23",
+	"temperature" : "39",
+	"triageIn" : 1386899874,
+	"triageOut" : 1386899975,
+	"visitationId" : "Kayla_James_1362023922_023225_1386899974.123456",
+	"weight" : 120
+    }]

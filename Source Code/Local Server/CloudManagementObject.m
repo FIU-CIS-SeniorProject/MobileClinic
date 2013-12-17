@@ -253,6 +253,22 @@ int* isActive;
      }];
 }
 
+-(void)updateTimestamp: (NSDate*) inDate
+{
+    NSMutableDictionary* active = [[self GetActiveEnvironment] mutableCopy];
+    if (active != nil)
+    {
+        [active setObject:[inDate convertNSDateToSeconds] forKey:LASTPULLTIME];
+    }
+    
+    CloudManagementObject* activeCMO = [[CloudManagementObject alloc] initWithCachedObjectWithUpdatedObject:active];
+    
+    [activeCMO saveObject:^(id<BaseObjectProtocol> data, NSError *error)
+     {
+         // Nothing?
+     }];
+}
+
 -(void)updateActiveUser:(NSString *)currentUser
 {
     NSMutableDictionary* active = [[self GetActiveEnvironment] mutableCopy];

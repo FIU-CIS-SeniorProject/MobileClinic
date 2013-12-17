@@ -43,6 +43,7 @@
 -(void)setActiveEnvironment: (NSString*)environmentName;
 -(NSDictionary *)GetEnvironment: (NSString*)environmentName;
 -(void)updateTimestamp;
+-(void)updateTimestamp: (NSDate*)inDate;
 -(void)updateActiveUser: (NSString*)currentUser;
 
 @end

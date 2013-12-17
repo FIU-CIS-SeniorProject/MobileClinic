@@ -240,11 +240,57 @@ NSString* isLockedBy;
     //TODO: replace "withObject:nil" with timestamp dictionary
     [self makeCloudCallWithCommand:DATABASE withObject:timeDic onComplete:^(id cloudResults, NSError *error)
     {
-        NSArray* allPatients = [cloudResults objectForKey:@"data"];
+        /*NSArray* allPatients = [cloudResults objectForKey:@"data"];
         if ([allPatients count] > 0)
         {
             [self handleCloudCallback:onComplete UsingData:allPatients WithPotentialError:error];
+        }*/
+        if (cloudResults == nil) // NO CLOUD CONNECTION
+        {
+            NSString* errorValue = @"No connection to the Cloud";
+            NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+            [errorDetail setValue:errorValue forKey:NSLocalizedDescriptionKey];
+            error = [NSError errorWithDomain:@"PatientObject:pullFromCloud" code:100 userInfo:errorDetail];
+            onComplete((!error)?self:nil,error);
         }
+        else if ([[cloudResults objectForKey:@"result"] isEqualToString:@"true"]) // SUCCESS
+        {
+            NSArray* patientsFromCloud = [cloudResults objectForKey:@"data"];
+            
+            NSArray* allError = [self SaveListOfObjectsFromDictionary:patientsFromCloud];
+            
+            if (allError.count > 0)
+            {
+                error = [[NSError alloc]initWithDomain:COMMONDATABASE code:kErrorObjectMisconfiguration userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Object was misconfigured",NSLocalizedFailureReasonErrorKey, nil]];
+                onComplete(self,error);
+                return;
+            }
+        }
+        else // SOME ERROR FROM CLOUD
+        {
+            NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+            NSString* errorValue = @"Error from Cloud: ";
+            errorValue = [errorValue stringByAppendingString:[cloudResults objectForKey:@"data"]];
+            
+            [errorDetail setValue:errorValue forKey:NSLocalizedDescriptionKey];
+            error = [NSError errorWithDomain:@"PatientsObject:pullFromCloud" code:100 userInfo:errorDetail];
+            onComplete((!error)?self:nil,error);
+        }
+        
+        
+        if (!error) {
+            
+            NSArray* allMeds = [cloudResults objectForKey:@"data"];
+            
+            NSArray* allError = [self SaveListOfObjectsFromDictionary:allMeds];
+            
+            if (allError.count > 0) {
+                error = [[NSError alloc]initWithDomain:COMMONDATABASE code:kErrorObjectMisconfiguration userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Object was misconfigured",NSLocalizedFailureReasonErrorKey, nil]];
+                onComplete(self,error);
+                return;
+            }
+        }
+        onComplete((!error)?self:nil,error);
     }];
 }
 

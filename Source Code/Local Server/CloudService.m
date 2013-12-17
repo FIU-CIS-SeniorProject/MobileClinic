@@ -75,9 +75,8 @@
         //TODO: gets url of active cloud server (causes infinite loop with init)
         //kURL = [[[CloudManagementObject alloc] init] GetActiveURL];
     
-        //kURL = @"http://pure-island-5858.herokuapp.com/"; // Production Cloud
-        //kURL = @"http://still-citadel-8045.herokuapp.com/"; // Test Cloud
-        kURL = @"http://stark-hollows-5161.herokuapp.com/";
+        //kURL = @"http://stark-hollows-5161.herokuapp.com/"; // Test
+        kURL = @"http://secure-dawn-6822.herokuapp.com/"; // Production
         
         //kURL = @"http://localhost:3000/"; // local host for testing the Cloud Server
         //kURL = @"http://staging-webapp.herokuapp.com/";
@@ -179,6 +178,7 @@
 {
     NSMutableDictionary *mDic = [[NSMutableDictionary alloc]initWithDictionary:params];
     [mDic setObject:kAccessToken forKey:@"access_token"];
+    NSLog(@"access_toke: %@", kAccessToken);
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         [self queryWithPartialURL:[NSString stringWithFormat:@"api/%@", stringQuery] parameters:mDic completion:completion];
@@ -190,13 +190,12 @@
 {
     NSMutableDictionary *mDic = [[NSMutableDictionary alloc]initWithDictionary:params];
     [mDic setObject:kAccessToken forKey:@"access_token"];
-    
+    NSLog(@"query: access_token: %@", kAccessToken);
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),  ^{
         
         [self queryWithPartialURL:[NSString stringWithFormat:@"api/%@", mDic] parameters:params imageData:imageData completion:completion];
         
     });
-    
 }
 
 -(void)queryWithPartialURL:(NSString *)partialURL parameters: (NSDictionary *)params imageData:(NSData *)imageData completion:(void(^)(NSError *error, NSDictionary *result)) completion

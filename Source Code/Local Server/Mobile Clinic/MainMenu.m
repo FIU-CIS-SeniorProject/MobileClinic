@@ -273,6 +273,8 @@ id<ServerProtocol> connection;
         }
     }
     
+    [[[CloudManagementObject alloc] init] updateTimestamp: [NSDate distantPast]];
+    
     NSLog(@"Completely Purged The System of %i Visits, %i Patients, %i Medications, and %i Users", vCounter, pCounter, mCounter, uCounter);
     
     [self showLoginView:nil];
