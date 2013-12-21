@@ -197,8 +197,7 @@ NSString* isLockedBy;
 
 -(NSArray *)covertAllSavedObjectsToJSON{
     
-    NSArray* allPatients = [self FindObjectInTable:COMMONDATABASE withCustomPredicate:[NSPredicate predicateWithFormat:@"%K == YES",ISDIRTY] andSortByAttribute:VISITID];
-    
+    NSArray* allPatients= [self FindObjectInTable:COMMONDATABASE withCustomPredicate:[NSPredicate predicateWithFormat:@"%K == YES",ISDIRTY] andSortByAttribute:VISITID];
     NSMutableArray* allObject = [[NSMutableArray alloc]initWithCapacity:allPatients.count];
     
     for (NSManagedObject* obj in allPatients) {
@@ -225,10 +224,11 @@ NSString* isLockedBy;
     NSMutableDictionary* timeDic = [[NSMutableDictionary alloc] init];
     [timeDic setObject:timestamp forKey:@"Timestamp"];
     
+    //TODO: replace "withObject:nil" with timestamp dictionary
     [self makeCloudCallWithCommand:DATABASE withObject:timeDic onComplete:^(id cloudResults, NSError *error)
      {
-         //NSArray* allVisits = [cloudResults objectForKey:@"data"];
-         //[self handleCloudCallback:onComplete UsingData:allVisits WithPotentialError:error];
+         /*NSArray* allVisits = [cloudResults objectForKey:@"data"];
+         [self handleCloudCallback:onComplete UsingData:allVisits WithPotentialError:error];//*/
          
          if (cloudResults == nil) // NO CLOUD CONNECTION
          {

@@ -118,8 +118,6 @@ CloudManagementObject* cloudMO;
     }
     
     [self loadDefaultUser];
-    
-    [[[CloudManagementObject alloc] init] updateActiveUser:@""];
 }
 
 // Switching to the Test Environment
@@ -129,7 +127,7 @@ CloudManagementObject* cloudMO;
     
     if ([[[[CloudManagementObject alloc]init] GetActiveUser] isEqual: @""])
     {
-        [alert setMessageText:@"You must be logged in to Switch Environments"];
+        [alert setMessageText:@"You must be logged in to Purge the System"];
         [alert setAlertStyle:NSWarningAlertStyle];
         [alert runModal];
         return;
@@ -242,9 +240,7 @@ CloudManagementObject* cloudMO;
         }
         
         NSLog(@"Performing a True Purge of the System");
-        MainMenu* lMainMenu = [[MainMenu alloc] init];
-        [lMainMenu completeSystemPurge];
-        [lMainMenu showLoginView:nil];
+        [mainView completeSystemPurge];
         
         // Set CloudManagementObject
         [cloudMO setActiveEnvironment:@"test"];
@@ -268,26 +264,6 @@ CloudManagementObject* cloudMO;
         
         NSLog(@"Imported Patients: \n%@", patients);
         
-        dataPath = [[NSBundle mainBundle] pathForResource:@"Visitations" ofType:@"json"];
-        
-        NSArray* Visits = [NSArray arrayWithArray:[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPath] options:0 error:&err]];
-        
-        //NSArray* jv = [[[VisitationObject alloc] init] covertAllSavedObjectsToJSON];
-        //NSLog(@"jv: %@", jv.description);
-        NSLog(@"ERROR: %@", err.description);
-        
-        [Visits enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
-         {
-             VisitationObject* base = [[VisitationObject alloc]init];
-             NSError* success = [base setValueToDictionaryValues:obj];
-             [base saveObject:^(id<BaseObjectProtocol> data, NSError *error)
-              {
-                  
-              }];
-         }];
-        
-        NSLog(@"Imported Visitations: \n%@", Visits.description);
-        
         dataPath = [[NSBundle mainBundle] pathForResource:@"MedicationFile" ofType:@"json"];
         
         NSArray* Meds = [NSArray arrayWithArray:[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPath]options:0 error:&err]];
@@ -303,21 +279,6 @@ CloudManagementObject* cloudMO;
         }];
         
         NSLog(@"Imported Medications: \n%@", Meds.description);
-        
-        NSMutableDictionary* defaultUser = [[NSMutableDictionary alloc] init];
-        [defaultUser setObject:@"defaultuser@default.com" forKey:EMAIL];
-        [defaultUser setObject:@"James" forKey:FIRSTNAME];
-        [defaultUser setObject:@"Mendez" forKey:LASTNAME];
-        [defaultUser setObject:@(3) forKey:USERTYPE];
-        [defaultUser setObject:@"jmendez" forKey:USERNAME];
-        [defaultUser setObject:@"orant" forKey:PASSWORD];
-        [defaultUser setObject:@(YES) forKey:STATUS];
-        [defaultUser setObject:@(0) forKey:CHARITYID];
-        [defaultUser setObject:@(NO) forKey: ISDIRTY];
-        
-        UserObject* newDefaultUser = [[UserObject alloc] initAndMakeNewDatabaseObject];
-        [newDefaultUser setValueToDictionaryValues:defaultUser];
-        [newDefaultUser saveObject:^(id<BaseObjectProtocol> data, NSError *error) {}];
     }
 }
 
@@ -453,10 +414,10 @@ CloudManagementObject* cloudMO;
     {
         NSMutableDictionary* defaultUser = [[NSMutableDictionary alloc] init];
         [defaultUser setObject:@"defaultuser@default.com" forKey:EMAIL];
-        [defaultUser setObject:@"James" forKey:FIRSTNAME];
-        [defaultUser setObject:@"Mendez" forKey:LASTNAME];
+        [defaultUser setObject:@"John" forKey:FIRSTNAME];
+        [defaultUser setObject:@"Smith" forKey:LASTNAME];
         [defaultUser setObject:@(3) forKey:USERTYPE];
-        [defaultUser setObject:@"jmendez" forKey:USERNAME];
+        [defaultUser setObject:@"jsmith13" forKey:USERNAME];
         [defaultUser setObject:@"orant" forKey:PASSWORD];
         [defaultUser setObject:@(YES) forKey:STATUS];
         [defaultUser setObject:@(0) forKey:CHARITYID];

@@ -109,13 +109,9 @@ id<ServerProtocol> connection;
     {
         [patientView.view removeFromSuperview];
     }
-    else if (currentView == medicationView.view)
-    {
-        [medicationView.view removeFromSuperview];
-    }
     else
     {
-        // ERROR: Unrecognized current view
+        [medicationView.view removeFromSuperview];
     }
     
     //set view to login
@@ -273,11 +269,7 @@ id<ServerProtocol> connection;
         }
     }
     
-    [[[CloudManagementObject alloc] init] updateTimestamp: [NSDate distantPast]];
-    
     NSLog(@"Completely Purged The System of %i Visits, %i Patients, %i Medications, and %i Users", vCounter, pCounter, mCounter, uCounter);
-    
-    [self showLoginView:nil];
 }
 
 - (IBAction)manualTableRefresh:(id)sender

@@ -47,9 +47,7 @@ return self;
     }
     
     NSError* error = nil;
-    BOOL* successful = [context save:&error];
-    
-    return !successful;
+    return ![context save:&error];
 }
 
 -(NSManagedObject*)CreateANewObjectFromClass:(NSString *)name isTemporary:(BOOL)temp{
@@ -99,7 +97,7 @@ return self;
         [fetch setPredicate:predicateString];
     }
     
-    return [self fetchElementsUsingFetchRequest:fetch withTable:table];
+     return [self fetchElementsUsingFetchRequest:fetch withTable:table];
 }
 
 

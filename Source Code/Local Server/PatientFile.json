@@ -1,12 +1,12 @@
 [{
-        "age" : 98584932,
+        "age" : 14038294,
         "familyName" : "James",
         "firstName" : "Kayla",
         "isLockedBy" : "",
-        "patientId" : "Kayla_James_1386953366019819",
+        "patientId" : "Kayla_James_1362023922_023225",
         "photo" : null,
         "sex" : 0,
-        "isOpen" : 1,
+        "status" : 0,
         "villageName" : "Pinecrest"
     },
     {
@@ -17,7 +17,7 @@
         "patientId" : "Williams_Devon_1362023922_023225",
         "photo" : null,
         "sex" : 1,
-        "isOpen" : 1,
+        "status" : 0,
         "villageName" : "EvergreenPark"
     },
     {
@@ -28,7 +28,7 @@
         "patientId" : "Cortez_Karla_1362023922_023225",
         "photo" : null,
         "sex" : 0,
-        "isOpen" : 1,
+        "status" : 0,
         "villageName" : "Miami"
     },
     {
@@ -39,7 +39,7 @@
         "patientId" : "Ramos_Cynthia_1362023922_023225",
         "photo" : null,
         "sex" : 0,
-        "isOpen" : 1,
+        "status" : 0,
         "villageName" : "Springfield"
     },
     {
@@ -50,7 +50,7 @@
         "patientId" : "Luis_Ray_1362023922_023225",
         "photo" : null,
         "sex" : 1,
-        "isOpen" : 1,
+        "status" : 0,
         "villageName" : "SanJose"
     },
     {
@@ -61,7 +61,7 @@
         "patientId" : "Cramer_Jane_1362023922_023225",
         "photo" : null,
         "sex" : 0,
-        "isOpen" : 1,
+        "status" : 0,
         "villageName" : "Complacenville"
     },
     {
@@ -72,6 +72,6 @@
         "patientId" : "BigWood_TayTay_1362023922_023225",
         "photo" : null,
         "sex" : 0,
-        "isOpen" : 1,
+        "status" : 1,
         "villageName" : "Goulds"
     }]

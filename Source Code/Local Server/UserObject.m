@@ -158,25 +158,12 @@
     //TODO: Remove Hard Dependencies
     [self makeCloudCallWithCommand:DATABASE withObject:nil onComplete:^(id cloudResults, NSError *error)
     {
-        if (cloudResults == nil) // NO CLOUD CONNECTION
+        //if (!error) //Not receiving error from cloud, receiving result, data json dictionary instead
+        if ([[cloudResults objectForKey:@"result"] isEqualToString:@"true"])
         {
-            NSString* errorValue = @"No connection to the Cloud";
-            NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
-            [errorDetail setValue:errorValue forKey:NSLocalizedDescriptionKey];
-            error = [NSError errorWithDomain:@"UserObject:pullFromCloud" code:100 userInfo:errorDetail];
-            onComplete((!error)?self:nil,error);
-        }
-        else if ([[cloudResults objectForKey:@"result"] isEqualToString:@"true"]) // SUCCESS
-        {
-            NSArray* usersFromCloud = [cloudResults objectForKey:@"data"];
+            NSArray* users = [cloudResults objectForKey:@"data"];
             
-            // Check if usersFromCloud has more than 0 users, if yes: delete all users, if no, do nothing
-            if ([usersFromCloud count] > 0)
-            {
-                [self deleteAllUsers];
-            }
-            
-            NSArray* allError = [self SaveListOfObjectsFromDictionary:usersFromCloud];
+            NSArray* allError = [self SaveListOfObjectsFromDictionary:users];
             
             if (allError.count > 0)
             {
@@ -184,9 +171,8 @@
                 onComplete(self,error);
                 return;
             }
-            onComplete((!error)?self:nil,error);
         }
-        else // SOME ERROR FROM CLOUD
+        else
         {
             NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
             NSString* errorValue = @"Error from Cloud: ";
@@ -305,15 +291,5 @@
         [allObject addObject:[obj dictionaryWithValuesForKeys:[obj attributeKeys]]];
     }
     return  allObject;
-}
-
--(void)deleteAllUsers
-{
-    NSArray* allUsers = [self FindAllObjects];
-    
-    for (NSDictionary* user in allUsers)
-    {
-        [self deleteDatabaseDictionaryObject:user];
-    }
 }
 @end
