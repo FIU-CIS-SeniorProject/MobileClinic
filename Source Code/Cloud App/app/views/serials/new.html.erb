@@ -1,0 +1,49 @@
+<% provide(:title, 'Create Serial Record') %>
+<div class="block">
+	<div class="block">
+		<div class="grid">
+			<div class="grid-title">
+				<div class="pull-left">
+					<span class="glyphicon glyphicon-pencil"></span>
+				</div>
+				<div class="pull-left" style="padding-top: 10px;">
+					<span>New Serial</span>
+				</div>
+			</div>
+			<div class="grid-content">
+				<%= form_for @serial, html: {role: "form"} do |f| %>
+				<%= render 'shared/error_messages_serial' %>
+				<div class="formRow">
+					<%= f.label :serialnum, "Serial Number", class: "label-gray"%>
+					<div class="formRight">
+						<%= f.text_field :serialnum , class: "span input", :placeholder => 'Serial number', :class => "form-control",required: "true",autocomplete: "off"  %>
+					</div>
+				</div>
+				<% if current_user.userType != 0 %>c
+				<div class="formRow">
+					<%= f.label :charityid, "Charity", class: "label-gray"%>
+					<div class="formRight">
+						<%= f.collection_select :charityid, Charity.where("charityid = ? AND status = 1",current_user.charityid),:charityid,:name ,class: "form-control",required: "true"%>
+					</div>
+				</div>
+				<% else %>
+				<div class="formRow">
+					<%= f.label :charityid, "Charity", class: "label-gray"%>
+					<div class="formRight">
+						<%= f.collection_select :charityid, Charity.where("status = 1"),:charityid,:name ,class: "form-control",required: "true"%>
+					</div>
+				</div>
+				<% end %>
+				<div class="formRow">
+					<%= f.label :status, "Status", class: "label-gray"%>
+					<div class="formRight">
+						<%= f.select :status, [['Active',1]], class: "form-controller",required: "true"  %>
+					</div>
+				</div>
+				<%= f.submit "Create Serial", :class => "btn btn-large btn-block btn-info"%>
+				<%= link_to 'Back', serials_path, :class => "btn btn-large btn-block btn-default" %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>

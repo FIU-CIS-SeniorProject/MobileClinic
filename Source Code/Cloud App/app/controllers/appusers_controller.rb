@@ -12,10 +12,8 @@ class AppusersController < ApplicationController
   def show
     if current_user.userType != 0
       @appuser = Appuser.where("charityid = ?",current_user.charityid).find(params[:id])
-      @charity = Charity.where("charityid = ?",current_user.charityid).find(@appuser.charityid)
     else
       @appuser = Appuser.find(params[:id])
-      @charity = Charity.find(@appuser.charityid)
     end
   rescue ActiveRecord::RecordNotFound
     flash[:success] = "You are not allow to see this user."

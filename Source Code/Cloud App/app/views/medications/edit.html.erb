@@ -4,61 +4,51 @@
 		<div class="grid">
 			<div class="grid-title">
 				<div class="pull-left">
-					<div class="icon-title">
-						<i class="icon-edit"></i>
-					</div>
-					<span>Edit Medication</span>
-					<div class="clearfix"></div>
+					<span class="glyphicon glyphicon-pencil"></span>
 				</div>
-				<div class="clearfix"></div>
+				<div class="pull-left" style="padding-top: 10px;">
+					<span>Edit Medication</span>
+				</div>
 			</div>
 			<div class="grid-content">
 				<%= form_for(@medication, :html => { :multipart => true, role: "form" }) do |f| %>
 				<%= render 'shared/error_messages_med' %>
 				<div class="formRow">
-					<%= f.label :name, "Name", class: "label-gray"%>
+					<%= f.label :medName, "Name", class: "label-gray"%>
 					<div class="formRight">
-						<%= f.text_field :name, class: "form-control" %>
+						<%= f.text_field :medName, class: "form-control", type: "text", required: "true",autocomplete: "off" %>
 					</div>
 				</div>
 				<div class="formRow">
 					<%= f.label :numContainers, "Number of Containers", class: "label-gray"%>
 					<div class="formRight">
-						<%= f.text_field :numContainers, class: "form-control", type: "number" %>
+						<%= f.text_field :numContainers, class: "form-control", type: "number", required: "true",autocomplete: "off" %>
 					</div>
 				</div>
 				<div class="formRow">
-					<%= f.label :tabletsPerContainer, "Tables per Container", class: "label-gray"%>
+					<%= f.label :tabletsContainer, "Tables per Container", class: "label-gray"%>
 					<div class="formRight">
-						<%= f.text_field :tabletsPerContainer, class: "form-control", type: "number"  %>
+						<%= f.text_field :tabletsContainer, class: "form-control", type: "number", required: "true",autocomplete: "off"  %>
 					</div>
 				</div>
 				<div class="formRow">
-					<%= f.label :doseOfTablets, "Dose of Tablets", class: "label-gray"%>
+					<%= f.label :dosage, "Dose of Tablets", class: "label-gray"%>
 					<div class="formRight">
-						<%= f.text_field :doseOfTablets, class: "form-control", type: "number"  %>
+						<%= f.text_field :dosage, class: "form-control", type: "number", required: "true",autocomplete: "off"  %>
 					</div>
 				</div>
 				<div class="formRow">
 					<%= f.label :expiration, "Expiration Date", class: "label-gray"%>
 					<div class="formRight">
-						<%= f.text_field :expiration, :value => @medication.expiration.to_s("%m/%d/%Y"), class: "form-control", type: "date"  %>
+						<%= f.text_field :expiration, :value => @medication.expiration.to_s("%m/%d/%Y"), class: "form-control", type: "date", required: "true",autocomplete: "off"  %>
 					</div>
 				</div>
 				<div class="formRow">
 					<%= f.label :status, "Status", class: "label-gray"%>
 					<div class="formRight">
-						<%= f.select :status, [['Active',1], ['Inactive',0]], class: "form-control"%>
+						<%= f.select :status, [['Active',1], ['Inactive',0]], class: "form-control", required: "true"%>
 					</div>
 				</div>
-				<div class="formRow">
-					<%= f.label :notes, "Notes", class: "label-gray"%>
-					<div class="formRight">
-						<%= f.text_area :notes, class: "form-control", type: "text"  %>
-					</div>
-				</div>
-				
-				<div style="height: 100px;"></div>
 				<%= f.submit "Save changes", :class => "btn btn-large btn-block btn-info"%>
 				<%= link_to 'Back', @medication,:class => "btn btn-large btn-block btn-default" %>
 				<%- end -%>

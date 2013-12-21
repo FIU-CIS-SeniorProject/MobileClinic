@@ -24,6 +24,7 @@
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 1/23/13.
+//  Modified by James Mendez on 12/2013
 //
 #define APPDELEGATE_STARTED @"slow appdelegate"
 #import <Cocoa/Cocoa.h>
@@ -49,7 +50,6 @@ typedef enum
 @property (nonatomic, strong) ServerCore *server;
 @property (assign) IBOutlet NSWindow *window;
 
-
 - (IBAction)restartServer:(id)sender;
 - (IBAction)shutdownServer:(id)sender;
 
@@ -62,6 +62,5 @@ typedef enum
 
 - (IBAction)showPatientsView:(id)sender;
 - (IBAction)showUserView:(id)sender;
-
 
 @end

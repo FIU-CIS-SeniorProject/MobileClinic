@@ -5,8 +5,6 @@
 //  Created by Steven Berlanga on 2/2/13.
 //  Copyright (c) 2013 Steven Berlanga. All rights reserved.
 //
-
-
 #import <CoreData/CoreData.h>
 #import <UIKit/UIKit.h>
 #import "ServerProtocol.h"
@@ -22,7 +20,6 @@
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;

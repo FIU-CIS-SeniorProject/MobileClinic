@@ -24,6 +24,7 @@
 //  Mobile Clinic
 //
 //  Created by Kevin Diaz on 11/02/13.
+//  Edited by James Mendez on 12/2013
 //
 #define NAME                @"name"
 #define CLOUDURL            @"cloudURL"

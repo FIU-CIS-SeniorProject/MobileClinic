@@ -7,24 +7,14 @@
 
 	<div class="row-fluid">
 		<!--visitor statistics-->
-		<div class="gridmine span5" style="width: 350px; margin-left: 50px; float: left; height: 300px;">
+		<div class="gridmine span5" style="width: 25%; margin-left: 25px; float: left; height: 250px;">
 			<div class="grid-title">
 				<div class="pull-left">
-					<div class="icon-title">
-						<i class="icon-file"></i>
-					</div>
+					<span class="glyphicon glyphicon-stats"></span>
+				</div>
+				<div class="pull-left" style="padding-top: 10px;">
 					<span>Visits Statistics</span>
-					<div class="clearfix"></div>
 				</div>
-				<div class="pull-right">
-					<div class="icon-title">
-						<a href="#"><i class="icon-refresh"></i></a>
-					</div>
-					<div class="icon-title">
-						<a href="#"><i class="icon-cog"></i></a>
-					</div>
-				</div>
-				<div class="clearfix"></div>
 			</div>
 			<div class="grid-content overflow">
 				<ul class="list-visitor">
@@ -47,39 +37,31 @@
 		<!--visitor statistics END-->
 
 		<!--friends-->
-		<div class="gridmine span5" style="width: 500px; margin-left:100px; float: left; height: 350px;">
+		<div class="gridmine span5" style="width: 40%; margin-left:80px; float: left; height: 350px;">
 			<div class="grid-title">
 				<div class="pull-left">
-					<div class="icon-title">
-						<i class="icon-user"></i>
-					</div>
-					<span style="width: 250px;">Latest Updated Patient</span>
-					<div class="clearfix"></div>
+					<span class="glyphicon glyphicon-stats"></span>
 				</div>
-				<div class="pull-right">
-					<div class="icon-title">
-						<a href="#"><i class="icon-refresh"></i></a>
-					</div>
+				<div class="pull-left" style="padding-top: 10px;">
+					<span>Latest Updated Patient</span>
 				</div>
-				<div class="clearfix"></div>
 			</div>
 			<div class="grid-content overflow">
 				<div class="friends chat">
 					<% @patients.each do |patient| %>
 					<div class="friend">
-						<%= image_tag patient.picture.url(:medium) , class: "f-avatar" %>
 						<div class="f-actions">
 							<%= link_to "View", patient, class: "f-actions" %>
 						</div>
-						<div class="f-info">
+						<div>
 							<div class="f-name">
-								<%= patient.firstName%> <%= patient.familyName%>
+								Name: <%= patient.firstName%> <%= patient.familyName%>
 							</div>
 							<div class="f-text">
-								<%= patient.villageName%>
+								<b>Village:</b> <%= patient.villageName%>
 							</div>
 							<div class="f-text">
-								<%= patient.updated_at.to_formatted_s(:long_ordinal) %>
+								<b>Uploaded:</b> <%= patient.updated_at.to_formatted_s(:long_ordinal) %>
 							</div>
 						</div>
 						<div class="clearfix"></div>

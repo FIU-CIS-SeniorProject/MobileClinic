@@ -1,3 +1,24 @@
+// The MIT License (MIT)
+//
+// Copyright (c) 2013 Florida International University
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 //
 //  FaceRecognize.mm
 //  Mobile Clinic
@@ -5,7 +26,6 @@
 //  Created by Humberto Suarez on 11/11/13.
 //  Copyright (c) 2013 Florida International University. All rights reserved.
 //
-
 #import "FaceRecognize.h"
 #import "Face.h"
 #import <CoreData/CoreData.h>
@@ -23,8 +43,9 @@ NSDictionary* faceD;
     self = [ super init];
     database = [Database sharedInstance];
     context1 = database.managedObjectContext;
-    if (self) {
-        //[self loadDatabase];
+    if (self)
+    {
+        //specific init stuff goes here
     }
     
     return self;
@@ -41,7 +62,6 @@ NSDictionary* faceD;
 - (id)initWithFisherFaceRecognizer
 {
     self = [self init];
-    //_model = cv::createFisherFaceRecognizer();
     
     return self;
 }
@@ -49,7 +69,6 @@ NSDictionary* faceD;
 - (id)initWithLBPHFaceRecognizer
 {
     self = [self init];
-    //_model = cv::createLBPHFaceRecognizer();
     
     return self;
 }
@@ -61,6 +80,139 @@ NSDictionary* faceD;
      }
      [self getAllPeople];
      [self createTablesIfNeeded];*/
+}
+
+- (BOOL)trainModel
+{
+    std::vector<cv::Mat> images;
+    std::vector<int> labels;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Faces" inManagedObjectContext:context1];
+    [fetchRequest setEntity:entity];
+    
+    NSError *error = nil;
+    NSArray *array = [context1 executeFetchRequest:fetchRequest error:&error];
+    
+    if(array ==nil)
+    {
+        NSLog(@"Problem ! @%",error);
+    }
+    
+    for(Face *c in array)
+    {
+        int label = c.label.intValue;
+        NSData *imageD = c.photo;
+        cv::Mat faceData = [self dataToMat:imageD
+                                     width:[NSNumber numberWithInt:100]
+                                    height:[NSNumber numberWithInt:100]];
+        images.push_back(faceData);
+        labels.push_back(label);
+    }
+    
+    if (images.size() > 0 && labels.size() > 0)
+    {
+        _model->train(images, labels);
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
+
+-(cv::Mat)dataToMat:(NSData *)data width:(NSNumber *)width height:(NSNumber *)height
+{
+    cv::Mat output = cv::Mat([width integerValue], [height integerValue], CV_8UC1);
+    output.data = (unsigned char*)data.bytes;
+    
+    return output;
+}
+
+- (void)forgetAllFacesForPersonID:(int)personID
+{
+    /* const char* deleteSQL = "DELETE FROM person WHERE personid = ?";
+     sqlite3_stmt *statement;
+     
+     if (sqlite3_prepare_v2(_db, deleteSQL, -1, &statement, nil) == SQLITE_OK) {
+     sqlite3_bind_int(statement, 1, personID);
+     sqlite3_step(statement);
+     }
+     
+     sqlite3_finalize(statement);*/
+}
+
+- (cv::Mat)pullStandardizedFace:(cv::Rect)face fromImage:(cv::Mat&)image
+{
+    // Pull the grayscale face ROI out of the captured image
+    cv::Mat onlyTheFace;
+    cv::cvtColor(image(face), onlyTheFace, CV_RGB2GRAY);
+    
+    // Standardize the face to 100x100 pixels
+    cv::resize(onlyTheFace, onlyTheFace, cv::Size(100, 100), 0, 0);
+    return onlyTheFace;
+}
+
+- (NSDictionary *)recognizeFace:(cv::Mat)image
+{
+    int predictedLabel = -1;
+    double confidence = 0.0;
+    
+    _model->predict(image, predictedLabel, confidence);
+    
+    NSString *firstName = @"";
+    NSString *familyName =@"";
+    if(predictedLabel )
+    {
+        if (predictedLabel != -1)
+        {
+            NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+            NSEntityDescription *entity = [NSEntityDescription entityForName:@"Faces" inManagedObjectContext:context1];
+            [fetchRequest setEntity:entity];
+            fetchRequest.predicate = [NSPredicate predicateWithFormat:@" label == %i",predictedLabel];
+            NSError *error = nil;
+            NSArray *array = [context1 executeFetchRequest:fetchRequest error:&error];
+            
+            if(array ==nil)
+            {
+                NSLog(@"Problem ! @%",error);
+            }
+            
+            for(Face *c in array)
+            {
+                firstName = c.firstName;
+                familyName = c.familyName;
+            }
+        }
+    }
+    return @{
+             @"label": [NSNumber numberWithInt:predictedLabel],
+             @"firstName": firstName,
+             @"familyName": familyName,
+             @"confidence": [NSNumber numberWithDouble:confidence]
+             };
+}
+
+- (void)createTablesIfNeeded
+{
+    /* // People table
+     const char *peopleSQL = "CREATE TABLE IF NOT EXISTS people ("
+     "'id' integer NOT NULL PRIMARY KEY AUTOINCREMENT, "
+     "'name' text NOT NULL)";
+     
+     if (sqlite3_exec(_db, peopleSQL, nil, nil, nil) != SQLITE_OK) {
+     NSLog(@"The people table could not be created.");
+     }
+     
+     // Images table
+     const char *imagesSQL = "CREATE TABLE IF NOT EXISTS images ("
+     "'id' integer NOT NULL PRIMARY KEY AUTOINCREMENT, "
+     "'person_id' integer NOT NULL, "
+     "'image' blob NOT NULL)";
+     
+     if (sqlite3_exec(_db, imagesSQL, nil, nil, nil) != SQLITE_OK) {
+     NSLog(@"The images table could not be created.");
+     }*/
 }
 
 /*- (NSString *)dbPath
@@ -106,60 +258,7 @@ NSDictionary* faceD;
  return results;
  }
  */
-- (BOOL)trainModel
-{
-    std::vector<cv::Mat> images;
-    std::vector<int> labels;
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Faces" inManagedObjectContext:context1];
-    [fetchRequest setEntity:entity];
-    
-    NSError *error = nil;
-    NSArray *array = [context1 executeFetchRequest:fetchRequest error:&error];
-    if(array ==nil)
-    {
-        NSLog(@"Problem ! @%",error);
-    }
-    
-    for(Face *c in array)
-    {
-        int label = c.label.intValue;
-        NSData *imageD = c.photo;
-        cv::Mat faceData = [self dataToMat:imageD
-                                     width:[NSNumber numberWithInt:100]
-                                    height:[NSNumber numberWithInt:100]];
-        images.push_back(faceData);
-        labels.push_back(label);
-    }
-    if (images.size() > 0 && labels.size() > 0) {
-        _model->train(images, labels);
-        return YES;
-    }
-    else {
-        return NO;
-    }
-}
--(cv::Mat)dataToMat:(NSData *)data width:(NSNumber *)width height:(NSNumber *)height
-{
-    cv::Mat output = cv::Mat([width integerValue], [height integerValue], CV_8UC1);
-    output.data = (unsigned char*)data.bytes;
-    
-    return output;
-}
 
-- (void)forgetAllFacesForPersonID:(int)personID
-{
-    /* const char* deleteSQL = "DELETE FROM person WHERE personid = ?";
-     sqlite3_stmt *statement;
-     
-     if (sqlite3_prepare_v2(_db, deleteSQL, -1, &statement, nil) == SQLITE_OK) {
-     sqlite3_bind_int(statement, 1, personID);
-     sqlite3_step(statement);
-     }
-     
-     sqlite3_finalize(statement);*/
-}
 /*
  - (void)learnFace:(cv::Rect)face ofPersonName:(NSString *)name fromImage:(cv::Mat&)image//(int)personID fromImage:(cv::Mat&)image
  {
@@ -181,75 +280,4 @@ NSDictionary* faceD;
  sqlite3_finalize(statement);
  }
  */
-- (cv::Mat)pullStandardizedFace:(cv::Rect)face fromImage:(cv::Mat&)image
-{
-    // Pull the grayscale face ROI out of the captured image
-    cv::Mat onlyTheFace;
-    cv::cvtColor(image(face), onlyTheFace, CV_RGB2GRAY);
-    // Standardize the face to 100x100 pixels
-    cv::resize(onlyTheFace, onlyTheFace, cv::Size(100, 100), 0, 0);
-    return onlyTheFace;
-}
-
-- (NSDictionary *)recognizeFace:(cv::Mat)image
-{
-    int predictedLabel = -1;
-    double confidence = 0.0;
-    
-    _model->predict(image, predictedLabel, confidence);
-    
-    NSString *firstName = @"";
-    NSString *familyName =@"";
-    if(predictedLabel )
-        
-        if (predictedLabel != -1) {
-            
-            NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-            NSEntityDescription *entity = [NSEntityDescription entityForName:@"Faces" inManagedObjectContext:context1];
-            [fetchRequest setEntity:entity];
-            fetchRequest.predicate = [NSPredicate predicateWithFormat:@" label == %i",predictedLabel];
-            NSError *error = nil;
-            NSArray *array = [context1 executeFetchRequest:fetchRequest error:&error];
-            if(array ==nil)
-            {
-                NSLog(@"Problem ! @%",error);
-            }
-            
-             for(Face *c in array)
-             {
-             firstName = c.firstName;
-             familyName = c.familyName;
-             }
-        }
-    return @{
-             @"label": [NSNumber numberWithInt:predictedLabel],
-             @"firstName": firstName,
-             @"familyName": familyName,
-             @"confidence": [NSNumber numberWithDouble:confidence]
-             };
-}
-
-- (void)createTablesIfNeeded
-{
-    /* // People table
-     const char *peopleSQL = "CREATE TABLE IF NOT EXISTS people ("
-     "'id' integer NOT NULL PRIMARY KEY AUTOINCREMENT, "
-     "'name' text NOT NULL)";
-     
-     if (sqlite3_exec(_db, peopleSQL, nil, nil, nil) != SQLITE_OK) {
-     NSLog(@"The people table could not be created.");
-     }
-     
-     // Images table
-     const char *imagesSQL = "CREATE TABLE IF NOT EXISTS images ("
-     "'id' integer NOT NULL PRIMARY KEY AUTOINCREMENT, "
-     "'person_id' integer NOT NULL, "
-     "'image' blob NOT NULL)";
-     
-     if (sqlite3_exec(_db, imagesSQL, nil, nil, nil) != SQLITE_OK) {
-     NSLog(@"The images table could not be created.");
-     }*/
-}
-
 @end
-

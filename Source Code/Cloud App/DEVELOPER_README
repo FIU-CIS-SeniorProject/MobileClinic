@@ -1,0 +1,37 @@
+By Ernesto Perez Fall 2013 Florida International University
+Sernior Porject Mobile Clinic Version 2
+
+Developer and Production enviroments are using different databases. This is a serios mistake, since
+PostgreSQL and SQLite are so different than we will only see the errors once they are in production.
+I received the project like this, and since I strugle to install PostgreSQL on my local machine, I continue
+using this system; but I recomend not to.
+
+In the "bootstrap_and_overrides.css.scss" file that is located at app/assets/stylesheet/ I put a commend 
+for some weird behavoir that I was finding between Development and Production. In line 253 you will find the
+commend. Basically the left side menu on the project appears in different places depending on that line.
+I was not able to fix it, and honestly I did not try to hard since there were thing more important than that.
+For Development you should keep the line commented out, and for production uncommented out.
+
+In the file "application.js" which is at app/assets/javascript/ there is an error which I try very hard to fix
+but was unable to. The problem is that the dropdown in the menu at the top right corner of the webpage does not
+work in development if you do not put the line //= require bootstrap/dropdown before //= require jquery. 
+For production you need to remove this since in production everything is fine, but for some reason unknown
+by me, the javascript does not work for the dropdown functionality if that line is not before jquery.
+
+At the api_controller, you will find an if stament cheking for the timestamp that the Local Server send,
+and comparing that timestamp to a hard code date that I wrote over there. That date is some date from 1901
+in epoch unix time. The explanation for that is that Local Server and Cloud Server are using different
+databases, so as a result the Local Server sends a weird date so far back that PostgreSQL gives an error
+saying that the date is out of range. The only solution that I could find was cheing with a fix date
+that I know works in PostgrSQL and that is really far back, and if the date coming from Local Server is less
+then using my date instead of the otherone. This is purely a hack, but I need it to fix this and I was agaist
+time, so I leave it to future developers to give a better solution to this problem.
+
+Since Development and Production have different databases you will find some ""\columns\"" inside select
+clause that have quotes with backslah at the beginning and at the end. The reason for that is that when Rails
+perform queries, it converts all columns to lowercase, and SQLite does not care about it, but PostgreSQL is 
+too delicate, so if the column has a leter in upper case then it will give you an error.
+Ex. select("patientId") will give you an error in PostgreSQL since Rails will turn all to lower case
+and for PostgreSQL patientid is not the same as patientId. Write it like this select(""\patientId"\") while
+you have two different databases otherwise you wil have some error.
+

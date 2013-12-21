@@ -24,6 +24,7 @@
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 2/26/13.
+//  Modified by James Mendez on 12/2013
 //
 #import "Medication.h"
 

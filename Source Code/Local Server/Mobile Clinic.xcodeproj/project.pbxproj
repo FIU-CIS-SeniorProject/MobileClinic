@@ -8,12 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		0FCC49CE16F3C63400FD3338 /* MedicationFile.json in Resources */ = {isa = PBXBuildFile; fileRef = 0FCC49CD16F3C63400FD3338 /* MedicationFile.json */; };
-		463294A216C9B97B00C57DCE /* PatientObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 463294A116C9B97B00C57DCE /* PatientObject.m */; };
+		891764A01859773A00545617 /* libopencv_calib3d.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 891764951859773A00545617 /* libopencv_calib3d.2.4.6.dylib */; };
+		891764A11859773A00545617 /* libopencv_contrib.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 891764961859773A00545617 /* libopencv_contrib.2.4.6.dylib */; };
+		891764A21859773A00545617 /* libopencv_core.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 891764971859773A00545617 /* libopencv_core.2.4.6.dylib */; };
+		891764A31859773A00545617 /* libopencv_features2d.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 891764981859773A00545617 /* libopencv_features2d.2.4.6.dylib */; };
+		891764A41859773A00545617 /* libopencv_flann.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 891764991859773A00545617 /* libopencv_flann.2.4.6.dylib */; };
+		891764A51859773A00545617 /* libopencv_highgui.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8917649A1859773A00545617 /* libopencv_highgui.2.4.6.dylib */; };
+		891764A61859773A00545617 /* libopencv_imgproc.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8917649B1859773A00545617 /* libopencv_imgproc.2.4.6.dylib */; };
+		891764A71859773A00545617 /* libopencv_objdetect.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8917649C1859773A00545617 /* libopencv_objdetect.2.4.6.dylib */; };
+		891764A81859773A00545617 /* libopencv_photo.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8917649D1859773A00545617 /* libopencv_photo.2.4.6.dylib */; };
+		891764A91859773A00545617 /* libopencv_stitching.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8917649E1859773A00545617 /* libopencv_stitching.2.4.6.dylib */; };
+		891764AA1859773A00545617 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8917649F1859773A00545617 /* opencv2.framework */; };
 		893FCE6A1825EB520054402A /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 893FCE691825EB520054402A /* libsqlite3.dylib */; };
 		893FCE6C1825EB800054402A /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 893FCE6B1825EB800054402A /* libsqlite3.0.dylib */; };
 		897036B21830611E004AA93D /* Face.m in Sources */ = {isa = PBXBuildFile; fileRef = 897036B11830611E004AA93D /* Face.m */; };
 		899B272318317EC200BEC734 /* FaceRecognize.mm in Sources */ = {isa = PBXBuildFile; fileRef = 899B272218317EC200BEC734 /* FaceRecognize.mm */; };
 		899B27251831846400BEC734 /* FaceObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 899B27241831846400BEC734 /* FaceObject.mm */; };
+		899EF63B1861116C000A36A2 /* VisitationObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 899EF63A1861116C000A36A2 /* VisitationObject.m */; };
+		899EF63E1861122F000A36A2 /* UserObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 899EF63D1861122F000A36A2 /* UserObject.m */; };
+		899EF6411861126B000A36A2 /* PatientObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 899EF6401861126B000A36A2 /* PatientObject.m */; };
+		899EF644186112A4000A36A2 /* MedicationObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 899EF643186112A4000A36A2 /* MedicationObject.m */; };
 		89BCE2CC1842D13B00FCE9DA /* CloudManagementObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 89BCE2CA1842D13B00FCE9DA /* CloudManagementObject.m */; };
 		89BCE2D11842D16F00FCE9DA /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89BCE2CF1842D16F00FCE9DA /* LoginView.m */; };
 		89BCE2D21842D16F00FCE9DA /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89BCE2D01842D16F00FCE9DA /* LoginView.xib */; };
@@ -21,19 +35,7 @@
 		89DA4136183DA67900C096BB /* Recognition.mm in Sources */ = {isa = PBXBuildFile; fileRef = 89DA4135183DA67900C096BB /* Recognition.mm */; };
 		8C2CBC84185185BE006CE67C /* Mobile_Clinic.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CBC82185185BE006CE67C /* Mobile_Clinic.xcdatamodeld */; };
 		8C4DCA241851848B009FA3C7 /* NSMutableData-AES.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4DCA231851848B009FA3C7 /* NSMutableData-AES.m */; };
-		8C4EA135185AFF8D00A38039 /* Visitations.json in Resources */ = {isa = PBXBuildFile; fileRef = 8C4EA134185AFF8D00A38039 /* Visitations.json */; };
 		8CD2C94D18516FCE00511580 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD2C94C18516FCE00511580 /* IOKit.framework */; };
-		8CD2C94F18516FE500511580 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD2C94E18516FE500511580 /* opencv2.framework */; };
-		8CD2C95A18516FF300511580 /* libopencv_calib3d.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD2C95018516FF200511580 /* libopencv_calib3d.2.4.6.dylib */; };
-		8CD2C95B18516FF300511580 /* libopencv_contrib.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD2C95118516FF200511580 /* libopencv_contrib.2.4.6.dylib */; };
-		8CD2C95C18516FF300511580 /* libopencv_core.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD2C95218516FF200511580 /* libopencv_core.2.4.6.dylib */; };
-		8CD2C95D18516FF300511580 /* libopencv_features2d.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD2C95318516FF200511580 /* libopencv_features2d.2.4.6.dylib */; };
-		8CD2C95E18516FF300511580 /* libopencv_flann.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD2C95418516FF200511580 /* libopencv_flann.2.4.6.dylib */; };
-		8CD2C95F18516FF300511580 /* libopencv_highgui.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD2C95518516FF200511580 /* libopencv_highgui.2.4.6.dylib */; };
-		8CD2C96018516FF300511580 /* libopencv_imgproc.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD2C95618516FF200511580 /* libopencv_imgproc.2.4.6.dylib */; };
-		8CD2C96118516FF300511580 /* libopencv_objdetect.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD2C95718516FF200511580 /* libopencv_objdetect.2.4.6.dylib */; };
-		8CD2C96218516FF300511580 /* libopencv_photo.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD2C95818516FF200511580 /* libopencv_photo.2.4.6.dylib */; };
-		8CD2C96318516FF300511580 /* libopencv_stitching.2.4.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD2C95918516FF200511580 /* libopencv_stitching.2.4.6.dylib */; };
 		EA09328916F818D200536DF3 /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = EA09328816F818D200536DF3 /* Database.m */; };
 		EA0FE4DC171CB3CA00E68DFD /* SystemBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0FE4DB171CB3CA00E68DFD /* SystemBackup.m */; };
 		EA0FE4DD171CB3CA00E68DFD /* SystemBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0FE4DB171CB3CA00E68DFD /* SystemBackup.m */; };
@@ -42,13 +44,11 @@
 		EA0FE4F4171E2BAF00E68DFD /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0FE4F3171E2BAF00E68DFD /* libz.dylib */; };
 		EA172D3616B50A9C00F00C61 /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = EA172D3516B50A9C00F00C61 /* Server.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		EA172D3C16B56AEE00F00C61 /* ServerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EA172D3B16B56AEE00F00C61 /* ServerWrapper.m */; };
-		EA172D5C16B60A6B00F00C61 /* UserObject.m in Sources */ = {isa = PBXBuildFile; fileRef = EA172D5B16B60A6B00F00C61 /* UserObject.m */; };
 		EA172D6016B6108D00F00C61 /* ObjectFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = EA172D5F16B6108D00F00C61 /* ObjectFactory.m */; };
 		EA172D6416B6116800F00C61 /* BaseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = EA172D6316B6116800F00C61 /* BaseObject.m */; };
 		EA172D7A16B6371D00F00C61 /* StatusObject.m in Sources */ = {isa = PBXBuildFile; fileRef = EA172D7916B6371D00F00C61 /* StatusObject.m */; };
 		EA172D7E16B6412600F00C61 /* ConnectListContent.m in Sources */ = {isa = PBXBuildFile; fileRef = EA172D7D16B6412600F00C61 /* ConnectListContent.m */; };
 		EA186A4716BB5BF500977A00 /* HTTPServerCore.m in Sources */ = {isa = PBXBuildFile; fileRef = EA186A4616BB5BF500977A00 /* HTTPServerCore.m */; };
-		EA1EE1BF16D0A02100E263D2 /* VisitationObject.m in Sources */ = {isa = PBXBuildFile; fileRef = EA1EE1BE16D0A02000E263D2 /* VisitationObject.m */; };
 		EA4CEC1416E3F8F400D6AB58 /* Visitation.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4CEC1316E3F8F400D6AB58 /* Visitation.m */; };
 		EA51359E17015D93001761FC /* BaseObject+Protected.m in Sources */ = {isa = PBXBuildFile; fileRef = EA51359D17015D93001761FC /* BaseObject+Protected.m */; };
 		EA5272CE1708653E0033604C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA8D85EE16B0C9BF00256495 /* Cocoa.framework */; };
@@ -61,7 +61,6 @@
 		EA5272F2170867CE0033604C /* GHUnitTestMain.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5272F1170867CE0033604C /* GHUnitTestMain.m */; };
 		EA5272F5170868C20033604C /* SmokeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5272F4170868C20033604C /* SmokeTest.m */; };
 		EA5272F917086CDB0033604C /* UserObjectTest.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5272F817086CDB0033604C /* UserObjectTest.m */; };
-		EA5272FA17086D1F0033604C /* UserObject.m in Sources */ = {isa = PBXBuildFile; fileRef = EA172D5B16B60A6B00F00C61 /* UserObject.m */; };
 		EA5272FB17086D360033604C /* BaseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = EA172D6316B6116800F00C61 /* BaseObject.m */; };
 		EA5272FC17086D360033604C /* BaseObject+Protected.m in Sources */ = {isa = PBXBuildFile; fileRef = EA51359D17015D93001761FC /* BaseObject+Protected.m */; };
 		EA5272FD17086D4D0033604C /* CloudService.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC37F1416F36DBA00836C1C /* CloudService.m */; };
@@ -97,14 +96,12 @@
 		EAC19C8516DEE40700B0B8DA /* Patients.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC19C8416DEE40700B0B8DA /* Patients.m */; };
 		EAC37F1116F213E400836C1C /* Prescription.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC37F1016F213E400836C1C /* Prescription.m */; };
 		EAC37F1516F36DBA00836C1C /* CloudService.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC37F1416F36DBA00836C1C /* CloudService.m */; };
-		EAC37F1C16F394DB00836C1C /* MedicationObject.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC37F1B16F394DA00836C1C /* MedicationObject.m */; };
 		EAD015EA16D5E524002A8B3B /* NSObject+CustomTools.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD015E916D5E524002A8B3B /* NSObject+CustomTools.m */; };
 		EAE655E616F5443800139C62 /* MedicationList.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE655E416F5443800139C62 /* MedicationList.m */; };
 		EAE655E716F5443800139C62 /* MedicationList.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAE655E516F5443800139C62 /* MedicationList.xib */; };
 		EAE6CD9F16BE29B9008949DC /* NSString+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE6CD9E16BE29B9008949DC /* NSString+Validation.m */; };
 		EAEA9E94170F4F07005F1202 /* BaseObject+Protected.m in Sources */ = {isa = PBXBuildFile; fileRef = EAEA9E93170F4F07005F1202 /* BaseObject+Protected.m */; };
 		EAEA9E971711BCA5005F1202 /* PatientObjectTest.m in Sources */ = {isa = PBXBuildFile; fileRef = EAEA9E961711BCA5005F1202 /* PatientObjectTest.m */; };
-		EAEA9E9B1711C39A005F1202 /* PatientObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 463294A116C9B97B00C57DCE /* PatientObject.m */; };
 		EAEA9E9C1711C911005F1202 /* NSObject+CustomTools.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD015E916D5E524002A8B3B /* NSObject+CustomTools.m */; };
 /* End PBXBuildFile section */
 
@@ -133,8 +130,17 @@
 
 /* Begin PBXFileReference section */
 		0FCC49CD16F3C63400FD3338 /* MedicationFile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MedicationFile.json; sourceTree = "<group>"; };
-		463294A016C9B97B00C57DCE /* PatientObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatientObject.h; sourceTree = "<group>"; };
-		463294A116C9B97B00C57DCE /* PatientObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatientObject.m; sourceTree = "<group>"; };
+		891764951859773A00545617 /* libopencv_calib3d.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_calib3d.2.4.6.dylib; path = ../FRLibraries/libopencv_calib3d.2.4.6.dylib; sourceTree = "<group>"; };
+		891764961859773A00545617 /* libopencv_contrib.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_contrib.2.4.6.dylib; path = ../FRLibraries/libopencv_contrib.2.4.6.dylib; sourceTree = "<group>"; };
+		891764971859773A00545617 /* libopencv_core.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_core.2.4.6.dylib; path = ../FRLibraries/libopencv_core.2.4.6.dylib; sourceTree = "<group>"; };
+		891764981859773A00545617 /* libopencv_features2d.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_features2d.2.4.6.dylib; path = ../FRLibraries/libopencv_features2d.2.4.6.dylib; sourceTree = "<group>"; };
+		891764991859773A00545617 /* libopencv_flann.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_flann.2.4.6.dylib; path = ../FRLibraries/libopencv_flann.2.4.6.dylib; sourceTree = "<group>"; };
+		8917649A1859773A00545617 /* libopencv_highgui.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_highgui.2.4.6.dylib; path = ../FRLibraries/libopencv_highgui.2.4.6.dylib; sourceTree = "<group>"; };
+		8917649B1859773A00545617 /* libopencv_imgproc.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_imgproc.2.4.6.dylib; path = ../FRLibraries/libopencv_imgproc.2.4.6.dylib; sourceTree = "<group>"; };
+		8917649C1859773A00545617 /* libopencv_objdetect.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_objdetect.2.4.6.dylib; path = ../FRLibraries/libopencv_objdetect.2.4.6.dylib; sourceTree = "<group>"; };
+		8917649D1859773A00545617 /* libopencv_photo.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_photo.2.4.6.dylib; path = ../FRLibraries/libopencv_photo.2.4.6.dylib; sourceTree = "<group>"; };
+		8917649E1859773A00545617 /* libopencv_stitching.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_stitching.2.4.6.dylib; path = ../FRLibraries/libopencv_stitching.2.4.6.dylib; sourceTree = "<group>"; };
+		8917649F1859773A00545617 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ../FRLibraries/opencv2.framework; sourceTree = "<group>"; };
 		893FCE691825EB520054402A /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		893FCE6B1825EB800054402A /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		895D5CCA1825D053005D25A8 /* FaceObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceObject.h; sourceTree = "<group>"; };
@@ -144,6 +150,14 @@
 		899B272118317EC200BEC734 /* FaceRecognize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceRecognize.h; sourceTree = "<group>"; };
 		899B272218317EC200BEC734 /* FaceRecognize.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FaceRecognize.mm; sourceTree = "<group>"; };
 		899B27241831846400BEC734 /* FaceObject.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FaceObject.mm; sourceTree = "<group>"; };
+		899EF6391861116C000A36A2 /* VisitationObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisitationObject.h; sourceTree = "<group>"; };
+		899EF63A1861116C000A36A2 /* VisitationObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisitationObject.m; sourceTree = "<group>"; };
+		899EF63C1861122F000A36A2 /* UserObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserObject.h; sourceTree = "<group>"; };
+		899EF63D1861122F000A36A2 /* UserObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserObject.m; sourceTree = "<group>"; };
+		899EF63F1861126B000A36A2 /* PatientObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatientObject.h; sourceTree = "<group>"; };
+		899EF6401861126B000A36A2 /* PatientObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatientObject.m; sourceTree = "<group>"; };
+		899EF642186112A4000A36A2 /* MedicationObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MedicationObject.h; sourceTree = "<group>"; };
+		899EF643186112A4000A36A2 /* MedicationObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MedicationObject.m; sourceTree = "<group>"; };
 		89BCE2C91842D13B00FCE9DA /* CloudManagementObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloudManagementObject.h; sourceTree = "<group>"; };
 		89BCE2CA1842D13B00FCE9DA /* CloudManagementObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloudManagementObject.m; sourceTree = "<group>"; };
 		89BCE2CB1842D13B00FCE9DA /* CloudManagementObjectProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloudManagementObjectProtocol.h; sourceTree = "<group>"; };
@@ -157,9 +171,7 @@
 		8C2CBC83185185BE006CE67C /* Mobile_Clinic.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Mobile_Clinic.xcdatamodel; sourceTree = "<group>"; };
 		8C4DCA221851848B009FA3C7 /* NSMutableData-AES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableData-AES.h"; sourceTree = "<group>"; };
 		8C4DCA231851848B009FA3C7 /* NSMutableData-AES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableData-AES.m"; sourceTree = "<group>"; };
-		8C4EA134185AFF8D00A38039 /* Visitations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Visitations.json; sourceTree = "<group>"; };
 		8CD2C94C18516FCE00511580 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
-		8CD2C94E18516FE500511580 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		8CD2C95018516FF200511580 /* libopencv_calib3d.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_calib3d.2.4.6.dylib; path = "../Facial Recognition Libraries/libopencv_calib3d.2.4.6.dylib"; sourceTree = "<group>"; };
 		8CD2C95118516FF200511580 /* libopencv_contrib.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_contrib.2.4.6.dylib; path = "../Facial Recognition Libraries/libopencv_contrib.2.4.6.dylib"; sourceTree = "<group>"; };
 		8CD2C95218516FF200511580 /* libopencv_core.2.4.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_core.2.4.6.dylib; path = "../Facial Recognition Libraries/libopencv_core.2.4.6.dylib"; sourceTree = "<group>"; };
@@ -182,8 +194,6 @@
 		EA172D3516B50A9C00F00C61 /* Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Server.m; sourceTree = "<group>"; };
 		EA172D3A16B56AEE00F00C61 /* ServerWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerWrapper.h; sourceTree = "<group>"; };
 		EA172D3B16B56AEE00F00C61 /* ServerWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerWrapper.m; sourceTree = "<group>"; };
-		EA172D5A16B60A6A00F00C61 /* UserObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserObject.h; sourceTree = "<group>"; };
-		EA172D5B16B60A6B00F00C61 /* UserObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserObject.m; sourceTree = "<group>"; };
 		EA172D5E16B6108D00F00C61 /* ObjectFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectFactory.h; sourceTree = "<group>"; };
 		EA172D5F16B6108D00F00C61 /* ObjectFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectFactory.m; sourceTree = "<group>"; };
 		EA172D6216B6116800F00C61 /* BaseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseObject.h; sourceTree = "<group>"; };
@@ -194,8 +204,6 @@
 		EA172D7D16B6412600F00C61 /* ConnectListContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectListContent.m; sourceTree = "<group>"; };
 		EA186A4516BB5BF500977A00 /* HTTPServerCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPServerCore.h; sourceTree = "<group>"; };
 		EA186A4616BB5BF500977A00 /* HTTPServerCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPServerCore.m; sourceTree = "<group>"; };
-		EA1EE1BD16D0A02000E263D2 /* VisitationObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisitationObject.h; sourceTree = "<group>"; };
-		EA1EE1BE16D0A02000E263D2 /* VisitationObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisitationObject.m; sourceTree = "<group>"; };
 		EA27F9C516DCA9FA008D7DA9 /* DatabaseDriverProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseDriverProtocol.h; sourceTree = "<group>"; };
 		EA4CEC1216E3F8F400D6AB58 /* Visitation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Visitation.h; sourceTree = "<group>"; };
 		EA4CEC1316E3F8F400D6AB58 /* Visitation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Visitation.m; sourceTree = "<group>"; };
@@ -284,8 +292,6 @@
 		EAC37F1416F36DBA00836C1C /* CloudService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloudService.m; sourceTree = "<group>"; };
 		EAC37F1616F36DD500836C1C /* CloudServiceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloudServiceProtocol.h; sourceTree = "<group>"; };
 		EAC37F1716F37A8F00836C1C /* CommonObjectProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonObjectProtocol.h; sourceTree = "<group>"; };
-		EAC37F1A16F394D800836C1C /* MedicationObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MedicationObject.h; sourceTree = "<group>"; };
-		EAC37F1B16F394DA00836C1C /* MedicationObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MedicationObject.m; sourceTree = "<group>"; };
 		EAC37F1E16F3950D00836C1C /* MedicationObjectProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MedicationObjectProtocol.h; sourceTree = "<group>"; };
 		EAC37F1F16F3A01C00836C1C /* StatusObjectProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusObjectProtocol.h; sourceTree = "<group>"; };
 		EAD015E816D5E524002A8B3B /* NSObject+CustomTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+CustomTools.h"; sourceTree = "<group>"; };
@@ -315,18 +321,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				891764A01859773A00545617 /* libopencv_calib3d.2.4.6.dylib in Frameworks */,
+				891764A11859773A00545617 /* libopencv_contrib.2.4.6.dylib in Frameworks */,
+				891764A21859773A00545617 /* libopencv_core.2.4.6.dylib in Frameworks */,
+				891764A31859773A00545617 /* libopencv_features2d.2.4.6.dylib in Frameworks */,
+				891764A41859773A00545617 /* libopencv_flann.2.4.6.dylib in Frameworks */,
+				891764A51859773A00545617 /* libopencv_highgui.2.4.6.dylib in Frameworks */,
+				891764A61859773A00545617 /* libopencv_imgproc.2.4.6.dylib in Frameworks */,
+				891764A71859773A00545617 /* libopencv_objdetect.2.4.6.dylib in Frameworks */,
+				891764A81859773A00545617 /* libopencv_photo.2.4.6.dylib in Frameworks */,
+				891764A91859773A00545617 /* libopencv_stitching.2.4.6.dylib in Frameworks */,
+				891764AA1859773A00545617 /* opencv2.framework in Frameworks */,
 				8CD2C94D18516FCE00511580 /* IOKit.framework in Frameworks */,
-				8CD2C94F18516FE500511580 /* opencv2.framework in Frameworks */,
-				8CD2C95A18516FF300511580 /* libopencv_calib3d.2.4.6.dylib in Frameworks */,
-				8CD2C95B18516FF300511580 /* libopencv_contrib.2.4.6.dylib in Frameworks */,
-				8CD2C95C18516FF300511580 /* libopencv_core.2.4.6.dylib in Frameworks */,
-				8CD2C95D18516FF300511580 /* libopencv_features2d.2.4.6.dylib in Frameworks */,
-				8CD2C95E18516FF300511580 /* libopencv_flann.2.4.6.dylib in Frameworks */,
-				8CD2C95F18516FF300511580 /* libopencv_highgui.2.4.6.dylib in Frameworks */,
-				8CD2C96018516FF300511580 /* libopencv_imgproc.2.4.6.dylib in Frameworks */,
-				8CD2C96118516FF300511580 /* libopencv_objdetect.2.4.6.dylib in Frameworks */,
-				8CD2C96218516FF300511580 /* libopencv_photo.2.4.6.dylib in Frameworks */,
-				8CD2C96318516FF300511580 /* libopencv_stitching.2.4.6.dylib in Frameworks */,
 				893FCE6C1825EB800054402A /* libsqlite3.0.dylib in Frameworks */,
 				893FCE6A1825EB520054402A /* libsqlite3.dylib in Frameworks */,
 				EA0FE4F4171E2BAF00E68DFD /* libz.dylib in Frameworks */,
@@ -377,7 +383,7 @@
 			name = "Login View & Controller";
 			sourceTree = "<group>";
 		};
-		8C4EA133185AF72200A38039 /* Recognition Object */ = {
+		8CB97C8B1864FE4600A47A84 /* Recognition Object */ = {
 			isa = PBXGroup;
 			children = (
 				89DA4134183DA67900C096BB /* Recognition.h */,
@@ -507,9 +513,9 @@
 		EA749BCF16EDAF2E000F849F /* Visitation Objects */ = {
 			isa = PBXGroup;
 			children = (
-				EA1EE1BD16D0A02000E263D2 /* VisitationObject.h */,
-				EA1EE1BE16D0A02000E263D2 /* VisitationObject.m */,
 				EAEF2F9816ED63BD00A9B49A /* VisitationObjectProtocol.h */,
+				899EF6391861116C000A36A2 /* VisitationObject.h */,
+				899EF63A1861116C000A36A2 /* VisitationObject.m */,
 			);
 			name = "Visitation Objects";
 			sourceTree = "<group>";
@@ -517,9 +523,9 @@
 		EA749BD016EDAF3F000F849F /* Patient Objects */ = {
 			isa = PBXGroup;
 			children = (
-				463294A016C9B97B00C57DCE /* PatientObject.h */,
-				463294A116C9B97B00C57DCE /* PatientObject.m */,
 				EA7CDC7416ED1D13005A9070 /* PatientObjectProtocol.h */,
+				899EF63F1861126B000A36A2 /* PatientObject.h */,
+				899EF6401861126B000A36A2 /* PatientObject.m */,
 			);
 			name = "Patient Objects";
 			sourceTree = "<group>";
@@ -539,7 +545,17 @@
 		EA8D85DF16B0C9BF00256495 = {
 			isa = PBXGroup;
 			children = (
-				8CD2C94E18516FE500511580 /* opencv2.framework */,
+				891764951859773A00545617 /* libopencv_calib3d.2.4.6.dylib */,
+				891764961859773A00545617 /* libopencv_contrib.2.4.6.dylib */,
+				891764971859773A00545617 /* libopencv_core.2.4.6.dylib */,
+				891764981859773A00545617 /* libopencv_features2d.2.4.6.dylib */,
+				891764991859773A00545617 /* libopencv_flann.2.4.6.dylib */,
+				8917649A1859773A00545617 /* libopencv_highgui.2.4.6.dylib */,
+				8917649B1859773A00545617 /* libopencv_imgproc.2.4.6.dylib */,
+				8917649C1859773A00545617 /* libopencv_objdetect.2.4.6.dylib */,
+				8917649D1859773A00545617 /* libopencv_photo.2.4.6.dylib */,
+				8917649E1859773A00545617 /* libopencv_stitching.2.4.6.dylib */,
+				8917649F1859773A00545617 /* opencv2.framework */,
 				89700A4F18304290004AA93D /* Face Recognition */,
 				893FCE6B1825EB800054402A /* libsqlite3.0.dylib */,
 				893FCE691825EB520054402A /* libsqlite3.dylib */,
@@ -558,7 +574,6 @@
 				89BCE2CD1842D15300FCE9DA /* Login View & Controller */,
 				EA09328616F8149F00536DF3 /* Cloud API */,
 				EAADC01D16E0596C009E7AF9 /* PatientFile.json */,
-				8C4EA134185AFF8D00A38039 /* Visitations.json */,
 				0FCC49CD16F3C63400FD3338 /* MedicationFile.json */,
 				EAEF2F9716ED5B7300A9B49A /* Patient Control */,
 				EA172D7C16B6412600F00C61 /* ConnectListContent.h */,
@@ -712,16 +727,16 @@
 		EA9372AE16BC7CBD00D3D617 /* Object Types (USE THESE ONLY) */ = {
 			isa = PBXGroup;
 			children = (
-				8C4EA133185AF72200A38039 /* Recognition Object */,
+				EAC37F1716F37A8F00836C1C /* CommonObjectProtocol.h */,
 				89BCE2C81842D12000FCE9DA /* CloudManagement Object */,
 				895D5CC91825D02B005D25A8 /* Face Object */,
-				EAC37F1716F37A8F00836C1C /* CommonObjectProtocol.h */,
 				EAC37F1916F394B300836C1C /* Status Object */,
 				EAC37F1816F3821F00836C1C /* User Objects */,
 				EA749BD016EDAF3F000F849F /* Patient Objects */,
 				EA749BCF16EDAF2E000F849F /* Visitation Objects */,
 				EAC37F0A16F17A9A00836C1C /* Prescription Object */,
 				EAC37F1D16F394E100836C1C /* Medication Objects */,
+				8CB97C8B1864FE4600A47A84 /* Recognition Object */,
 			);
 			name = "Object Types (USE THESE ONLY)";
 			sourceTree = "<group>";
@@ -789,9 +804,9 @@
 		EAC37F1816F3821F00836C1C /* User Objects */ = {
 			isa = PBXGroup;
 			children = (
-				EA172D5A16B60A6A00F00C61 /* UserObject.h */,
-				EA172D5B16B60A6B00F00C61 /* UserObject.m */,
 				EAF4B6C416E68FED007B14B7 /* UserObjectProtocol.h */,
+				899EF63C1861122F000A36A2 /* UserObject.h */,
+				899EF63D1861122F000A36A2 /* UserObject.m */,
 			);
 			name = "User Objects";
 			sourceTree = "<group>";
@@ -809,9 +824,9 @@
 		EAC37F1D16F394E100836C1C /* Medication Objects */ = {
 			isa = PBXGroup;
 			children = (
-				EAC37F1A16F394D800836C1C /* MedicationObject.h */,
-				EAC37F1B16F394DA00836C1C /* MedicationObject.m */,
 				EAC37F1E16F3950D00836C1C /* MedicationObjectProtocol.h */,
+				899EF642186112A4000A36A2 /* MedicationObject.h */,
+				899EF643186112A4000A36A2 /* MedicationObject.m */,
 			);
 			name = "Medication Objects";
 			sourceTree = "<group>";
@@ -928,7 +943,6 @@
 				0FCC49CE16F3C63400FD3338 /* MedicationFile.json in Resources */,
 				EAE655E716F5443800139C62 /* MedicationList.xib in Resources */,
 				EAC0D7DD16FE7D6200621DDC /* UserView.xib in Resources */,
-				8C4EA135185AFF8D00A38039 /* Visitations.json in Resources */,
 				EA7D505A17179D9E002ED819 /* PatientData.png in Resources */,
 				EA7D505B17179D9E002ED819 /* PatientFile.png in Resources */,
 				EA7D505E1717A045002ED819 /* Pills.png in Resources */,
@@ -946,14 +960,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAEA9E9C1711C911005F1202 /* NSObject+CustomTools.m in Sources */,
-				EAEA9E9B1711C39A005F1202 /* PatientObject.m in Sources */,
 				EA52730017086D5F0033604C /* StatusObject.m in Sources */,
 				EA5272FD17086D4D0033604C /* CloudService.m in Sources */,
 				EA5272FE17086D4D0033604C /* Database.m in Sources */,
 				EA5272FF17086D4D0033604C /* DatabaseDriver.m in Sources */,
 				EA5272FB17086D360033604C /* BaseObject.m in Sources */,
 				EA5272FC17086D360033604C /* BaseObject+Protected.m in Sources */,
-				EA5272FA17086D1F0033604C /* UserObject.m in Sources */,
 				EA5272EB170867800033604C /* Makefile in Sources */,
 				EA5272F2170867CE0033604C /* GHUnitTestMain.m in Sources */,
 				EA5272F5170868C20033604C /* SmokeTest.m in Sources */,
@@ -974,7 +986,6 @@
 				EA8D860216B0C9C000256495 /* FIUAppDelegate.m in Sources */,
 				EA172D3616B50A9C00F00C61 /* Server.m in Sources */,
 				EA172D3C16B56AEE00F00C61 /* ServerWrapper.m in Sources */,
-				EA172D5C16B60A6B00F00C61 /* UserObject.m in Sources */,
 				8C2CBC84185185BE006CE67C /* Mobile_Clinic.xcdatamodeld in Sources */,
 				EA172D6016B6108D00F00C61 /* ObjectFactory.m in Sources */,
 				EA172D6416B6116800F00C61 /* BaseObject.m in Sources */,
@@ -985,8 +996,6 @@
 				EA186A4716BB5BF500977A00 /* HTTPServerCore.m in Sources */,
 				EA9372AB16BC6D6300D3D617 /* DatabaseDriver.m in Sources */,
 				EAE6CD9F16BE29B9008949DC /* NSString+Validation.m in Sources */,
-				463294A216C9B97B00C57DCE /* PatientObject.m in Sources */,
-				EA1EE1BF16D0A02100E263D2 /* VisitationObject.m in Sources */,
 				EAD015EA16D5E524002A8B3B /* NSObject+CustomTools.m in Sources */,
 				EAC19C6316DD27BF00B0B8DA /* Medication.m in Sources */,
 				EAC19C6816DD27BF00B0B8DA /* Users.m in Sources */,
@@ -996,7 +1005,6 @@
 				EA749BD316EDAF8D000F849F /* PrescriptionObject.m in Sources */,
 				EAC37F1116F213E400836C1C /* Prescription.m in Sources */,
 				EAC37F1516F36DBA00836C1C /* CloudService.m in Sources */,
-				EAC37F1C16F394DB00836C1C /* MedicationObject.m in Sources */,
 				EAE655E616F5443800139C62 /* MedicationList.m in Sources */,
 				EA09328916F818D200536DF3 /* Database.m in Sources */,
 				EAC0D7D516FBBACD00621DDC /* DataProcessor.m in Sources */,
@@ -1013,6 +1021,10 @@
 				89DA4136183DA67900C096BB /* Recognition.mm in Sources */,
 				89BCE2CC1842D13B00FCE9DA /* CloudManagementObject.m in Sources */,
 				89BCE2D11842D16F00FCE9DA /* LoginView.m in Sources */,
+				899EF63B1861116C000A36A2 /* VisitationObject.m in Sources */,
+				899EF63E1861122F000A36A2 /* UserObject.m in Sources */,
+				899EF6411861126B000A36A2 /* PatientObject.m in Sources */,
+				899EF644186112A4000A36A2 /* MedicationObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1177,7 +1189,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libstdc++";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1185,6 +1196,8 @@
 					"$(inherited)",
 					"\\\"$(SRCROOT)/../../..\\\"",
 					"/Users/jamesmendez/Documents/Senior\\ Project/MobileClinic\\ -\\ GIT/Source\\ Code/Local\\ Server",
+					"\"$(SRCROOT)/../../Desktop\"",
+					"\"$(SRCROOT)/../FRLibraries\"",
 				);
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1195,6 +1208,8 @@
 					"$(inherited)",
 					/opt/local/lib,
 					"/Users/jamesmendez/Documents/Senior\\ Project/MobileClinic\\ -\\ GIT/Source\\ Code/Facial\\ Recognition\\ Libraries",
+					"\"$(SRCROOT)/../../Desktop/MobileClinic/Source Code/Facial Recognition Libraries\"",
+					"\"$(SRCROOT)/../FRLibraries\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1206,7 +1221,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libstdc++";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1214,6 +1228,8 @@
 					"$(inherited)",
 					"\\\"$(SRCROOT)/../../..\\\"",
 					"/Users/jamesmendez/Documents/Senior\\ Project/MobileClinic\\ -\\ GIT/Source\\ Code/Local\\ Server",
+					"\"$(SRCROOT)/../../Desktop\"",
+					"\"$(SRCROOT)/../FRLibraries\"",
 				);
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1224,6 +1240,8 @@
 					"$(inherited)",
 					/opt/local/lib,
 					"/Users/jamesmendez/Documents/Senior\\ Project/MobileClinic\\ -\\ GIT/Source\\ Code/Facial\\ Recognition\\ Libraries",
+					"\"$(SRCROOT)/../../Desktop/MobileClinic/Source Code/Facial Recognition Libraries\"",
+					"\"$(SRCROOT)/../FRLibraries\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";

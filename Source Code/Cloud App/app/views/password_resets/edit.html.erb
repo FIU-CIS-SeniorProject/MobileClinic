@@ -7,11 +7,11 @@
 			</div>
 			<div class="grid-content overflow"> 
 				<%= f.label :password, :class => "reset_pass"%> 
-				<%= f.password_field :password,class: "form-control", type: "password" %> 
+				<%= f.password_field :password,class: "form-control", type: "password",required: "true",autocomplete: "off"  %> 
 			</div>
 			<div class="grid-content overflow">
 				<%= f.label :password_confirmation, :class => "reset_pass" %>  
-				<%= f.password_field :password_confirmation,class: "form-control", type: "password" %>				
+				<%= f.password_field :password_confirmation,class: "form-control", type: "password",required: "true" ,autocomplete: "off" %>				
 			</div>
 			<div class="clear"></div>
 			<div class="button-login">

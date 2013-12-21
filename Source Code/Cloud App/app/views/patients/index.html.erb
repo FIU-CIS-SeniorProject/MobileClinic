@@ -3,16 +3,19 @@
 	<div class="grid">
 		<div class="grid-title">
 			<div class="pull-left">
-				<div class="icon-title">
-					<i class="icon-user"></i>
-				</div>
-				<span>Patients</span>
-				<div class="clearfix"></div>
+				<span class="glyphicon glyphicon-align-justify"></span>
 			</div>
-			<div class="clearfix"></div>
+			<div class="pull-left" style="padding-top: 10px;">
+				<span>Patients</span>
+			</div>
+			<div class="pull-right">
+				<div class="icon-title">
+					<%= link_to patients_path(format: "csv") do%> <i> Download CSV <span class="glyphicon glyphicon-save"></span></i></a> <%end%>
+				</div>
+			</div>
 		</div>
 		<div class="grid-content overflow">
-			<table class="table table-bordered table-mod-2" id="datatable_patients">
+			<table class="table table-bordered" id="datatable_patients">
 				<thead>
 					<tr>
 						<th>First Name</th>
@@ -27,7 +30,7 @@
 						<td><%= patient.firstName%></td>
 						<td><%= patient.familyName%></td>
 						<td><%= patient.villageName%></td>
-						<td style="text-align: right;"><%= button_to "View", patient,:class => "btn btn-info btn-sm" %></td>
+						<td style="text-align: right;"><%= link_to "View", patient,:class => "btn btn-info btn-sm" %></td>
 					</tr>
 					<% end %>
 				</tbody>

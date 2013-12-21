@@ -6,13 +6,13 @@
 				Reset Password Form
 			</div>
 			<div class="grid-content overflow"> 
-		    	<%= text_field_tag :email,  nil, :placeholder => 'Enter email address...', class: "form-control", type: "email" %>
+		    	<%= text_field_tag :email,  nil, :placeholder => 'Enter email address...', class: "form-control", type: "email",required: "true",autocomplete: "off"  %>
 			</div>
 			<div class="grid-content overflow">
-				<%= select_tag "question", options_for_select([['Who was your childhood hero?',1], ['What is the name of the company of your first job?',2], ['What was your childhood nickname?',3], ['What school did you attend for sixth grade?',4], ['What street did you live on in third grade?',5]]) %>
+				<%= select_tag "question", options_for_select([['Who was your childhood hero?',1], ['What is the name of the company of your first job?',2], ['What was your childhood nickname?',3], ['What school did you attend for sixth grade?',4], ['What street did you live on in third grade?',5]]),class: "form-control",required: "true" %>
 		  	</div>
 		  	<div class="grid-content overflow">
-				<%= text_field_tag :answer ,  nil, :placeholder => 'Enter security answer...', class: "form-control", type: "text" %>
+				<%= text_field_tag :answer ,  nil, :placeholder => 'Enter security answer...', class: "form-control", type: "text",required: "true",autocomplete: "off"  %>
 		  	</div>
 			<div class="clear"></div>
 			<div class="button-login">

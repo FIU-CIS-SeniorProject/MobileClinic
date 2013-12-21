@@ -25,7 +25,6 @@
 //
 //  Created by Kevin Diaz on 11/17/13.
 //
-
 #import "LoginView.h"
 #import "UserObject.h"
 #import "Users.h"
@@ -40,7 +39,8 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if (self)
+    {
         
     }
     
@@ -58,11 +58,10 @@
          {
              [NSApp presentError:error];
          }
-         
      }];
     
-    [users loginWithUsername:[usernameTextField stringValue] andPassword:[passwordTextField stringValue] onCompletion:^(id<BaseObjectProtocol> data, NSError *error, NSDictionary *userA) {
-        
+    [users loginWithUsername:[usernameTextField stringValue] andPassword:[passwordTextField stringValue] onCompletion:^(id<BaseObjectProtocol> data, NSError *error, NSDictionary *userA)
+    {
         //TODO: fix error
         if (error)
         {
@@ -78,5 +77,4 @@
         [passwordTextField setStringValue:@""];
     }];
 }
-
 @end

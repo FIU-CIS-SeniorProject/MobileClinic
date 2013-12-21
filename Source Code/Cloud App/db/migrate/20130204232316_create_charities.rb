@@ -1,7 +1,6 @@
 class CreateCharities < ActiveRecord::Migration
   def change
     create_table :charities, {:primary_key => :charityid}  do |t|
-      t.string  :name_lowercase
       t.string  :name
       t.integer :status
 

@@ -1,16 +1,35 @@
+// The MIT License (MIT)
+//
+// Copyright (c) 2013 Florida International University
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 //
 //  CloudService.m
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 3/15/13.
-//  Edited by Kevin Diaz on 11/2013
+//  Edited by Kevin Diaz and James Mendez on 12/2013
 //
-
 #import "CloudService.h"
 #import "CloudManagementObject.h"
 #import "NSMutableData-AES.h"
 #import <IOKit/IOKitLib.h>
-//#import <CommonCrypto/CommonCryptor.h>
 
 @interface CloudService()
 {
@@ -75,12 +94,10 @@
         //TODO: gets url of active cloud server (causes infinite loop with init)
         //kURL = [[[CloudManagementObject alloc] init] GetActiveURL];
     
-        //kURL = @"http://pure-island-5858.herokuapp.com/"; // Production Cloud
-        kURL = @"http://stark-hollows-5161.herokuapp.com/"; // Test Cloud
+        kURL = @"http://secure-dawn-6822.herokuapp.com/"; // Production Cloud
+        //kURL = @"http://stark-hollows-5161.herokuapp.com/"; // Test Cloud
         
         //kURL = @"http://localhost:3000/"; // local host for testing the Cloud Server
-        //kURL = @"http://staging-webapp.herokuapp.com/";
-        //kURL = @"http://znja-webapp.herokuapp.com/api/";
         
         [self getAccessToken:^(BOOL success)
         {
@@ -179,9 +196,7 @@
     NSMutableDictionary *mDic = [[NSMutableDictionary alloc]initWithDictionary:params];
     [mDic setObject:kAccessToken forKey:@"access_token"];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
         [self queryWithPartialURL:[NSString stringWithFormat:@"api/%@", stringQuery] parameters:mDic completion:completion];
-        
     });
 }
 
@@ -191,9 +206,7 @@
     [mDic setObject:kAccessToken forKey:@"access_token"];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),  ^{
-        
         [self queryWithPartialURL:[NSString stringWithFormat:@"api/%@", mDic] parameters:params imageData:imageData completion:completion];
-        
     });
     
 }
@@ -203,7 +216,6 @@
     //    [[NSApplication sharedApplication] setNetworkActivityIndicatorVisible: YES];
     
     NSURL *url = [NSURL  URLWithString:[NSString stringWithFormat:@"%@%@", kURL, partialURL]];
-    
     
     //////////////////////////////////////////////////////
     NSData *json = [NSJSONSerialization dataWithJSONObject:params options:NSJSONWritingPrettyPrinted error:nil];

@@ -1,3 +1,24 @@
+// The MIT License (MIT)
+//
+// Copyright (c) 2013 Florida International University
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 //
 //  Recognition.m
 //  Mobile Clinic
@@ -5,9 +26,7 @@
 //  Created by Humberto Suarez on 11/20/13.
 //  Copyright (c) 2013 Florida International University. All rights reserved.
 //
-
 #define ISOPEN  @"isOpen"
-
 
 #import "Recognition.h"
 #import "NSDataAdditions.h"
@@ -23,49 +42,55 @@ NSString* risLockedBy;
 NSData * rpictures;
 
 @implementation Recognition
-+(NSString *)DatabaseName{
++(NSString *)DatabaseName
+{
     return DATABASE;
 }
+
 - (id)init
 {
     [self setupObject];
     return [super init];
 }
+
 -(id)initAndMakeNewDatabaseObject
 {
     [self setupObject];
     return [super initAndMakeNewDatabaseObject];
 }
+
 - (id)initAndFillWithNewObject:(NSDictionary *)info
 {
     [self setupObject];
     return [super initAndFillWithNewObject:info];
 }
+
 -(id)initWithCachedObjectWithUpdatedObject:(NSDictionary *)dic
 {
     [self setupObject];
     return [super initWithCachedObjectWithUpdatedObject:dic];
 }
 
--(void)setupObject{
-    
+-(void)setupObject
+{
     self->COMMONID =  PATIENTID;
     self->CLASSTYPE = kFaceType;
     self->COMMONDATABASE = DATABASE;
 }
+
 #pragma mark - BaseObjectProtocol Methods
 #pragma mark -
 
 /* The super needs to be called first */
--(NSDictionary *)consolidateForTransmitting{
-    
+-(NSDictionary *)consolidateForTransmitting
+{
     NSMutableDictionary* consolidate = [[NSMutableDictionary alloc]initWithDictionary:[super consolidateForTransmitting]];
-    
     [consolidate setValue:[NSNumber numberWithInt:kFaceType] forKey:OBJECTTYPE];
     return consolidate;
 }
 
--(void)ServerCommand:(NSDictionary *)dataToBeRecieved withOnComplete:(ServerCommand)response{
+-(void)ServerCommand:(NSDictionary *)dataToBeRecieved withOnComplete:(ServerCommand)response
+{
     [super ServerCommand:nil withOnComplete:response];
     //response = nil;
     [self unpackageFileForUser:dataToBeRecieved];
@@ -74,7 +99,8 @@ NSData * rpictures;
     [self CommonExecution];
 }
 
--(void)unpackageFileForUser:(NSDictionary *)data{
+-(void)unpackageFileForUser:(NSDictionary *)data
+{
     [super unpackageFileForUser:data];
     rpictures = [self->databaseObject valueForKey:@"photo"];
     rfirstname =[self->databaseObject valueForKey:FIRSTNAME];
@@ -87,7 +113,8 @@ NSData * rpictures;
 /* Depending on the RemoteCommands it will execute a different Command */
 -(void)CommonExecution
 {
-    switch (self->commands) {
+    switch (self->commands)
+    {
         case kAbort:
             break;
         case kUpdateObject:
@@ -105,53 +132,58 @@ NSData * rpictures;
             break;
     }
 }
--(NSArray*)getObjectsUsingCustomPredicate:(NSString*)predicate{
-    
+
+-(NSArray*)getObjectsUsingCustomPredicate:(NSString*)predicate
+{
     NSPredicate* pred = [NSPredicate predicateWithFormat:predicate];
     
     return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:pred andSortByAttribute:FIRSTNAME]];
 }
+
 -(NSArray*)recognizeFace
 {
     FaceRecognize *faceRecognizer = [[FaceRecognize alloc] initWithEigenFaceRecognizer];
     self.modelAvailable =[faceRecognizer trainModel];
     if(self.modelAvailable)
     {
-    NSDictionary *match = [faceRecognizer recognizeFace:[self dataToMat:rpictures width:[NSNumber numberWithInt:100]
-                                                                 height:[NSNumber numberWithInt:100]]];
-    NSLog(@"person id %@ ",[match objectForKey:@"label"]);
-    NSLog(@"person name %@",[match objectForKey:@"firstName"]);
-    NSLog(@"person last name %@",[match objectForKey:@"familyName"]);
-    int label =[[match objectForKey:@"label"] intValue];
-    NSPredicate* pred = [NSPredicate predicateWithFormat:@"%K beginswith[cd] %@ AND %K beginswith[cd] %@",FIRSTNAME,
-                         [match objectForKey:@"firstName"],FAMILYNAME,[match objectForKey:@"familyName"]];
-    
-    //FaceObject* face = [[FaceObject alloc]initAndMakeNewDatabaseObject];
-    
-    NSMutableDictionary* dict = [NSMutableDictionary dictionary];
-    [dict setObject:[match objectForKey:@"label"] forKey:@"label"];
-    [dict setObject:[match objectForKey:@"firstName"] forKey:@"firstName"];
-    [dict setObject:[match objectForKey:@"familyName"] forKey:@"familyName"];
-    
-    //[face unpackageFileForUser:dict];
-    
-    //Face * myface = [[Face alloc]init];
-    //myface.label = [match objectForKey:@"personID"];
-    //myface.firstName = [match objectForKey:@"firstName"];
-    //myface.familyName = [match objectForKey:@"familyName"];
-    NSArray * values = [NSArray arrayWithObject:dict];
-    
-    [self sendSearchResults:values];
-    
-    if (!rfirstname && !rlastname) {
-        pred = nil;
-    }
-    if(label != -1)
-    {
-    return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:@"Patients" withCustomPredicate:pred andSortByAttribute:FIRSTNAME]];
-    }
-    else
-        return nil;
+        NSDictionary *match = [faceRecognizer recognizeFace:[self dataToMat:rpictures width:[NSNumber numberWithInt:100]
+                                                                     height:[NSNumber numberWithInt:100]]];
+        NSLog(@"person id %@ ",[match objectForKey:@"label"]);
+        NSLog(@"person name %@",[match objectForKey:@"firstName"]);
+        NSLog(@"person last name %@",[match objectForKey:@"familyName"]);
+        int label =[[match objectForKey:@"label"] intValue];
+        NSPredicate* pred = [NSPredicate predicateWithFormat:@"%K beginswith[cd] %@ AND %K beginswith[cd] %@",FIRSTNAME,
+                             [match objectForKey:@"firstName"],FAMILYNAME,[match objectForKey:@"familyName"]];
+        
+        //FaceObject* face = [[FaceObject alloc]initAndMakeNewDatabaseObject];
+        
+        NSMutableDictionary* dict = [NSMutableDictionary dictionary];
+        [dict setObject:[match objectForKey:@"label"] forKey:@"label"];
+        [dict setObject:[match objectForKey:@"firstName"] forKey:@"firstName"];
+        [dict setObject:[match objectForKey:@"familyName"] forKey:@"familyName"];
+        
+        //[face unpackageFileForUser:dict];
+        
+        //Face * myface = [[Face alloc]init];
+        //myface.label = [match objectForKey:@"personID"];
+        //myface.firstName = [match objectForKey:@"firstName"];
+        //myface.familyName = [match objectForKey:@"familyName"];
+        NSArray * values = [NSArray arrayWithObject:dict];
+        
+        [self sendSearchResults:values];
+        
+        if (!rfirstname && !rlastname)
+        {
+            pred = nil;
+        }
+        if(label != -1)
+        {
+            return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:@"Patients" withCustomPredicate:pred andSortByAttribute:FIRSTNAME]];
+        }
+        else
+        {
+            return nil;
+        }
     }
     else
     {
@@ -160,6 +192,7 @@ NSData * rpictures;
     }
     
 }
+
 - (cv::Mat)dataToMat:(NSData *)data width:(NSNumber *)width height:(NSNumber *)height
 {
     cv::Mat output = cv::Mat([width integerValue], [height integerValue], CV_8UC1);
@@ -171,11 +204,12 @@ NSData * rpictures;
 
 #pragma mark - COMMON OBJECT Methods
 #pragma mark -
--(NSArray*)OptimizedFindAllObjects{
-    
+-(NSArray*)OptimizedFindAllObjects
+{
     FIUAppDelegate* app = (FIUAppDelegate*)[[NSApplication sharedApplication]delegate];
     
-    switch ([app isOptimized]) {
+    switch ([app isOptimized])
+    {
         case kFirstSync:
             return [self FindAllObjects];
         case kFastSync:
@@ -185,28 +219,32 @@ NSData * rpictures;
             return [self FindAllDirtyPatients];
     }
 }
--(NSArray*)FindAllDirtyPatients{
+
+-(NSArray*)FindAllDirtyPatients
+{
     //TODO: Add BETWEEN Comparison
-    
     return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:[NSPredicate predicateWithFormat:@"%K == YES",ISDIRTY] andSortByAttribute:FIRSTNAME]];
 }
--(NSArray*)FindAllOpenPatients{
-    
+
+-(NSArray*)FindAllOpenPatients
+{
     NSPredicate* pred = [NSPredicate predicateWithFormat:@"%K == YES",ISOPEN];
     
     return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:pred andSortByAttribute:FIRSTNAME]];
 }
 
--(NSArray *)FindAllObjects{
+-(NSArray *)FindAllObjects
+{
     return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:nil andSortByAttribute:FIRSTNAME]];
 }
 
--(NSArray*)FindAllObjectsUnderParentID:(NSString*)parentID{
+-(NSArray*)FindAllObjectsUnderParentID:(NSString*)parentID
+{
     return [self FindAllObjects];
 }
 
--(NSAttributedString *)printFormattedObject:(NSDictionary *)object{
-    
+-(NSAttributedString *)printFormattedObject:(NSDictionary *)object
+{
     /* NSString* titleString = [NSString stringWithFormat:@"Patient Records\n"];
      
      NSMutableAttributedString* title = [[NSMutableAttributedString alloc]initWithString:titleString];
@@ -230,49 +268,55 @@ NSData * rpictures;
      
      return container;*/
 }
--(NSString*)convertDateNumberForPrinting:(NSNumber*)number{
-    if (number) {
+
+-(NSString*)convertDateNumberForPrinting:(NSNumber*)number
+{
+    if (number)
+    {
         return [[NSDate convertSecondsToNSDate:number]convertNSDateToMonthDayYearTimeString];
     }
     return @"N/A";
 }
--(NSString*)convertTextForPrinting:(NSString*)text{
+
+-(NSString*)convertTextForPrinting:(NSString*)text
+{
     return ([text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length > 0)?text:@"Incomplete";
 }
+
 #pragma mark - Private Methods
 #pragma mark -
 
--(NSArray *)FindAllObjectsForGivenCriteria{
-    
+-(NSArray *)FindAllObjectsForGivenCriteria
+{
     NSPredicate* pred = [NSPredicate predicateWithFormat:@"%K beginswith[cd] %@ || %K beginswith[cd] %@",FIRSTNAME,rfirstname,FAMILYNAME,rlastname];
     
-    if (!rfirstname && !rlastname) {
+    if (!rfirstname && !rlastname)
+    {
         pred = nil;
     }
     
     return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:pred andSortByAttribute:FIRSTNAME]];
 }
 
--(void)UnlockPatient:(ObjectResponse)onComplete{
+-(void)UnlockPatient:(ObjectResponse)onComplete
+{
     // Unlock patient
     [self->databaseObject setValue:@"" forKey:ISLOCKEDBY];
     // save changes
     [self saveObject:onComplete];
 }
 
--(void)pullFromCloud:(CloudCallback)onComplete{
-    
-    [self makeCloudCallWithCommand:DATABASE withObject:nil onComplete:^(id cloudResults, NSError *error) {
-        
+-(void)pullFromCloud:(CloudCallback)onComplete
+{
+    [self makeCloudCallWithCommand:DATABASE withObject:nil onComplete:^(id cloudResults, NSError *error)
+    {
         NSArray* allPatients = [cloudResults objectForKey:@"data"];
-        
         [self handleCloudCallback:onComplete UsingData:allPatients WithPotentialError:error];
-        
     }];
 }
 
--(void)pushToCloud:(CloudCallback)onComplete{
-    
+-(void)pushToCloud:(CloudCallback)onComplete
+{
     /*  //    NSArray* allPatients= [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:COMMONDATABASE withCustomPredicate:[NSPredicate predicateWithFormat:@"%K == YES",ISDIRTY] andSortByAttribute:FIRSTNAME]];
      
      NSArray* allPatients= [self FindAllObjects];
@@ -300,8 +344,8 @@ NSData * rpictures;
      }];*/
 }
 
--(NSArray *)covertAllSavedObjectsToJSON{
-    
+-(NSArray *)covertAllSavedObjectsToJSON
+{
     /* NSArray* allPatients= [self FindObjectInTable:COMMONDATABASE withCustomPredicate:[NSPredicate predicateWithFormat:@"%K == YES",ISDIRTY] andSortByAttribute:FIRSTNAME];
      
      NSMutableArray* allObject = [[NSMutableArray alloc]initWithCapacity:allPatients.count];
@@ -325,11 +369,9 @@ NSData * rpictures;
      [dictionary setValue:[fingerData base64Encoding] forKey:FINGERDATA];
      }
      
-     
      [allObject addObject:dictionary];
      }
      
      return  allObject;*/
 }
-
 @end

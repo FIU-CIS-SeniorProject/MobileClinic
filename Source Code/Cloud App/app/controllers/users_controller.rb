@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   
   def index
     if current_user.userType != 0
-      @users = User.where("userType = ? and charityid = ?",current_user.userType,current_user.charityid)
+      @users = User.where("\"userType\" = 1 and charityid = ?",current_user.charityid)
     else
       @users = User.all
     end
@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
   def show
     if current_user.userType != 0
-      @user = User.where("userType = ? and charityid = ?",current_user.userType,current_user.charityid).find(params[:id])
+      @user = User.where("\"userType\" = '1' and charityid = ?",current_user.charityid).find(params[:id])
       @charity = Charity.where("charityid = ?",current_user.charityid).find(@user.charityid)
     else
       @user = User.find(params[:id])
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
 
   def edit
     if current_user.userType != 0
-      @user = User.where("userType = ? and charityid = ?",current_user.userType,current_user.charityid).find(params[:id])
+      @user = User.where("\"userType\" = ? and charityid = ?",current_user.userType,current_user.charityid).find(params[:id])
     else
       @user = User.find(params[:id])
     end
@@ -49,7 +49,7 @@ class UsersController < ApplicationController
   
   def change_password
     if current_user.userType != 0
-      @user = User.where("userType = ? and charityid = ?",current_user.userType,current_user.charityid).find(params[:id])
+      @user = User.where("\"userType\" = ? and charityid = ?",current_user.userType,current_user.charityid).find(params[:id])
     else
       @user = User.find(params[:id])
     end

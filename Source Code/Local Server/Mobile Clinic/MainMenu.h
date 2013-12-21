@@ -25,6 +25,7 @@
 //
 //  Created by Michael Montaque on 3/24/13.
 //  Modified by Kevin Diaz on 11/23/13.
+//  Modified by James Mendez 12/2013
 //
 #import <Cocoa/Cocoa.h>
 #import "LoginView.h"

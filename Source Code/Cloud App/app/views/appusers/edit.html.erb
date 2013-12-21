@@ -5,13 +5,11 @@
 		<div class="grid">
 			<div class="grid-title">
 				<div class="pull-left">
-					<div class="icon-title">
-						<i class="icon-edit"></i>
-					</div>
-					<span>Edit User</span>
-					<div class="clearfix"></div>
+					<span class="glyphicon glyphicon-pencil"></span>
 				</div>
-				<div class="clearfix"></div>
+				<div class="pull-left" style="padding-top: 10px;">
+					<span>Edit Application User</span>
+				</div>
 			</div>
 			<div class="grid-content">
 				<%= form_for @appuser, :html => { :multipart => true, role: "form"  } do |f| %>
@@ -19,58 +17,59 @@
 					<div class="formRow">
 						<%= f.label :firstName, "First Name", class: "label-gray"%>
 						<div class="formRight">
-							<%= f.text_field :firstName,class: "form-control", type: "text" %>
+							<%= f.text_field :firstName,class: "form-control", type: "text", required: "true",autocomplete: "off"  %>
 						</div>
 					</div>
 					<div class="formRow">
 						<%= f.label :lastName, "Last Name", class: "label-gray"%>
 						<div class="formRight">
-							<%= f.text_field :lastName,class: "form-control", type: "text" %>
+							<%= f.text_field :lastName,class: "form-control", type: "text", required: "true",autocomplete: "off"  %>
 						</div>
 					</div>
 					<div class="formRow">
 					<%= f.label :email, "Email", class: "label-gray"%>
 					<div class="formRight">
-						<%= f.text_field :email,class: "form-control", type: "email" %>
+						<%= f.text_field :email,class: "form-control", type: "email", required: "true",autocomplete: "off"  %>
 					</div>
 					</div>
 					<div class="formRow">
 						<%= f.label :userName, "Username", class: "label-gray"%>
 						<div class="formRight">
-							<%= f.text_field :userName,class: "form-control", type: "text" %>
+							<%= f.text_field :userName,class: "form-control", type: "text", required: "true",autocomplete: "off"  %>
 						</div>
 					</div>
 					<% if current_user.userType != 0 %>
 						<div class="formRow">
 							<%= f.label :charityid, class: "label-gray"%>
 							<div class="formRight">
-								<%= f.collection_select :charityid, Charity.where("charityid = ?",current_user.charityid),:charityid,:name%>
+								<%= f.collection_select :charityid, Charity.where("charityid = ? AND status = 1",current_user.charityid),:charityid,:name,class: "form-control", required: "true"%>
 							</div>
 						</div>
 					<% else %>
 						<div class="formRow">
 							<%= f.label :charityid, class: "label-gray"%>
 							<div class="formRight">
-								<%= f.collection_select :charityid, Charity.all,:charityid,:name%>
+								<%= f.collection_select :charityid, Charity.where("status = 1"),:charityid,:name,class: "form-control", required: "true" %>
 							</div>
 						</div>
 					<% end %>
 					<div class="formRow">
 						<%= f.label :userType, class: "label-gray"%>
 						<div class="formRight">
-							<%= f.select :userType, [['Nurse',0], ['Doctor',1], ['Pharmacist',2], ['Application Admin',3]]%>
+							<%= f.select :userType, [['Nurse',0], ['Doctor',1], ['Pharmacist',2], ['Application Admin',3]],class: "form-control", required: "true" %>
 						</div>
 					</div>
 					<div class="formRow">
 						<%= f.label :status, class: "label-gray"%>
 						<div class="formRight">
-							<%= f.select :status, [['Active',1], ['Inactive',0]],class: "form-control", type: "text"%>
+							<%= f.select :status, [['Active',1], ['Inactive',0]],class: "form-control", type: "text", required: "true" %>
 						</div>
 					</div>
 					<div class="formRow">
 						<%= f.label "Pictures" , class: "label-gray" %>
 						<div class="formRight">
 							<%= f.file_field :avatar ,class: "form-control", type: "file"%>
+							<span><b>(Insert an image extention jpg or png with size less than 2 MB)</b></span>
 						</div>
 					</div>
 					<div class="formRow">

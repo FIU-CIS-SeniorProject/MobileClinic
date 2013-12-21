@@ -185,7 +185,7 @@
     
     prevVisit = [self getViewControllerFromiPadStoryboardWithName:@"previousVisitsViewController"];
     [prevVisit.navigationItem setHidesBackButton:YES];
-    
+    prevVisit.patientData = _patientData;
     [self.navigationController pushViewController:prevVisit animated:YES];
 }
 -(void)closePreviousVisit{

@@ -1,18 +1,39 @@
+// The MIT License (MIT)
+//
+// Copyright (c) 2013 Florida International University
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 //
 //  PatientTable.m
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 2/27/13.
-//  Copyright (c) 2013 Florida International University. All rights reserved.
+//  Edited by James Mendez and Kevin Diaz 12/2013
 //
-
 #import "PatientTable.h"
 #define INNER   @"Inner"
 #import "DataProcessor.h"
 #import "NSString+Validation.h"
 #import "SystemBackup.h"
 #import "CloudManagementObject.h"
-@interface PatientTable (){
+@interface PatientTable ()
+{
     NSMutableDictionary* selectedVisit;
 }
 @property(strong)NSArray* patientArray;
@@ -27,7 +48,8 @@ id currentTable;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if (self)
+    {
         [self refreshPatients:nil];
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(refreshPatients:) name:UPDATEPATIENT object:nil];
     }
@@ -36,28 +58,34 @@ id currentTable;
 
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
 {
-    
     NSDictionary* commonDictionary;
     
     id obj;
     
     // If Patient Table
     if([aTableView isEqualTo:patientTableView])
+    {
         // Get the patient Dictionary
         commonDictionary =  [patientArray objectAtIndex:rowIndex];
-    
+    }
     else //If Visitation Table
+    {
         commonDictionary = [visitArray objectAtIndex:rowIndex];
+    }
     
     // get the value based on table identifier
     obj = [commonDictionary objectForKey:aTableColumn.identifier];
     
-    
-    if([aTableColumn.identifier isEqualToString:ISOPEN]){
+    if([aTableColumn.identifier isEqualToString:ISOPEN])
+    {
         return ([obj boolValue])?@"In Queue":@"Closed";
-    }else if ([aTableColumn.identifier isEqualToString:TRIAGEIN]){
+    }
+    else if ([aTableColumn.identifier isEqualToString:TRIAGEIN])
+    {
         return [[NSDate convertSecondsToNSDate:obj] convertNSDateToMonthDayYearTimeString];
-    }else{
+    }
+    else
+    {
         return obj;
     }
 }
@@ -65,38 +93,44 @@ id currentTable;
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
 {
     if([aTableView isEqualTo:patientTableView])
+    {
         return patientArray.count;
+    }
     else
+    {
         return visitArray.count;
+    }
 }
 
--(void)tableView:(NSTableView *)tableView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row{
-    
+-(void)tableView:(NSTableView *)tableView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+{
     NSDictionary* commonDictionary;
     
-    if([tableView isEqualTo:patientTableView]){
+    if([tableView isEqualTo:patientTableView])
+    {
         commonDictionary =  [patientArray objectAtIndex:row];
-        
-    }else{
+    }
+    else
+    {
         commonDictionary = [visitArray objectAtIndex:row];
     }
     
     NSString* lockedBy = [commonDictionary objectForKey:ISLOCKEDBY];
     
-    if (lockedBy.length > 0) {
- 
+    if (lockedBy.length > 0)
+    {
         [cell setBackgroundColor:[NSColor redColor]];
-    }else{
+    }
+    else
+    {
         [cell setBackgroundColor:[NSColor whiteColor]];
     }
-    
 }
 
--(BOOL)tableView:(NSTableView *)tableView shouldSelectRow:(NSInteger)row{
-    
-    
-    
-    if([tableView isEqualTo:patientTableView]){
+-(BOOL)tableView:(NSTableView *)tableView shouldSelectRow:(NSInteger)row
+{
+    if([tableView isEqualTo:patientTableView])
+    {
         // Clear the Records
         [_visitDocumentation setString:@""];
         
@@ -109,17 +143,21 @@ id currentTable;
         id photo = [patient objectForKey:PICTURE];
         
         // Set Photo
-        if (!photo) {
+        if (!photo)
+        {
             [_patientPhoto setImage:[NSImage imageNamed:@"PatientData"]];
-        }else{
+        }
+        else
+        {
             [_patientPhoto setImage:[[NSImage alloc]initWithData:photo]];
         }
         
         visitArray = [NSArray arrayWithArray:[[[VisitationObject alloc]init]FindAllObjectsUnderParentID:[patient objectForKey:PATIENTID]]];
         
         [visitTableView reloadData];
-        
-    }else{
+    }
+    else
+    {
         // Enable Print Button
         [_printButton setEnabled:YES];
         [self showDetails:[NSNumber numberWithInteger:row]];
@@ -128,34 +166,32 @@ id currentTable;
     return YES;
 }
 
--(void)controlTextDidChange:(NSNotification *)obj{
-   
+-(void)controlTextDidChange:(NSNotification *)obj
+{
     NSTextField* textfield = [obj object];
     
     NSString* criteria =  textfield.stringValue;
 
-    if (criteria.length > 0) {
+    if (criteria.length > 0)
+    {
       [self refreshPatients:[NSPredicate predicateWithFormat:@"%K beginswith[c] %@ || %K beginswith[c] %@",FIRSTNAME,criteria,FAMILYNAME,criteria]];
-    }else{
+    }
+    else
+    {
         [self findPatientWithCriteria:nil];
     }
-    
 }
 
-- (IBAction)showDetails:(id)sender {
-    
+- (IBAction)showDetails:(id)sender
+{
     NSInteger* visitRow = [sender integerValue];
     
-    if(visitRow >= 0){
-        
+    if(visitRow >= 0)
+    {
         NSDictionary* vRecord = [visitArray objectAtIndex:visitRow];
-        
         NSDictionary* pRecord = [patientArray objectAtIndex:patientTableView.selectedRow];
-        
         NSArray* array = [NSArray arrayWithArray:[[[PrescriptionObject alloc]init]FindAllObjectsUnderParentID:[vRecord objectForKey:VISITID]]];
-        
         NSString* titleString = [NSString stringWithFormat:@"Prescribed Medication: \n\n"];
-        
         NSMutableAttributedString* title = [[NSMutableAttributedString alloc]initWithString:titleString];
         
         [title addAttribute:NSFontAttributeName value:[NSFont fontWithName:@"HelveticaNeue-Bold" size:20.0] range:[titleString rangeOfString:titleString]];
@@ -164,7 +200,8 @@ id currentTable;
         
         NSMutableAttributedString* prescriptString = [[NSMutableAttributedString alloc]initWithAttributedString:title];
         
-        for (NSDictionary* dict in array) {
+        for (NSDictionary* dict in array)
+        {
             [prescriptString appendAttributedString:[[[PrescriptionObject alloc]init]printFormattedObject:dict]];
         }
         
@@ -172,20 +209,20 @@ id currentTable;
     }
 }
 
--(void)displayRecordsForPatient:(NSAttributedString*)pInfo visit:(NSAttributedString*)vInfo andPrescription:(NSAttributedString*)prInfo{
-    
+-(void)displayRecordsForPatient:(NSAttributedString*)pInfo visit:(NSAttributedString*)vInfo andPrescription:(NSAttributedString*)prInfo
+{
     NSMutableAttributedString* info = [[NSMutableAttributedString alloc]initWithAttributedString:pInfo];
     
     [info appendAttributedString:vInfo];
     [info appendAttributedString:prInfo];
-    
     [info addAttributes:[NSDictionary dictionaryWithObjectsAndKeys:NSForegroundColorAttributeName,[NSColor blackColor], nil] range:[info.string rangeOfString:info.string]];
     [_visitDocumentation setString:@""];
     [_visitDocumentation insertText:info];
     
 }
 
-- (IBAction)refreshPatients:(id)sender {
+- (IBAction)refreshPatients:(id)sender
+{
     [progressIndicator startAnimation:self];
     patientArray = [self findPatientWithCriteria:([sender isKindOfClass:[NSPredicate class]])?sender:nil];
     [_visitDocumentation setString:@""];
@@ -199,12 +236,12 @@ id currentTable;
 {
     NSArray* array = [NSArray arrayWithArray:[[[PatientObject alloc]init]FindAllObjectsUnderParentID:nil]];
     
-    if (criteria != nil) {
+    if (criteria != nil)
+    {
      return [array filteredArrayUsingPredicate:criteria];
     }
     
     return array;
-   
 }
 
 - (IBAction)unblockPatients:(id)sender
@@ -221,7 +258,9 @@ id currentTable;
 - (IBAction)getPatientsFromCloud:(id)sender
 {
     [progressIndicator startAnimation:self];
-    
+    BOOL patientUpdated = NO;
+    BOOL visitUpdated = NO;
+    BOOL prescriptionUpdated = NO;
     [[[PatientObject alloc]init] pullFromCloud:^(id cloudResults, NSError *error)
      {
          if (!cloudResults && error)
@@ -239,6 +278,7 @@ id currentTable;
                   else
                   {
                       [self refreshPatients:nil];
+                      BOOL patientUpdated = YES;
                   }
               }];
          }
@@ -262,6 +302,7 @@ id currentTable;
                   else
                   {
                       [self refreshPatients:nil];
+                      BOOL visitUpdated = YES;
                   }
               }];
          }
@@ -285,6 +326,7 @@ id currentTable;
                   else
                   {
                       [self refreshPatients:nil];
+                      BOOL prescriptionUpdated = YES;
                   }
               }];
          }
@@ -292,10 +334,15 @@ id currentTable;
      }];//*/
     
     // allocate and init a CloudManagementObject, then update timestamp
-    [[[CloudManagementObject alloc] init] updateTimestamp];
+    if(patientUpdated == YES && visitUpdated == YES && prescriptionUpdated == YES)
+    {
+        [[[CloudManagementObject alloc] init] updateTimestamp];
+    }
+    
 }
 
-- (IBAction)exportPatientData:(id)sender {
+- (IBAction)exportPatientData:(id)sender
+{
     NSSavePanel* savePnl = [NSSavePanel savePanel];
     
     // Set array of file types
@@ -308,18 +355,17 @@ id currentTable;
     
     // Display the dialog box.  If the OK pressed,
     // process the files.
-    if ( [savePnl runModal] == NSOKButton ) {
-        
+    if ( [savePnl runModal] == NSOKButton )
+    {
         // Gets list of all files selected
         NSURL *file = [savePnl URL];
-        
         NSLog(@"Saving to: %@",file.path);
     }
     
 }
 
-- (IBAction)importFile:(id)sender {
-    
+- (IBAction)importFile:(id)sender
+{
     // Create a File Open Dialog class.
     NSOpenPanel* openDlg = [NSOpenPanel openPanel];
     
@@ -334,8 +380,8 @@ id currentTable;
     
     // Display the dialog box.  If the OK pressed,
     // process the files.
-    if ( [openDlg runModal] == NSOKButton ) {
-        
+    if ( [openDlg runModal] == NSOKButton )
+    {
         // Gets list of all files selected
         NSArray *files = [openDlg URLs];
         
@@ -344,10 +390,13 @@ id currentTable;
         
         NSDictionary* objects = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:files.lastObject] options:0 error:&err];
         
-        if (objects.allKeys.count > 0) {
+        if (objects.allKeys.count > 0)
+        {
             [SystemBackup installFromBackup:objects];
             NSLog(@"Imported Object: %@", objects);
-        }else{
+        }
+        else
+        {
             NSLog(@"Could not import selected file");
         }
     }
@@ -406,10 +455,10 @@ id currentTable;
      */
 }
 
-- (IBAction)printPatient:(id)sender{
-    
-    if (_visitDocumentation.string.length > 0) {
-        
+- (IBAction)printPatient:(id)sender
+{
+    if (_visitDocumentation.string.length > 0)
+    {
         NSPrintOperation *op = [NSPrintOperation printOperationWithView:_visitDocumentation];
         
         NSPrintInfo* pi = [[NSPrintInfo alloc]init];
@@ -426,13 +475,18 @@ id currentTable;
         [op setShowsPrintPanel:YES];
         
         if (op)
+        {
             [op runOperation];
-        else{
+        }
+        else
+        {
             //TODO: Show error Dialog here
             NSLog(@"Failed to open print dialog");
         }
-    }else{
-        
+    }
+    else
+    {
+        // Do nothing?
     }
 }
 @end

@@ -24,12 +24,12 @@
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 3/23/13.
-//  Edited by Kevin Diaz on 11/2013
+//  Edited by Kevin Diaz and James Mendez on 11/2013
 //
-
 #import "UserView.h"
 
-@interface UserView (){
+@interface UserView ()
+{
     NSMutableDictionary* currentUser;
 }
 @property(strong)NSArray* allUsers;

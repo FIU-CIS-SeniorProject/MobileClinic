@@ -5,6 +5,7 @@ class CreateUserTokens < ActiveRecord::Migration
       t.string :user_token
       t.string :expiration
       t.string :access_token
+      t.integer :charityid
       t.timestamps
     end
   end

@@ -20,11 +20,10 @@ class MedicationsController < ApplicationController
   end
 
   def index
-    @medications = Medication.order(:name)
+    @medications = Medication.order(:medName)
     respond_to do |format|
       format.html
-      format.csv { send_data @medications.to_csv}
-      format.xls
+      format.csv {send_data @medications.to_csv}
     end
   end
   

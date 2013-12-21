@@ -56,7 +56,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 5;
+    return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -75,9 +75,6 @@
         case 2:
             [cell.stationTitle setText:@"Pharmacy Station"];
             break;
-        case 3:
-            [cell.stationTitle setText:@"Purge System"];
-            break;
         default:
             [cell.stationTitle setText:@"Log Off"];
             break;
@@ -91,16 +88,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [popover dismissPopoverAnimated:YES];
-    if (indexPath.row < 4)
+    if (indexPath.row < 3)
     {
-        NSNumber* indexRow = [NSNumber numberWithInteger:indexPath.row];
-        // Because of an index issue with kAdministrator userType = 3, and the index of Purge System also being at 3,
-        //   it is important to set the Notification object to kPurgeSystem = 4
-        if (indexPath.row == 3)
-        {
-            indexRow = [NSNumber numberWithInteger:4];
-        }
-        [[NSNotificationCenter defaultCenter]postNotificationName:SWITCH_STATIONS object:indexRow];
+        [[NSNotificationCenter defaultCenter]postNotificationName:SWITCH_STATIONS object:[NSNumber numberWithInteger:indexPath.row]];
     }
     else
     {
@@ -129,9 +119,6 @@
             break;
         case 3:
             [cell setBackgroundColor:[ColorMe colorFor:PALERED]];
-            break;
-        case 4:
-            [cell setBackgroundColor:[ColorMe colorFor:PALEORANGE]];
             break;
         default:
             break;

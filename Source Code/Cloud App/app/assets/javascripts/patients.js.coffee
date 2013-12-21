@@ -4,5 +4,6 @@
 
 jQuery ->
 	$('#datatable_patients').dataTable({
-	"sPaginationType": "full_numbers"
+    "iDisplayLength": 10,
+    "sPaginationType": "full_numbers"
 				});

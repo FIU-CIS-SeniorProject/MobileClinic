@@ -87,8 +87,8 @@ NSTimer* saveTimer;
     
     // Display the dialog box.  If the OK pressed,
     // process the files.
-    if ( [savePnl runModal] == NSOKButton ) {
-        
+    if ( [savePnl runModal] == NSOKButton )
+    {
         // Gets list of all files selected
         NSURL *file = [savePnl URL];
         
@@ -98,7 +98,8 @@ NSTimer* saveTimer;
         
         BOOL doesExists = [fm fileExistsAtPath:file.path];
         
-        if (!doesExists) {
+        if (!doesExists)
+        {
             NSLog(@"Created New File: %@",file.lastPathComponent);
             
             [fm createFileAtPath:file.path contents:nil attributes:nil];
@@ -108,7 +109,8 @@ NSTimer* saveTimer;
         
         NSError* error = nil;
         
-        if (canBeConverted) {
+        if (canBeConverted)
+        {
             // Need Proper File location
             NSOutputStream* stream = [NSOutputStream outputStreamToFileAtPath:file.path append:NO];
             [stream open];
@@ -139,7 +141,9 @@ NSTimer* saveTimer;
         
         // if there is no object, skip
         if (!base)
+        {
             continue;
+        }
         
         // Get the array of dictionaries for that key
         NSArray* internalObjects = [allObjects objectForKey:key];

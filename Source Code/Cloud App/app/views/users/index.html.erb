@@ -3,13 +3,11 @@
 	<div class="grid">
 		<div class="grid-title">
 			<div class="pull-left">
-				<div class="icon-title">
-					<i class="icon-user"></i>
-				</div>
-				<span>Users</span>
-				<div class="clearfix"></div>
+				<span class="glyphicon glyphicon-user"></span>
 			</div>
-			<div class="clearfix"></div>
+			<div class="pull-left" style="padding-top: 10px;">
+				<span>Users</span>
+			</div>
 		</div>
 		<div class="grid-content overflow">
 			<table class="table table-bordered" id="datatable_users">
@@ -19,6 +17,7 @@
 						<th> Last Name </th>
 						<th> User Type </th>
 						<th> Charity </th>
+						<th> Status </th>
 						<th></th>
 					</tr>
 				</thead>
@@ -27,8 +26,21 @@
 					<tr>
 						<td> <%= user.firstName %> </td>
 						<td> <%= user.lastName %> </td>
-						<td> <%= type_of_user(user.userType) %> </td>
+						<td> 
+							<% if user.userType == 1%> 
+								Charity Local Admin							
+							<% else %>
+								Admin
+							<% end %>
+						</td>
 						<td> <%= Charity.find(user.charityid).name %> </td>
+						<td> 
+							<% if user.status == 1 %>
+								Active
+							<% else %>
+								Inactive
+							<% end %>
+					    </td>
 						<td style="text-align: right;"> <div class="inline"><%= link_to "View", user, :class => "btn btn-xm btn-info" %> <%= link_to "Edit", edit_user_path(user.userid), :class => "btn btn-xm btn-info"%></div></td>
 					</tr>
 					<% end %>
@@ -36,7 +48,7 @@
 			</table>
 			<div class="clearfix"></div>
 		</div>
-		<%= button_to "Create User", createuser_path, :class => "btn btn-large btn-block btn-info"%>
-		<%= button_to 'Back', home_path, :class => "btn btn-default btn-large btn-block" %>
+		<%= link_to "Create User", new_user_path, :class => "btn btn-large btn-block btn-info"%>
+		<%= link_to 'Back', home_path, :class => "btn btn-default btn-large btn-block" %>
 	</div>
 </div>

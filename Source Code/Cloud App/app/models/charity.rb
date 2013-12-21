@@ -1,10 +1,8 @@
 class Charity < ActiveRecord::Base
-  attr_accessible :charityid, :name, :status,:name_lowercase,:created_at,:updated_at
+  attr_accessible :charityid, :name, :status,:created_at,:updated_at
   
-  before_validation { |user| user.name_lowercase = name.downcase}
-  
-  validates :name_lowercase, :presence => true, uniqueness: {:message => "already exist, check lower and upper case letters."}
-	validates :name, :presence => true
+  validates_presence_of :name
+  validates_uniqueness_of :name, :case_sensitive => false, conditions: -> { where.not(status: 0) }
 	validates :status, :presence => true	
 	
 	self.primary_key = "charityid"

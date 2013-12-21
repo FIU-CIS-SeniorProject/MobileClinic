@@ -4,6 +4,11 @@
 
 jQuery ->
   $('#datatable_charity').dataTable({
-  "iDisplayLength": 10,
-  "sPaginationType": "full_numbers"
-        });
+    "iDisplayLength": 10,
+    "sPaginationType": "full_numbers"
+  });
+        
+jQuery ->
+  $("#charity_status").change ->
+      $("#message").slideDown() if ($("#charity_status").val() == '0')
+      $("#message").slideUp() if ($("#charity_status").val() == '1')

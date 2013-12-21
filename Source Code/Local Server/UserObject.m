@@ -25,6 +25,7 @@
 //
 //  Created by Michael Montaque on 1/27/13.
 //  Modified by Kevin Diaz on 11/23/13.
+//  Modified by James Mendez on 12/2013
 //
 
 /* NOTE ABOUT THIS CLASS
@@ -91,9 +92,7 @@
 -(NSDictionary *)consolidateForTransmitting
 {
     NSMutableDictionary* consolidate = [[NSMutableDictionary alloc]initWithDictionary:[super consolidateForTransmitting]];
-    
     [consolidate setValue:[NSNumber numberWithInt:kUserType] forKey:OBJECTTYPE];
-    
     return consolidate;
 }
 
@@ -112,7 +111,7 @@
         case kAbort:
             NSLog(@"Error: User Object Misconfiguration handled by baseObject");
             break;
-        case kPullAllUsers: 
+        case kPullAllUsers:
             [self sendSearchResults:[self FindAllObjects]];
             break;
         case kLoginUser:
@@ -153,38 +152,92 @@
     onComplete(nil,[[NSError alloc]initWithDomain:COMMONDATABASE code:kErrorObjectMisconfiguration userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"This feature is not implemented",NSLocalizedFailureReasonErrorKey, nil]]);
 }
 
+/* OLD VERSION - No error checking, crashes unless there is connection with cloud
+ -(void)pullFromCloud:(CloudCallback)onComplete
+ {
+ //TODO: Remove Hard Dependencies
+ [self makeCloudCallWithCommand:DATABASE withObject:nil onComplete:^(id cloudResults, NSError *error)
+ {
+ //if (!error) //Not receiving error from cloud, receiving result, data json dictionary instead
+ if ([[cloudResults objectForKey:@"result"] isEqualToString:@"true"])
+ {
+ NSArray* users = [cloudResults objectForKey:@"data"];
+ 
+ NSArray* allError = [self SaveListOfObjectsFromDictionary:users];
+ 
+ if (allError.count > 0)
+ {
+ error = [[NSError alloc]initWithDomain:COMMONDATABASE code:kErrorObjectMisconfiguration userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Object was misconfigured",NSLocalizedFailureReasonErrorKey, nil]];
+ onComplete(self,error);
+ return;
+ }
+ }
+ else
+ {
+ NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+ NSString* errorValue = @"Error from Cloud: ";
+ errorValue = [errorValue stringByAppendingString:[cloudResults objectForKey:@"data"]];
+ 
+ [errorDetail setValue:errorValue forKey:NSLocalizedDescriptionKey];
+ error = [NSError errorWithDomain:@"UserObject:pullFromCloud" code:100 userInfo:errorDetail];
+ onComplete((!error)?self:nil,error);
+ }
+ }];
+ }//*/
+
 -(void)pullFromCloud:(CloudCallback)onComplete
-{    
+{
     //TODO: Remove Hard Dependencies
     [self makeCloudCallWithCommand:DATABASE withObject:nil onComplete:^(id cloudResults, NSError *error)
-    {
-        //if (!error) //Not receiving error from cloud, receiving result, data json dictionary instead
-        if ([[cloudResults objectForKey:@"result"] isEqualToString:@"true"])
-        {
-            NSArray* users = [cloudResults objectForKey:@"data"];
-            
-            NSArray* allError = [self SaveListOfObjectsFromDictionary:users];
-            
-            if (allError.count > 0)
-            {
-                error = [[NSError alloc]initWithDomain:COMMONDATABASE code:kErrorObjectMisconfiguration userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Object was misconfigured",NSLocalizedFailureReasonErrorKey, nil]];
-                onComplete(self,error);
-                return;
-            }
-        }
-        else
-        {
-            NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
-            NSString* errorValue = @"Error from Cloud: ";
-            errorValue = [errorValue stringByAppendingString:[cloudResults objectForKey:@"data"]];
-            
-            [errorDetail setValue:errorValue forKey:NSLocalizedDescriptionKey];
-            error = [NSError errorWithDomain:@"UserObject:pullFromCloud" code:100 userInfo:errorDetail];
-            onComplete((!error)?self:nil,error);
-        }
-    }];
+     {
+         if (cloudResults == nil) // NO CLOUD CONNECTION
+         {
+             NSString* errorValue = @"No connection to the Cloud";
+             NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+             [errorDetail setValue:errorValue forKey:NSLocalizedDescriptionKey];
+             error = [NSError errorWithDomain:@"UserObject:pullFromCloud" code:100 userInfo:errorDetail];
+             onComplete((!error)?self:nil,error);
+         }
+         else if ([[cloudResults objectForKey:@"result"] isEqualToString:@"true"]) // SUCCESS
+         {
+             NSArray* usersFromCloud = [cloudResults objectForKey:@"data"];
+             
+             // Check if usersFromCloud has more than 0 users, if yes: delete all users, if no, do nothing
+             if ([usersFromCloud count] > 0)
+             {
+                 [self deleteAllUsers];
+             }
+             NSArray* allError = [self SaveListOfObjectsFromDictionary:usersFromCloud];
+             if (allError.count > 0)
+             {
+                 error = [[NSError alloc]initWithDomain:COMMONDATABASE code:kErrorObjectMisconfiguration userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Object was misconfigured",NSLocalizedFailureReasonErrorKey, nil]];
+                 onComplete(self,error);
+                 return;
+             }
+             onComplete((!error)?self:nil,error);
+         }
+         else // SOME ERROR FROM CLOUD
+         {
+             NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+             NSString* errorValue = @"Error from Cloud: ";
+             errorValue = [errorValue stringByAppendingString:[cloudResults objectForKey:@"data"]];
+             
+             [errorDetail setValue:errorValue forKey:NSLocalizedDescriptionKey];
+             error = [NSError errorWithDomain:@"UserObject:pullFromCloud" code:100 userInfo:errorDetail];
+             onComplete((!error)?self:nil,error);
+         }
+     }];
 }
 
+-(void)deleteAllUsers
+{
+    NSArray* allUsers = [self FindAllObjects];
+    
+    for (NSDictionary* user in allUsers)
+    {
+        [self deleteDatabaseDictionaryObject:user];
+    }
+}
 #pragma mark - Private Methods
 #pragma mark -
 
@@ -238,7 +291,6 @@
 }
 
 //TODO: Allow login even without cloud connection
-//-(void)loginWithUsername:(NSString*)username andPassword:(NSString*)password onCompletion:(void(^)(id <BaseObjectProtocol> data, NSError* error, Users* userA))onSuccessHandler
 -(void)loginWithUsername:(NSString*)username andPassword:(NSString*)password onCompletion:(void(^)(id <BaseObjectProtocol> data, NSError* error, NSDictionary* userDict))onSuccessHandler
 {
     username = [username lowercaseString];

@@ -24,6 +24,7 @@
 //  Mobile Clinic
 //
 //  Created by Steven Berlanga on 2/11/13.
+//  Modified by James Mendez on 11/2013
 //
 #define ISOPEN  @"isOpen"
 
@@ -83,7 +84,7 @@ NSString* isLockedBy;
 -(NSDictionary *)consolidateForTransmitting
 {
     NSMutableDictionary* consolidate = [[NSMutableDictionary alloc]initWithDictionary:[super consolidateForTransmitting]];
-
+    
     [consolidate setValue:[NSNumber numberWithInt:kPatientType] forKey:OBJECTTYPE];
     return consolidate;
 }
@@ -125,7 +126,7 @@ NSString* isLockedBy;
 -(NSArray*)getObjectsUsingCustomPredicate:(NSString*)predicate
 {
     NSPredicate* pred = [NSPredicate predicateWithFormat:predicate];
-   
+    
     return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:pred andSortByAttribute:FIRSTNAME]];
 }
 
@@ -162,7 +163,7 @@ NSString* isLockedBy;
 
 -(NSArray *)FindAllObjects
 {
-    return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:nil andSortByAttribute:FIRSTNAME]]; 
+    return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:nil andSortByAttribute:FIRSTNAME]];
 }
 
 -(NSArray*)FindAllObjectsUnderParentID:(NSString*)parentID
@@ -229,6 +230,24 @@ NSString* isLockedBy;
     [self saveObject:onComplete];
 }
 
+/* Old - no error checking, crashed if no connection with cloud
+-(void)pullFromCloud:(CloudCallback)onComplete
+ {
+ // allocate and init a CloudManagementObject for timestamp
+ CloudManagementObject* TSCloudMO = [[CloudManagementObject alloc] init];
+ NSNumber* timestamp = [TSCloudMO GetActiveTimestamp];
+ NSMutableDictionary* timeDic = [[NSMutableDictionary alloc] init];
+ [timeDic setObject:timestamp forKey:@"Timestamp"];
+ 
+ //TODO: replace "withObject:nil" with timestamp dictionary
+ [self makeCloudCallWithCommand:DATABASE withObject:timeDic onComplete:^(id cloudResults, NSError *error)
+ {
+ NSArray* allPatients = [cloudResults objectForKey:@"data"];
+ [self handleCloudCallback:onComplete UsingData:allPatients WithPotentialError:error];
+ 
+ }];
+ }*/
+
 -(void)pullFromCloud:(CloudCallback)onComplete
 {
     // allocate and init a CloudManagementObject for timestamp
@@ -237,33 +256,49 @@ NSString* isLockedBy;
     NSMutableDictionary* timeDic = [[NSMutableDictionary alloc] init];
     [timeDic setObject:timestamp forKey:@"Timestamp"];
     
-    //TODO: replace "withObject:nil" with timestamp dictionary
     [self makeCloudCallWithCommand:DATABASE withObject:timeDic onComplete:^(id cloudResults, NSError *error)
-    {
-        NSArray* allPatients = [cloudResults objectForKey:@"data"];
-        [self handleCloudCallback:onComplete UsingData:allPatients WithPotentialError:error];
-        
-    }];
+     {
+         if (cloudResults == nil) // NO CLOUD CONNECTION
+         {
+             NSString* errorValue = @"No connection to the Cloud";
+             NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+             [errorDetail setValue:errorValue forKey:NSLocalizedDescriptionKey];
+             error = [NSError errorWithDomain:@"PatientObject:pullFromCloud" code:100 userInfo:errorDetail];
+             onComplete((!error)?self:nil,error);
+         }
+         else if ([[cloudResults objectForKey:@"result"] isEqualToString:@"true"]) // SUCCESS
+         {
+             NSArray* patientsFromCloud = [cloudResults objectForKey:@"data"];
+             [self handleCloudCallback:onComplete UsingData:patientsFromCloud WithPotentialError:error];
+         }
+         else // SOME ERROR FROM CLOUD
+         {
+             NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+             NSString* errorValue = @"Error from Cloud: ";
+             errorValue = [errorValue stringByAppendingString:[cloudResults objectForKey:@"data"]];
+             
+             [errorDetail setValue:errorValue forKey:NSLocalizedDescriptionKey];
+             error = [NSError errorWithDomain:@"PatientObject:pullFromCloud" code:100 userInfo:errorDetail];
+             onComplete((!error)?self:nil,error);
+         }
+     }];
 }
 
 -(void)pushToCloud:(CloudCallback)onComplete
 {
     NSArray* allPatients = [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:COMMONDATABASE withCustomPredicate:[NSPredicate predicateWithFormat:@"%K == YES",ISDIRTY] andSortByAttribute:FIRSTNAME]];
     
-    //NSArray* allPatients= [self FindAllObjects];
-    
     // Remove Values that will break during serialization
     for (NSMutableDictionary* object in allPatients)
     {
         NSString* pId = [object objectForKey:PATIENTID];
-        NSString* photo = [[object objectForKey:PICTURE] base64Encoding];
+        //NSString* photo = [[object objectForKey:PICTURE] base64Encoding];
         pId = [pId stringByReplacingOccurrencesOfString:@"." withString:@""];
         [object setValue:pId forKey:PATIENTID];
         
         // Remove Pictures (NSData)
-        [object setValue:photo forKey:PICTURE];
-        NSLog(@"%@",photo);
-        
+        [object setValue:nil forKey:PICTURE];
+        //NSLog(@"%@",photo);
         // Remove FingerPrint (NSData)
         [object setValue:nil forKey:FINGERDATA];
         
@@ -276,15 +311,15 @@ NSString* isLockedBy;
     }
     
     [self makeCloudCallWithCommand:UPDATEPATIENT withObject:[NSDictionary dictionaryWithObject:allPatients forKey:DATABASE] onComplete:^(id cloudResults, NSError *error)
-    {
-        [self handleCloudCallback:onComplete UsingData:allPatients WithPotentialError:error];
-    }];
+     {
+         [self handleCloudCallback:onComplete UsingData:allPatients WithPotentialError:error];
+     }];
 }
 
 -(NSArray *)covertAllSavedObjectsToJSON
 {
     NSArray* allPatients= [self FindObjectInTable:COMMONDATABASE withCustomPredicate:[NSPredicate predicateWithFormat:@"%K == YES",ISDIRTY] andSortByAttribute:FIRSTNAME];
-   
+    
     NSMutableArray* allObject = [[NSMutableArray alloc]initWithCapacity:allPatients.count];
     
     for (NSManagedObject* obj in allPatients)
@@ -299,7 +334,7 @@ NSString* isLockedBy;
             NSString* picString = [picture base64Encoding];
             [dictionary setValue:picString forKey:PICTURE];
         }
-       
+        
         id fingerData = [dictionary objectForKey:FINGERDATA];
         
         if ([fingerData isKindOfClass:[NSData class]])
@@ -311,8 +346,7 @@ NSString* isLockedBy;
         
         [allObject addObject:dictionary];
     }
-
+    
     return  allObject;
 }
-
 @end

@@ -3,37 +3,41 @@
 	<div class="grid">
 		<div class="grid-title">
 			<div class="pull-left">
-				<div class="icon-title">
-					<i class="icon-user"></i>
-				</div>
+				<span class="glyphicon glyphicon-align-justify"></span>
+			</div>
+			<div class="pull-left" style="padding-top: 10px;">
 				<span>Medications</span>
-				<div class="clearfix"></div>
-			</div>
-			<div class="pull-right">
-				<div class="clearfix"></div>
 			</div>
 			<div class="pull-right">
 				<div class="icon-title">
-					<%= link_to medications_path(format: "csv") do%> <i> Download CSV</i></a> <%end%>
+					<%= link_to medications_path(format: "csv") do%> <i> Download CSV <span class="glyphicon glyphicon-save"></span></i></a> <%end%>
 				</div>
 			</div>
 			<div class="clearfix"></div>
 		</div>
 		<div class="grid-content overflow">
-			<table class="table table-bordered table-mod-2" id="datatable_medication">
+			<table class="table table-bordered" id="datatable_medication">
 				<thead>
 					<tr>
-						<th class="hidden-mobile"> Medicine Name </th>
-						<th class="hidden-mobile"> Expiration Date </th>
+						<th> Medicine Name </th>
+						<th> Expiration Date </th>
+						<th> Status </th>
 						<th></th>
 					</tr>
 				</thead>
 				<tbody>
 					<% @medications.each do |medication| %>
 					<tr>
-						<td class="hidden-mobile"> <%= medication.name %> </td>
-						<td class="hidden-mobile"> <%= medication.expiration.to_s("%m/%d/%Y")%> </td>
-						<td class="action-table"> <%= link_to "View", medication, :class => "btn btn-info btn-sm"%> <%= link_to "Edit", edit_medication_path(medication.medId), :class => "btn btn-info btn-sm" %></td>
+						<td> <%= medication.medName %> </td>
+						<td> <%= medication.expiration.strftime("%m/%d/%Y")%> </td>
+						<td> 
+							<% if medication.status == 1 %>
+								Active
+							<% else %>
+								Inactive
+							<% end %>
+					    </td>
+						<td style="text-align: right;" class="action-table"> <%= link_to "View", medication, :class => "btn btn-info btn-sm"%> <%= link_to "Edit", edit_medication_path(medication.medId), :class => "btn btn-info btn-sm" %></td>
 					</tr>
 					<% end %>
 				</tbody>

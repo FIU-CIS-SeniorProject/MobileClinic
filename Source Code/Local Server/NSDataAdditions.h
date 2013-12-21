@@ -5,9 +5,7 @@
 //  Created by Alexander Rudenko on 3/12/10.
 //  Copyright 2010 r3apps.com. All rights reserved.
 //
-
 #import <Foundation/Foundation.h>
-
 
 @interface NSData (NSDataAdditions)
 
@@ -22,5 +20,8 @@
 
 - (BOOL) hasSuffix:(NSData *) suffix;
 - (BOOL) hasSuffixBytes:(const void *) suffix length:(NSUInteger) length;
+
+- (NSData*)AES256EncryptWithKey:(NSString*)key;
+- (NSData*)AES256DecryptWithKey:(NSString*)key;
 
 @end

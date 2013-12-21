@@ -24,7 +24,7 @@
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 3/24/13.
-//  Edited by James Mendez 11/2013
+//  Modified by James Mendez 11/2013
 //
 #import "MainMenu.h"
 #import "ServerCore.h"

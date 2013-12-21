@@ -29,14 +29,10 @@
 //
 //  3. This notice may not be removed or altered from any source distribution.
 //
-
-
 #import "NSData+GZIP.h"
 #import <zlib.h>
 
-
 #define CHUNK_SIZE 16384
-
 
 @implementation NSData (GZIP)
 
@@ -118,5 +114,4 @@
     }
     return nil;
 }
-
 @end

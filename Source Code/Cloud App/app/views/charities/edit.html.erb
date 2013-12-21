@@ -4,27 +4,29 @@
 		<div class="grid">
 			<div class="grid-title">
 				<div class="pull-left">
-					<div class="icon-title">
-						<i class="icon-edit"></i>
-					</div>
-					<span>Edit Charity</span>
-					<div class="clearfix"></div>
+					<span class="glyphicon glyphicon-pencil"></span>
 				</div>
-				<div class="clearfix"></div>
+				<div class="pull-left" style="padding-top: 10px;">
+					<span>Edit Charity</span>
+				</div>
 			</div>
 			<div class="grid-content">
 				<%= form_for(@charity, :html => { :multipart => true, role: "form" }) do |f| %>
 				<%= render 'shared/error_messages_charity' %>
+				<div id="message" style="display:none; border: 1px solid red; color: black; background-color: lightyellow; padding-left: 10px;">
+					If you inactivate this charity, all the Application Users and the Local Charity
+					Administrators will be incativated as well.
+				</div>
 				<div class="formRow">
 					<%= f.label :name, "Name", class: "label-gray"%>
 					<div class="formRight">
-						<%= f.text_field :name, class: "form-control" %>
+						<%= f.text_field :name, class: "form-control",required: "true",autocomplete: "off"  %>
 					</div>
 				</div>
 				<div class="formRow">
 					<%= f.label :status, "Status", class: "label-gray"%>
 					<div class="formRight">
-						<%= f.select :status, [['Active',1], ['Inactive',0]], class: "form-control"%>
+						<%= f.select :status, [['Active',1], ['Inactive',0]], class: "form-control",required: "true" %>
 					</div>
 				</div>
 				<div style="height: 100px;"></div>

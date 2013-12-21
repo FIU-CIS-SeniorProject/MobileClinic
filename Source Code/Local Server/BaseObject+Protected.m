@@ -1,9 +1,29 @@
+// The MIT License (MIT)
+//
+// Copyright (c) 2013 Florida International University
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 //
 //  BaseObject+Protected.m
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 3/26/13.
-//  Copyright (c) 2013 Florida International University. All rights reserved.
 //
 #import "BaseObject+Protected.h"
 
@@ -23,8 +43,10 @@
 }
 
 
--(void)copyDictionaryValues:(NSDictionary*)dictionary intoManagedObject:(NSManagedObject*)mObject{
-    for (NSString* key in dictionary.allKeys) {
+-(void)copyDictionaryValues:(NSDictionary*)dictionary intoManagedObject:(NSManagedObject*)mObject
+{
+    for (NSString* key in dictionary.allKeys)
+    {
         [mObject setValue:[dictionary objectForKey:key] forKey:key];
     }
 }
@@ -48,7 +70,8 @@
 -(BOOL)isObject:(id)obj UniqueForKey:(NSString*)key
 {
     // Check if it exists in database
-    if ([self FindObjectInTable:self->COMMONDATABASE withName:obj forAttribute:key].count > 0) {
+    if ([self FindObjectInTable:self->COMMONDATABASE withName:obj forAttribute:key].count > 0)
+    {
         return NO;
     }
     return YES;
@@ -84,8 +107,8 @@
 }
 
 // MARK: Converts and array of NSManagedObjects to an array of dictionaries
--(NSMutableArray*)convertListOfManagedObjectsToListOfDictionaries:(NSArray*)managedObjects{
-    
+-(NSMutableArray*)convertListOfManagedObjectsToListOfDictionaries:(NSArray*)managedObjects
+{
     NSMutableArray* arrayWithDictionaries = [[NSMutableArray alloc]initWithCapacity:managedObjects.count];
     
     for (NSManagedObject* objs in managedObjects) {
@@ -95,63 +118,65 @@
 }
 
 // MARK: Send and array of dictionaries to the client
--(void)sendSearchResults:(NSArray*)results{
-    
+-(void)sendSearchResults:(NSArray*)results
+{
     NSMutableDictionary* dict = [[NSMutableDictionary alloc]initWithCapacity:2];
-    
     [dict setValue:[NSNumber numberWithInteger:self->CLASSTYPE] forKey:OBJECTTYPE];
-    
     [dict setValue:results forKey:ALLITEMS];
-    
     [self sendInformation:dict toClientWithStatus:kSuccess andMessage:@"Server search completed"];
 }
 
--(void)setObject:(id)object withAttribute:(NSString *)attribute{
+-(void)setObject:(id)object withAttribute:(NSString *)attribute
+{
     [super setObject:object withAttribute:attribute inDatabaseObject:self->databaseObject];
 }
 
--(id)getObjectForAttribute:(NSString *)attribute{
+-(id)getObjectForAttribute:(NSString *)attribute
+{
     return [super getObjectForAttribute:attribute inDatabaseObject:self->databaseObject];
 }
 
 
 // MARK: Updates the object and sends the info to the client
--(void)UpdateObjectAndSendToClient{
-    
+-(void)UpdateObjectAndSendToClient
+{
     // Load old patient in global object and save new patient in variable
     NSManagedObject* oldValue = [self loadObjectWithID:[self->databaseObject valueForKey:self->COMMONID]];
-    
     NSString* lockedByOlduser = [oldValue valueForKey:ISLOCKEDBY] ;
-    
     BOOL isNotLockedUp = (!oldValue || [lockedByOlduser isEqualToString:self->isLockedBy] || lockedByOlduser.length == 0);
     
-    if (isNotLockedUp) {
+    if (isNotLockedUp)
+    {
         // save to local database
-        [self saveObject:^(id<BaseObjectProtocol> data, NSError *error) {
-            if (!data && error) {
+        [self saveObject:^(id<BaseObjectProtocol> data, NSError *error)
+        {
+            if (!data && error)
+            {
                 [self sendInformation:nil toClientWithStatus:kError andMessage:error.localizedDescription];
-            }else{
+            }
+            else
+            {
                 [self sendInformation:[data getDictionaryValuesFromManagedObject] toClientWithStatus:kSuccess andMessage:@"Succesfully updated & synced"];
             }
         }];
-    }else{
-        
+    }
+    else
+    {
         [self sendInformation:nil toClientWithStatus:kError andMessage:[NSString stringWithFormat:@"This currently being used by %@",lockedByOlduser]];
     }
+}
+
+-(void)CommonExecution
+{
     
 }
 
--(void)CommonExecution{
-    
-}
-
-
-
--(void)unpackageFileForUser:(NSDictionary *)data{
-   
-    if (!data) {
+-(void)unpackageFileForUser:(NSDictionary *)data
+{
+    if (!data)
+    {
         self->commands = kAbort;
-          [self sendInformation:nil toClientWithStatus:kErrorObjectMisconfiguration andMessage:@"Server Error: The object sent was not configured properly"];
+        [self sendInformation:nil toClientWithStatus:kErrorObjectMisconfiguration andMessage:@"Server Error: The object sent was not configured properly"];
         return;
     }
     
@@ -178,7 +203,8 @@
     
     if (!error)
     {
-        for (NSMutableDictionary* object in data) {
+        for (NSMutableDictionary* object in data)
+        {
             NSMutableDictionary* unlocked = [NSMutableDictionary dictionaryWithDictionary:object];
             [unlocked setValue:[NSNumber numberWithBool:NO] forKey:ISDIRTY];
             [newObjects addObject:unlocked];
@@ -186,8 +212,8 @@
         
         NSArray* allErrors = [self SaveListOfObjectsFromDictionary:newObjects];
         
-        if (allErrors.count > 0) {
-            
+        if (allErrors.count > 0)
+        {
             error = [[NSError alloc]initWithDomain:COMMONDATABASE code:kErrorObjectMisconfiguration userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[allErrors.lastObject description],NSLocalizedDescriptionKey, nil]];
         }
     }
@@ -201,12 +227,13 @@
     NSMutableArray* array = [[NSMutableArray alloc]initWithCapacity:List.count];
     
     // Go through all users in array
-    for (NSDictionary* dict in List) {
-
+    for (NSDictionary* dict in List)
+    {
         //TODO: Revise this section to handle possibility of failure
        NSError* err = [self setValueToDictionaryValues:dict];
         
-        if (err) {
+        if (err)
+        {
             [array addObject:err.localizedDescription];
         }
         
@@ -218,5 +245,4 @@
     }
     return array;
 }
-
 @end

@@ -5,13 +5,13 @@
 				<div class="header">Account Login</div>
 			
 				<div class="grid-content overflow">
-					<%= f.text_field :userName, placeholder: "User Name", class: "form-control", type: "text" %>
+					<%= f.text_field :userName, placeholder: "User Name", class: "form-control", type: "text", required: "true",autocomplete: "off" %>
 				</div>
 				<div class="grid-content overflow">
-					<%= f.password_field :password, placeholder: "Password", class: "form-control", type: "password" %>
+					<%= f.password_field :password, placeholder: "Password", class: "form-control", type: "password", required: "true",autocomplete: "off" %>
 				</div>
 			
-				<div class="link-2"><p><%= link_to "forgotten password?", new_password_reset_path %></p></div>
+				<div class="link-2"><p><%= link_to "Forgot Password?", new_password_reset_path %></p></div>
 				<div class="clear"></div>
 				<div class="button-login">
 					<%= f.submit "Sign in", class: "btn btn-primary btn-lg btn-block" %>

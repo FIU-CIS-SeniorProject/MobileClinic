@@ -9,7 +9,6 @@
 #import <GHUnitIOS/GHUnit.h> 
 #import "BaseObject.h"
 #import "PatientObject.h"
-
 @interface BaseObjectTest : GHTestCase {
     PatientObject* base;
     NSMutableDictionary* testData;

@@ -24,6 +24,7 @@
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 1/30/13.
+//  Modified by James Mendez on 12/2013
 //
 #define ARCHIVER    @"archiver"
 #define SERVER_TYPE @"_MC-EMR._tcp."

@@ -10,8 +10,10 @@ class User < ActiveRecord::Base
   :userName, :avatar, :delete_avatar, :userid, :charityid, :question, :answer,:created_at,:updated_at
   has_secure_password
   
-  validates :password, length:  { minimum: 6 }, :on => :create , :if => :should_validate_password?
-  validates :password_confirmation, length: { minimum: 6 } , :on => :create
+  before_validation :clear_avatar
+  
+  validates :password, presence: true, length:  { minimum: 6 }, :on => :create
+  validates :password_confirmation, presence: true, length: { minimum: 6 } , :on => :create
 
   validates :userName, presence: true , length: {maximum: 50 , minimum: 5} , uniqueness: true
 
@@ -33,7 +35,7 @@ class User < ActiveRecord::Base
   self.primary_key = "userid"
   attr_accessor :updating_password
   
-  def delete_avatar=(value)
+    def delete_avatar=(value)
       @delete_avatar = !value.to_i.zero?
     end
     
@@ -41,11 +43,11 @@ class User < ActiveRecord::Base
       !!@delete_avatar
     end
     alias_method :delete_avatar?, :delete_avatar
-
+    
     # Later in the model
-  def clear_avatar
-    self.avatar = nil if delete_avatar? && !avatar.dirty?
-  end
+    def clear_avatar
+      self.avatar = nil if delete_avatar? && !avatar.dirty?
+    end
 
     private
 

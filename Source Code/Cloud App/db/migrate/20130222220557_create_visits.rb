@@ -1,22 +1,27 @@
 class CreateVisits < ActiveRecord::Migration
   def change
     create_table :visits, :id => false do |t|
-      t.integer :triageIn
-      t.float :weight
-      t.string :diagnosisTitle
-      t.text :conditions
-      t.string :bloodPressure
-      t.integer :triageOut
+      t.string  :assessment
+      t.string  :bloodPressure
+      t.integer :charityid
+      t.string  :condition
+      t.string  :conditionTitle
+      t.string  :diagnosisTitle
+      t.string  :doctorId
       t.integer :doctorIn
       t.integer :doctorOut
-      t.string :doctorId
-      t.string :nurseId
-      t.string :patientId
-      t.text :observation
-      t.string :heartRate 
-      t.string :respiration 
-      t.string :visitationId
-
+      t.string  :heartRate 
+      t.string  :medicationNotes 
+      t.string  :nurseId 
+      t.string  :observation
+      t.string  :patientId
+      t.string  :respiration 
+      t.string  :temperature 
+      t.integer :triageIn
+      t.integer :triageOut
+      t.string  :visitationId
+      t.float   :weight
+            
       t.timestamps
     end
   end

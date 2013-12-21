@@ -7,7 +7,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string  :firstName
       t.string  :lastName
       t.string  :email , unique: true
-      t.string  :charityid
+      t.integer  :charityid
       t.string  :question
       t.string  :answer
       t.integer :userType

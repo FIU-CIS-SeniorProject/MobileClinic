@@ -1,14 +1,9 @@
 class Visit < ActiveRecord::Base
 
-  attr_accessible   :bloodPressure, :conditions, :observation, :docterOut, :doctorId, 
-                    :doctorIn, :doctorOut, :nurseId, :patientId, :triageIn, :triageOut, 
-                    :weight, :diagnosisTitle, :heartRate, :respiration, :visitationId,
-                    :created_at,:updated_at
-  
+  attr_accessible   :assessment, :bloodPressure, :charityid, :condition, :conditionTitle, :diagnosisTitle, :doctorId,
+                    :doctorIn, :doctorOut, :heartRate, :medicationNotes, :nurseId, :observation,
+                    :patientId,:respiration,:temperature,:triageIn,:triageOut,:visitationId,
+                    :weight, :created_at,:updated_at
+
   self.primary_key = "visitationId"
-  belongs_to :patient, :foreign_key => 'patientId'
-  belongs_to :user
-  
-  has_one :prescription
-     
-  end
+end

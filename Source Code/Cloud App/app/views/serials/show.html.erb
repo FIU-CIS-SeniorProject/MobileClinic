@@ -1,0 +1,49 @@
+<% provide(:title, @serial.serialnum) %>
+<div class="block">
+	<div class="grid">
+		<div class="grid-title">
+			<div class="pull-left">
+				<span class="glyphicon glyphicon-eye-open"></span>
+			</div>
+			<div class="pull-left" style="padding-top: 10px;">
+				<span>Serial Information</span>
+			</div>
+		</div>
+		<div class="grid-content padding-none">
+			<table class="table table-striped">
+				<thead>
+					<tr></tr><tr></tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="width: 950px;">
+						<div class="grid-content">
+							<table class="table table-striped">
+								<thead>
+									<tr></tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Serial Number </td>
+										<td><%= @serial.serialnum %></td>
+									</tr>
+									<tr>
+										<td>Charity: </td>
+										<td><%= @serial.charityName %> </td>
+									</tr>
+									<tr>
+										<td>Status:</td>
+										<td> <%= status( @serial.status ) %></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+		<%= link_to "Edit Serial", edit_serial_path(@serial.serialId),  :class => "btn btn-large btn-block btn-info"%>
+		<%= link_to 'Back', serials_path, :class => "btn btn-large btn-block btn-default" %>
+	</div>
+</div>

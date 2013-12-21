@@ -24,6 +24,7 @@
 //  Mobile Clinic
 //
 //  Created by Kevin Diaz on 11/02/13.
+//  Edited by James Mendez on 12/2013
 //
 #import "BaseObject+Protected.h"
 #import "CloudManagementObject.h"
@@ -109,6 +110,22 @@ int* isActive;
         }
     }
     return dict;
+}
+
+-(void)updateTimestamp: (NSDate*) inDate
+{
+    NSMutableDictionary* active = [[self GetActiveEnvironment] mutableCopy];
+    if (active != nil)
+    {
+        [active setObject:[inDate convertNSDateToSeconds] forKey:LASTPULLTIME];
+    }
+    
+    CloudManagementObject* activeCMO = [[CloudManagementObject alloc] initWithCachedObjectWithUpdatedObject:active];
+    
+    [activeCMO saveObject:^(id<BaseObjectProtocol> data, NSError *error)
+     {
+         // Nothing?
+     }];
 }
 
 -(NSNumber *)GetActiveTimestamp

@@ -3,13 +3,11 @@
 	<div class="grid">
 		<div class="grid-title">
 			<div class="pull-left">
-				<div class="icon-title">
-					<i class="icon-user"></i>
-				</div>
-				<span>App Users</span>
-				<div class="clearfix"></div>
+				<span class="glyphicon glyphicon-user"></span>
 			</div>
-			<div class="clearfix"></div>
+			<div class="pull-left" style="padding-top: 10px;">
+				<span>Application Users</span>
+			</div>
 		</div>
 		<div class="grid-content overflow">
 			<table class="table table-bordered" id="datatable_appuser">
@@ -19,6 +17,7 @@
 						<th>Last Name</th>
 						<th class="hidden-mobile">User Type</th>
 						<th>Charity</th>
+						<th>Status</th>
 						<th></th>
 					</tr>
 				</thead>
@@ -29,6 +28,14 @@
 						<td> <%= appuser.lastName %> </td>
 						<td class="hidden-mobile"> <%= type_of_appuser(appuser.userType) %> </td>
 						<td> <%= Charity.find(appuser.charityid).name %> </td>
+						<td> 
+						<% if appuser.status == 1 %>
+							Active
+						<% else %>
+							Inactive
+						<% end %> 
+						</td>
+						<td sty
 						<td style="text-align: right;"><%= link_to "View", appuser,:class => "btn btn-info btn-sm" %> <%= link_to "Edit", edit_appuser_path(appuser.appuserid),:class => "btn btn-info btn-sm" %></td>
 					</tr>
 					<% end %>
@@ -36,7 +43,7 @@
 			</table>
 			<div class="clearfix"></div>
 		</div>
-		<%= link_to "Create Application User", createappuser_path, :class => "btn btn-large btn-block btn-info"%>
+		<%= link_to "Create Application User", new_appuser_path, :class => "btn btn-large btn-block btn-info"%>
 		<%= link_to 'Back', home_path, :class => "btn btn-default btn-large btn-block" %>
 	</div>
 </div>

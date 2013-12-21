@@ -1,28 +1,36 @@
 class AuthController < ApplicationController
-@@api_key = "12345"
 
 def access_token
 	begin
 		postParams = JSON.parse(params[:params])
-    logger.info postParams.inspect
+              
 		if(!postParams.has_key?('api_key'))
 			@response = {
 				:result => 'false' ,
-				:message => 'missing api key. Params[api_key]'
+				:data => 'missing api key. Params[api_key]'
 			}
 
 			render json:@response
 		end
 
-		if(postParams['api_key'] )
-
+		if(postParams['api_key'])
+		  if(!Serial.where("serialnum = ? AND status = ?",postParams['api_key'],1) rescue nil)
+          @response = {
+            :result => 'false' ,
+            :data => 'invalid serial number. Params[api_key]'
+          }
+  
+        render json:@response
+      else      
+        
 			@auth = Auth.create!(
             	:expiration => "", 
            	 	:user_id => "", 
             	:user_token=> "",
+            	:charityid => Serial.select("charityid").where("serialnum = ?",postParams['api_key'])[0].charityid,
             	:access_token => generate_access_token()
             )
-
+            
             @response = {
             	:result => 'true',
             	:data => {
@@ -31,20 +39,20 @@ def access_token
           	}
 
           render json:@response
-        else
+      end
+    else
         	@response = {
         		:result => 'false',
-        		:message => 'api_key invalid'
+        		:data => 'Empty serial number Params[api_key]'
         	}
 
         	render json:@response
-        end
+    end
 
 	rescue => error
-		
 		@response = {
             :result => 'false',
-            :data => error.message
+            :data => "Serial Number not found"
           }
 
           render json:@response

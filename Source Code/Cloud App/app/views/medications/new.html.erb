@@ -1,45 +1,56 @@
+<% provide(:title, 'Add Medication') %>
 <div class="block">
-
-	<% provide(:title, 'Add Medication') %>
 	<div class="grid">
 		<div class="grid-title">
 			<div class="pull-left">
-				<div class="icon-title">
-					<i class="icon-plus"></i>
-				</div>
-				<span>New Medication</span>
-				<div class="clearfix"></div>
+				<span class="glyphicon glyphicon-pencil"></span>
 			</div>
-			<div class="clearfix"></div>
+			<div class="pull-left" style="padding-top: 10px;">
+				<span>New Medication</span>
+			</div>
 		</div>
 		<div class="grid-content">
 			<%= form_for @medication, html: {role: "form"} do |f| %>
 			<%= render 'shared/error_messages_med' %>
-			<div class="grid-content overflow">
-				<%= f.text_field :name , class: "form-control", :placeholder => 'Name of Medication' %>
+			<div class="formRow">
+				<%= f.label :medName, "Name", class: "label-gray"%>
+				<div class="formRight">
+					<%= f.text_field :medName , class: "form-control", :placeholder => 'Name of Medication',type: "text", required: "true",autocomplete: "off" %>
+				</div>
 			</div>
-			<div class="grid-content overflow">
-				<%= f.text_field :numContainers , class: "form-control", type: "number", :placeholder => 'Number of Containers' %>
+			<div class="formRow">
+				<%= f.label :numContainers, "Number of Containers", class: "label-gray"%>
+				<div class="formRight">
+					<%= f.text_field :numContainers , class: "form-control", type: "number", :placeholder => 'Number of Containers', required: "true",autocomplete: "off"  %>
+				</div>
 			</div>
-			<div class="grid-content overflow">
-				<%= f.text_field :tabletsPerContainer , class: "form-control", type: "number", :placeholder => 'Tablets Per Container' %>
+			<div class="formRow">
+				<%= f.label :tabletsContainer, "Tables per Container", class: "label-gray"%>
+				<div class="formRight">
+					<%= f.text_field :tabletsContainer , class: "form-control", type: "number", :placeholder => 'Tablets Per Container', required: "true",autocomplete: "off"  %>
+				</div>
 			</div>
-			<div class="grid-content overflow">
-				<%= f.text_field :doseOfTablets , class: "form-control", type: "number", :placeholder => 'Amount of Dose' %>
+			<div class="formRow">
+				<%= f.label :dosage, "Dose of Tables", class: "label-gray"%>
+				<div class="formRight">
+					<%= f.text_field :dosage , class: "form-control", type: "number", :placeholder => 'Amount of Dose', required: "true",autocomplete: "off"  %>
+				</div>
 			</div>
-			<div class="grid-content overflow">
-				<%= f.text_field :expiration , class: "form-control", type: "date", :placeholder => 'Expiration' %>
+			<div class="formRow">
+				<%= f.label :expiration, "Expiration Date", class: "label-gray"%>
+				<div class="formRight">
+					<%= f.text_field :expiration , class: "form-control", type: "date", :placeholder => 'Expiration', required: "true",autocomplete: "off"  %>
+				</div>
 			</div>
-			<div class="grid-content overflow">
-				<%= f.select :status, [['Active',1], ['Inactive',0]], class: "form-controller" %>
+			<div class="formRow">
+				<%= f.label :status, "Status", class: "label-gray"%>
+				<div class="formRight">
+					<%= f.select :status, [['Active',1]], class: "form-controller", required: "true"  %>
+				</div>
 			</div>
-			<div class="grid-content overflow">
-				<%= f.text_area :notes , class: "form-control same-height-1", :placeholder => 'Notes' %>
-			</div>
-
 			<%= f.submit "Create New Medication", :class => "btn btn-large btn-block btn-info"%>
+			<%= link_to 'Back', @medication,:class => "btn btn-large btn-block btn-default" %>
 			<% end %>
 		</div>
 	</div>
-
 </div>

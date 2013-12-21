@@ -1,9 +1,29 @@
+// The MIT License (MIT)
+//
+// Copyright (c) 2013 Florida International University
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 //
 //  BaseObject+Protected.m
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 3/21/13.
-//  Copyright (c) 2013 Steven Berlanga. All rights reserved.
 //
 #import "BaseObject+Protected.h"
 #import "ServerCore.h"
@@ -48,10 +68,12 @@ id<ServerProtocol> serverManager;
     }
 }
 
--(void)startSearchWithData:(NSDictionary*)data withsearchType:(RemoteCommands)rCommand andOnComplete:(ObjectResponse)response
-{
-    NSMutableDictionary* dataToSend = [[NSMutableDictionary alloc]initWithCapacity:3];
+-(void)startSearchWithData:(NSDictionary*)data withsearchType:(RemoteCommands)rCommand andOnComplete:(ObjectResponse)response {
+    
+    NSMutableDictionary* dataToSend = [[NSMutableDictionary alloc]initWithCapacity:3
+                                       ];
     [dataToSend setValue:data forKey:DATABASEOBJECT];
+    
     [dataToSend setValue:[NSNumber numberWithInt:self->CLASSTYPE] forKey:OBJECTTYPE];
     [dataToSend setValue:[NSNumber numberWithInt:rCommand] forKey:OBJECTCOMMAND];
     
@@ -108,10 +130,10 @@ id<ServerProtocol> serverManager;
     // Set/Clear the lock on the object
     NSMutableDictionary* container = [NSMutableDictionary dictionaryWithCapacity:3];
     
-    NSString* lock = (shouldLock)?[BaseObject getCurrentUserName]:@"";
+    NSString* lock = (shouldLock)?[BaseObject getCurrenUserName]:@"";
     
     //So the reciever knows who sent this data
-    [container setValue:[BaseObject getCurrentUserName] forKey:ISLOCKEDBY];
+    [container setValue:[BaseObject getCurrenUserName] forKey:ISLOCKEDBY];
     
     // determines whether or not object is locked
     [dataToSend setValue:lock forKey:ISLOCKEDBY];
@@ -132,8 +154,7 @@ id<ServerProtocol> serverManager;
     [self tryAndSendData:container withErrorToFire:^(id<BaseObjectProtocol> data, NSError *error) {
         
         // Make sure that the object is attached to this object
-        if([self setValueToDictionaryValues:dataToSend])
-        {
+        if([self setValueToDictionaryValues:dataToSend]){
             // Create New Queue Manager
             QueueManager* qm = [[QueueManager alloc]init];
             // Create a new Queue Object
@@ -148,14 +169,11 @@ id<ServerProtocol> serverManager;
             [qm addQueueToDatabase:queue];
             
             // Save current information if cannot connect
-            [self saveObject:^(id<BaseObjectProtocol> data, NSError *noError)
-            {
-                response(data,error);
-            }];
+            [self saveObject:^(id<BaseObjectProtocol> data, NSError *noError) {
+            response(data,error);
+        }];
             
-        }
-        else
-        {
+        }else{
             response(nil,[self createErrorWithDescription:@"Developer Error: Misconfigured Object" andErrorCodeNumber:kErrorObjectMisconfiguration inDomain:@"BaseObject + Protected"]);
             return;
         }

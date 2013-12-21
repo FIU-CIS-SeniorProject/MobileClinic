@@ -36,6 +36,24 @@ class CharitiesController < ApplicationController
   # PUT /charities/1
   def update
     @charity = Charity.find(params[:id])
+    logger.info params[:charity][:status].inspect
+    if(params[:charity][:status] == "0")
+      @appusers = Appuser.where("charityid = ?",params[:id])
+      @appusers.each do |appuser|
+        appuser.status = 0
+        appuser.save
+      end
+      @users = User.where("charityid = ? AND \"userType\" = 1",params[:id])
+      @users.each do |user|
+        user.status = 0
+        user.save
+      end
+      @serial = Serial.where("charityid = ?",params[:id])
+      @serial.each do |serial|
+        serial.status = 0
+        serial.save
+      end
+    end
     if @charity.update_attributes(params[:charity])
       flash[:notice] = "Charity updated"
       redirect_to @charity

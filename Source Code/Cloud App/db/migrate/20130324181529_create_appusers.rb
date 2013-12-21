@@ -7,7 +7,8 @@ class CreateAppusers < ActiveRecord::Migration
       t.string  :firstName
       t.string  :lastName
       t.string  :email
-      t.string  :charityid
+      t.integer :charityid
+      t.string  :charityName
       t.integer :userType
       t.integer :status
 

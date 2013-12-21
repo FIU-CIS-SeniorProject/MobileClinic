@@ -24,6 +24,7 @@
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 3/10/13.
+//  Modified by James Mendez on 11/2013
 //
 #define FIRSTNAME                   @"firstName"
 #define FAMILYNAME                  @"familyName"

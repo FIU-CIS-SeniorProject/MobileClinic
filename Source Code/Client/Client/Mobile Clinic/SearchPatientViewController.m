@@ -126,7 +126,7 @@
     NSString * lockedBy = [patient  objectForKey:ISLOCKEDBY];
     BOOL isOpen = [[patient  objectForKey:ISOPEN]boolValue];
     
-    if(![lockedBy isEqualToString:[BaseObject getCurrentUserName ]]) {
+    if(![lockedBy isEqualToString:[BaseObject getCurrenUserName ]]) {
         [[[tableView cellForRowAtIndexPath:indexPath]contentView]setBackgroundColor:[UIColor yellowColor]];
     }else{
         [[[tableView cellForRowAtIndexPath:indexPath]contentView]setBackgroundColor:[UIColor whiteColor]];

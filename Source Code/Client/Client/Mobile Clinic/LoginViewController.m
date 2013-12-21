@@ -5,6 +5,8 @@
 //  Created by sebastian a zanlongo on 2/18/13.
 //  Copyright (c) 2013 Steven Berlanga. All rights reserved.
 //
+
+
 #define TESTING @"Test"
 
 #import "MBProgressHUD.h"
@@ -13,13 +15,10 @@
 #import "PatientObject.h"
 #import "ServerCore.h"
 #import "SystemBackup.h"
-#import "MobileClinicFacade.h"
-
-@interface LoginViewController()
-{
+@interface LoginViewController (){
     MBProgressHUD* progress;
+    
 }
-
 @property (nonatomic, retain) UIScrollView* scrollView;
 @property (nonatomic, retain) NSMutableArray* slideImages;
 @property (nonatomic, retain) NSTimer* timer;
@@ -33,8 +32,7 @@
 @synthesize gradient = _gradient;
 @synthesize usernameTextField, passwordTextField;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -42,29 +40,26 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad{
     [super viewDidLoad];
     
     [ColorMe addGradientToLayer:self.view.layer colorOne:[ColorMe lightGray] andColorTwo:[ColorMe whitishColor]inFrame:self.view.bounds];
 	// Do any additional setup after loading the view.
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
+- (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
    
     [self setupEnvironment];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (void)setupEnvironment
-{
+- (void)setupEnvironment {
+    
     // This will populate the databaes with values from the JSON files
     // Use this for testing only
     
@@ -86,8 +81,8 @@
 }
 
 /** Initiates Login */
-- (IBAction)loginButton:(id)sender
-{
+- (IBAction)loginButton:(id)sender {
+
     /** This will should HUD in tableview to show alert the user that the system is working */
     [self showIndeterminateHUDInView:self.view withText:@"Logging In" shouldHide:NO afterDelay:0 andShouldDim:YES];
    
@@ -116,8 +111,7 @@
         /** This will remove the HUD since the search is complete */
         [self HideALLHUDDisplayInView:self.view];
         
-        if (error)
-        {
+        if (error) {
             [FIUAppDelegate getNotificationWithColor:AJNotificationTypeRed Animation:AJLinedBackgroundTypeAnimated WithMessage:error.localizedDescription inView:self.view];
         }
         else
@@ -136,19 +130,20 @@
 }
 
 /** Private Helper Method: Called through notifications to switch views*/
--(void)SwitchViews:(NSNotification*)notification
-{
-    [self dismissViewControllerAnimated:YES completion:^
-    {
+-(void)SwitchViews:(NSNotification*)notification{
+    
+    [self dismissViewControllerAnimated:YES completion:^{
+       
         int view = [notification.object integerValue];
+        
         [self loadViewBasedOnUserType:view];
+        
     }];
 }
 /** Private Method: Closes the view, and clears all text fields and username memory */
-- (void)LogOffDevice
-{
-    [self dismissViewControllerAnimated:YES completion:^
-    {
+- (void)LogOffDevice {
+    
+    [self dismissViewControllerAnimated:YES completion:^{
         // Stops listening
         [passwordTextField setText:@""];
         
@@ -159,52 +154,12 @@
     }];
 }
 
-- (void) PerformSystemPurge
-{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Purge System:" message:@"Enter credentials to confirm purge" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-    
-    alert.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
-    alert.tag = 12;
-    
-    [alert addButtonWithTitle:@"Go"];
-    [alert show];
-}
-
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    if (alertView.tag == 12)
-    {
-        if (buttonIndex == 1)
-        {
-            UITextField* usernameField = [alertView textFieldAtIndex:0];
-            UITextField* passwordField = [alertView textFieldAtIndex:1];
-            
-            NSString* username = usernameField.text;
-            NSString* password = passwordField.text;
-            
-            [[[UserObject alloc] init] loginWithUsername:username andPassword:password onCompletion:^(id<BaseObjectProtocol> data, NSError *error, Users *userA)
-            {
-                if (error)
-                {
-                    [FIUAppDelegate getNotificationWithColor:AJNotificationTypeRed Animation:AJLinedBackgroundTypeAnimated WithMessage:error.localizedDescription inView:self.view];
-                }
-                else
-                {
-                    [[[MobileClinicFacade alloc] init] completeSystemPurge];
-                    [self LogOffDevice];
-                }
-            }];
-        }
-    }
-}
-
 /** Private Method: Switches the view based on the usertype. */
 -(void)loadViewBasedOnUserType:(UserTypes)type{
    
     UINavigationController * newView;
    
-    switch (type)
-    {
+    switch (type) {
         case kTriageNurse:
         case kAdministrator:
             newView = [self getViewControllerFromiPadStoryboardWithName:@"triageController"];
@@ -215,21 +170,16 @@
         case kPharmacists:
             newView = [self getViewControllerFromiPadStoryboardWithName:@"PharmacyQueueController"];
             break;
-        case kPurgeSystem:
-            [self PerformSystemPurge];
-            break;
         default:
             break;
     }
     
-    if (newView != nil)
-    {
-        [self presentViewController:newView animated:YES completion:^{ }];
-    }
+    [self presentViewController:newView animated:YES completion:^{
+        
+    }];
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [self setUsernameTextField:nil];
     [self setPasswordTextField:nil];
     [super viewDidUnload];
@@ -238,8 +188,7 @@
 #pragma mark- Moving Tiles
 #pragma mark-
 
-- (IBAction)setupTestPatients:(id)sender
-{
+- (IBAction)setupTestPatients:(id)sender {
     // - DO NOT COMMENT: IF YOUR RESTART YOUR SERVER IT WILL PLACE DEMO PATIENTS INSIDE TO HELP ACCELERATE YOUR TESTING
     // - YOU CAN SEE WHAT PATIENTS ARE ADDED BY CHECKING THE PatientFile.json file
     NSError *err = nil;
@@ -259,8 +208,7 @@
     }];
 }
 
-- (IBAction)setupUser:(id)sender
-{
+- (IBAction)setupUser:(id)sender {
     NSError *err = nil;
     NSString *dataPath = [[NSBundle mainBundle] pathForResource:@"User" ofType:@"json"];
     NSArray *users = [NSArray arrayWithArray:[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPath]options:0 error:&err]];
@@ -278,31 +226,32 @@
     }];
 }
 
-- (IBAction)createTestMedications:(id)sender
-{
+- (IBAction)createTestMedications:(id)sender {
     NSError *err = nil;
     NSString *dataPath = [[NSBundle mainBundle] pathForResource:@"MedicationFile" ofType:@"json"];
     NSArray *meds = [NSArray arrayWithArray:[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPath]options:0 error:&err]];
     
     NSLog(@"Imported Medications: %@", meds.description);
     
-    [meds enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
-    {
+    [meds enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        
         MedicationObject *base = [[MedicationObject alloc]init];
         
-        if([base setValueToDictionaryValues:obj])
-        {
-            [base saveObject:^(id<BaseObjectProtocol> data, NSError *error) {}];
+        if([base setValueToDictionaryValues:obj]){
+            [base saveObject:^(id<BaseObjectProtocol> data, NSError *error) {
+            }];
         }
     }];
 }
 
-- (IBAction)DeleteMedications:(id)sender
-{
-    MedicationObject *base = [[MedicationObject alloc]init];
+- (IBAction)DeleteMedications:(id)sender {
+
+     MedicationObject *base = [[MedicationObject alloc]init];
+ 
     NSArray* allMeds = [base FindAllObjectsLocallyFromParentObject:nil];
-    [allMeds enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
-    {
+    
+    [allMeds enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        
         [base deleteDatabaseDictionaryObject:obj];
     }];
 }

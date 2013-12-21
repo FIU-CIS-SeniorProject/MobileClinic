@@ -23,7 +23,8 @@
 //  CloudManagementObject.h
 //  Mobile Clinic
 //
-//  Created by Kevin Diaz on 11/02/13.
+//  Created by Kevin Diaz on 11/02/2013.
+//  Edited by James Mendez on 12/2013
 //
 //#import <Foundation/Foundation.h>
 #import "BaseObject.h"
@@ -34,5 +35,6 @@
 {
     CloudManager* cloudMO;
 }
+-(void)updateTimestamp: (NSDate*)inDate;
 
 @end

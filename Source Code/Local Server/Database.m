@@ -1,11 +1,30 @@
+// The MIT License (MIT)
+//
+// Copyright (c) 2013 Florida International University
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 //
 //  Database.m
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 3/18/13.
-//  Copyright (c) 2013 Florida International University. All rights reserved.
 //
-
 #import "Database.h"
 
 @implementation Database
@@ -35,7 +54,8 @@
 // Creates if necessary and returns the managed object model for the application.
 - (NSManagedObjectModel *)managedObjectModel
 {
-    if (_managedObjectModel) {
+    if (_managedObjectModel)
+    {
         return _managedObjectModel;
     }
 	
@@ -47,12 +67,14 @@
 // Returns the persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it. (The directory for the store is created, if necessary.)
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator
 {
-    if (_persistentStoreCoordinator) {
+    if (_persistentStoreCoordinator)
+    {
         return _persistentStoreCoordinator;
     }
     
     NSManagedObjectModel *mom = [self managedObjectModel];
-    if (!mom) {
+    if (!mom)
+    {
         NSLog(@"%@:%@ No model to generate a store from", [self class], NSStringFromSelector(_cmd));
         return nil;
     }
@@ -64,17 +86,23 @@
     
     NSDictionary *properties = [applicationFilesDirectory resourceValuesForKeys:@[NSURLIsDirectoryKey] error:&error];
     
-    if (!properties) {
+    if (!properties)
+    {
         BOOL ok = NO;
-        if ([error code] == NSFileReadNoSuchFileError) {
+        if ([error code] == NSFileReadNoSuchFileError)
+        {
             ok = [fileManager createDirectoryAtPath:[applicationFilesDirectory path] withIntermediateDirectories:YES attributes:nil error:&error];
         }
-        if (!ok) {
+        if (!ok)
+        {
             [[NSApplication sharedApplication] presentError:error];
             return nil;
         }
-    } else {
-        if (![properties[NSURLIsDirectoryKey] boolValue]) {
+    }
+    else
+    {
+        if (![properties[NSURLIsDirectoryKey] boolValue])
+        {
             // Customize and localize this error.
             NSString *failureDescription = [NSString stringWithFormat:@"Expected a folder to store application data, found a file (%@).", [applicationFilesDirectory path]];
             
@@ -89,7 +117,8 @@
     
     NSURL *url = [applicationFilesDirectory URLByAppendingPathComponent:@"Mobile_Clinic.sqldata"];
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
-    if (![coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:nil error:&error]) {
+    if (![coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:nil error:&error])
+    {
         [[NSApplication sharedApplication] presentError:error];
         return nil;
     }
@@ -112,7 +141,8 @@
     }
     
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (!coordinator) {
+    if (!coordinator)
+    {
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         [dict setValue:@"Failed to initialize the store" forKey:NSLocalizedDescriptionKey];
         [dict setValue:@"There was an error building up the data file." forKey:NSLocalizedFailureReasonErrorKey];
@@ -131,11 +161,13 @@
 {
     NSError *error = nil;
     
-    if (![[self managedObjectContext] commitEditing]) {
+    if (![[self managedObjectContext] commitEditing])
+    {
         NSLog(@"%@:%@ unable to commit editing before saving", [self class], NSStringFromSelector(_cmd));
     }
     
-    if (![[self managedObjectContext] save:&error]) {
+    if (![[self managedObjectContext] save:&error])
+    {
         [[NSApplication sharedApplication] presentError:error];
     }
 }
@@ -144,8 +176,10 @@
 {
     NSError *error = nil;
     NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
-    if (managedObjectContext != nil) {
-        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
+    if (managedObjectContext != nil)
+    {
+        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error])
+        {
             // Replace this implementation with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
@@ -158,25 +192,28 @@
 
     // Save changes in the application's managed object context before the application terminates.
     
-    if (!_managedObjectContext) {
+    if (!_managedObjectContext)
+    {
         return YES;
     }
     
-    if (![[self managedObjectContext] commitEditing]) {
+    if (![[self managedObjectContext] commitEditing])
+    {
         NSLog(@"%@:%@ unable to commit editing to terminate", [self class], NSStringFromSelector(_cmd));
         return NO;
     }
     
-    if (![[self managedObjectContext] hasChanges]) {
+    if (![[self managedObjectContext] hasChanges])
+    {
         return NO;
     }
     
     NSError *error = nil;
-    if (![[self managedObjectContext] save:&error]) {
+    if (![[self managedObjectContext] save:&error])
+    {
 
         return YES;
     }
     return NO;
 }
-
 @end

@@ -3,13 +3,11 @@
 	<div class="grid">
 		<div class="grid-title">
 			<div class="pull-left">
-				<div class="icon-title">
-					<i class="icon-user"></i>
-				</div>
-				<span>Charities</span>
-				<div class="clearfix"></div>
+				<span class="glyphicon glyphicon-align-justify"></span>
 			</div>
-			<div class="clearfix"></div>
+			<div class="pull-left" style="padding-top: 10px;">
+				<span>Charities</span>
+			</div>
 		</div>
 		<div class="grid-content overflow">
 			<table class="table table-bordered" id="datatable_charity">
@@ -24,11 +22,13 @@
 					<% (@charities).each do |charity| %>
 					<tr>
 						<td> <%= charity.name %> </td>
-						<td> <% if charity.status == 1 %>
-						Active
+						<td> 
+						<% if charity.status == 1 %>
+							Active
 						<% else %>
-						Inactive
-						<% end %> </td>
+							Inactive
+						<% end %> 
+						</td>
 						<td style="text-align: right;"><%= link_to "View", charity, :class => "btn btn-info btn-sm" %> <%= link_to "Edit", edit_charity_path(charity.charityid), :class => "btn btn-info btn-sm" %></td>
 					</tr>
 				</tbody>

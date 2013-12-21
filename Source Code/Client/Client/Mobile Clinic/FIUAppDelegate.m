@@ -43,16 +43,19 @@ NSTimer* syncTimer;
     return [AJNotificationView showNoticeInView:view type:color title:msg linedBackground:animate hideAfter:3];
 }
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+
     // This is the needed to upload the application into test flight
+    /*#define TESTING 1
+        #ifdef TESTING
+            [TestFlight setDeviceIdentifier:[[NSUUID UUID]UUIDString]];
+        #endif
+    */
     [TestFlight takeOff:@"d2445572-9076-4fe1-a145-f603c2d035e9"];
-    
     [self setupTimer:SYNC_EXTENDED_INTERVAL];
-    
     return YES;
 }
-
 -(void)setupTimer:(NSInteger)seconds{
     syncTimer = [NSTimer timerWithTimeInterval:seconds target:self selector:@selector(syncronize) userInfo:nil repeats:NO];
     
