@@ -30,15 +30,19 @@
 #define LASTPULLTIME        @"lastPullTime"
 #define ISACTIVE            @"isActive"
 #define ISDIRTY             @"isDirty"
+#define ACTIVEUSER          @"activeUser"
 
 #import <Foundation/Foundation.h>
 #import "CommonObjectProtocol.h"
 @protocol CloudManagementObjectProtocol <NSObject>
 
 -(NSDictionary *)GetActiveEnvironment;
--(NSDate *)GetActiveTimestamp;
+-(NSNumber *)GetActiveTimestamp;
 -(NSString *)GetActiveURL;
+-(NSString *)GetActiveUser;
 -(void)setActiveEnvironment: (NSString*)environmentName;
 -(NSDictionary *)GetEnvironment: (NSString*)environmentName;
+-(void)updateTimestamp;
+-(void)updateActiveUser: (NSString*)currentUser;
 
 @end

@@ -34,5 +34,7 @@
 {
     CloudManager* cloudMO;
 }
+-(void)updateTimestamp: (NSDate*)inDate;
+
 
 @end

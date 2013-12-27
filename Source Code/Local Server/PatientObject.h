@@ -1,4 +1,4 @@
-//
+
 //  PatientObject.h
 //  Mobile Clinic
 //
@@ -14,7 +14,7 @@
 #import "Patients.h"
 
 @interface PatientObject : BaseObject<PatientObjectProtocol,CommonObjectProtocol>{
-
+    
 }
 
 @end

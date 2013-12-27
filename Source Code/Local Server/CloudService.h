@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "CloudServiceProtocol.h"
 @interface CloudService : NSObject<CloudServiceProtocol>
+
 +(CloudService *) cloud;
+-(NSString*)stringWithMachineSerialNumber;
 
 @end

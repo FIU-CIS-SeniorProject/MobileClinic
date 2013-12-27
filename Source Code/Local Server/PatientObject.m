@@ -83,7 +83,7 @@ NSString* isLockedBy;
 -(NSDictionary *)consolidateForTransmitting
 {
     NSMutableDictionary* consolidate = [[NSMutableDictionary alloc]initWithDictionary:[super consolidateForTransmitting]];
-
+    
     [consolidate setValue:[NSNumber numberWithInt:kPatientType] forKey:OBJECTTYPE];
     return consolidate;
 }
@@ -125,7 +125,7 @@ NSString* isLockedBy;
 -(NSArray*)getObjectsUsingCustomPredicate:(NSString*)predicate
 {
     NSPredicate* pred = [NSPredicate predicateWithFormat:predicate];
-   
+    
     return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:pred andSortByAttribute:FIRSTNAME]];
 }
 
@@ -162,7 +162,7 @@ NSString* isLockedBy;
 
 -(NSArray *)FindAllObjects
 {
-    return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:nil andSortByAttribute:FIRSTNAME]]; 
+    return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:nil andSortByAttribute:FIRSTNAME]];
 }
 
 -(NSArray*)FindAllObjectsUnderParentID:(NSString*)parentID
@@ -229,40 +229,74 @@ NSString* isLockedBy;
     [self saveObject:onComplete];
 }
 
+/*
+-(void)pullFromCloud:(CloudCallback)onComplete
+ {
+ // allocate and init a CloudManagementObject for timestamp
+ CloudManagementObject* TSCloudMO = [[CloudManagementObject alloc] init];
+ NSNumber* timestamp = [TSCloudMO GetActiveTimestamp];
+ NSMutableDictionary* timeDic = [[NSMutableDictionary alloc] init];
+ [timeDic setObject:timestamp forKey:@"Timestamp"];
+ 
+ //TODO: replace "withObject:nil" with timestamp dictionary
+ [self makeCloudCallWithCommand:DATABASE withObject:timeDic onComplete:^(id cloudResults, NSError *error)
+ {
+ NSArray* allPatients = [cloudResults objectForKey:@"data"];
+ [self handleCloudCallback:onComplete UsingData:allPatients WithPotentialError:error];
+ 
+ }];
+ }*/
+
 -(void)pullFromCloud:(CloudCallback)onComplete
 {
     // allocate and init a CloudManagementObject for timestamp
     CloudManagementObject* TSCloudMO = [[CloudManagementObject alloc] init];
-    NSMutableDictionary* timestamp = [[TSCloudMO GetActiveTimestamp] mutableCopy];
-
-    //TODO: replace "withObject:nil" with timestamp dictionary
-    [self makeCloudCallWithCommand:DATABASE withObject:timestamp onComplete:^(id cloudResults, NSError *error)
-    {
-        NSArray* allPatients = [cloudResults objectForKey:@"data"];
-        [self handleCloudCallback:onComplete UsingData:allPatients WithPotentialError:error];
-        
-        // allocate and init a CloudManagementObject
-        CloudManagementObject* CloudMO = [[CloudManagementObject alloc] init];
-        
-        // Call getActiveEnvironment and put it into an NSMutableDictionary
-        NSMutableDictionary* environment = [[CloudMO GetActiveEnvironment] mutableCopy];
-        
-        // Update timestamp in NSMutableDictionary
-        [environment setObject:[NSDate date] forKey:LASTPULLTIME];
-        
-        // Put back into CloudManagementObject
-        CloudMO = [CloudMO initAndFillWithNewObject:environment];
-        
-        // Save CloudManagementObject
-        [CloudMO saveObject:^(id<BaseObjectProtocol> data, NSError *error) {
-            
-        }];
-    }];
+    NSNumber* timestamp = [TSCloudMO GetActiveTimestamp];
+    NSMutableDictionary* timeDic = [[NSMutableDictionary alloc] init];
+    [timeDic setObject:timestamp forKey:@"Timestamp"];
+    
+    [self makeCloudCallWithCommand:DATABASE withObject:timeDic onComplete:^(id cloudResults, NSError *error)
+     {
+         if (cloudResults == nil) // NO CLOUD CONNECTION
+         {
+             NSString* errorValue = @"No connection to the Cloud";
+             NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+             [errorDetail setValue:errorValue forKey:NSLocalizedDescriptionKey];
+             error = [NSError errorWithDomain:@"PatientObject:pullFromCloud" code:100 userInfo:errorDetail];
+             onComplete((!error)?self:nil,error);
+         }
+         else if ([[cloudResults objectForKey:@"result"] isEqualToString:@"true"]) // SUCCESS
+         {
+             NSArray* patientsFromCloud = [cloudResults objectForKey:@"data"];
+             [self handleCloudCallback:onComplete UsingData:patientsFromCloud WithPotentialError:error];
+             /*
+             NSArray* allError = [self SaveListOfObjectsFromDictionary:patientsFromCloud];
+             if (allError.count > 0)
+             {
+                 error = [[NSError alloc]initWithDomain:COMMONDATABASE code:kErrorObjectMisconfiguration userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Object was misconfigured",NSLocalizedFailureReasonErrorKey, nil]];
+                 onComplete(self,error);
+                 return;
+             }
+			 */
+			 //[[[CloudManagementObject alloc] init] updateTimestamp];
+             //onComplete((error)?self:nil,error);
+         }
+         else // SOME ERROR FROM CLOUD
+         {
+             NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+             NSString* errorValue = @"Error from Cloud: ";
+             errorValue = [errorValue stringByAppendingString:[cloudResults objectForKey:@"data"]];
+             
+             [errorDetail setValue:errorValue forKey:NSLocalizedDescriptionKey];
+             error = [NSError errorWithDomain:@"PatientObject:pullFromCloud" code:100 userInfo:errorDetail];
+             onComplete((!error)?self:nil,error);
+         }
+     }];
 }
 
 -(void)pushToCloud:(CloudCallback)onComplete
 {
-    NSArray* allPatients= [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:COMMONDATABASE withCustomPredicate:[NSPredicate predicateWithFormat:@"%K == YES",ISDIRTY] andSortByAttribute:FIRSTNAME]];
+    NSArray* allPatients = [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:COMMONDATABASE withCustomPredicate:[NSPredicate predicateWithFormat:@"%K == YES",ISDIRTY] andSortByAttribute:FIRSTNAME]];
     
     //NSArray* allPatients= [self FindAllObjects];
     
@@ -270,10 +304,13 @@ NSString* isLockedBy;
     for (NSMutableDictionary* object in allPatients)
     {
         NSString* pId = [object objectForKey:PATIENTID];
+        //NSString* photo = [[object objectForKey:PICTURE] base64Encoding];
         pId = [pId stringByReplacingOccurrencesOfString:@"." withString:@""];
         [object setValue:pId forKey:PATIENTID];
+        
         // Remove Pictures (NSData)
         [object setValue:nil forKey:PICTURE];
+        //NSLog(@"%@",photo);
         // Remove FingerPrint (NSData)
         [object setValue:nil forKey:FINGERDATA];
         
@@ -286,15 +323,15 @@ NSString* isLockedBy;
     }
     
     [self makeCloudCallWithCommand:UPDATEPATIENT withObject:[NSDictionary dictionaryWithObject:allPatients forKey:DATABASE] onComplete:^(id cloudResults, NSError *error)
-    {
-        [self handleCloudCallback:onComplete UsingData:allPatients WithPotentialError:error];
-    }];
+     {
+         [self handleCloudCallback:onComplete UsingData:allPatients WithPotentialError:error];
+     }];
 }
 
 -(NSArray *)covertAllSavedObjectsToJSON
 {
     NSArray* allPatients= [self FindObjectInTable:COMMONDATABASE withCustomPredicate:[NSPredicate predicateWithFormat:@"%K == YES",ISDIRTY] andSortByAttribute:FIRSTNAME];
-   
+    
     NSMutableArray* allObject = [[NSMutableArray alloc]initWithCapacity:allPatients.count];
     
     for (NSManagedObject* obj in allPatients)
@@ -309,7 +346,7 @@ NSString* isLockedBy;
             NSString* picString = [picture base64Encoding];
             [dictionary setValue:picString forKey:PICTURE];
         }
-       
+        
         id fingerData = [dictionary objectForKey:FINGERDATA];
         
         if ([fingerData isKindOfClass:[NSData class]])
@@ -321,7 +358,40 @@ NSString* isLockedBy;
         
         [allObject addObject:dictionary];
     }
-
+    
+    return  allObject;
+}
+-(NSArray *)covertAllSavedObjectsToJSON1
+{
+    NSArray* allPatients= [self FindObjectInTable:COMMONDATABASE withCustomPredicate:nil andSortByAttribute:FIRSTNAME];
+    
+    NSMutableArray* allObject = [[NSMutableArray alloc]initWithCapacity:allPatients.count];
+    
+    for (NSManagedObject* obj in allPatients)
+    {
+        NSMutableDictionary* dictionary = [NSMutableDictionary dictionaryWithDictionary:[obj dictionaryWithValuesForKeys:[obj attributeKeys]]];
+        
+        NSData* picture = [dictionary objectForKey:PICTURE];
+        
+        if ([picture isKindOfClass:[NSData class]])
+        {
+            // Convert the picture to string
+            NSString* picString = [picture base64Encoding];
+            [dictionary setValue:picString forKey:PICTURE];
+        }
+        
+        id fingerData = [dictionary objectForKey:FINGERDATA];
+        
+        if ([fingerData isKindOfClass:[NSData class]])
+        {
+            //convert finger data to string
+            [dictionary setValue:[fingerData base64Encoding] forKey:FINGERDATA];
+        }
+        
+        
+        [allObject addObject:dictionary];
+    }
+    
     return  allObject;
 }
 

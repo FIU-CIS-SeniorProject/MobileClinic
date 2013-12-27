@@ -60,7 +60,8 @@
     // checks to see if object exists
     NSArray* arr = [self FindObjectInTable:self->COMMONDATABASE withName:objectID forAttribute:self->COMMONID];
     
-    if (arr.count == 1) {
+    if (arr.count == 1)
+    {
         self->databaseObject = [arr objectAtIndex:0];
         return  YES;
     }
@@ -171,12 +172,12 @@
     }
 }
 
--(void)handleCloudCallback:(CloudCallback)callBack UsingData:(NSArray*)data WithPotentialError:(NSError *)error{
-  
+-(void)handleCloudCallback:(CloudCallback)callBack UsingData:(NSArray*)data WithPotentialError:(NSError *)error
+{
     NSMutableArray* newObjects = [[NSMutableArray alloc]initWithCapacity:data.count];
     
-    if (!error) {
-        
+    if (!error)
+    {
         for (NSMutableDictionary* object in data) {
             NSMutableDictionary* unlocked = [NSMutableDictionary dictionaryWithDictionary:object];
             [unlocked setValue:[NSNumber numberWithBool:NO] forKey:ISDIRTY];

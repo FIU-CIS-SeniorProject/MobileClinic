@@ -11,12 +11,19 @@
 //#import "FaceDetector.h"
 //#import "FaceRecognizer.h"
 //#import "DatabaseProtocol.h"
+#import <Foundation/Foundation.h>
 
+@protocol faceViewDelegate <NSObject>
+
+- (void)addItemViewController:(id)controller didFinishEnteringItem:( UIImage*)item;
+
+@end
 
 
 @interface RegisterFaceViewController : UIViewController <CvVideoCameraDelegate>
 {
     NSMutableArray *pictures;
+     UIImage *previousImage;
     
 }
 //@property(nonatomic, strong) id<DatabaseProtocol> database;
@@ -24,7 +31,7 @@
 
 - (IBAction)savePerson:(id)sender;
 
-
+@property (nonatomic, assign) id <faceViewDelegate> delegate1;
 @property (weak, nonatomic) IBOutlet UIButton *Register;
 @property (strong, nonatomic) IBOutlet UIButton *switchCameraButton;
 @property (nonatomic, strong) IBOutlet UIImageView * imageView;

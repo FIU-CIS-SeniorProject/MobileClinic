@@ -24,7 +24,7 @@
 #define RESPIRATION     @"respiration"
 #define PRIORITY        @"priority"
 #define VISITID         @"visitationId"
-#define CHARITYID       @"charityId"
+#define CHARITYID       @"charityid"
 
 #define ISOPEN      @"isOpen"
 #define MEDICATIONNOTES @"medicationNotes"
@@ -34,6 +34,6 @@
 
 @protocol VisitationObjectProtocol <NSObject>
 -(void)UnlockVisit:(ObjectResponse)onComplete;
-
+-(NSArray *)covertAllSavedObjectsToJSON1;
 
 @end

@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Mobile Clinic/CurrentVisitViewController.m"
-         timestampString = "405010720.156082"
+         timestampString = "407287537.390855"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "100"
-         endingLineNumber = "100"
+         startingLineNumber = "102"
+         endingLineNumber = "102"
          landmarkName = "-setVisitData:isGoingToPharmacy:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -60,11 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MobileClinicFacade.m"
-         timestampString = "406696387.676089"
+         timestampString = "408082882.531112"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "97"
-         endingLineNumber = "97"
+         startingLineNumber = "79"
+         endingLineNumber = "79"
          landmarkName = "-addNewVisit:ForCurrentPatient:shouldCheckOut:onCompletion:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -86,7 +86,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BaseObject.m"
-         timestampString = "407459068.668468"
+         timestampString = "405277769.939715"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "145"
@@ -112,11 +112,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Face Recognition/RegisterFaceViewController.mm"
-         timestampString = "407208780.540006"
+         timestampString = "408510296.329497"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "116"
-         endingLineNumber = "116"
+         startingLineNumber = "119"
+         endingLineNumber = "119"
          landmarkName = "-deleteAllWithFirstName:forFamilyName:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -125,13 +125,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Face Recognition/RegisterFaceViewController.mm"
-         timestampString = "407208780.540006"
+         timestampString = "408510296.329497"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "205"
-         endingLineNumber = "205"
-         landmarkName = "-cameraButtonClicked:"
-         landmarkType = "5">
+         startingLineNumber = "208"
+         endingLineNumber = "208"
+         landmarkName = "@implementation RegisterFaceViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -255,11 +255,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Face Recognition/RegisterFaceViewController.mm"
-         timestampString = "407208780.540006"
+         timestampString = "408510296.329497"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "165"
-         endingLineNumber = "165"
+         startingLineNumber = "168"
+         endingLineNumber = "168"
          landmarkName = "-learnFace:forImage:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -294,12 +294,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Face Recognition/RegisterFaceViewController.mm"
-         timestampString = "406849832.373911"
+         timestampString = "407902457.616162"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "31"
-         endingLineNumber = "31"
+         startingLineNumber = "32"
+         endingLineNumber = "32"
          landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Face Recognition/FaceObject.m"
+         timestampString = "407191089.588043"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "66"
+         endingLineNumber = "66"
+         landmarkName = "-createNewObject:onCompletion:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -346,11 +359,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Face Recognition/RegisterFaceViewController.mm"
-         timestampString = "407208780.540006"
+         timestampString = "408510296.329497"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "158"
-         endingLineNumber = "158"
+         startingLineNumber = "161"
+         endingLineNumber = "161"
          landmarkName = "-learnFace:forImage:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -463,11 +476,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BaseObject.m"
-         timestampString = "407459068.668468"
+         timestampString = "406851996.345925"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "155"
-         endingLineNumber = "155"
+         startingLineNumber = "151"
+         endingLineNumber = "151"
          landmarkName = "-setValueToDictionaryValues:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -489,11 +502,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MobileClinicFacade.m"
-         timestampString = "406865925.171663"
+         timestampString = "408082882.531112"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "129"
-         endingLineNumber = "129"
+         startingLineNumber = "111"
+         endingLineNumber = "111"
          landmarkName = "-findPatientWithLabel:onCompletion:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -515,11 +528,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MobileClinicFacade.m"
-         timestampString = "407200956.324197"
+         timestampString = "408082882.531112"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "347"
-         endingLineNumber = "347"
+         startingLineNumber = "329"
+         endingLineNumber = "329"
          landmarkName = "-CommonCommandObject:ForSearch1:withResults:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -528,11 +541,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MobileClinicFacade.m"
-         timestampString = "407200956.324197"
+         timestampString = "408082882.531112"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "350"
-         endingLineNumber = "350"
+         startingLineNumber = "332"
+         endingLineNumber = "332"
          landmarkName = "-CommonCommandObject:ForSearch1:withResults:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -541,33 +554,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Mobile Clinic/RegisterPatientViewController.mm"
-         timestampString = "407201885.569053"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "160"
-         endingLineNumber = "160"
-         landmarkName = "-faceRecognition:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Mobile Clinic/RegisterPatientViewController.mm"
-         timestampString = "407201885.569053"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "174"
-         endingLineNumber = "174"
-         landmarkName = "-faceRecognition:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Mobile Clinic/RegisterPatientViewController.mm"
-         timestampString = "407201885.569053"
+         timestampString = "407904945.362899"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "178"
@@ -580,11 +567,37 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Mobile Clinic/RegisterPatientViewController.mm"
-         timestampString = "407201885.569053"
+         timestampString = "407904945.362899"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "198"
-         endingLineNumber = "198"
+         startingLineNumber = "192"
+         endingLineNumber = "192"
+         landmarkName = "-faceRecognition:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Mobile Clinic/RegisterPatientViewController.mm"
+         timestampString = "407904945.362899"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "196"
+         endingLineNumber = "196"
+         landmarkName = "-faceRecognition:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Mobile Clinic/RegisterPatientViewController.mm"
+         timestampString = "407904945.362899"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "216"
+         endingLineNumber = "216"
          landmarkName = "-faceRecognition:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -632,11 +645,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Mobile Clinic/RegisterPatientViewController.mm"
-         timestampString = "407201885.569053"
+         timestampString = "407904945.362899"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "199"
-         endingLineNumber = "199"
+         startingLineNumber = "217"
+         endingLineNumber = "217"
          landmarkName = "-faceRecognition:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -658,11 +671,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Mobile Clinic/RegisterPatientViewController.mm"
-         timestampString = "407201885.569053"
+         timestampString = "407904945.362899"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "204"
-         endingLineNumber = "204"
+         startingLineNumber = "222"
+         endingLineNumber = "222"
          landmarkName = "-faceRecognition:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -671,102 +684,128 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Mobile Clinic/RegisterPatientViewController.mm"
-         timestampString = "407201885.569053"
+         timestampString = "407904945.362899"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "173"
-         endingLineNumber = "173"
+         startingLineNumber = "191"
+         endingLineNumber = "191"
          landmarkName = "-faceRecognition:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Face Recognition/FaceObject.m"
-         timestampString = "407458780.00661"
+         filePath = "Mobile Clinic/RegisterPatientViewController.mm"
+         timestampString = "408433302.254665"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "70"
-         endingLineNumber = "70"
-         landmarkName = "-createNewObject:onCompletion:"
+         startingLineNumber = "334"
+         endingLineNumber = "334"
+         landmarkName = "-createPatient:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Face Recognition/FaceObject.m"
-         timestampString = "407458786.31252"
+         filePath = "Mobile Clinic/CurrentVisitViewController.m"
+         timestampString = "408520795.725387"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "69"
-         endingLineNumber = "69"
-         landmarkName = "-createNewObject:onCompletion:"
+         startingLineNumber = "269"
+         endingLineNumber = "269"
+         landmarkName = "-addPicture1:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "BaseObject+Protected.m"
-         timestampString = "407458840.657745"
+         filePath = "Face Recognition/RegisterFaceViewController.mm"
+         timestampString = "408510296.329497"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "157"
-         endingLineNumber = "157"
-         landmarkName = "-UpdateObject:shouldLock:andSendObjects:withInstruction:"
+         startingLineNumber = "92"
+         endingLineNumber = "92"
+         landmarkName = "-parseFaces:forImage:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "BaseObject+Protected.m"
-         timestampString = "407459068.668468"
+         filePath = "Mobile Clinic/RegisterPatientViewController.mm"
+         timestampString = "407904945.362899"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "183"
-         endingLineNumber = "183"
-         landmarkName = "-UpdateObject:shouldLock:andSendObjects:withInstruction:"
+         startingLineNumber = "160"
+         endingLineNumber = "160"
+         landmarkName = "-addItemViewController:didFinishEnteringItem:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "PatientObject.m"
-         timestampString = "407458848.953703"
+         filePath = "Mobile Clinic/DoctorPatientViewController.mm"
+         timestampString = "408513175.92434"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "69"
-         endingLineNumber = "69"
-         landmarkName = "-createNewObject:onCompletion:"
+         startingLineNumber = "255"
+         endingLineNumber = "255"
+         landmarkName = "-verify:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Face Recognition/RecognitionObject.m"
-         timestampString = "407458854.315456"
+         filePath = "Mobile Clinic/DoctorPatientViewController.mm"
+         timestampString = "408000278.294906"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "67"
-         endingLineNumber = "67"
-         landmarkName = "-createNewObject:onCompletion:"
+         startingLineNumber = "238"
+         endingLineNumber = "238"
+         landmarkName = "-verify:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MobileClinicFacade.m"
+         timestampString = "408430595.943408"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "110"
+         endingLineNumber = "110"
+         landmarkName = "-findPatientWithLabel:onCompletion:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Mobile Clinic/RegisterPatientViewController.mm"
+         timestampString = "408479689.165012"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "235"
+         endingLineNumber = "235"
+         landmarkName = "-faceRecognition:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "VisitationObject.m"
-         timestampString = "407458862.53119"
+         timestampString = "408478696.182255"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "59"
-         endingLineNumber = "59"
+         startingLineNumber = "74"
+         endingLineNumber = "74"
          landmarkName = "-createNewObject:onCompletion:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -774,13 +813,130 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "BaseObject.m"
-         timestampString = "407459028.526534"
+         filePath = "MobileClinicFacade.m"
+         timestampString = "408478706.472171"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "152"
-         endingLineNumber = "152"
-         landmarkName = "-setValueToDictionaryValues:"
+         startingLineNumber = "101"
+         endingLineNumber = "101"
+         landmarkName = "-addNewVisit:ForCurrentPatient:shouldCheckOut:onCompletion:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Mobile Clinic/RegisterPatientViewController.mm"
+         timestampString = "408507499.946444"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "698"
+         endingLineNumber = "698"
+         landmarkName = "-broadSearchForPatient"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Mobile Clinic/RegisterPatientViewController.mm"
+         timestampString = "408505773.529022"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "351"
+         endingLineNumber = "351"
+         landmarkName = "-createPatient:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Mobile Clinic/RegisterPatientViewController.mm"
+         timestampString = "408507499.946444"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "379"
+         endingLineNumber = "379"
+         landmarkName = "-updatedPatient"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Mobile Clinic/PharmacyPatientViewController.mm"
+         timestampString = "408569114.299122"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "281"
+         endingLineNumber = "281"
+         landmarkName = "-verify:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Mobile Clinic/PharmacyPatientViewController.mm"
+         timestampString = "408569322.36403"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "79"
+         endingLineNumber = "79"
+         landmarkName = "-viewDidAppear:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Mobile Clinic/PharmacyPatientViewController.mm"
+         timestampString = "408659416.626368"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "75"
+         endingLineNumber = "75"
+         landmarkName = "-viewDidAppear:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Mobile Clinic/PreviousVisitsViewController.m"
+         timestampString = "408659593.717226"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "29"
+         endingLineNumber = "29"
+         landmarkName = "-viewDidAppear:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Mobile Clinic/PreviousVisitsViewController.m"
+         timestampString = "408660581.456809"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "43"
+         endingLineNumber = "43"
+         landmarkName = "-viewDidAppear:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Mobile Clinic/PreviousVisitsViewController.m"
+         timestampString = "408945056.580948"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "41"
+         endingLineNumber = "41"
+         landmarkName = "-viewDidAppear:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

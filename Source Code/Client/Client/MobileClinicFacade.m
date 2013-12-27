@@ -5,7 +5,6 @@
 //  Created by Michael Montaque on 3/1/13.
 //  Copyright (c) 2013 Steven Berlanga. All rights reserved.
 //
-
 #import "MobileClinicFacade.h"
 #import "PatientObject.h"
 #import "VisitationObject.h"
@@ -59,24 +58,6 @@
             Response(object,error);
         }
     }];
-    
-    //[self CommonCommandObject:face ForCreating:faceInfo bindedToParentObjectToUpdate:nil withResults:Response];
-    //FaceObject* facePic = [[FaceObject alloc] initAndMakeNewDatabaseObject]; //initAndMakeNewDatabaseObject];
-    //NSLog(@"llegue aquiiiiiiiiiiiiii");
-    /*if (![[faceInfo objectForKey:ISOPEN]boolValue]) {
-        
-        NSMutableDictionary* openFace = [[NSMutableDictionary alloc]initWithDictionary:faceInfo];
-        // Set patient open status
-        [openFace setValue:[NSNumber numberWithBool:!checkout] forKey:ISOPEN];
-        
-        [self CommonCommandObject:[[FaceObject alloc]init] ShouldLock:NO CommonUpdate:openFace withResults:^(NSDictionary *object, NSError *error) {
-            if (error.code > kErrorDisconnected) {
-                Response(object,error);
-            }}];
-        
-    }else{
-        Response(nil,[self createErrorWithDescription:MULTIPLE_VISIT_ERROR andErrorCodeNumber:kError inDomain:@"MCF"]);
-    }*/
     
 }
 
@@ -302,18 +283,15 @@
     // Just in case people become silly
     [visitDictionary removeObjectForKey:OPEN_VISITS_PATIENT];
     
+    
     VisitationObject* myVisit = [[VisitationObject alloc]init];
     
-    [self CommonCommandObject:myVisit ShouldLock:NO CommonUpdate:visitDictionary withResults:^(NSDictionary *object, NSError *error)
-    {
-        if (object)
-        {
+    [self CommonCommandObject:myVisit ShouldLock:NO CommonUpdate:visitDictionary withResults:^(NSDictionary *object, NSError *error) {
+        if (object) {
             PatientObject* myPatient = [[PatientObject alloc]init];
             
             [self CommonCommandObject:myPatient ShouldLock:NO CommonUpdate:patientDictionary withResults:Response];
-        }
-        else
-        {
+        }else{
             Response(object,error);
         }
     }];

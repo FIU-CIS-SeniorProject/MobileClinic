@@ -23,4 +23,7 @@
 - (BOOL) hasSuffix:(NSData *) suffix;
 - (BOOL) hasSuffixBytes:(const void *) suffix length:(NSUInteger) length;
 
+- (NSData*)AES256EncryptWithKey:(NSString*)key;
+- (NSData*)AES256DecryptWithKey:(NSString*)key;
+
 @end

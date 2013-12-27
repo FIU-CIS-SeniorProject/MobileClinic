@@ -5,16 +5,15 @@
 //  Created by Michael Montaque on 2/11/13.
 //  Copyright (c) 2013 Steven Berlanga. All rights reserved.
 //
-
-
 #import "VisitationObject.h"
 #import "UserObject.h"
 #import "StatusObject.h"
 #import "Visitation.h"
 #import "BaseObject+Protected.h"
 #import "FIUAppDelegate.h"
+#import "CloudManagementObject.h"
 
-#define DATABASE    @"Visitation"
+#define DATABASE    @"Visitations"
 NSString* patientID;
 NSString* isLockedBy;
 @implementation VisitationObject
@@ -63,7 +62,6 @@ NSString* isLockedBy;
     patientID = [self->databaseObject valueForKey:PATIENTID];
 }
 
-
 -(void)CommonExecution
 {
     switch (self->commands) {
@@ -85,13 +83,15 @@ NSString* isLockedBy;
             break;
     }
 }
+
 #pragma mark - COMMON OBJECT Methods
 #pragma mark -
--(NSArray*)OptimizedFindAllObjects{
-    
+-(NSArray*)OptimizedFindAllObjects
+{
     FIUAppDelegate* app = (FIUAppDelegate*)[[NSApplication sharedApplication]delegate];
     
-    switch ([app isOptimized]) {
+    switch ([app isOptimized])
+	{
         case kFirstSync:
             return [self FindAllObjects];
         case kFastSync:
@@ -100,12 +100,12 @@ NSString* isLockedBy;
         case kFinalize:
             return [self FindAllOpenVisits];
     }
-
+    
 }
 -(NSArray*)FindAllPatientsWithinMinutes{
     
     NSDate* aDayPrior = [[NSDate alloc] initWithTimeInterval:-60*15 sinceDate:[NSDate date]];
-   
+    
     NSNumber* hoursBefore = [NSNumber numberWithInteger:[aDayPrior timeIntervalSince1970]];
     
     return [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:DATABASE withCustomPredicate:[NSPredicate predicateWithFormat:@"%K == YES && %K >= %@",ISDIRTY,TRIAGEOUT,hoursBefore] andSortByAttribute:TRIAGEOUT]];
@@ -119,7 +119,7 @@ NSString* isLockedBy;
     NSArray* allVisits = [self FindAllOpenVisits];
     
     NSArray* filtered = [allVisits filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K == %@",PATIENTID,patientID]];
-   
+    
     if (filtered.count <= 1) {
         [super UpdateObjectAndSendToClient];
     }
@@ -140,7 +140,7 @@ NSString* isLockedBy;
 }
 
 -(NSAttributedString *)printFormattedObject:(NSDictionary *)object{
-
+    
     NSString* titleString = [NSString stringWithFormat:@"\n\nVisitation Information\n"];
     
     NSMutableAttributedString* title = [[NSMutableAttributedString alloc]initWithString:titleString];
@@ -149,7 +149,7 @@ NSString* isLockedBy;
     
     
     NSMutableAttributedString* container = [[NSMutableAttributedString alloc]initWithAttributedString:title];
-
+    
     
     NSString* main = [NSString stringWithFormat:@"Blood Pressure:\t%@ \n Heart Rate:\t%@ \n Respiration:\t%@ \n Weight:\t%@ \n Chief Complaint:\t%@ \n Diagnosis:\t%@ \nAssessment:\t%@ \nTriage In:\t%@ \n Triage Out:\t%@ \n Doctor In:\t%@ \n Doctor Out:\t%@ \nAdditional Medical Notes:\t%@ \n\n",[self convertTextForPrinting:[object objectForKey:BLOODPRESSURE]],[self convertTextForPrinting:[object objectForKey:HEARTRATE]],[self convertTextForPrinting:[object objectForKey:RESPIRATION]],[object objectForKey:WEIGHT],[self convertTextForPrinting:[object objectForKey:CONDITIONTITLE]],[self convertTextForPrinting:[object objectForKey:OBSERVATION]],[self convertTextForPrinting:[object objectForKey:ASSESSMENT]],[self convertDateNumberForPrinting:[object objectForKey:TRIAGEIN]],[self convertDateNumberForPrinting:[object objectForKey:TRIAGEOUT]],[self convertDateNumberForPrinting:[object objectForKey:DOCTORIN]],[self convertDateNumberForPrinting:[object objectForKey:DOCTOROUT]],[self convertTextForPrinting:[object objectForKey:MEDICATIONNOTES]]];
     
@@ -204,5 +204,92 @@ NSString* isLockedBy;
     }
     return  allObject;
 }
+-(NSArray *)covertAllSavedObjectsToJSON1{
+    
+    NSArray* allPatients= [self FindObjectInTable:COMMONDATABASE withCustomPredicate:[NSPredicate predicateWithFormat:nil] andSortByAttribute:VISITID];
+    NSMutableArray* allObject = [[NSMutableArray alloc]initWithCapacity:allPatients.count];
 
+    for (NSManagedObject* obj in allPatients) {
+        [allObject addObject:[obj dictionaryWithValuesForKeys:[obj attributeKeys]]];
+    }
+    return  allObject;
+}
+
+-(void)pushToCloud:(CloudCallback)onComplete
+{
+    NSArray* allVisits= [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:COMMONDATABASE withCustomPredicate:[NSPredicate predicateWithFormat:@"%K == YES",ISDIRTY] andSortByAttribute:VISITID]];
+    
+    [self makeCloudCallWithCommand:UPDATEVISIT withObject:[NSDictionary dictionaryWithObject:allVisits forKey:DATABASE] onComplete:^(id cloudResults, NSError *error)
+     {
+         [self handleCloudCallback:onComplete UsingData:allVisits WithPotentialError:error];
+     }];
+}
+
+
+
+-(void)pullFromCloud:(CloudCallback)onComplete
+ {
+ // allocate and init a CloudManagementObject for timestamp
+ CloudManagementObject* TSCloudMO = [[CloudManagementObject alloc] init];
+ NSNumber* timestamp = [TSCloudMO GetActiveTimestamp];
+ NSMutableDictionary* timeDic = [[NSMutableDictionary alloc] init];
+ [timeDic setObject:timestamp forKey:@"Timestamp"];
+ 
+ //TODO: replace "withObject:nil" with timestamp dictionary
+ [self makeCloudCallWithCommand:DATABASE withObject:timeDic onComplete:^(id cloudResults, NSError *error)
+ {
+ /*NSArray* allVisits = [cloudResults objectForKey:@"data"];
+ [self handleCloudCallback:onComplete UsingData:allVisits WithPotentialError:error];//*/
+
+if (cloudResults == nil) // NO CLOUD CONNECTION
+{
+    NSString* errorValue = @"No connection to the Cloud";
+    NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+    [errorDetail setValue:errorValue forKey:NSLocalizedDescriptionKey];
+    error = [NSError errorWithDomain:@"UserObject:pullFromCloud" code:100 userInfo:errorDetail];
+    onComplete((!error)?self:nil,error);
+}
+else if ([[cloudResults objectForKey:@"result"] isEqualToString:@"true"]) // SUCCESS
+{
+    NSArray* visitsFromCloud = [cloudResults objectForKey:@"data"];
+    
+    NSArray* allError = [self SaveListOfObjectsFromDictionary:visitsFromCloud];
+    
+    if (allError.count > 0)
+    {
+        error = [[NSError alloc]initWithDomain:COMMONDATABASE code:kErrorObjectMisconfiguration userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Object was misconfigured",NSLocalizedFailureReasonErrorKey, nil]];
+        onComplete(self,error);
+        return;
+    }
+    //onComplete((!error)?self:nil,error);
+    [self handleCloudCallback:onComplete UsingData:visitsFromCloud WithPotentialError:error];
+}
+else // SOME ERROR FROM CLOUD
+{
+    NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+    NSString* errorValue = @"Error from Cloud: ";
+    errorValue = [errorValue stringByAppendingString:[cloudResults objectForKey:@"data"]];
+    
+    [errorDetail setValue:errorValue forKey:NSLocalizedDescriptionKey];
+    error = [NSError errorWithDomain:@"VistationObject:pullFromCloud" code:100 userInfo:errorDetail];
+    onComplete((!error)?self:nil,error);
+}
+}];
+}//*/
+
+/*-(void)pullFromCloud:(CloudCallback)onComplete
+ {
+ // allocate and init a CloudManagementObject for timestamp
+ CloudManagementObject* TSCloudMO = [[CloudManagementObject alloc] init];
+ NSNumber* timestamp = [TSCloudMO GetActiveTimestamp];
+ NSMutableDictionary* timeDic = [[NSMutableDictionary alloc] init];
+ [timeDic setObject:timestamp forKey:@"Timestamp"];
+ 
+ [self makeCloudCallWithCommand:DATABASE withObject:timeDic onComplete:^(id cloudResults, NSError *error)
+ {
+ NSArray* allVisits = [cloudResults objectForKey:@"data"];
+ [self handleCloudCallback:onComplete UsingData:allVisits WithPotentialError:error];
+ }];
+ }
+ */
 @end

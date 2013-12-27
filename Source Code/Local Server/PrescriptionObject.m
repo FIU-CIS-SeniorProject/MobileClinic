@@ -8,8 +8,10 @@
 
 #import "PrescriptionObject.h"
 #import "BaseObject+Protected.h"
+#import "CloudManagementObject.h"
 
-#define DATABASE    @"Prescription"
+#define DATABASE    @"Prescriptions"
+
 NSString* visitID;
 NSString* isLockedBy;
 @implementation PrescriptionObject
@@ -140,4 +142,95 @@ NSString* main = [NSString stringWithFormat:@" Medication Name:\t%@ \n Dose:\t%@
     }
     return  allObject;
 }
+
+-(void)pushToCloud:(CloudCallback)onComplete
+{
+    NSArray* allPrescriptions = [self convertListOfManagedObjectsToListOfDictionaries:[self FindObjectInTable:COMMONDATABASE withCustomPredicate:[NSPredicate predicateWithFormat:@"%K == YES",ISDIRTY] andSortByAttribute:PRESCRIPTIONID]];
+    
+    [self makeCloudCallWithCommand:UPDATEPRESCRIPTION withObject:[NSDictionary dictionaryWithObject:allPrescriptions forKey:DATABASE] onComplete:^(id cloudResults, NSError *error)
+     {
+         [self handleCloudCallback:onComplete UsingData:allPrescriptions WithPotentialError:error];
+     }];
+}
+-(void)pullFromCloud:(CloudCallback)onComplete
+{
+    // allocate and init a CloudManagementObject for timestamp
+    CloudManagementObject* TSCloudMO = [[CloudManagementObject alloc] init];
+    NSNumber* timestamp = [TSCloudMO GetActiveTimestamp];
+    NSMutableDictionary* timeDic = [[NSMutableDictionary alloc] init];
+    [timeDic setObject:timestamp forKey:@"Timestamp"];
+    
+    //TODO: replace "withObject:nil" with timestamp dictionary
+    [self makeCloudCallWithCommand:DATABASE withObject:timeDic onComplete:^(id cloudResults, NSError *error)
+     {
+         /*NSArray* allPrescriptions = [cloudResults objectForKey:@"data"];
+          if ([allPrescriptions count] > 0)
+          {
+          [self handleCloudCallback:onComplete UsingData:allPrescriptions WithPotentialError:error];
+          }*/
+         
+         if (cloudResults == nil) // NO CLOUD CONNECTION
+         {
+             NSString* errorValue = @"No connection to the Cloud";
+             NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+             [errorDetail setValue:errorValue forKey:NSLocalizedDescriptionKey];
+             error = [NSError errorWithDomain:@"PrescriptionObject:pullFromCloud" code:100 userInfo:errorDetail];
+             onComplete((!error)?self:nil,error);
+         }
+         else if ([[cloudResults objectForKey:@"result"] isEqualToString:@"true"]) // SUCCESS
+         {
+             NSArray* prescriptionsFromCloud = [cloudResults objectForKey:@"data"];
+             [self handleCloudCallback:onComplete UsingData:prescriptionsFromCloud WithPotentialError:error];
+             /*NSArray* allError = [self SaveListOfObjectsFromDictionary:prescriptionsFromCloud];
+              
+              if (allError.count > 0)
+              {
+              error = [[NSError alloc]initWithDomain:COMMONDATABASE code:kErrorObjectMisconfiguration userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Object was misconfigured",NSLocalizedFailureReasonErrorKey, nil]];
+              onComplete(self,error);
+              return;
+              }//*/
+         }
+         else // SOME ERROR FROM CLOUD
+         {
+             NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+             NSString* errorValue = @"Error from Cloud: ";
+             errorValue = [errorValue stringByAppendingString:[cloudResults objectForKey:@"data"]];
+             
+             [errorDetail setValue:errorValue forKey:NSLocalizedDescriptionKey];
+             error = [NSError errorWithDomain:@"PrescriptionObject:pullFromCloud" code:100 userInfo:errorDetail];
+             onComplete((!error)?self:nil,error);
+         }
+         
+         /*if (!error)
+          {
+          NSArray* allPrescriptions = [cloudResults objectForKey:@"data"];
+          
+          NSArray* allError = [self SaveListOfObjectsFromDictionary:allMeds];
+          
+          if (allError.count > 0)
+          {
+          error = [[NSError alloc]initWithDomain:COMMONDATABASE code:kErrorObjectMisconfiguration userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Object was misconfigured",NSLocalizedFailureReasonErrorKey, nil]];
+          onComplete(self,error);
+          return;
+          }
+          }
+          onComplete((!error)?self:nil,error);//*/
+     }];
+}
+/*-(void)pullFromCloud:(CloudCallback)onComplete
+{
+    // allocate and init a CloudManagementObject for timestamp
+    CloudManagementObject* TSCloudMO = [[CloudManagementObject alloc] init];
+    NSNumber* timestamp = [TSCloudMO GetActiveTimestamp];
+    NSMutableDictionary* timeDic = [[NSMutableDictionary alloc] init];
+    [timeDic setObject:timestamp forKey:@"Timestamp"];
+    
+    //TODO: replace "withObject:nil" with timestamp dictionary
+    [self makeCloudCallWithCommand:DATABASE withObject:timeDic onComplete:^(id cloudResults, NSError *error)
+     {
+         NSArray* allPrescriptions = [cloudResults objectForKey:@"data"];
+         [self handleCloudCallback:onComplete UsingData:allPrescriptions WithPotentialError:error];
+         
+     }];
+}*/
 @end

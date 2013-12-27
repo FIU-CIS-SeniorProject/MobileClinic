@@ -9,9 +9,11 @@
 #import "CurrentVisitViewController.h"
 #import "PreviousVisitsViewController.h"
 #import "MobileClinicFacade.h"
+#import "CameraFacade.h"
 
 @interface CurrentVisitViewController (){
     PreviousVisitsViewController* prevVisit;
+    CameraFacade *facade;
 }
 
 @property CGPoint originalCenter;
@@ -30,7 +32,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+
     UINavigationBar *bar =[self.navigationController navigationBar];
     
     [bar setTintColor:[ColorMe colorFor:PALEORANGE]];
@@ -183,10 +185,163 @@
     
     prevVisit = [self getViewControllerFromiPadStoryboardWithName:@"previousVisitsViewController"];
     [prevVisit.navigationItem setHidesBackButton:YES];
-    
+    prevVisit.patientData = _patientData;
     [self.navigationController pushViewController:prevVisit animated:YES];
 }
 -(void)closePreviousVisit{
     [self.navigationController popViewControllerAnimated:YES];
 }
+- (IBAction)addPicture2:(id)sender {
+    if (!facade) {
+        facade = [[CameraFacade alloc] initWithView:self];
+    }
+    
+    // Added Indeterminate Loader
+    MBProgressHUD *progress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    [progress setMode:MBProgressHUDModeIndeterminate];
+    
+    [facade TakePictureWithCompletion:^(id img) {
+        
+        if(img) {
+            // Reduce Image Size
+            UIImage* image = img;
+            
+            UIImage* scaled = [image imageByScalingAndCroppingForSize:CGSizeMake(150, 150)];
+            [scaled drawInRect:CGRectMake(0.0f, 0.0f, 90, 90)];
+            // Set the image
+            [_picture2 setImage:scaled];
+            //[currentVisit setValue:[scaled convertImageToPNGBinaryData]forKey:@"picture1"];
+            // save picture to object
+            //[patientData setValue:[scaled convertImageToPNGBinaryData] forKey:PICTURE];
+            
+        }
+        
+        [progress hide:YES];
+    }];
+}
+
+- (IBAction)addPicture3:(id)sender
+{
+    if (!facade) {
+        facade = [[CameraFacade alloc] initWithView:self];
+    }
+    
+    // Added Indeterminate Loader
+    MBProgressHUD *progress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    [progress setMode:MBProgressHUDModeIndeterminate];
+    
+    [facade TakePictureWithCompletion:^(id img) {
+        
+        if(img) {
+            // Reduce Image Size
+            UIImage* image = img;
+            
+            UIImage* scaled = [image imageByScalingAndCroppingForSize:CGSizeMake(150, 150)];
+            [scaled drawInRect:CGRectMake(0.0f, 0.0f, 90, 90)];
+            // Set the image
+            [_picture3 setImage:scaled];
+            //[currentVisit setValue:[scaled convertImageToPNGBinaryData]forKey:@"picture1"];
+            // save picture to object
+            //[patientData setValue:[scaled convertImageToPNGBinaryData] forKey:PICTURE];
+            
+        }
+        
+        [progress hide:YES];
+    }];
+}
+
+- (IBAction)addPicture1:(id)sender
+{
+    if (!facade) {
+        facade = [[CameraFacade alloc] initWithView:self];
+    }
+    
+    // Added Indeterminate Loader
+    MBProgressHUD *progress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    [progress setMode:MBProgressHUDModeIndeterminate];
+    
+    [facade TakePictureWithCompletion:^(id img) {
+        
+        if(img) {
+            // Reduce Image Size
+            UIImage* image = img;
+            
+            UIImage* scaled = [image imageByScalingAndCroppingForSize:CGSizeMake(150, 150)];
+            [scaled drawInRect:CGRectMake(0.0f, 0.0f, 90, 90)];
+            // Set the image
+            [_picture1 setImage:scaled];
+            //[currentVisit setValue:[scaled convertImageToPNGBinaryData]forKey:@"picture1"];
+            // save picture to object
+            //[patientData setValue:[scaled convertImageToPNGBinaryData] forKey:PICTURE];
+            
+        }
+        
+        [progress hide:YES];
+    }];
+}/*
+- (IBAction)addPicture2:(id)sender
+{
+    /*if (!facade) {
+        facade = [[CameraFacade alloc]initWithView:self];
+    }
+    
+    // Added Indeterminate Loader
+    MBProgressHUD *progress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    [progress setMode:MBProgressHUDModeIndeterminate];
+    
+    [facade TakePictureWithCompletion:^(id img) {
+        
+        if(img) {
+            // Reduce Image Size
+            UIImage* image = img;
+            
+            UIImage* scaled = [image imageByScalingAndCroppingForSize:CGSizeMake(150, 150)];
+            
+            // Set the image
+            [_picture2 setImage:scaled];
+            [currentVisit setValue:[scaled convertImageToPNGBinaryData]forKey:@"picture2"];
+            // save picture to object
+            //[patientData setValue:[scaled convertImageToPNGBinaryData] forKey:PICTURE];
+            
+        }
+        
+        [progress hide:YES];
+    }];*/
+    
+/*}
+
+- (IBAction)addPicture3:(id)sender
+{
+    /*if (!facade) {
+        facade = [[CameraFacade alloc]initWithView:self];
+    }
+    
+    // Added Indeterminate Loader
+    MBProgressHUD *progress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    [progress setMode:MBProgressHUDModeIndeterminate];
+    
+    [facade TakePictureWithCompletion:^(id img) {
+        
+        if(img) {
+            // Reduce Image Size
+            UIImage* image = img;
+            
+            UIImage* scaled = [image imageByScalingAndCroppingForSize:CGSizeMake(150, 150)];
+            
+            // Set the image
+            [_picture3 setImage:scaled];
+            [currentVisit setValue:[scaled convertImageToPNGBinaryData]forKey:@"picture3"];
+            // save picture to object
+            //[patientData setValue:[scaled convertImageToPNGBinaryData] forKey:PICTURE];
+            
+        }
+        
+        [progress hide:YES];
+    }];*/
+//}
 @end

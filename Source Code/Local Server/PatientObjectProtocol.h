@@ -48,5 +48,7 @@
 
 -(NSArray*)FindAllOpenPatients;
 -(void)UnlockPatient:(ObjectResponse)onComplete;
+-(NSArray *)covertAllSavedObjectsToJSON1;
+
 
 @end

@@ -7,12 +7,11 @@
 //
 
 #import "VisitationObject.h"
+#import "BaseObject+Protected.h"
+#import "Visitation.h"
 
 #define DATABASE    @"Visitation"
 #define ALLVISITS   @"all visits"
-
-#import "BaseObject+Protected.h"
-#import "Visitation.h"
 @implementation VisitationObject
 
 +(NSString *)DatabaseName{

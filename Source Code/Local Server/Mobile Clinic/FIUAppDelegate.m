@@ -86,10 +86,11 @@ CloudManagementObject* cloudMO;
     {
         testDictionary = [[NSMutableDictionary alloc] init];
         [testDictionary setObject:@"test" forKey:NAME];
-        [testDictionary setObject:@(NO) forKey:ISACTIVE];
+        [testDictionary setObject:@(YES) forKey:ISACTIVE];
         [testDictionary setObject:[[NSDate distantPast] convertNSDateToSeconds] forKey:LASTPULLTIME];
         [testDictionary setObject:@"http://still-citadel-8045.herokuapp.com/" forKey:CLOUDURL];
         [testDictionary setObject:@(NO) forKey: ISDIRTY];
+        [testDictionary setObject:@"" forKey: ACTIVEUSER];
         
         CloudManagementObject* testCMO = [[CloudManagementObject alloc] initAndMakeNewDatabaseObject];
         [testCMO setValueToDictionaryValues: testDictionary];
@@ -105,78 +106,212 @@ CloudManagementObject* cloudMO;
     {
         productionDictionary = [[NSMutableDictionary alloc] init];
         [productionDictionary setObject:@"production" forKey:NAME];
-        [productionDictionary setObject:@(YES) forKey:ISACTIVE];
+        [productionDictionary setObject:@(NO) forKey:ISACTIVE];
         [productionDictionary setObject:[[NSDate distantPast] convertNSDateToSeconds] forKey:LASTPULLTIME];
         [productionDictionary setObject:@"http://pure-island-5858.herokuapp.com/" forKey:CLOUDURL];
         [productionDictionary setObject:@(NO) forKey: ISDIRTY];
+        [productionDictionary setObject:@"" forKey: ACTIVEUSER];
         
         CloudManagementObject* productionCMO = [[CloudManagementObject alloc] initAndMakeNewDatabaseObject];
         [productionCMO setValueToDictionaryValues:productionDictionary];
         [productionCMO saveObject:^(id<BaseObjectProtocol> data, NSError *error) {}];
     }
+    
+    [self loadDefaultUser];
 }
 
 // Switching to the Test Environment
 - (IBAction)setupTestPatients:(id)sender
 {
-    // - DO NOT COMMENT: IF YOUR RESTART YOUR SERVER IT WILL PLACE DEMO PATIENTS INSIDE TO HELP ACCELERATE YOUR TESTING
-    // - YOU CAN SEE WHAT PATIENTS ARE ADDED BY CHECKING THE PatientFile.json file
-    NSError* err = nil;
+    NSAlert* alert = [[NSAlert alloc] init];
     
-    NSLog(@"Performing a True Purge of the System");
-    [mainView truePurgeTheSystem:nil];
-    
-    // Set CloudManagementObject
-    [cloudMO setActiveEnvironment:@"test"];
-    
-    NSString* dataPath = [[NSBundle mainBundle] pathForResource:@"PatientFile" ofType:@"json"];
-    
-    NSArray* patients = [NSArray arrayWithArray:[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPath]options:0 error:&err]];
-    
-    [patients enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+    if ([[[[CloudManagementObject alloc]init] GetActiveUser] isEqual: @""])
     {
-        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:obj];
-        PatientObject *base = [[PatientObject alloc]init];
+        [alert setMessageText:@"You must be logged in to Purge the System"];
+        [alert setAlertStyle:NSWarningAlertStyle];
+        [alert runModal];
+        return;
+    }
+    
+    [alert addButtonWithTitle:@"Yes"];
+    [alert addButtonWithTitle:@"No"];
+    [alert setMessageText:@"Confirm Switch to Test Environment"];
+    [alert setInformativeText:@"Switching to the test environment will purge the system of Patient and User data."];
+    
+    if ([alert runModal] == NSAlertFirstButtonReturn)
+    {
+        BOOL syncWithCloudFirst;
+        BOOL loadJSON;
+        BOOL syncWithCloudSecond;
         
-        NSError* success = [base setValueToDictionaryValues:dic];
+        // Ask to sync with cloud before purging the system
+        alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:@"Yes"];
+        [alert addButtonWithTitle:@"No"];
+        [alert addButtonWithTitle:@"Cancel"];
+        [alert setMessageText:@"Syncronize with Cloud before Purging the system?"];
+        [alert setAlertStyle:NSWarningAlertStyle];
+        
+        NSInteger* choice = [alert runModal];
+        
+        switch ((int)choice)
+        {
+            case NSAlertFirstButtonReturn:
+                syncWithCloudFirst = YES;
+                break;
+            case NSAlertSecondButtonReturn:
+                syncWithCloudFirst = NO;
+                break;
+            case NSAlertThirdButtonReturn:
+                return;
+                break;
+            default:
+                return;
+                break;
+        }
+        
+        // Ask to load from JSON files after purging the system
+        alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:@"Yes"];
+        [alert addButtonWithTitle:@"No"];
+        [alert addButtonWithTitle:@"Cancel"];
+        [alert setMessageText:@"Load JSON files after Purging the system?"];
+        [alert setAlertStyle:NSWarningAlertStyle];
+        
+        choice = [alert runModal];
+        
+        switch ((int)choice)
+        {
+            case NSAlertFirstButtonReturn:
+                loadJSON = YES;
+                break;
+            case NSAlertSecondButtonReturn:
+                loadJSON = NO;
+                break;
+            case NSAlertThirdButtonReturn:
+                return;
+                break;
+            default:
+                return;
+                break;
+        }
+        
+        alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:@"Yes"];
+        [alert addButtonWithTitle:@"No"];
+        [alert addButtonWithTitle:@"Cancel"];
+        [alert setMessageText:@"Syncronize with Cloud after Purging the system?"];
+        [alert setAlertStyle:NSWarningAlertStyle];
+        
+        choice = [alert runModal];
+        
+        switch ((int)choice)
+        {
+            case NSAlertFirstButtonReturn:
+                syncWithCloudSecond = YES;
+                break;
+            case NSAlertSecondButtonReturn:
+                syncWithCloudSecond = NO;
+                break;
+            case NSAlertThirdButtonReturn:
+                return;
+                break;
+            default:
+                return;
+                break;
+        }
+        
+        // - DO NOT COMMENT: IF YOUR RESTART YOUR SERVER IT WILL PLACE DEMO PATIENTS INSIDE TO HELP ACCELERATE YOUR TESTING
+        // - YOU CAN SEE WHAT PATIENTS ARE ADDED BY CHECKING THE PatientFile.json file
+        NSError* err = nil;
+        
+        //TODO: Sync with cloud first
+        if (syncWithCloudFirst)
+        {
+            [[[PatientObject alloc] init] pushToCloud:^(id cloudResults, NSError *error)
+            {
+                // Nothing
+            }];
+            
+            [[[VisitationObject alloc] init] pushToCloud:^(id cloudResults, NSError *error)
+             {
+                 // Nothing
+             }];
+        }
+        
+        NSLog(@"Performing a True Purge of the System");
+        [mainView completeSystemPurge];
+        
+        // Set CloudManagementObject
+        [cloudMO setActiveEnvironment:@"test"];
+        
+        NSString* dataPath = [[NSBundle mainBundle] pathForResource:@"PatientFile" ofType:@"json"];
+        
+        NSArray* patients = [NSArray arrayWithArray:[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPath]options:0 error:&err]];
+        
+        [patients enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+        {
+            NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:obj];
+            PatientObject *base = [[PatientObject alloc]init];
+            
+            NSError* success = [base setValueToDictionaryValues:dic];
 
-        [base saveObject:^(id<BaseObjectProtocol> data, NSError *error)
-        {
-                
+            [base saveObject:^(id<BaseObjectProtocol> data, NSError *error)
+            {
+                    
+            }];
         }];
-    }];
-    
-    NSLog(@"Imported Patients: \n%@", patients);
-    
-    dataPath = [[NSBundle mainBundle] pathForResource:@"MedicationFile" ofType:@"json"];
-    
-    NSArray* Meds = [NSArray arrayWithArray:[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPath]options:0 error:&err]];
-    
-    [Meds enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
-    {
-        MedicationObject* base = [[MedicationObject alloc]init];
-        NSError* success = [base setValueToDictionaryValues:obj];
-        [base saveObject:^(id<BaseObjectProtocol> data, NSError *error)
+        
+        NSLog(@"Imported Patients: \n%@", patients);
+        
+        dataPath = [[NSBundle mainBundle] pathForResource:@"MedicationFile" ofType:@"json"];
+        
+        NSArray* Meds = [NSArray arrayWithArray:[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPath]options:0 error:&err]];
+        
+        [Meds enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
         {
-                
+            MedicationObject* base = [[MedicationObject alloc]init];
+            NSError* success = [base setValueToDictionaryValues:obj];
+            [base saveObject:^(id<BaseObjectProtocol> data, NSError *error)
+            {
+                    
+            }];
         }];
-    }];
-    
-    NSLog(@"Imported Medications: \n%@", Meds.description);
+        
+        NSLog(@"Imported Medications: \n%@", Meds.description);
+    }
 }
 
 // Implement switching to the Production Environment
 - (IBAction)TearDownEnvironment:(id)sender
 {
-    NSError* err = nil;
+    NSAlert* alert = [[NSAlert alloc] init];
     
-    NSLog(@"Performing a True Purge of the System");
-    [mainView truePurgeTheSystem:nil];
+    if ([[[[CloudManagementObject alloc]init] GetActiveUser] isEqual: @""])
+    {
+        [alert setMessageText:@"You must be logged in to Purge the System"];
+        [alert setAlertStyle:NSWarningAlertStyle];
+        [alert runModal];
+        return;
+    }
     
-    // Set CloudManagementObject
-    [cloudMO setActiveEnvironment:@"production"];
+    [alert addButtonWithTitle:@"Yes"];
+    [alert addButtonWithTitle:@"No"];
+    [alert setMessageText:@"Confirm Switch to Production Environment"];
+    [alert setInformativeText:@"Switching to the test environment will purge the system of Patient and User data."];
     
-    // Sync Patients, Users, Medications, etc.
+    if ([alert runModal] == NSAlertFirstButtonReturn)
+    {
+        NSError* err = nil;
+        
+        NSLog(@"Performing a True Purge of the System");
+        [mainView truePurgeTheSystem:nil];
+        
+        // Set CloudManagementObject
+        [cloudMO setActiveEnvironment:@"production"];
+        
+        // Sync Patients, Users, Medications, etc.
+    }
 }
 
 - (void) testCloud
@@ -269,5 +404,28 @@ CloudManagementObject* cloudMO;
 -(Optimizer)isOptimized
 {
     return isOptimized;
+}
+
+-(void)loadDefaultUser
+{
+    NSArray* userArray = [[[UserObject alloc] init] FindAllObjects];
+    
+    if ([userArray count] <= 0)
+    {
+        NSMutableDictionary* defaultUser = [[NSMutableDictionary alloc] init];
+        [defaultUser setObject:@"defaultuser@default.com" forKey:EMAIL];
+        [defaultUser setObject:@"John" forKey:FIRSTNAME];
+        [defaultUser setObject:@"Smith" forKey:LASTNAME];
+        [defaultUser setObject:@(3) forKey:USERTYPE];
+        [defaultUser setObject:@"jsmith13" forKey:USERNAME];
+        [defaultUser setObject:@"orant" forKey:PASSWORD];
+        [defaultUser setObject:@(YES) forKey:STATUS];
+        [defaultUser setObject:@(0) forKey:CHARITYID];
+        [defaultUser setObject:@(NO) forKey: ISDIRTY];
+        
+        UserObject* newDefaultUser = [[UserObject alloc] initAndMakeNewDatabaseObject];
+        [newDefaultUser setValueToDictionaryValues:defaultUser];
+        [newDefaultUser saveObject:^(id<BaseObjectProtocol> data, NSError *error) {}];
+    }
 }
 @end

@@ -11,6 +11,9 @@
 #import "DataProcessor.h"
 #import "NSString+Validation.h"
 #import "SystemBackup.h"
+#import "CloudManagementObject.h"
+#import "NSDataAdditions.h"#import "NSDataAdditions.h"
+
 @interface PatientTable (){
     NSMutableDictionary* selectedVisit;
 }
@@ -220,50 +223,139 @@ id currentTable;
 - (IBAction)getPatientsFromCloud:(id)sender
 {
     [progressIndicator startAnimation:self];
-    
+    BOOL patientUpdated = NO;
+    BOOL visitUpdated = NO;
+    BOOL prescriptionUpdated = NO;
     [[[PatientObject alloc]init] pullFromCloud:^(id cloudResults, NSError *error)
-    {
-        if (!cloudResults && error)
-        {
-            [NSApp presentError:error];
-        }
-        else
-        {
-            [[[PatientObject alloc]init] pushToCloud:^(id cloudResults, NSError *error)
-            {
-                if (error)
-                {
-                    [NSApp presentError:error];
-                }
-                else
-                {
-                    [self refreshPatients:nil];
-                }
-            }];
-        }
-        [progressIndicator stopAnimation:self];
-    }];
+     {
+         if (!cloudResults && error)
+         {
+             [NSApp presentError:error];
+         }
+         else
+         {
+             [[[PatientObject alloc]init] pushToCloud:^(id cloudResults, NSError *error)
+              {
+                  if (error)
+                  {
+                      [NSApp presentError:error];
+                  }
+                  else
+                  {
+                      [self refreshPatients:nil];
+                      BOOL patientUpdated = YES;
+                  }
+              }];
+         }
+         [progressIndicator stopAnimation:self];
+     }];//*/
+    
+    [[[VisitationObject alloc]init] pullFromCloud:^(id cloudResults, NSError *error)
+     {
+         if (!cloudResults && error)
+         {
+             [NSApp presentError:error];
+         }
+         else
+         {
+             [[[VisitationObject alloc]init] pushToCloud:^(id cloudResults, NSError *error)
+              {
+                  if (error)
+                  {
+                      [NSApp presentError:error];
+                  }
+                  else
+                  {
+                      [self refreshPatients:nil];
+                      BOOL visitUpdated = YES;
+                  }
+              }];
+         }
+         [progressIndicator stopAnimation:self];
+     }];//*/
+    
+    [[[PrescriptionObject alloc]init] pullFromCloud:^(id cloudResults, NSError *error)
+     {
+         if (!cloudResults && error)
+         {
+             [NSApp presentError:error];
+         }
+         else
+         {
+             [[[PrescriptionObject alloc]init] pushToCloud:^(id cloudResults, NSError *error)
+              {
+                  if (error)
+                  {
+                      [NSApp presentError:error];
+                  }
+                  else
+                  {
+                      [self refreshPatients:nil];
+                      BOOL prescriptionUpdated = YES;
+                  }
+              }];
+         }
+         [progressIndicator stopAnimation:self];
+     }];//*/
+    
+    // allocate and init a CloudManagementObject, then update timestamp
+    if(patientUpdated == YES && visitUpdated == YES && prescriptionUpdated == YES){
+        [[[CloudManagementObject alloc] init] updateTimestamp];
+    }
+    
 }
 
-- (IBAction)exportPatientData:(id)sender {
+- (IBAction)exportPatientData:(id)sender
+{
     NSSavePanel* savePnl = [NSSavePanel savePanel];
     
     // Set array of file types
     NSArray *fileTypesArray;
-    fileTypesArray = [NSArray arrayWithObjects:@"json", nil];
+    fileTypesArray = [NSArray arrayWithObjects:@"json",nil];
     
     // Enable options in the dialog.
     [savePnl setAllowsOtherFileTypes:NO];
     [savePnl setAllowedFileTypes:fileTypesArray];
-    
+
     // Display the dialog box.  If the OK pressed,
     // process the files.
     if ( [savePnl runModal] == NSOKButton ) {
         
-        // Gets list of all files selected
+        //NSMutableArray* allObject = [[NSMutableArray alloc]initWithCapacity:patientArray.count];
+        PatientObject *myObj = [[PatientObject alloc]init];
+        VisitationObject *myVisitObj = [[VisitationObject alloc]init];
+        NSArray *visitObject = myVisitObj.covertAllSavedObjectsToJSON1;
+        NSArray *allObject = myObj.covertAllSavedObjectsToJSON1;
+        NSMutableDictionary *final = [[NSMutableDictionary alloc]init];
+        [final setValue:allObject forKey:@"patients"];
+        [final setValue:visitObject forKey:@"visits"];
+        
         NSURL *file = [savePnl URL];
         
-        NSLog(@"Saving to: %@",file.path);
+        NSLog(@"Trying to find: %@",file.path);
+        
+        NSFileManager* fm = [NSFileManager defaultManager];
+        
+        BOOL doesExists = [fm fileExistsAtPath:file.path];
+        
+        if (!doesExists) {
+            NSLog(@"Created New File: %@",file.lastPathComponent);
+            
+            [fm createFileAtPath:file.path contents:nil attributes:nil];
+        }
+        
+        BOOL canBeConverted = [NSJSONSerialization isValidJSONObject:final];
+        
+        NSError* error = nil;
+        
+        if (canBeConverted) {
+            // Need Proper File location
+            NSOutputStream* stream = [NSOutputStream outputStreamToFileAtPath:file.path append:NO];
+            [stream open];
+            [NSJSONSerialization writeJSONObject:final toStream:stream options:NSJSONWritingPrettyPrinted error:&error];
+            [stream close];
+        }
+        
     }
     
 }
@@ -272,7 +364,7 @@ id currentTable;
     
     // Create a File Open Dialog class.
     NSOpenPanel* openDlg = [NSOpenPanel openPanel];
-    
+    //NSOpenPanel* openDlg = [[NSOpenPanel alloc]init];
     // Set array of file types
     NSArray *fileTypesArray;
     fileTypesArray = [NSArray arrayWithObjects:@"json", nil];
@@ -284,19 +376,49 @@ id currentTable;
     
     // Display the dialog box.  If the OK pressed,
     // process the files.
-    if ( [openDlg runModal] == NSOKButton ) {
+    NSInteger result = [openDlg runModal];
+    if ( result == NSOKButton ) {
         
         // Gets list of all files selected
-        NSArray *files = [openDlg URLs];
+        //NSArray *files = [openDlg URLs];
+        
+        //NSData *theData=[NSData dataWithContentsOfURL:[NSURL URLWithString:files.lastObject]];
         
         // Loop through the files and process them.
-        NSError* err = nil;
+        //NSError* err = nil;
         
-        NSDictionary* objects = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:files.lastObject] options:0 error:&err];
+        //NSString *myJSON = [[NSString alloc] initWithContentsOfFile:theData encoding:NSUTF8StringEncoding error:NULL];
+        //NSLog(@"myJASon %@",myJSON);
+        //NSDictionary* objects = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:files.lastObject] options:0 error:&err];
+        /*NSDictionary *JSON =
+        [NSJSONSerialization JSONObjectWithData: theData
+                                        options: NSJSONReadingMutableContainers
+                                          error: &err];*/
+       
         
-        if (objects.allKeys.count > 0) {
-            [SystemBackup installFromBackup:objects];
-            NSLog(@"Imported Object: %@", objects);
+        NSError* error = nil;
+    
+        //NSData *jsonData = [NSData dataWithContentsOfFile:@"/Users/humbertosuarez/Desktop/export.json"];
+    
+        NSData *jsonData = [NSData dataWithContentsOfURL:[openDlg URL]];
+        
+        NSDictionary *mainArray = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:NULL];
+        
+        NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] init];
+        NSMutableDictionary* dictionary1 = [[NSMutableDictionary alloc]init];
+        
+        [dictionary setObject:[mainArray objectForKey:@"patients"] forKey:[NSString stringWithFormat:@"%i",kPatientType]];
+        [dictionary1 setObject:[mainArray objectForKey:@"visits"] forKey:[NSString stringWithFormat:@"%i",kVisitationType]];
+        
+       if (dictionary.allKeys.count > 0) {
+           [SystemBackup installFromBackup:dictionary];
+            NSLog(@"Imported Object: %@", dictionary.allKeys);
+        }else{
+            NSLog(@"Could not import selected file");
+        }
+        if (dictionary1.allKeys.count > 0) {
+            [SystemBackup installFromBackup:dictionary1];
+            NSLog(@"Imported Object: %@", dictionary1.allKeys);
         }else{
             NSLog(@"Could not import selected file");
         }
@@ -371,7 +493,6 @@ id currentTable;
         [pi setHorizontallyCentered:NO];
         [pi setOrientation:NSPortraitOrientation];
         [pi setScalingFactor:1];
-        
         [pi setPaperName:@"Letter"];
         [op setPrintInfo:pi];
         [op setShowsPrintPanel:YES];

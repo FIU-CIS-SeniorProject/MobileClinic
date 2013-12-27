@@ -97,7 +97,7 @@ int* isActive;
 
 -(NSDictionary *)GetActiveEnvironment
 {
-    NSPredicate* pred = [NSPredicate predicateWithFormat:@"K == YES", ISACTIVE];
+    NSPredicate* pred = [NSPredicate predicateWithFormat:@"%K == YES", ISACTIVE];
     NSArray* managedObjects = [self FindObjectInTable:DATABASE withCustomPredicate:pred andSortByAttribute:NAME];
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     
@@ -110,11 +110,26 @@ int* isActive;
     }
     return dict;
 }
+-(void)updateTimestamp: (NSDate*) inDate
+{
+    NSMutableDictionary* active = [[self GetActiveEnvironment] mutableCopy];
+    if (active != nil)
+    {
+        [active setObject:[inDate convertNSDateToSeconds] forKey:LASTPULLTIME];
+    }
+    
+    CloudManagementObject* activeCMO = [[CloudManagementObject alloc] initWithCachedObjectWithUpdatedObject:active];
+    
+    [activeCMO saveObject:^(id<BaseObjectProtocol> data, NSError *error)
+     {
+         // Nothing?
+     }];
+}
 
--(NSDate *)GetActiveTimestamp
+-(NSNumber *)GetActiveTimestamp
 {
     NSDictionary* dict = [self GetActiveEnvironment];
-    NSDate* lastPullTime = nil;
+    NSNumber* lastPullTime = nil;
     
     if (dict != nil)
     {
@@ -204,12 +219,6 @@ int* isActive;
 {
     NSMutableDictionary *cmo = [[NSMutableDictionary alloc] init];
     
-    //NSPredicate* pred = [NSPredicate predicateWithFormat:@"%@ == %@",NAME, environment];
-    //NSArray* managedObjects = [self FindObjectInTable:DATABASE withCustomPredicate:nil andSortByAttribute:NAME];
-    //Compare to finding a user
-    //NSArray* managedObjects = [self FindObjectInTable:DATABASE withName:environment forAttribute:NAME];
-    //NSDate* lastPullTime = nil;
-    
     // Try to find user from username in local DB
     BOOL didFindCMO = [self loadObjectForID:environment];
     
@@ -225,6 +234,7 @@ int* isActive;
         [cmo setObject:cloudMO.isDirty forKey:ISDIRTY];
         [cmo setObject:cloudMO.cloudURL forKey:CLOUDURL];
         [cmo setObject:cloudMO.lastPullTime forKey:LASTPULLTIME];
+        [cmo setObject:cloudMO.activeUser forKey:ACTIVEUSER];
     }
     else
     {
@@ -232,6 +242,53 @@ int* isActive;
     }
     
     return cmo;
+}
+
+-(NSString *)GetActiveUser
+{
+    NSDictionary* active = [self GetActiveEnvironment];
+    NSString* user = [active objectForKey:ACTIVEUSER];
+    
+    return user;
+}
+
+-(void)updateTimestamp
+{
+    NSMutableDictionary* active = [[self GetActiveEnvironment] mutableCopy];
+    if (active != nil)
+    {
+        [active setObject:[[NSDate date] convertNSDateToSeconds] forKey:LASTPULLTIME];
+    }
+    
+    CloudManagementObject* activeCMO = [[CloudManagementObject alloc] initWithCachedObjectWithUpdatedObject:active];
+    
+    [activeCMO saveObject:^(id<BaseObjectProtocol> data, NSError *error)
+     {
+         // Nothing?
+     }];
+}
+
+-(void)updateActiveUser:(NSString *)currentUser
+{
+    NSMutableDictionary* active = [[self GetActiveEnvironment] mutableCopy];
+    if (active != nil)
+    {
+        if (currentUser != nil)
+        {
+            [active setObject:currentUser forKey:ACTIVEUSER];
+        }
+        else
+        {
+            [active setObject:[NSNull null] forKey:ACTIVEUSER];
+        }
+    }
+    
+    CloudManagementObject* activeCMO = [[CloudManagementObject alloc] initWithCachedObjectWithUpdatedObject:active];
+    
+    [activeCMO saveObject:^(id<BaseObjectProtocol> data, NSError *error)
+     {
+         // Nothing?
+     }];
 }
 
 // MARK: Loads objects to an instantiated databaseObject

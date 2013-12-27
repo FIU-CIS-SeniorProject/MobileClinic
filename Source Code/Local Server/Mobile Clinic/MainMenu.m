@@ -94,19 +94,26 @@ id<ServerProtocol> connection;
 
 - (IBAction)quitApplication:(id)sender
 {
+    [[[CloudManagementObject alloc]init] updateActiveUser:@""];
     [NSApp terminate:self];
 }
 
 - (IBAction)showLoginView:(id)sender
 {
     //reset current view
-    if (currentView == userView.view) {
+    if (currentView == userView.view)
+    {
         [userView.view removeFromSuperview];
-    } else if (currentView == patientView.view) {
+    }
+    else if (currentView == patientView.view)
+    {
         [patientView.view removeFromSuperview];
-    } else {
+    }
+    else
+    {
         [medicationView.view removeFromSuperview];
     }
+    
     //set view to login
     [_mainScreen addSubview:loginView.view];
     currentView = loginView.view;
@@ -116,6 +123,8 @@ id<ServerProtocol> connection;
     [_patientButton setEnabled: NO];
     [_medicationButton setEnabled: NO];
     [_logoutButton setEnabled: NO];
+    
+    [[[CloudManagementObject alloc] init] updateActiveUser:@""];
 }
 
 - (IBAction)showMedicationView:(id)sender
@@ -186,6 +195,30 @@ id<ServerProtocol> connection;
 
 - (IBAction)truePurgeTheSystem:(id)sender
 {
+    NSAlert* alert = [[NSAlert alloc] init];
+    
+    if ([[[[CloudManagementObject alloc]init] GetActiveUser] isEqual: @""])
+    {
+        [alert setMessageText:@"You must be logged in to Purge the System"];
+        [alert setAlertStyle:NSWarningAlertStyle];
+        [alert runModal];
+        return;
+    }
+    
+    [alert addButtonWithTitle:@"Yes"];
+    [alert addButtonWithTitle:@"No"];
+    [alert setMessageText:@"Confirm System Purge"];
+    [alert setInformativeText:@"Delete all Patient and User data?\nEnsure you had already synced with the cloud before purging the system."];
+    [alert setAlertStyle:NSWarningAlertStyle];
+    
+    if ([alert runModal] == NSAlertFirstButtonReturn)
+    {
+        [self completeSystemPurge];
+    }
+}
+
+-(void)completeSystemPurge
+{
     VisitationObject* v = [[VisitationObject alloc] init];
     NSArray* allVisits = [v FindAllObjects];
     PatientObject* p = [[PatientObject alloc] init];
@@ -194,12 +227,12 @@ id<ServerProtocol> connection;
     NSArray* allMedications = [m FindAllObjects];
     UserObject* u = [[UserObject alloc] init];
     NSArray* allUsers = [u FindAllObjects];
-
+    
     int vCounter = 0;
     int pCounter = 0;
     int mCounter = 0;
     int uCounter = 0;
-
+    
     for (NSDictionary* visit in allVisits)
     {
         BOOL didDelete = [v deleteDatabaseDictionaryObject:visit];
@@ -226,7 +259,7 @@ id<ServerProtocol> connection;
             mCounter++;
         }
     }
-
+    
     for (NSDictionary* user in allUsers)
     {
         BOOL didDelete = [u deleteDatabaseDictionaryObject:user];
@@ -236,7 +269,7 @@ id<ServerProtocol> connection;
         }
     }
     
-    NSLog(@"Truly Purged The System of %i Visits, %i Patients, %i Medications, and %i Users", vCounter, pCounter, mCounter, uCounter);
+    NSLog(@"Completely Purged The System of %i Visits, %i Patients, %i Medications, and %i Users", vCounter, pCounter, mCounter, uCounter);
 }
 
 - (IBAction)manualTableRefresh:(id)sender
@@ -312,6 +345,18 @@ id<ServerProtocol> connection;
             [_statusLabel setStringValue:@"OFF"];
             break;
     }
+}
+
+-(void)enableButtons:(NSNotification*)note
+{
+    [loginView.view removeFromSuperview];
+    currentView = nil;
+    //restore initial state of logged out user
+    [_userButton setEnabled: YES];
+    [_patientButton setEnabled: YES];
+    [_medicationButton setEnabled: YES];
+    [_logoutButton setEnabled: YES];
+    [[[CloudManagementObject alloc] init] updateActiveUser:[note object]];
 }
 
 - (IBAction)pushPatientsToCloud:(id)sender

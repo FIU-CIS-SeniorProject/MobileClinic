@@ -11,7 +11,7 @@
 #import "FIUAppDelegate.h"
 #import "ServerCore.h"
 #import "QueueManager.h"
-
+#import "TestFlight.h"
 
 NSTimer* syncTimer;
 
@@ -22,10 +22,12 @@ NSTimer* syncTimer;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
-+ (UIViewController*) topMostController {
++ (UIViewController*) topMostController
+{
     UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
     
-    while (topController.presentedViewController) {
+    while (topController.presentedViewController)
+    {
         topController = topController.presentedViewController;
     }
     
@@ -45,15 +47,13 @@ NSTimer* syncTimer;
     
 
     // This is the needed to upload the application into test flight
-    #define TESTING 1
+    /*#define TESTING 1
         #ifdef TESTING
             [TestFlight setDeviceIdentifier:[[NSUUID UUID]UUIDString]];
         #endif
-    
-        [TestFlight takeOff:@"afc6ff4013b9e807e5a97743e2a8d270_MTg2NjAwMjAxMy0wMi0xMiAxODozOTozOS41NzU1OTk"];
-    
+    */
+    [TestFlight takeOff:@"d2445572-9076-4fe1-a145-f603c2d035e9"];
     [self setupTimer:SYNC_EXTENDED_INTERVAL];
-    
     return YES;
 }
 -(void)setupTimer:(NSInteger)seconds{

@@ -145,6 +145,9 @@ NSTimer* saveTimer;
         NSArray* internalObjects = [allObjects objectForKey:key];
        
         // for each dictionary in the array
+        if([key isEqualToString:@"3"])
+        {
+        
         for (NSDictionary* object in internalObjects)
         {
             // make data changeable
@@ -153,10 +156,11 @@ NSTimer* saveTimer;
             NSString* picture = [changeObject objectForKey:PICTURE];
             
             // convert Picture String to NSData
-            [changeObject setValue:[NSData dataWithBase64EncodedString:picture] forKey:PICTURE];
-            
+            if([changeObject valueForKey:PICTURE]==nil)
+            {[changeObject setValue:[NSData dataWithBase64EncodedString:picture] forKey:PICTURE];
+            }
             // convert FingerData String to NSData
-            [changeObject setValue:[NSData dataWithBase64EncodedString:[changeObject objectForKey:FINGERDATA]] forKey:FINGERDATA];
+            //[changeObject setValue:[NSData dataWithBase64EncodedString:[changeObject objectForKey:FINGERDATA]] forKey:FINGERDATA];
             
             // Store the value to the object
             [base setValueToDictionaryValues:object];
@@ -167,6 +171,23 @@ NSTimer* saveTimer;
                 NSLog(@"Saved %@ \n\n",object);
             }];
         }
+        }
+        else
+        {
+            for (NSDictionary* object in internalObjects)
+            {
+                // Store the value to the object
+                [base setValueToDictionaryValues:object];
+                
+                // And save
+                [base saveObject:^(id<BaseObjectProtocol> data, NSError *error)
+                 {
+                     NSLog(@"Saved %@ \n\n",object);
+                 }];
+            }
+        
+        }
+        
     }
 }
 

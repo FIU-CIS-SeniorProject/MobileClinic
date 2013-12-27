@@ -13,7 +13,7 @@
 #define PRESCRIPTIONID  @"prescriptionId"
 #define VISITID         @"visitationId"
 #define MEDNAME         @"medName"
-#define CHARITYID       @"charityId"
+#define CHARITYID       @"charityid"
 
 #import <Foundation/Foundation.h>
 #import "CommonObjectProtocol.h"

@@ -33,7 +33,7 @@ typedef enum MobileClinicMode{
     kPharmacistMode
 } MCMode;
 
-@interface RegisterPatientViewController ()<CancelDelegate,UIPopoverControllerDelegate,PBVerificationDelegate> {
+@interface RegisterPatientViewController ()<CancelDelegate,UIPopoverControllerDelegate,PBVerificationDelegate,faceViewDelegate> {
     PBBiometryUser* user;
     MCMode mode;
     PBManageFingersController* manageFingersController;
@@ -126,7 +126,7 @@ typedef enum MobileClinicMode{
             UIImage* image = img;
             
             UIImage* scaled = [image imageByScalingAndCroppingForSize:CGSizeMake(150, 150)];
-            
+            [scaled drawInRect:CGRectMake(0.0f, 0.0f, 90, 90)];
             // Set the image
             [_patientPhoto setImage:scaled];
             // save picture to object
@@ -144,7 +144,9 @@ typedef enum MobileClinicMode{
     
     if (self.validateRegistration){
     RegisterFaceViewController *faceViewController = [self getViewControllerFromiPadStoryboardWithName:@"RegisterFaceViewController"];
+    faceViewController.delegate1 = self;
     [faceViewController view];
+        
     faceViewController.firstName = _patientNameField.text;
     faceViewController.familyName = _familyNameField.text;
     faceViewController.frameNum =0;
@@ -154,6 +156,22 @@ typedef enum MobileClinicMode{
     
     [self.navigationController pushViewController:faceViewController animated:YES];
     }
+}
+- (void)addItemViewController:(RegisterFaceViewController *)controller didFinishEnteringItem:(UIImage *)item
+{
+    //using delegate method, get data back from second page view controller and set it to property declared in here
+    NSLog(@"This was returned from secondPageViewController: %@",item);
+    self.returnedImage=item;
+    UIImage* image = self.returnedImage;
+    
+    UIImage* scaled = [image imageByScalingAndCroppingForSize:CGSizeMake(100, 100)];
+    [scaled drawInRect:CGRectMake(0.0f, 0.0f, 90, 90)];
+    // Set the image
+    [_patientPhoto setImage:scaled];
+    // save picture to object
+    [patientData setValue:[scaled convertImageToPNGBinaryData] forKey:PICTURE];
+    
+    //add item to array here and call reload
 }
 -(IBAction)faceRecognition:(id)sender
 {
@@ -204,11 +222,15 @@ typedef enum MobileClinicMode{
                          NSString *lname = [pat objectForKey:@"familyName"];
                          
                          
-                         
+                         double delayInSeconds = 1.5;
+                         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+                         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                            
                          if([fname length] != 0 && [lname length]!=0 ){
                              
                              //[mobileFacade findPatientWithFirstName:fname orLastName:lname onCompletion:^(NSArray *allObjectsFromSearch1, NSError *error)
-                             [mobileFacade findPatientWithLabel:label onCompletion:^(NSArray *allObjectsFromSearch1, NSError *error)
+                             
+                            [mobileFacade findPatientWithLabel:label onCompletion:^(NSArray *allObjectsFromSearch1, NSError *error)
                               {
                                   if(allObjectsFromSearch1){
                                       // Get all the result from the query
@@ -233,6 +255,17 @@ typedef enum MobileClinicMode{
                                                                    otherButtonTitles:nil];
                              [alert show];
                          }
+                         });
+                     }
+                     else
+                     {
+                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Done"
+                                                                         message:@"No match was found. Please try again!"
+                                                                        delegate:nil
+                                                               cancelButtonTitle:@"OK"
+                                                               otherButtonTitles:nil];
+                         [alert show];
+                         
                      }
                      
                      
@@ -332,7 +365,10 @@ typedef enum MobileClinicMode{
      * This is done because of the workflow of the system
      * To unlock the patient see the documentation for the PatientObject
      */
-    
+    double delayInSeconds = 1.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        
     MobileClinicFacade* mobileFacade = [[MobileClinicFacade alloc]init];
     
     [mobileFacade updateCurrentPatient:patientData AndShouldLock:YES onCompletion:^(NSDictionary *object, NSError *error) {
@@ -355,6 +391,7 @@ typedef enum MobileClinicMode{
         }
         [self HideALLHUDDisplayInView:self.view];
     }];
+    });
 
 }
 

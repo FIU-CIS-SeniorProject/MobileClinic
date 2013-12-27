@@ -14,6 +14,9 @@
 #import "DoctorPrescriptionViewController.h"
 #import "MedicineSearchViewController.h"
 #import "MobileClinicFacade.h"
+#import "CameraFacade.h"
+//#import "FaceDetector.h"
+//@class FaceDetector;
 
 @protocol DoctorPatientViewDelegate <NSObject>
 
@@ -22,9 +25,11 @@
 @end
 
 
-@interface DoctorPatientViewController : UIViewController {
-
+@interface DoctorPatientViewController : UIViewController
+{
+     CameraFacade *facade;
 }
+- (IBAction)verify:(id)sender;
 
 @property (strong, nonatomic) NSMutableDictionary * patientData;
 

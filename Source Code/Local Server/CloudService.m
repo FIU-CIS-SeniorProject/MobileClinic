@@ -3,11 +3,14 @@
 //  Mobile Clinic
 //
 //  Created by Michael Montaque on 3/15/13.
-//  Copyright (c) 2013 Florida International University. All rights reserved.
+//  Edited by Kevin Diaz on 11/2013
 //
 
 #import "CloudService.h"
+#import "CloudManagementObject.h"
+#import "NSMutableData-AES.h"
 #import <IOKit/IOKitLib.h>
+//#import <CommonCrypto/CommonCryptor.h>
 
 @interface CloudService()
 {
@@ -34,7 +37,7 @@
     return mApi;
 }
 
-+ (id)stringWithMachineSerialNumber
+-(NSString*)stringWithMachineSerialNumber
 {
     NSString* result = nil;
     CFStringRef serialNumber = NULL;
@@ -60,19 +63,33 @@
     self = [super init];
     if(self)
     {
-        //kURL = @"http://staging-webapp.herokuapp.com/";
-        kApiKey = @"12345";
+        //TODO: Use serialNumber as kApiKey when cloud allows for local server registration.
+        NSString* serialNumber = [self stringWithMachineSerialNumber];
+        NSLog(@"Serial Number: %@", serialNumber);
+        
+        //kApiKey = @"12345";
+        kApiKey = serialNumber;
         kAccessToken = @"";
         isAuthenticated = NO;
-        //production
-        //kURL = @"http://znja-webapp.herokuapp.com/api/";
-        kURL = @"http://still-citadel-8045.herokuapp.com/"; // Test Cloud
-        //kURL = @"http://localhost:3000/";
         
-        [self getAccessToken:^(BOOL success) {
-            if(success){
+        //TODO: gets url of active cloud server (causes infinite loop with init)
+        //kURL = [[[CloudManagementObject alloc] init] GetActiveURL];
+    
+        kURL = @"http://secure-dawn-6822.herokuapp.com/"; // Production Cloud
+        //kURL = @"http://stark-hollows-5161.herokuapp.com/"; // Test Cloud
+        
+        //kURL = @"http://localhost:3000/"; // local host for testing the Cloud Server
+        //kURL = @"http://staging-webapp.herokuapp.com/";
+        //kURL = @"http://znja-webapp.herokuapp.com/api/";
+        
+        [self getAccessToken:^(BOOL success)
+        {
+            if(success)
+            {
                 NSLog(@"Connected To Cloud");
-            }else{
+            }
+            else
+            {
                 NSLog(@"Could Not Connect To Cloud");
             }
         }];
@@ -80,7 +97,8 @@
     return self;
 }
 
--(void)getAccessToken:(void(^)(BOOL success)) completion{
+-(void)getAccessToken:(void(^)(BOOL success)) completion
+{
     NSMutableDictionary * params = [[NSMutableDictionary alloc]init];
     [params setObject:kApiKey forKey:@"api_key"];
     
@@ -90,7 +108,8 @@
         
         NSData *data;
         
-        if (params) {
+        if (params)
+        {
             NSData *json = [NSJSONSerialization dataWithJSONObject:params options:NSJSONWritingPrettyPrinted error:nil];
             
             data = [[NSString stringWithFormat:@"%@%@",
@@ -108,25 +127,45 @@
         [request setHTTPMethod:@"POST"];
         [request setHTTPBody: data];
         
-        
-        [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error){
-            
-            if(!error){
-                NSError *jsonError;
+        [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
+         {
+             NSError *jsonError;
+             //NSLog(@"CloudService: getAccessToken: sendAsynchronousRequest: %@", data);
+             
+             // If we get nil data, the application crashes on
+             //JSONObjectWithData:data, alloc and init data
+             if (data == nil)
+             {
+                 data = [[NSData alloc] init];
+             }
+             
+             NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
+             
+             //if(!error) //Not getting an error from the cloud, getting "result: false" instead
+             if (!jsonError && [[json objectForKey:@"result"] isEqualToString:@"true"])
+             {
                 
-                //read and print the server response for debug
+                 //read and print the server response for debug
                 NSString *myString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                // NSLog(@"%@", myString);
+                NSLog(@"CloudService.m: myString printed: %@", myString);
                 
-                NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
-                
-                if ((completion && json) || (completion && jsonError)) {
-                    kAccessToken = [[json objectForKey:@"data"] objectForKey:@"access_token"];
-                    completion(YES);
+                if ((completion && json) || (completion && jsonError))
+                {
+                    if ([[json objectForKey:@"data"] isKindOfClass:[NSString class]])
+                    {
+                        completion(NO);
+                    }
+                    else
+                    {
+                        kAccessToken = [[json objectForKey:@"data"] objectForKey:@"access_token"];
+                        NSLog(@"CloudService.m: AccessToken: %@", kAccessToken);
+                        completion(YES);
+                    }
                 }
             }
-            else
+            else if (!jsonError)
             {
+                NSLog(@"Error data from Cloud: %@", [json objectForKey:@"data"]);
                 completion(NO);
             }
             
@@ -213,6 +252,10 @@
     
     [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", POSTBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
     
+    // TODO: encrypt "body"
+    [body EncryptAES:@"EncryptKey"];
+    
+    //[NSData data] AESEncrypt
     // setting the body of the post to the reqeust
     [request setHTTPBody:body];
     
@@ -232,43 +275,60 @@
     
     NSURL *url = [NSURL  URLWithString:[NSString stringWithFormat:@"%@%@", kURL, partialURL]];
     
-    NSData *data;
+    NSMutableData *body = [NSMutableData data];
     
     if (param) {
         NSData *json = [NSJSONSerialization dataWithJSONObject:param options:NSJSONWritingPrettyPrinted error:nil];
         
-        data = [[NSString stringWithFormat:@"%@%@",
+        [body appendData:[[NSString stringWithFormat:@"%@%@",
                  @"&params=",[[NSString alloc] initWithData:json encoding:NSUTF8StringEncoding] ]
-                dataUsingEncoding: NSUTF8StringEncoding];
+                dataUsingEncoding: NSUTF8StringEncoding]];
     }
     else
     {
-        data = [[NSString stringWithFormat:@"%@",@""] dataUsingEncoding: NSUTF8StringEncoding];
+        [body appendData:[[NSString stringWithFormat:@"%@",@""] dataUsingEncoding: NSUTF8StringEncoding]];
     }
     
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:30];
     
-    [request setHTTPMethod:@"POST"];
-    [request setHTTPBody: data];
+    //TODO: encrypt body
+    [body EncryptAES:@"EncryptKey"];
     
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody: body];
     
     [self sendAsyncRequest:request completion:completion];
 }
 
 -(void)sendAsyncRequest:(NSURLRequest *)request completion:(void(^)(NSError *error, NSDictionary *result)) completion
 {
-    
-    [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error){
-        
-        if(!error){
+    [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
+    {
+        if(!error)
+        {
             NSError *jsonError;
+            
+            //TODO: Decrypt Maybe?
+            NSMutableData *body = [NSMutableData data];
+            [body appendData: data];
+            // decrypts boby
+            [body DecryptAES:@"EncryptKey" andForData:body];
             
             //read and print the server response for debug
             NSString *myString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            NSLog(@"%@", myString);
+            NSLog(@"CloudService: SendAsyncRequest myString:%@", myString);
             
-            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
+            NSDictionary *json;
+            
+            if (data)
+            {
+                json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
+            }
+            else
+            {
+                json = nil;
+            }
             
             if ((completion && json) || (completion && jsonError)) {
                 completion(jsonError, json);
